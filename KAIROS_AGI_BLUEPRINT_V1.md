@@ -1,6 +1,8 @@
 # KAIROS AGI BLUEPRINT v1.0
 ## Constituição da Kairos AGI
 
+> Adendos vigentes: Missão 001 e Memory Sync V1. KAIROS é o robô do Founder; referências a Arthur no contexto Founder abaixo são históricas e substituídas por KAIROS. Arthur pertence a cliente. ORB significa Operational Runtime Beacon, hardware futuro. A seção de clientes foi anonimizada; as mudanças estão registradas em docs/BLUEPRINT_EVOLUTION.md.
+
 **Founder:** Matheus Schelle
 
 **Projeto:** Kairos AGI / Kairos World OS
@@ -659,13 +661,13 @@ Clone.
 
 # CLIENTES ATUAIS
 
-Rubens.
+CLIENT_001.
 
-Lucas.
+CLIENT_002.
 
-Instituto Armôre.
+CLIENT_003.
 
-Aline.
+CLIENT_004.
 
 Todos entram primeiro no CRM Kairos.
 

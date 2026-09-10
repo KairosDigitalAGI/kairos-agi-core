@@ -1,5 +1,9 @@
 # Contexto mestre — Kairos AGI Core
 
+Entrada operacional: [docs/context/MASTER_CONTEXT.md](docs/context/MASTER_CONTEXT.md). Histórico: [CHANGELOG](docs/context/CHANGELOG.md). Fila vigente: [MISSION_QUEUE](docs/context/MISSION_QUEUE.md).
+
+Missão 002 implementa a operação editorial local do Instagram, com pipeline, calendário, prompts, aprovação por revisão e estado compartilhado com Dashboard/World. Integrações continuam desconectadas; persistência restrita ao navegador. O Memory Sync V1 foi adotado como adendo, com conteúdo original preservado localmente fora do Git.
+
 ## Identidade e missão
 
 - Empresa: Kairos Digital.
@@ -64,4 +68,4 @@ Exportações completas de ChatGPT e Claude serão recebidas posteriormente em `
 
 ## Produtos
 
-Dashboard Kairos OS: Hunter, Carlos WhatsApp AI, Kairos Ads, Site Maker, ORB, Financeiro, Conteúdo e Infraestrutura. O significado funcional de ORB ainda precisa ser definido pelo responsável.
+Dashboard Kairos OS: Hunter, Carlos WhatsApp AI (legado), Kairos Ads, Site Maker, Financeiro, Conteúdo e Infraestrutura. ORB significa Operational Runtime Beacon: produto de hardware IA futuro, fora do escopo atual.

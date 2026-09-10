@@ -2,9 +2,8 @@ import { Float, Grid, Html, OrbitControls, PerspectiveCamera, Sparkles } from '@
 import { Canvas } from '@react-three/fiber'
 import { Suspense, useState } from 'react'
 import type { FounderAgent } from '../types'
-import { agents } from '../data/mock'
 
-interface WorldProps { onSelect: (agent: FounderAgent) => void }
+interface WorldProps { agents: FounderAgent[]; onSelect: (agent: FounderAgent) => void }
 
 function AgentNpc({ agent, selected, onSelect }: { agent: FounderAgent; selected: boolean; onSelect: () => void }) {
   const [hovered, setHovered] = useState(false)
@@ -32,7 +31,7 @@ function AgentNpc({ agent, selected, onSelect }: { agent: FounderAgent; selected
   )
 }
 
-function TowerScene({ onSelect, selectedId }: WorldProps & { selectedId?: FounderAgent['id'] }) {
+function TowerScene({ agents, onSelect, selectedId }: WorldProps & { selectedId?: FounderAgent['id'] }) {
   return (
     <>
       <color attach="background" args={['#04050a']} />
@@ -54,11 +53,11 @@ function TowerScene({ onSelect, selectedId }: WorldProps & { selectedId?: Founde
   )
 }
 
-export function FounderTower({ selected, onSelect }: { selected: FounderAgent; onSelect: (agent: FounderAgent) => void }) {
+export function FounderTower({ agents, selected, onSelect }: WorldProps & { selected: FounderAgent }) {
   return (
     <div className="world-canvas" role="img" aria-label="Sala futurista da Founder Tower com quatro agentes operacionais">
       <Canvas shadows dpr={[1, 1.7]} gl={{ antialias: true }}>
-        <Suspense fallback={null}><TowerScene selectedId={selected.id} onSelect={onSelect} /></Suspense>
+        <Suspense fallback={null}><TowerScene agents={agents} selectedId={selected.id} onSelect={onSelect} /></Suspense>
       </Canvas>
     </div>
   )

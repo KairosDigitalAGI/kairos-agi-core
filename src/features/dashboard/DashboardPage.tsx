@@ -1,10 +1,13 @@
 import { Activity, ArrowRight, Bot, CheckCircle2, CircleDollarSign, Clock3, Target } from 'lucide-react'
-import { agents, founderEconomy, metrics, missions } from '../../data/mock'
+import { founderEconomy, metrics, missions } from '../../data/mock'
+import { useFounderAgents } from '../../core/useFounderAgents'
 import { ProgressBar } from '../../ui/ProgressBar'
 import { SectionHeader } from '../../ui/SectionHeader'
 import { StatCard } from '../../ui/StatCard'
+import { ApprovalQueue } from '../../engines/instagram/ApprovalQueue'
 
 export function DashboardPage() {
+  const agents = useFounderAgents()
   const activeMissions = missions.filter((mission) => mission.status !== 'Concluída').slice(0, 4)
 
   return (
@@ -13,6 +16,7 @@ export function DashboardPage() {
         {metrics.map((metric) => <StatCard key={metric.id} metric={metric} />)}
       </section>
 
+      <ApprovalQueue />
       <section className="dashboard-grid">
         <article className="glass-panel mission-panel">
           <SectionHeader eyebrow="Prioridades" title="Missões em curso" action={<button className="text-button">Ver todas <ArrowRight size={14} /></button>} />

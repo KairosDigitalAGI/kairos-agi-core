@@ -5,6 +5,7 @@
 - [Task System](TASK_SYSTEM.md)
 - [CRM](CRM.md)
 - [Instagram Engine](INSTAGRAM_ENGINE.md)
+- [Instagram Engine — Missão 002](INSTAGRAM_ENGINE_V0_2.md)
 - [Kairos Coins](KAIROS_COINS.md)
 - [Módulos preparados](PLACEHOLDERS.md)
 

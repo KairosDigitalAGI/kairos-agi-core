@@ -1,5 +1,7 @@
 # Roadmap
 
+Fila vigente de execução: [Missões 001–008](docs/context/MISSION_QUEUE.md). A Missão 002 entrega Instagram editorial local. ORB já foi definido como hardware futuro (Operational Runtime Beacon), fora do escopo.
+
 ## P0 — Fundação e acesso
 
 - [x] Criar documentação, estrutura do monorepo e backlog inicial.

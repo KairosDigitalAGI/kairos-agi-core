@@ -48,7 +48,7 @@ Cada módulo terá contrato próprio e poderá evoluir sem duplicar identidade, 
 ## Compatibilidade com a fundação existente
 
 - KAIROS é o robô pessoal do Founder e não pode ser substituído por Arthur. Arthur pertence a um cliente e fica fora da infraestrutura Founder. `Carlos WhatsApp AI` permanece como item legado do backlog até sua identidade de produto ser detalhada.
-- `ORB` permanece em descoberta porque o Blueprint V1 não define seu significado.
+- `ORB` = Operational Runtime Beacon, hardware futuro conforme Memory Sync V1; não implementar agora.
 - Os módulos Hunter, Kairos Ads, Site Maker, Financeiro, Conteúdo e Infraestrutura serão relacionados às Engines e aos distritos correspondentes durante o detalhamento do V2.
 
 ## Ambientes
@@ -66,3 +66,13 @@ O frontend usa divisão de código para carregar o pacote 3D apenas quando o usu
 ## Não implementado no v0.1
 
 Endpoints, persistência, autenticação, migrações SQL, filas, integrações com Instagram ou WhatsApp e armazenamento de credenciais. O Vault é apenas um placeholder seguro. Não existe sincronização automática entre arquivos locais e fontes do ChatGPT.
+
+## Incremento Missão 002
+
+EditorialProvider em src/core é a fonte única do estado editorial, com persistência local versionada. src/engines/instagram/domain.ts concentra validação de etapas, revisão e aprovação; os tipos vivem em src/types/instagram.ts. Mocks são apenas a semente inicial e analytics fictícios.
+
+ContentEditor, PromptLibrary e ApprovalQueue compõem a Engine. O Dashboard reutiliza ApprovalQueue. useFounderAgents deriva Instagram AI da fila editorial e entrega o mesmo estado para Dashboard e World. FounderTower recebe agentes por props sem duplicar lógica.
+
+Aprovar marca a revisão e move para Publicação, que continua bloqueada. Edição invalida a aprovação. O InstagramGateway é um contrato futuro; disconnectedGateway rejeita publicação sem tráfego externo. Aprovações locais não são autorização confiável de servidor.
+
+Limites: sem backend, autenticação, geração de mídia, integração Meta ou sincronização entre dispositivos/abas. Os dados editoriais sobrevivem à navegação e recarga no mesmo navegador; Tasks da Missão 001 mantêm o comportamento legado. Documentação: docs/modules/INSTAGRAM_ENGINE_V0_2.md.

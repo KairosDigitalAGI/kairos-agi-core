@@ -1,12 +1,15 @@
 import { Bot, Building2, Maximize2, Radio, X } from 'lucide-react'
 import { useState } from 'react'
-import { agents } from '../data/mock'
+import { useFounderAgents } from '../core/useFounderAgents'
 import type { FounderAgent } from '../types'
 import { ProgressBar } from '../ui/ProgressBar'
 import { FounderTower } from './FounderTower'
 
 export function WorldPage() {
-  const [selected, setSelected] = useState<FounderAgent>(agents[0])
+  const agents = useFounderAgents()
+  const [selectedId, setSelectedId] = useState<FounderAgent['id']>('orion')
+  const selected = agents.find(agent => agent.id === selectedId) || agents[0]
+  const setSelected = (agent: FounderAgent) => setSelectedId(agent.id)
   const openFullscreen = () => {
     const world = document.querySelector('.world-shell')
     if (world instanceof HTMLElement && document.fullscreenElement === null) void world.requestFullscreen()
@@ -17,7 +20,7 @@ export function WorldPage() {
         <div><span className="eyebrow"><Radio size={13} /> WORLD 0.1 · AO VIVO</span><h2>Founder Tower</h2></div>
         <div><span><Building2 size={15} /> Sala de comando</span><button aria-label="Abrir World em tela cheia" onClick={openFullscreen}><Maximize2 size={16} /></button></div>
       </div>
-      <FounderTower selected={selected} onSelect={setSelected} />
+      <FounderTower agents={agents} selected={selected} onSelect={setSelected} />
       <aside className="agent-inspector" aria-label={`Detalhes de ${selected.name}`}>
         <div className="inspector-top"><span className="agent-glyph large" style={{ '--agent-color': selected.color } as React.CSSProperties}><Bot size={22} /></span><button aria-label="Fechar painel" onClick={() => setSelected(agents[0])}><X size={17} /></button></div>
         <span className="eyebrow">{selected.role}</span><h3>{selected.name}</h3><span className="working-state"><i /> {selected.status}</span>

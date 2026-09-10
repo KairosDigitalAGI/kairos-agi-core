@@ -23,7 +23,7 @@ Este registro preserva a evolução da constituição `KAIROS_AGI_BLUEPRINT_V1.m
 ### Questões abertas
 
 - Detalhar a identidade de produto de Carlos WhatsApp AI. Arthur é um agente de cliente e KAIROS é o robô pessoal do Founder; os dois não são intercambiáveis.
-- Definir o significado e os limites do ORB.
+- ORB definido no Memory Sync V1 como Operational Runtime Beacon; hardware futuro fora do escopo atual.
 - Definir stack de aplicação, modelo de tenancy, fronteiras do Core e esquema de Ordens de Serviço.
 - Converter o roadmap fundador de 30 dias em entregas técnicas estimadas após os contratos do Core.
 
@@ -49,3 +49,13 @@ O Blueprint V2 deverá detalhar Core, ORION, Vault, Shield, Billing, Memory, Eng
 - React Three Fiber e Drei implementam o World 0.1.
 - `src/data/mock` é a fonte única de dados demonstrativos até a camada de persistência.
 - O pacote 3D é carregado sob demanda quando o usuário abre o World.
+
+## Memory Sync V1 e Missão 002
+
+Conversa fornecida pelo Founder adotada como adendo curado em KAIROS_MEMORY_SYNC_V1.md. Original preservado em memory/private, ignorado pelo Git. Estrutura docs/context e docs/blueprint adicionada sem substituir documentos fundadores.
+
+ORB definido como Operational Runtime Beacon, hardware futuro. KAIROS continua robô do Founder e Arthur restrito a cliente. Identificações de clientes removidas da revisão pública atual do Blueprint, substituídas por CLIENT_001–004; histórico Git antigo não foi reescrito, portanto ainda contém a publicação anterior.
+
+Instagram passa de tela mock para fluxo editorial manual local: ideias, materiais, pipeline, calendário, prompts, decisão do Founder e histórico. Estado editorial compartilhado em Core; Dashboard e World refletem a mesma fila. Dados persistem apenas no navegador, com validação e aviso de falha. API, IA e publicação reais continuam desconectadas.
+
+Missões 003–008 registradas na fila; não implementadas por este sync. Recomendação de separar estratégia em repositório privado registrada sem mudar a visibilidade do repositório existente.
