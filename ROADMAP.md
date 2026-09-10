@@ -4,7 +4,7 @@
 
 - [x] Criar documentação, estrutura do monorepo e backlog inicial.
 - [x] Preparar MEMORY_IMPORT sem importar arquivos.
-- [ ] Concluir as cinco conversas do Project do ChatGPT: Kairos Master pronta; quatro áreas pendentes.
+- [x] Concluir as cinco conversas do Project do ChatGPT: Kairos Master, Engenharia, Comercial, Conteúdo e Infraestrutura.
 - [x] Criar organização GitHub KairosDigitalAGI (alternativa autorizada porque KairosDigital estava indisponível).
 - [x] Criar o repositório público kairos-agi-core, publicar `main` e sincronizar o Codex local.
 - [x] Conectar Vercel Hobby, importar o repositório e validar o deploy automático.
