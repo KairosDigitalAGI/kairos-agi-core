@@ -1,0 +1,23 @@
+# Credenciais e configurações locais
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dependências e builds
+node_modules/
+.next/
+dist/
+coverage/
+.vercel/
+
+# Exportações e dados brutos
+MEMORY_IMPORT/*
+!MEMORY_IMPORT/README.md
+*.zip
+memory/private/
+
+# Sistema
+.DS_Store
+Thumbs.db
