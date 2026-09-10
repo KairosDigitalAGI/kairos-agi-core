@@ -15,7 +15,8 @@
 ## P1 — Dashboard mínimo
 
 - [ ] Definir os contratos de Core, ORION, Dispatcher, Task System, Billing, Vault, Shield e Memory.
-- [ ] Resolver Carlos versus Arthur e definir o domínio ORB com o Founder.
+- [x] Fixar KAIROS como robô do Founder e manter Arthur fora da infraestrutura Founder.
+- [ ] Detalhar a identidade de produto de Carlos WhatsApp AI e definir o domínio ORB com o Founder.
 - [ ] Escolher framework e registrar decisão arquitetural.
 - [ ] Implementar login, permissões, navegação dos oito módulos e visão de tarefas.
 - [ ] Implementar persistência, políticas RLS e testes de isolamento.

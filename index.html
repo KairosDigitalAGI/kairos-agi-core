@@ -1,33 +1,14 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Kairos AGI Core — infraestrutura e agentes da Kairos Digital." />
-    <title>Kairos AGI Core</title>
-    <style>
-      :root { color-scheme: dark; font-family: Inter, system-ui, sans-serif; }
-      * { box-sizing: border-box; }
-      body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #070a0f; color: #eef2ff; }
-      main { width: min(900px, calc(100% - 40px)); padding: 64px 0; }
-      .eyebrow { color: #7dd3fc; letter-spacing: .16em; text-transform: uppercase; font-size: .78rem; }
-      h1 { margin: 12px 0; font-size: clamp(2.6rem, 8vw, 6rem); line-height: .95; }
-      p { max-width: 680px; color: #aab4c8; font-size: 1.1rem; line-height: 1.7; }
-      ul { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; padding: 0; margin-top: 40px; }
-      li { list-style: none; padding: 16px; border: 1px solid #263247; border-radius: 14px; background: #0d1420; }
-      footer { margin-top: 44px; color: #667085; font-size: .85rem; }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07070b" />
+    <meta name="description" content="Founder Edition do Kairos Core — operação da Kairos Digital." />
+    <title>Kairos Core · Founder Edition</title>
   </head>
   <body>
-    <main>
-      <div class="eyebrow">Kairos Digital</div>
-      <h1>Kairos AGI Core</h1>
-      <p>Fundação oficial para o desenvolvimento do Kairos OS e de agentes autônomos com supervisão humana, rastreabilidade e controle de custos.</p>
-      <ul aria-label="Módulos planejados">
-        <li>Hunter</li><li>Carlos WhatsApp AI</li><li>Kairos Ads</li><li>Site Maker</li>
-        <li>ORB</li><li>Financeiro</li><li>Conteúdo</li><li>Infraestrutura</li>
-      </ul>
-      <footer>Ambiente inicial · desenvolvimento contínuo</footer>
-    </main>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

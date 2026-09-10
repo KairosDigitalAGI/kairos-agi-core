@@ -11,6 +11,7 @@ node_modules/
 dist/
 coverage/
 .vercel/
+*.tsbuildinfo
 
 # Exportações e dados brutos
 MEMORY_IMPORT/*

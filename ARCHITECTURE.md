@@ -4,7 +4,7 @@ Esta arquitetura implementa progressivamente a constituição em `KAIROS_AGI_BLU
 
 ## Camadas
 
-1. **Interface**: Dashboard Kairos OS em `apps/`. A página inicial está hospedada na Vercel Hobby; o dashboard funcional ainda será implementado.
+1. **Interface**: Founder Edition em React e TypeScript, com Dashboard 2D e Founder Tower 3D. A aplicação está hospedada na Vercel Hobby.
 2. **Serviços**: APIs e workers com contratos em `packages/`; tarefas longas podem executar na Hostinger VPS.
 3. **Automação**: n8n aciona serviços autenticados, com identificadores de execução, limites, retries e idempotência.
 4. **Dados**: Supabase para dados operacionais, identidade e artefatos. Separar Development e Production; aplicar isolamento por usuário/empresa e políticas RLS antes de acesso cliente.
@@ -47,7 +47,7 @@ Cada módulo terá contrato próprio e poderá evoluir sem duplicar identidade, 
 
 ## Compatibilidade com a fundação existente
 
-- `Carlos WhatsApp AI` permanece no backlog existente. O Blueprint apresenta `Arthur` como vendedor WhatsApp. A relação entre os dois será decidida antes da implementação; nenhum deles foi removido ou renomeado.
+- KAIROS é o robô pessoal do Founder e não pode ser substituído por Arthur. Arthur pertence a um cliente e fica fora da infraestrutura Founder. `Carlos WhatsApp AI` permanece como item legado do backlog até sua identidade de produto ser detalhada.
 - `ORB` permanece em descoberta porque o Blueprint V1 não define seu significado.
 - Os módulos Hunter, Kairos Ads, Site Maker, Financeiro, Conteúdo e Infraestrutura serão relacionados às Engines e aos distritos correspondentes durante o detalhamento do V2.
 
@@ -55,6 +55,14 @@ Cada módulo terá contrato próprio e poderá evoluir sem duplicar identidade, 
 
 Development: dados sintéticos e credenciais próprias. Production: configuração separada, domínio e acesso revisados. A Vercel usa `main` para produção e cria deployments automaticamente a partir do GitHub; previews devem usar variáveis próprias. Nenhum segredo de servidor deve ser entregue ao navegador.
 
-## Não implementado nesta fundação
+## Kairos Core v0.1
 
-Framework, endpoints, migrações SQL, autenticação, filas, integrações e deploy. A seleção e implementação fazem parte do roadmap. Não existe sincronização automática entre arquivos locais e fontes do ChatGPT.
+A Missão 001 estabelece uma aplicação cliente sem backend. `src/core` agrega o estado compartilhado; `src/types` define os contratos; `src/data/mock` é a única fonte dos dados demonstrativos. Dashboard, World, Tasks, CRM e Instagram consomem esses contratos sem integração externa.
+
+O World 0.1 usa React Three Fiber e Drei. ORION, KAIROS, Instagram AI e Hunter AI são instâncias do mesmo tipo `FounderAgent`; o painel lateral e os balões leem a mesma coleção mockada. KAIROS é o robô pessoal do Founder. Arthur permanece fora da infraestrutura da Founder Edition.
+
+O frontend usa divisão de código para carregar o pacote 3D apenas quando o usuário abre o World. Navegação e estado de Tasks existem apenas na sessão do navegador nesta versão.
+
+## Não implementado no v0.1
+
+Endpoints, persistência, autenticação, migrações SQL, filas, integrações com Instagram ou WhatsApp e armazenamento de credenciais. O Vault é apenas um placeholder seguro. Não existe sincronização automática entre arquivos locais e fontes do ChatGPT.

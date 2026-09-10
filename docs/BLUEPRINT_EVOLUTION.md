@@ -22,7 +22,7 @@ Este registro preserva a evolução da constituição `KAIROS_AGI_BLUEPRINT_V1.m
 
 ### Questões abertas
 
-- Definir se Carlos WhatsApp AI e Arthur são o mesmo agente, papéis complementares ou produtos distintos.
+- Detalhar a identidade de produto de Carlos WhatsApp AI. Arthur é um agente de cliente e KAIROS é o robô pessoal do Founder; os dois não são intercambiáveis.
 - Definir o significado e os limites do ORB.
 - Definir stack de aplicação, modelo de tenancy, fronteiras do Core e esquema de Ordens de Serviço.
 - Converter o roadmap fundador de 30 dias em entregas técnicas estimadas após os contratos do Core.
@@ -30,3 +30,22 @@ Este registro preserva a evolução da constituição `KAIROS_AGI_BLUEPRINT_V1.m
 ### Próxima versão planejada
 
 O Blueprint V2 deverá detalhar Core, ORION, Vault, Shield, Billing, Memory, Engines, Factories, Supabase, GitHub, World 3D, aplicativos Founder/Cliente e fluxos de venda, onboarding e entrega.
+
+## 2026-09-10 — Missão 001: Cliente Zero
+
+### Implementado
+
+- Founder Dashboard com métricas operacionais mockadas.
+- Founder Tower em React Three Fiber com ORION, KAIROS, Instagram AI e Hunter AI.
+- Task System gamificado com avanço local de estado, XP e Kairos Coins.
+- CRM com identificadores anônimos e dados fictícios.
+- Instagram Engine demonstrativa, sem integração externa.
+- Navegação completa da Founder Edition e placeholders para módulos futuros.
+
+### Decisões
+
+- KAIROS é o robô pessoal do Founder; Arthur permanece restrito ao contexto de cliente.
+- React, TypeScript e Vite formam a base do frontend v0.1.
+- React Three Fiber e Drei implementam o World 0.1.
+- `src/data/mock` é a fonte única de dados demonstrativos até a camada de persistência.
+- O pacote 3D é carregado sob demanda quando o usuário abre o World.

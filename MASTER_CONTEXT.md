@@ -35,6 +35,8 @@ A ordem de decisão do projeto é: requisitos atuais do Founder; Blueprint vigen
 - Founder Edition controla a empresa completa; Client Edition expõe apenas os departamentos contratados.
 - Dashboard 2D e World 3D são duas interfaces sobre os mesmos domínios, contratos e dados.
 
+KAIROS é o robô pessoal do Founder. Arthur é um agente associado a cliente e não faz parte da infraestrutura da Founder Edition.
+
 ## Stack oficial
 
 | Tecnologia | Papel planejado |
