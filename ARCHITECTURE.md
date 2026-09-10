@@ -2,7 +2,7 @@
 
 ## Camadas
 
-1. **Interface**: Dashboard Kairos OS em `apps/`, hospedado futuramente na Vercel.
+1. **Interface**: Dashboard Kairos OS em `apps/`. A página inicial está hospedada na Vercel Hobby; o dashboard funcional ainda será implementado.
 2. **Serviços**: APIs e workers com contratos em `packages/`; tarefas longas podem executar na Hostinger VPS.
 3. **Automação**: n8n aciona serviços autenticados, com identificadores de execução, limites, retries e idempotência.
 4. **Dados**: Supabase para dados operacionais, identidade e artefatos. Separar Development e Production; aplicar isolamento por usuário/empresa e políticas RLS antes de acesso cliente.
@@ -25,7 +25,7 @@ Cada execução deve ter estado, responsável, histórico, custo estimado/real e
 
 ## Ambientes
 
-Development: dados sintéticos e credenciais próprias. Production: configuração separada, domínio e acesso revisados. Vercel deve usar `main` para produção após conexão ao GitHub; previews devem usar variáveis próprias. Nenhum segredo de servidor deve ser entregue ao navegador.
+Development: dados sintéticos e credenciais próprias. Production: configuração separada, domínio e acesso revisados. A Vercel usa `main` para produção e cria deployments automaticamente a partir do GitHub; previews devem usar variáveis próprias. Nenhum segredo de servidor deve ser entregue ao navegador.
 
 ## Não implementado nesta fundação
 

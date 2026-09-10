@@ -4,11 +4,12 @@
 
 - [x] Criar documentação, estrutura do monorepo e backlog inicial.
 - [x] Preparar MEMORY_IMPORT sem importar arquivos.
-- [ ] Concluir cinco conversas e anexar fontes no Project do ChatGPT.
-- [ ] Verificar organização GitHub KairosDigitalAGI (alternativa autorizada a KairosDigital).
-- [ ] Criar repositório privado kairos-agi-core, publicar main e conectar Codex.
-- [ ] Conectar Vercel, importar repositório e verificar deploy automático.
-- [ ] Criar Supabase kairos-core sem recursos pagos e separar configurações de ambientes.
+- [ ] Concluir as cinco conversas do Project do ChatGPT: Kairos Master pronta; quatro áreas pendentes.
+- [x] Criar organização GitHub KairosDigitalAGI (alternativa autorizada porque KairosDigital estava indisponível).
+- [x] Criar o repositório público kairos-agi-core, publicar `main` e sincronizar o Codex local.
+- [x] Conectar Vercel Hobby, importar o repositório e validar o deploy automático.
+- [ ] Criar Supabase kairos-core e separar ambientes. Bloqueado pelo limite de dois projetos ativos no plano Free; projetos existentes foram preservados.
+- [ ] Concluir o conector web Codex–GitHub. O fluxo de autorização está travado; o repositório local e o remoto já estão sincronizados.
 
 ## P1 — Dashboard mínimo
 
@@ -16,7 +17,7 @@
 - [ ] Implementar login, permissões, navegação dos oito módulos e visão de tarefas.
 - [ ] Implementar persistência, políticas RLS e testes de isolamento.
 - [ ] Implementar auditoria, aprovações e limites de execução/custo.
-- [ ] Publicar e validar Development, preview e Production.
+- [ ] Configurar dados e variáveis separados para Development e Production; a primeira página de Production já está publicada.
 
 ## P2 — Primeiro fluxo comercial
 
