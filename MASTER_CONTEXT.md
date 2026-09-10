@@ -8,6 +8,12 @@
 - Objetivo: construir uma empresa composta por agentes autônomos de IA.
 - Direção: migração do Claude Code para GPT-6 Astra + Codex.
 
+## Constituição e governança
+
+`KAIROS_AGI_BLUEPRINT_V1.md` é a especificação fundadora da Kairos AGI. A arquitetura existente deve ser evoluída por módulos, sem reinicializações ou substituições silenciosas. Toda mudança que amplie, ajuste ou contradiga o Blueprint precisa de registro em `docs/BLUEPRINT_EVOLUTION.md` e, quando for uma decisão técnica duradoura, de um ADR em `memory/decisions/`.
+
+A ordem de decisão do projeto é: requisitos atuais do Founder; Blueprint vigente; decisões arquiteturais registradas; documentação operacional. Credenciais, tokens e senhas citados como domínio do Vault nunca devem ser armazenados em Markdown ou Git.
+
 ## Áreas de trabalho
 
 | Conversa | Responsabilidade |
@@ -17,6 +23,17 @@
 | Comercial | Prospecção, CRM, ofertas e atendimento |
 | Conteúdo | Calendário editorial, produção e revisão |
 | Infraestrutura | Deploy, banco, automações, acesso e observabilidade |
+
+## Núcleo definido no Blueprint V1
+
+- ORION coordena prioridades e departamentos.
+- Dispatcher transforma demandas em Ordens de Serviço e acompanha sua execução.
+- Task System representa trabalho como missões com prioridade, progresso, impacto financeiro e aprovações.
+- Engines são departamentos vendáveis; Factories produzem e entregam produtos.
+- Vault governa identidades e segredos; Shield governa segurança, auditoria, logs, backups e alertas.
+- Billing mede franquias e cobrança; Memory preserva conhecimento e decisões.
+- Founder Edition controla a empresa completa; Client Edition expõe apenas os departamentos contratados.
+- Dashboard 2D e World 3D são duas interfaces sobre os mesmos domínios, contratos e dados.
 
 ## Stack oficial
 

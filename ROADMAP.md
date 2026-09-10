@@ -4,6 +4,7 @@
 
 - [x] Criar documentação, estrutura do monorepo e backlog inicial.
 - [x] Preparar MEMORY_IMPORT sem importar arquivos.
+- [x] Incorporar o Blueprint V1 como constituição e registrar o mapa modular inicial.
 - [x] Concluir as cinco conversas do Project do ChatGPT: Kairos Master, Engenharia, Comercial, Conteúdo e Infraestrutura.
 - [x] Criar organização GitHub KairosDigitalAGI (alternativa autorizada porque KairosDigital estava indisponível).
 - [x] Criar o repositório público kairos-agi-core, publicar `main` e sincronizar o Codex local.
@@ -13,6 +14,8 @@
 
 ## P1 — Dashboard mínimo
 
+- [ ] Definir os contratos de Core, ORION, Dispatcher, Task System, Billing, Vault, Shield e Memory.
+- [ ] Resolver Carlos versus Arthur e definir o domínio ORB com o Founder.
 - [ ] Escolher framework e registrar decisão arquitetural.
 - [ ] Implementar login, permissões, navegação dos oito módulos e visão de tarefas.
 - [ ] Implementar persistência, políticas RLS e testes de isolamento.

@@ -1,5 +1,7 @@
 # Arquitetura — proposta inicial
 
+Esta arquitetura implementa progressivamente a constituição em `KAIROS_AGI_BLUEPRINT_V1.md`. O Blueprint define os domínios; este documento registra como eles serão separados e integrados.
+
 ## Camadas
 
 1. **Interface**: Dashboard Kairos OS em `apps/`. A página inicial está hospedada na Vercel Hobby; o dashboard funcional ainda será implementado.
@@ -22,6 +24,32 @@ Cada execução deve ter estado, responsável, histórico, custo estimado/real e
 - Run: task_id, modelo, estado, tentativas, custo e resultado.
 - Approval: run_id, ação, escopo, decisão e autor.
 - AuditEvent: origem, ator, ação, referência e timestamp.
+
+## Mapa modular do Blueprint V1
+
+| Módulo | Responsabilidade | Dependências principais |
+| --- | --- | --- |
+| Kairos Core | Identidade da instalação, clientes, configuração e eventos centrais | Dados, auditoria |
+| ORION | Priorização, coordenação e distribuição estratégica | Dispatcher, Task System, aprovações |
+| Dispatcher | Ordens de Serviço, roteamento e acompanhamento | Engines, Factories, filas |
+| Task System | Missões, checklist, XP, prioridade, prazo e impacto | Core, auditoria |
+| Billing | Planos, franquias, consumo e cobrança | Clientes, uso, aprovações financeiras |
+| Vault | Referências seguras para credenciais e identidades | Provedor de segredos, controle de acesso |
+| Shield | Políticas, logs, alertas, backup e auditoria | Todos os módulos |
+| Memory | Conhecimento curado, decisões e recuperação contextual | Core, agentes |
+| Engines | Departamentos operacionais e vendáveis | Dispatcher, Billing, integrações |
+| Factories | Produção, QA e deploy de entregáveis | Dispatcher, Engines, Shield |
+| Founder Edition | Controle integral da Kairos e de todos os clientes | Todos os domínios |
+| Client Edition | Acesso limitado aos módulos contratados | Billing, permissões, Engines |
+| World OS | Dashboard 2D e World 3D sobre contratos compartilhados | Founder/Client Edition |
+
+Cada módulo terá contrato próprio e poderá evoluir sem duplicar identidade, tarefas, uso, aprovação ou auditoria. O World 3D é uma visualização do estado operacional; não mantém uma segunda fonte de verdade.
+
+## Compatibilidade com a fundação existente
+
+- `Carlos WhatsApp AI` permanece no backlog existente. O Blueprint apresenta `Arthur` como vendedor WhatsApp. A relação entre os dois será decidida antes da implementação; nenhum deles foi removido ou renomeado.
+- `ORB` permanece em descoberta porque o Blueprint V1 não define seu significado.
+- Os módulos Hunter, Kairos Ads, Site Maker, Financeiro, Conteúdo e Infraestrutura serão relacionados às Engines e aos distritos correspondentes durante o detalhamento do V2.
 
 ## Ambientes
 

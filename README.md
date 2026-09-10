@@ -2,6 +2,8 @@
 
 Ambiente oficial de desenvolvimento da **Kairos Digital**, destinado à construção de uma empresa operada por agentes de IA com supervisão humana.
 
+O documento [KAIROS_AGI_BLUEPRINT_V1.md](KAIROS_AGI_BLUEPRINT_V1.md) é a constituição arquitetural do produto. Novas decisões devem evoluir essa base de forma modular e registrar alterações em [docs/BLUEPRINT_EVOLUTION.md](docs/BLUEPRINT_EVOLUTION.md).
+
 ## Estado atual
 
 A fundação documental e a organização do monorepo estão publicadas. A página inicial está em produção na Vercel Hobby, com deploy automático a partir da branch `main` do GitHub. O backend dedicado ainda aguarda uma vaga no plano Free do Supabase.
@@ -21,7 +23,7 @@ scripts/          Utilitários de desenvolvimento
 MEMORY_IMPORT/    Recepção local de exportações futuras (não versionadas)
 ```
 
-Leia [MASTER_CONTEXT.md](MASTER_CONTEXT.md), [ARCHITECTURE.md](ARCHITECTURE.md), [ROADMAP.md](ROADMAP.md) e [backlog](docs/DASHBOARD_BACKLOG.md).
+Leia [KAIROS_AGI_BLUEPRINT_V1.md](KAIROS_AGI_BLUEPRINT_V1.md), [MASTER_CONTEXT.md](MASTER_CONTEXT.md), [ARCHITECTURE.md](ARCHITECTURE.md), [ROADMAP.md](ROADMAP.md) e [backlog](docs/DASHBOARD_BACKLOG.md).
 
 ## Stack oficial
 
