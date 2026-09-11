@@ -14,7 +14,7 @@ Validação da engine: `npm test` (Node 24) e `npm run build`. Dados locais não
 
 
 ## Adendo V1.1 e escopo atual
-Ler também KAIROS_MEMORY_SYNC_V1_1.md. A missão atual é somente 003 (Clone Engine arquitetural, sem serviços externos). A fila 004–010 substitui a numeração anterior. Não ativar missões futuras a partir da documentação.
+Ler também KAIROS_MEMORY_SYNC_V1_1.md. Missões 003 e 004 foram autorizadas e entregues. A fila 005–010 segue condicionada à autorização do Founder e aos acessos correspondentes.
 
 Usar somente dados reais cadastrados ou consultados em fonte autorizada. Dado externo desconhecido = indisponível, nunca zero estimado, receita inventada ou agente fingindo trabalhar. Configuração de um papel não comprova execução. Não importar dados privados de clientes para o repositório público.
 
@@ -27,7 +27,7 @@ Usar somente dados reais cadastrados ou consultados em fonte autorizada. Dado ex
 | Instagram AI | Conteúdo, calendário, revisão e métricas verificadas | Só usa fontes conectadas; sem publicação automática |
 | Hunter AI | Prospecção e qualificação para CRM | Isolar tenant, fonte e consentimentos; sem disparos nesta missão |
 | Clone AI | Identidade autorizada, referências de voz/rosto, produção e revisão | Não gera nem clona mídia na Missão 003 |
-| Video AI | Adaptadores de geração e edição de mídia | Missão 004 futura; nenhuma chamada ou cobrança agora |
+| Video AI | Processamento local no navegador e adaptadores externos | Render local WebM custa zero; integrações externas continuam desligadas |
 | QA AI | Validar regras, regressões, integridade dos dados e entregas | Relatar limites e falhas sem inventar verificações |
 | Vault AI | Contratos de referências seguras a credenciais | Vault vazio, sem valores secretos no frontend |
 | Shield AI | Isolamento, políticas, eventos e prevenção de vazamentos | Sem mudanças em outros projetos ou processos ativos |

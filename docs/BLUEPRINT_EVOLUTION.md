@@ -64,6 +64,9 @@ Missões 003–008 registradas na fila; não implementadas por este sync. Recome
 Adendo oficial preservado em KAIROS_MEMORY_SYNC_V1_1.md: Money Hunter com cinco equipes, Score Kairos, Ideas Vault, Clone Engine modular, VideoProvider, Content Brain, Asset Library, separação pública/privada e fila renumerada. Missão ativa limitada a 003.
 A instrução direta de usar apenas dados reais substitui o requisito antigo de mocks na interface. O Blueprint original não foi refeito. Dados ausentes ficam indisponíveis; nenhum agente simula execução.
 
+## 11/09/2026 — Missão 004
+Video Engine ganhou execução local real no navegador. O caminho gratuito usa Canvas, Web Audio e MediaRecorder para produzir WebM. Provedores de geração continuam definidos como futuras integrações e não são apresentados como ativos.
+
 ### Adendo escrito pelo Founder
 Interface séria e imersiva: painel 2D transparente sobre ambiente 3D contextual, reaproveitando o acervo. Progresso corresponde a trabalho cadastrado e revisão, sem inventar ganhos. Mantido foco econômico, sem promessa de receita.
 

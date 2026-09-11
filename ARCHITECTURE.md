@@ -97,3 +97,8 @@ A nova página Agentes contém busca, departamento, responsabilidades, indicador
 Dashboard e World usam o mesmo cadastro operacional. O Dashboard resume seis agentes e oferece acesso explícito ao organograma completo. O World instancia os 27, exibe balão apenas na seleção/hover para reduzir sobreposição e permite selecionar qualquer agente pelo nome. Fechar o inspetor agora oculta o painel.
 
 O código do motor/importador existente na origem é evidência de implementação, não prova de conexão com este Core. Os executores continuam desconectados. A hierarquia dos 15 papéis originais responde a ORION; vínculos dos especialistas dos adendos são organização adotada neste Core, não importação literal do organograma original.
+
+## Incremento Missão 004 — Video Engine local
+`src/engines/video` implementa uma estação de trabalho no navegador. Arquivos reais entram por seleção local e permanecem em memória; Canvas compõe enquadramento, marca e logo, Web Audio mistura áudio original e música, e MediaRecorder produz WebM para download. `renderPlan.ts` concentra limites, dimensões, nomes seguros e negociação de codec.
+
+O histórico local contém somente metadados da execução e não permite recuperar o vídeo após recarregar. O resultado deve ser baixado antes de fechar a página. Google Flow, Higgsfield, Kling, Runway e Pika permanecem adaptadores desconectados. O pipeline FFmpeg do `kairos3` serviu como referência de capacidades e limites, mas não foi executado nem acoplado à Vercel.

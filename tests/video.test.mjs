@@ -1,0 +1,27 @@
+import test from 'node:test'
+import assert from 'node:assert/strict'
+import { MAX_INPUT_BYTES, MAX_RENDER_SECONDS, outputDimensions, safeOutputName, selectRecorderMime, validateRenderPlan } from '../src/engines/video/renderPlan.ts'
+
+const plan = { title: 'Reel Kairos', startSeconds: 3, endSeconds: 33, aspect: '9:16', quality: 'balanced', watermark: '@_kairosdigital_', includeAudio: true, musicVolume: .15 }
+
+test('render plan accepts a real bounded local job and rejects unsafe intervals', () => {
+  assert.equal(validateRenderPlan(plan, 60, 10_000_000), '')
+  assert.match(validateRenderPlan({ ...plan, endSeconds: 2 }, 60, 10_000_000), /início anterior/)
+  assert.match(validateRenderPlan({ ...plan, endSeconds: MAX_RENDER_SECONDS + 4 }, MAX_RENDER_SECONDS + 10, 10_000_000), /10 minutos/)
+  assert.match(validateRenderPlan(plan, 60, MAX_INPUT_BYTES + 1), /500 MB/)
+  assert.match(validateRenderPlan({ ...plan, musicVolume: 1.1 }, 60, 10_000_000), /cem por cento/)
+})
+
+test('output presets are bounded, even-sized and preserve original ratio', () => {
+  assert.deepEqual(outputDimensions(1920, 1080, '9:16', 'balanced'), { width: 406, height: 720 })
+  assert.deepEqual(outputDimensions(1920, 1080, '1:1', 'high'), { width: 1080, height: 1080 })
+  assert.deepEqual(outputDimensions(1280, 720, 'original', 'high'), { width: 1280, height: 720 })
+  assert.throws(() => outputDimensions(0, 720, 'original', 'balanced'))
+})
+
+test('download names remove path-like characters and codecs degrade predictably', () => {
+  assert.equal(safeOutputName('Vídeo / Founder: 01', 'source.mp4'), 'Video-Founder-01.webm')
+  assert.equal(safeOutputName('', 'meu arquivo.mov'), 'meu-arquivo.webm')
+  assert.equal(selectRecorderMime(mime => mime.includes('vp8')), 'video/webm;codecs=vp8,opus')
+  assert.equal(selectRecorderMime(() => false), '')
+})

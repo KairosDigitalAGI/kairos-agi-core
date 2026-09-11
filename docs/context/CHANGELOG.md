@@ -38,3 +38,11 @@ A nova página Agentes contém busca, departamento, responsabilidades, indicador
 Dashboard e World usam o mesmo cadastro operacional. O Dashboard resume seis agentes e oferece acesso explícito ao organograma completo. O World instancia os 27, exibe balão apenas na seleção/hover para reduzir sobreposição e permite selecionar qualquer agente pelo nome. Fechar o inspetor agora oculta o painel.
 
 O código do motor/importador existente na origem é evidência de implementação, não prova de conexão com este Core. Os executores continuam desconectados. A hierarquia dos 15 papéis originais responde a ORION; vínculos dos especialistas dos adendos são organização adotada neste Core, não importação literal do organograma original.
+
+## Missão 004 — Video Engine local
+- Editor utiliza arquivos reais selecionados no dispositivo e mostra duração, resolução e tamanho lidos do arquivo.
+- Corte por intervalo, formatos 9:16, 1:1, 16:9 ou original; qualidades até 480p, 720p e 1080p.
+- Composição de marca d'água e logo, áudio original opcional e música local com volume controlado.
+- Render WebM e download no navegador, com progresso, cancelamento e histórico de metadados.
+- Limites: 500 MB e 10 minutos por render; compatibilidade depende de Chrome/Edge e codecs do arquivo.
+- Sem upload, backend, API, publicação, geração por IA ou custo externo.

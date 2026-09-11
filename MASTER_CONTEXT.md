@@ -2,7 +2,7 @@
 
 Entrada operacional: [docs/context/MASTER_CONTEXT.md](docs/context/MASTER_CONTEXT.md). Histórico: [CHANGELOG](docs/context/CHANGELOG.md). Fila vigente: [MISSION_QUEUE](docs/context/MISSION_QUEUE.md).
 
-Missão 002 implementa a operação editorial local do Instagram, com pipeline, calendário, prompts, aprovação por revisão e estado compartilhado com Dashboard/World. Integrações continuam desconectadas; persistência restrita ao navegador. O Memory Sync V1 foi adotado como adendo, com conteúdo original preservado localmente fora do Git.
+As Missões 002–004 entregam a operação editorial local do Instagram, o Clone Engine e o Video Engine local. O vídeo aceita arquivo real, corte, reenquadramento, marca d'água, logo, música e áudio original, com saída WebM no próprio navegador. Integrações continuam desconectadas; persistência restrita ao navegador. O Memory Sync V1 foi adotado como adendo, com conteúdo original preservado localmente fora do Git.
 
 ## Identidade e missão
 
@@ -71,4 +71,4 @@ Exportações completas de ChatGPT e Claude serão recebidas posteriormente em `
 Dashboard Kairos OS: Hunter, Carlos WhatsApp AI (legado), Kairos Ads, Site Maker, Financeiro, Conteúdo e Infraestrutura. ORB significa Operational Runtime Beacon: produto de hardware IA futuro, fora do escopo atual.
 
 ## Atualização V1.1
-Consultar docs/context/MASTER_CONTEXT.md para o estado atual. Clone Engine arquitetural entregue na Missão 003; nenhuma geração automática. Perfil informado: https://www.instagram.com/_kairosdigital_/ . Somente dados reais; informações externas ausentes ficam indisponíveis. Money Hunter é departamento oficial futuro.
+Consultar docs/context/MASTER_CONTEXT.md para o estado atual. Clone Engine arquitetural entregue na Missão 003 e Video Engine local entregue na Missão 004; nenhuma geração automática externa. Perfil informado: https://www.instagram.com/_kairosdigital_/ . Somente dados reais; informações externas ausentes ficam indisponíveis. Money Hunter é departamento oficial futuro.

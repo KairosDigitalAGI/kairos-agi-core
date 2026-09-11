@@ -22,3 +22,6 @@ A triagem dos demais repositórios está no relatório privado local. Não afirm
 
 ## Organograma e reuniões
 Cadastro consultado no GitHub em 11/09/2026: [data/agents/agents.json](https://github.com/matheusschelle/kairos-os/blob/7113aac7ea727090ebf714e889b2df353d6f6233/data/agents/agents.json). Quinze papéis preservados com sourceId; quatro modelos de reunião preservados. Metadados de implementação são declarações da origem, sem execução ou confirmação de conectividade neste Core. Doze papéis adicionais vêm do Blueprint e adendos e têm origem identificada separadamente.
+
+## Video Engine
+Capacidades e limites foram estudados no `kairos3/video-skill` no commit inventariado pela auditoria privada. O Core implementa código novo compatível com o navegador para corte, composição, áudio e download. Não copia credenciais, configuração, integrações de WhatsApp, transcrição ou chamadas do motor legado. O worker FFmpeg permanece no repositório de origem.

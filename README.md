@@ -8,13 +8,16 @@ O documento [KAIROS_AGI_BLUEPRINT_V1.md](KAIROS_AGI_BLUEPRINT_V1.md) é a consti
 
 **Missão 003 — Clone Engine:** Identity Manager, Voice Profile, Face Profile, Avatar Library, Prompt Library, Video Queue, Approval Queue, Asset Library e Content Brain. Cadastre seus dados, referências a arquivos reais e produções; revise e aprove localmente. Não há clonagem, geração, upload ou publicação automática.
 
+**Missão 004 — Video Engine:** selecione um vídeo real no navegador, corte, escolha formato, aplique marca d'água ou logo, preserve o áudio, misture música e baixe o resultado em WebM. Todo processamento acontece no dispositivo, sem upload e sem custo de API.
+
 Sem dados fictícios na interface. Receita, clientes, XP, Coins e métricas do Instagram permanecem indisponíveis até conexão com fontes reais. O perfil informado pelo Founder é [_kairosdigital_](https://www.instagram.com/_kairosdigital_/); não está autenticado na API.
 
-A aplicação continua em React/Vite/TypeScript, hospedada na Vercel e sincronizada com main. Dados de edição ficam somente no navegador. Clone oferece exportação JSON para backup; não é Vault nem banco autenticado. Missões 004–010 estão planejadas, não implementadas.
+A aplicação continua em React/Vite/TypeScript, hospedada na Vercel e sincronizada com main. Dados de edição ficam somente no navegador. Clone oferece exportação JSON para backup; não é Vault nem banco autenticado. As Missões 003 e 004 estão implementadas; as Missões 005–010 permanecem planejadas.
 
 - [Produção](https://kairos-agi-core.vercel.app/)
 - [GitHub](https://github.com/KairosDigitalAGI/kairos-agi-core)
 - [Guia Clone](docs/modules/CLONE_ENGINE_V0_3.md)
+- [Guia Video Engine](docs/modules/VIDEO_ENGINE_V0_4.md)
 - [Dados reais e migração](docs/modules/REAL_DATA_POLICY.md)
 - [Contexto](docs/context/MASTER_CONTEXT.md), [histórico](docs/context/CHANGELOG.md), [fila](docs/context/MISSION_QUEUE.md)
 

@@ -4,3 +4,11 @@ export interface VideoRequest { edition: Edition; tenantId: string; videoId: str
 export interface VideoResult { jobId: string; status: 'queued' | 'running' | 'completed' | 'failed'; assetId?: string; costCents: number | null }
 export interface VideoProvider { id: string; connected: boolean; generate(request: VideoRequest): Promise<VideoResult> }
 export const videoProviders: VideoProvider[] = providerIds.map(id => ({ id, connected: false, async generate() { throw new Error('Provedor desconectado. Nenhuma geração, cobrança ou publicação foi executada.') } }))
+
+export const localBrowserVideo = {
+  id: 'browser-local',
+  label: 'Navegador local',
+  output: 'WebM',
+  costCents: 0,
+  available: () => typeof window !== 'undefined' && 'MediaRecorder' in window && 'captureStream' in HTMLCanvasElement.prototype,
+} as const

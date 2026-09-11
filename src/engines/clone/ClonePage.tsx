@@ -6,7 +6,7 @@ import { libraryCatalog } from './catalog'
 import { clonePipeline, stageRequirement } from './domain'
 import { VideoEditor } from './VideoEditor'
 import { CloneApprovalQueue } from './CloneApprovalQueue'
-import { videoProviders } from './videoProvider'
+import { localBrowserVideo, videoProviders } from './videoProvider'
 import './clone.css'
 export function ClonePage() {
   const { state, dispatch, error } = useClone()
@@ -23,7 +23,7 @@ export function ClonePage() {
     <nav className="editorial-tabs" aria-label="Módulos do Clone">{([['queue','Video Queue'], ...Object.entries(libraryCatalog).map(([key, value]) => [key, value.label]), ['approval','Approval Queue'], ['providers','Video Providers']] as [typeof tab, string][]).map(([key,label]) => <button key={key} aria-pressed={tab === key} onClick={() => { setTab(key); setEditing(null); setNotice('') }}>{label}</button>)}</nav>
     {tab in libraryCatalog && <LibraryPanel key={tab} kind={tab as LibraryKind} />}
     {tab === 'approval' && <CloneApprovalQueue />}
-    {tab === 'providers' && <section className="glass-panel"><h3>Engines preparadas para conexão futura</h3><p>Escolher uma engine apenas registra a intenção. Nenhum serviço é chamado, nenhum crédito é consumido.</p><div className="prompt-grid">{videoProviders.map(provider => <article className="prompt-card" key={provider.id}><h3>{provider.id}</h3><p>{provider.id === 'manual' ? 'Catálogo de arquivos produzidos por você.' : 'Adaptador arquitetural desconectado.'}</p></article>)}</div></section>}
+    {tab === 'providers' && <section className="glass-panel"><h3>Engines de vídeo</h3><p>O navegador local processa arquivos reais sem custo. Provedores externos continuam desligados.</p><div className="prompt-grid"><article className="prompt-card"><h3>{localBrowserVideo.label}</h3><p>{localBrowserVideo.available() ? 'Disponível neste navegador · saída WebM · custo de API zero.' : 'Indisponível neste navegador.'}</p></article>{videoProviders.map(provider => <article className="prompt-card" key={provider.id}><h3>{provider.id}</h3><p>{provider.id === 'manual' ? 'Catálogo de arquivos produzidos por você.' : 'Adaptador arquitetural desconectado.'}</p></article>)}</div></section>}
     {tab === 'queue' && (editing !== null ? <VideoEditor key={editing} video={state.videos.find(v => v.id === editing)} close={() => setEditing(null)} /> : <>
       <div className="editorial-row"><h3>Pipeline do Clone</h3><button className="primary-button" onClick={() => setEditing('new')}>Nova produção</button></div>
       {!state.videos.length && <p>Comece cadastrando sua identidade autorizada. Depois crie uma produção e vincule os materiais reais.</p>}

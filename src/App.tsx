@@ -11,6 +11,7 @@ import { MissionsPage } from './features/tasks/MissionsPage'
 import { CrmPage } from './features/crm/CrmPage'
 import { InstagramPage } from './engines/instagram/InstagramPage'
 import { ClonePage } from './engines/clone/ClonePage'
+import { VideoPage } from './engines/video/VideoPage'
 import { ModulePlaceholder } from './features/shared/ModulePlaceholder'
 
 const DepartmentBackdrop = lazy(() => import('./world/DepartmentBackdrop').then(module => ({ default: module.DepartmentBackdrop })))
@@ -18,7 +19,7 @@ const WorldPage = lazy(() => import('./world/WorldPage').then((module) => ({ def
 
 const titles: Record<ModuleKey, string> = {
   agents: 'Agentes e departamentos', world: 'Kairos World', dashboard: 'Visão geral', missions: 'Missões', clients: 'Clientes', crm: 'CRM',
-  instagram: 'Instagram', clone: 'Clone Engine', hunter: 'Hunter', 'money-lab': 'Money Lab', analytics: 'Analytics', vault: 'Vault', settings: 'Configurações',
+  instagram: 'Instagram', clone: 'Clone Engine', video: 'Video Engine', hunter: 'Hunter', 'money-lab': 'Money Lab', analytics: 'Analytics', vault: 'Vault', settings: 'Configurações',
 }
 
 export function App() {
@@ -38,6 +39,7 @@ export function App() {
       case 'crm': return <CrmPage />
       case 'instagram': return <InstagramPage />
       case 'clone': return <ClonePage />
+      case 'video': return <VideoPage />
       case 'clients': return <ModulePlaceholder title="Clientes" description="Visão consolidada dos clientes e das Engines contratadas." icon={Users} />
       case 'hunter': return <ModulePlaceholder title="Hunter" description="Descoberta, qualificação e encaminhamento de oportunidades para o CRM." icon={Search} />
       case 'money-lab': return <ModulePlaceholder title="Money Lab" description="Pesquisa de oportunidades de receita com aprovação obrigatória do Founder." icon={CircleDollarSign} />

@@ -5,7 +5,7 @@
 | 001 | Fundação entregue; fontes externas pendentes | Dashboard, World e módulos iniciais; exemplos retirados |
 | 002 | Editorial local entregue | Instagram, prompts, aprovação; Graph API desconectada |
 | 003 | Implementada | Clone Engine arquitetural, catálogo local e pipeline; sem clonagem ou geração |
-| 004 | Planejada, não iniciada | Video Engine; avaliar reaproveitamento de FFmpeg existente e remover dependências pagas do caminho local |
+| 004 | Implementada | Video Engine local: arquivo real, corte, formato, marca, logo, áudio, música, render e download WebM |
 | 005 | Planejada | KAIROS WhatsApp; preservar operação existente e validar conexão separada |
 | 006 | Planejada | Supabase Core; definir fonte, identidade e RLS sem afetar bases existentes |
 | 007 | Planejada | Billing Center; sem cobrança ou upgrade automático autorizado |
@@ -13,6 +13,6 @@
 | 009 | Planejada | Founder Mobile App |
 | 010 | Planejada | World 0.2, incluindo Money Hunter |
 
-A numeração 003–008 anterior foi substituída por esta fila em 11/09/2026. Ordem atual do Founder: executar somente a Missão 003. Nenhuma automação contínua, publicação ou serviço externo deve ser ativado nesta entrega.
+A numeração 003–008 anterior foi substituída por esta fila em 11/09/2026. Missão 004 foi autorizada posteriormente. Nenhuma publicação ou integração externa foi ativada.
 
-Correção autorizada após Missão 003: organograma completo importado e exposto no painel/World; sem iniciar Video Engine ou serviços externos.
+Correção autorizada após Missão 003: organograma completo importado e exposto no painel/World. A Missão 004 foi executada depois como processamento local, sem serviços externos.
