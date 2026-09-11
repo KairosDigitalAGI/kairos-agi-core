@@ -67,6 +67,8 @@ A instrução direta de usar apenas dados reais substitui o requisito antigo de 
 ## 11/09/2026 — Missão 004
 Video Engine ganhou execução local real no navegador. O caminho gratuito usa Canvas, Web Audio e MediaRecorder para produzir WebM. Provedores de geração continuam definidos como futuras integrações e não são apresentados como ativos.
 
+Correção aprovada pelo Founder: Video Engine deve criar conteúdo do zero. Foi adicionado o gerador local de motion graphics por roteiro; o fluxo com arquivo passou a ser pós-produção. O escopo gratuito não inclui síntese fotorealista de pessoas ou ambientes.
+
 ### Adendo escrito pelo Founder
 Interface séria e imersiva: painel 2D transparente sobre ambiente 3D contextual, reaproveitando o acervo. Progresso corresponde a trabalho cadastrado e revisão, sem inventar ganhos. Mantido foco econômico, sem promessa de receita.
 

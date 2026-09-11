@@ -1,5 +1,6 @@
 export type VideoAspect = 'original' | '9:16' | '1:1' | '16:9'
 export type VideoQuality = 'economy' | 'balanced' | 'high'
+export type VideoGenerationStyle = 'kairos' | 'minimal' | 'energy'
 
 export interface VideoRenderPlan {
   title: string
@@ -25,6 +26,28 @@ export interface VideoJob {
   durationSeconds: number
   mimeType: string | null
   error: string
+  kind?: 'generated' | 'edited'
+}
+
+export interface VideoGenerationPlan {
+  title: string
+  script: string
+  aspect: Exclude<VideoAspect, 'original'>
+  quality: VideoQuality
+  style: VideoGenerationStyle
+  secondsPerScene: number
+  watermark: string
+  soundtrack: boolean
+}
+
+export interface VideoScene {
+  id: string
+  headline: string
+  kicker: string
+  durationSeconds: number
+  accent: string
+  secondary: string
+  motion: 'orbit' | 'rise' | 'pulse'
 }
 
 export interface VideoRenderResult {

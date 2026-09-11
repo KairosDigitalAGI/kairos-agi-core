@@ -7,7 +7,7 @@ export function useFounderAgents(): FounderAgent[] {
   const approved = state.items.filter(i => i.stage === 'Publicação').length
   return agents.map(agent => agent.id === 'video-ai' ? {
     ...agent,
-    task: 'Processamento local WebM disponível; aguardando arquivo do Founder.',
+    task: 'Geração motion WebM e pós-produção local disponíveis; aguardando roteiro do Founder.',
     status: 'Aguardando',
     progress: 0,
   } : agent.id !== 'instagram-ai' ? agent : {

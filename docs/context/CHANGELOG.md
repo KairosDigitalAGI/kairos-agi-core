@@ -46,3 +46,6 @@ O código do motor/importador existente na origem é evidência de implementaç�
 - Render WebM e download no navegador, com progresso, cancelamento e histórico de metadados.
 - Limites: 500 MB e 10 minutos por render; compatibilidade depende de Chrome/Edge e codecs do arquivo.
 - Sem upload, backend, API, publicação, geração por IA ou custo externo.
+- Correção de escopo do Founder: criação do zero tornou-se o fluxo principal; o editor foi mantido como pós-produção.
+- Adicionados storyboard determinístico, três direções visuais, cenas animadas, transições, marca e trilha ambiente sintetizada localmente.
+- A geração parte somente do título e roteiro do Founder e produz um arquivo real, sem mídia de entrada, upload ou custo de API.

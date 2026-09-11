@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { MAX_INPUT_BYTES, MAX_RENDER_SECONDS, outputDimensions, safeOutputName, selectRecorderMime, validateRenderPlan } from '../src/engines/video/renderPlan.ts'
+import { compileStoryboard, generationDuration, validateGenerationPlan } from '../src/engines/video/storyboard.ts'
 
 const plan = { title: 'Reel Kairos', startSeconds: 3, endSeconds: 33, aspect: '9:16', quality: 'balanced', watermark: '@_kairosdigital_', includeAudio: true, musicVolume: .15 }
 
@@ -24,4 +25,22 @@ test('download names remove path-like characters and codecs degrade predictably'
   assert.equal(safeOutputName('', 'meu arquivo.mov'), 'meu-arquivo.webm')
   assert.equal(selectRecorderMime(mime => mime.includes('vp8')), 'video/webm;codecs=vp8,opus')
   assert.equal(selectRecorderMime(() => false), '')
+})
+
+const generation = { title: 'Kairos AGI', script: 'Sua empresa precisa agir. A Kairos organiza prioridades. Você aprova e o sistema executa.', aspect: '9:16', quality: 'balanced', style: 'kairos', secondsPerScene: 4, watermark: '@_kairosdigital_', soundtrack: true }
+
+test('storyboard compiles founder copy into deterministic scenes without input media', () => {
+  const scenes = compileStoryboard(generation)
+  assert.equal(scenes.length, 3)
+  assert.equal(scenes[0].kicker, 'Kairos AGI')
+  assert.equal(generationDuration(scenes), 12)
+  assert.deepEqual(compileStoryboard(generation), scenes)
+})
+
+test('generation rejects empty, oversized and unsafe timing plans', () => {
+  assert.equal(validateGenerationPlan(generation), '')
+  assert.match(validateGenerationPlan({ ...generation, title: '' }), /título/)
+  assert.match(validateGenerationPlan({ ...generation, script: 'curto' }), /roteiro/)
+  assert.match(validateGenerationPlan({ ...generation, secondsPerScene: 9 }), /2 e 8/)
+  assert.equal(compileStoryboard({ ...generation, script: '' }).length, 0)
 })

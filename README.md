@@ -8,7 +8,7 @@ O documento [KAIROS_AGI_BLUEPRINT_V1.md](KAIROS_AGI_BLUEPRINT_V1.md) é a consti
 
 **Missão 003 — Clone Engine:** Identity Manager, Voice Profile, Face Profile, Avatar Library, Prompt Library, Video Queue, Approval Queue, Asset Library e Content Brain. Cadastre seus dados, referências a arquivos reais e produções; revise e aprove localmente. Não há clonagem, geração, upload ou publicação automática.
 
-**Missão 004 — Video Engine:** selecione um vídeo real no navegador, corte, escolha formato, aplique marca d'água ou logo, preserve o áudio, misture música e baixe o resultado em WebM. Todo processamento acontece no dispositivo, sem upload e sem custo de API.
+**Missão 004 — Video Engine:** crie motion videos do zero a partir de título e roteiro, com storyboard, cenas animadas, identidade visual e trilha sintetizada; ou edite um vídeo real com corte, formato, marca, logo e áudio. Todo processamento acontece no dispositivo, sem upload e sem custo de API.
 
 Sem dados fictícios na interface. Receita, clientes, XP, Coins e métricas do Instagram permanecem indisponíveis até conexão com fontes reais. O perfil informado pelo Founder é [_kairosdigital_](https://www.instagram.com/_kairosdigital_/); não está autenticado na API.
 

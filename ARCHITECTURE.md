@@ -102,3 +102,5 @@ O código do motor/importador existente na origem é evidência de implementaç�
 `src/engines/video` implementa uma estação de trabalho no navegador. Arquivos reais entram por seleção local e permanecem em memória; Canvas compõe enquadramento, marca e logo, Web Audio mistura áudio original e música, e MediaRecorder produz WebM para download. `renderPlan.ts` concentra limites, dimensões, nomes seguros e negociação de codec.
 
 O histórico local contém somente metadados da execução e não permite recuperar o vídeo após recarregar. O resultado deve ser baixado antes de fechar a página. Google Flow, Higgsfield, Kling, Runway e Pika permanecem adaptadores desconectados. O pipeline FFmpeg do `kairos3` serviu como referência de capacidades e limites, mas não foi executado nem acoplado à Vercel.
+
+Após validação do Founder, `storyboard.ts` passou a compilar roteiro em cenas determinísticas e `motionRenderer.ts` gera frames e trilha diretamente em Canvas/Web Audio. `VideoGenerator` é o fluxo principal; o renderizador de arquivos permanece como pós-produção. A geração nativa cria motion graphics, sem afirmar síntese fotorealista ou uso de modelos externos.

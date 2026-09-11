@@ -25,3 +25,5 @@ Cadastro consultado no GitHub em 11/09/2026: [data/agents/agents.json](https://g
 
 ## Video Engine
 Capacidades e limites foram estudados no `kairos3/video-skill` no commit inventariado pela auditoria privada. O Core implementa código novo compatível com o navegador para corte, composição, áudio e download. Não copia credenciais, configuração, integrações de WhatsApp, transcrição ou chamadas do motor legado. O worker FFmpeg permanece no repositório de origem.
+
+A correção generativa acrescenta código novo de storyboard e motion graphics em Canvas. Ela reaproveita a separação entre planejamento, render e entrega observada nos repositórios, mas não copia nem apresenta como conectados modelos ou serviços externos.

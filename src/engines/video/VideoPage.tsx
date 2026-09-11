@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { Download, Film, Music2, OctagonX, Play, ShieldCheck, Upload } from 'lucide-react'
+import { Download, Film, Music2, OctagonX, Play, Scissors, ShieldCheck, Sparkles, Upload } from 'lucide-react'
 import type { VideoJob, VideoQuality, VideoRenderPlan } from '../../types/video'
 import { inspectVideo, renderVideo } from './browserRenderer'
 import { MAX_INPUT_BYTES, safeOutputName, validateRenderPlan } from './renderPlan'
+import { VideoGenerator } from './VideoGenerator'
 import './video.css'
 
 const HISTORY_KEY = 'kairos.video.jobs.v1'
@@ -19,6 +20,7 @@ function fileSize(bytes: number) { return new Intl.NumberFormat('pt-BR', { style
 function clock(seconds: number) { const whole = Math.max(0, Math.round(seconds)); return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}` }
 
 export function VideoPage() {
+  const [mode, setMode] = useState<'generate' | 'edit'>('generate')
   const [videoFile, setVideoFile] = useState<File | null>(null)
   const [musicFile, setMusicFile] = useState<File | null>(null)
   const [logoFile, setLogoFile] = useState<File | null>(null)
@@ -67,16 +69,18 @@ export function VideoPage() {
     try {
       const result = await renderVideo({ videoFile, musicFile, logoFile, plan, onProgress: setProgress, signal: controller.signal })
       const url = URL.createObjectURL(result.blob); setOutputUrl(url); setOutput({ name: outputName, bytes: result.blob.size, width: result.width, height: result.height })
-      saveJob({ id: jobId, sourceName: videoFile.name, outputName, createdAt, finishedAt: new Date().toISOString(), status: 'completed', progress: 100, inputBytes: videoFile.size, outputBytes: result.blob.size, durationSeconds: result.durationSeconds, mimeType: result.mimeType, error: '' })
+      saveJob({ id: jobId, kind: 'edited', sourceName: videoFile.name, outputName, createdAt, finishedAt: new Date().toISOString(), status: 'completed', progress: 100, inputBytes: videoFile.size, outputBytes: result.blob.size, durationSeconds: result.durationSeconds, mimeType: result.mimeType, error: '' })
       setNotice('Vídeo processado no seu navegador. Baixe o arquivo antes de fechar a página.')
     } catch (error) {
       const cancelled = error instanceof DOMException && error.name === 'AbortError'
-      saveJob({ id: jobId, sourceName: videoFile.name, outputName, createdAt, finishedAt: new Date().toISOString(), status: cancelled ? 'cancelled' : 'failed', progress, inputBytes: videoFile.size, outputBytes: null, durationSeconds: plan.endSeconds - plan.startSeconds, mimeType: null, error: cancelled ? 'Cancelado pelo Founder.' : error instanceof Error ? error.message : 'Falha desconhecida.' })
+      saveJob({ id: jobId, kind: 'edited', sourceName: videoFile.name, outputName, createdAt, finishedAt: new Date().toISOString(), status: cancelled ? 'cancelled' : 'failed', progress, inputBytes: videoFile.size, outputBytes: null, durationSeconds: plan.endSeconds - plan.startSeconds, mimeType: null, error: cancelled ? 'Cancelado pelo Founder.' : error instanceof Error ? error.message : 'Falha desconhecida.' })
       setNotice(cancelled ? 'Renderização cancelada.' : error instanceof Error ? error.message : 'A renderização falhou.')
     } finally { abortRef.current = null; setStatus('idle') }
   }
 
   return <div className="page-stack video-engine">
+    <section className="glass-panel video-mode-hero"><div><span className="eyebrow">MISSÃO 004 · VIDEO ENGINE</span><h2>Criação e pós-produção local</h2><p>Comece por um roteiro ou refine um arquivo real. Os dois fluxos funcionam no navegador.</p></div><div className="video-mode-tabs" role="tablist"><button className={mode === 'generate' ? 'active' : ''} onClick={() => setMode('generate')}><Sparkles size={17} />Criar do zero</button><button className={mode === 'edit' ? 'active' : ''} onClick={() => setMode('edit')}><Scissors size={17} />Editar arquivo</button></div></section>
+    {mode === 'generate' ? <VideoGenerator onJob={saveJob} /> : <>
     <section className="video-workspace glass-panel">
       <div className="video-heading"><span className="eyebrow">MISSÃO 004 · PROCESSAMENTO LOCAL</span><h2>Video Engine</h2><p>Selecione um vídeo real, escolha o enquadramento e gere um WebM sem enviar o arquivo para servidores.</p></div>
       <label className="video-drop"><Upload size={26} /><strong>{status === 'loading' ? 'Lendo vídeo…' : videoFile ? videoFile.name : 'Selecionar vídeo'}</strong><span>MP4, MOV, WebM ou outro formato aceito pelo navegador · até 500 MB</span><input type="file" accept="video/*" disabled={status !== 'idle'} onChange={event => void selectVideo(event.target.files?.[0] || null)} /></label>
@@ -100,11 +104,11 @@ export function VideoPage() {
     </section>}
 
     {output && <section className="glass-panel output-panel"><div><span className="eyebrow">RESULTADO LOCAL</span><h3>{output.name}</h3><p>{output.width} × {output.height} · {fileSize(output.bytes)} · não publicado</p></div><a className="primary-button" href={outputUrl} download={output.name}><Download size={17} />Baixar vídeo</a></section>}
-    {notice && <p className="editorial-alert" role="status">{notice}</p>}
-    <section className="glass-panel local-security"><ShieldCheck size={24} /><div><h3>Privacidade e custo</h3><p>Vídeo, música e logo são processados pelo navegador. A saída é WebM. Nada é enviado à Kairos, Meta ou provedores de IA; custo de API zero.</p></div></section>
+    {notice && <p className="editorial-alert" role="status">{notice}</p>}</>}
+    <section className="glass-panel local-security"><ShieldCheck size={24} /><div><h3>Privacidade e custo</h3><p>Roteiro e mídias são processados pelo navegador. A saída é WebM. Nada é enviado à Kairos, Meta ou provedores de IA; custo de API zero.</p></div></section>
     <section className="glass-panel"><div className="editorial-row"><div><span className="eyebrow">HISTÓRICO DESTE NAVEGADOR</span><h3>{history.length} renderizações registradas</h3></div>{history.length > 0 && <button onClick={() => { localStorage.removeItem(HISTORY_KEY); setHistory([]) }}>Limpar histórico</button>}</div>
       {!history.length && <p>Nenhum vídeo renderizado neste navegador.</p>}
-      <div className="render-history">{history.map(job => <article key={job.id}><span className={`render-state ${job.status}`}>{job.status === 'completed' ? 'Concluído' : job.status === 'cancelled' ? 'Cancelado' : 'Falhou'}</span><strong>{job.outputName}</strong><small>{new Date(job.createdAt).toLocaleString('pt-BR')} · {clock(job.durationSeconds)}{job.outputBytes ? ` · ${fileSize(job.outputBytes)}` : ''}</small>{job.error && <p>{job.error}</p>}</article>)}</div>
+      <div className="render-history">{history.map(job => <article key={job.id}><span className={`render-state ${job.status}`}>{job.status === 'completed' ? 'Concluído' : job.status === 'cancelled' ? 'Cancelado' : 'Falhou'}</span><strong>{job.outputName}<small className="job-kind">{job.kind === 'generated' ? 'criado do zero' : job.kind === 'edited' ? 'editado' : 'legado'}</small></strong><small>{new Date(job.createdAt).toLocaleString('pt-BR')} · {clock(job.durationSeconds)}{job.outputBytes ? ` · ${fileSize(job.outputBytes)}` : ''}</small>{job.error && <p>{job.error}</p>}</article>)}</div>
     </section>
   </div>
 }

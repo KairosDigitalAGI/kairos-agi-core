@@ -27,7 +27,7 @@ Usar somente dados reais cadastrados ou consultados em fonte autorizada. Dado ex
 | Instagram AI | Conteúdo, calendário, revisão e métricas verificadas | Só usa fontes conectadas; sem publicação automática |
 | Hunter AI | Prospecção e qualificação para CRM | Isolar tenant, fonte e consentimentos; sem disparos nesta missão |
 | Clone AI | Identidade autorizada, referências de voz/rosto, produção e revisão | Não gera nem clona mídia na Missão 003 |
-| Video AI | Processamento local no navegador e adaptadores externos | Render local WebM custa zero; integrações externas continuam desligadas |
+| Video AI | Geração motion por roteiro, pós-produção local e adaptadores externos | Render local WebM custa zero; integrações externas continuam desligadas |
 | QA AI | Validar regras, regressões, integridade dos dados e entregas | Relatar limites e falhas sem inventar verificações |
 | Vault AI | Contratos de referências seguras a credenciais | Vault vazio, sem valores secretos no frontend |
 | Shield AI | Isolamento, políticas, eventos e prevenção de vazamentos | Sem mudanças em outros projetos ou processos ativos |

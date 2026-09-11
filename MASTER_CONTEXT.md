@@ -2,7 +2,7 @@
 
 Entrada operacional: [docs/context/MASTER_CONTEXT.md](docs/context/MASTER_CONTEXT.md). Histórico: [CHANGELOG](docs/context/CHANGELOG.md). Fila vigente: [MISSION_QUEUE](docs/context/MISSION_QUEUE.md).
 
-As Missões 002–004 entregam a operação editorial local do Instagram, o Clone Engine e o Video Engine local. O vídeo aceita arquivo real, corte, reenquadramento, marca d'água, logo, música e áudio original, com saída WebM no próprio navegador. Integrações continuam desconectadas; persistência restrita ao navegador. O Memory Sync V1 foi adotado como adendo, com conteúdo original preservado localmente fora do Git.
+As Missões 002–004 entregam a operação editorial local do Instagram, o Clone Engine e o Video Engine local. O vídeo pode nascer de título e roteiro como motion graphics ou receber um arquivo real para pós-produção, sempre com saída WebM no navegador. Integrações continuam desconectadas; persistência restrita ao navegador. O Memory Sync V1 foi adotado como adendo, com conteúdo original preservado localmente fora do Git.
 
 ## Identidade e missão
 
