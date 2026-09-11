@@ -89,7 +89,8 @@ export async function renderMotionVideo({ plan, scenes, onProgress, signal }: Mo
   const finished = new Promise<void>((resolve, reject) => { recorder.onstop = () => resolve(); recorder.onerror = () => reject(new Error('O navegador interrompeu a geração.')) })
   const totalDuration = scenes.reduce((sum, scene) => sum + scene.durationSeconds, 0); const startedAt = performance.now()
   const stop = () => { if (recorder.state !== 'inactive') recorder.stop() }
-  signal.addEventListener('abort', stop, { once: true }); recorder.start(500)
+  drawFrame(context, canvas.width, canvas.height, scenes[0], 0, 0, plan)
+  signal.addEventListener('abort', stop, { once: true }); recorder.start(1000)
   try {
     await new Promise<void>((resolve, reject) => {
       const frame = (now: number) => {

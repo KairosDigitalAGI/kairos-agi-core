@@ -10,7 +10,7 @@ O processamento ocorre no navegador com Canvas, Web Audio e MediaRecorder. Rotei
 ## Geração nativa e limites
 - Entrada: título e roteiro de até 3.000 caracteres; cada linha ou frase forma uma cena.
 - Estilos: Kairos Cyber, Minimalista e Alta energia.
-- Duração: 2 a 8 segundos por cena, até 12 cenas.
+- Duração: 4 a 8 segundos por cena, até 12 cenas; o mínimo evita arquivos WebM vazios em codecs locais.
 - Áudio: trilha ambiente original sintetizada localmente; narração por voz ainda não é gerada.
 
 ## Pós-produção e formatos
@@ -21,7 +21,9 @@ O processamento ocorre no navegador com Canvas, Web Audio e MediaRecorder. Rotei
 - Limites locais: até 500 MB e até 10 minutos por renderização.
 
 ## Estado e dados reais
-O painel não inclui resultados de exemplo. Na criação, duração e cenas vêm do roteiro do Founder. Na edição, tamanho, duração e resolução vêm do arquivo escolhido. O histórico `kairos.video.jobs.v1` registra apenas trabalhos realmente iniciados, seu tipo, horário, estado, duração, tamanhos e erro real. O arquivo resultante vive somente na sessão e deve ser baixado antes de fechar ou recarregar.
+O painel não inclui resultados de exemplo. Na criação, duração e cenas vêm do roteiro do Founder. Na edição, tamanho, duração e resolução vêm do arquivo escolhido. O histórico `kairos.video.jobs.v1` registra apenas trabalhos realmente iniciados, seu tipo, horário, estado, duração, tamanhos e erro real.
+
+Arquivos concluídos são armazenados como `Blob` em IndexedDB na origem atual e aparecem na Galeria Local com player, download e remoção confirmada. Eles sobrevivem à recarga, mas ficam somente neste navegador e neste domínio. Limpar dados do site ou exceder a cota do navegador pode removê-los ou impedir novos salvamentos; nesse caso, o download imediato continua disponível.
 
 ## Segurança e falhas
 Nome de saída é normalizado para evitar caracteres de caminho. A renderização pode ser cancelada. Erro de decodificação, falta de codec, navegador incompatível ou falha de armazenamento são mostrados sem criar resultado falso. A página recomenda Chrome ou Edge atualizados quando MediaRecorder/captureStream não estão disponíveis.

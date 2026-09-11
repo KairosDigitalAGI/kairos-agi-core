@@ -15,6 +15,14 @@
 .scene-list article > span { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; color: white; background: color-mix(in srgb,var(--scene-accent),transparent 35%); font: .72rem "DM Mono",monospace; }
 .scene-list article small,.scene-list article strong { display: block; }.scene-list article small { color: #8d9ab1; font: .61rem "DM Mono",monospace; }.scene-list article strong { margin-top: 5px; line-height: 1.35; }.scene-list article em { color: #b9c4d7; font: normal .68rem "DM Mono",monospace; }
 .job-kind { display: block; margin-top: 4px; color: #7f8ba0; font-weight: 400; text-transform: uppercase; letter-spacing: .06em; font-size: .58rem; }
+.library-storage { color: #8290a6; font: .67rem "DM Mono",monospace; }
+.gallery-empty { min-height: 170px; display: grid; place-items: center; align-content: center; gap: 9px; text-align: center; color: #8592a8; border: 1px dashed rgba(255,255,255,.12); border-radius: 13px; }
+.gallery-empty strong { color: #dce5f4; }.gallery-empty p { max-width: 520px; margin: 0; line-height: 1.5; }
+.video-gallery-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 14px; }
+.video-gallery-grid article { min-width: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.1); border-radius: 13px; background: rgba(3,7,18,.58); }
+.video-gallery-grid video { display: block; width: 100%; aspect-ratio: 16/10; object-fit: contain; background: #010206; }
+.gallery-card-copy { display: grid; gap: 7px; padding: 13px; }.gallery-card-copy > span { color: #a78bfa; font: .61rem "DM Mono",monospace; text-transform: uppercase; letter-spacing: .08em; }.gallery-card-copy > strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }.gallery-card-copy > small { color: #8c99af; }
+.gallery-card-copy > div { display: flex; gap: 7px; margin-top: 4px; }.gallery-card-copy a,.gallery-card-copy button { min-height: 34px; padding: 0 10px; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; color: #dce5f4; background: rgba(255,255,255,.035); text-decoration: none; cursor: pointer; }.gallery-card-copy button { color: #f5a6a6; }
 .video-workspace { display: grid; grid-template-columns: 1fr minmax(300px,.7fr); gap: 24px; align-items: center; }
 .video-heading h2 { font-size: clamp(1.8rem,3vw,2.8rem); margin: 10px 0; }
 .video-heading p,.local-security p { color: #c3ccdc; line-height: 1.65; }

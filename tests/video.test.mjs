@@ -41,6 +41,6 @@ test('generation rejects empty, oversized and unsafe timing plans', () => {
   assert.equal(validateGenerationPlan(generation), '')
   assert.match(validateGenerationPlan({ ...generation, title: '' }), /título/)
   assert.match(validateGenerationPlan({ ...generation, script: 'curto' }), /roteiro/)
-  assert.match(validateGenerationPlan({ ...generation, secondsPerScene: 9 }), /2 e 8/)
+  assert.match(validateGenerationPlan({ ...generation, secondsPerScene: 3 }), /4 e 8/)
   assert.equal(compileStoryboard({ ...generation, script: '' }).length, 0)
 })

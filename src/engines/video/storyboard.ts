@@ -18,7 +18,7 @@ export function validateGenerationPlan(plan: VideoGenerationPlan) {
   if (plan.title.trim().length < 3) return 'Dê um título com pelo menos 3 caracteres.'
   if (plan.script.trim().length < 10) return 'Escreva um roteiro com pelo menos 10 caracteres.'
   if (plan.script.length > 3000) return 'O roteiro pode ter no máximo 3.000 caracteres.'
-  if (!Number.isFinite(plan.secondsPerScene) || plan.secondsPerScene < 2 || plan.secondsPerScene > 8) return 'Cada cena deve durar entre 2 e 8 segundos.'
+  if (!Number.isFinite(plan.secondsPerScene) || plan.secondsPerScene < 4 || plan.secondsPerScene > 8) return 'Cada cena deve durar entre 4 e 8 segundos para gerar um WebM confiável.'
   return ''
 }
 

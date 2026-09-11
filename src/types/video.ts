@@ -57,3 +57,16 @@ export interface VideoRenderResult {
   width: number
   height: number
 }
+
+export interface StoredVideo {
+  id: string
+  name: string
+  createdAt: string
+  durationSeconds: number
+  width: number
+  height: number
+  mimeType: string
+  bytes: number
+  kind: 'generated' | 'edited'
+  blob: Blob
+}

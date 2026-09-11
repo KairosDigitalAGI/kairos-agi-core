@@ -49,3 +49,4 @@ O código do motor/importador existente na origem é evidência de implementaç�
 - Correção de escopo do Founder: criação do zero tornou-se o fluxo principal; o editor foi mantido como pós-produção.
 - Adicionados storyboard determinístico, três direções visuais, cenas animadas, transições, marca e trilha ambiente sintetizada localmente.
 - A geração parte somente do título e roteiro do Founder e produz um arquivo real, sem mídia de entrada, upload ou custo de API.
+- Galeria local persistente adicionada com blobs em IndexedDB, player, download e remoção confirmada; vídeos antigos que existiam apenas como URL temporária não podem ser recuperados.

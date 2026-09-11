@@ -5,17 +5,18 @@ import type { VideoGenerationPlan, VideoGenerationStyle, VideoJob, VideoQuality 
 import { renderMotionVideo } from './motionRenderer'
 import { compileStoryboard, generationDuration, validateGenerationPlan } from './storyboard'
 import { safeOutputName } from './renderPlan'
+import { saveVideo } from './videoLibrary'
 
 const initialPlan: VideoGenerationPlan = {
   title: '', script: '', aspect: '9:16', quality: 'balanced', style: 'kairos', secondsPerScene: 4,
   watermark: '@_kairosdigital_', soundtrack: true,
 }
 
-interface Props { onJob: (job: VideoJob) => void }
+interface Props { onJob: (job: VideoJob) => void; onStored: () => void }
 
 function fileSize(bytes: number) { return new Intl.NumberFormat('pt-BR', { style: 'unit', unit: 'megabyte', maximumFractionDigits: 1 }).format(bytes / 1024 / 1024) }
 
-export function VideoGenerator({ onJob }: Props) {
+export function VideoGenerator({ onJob, onStored }: Props) {
   const [plan, setPlan] = useState(initialPlan)
   const [status, setStatus] = useState<'idle' | 'rendering'>('idle')
   const [progress, setProgress] = useState(0)
@@ -39,7 +40,10 @@ export function VideoGenerator({ onJob }: Props) {
       const result = await renderMotionVideo({ plan, scenes, signal: controller.signal, onProgress: setProgress })
       const url = URL.createObjectURL(result.blob); setOutput({ url, name: outputName, bytes: result.blob.size, width: result.width, height: result.height })
       onJob({ id: jobId, kind: 'generated', sourceName: 'Roteiro do Founder', outputName, createdAt, finishedAt: new Date().toISOString(), status: 'completed', progress: 100, inputBytes: 0, outputBytes: result.blob.size, durationSeconds: result.durationSeconds, mimeType: result.mimeType, error: '' })
-      setNotice('Vídeo criado do zero neste navegador. Baixe o arquivo antes de fechar a página.')
+      try {
+        await saveVideo({ id: jobId, name: outputName, createdAt, durationSeconds: result.durationSeconds, width: result.width, height: result.height, mimeType: result.mimeType, bytes: result.blob.size, kind: 'generated', blob: result.blob })
+        onStored(); setNotice('Vídeo criado e salvo na galeria deste navegador.')
+      } catch { setNotice('Vídeo criado, mas o navegador não conseguiu salvá-lo na galeria. Baixe o arquivo agora.') }
     } catch (error) {
       const cancelled = error instanceof DOMException && error.name === 'AbortError'; const message = cancelled ? 'Cancelado pelo Founder.' : error instanceof Error ? error.message : 'Falha desconhecida.'
       onJob({ id: jobId, kind: 'generated', sourceName: 'Roteiro do Founder', outputName, createdAt, finishedAt: new Date().toISOString(), status: cancelled ? 'cancelled' : 'failed', progress, inputBytes: 0, outputBytes: null, durationSeconds: duration, mimeType: null, error: message })
@@ -54,7 +58,7 @@ export function VideoGenerator({ onJob }: Props) {
         <label>Título<input value={plan.title} maxLength={80} placeholder="Ex.: A nova era da Kairos" onChange={event => setPlan({ ...plan, title: event.target.value })} /></label>
         <label>Roteiro<textarea value={plan.script} maxLength={3000} rows={9} placeholder={'Escreva uma frase por cena.\nCada linha vira uma sequência animada.'} onChange={event => setPlan({ ...plan, script: event.target.value })} /><small>{plan.script.length}/3.000 caracteres</small></label>
         <div className="video-fields"><label>Estilo<select value={plan.style} onChange={event => setPlan({ ...plan, style: event.target.value as VideoGenerationStyle })}><option value="kairos">Kairos Cyber</option><option value="minimal">Minimalista</option><option value="energy">Alta energia</option></select></label><label>Formato<select value={plan.aspect} onChange={event => setPlan({ ...plan, aspect: event.target.value as VideoGenerationPlan['aspect'] })}><option value="9:16">Vertical · 9:16</option><option value="1:1">Quadrado · 1:1</option><option value="16:9">Horizontal · 16:9</option></select></label></div>
-        <div className="video-fields"><label>Qualidade<select value={plan.quality} onChange={event => setPlan({ ...plan, quality: event.target.value as VideoQuality })}><option value="economy">Econômica · 480p</option><option value="balanced">Equilibrada · 720p</option><option value="high">Alta · 1080p</option></select></label><label>Segundos por cena<input type="number" min="2" max="8" step="1" value={plan.secondsPerScene} onChange={event => setPlan({ ...plan, secondsPerScene: Number(event.target.value) })} /></label></div>
+        <div className="video-fields"><label>Qualidade<select value={plan.quality} onChange={event => setPlan({ ...plan, quality: event.target.value as VideoQuality })}><option value="economy">Econômica · 480p</option><option value="balanced">Equilibrada · 720p</option><option value="high">Alta · 1080p</option></select></label><label>Segundos por cena<input type="number" min="4" max="8" step="1" value={plan.secondsPerScene} onChange={event => setPlan({ ...plan, secondsPerScene: Number(event.target.value) })} /></label></div>
         <label>Marca d'água<input value={plan.watermark} maxLength={80} onChange={event => setPlan({ ...plan, watermark: event.target.value })} /></label>
         <label className="video-check"><input type="checkbox" checked={plan.soundtrack} onChange={event => setPlan({ ...plan, soundtrack: event.target.checked })} />Criar trilha ambiente sintetizada</label>
         {status === 'rendering' ? <div className="render-progress"><span style={{ width: `${progress}%` }} /><strong>{Math.round(progress)}%</strong><button type="button" onClick={() => abortRef.current?.abort()}><OctagonX size={16} />Cancelar</button></div> : <button className="primary-button render-button" type="submit"><Play size={17} />Gerar vídeo do zero</button>}
