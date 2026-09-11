@@ -11,6 +11,7 @@ interface SidebarProps {
 }
 
 const navigation: Array<{ id: ModuleKey; label: string; icon: LucideIcon }> = [
+  { id: 'agents', label: 'Agentes', icon: Bot },
   { id: 'world', label: 'World', icon: Globe2 },
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'missions', label: 'Missões', icon: ListChecks },

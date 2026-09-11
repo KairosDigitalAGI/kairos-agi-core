@@ -15,7 +15,7 @@ function AgentNpc({ agent, selected, onSelect }: { agent: FounderAgent; selected
         onClick={(event) => { event.stopPropagation(); onSelect() }}
         onPointerOver={(event) => { event.stopPropagation(); setHovered(true); document.body.style.cursor = 'pointer' }}
         onPointerOut={() => { setHovered(false); document.body.style.cursor = 'default' }}
-        scale={hovered || selected ? 1.08 : 1}
+        scale={hovered || selected ? .65 : .5}
       >
         <mesh position={[0, 1.18, 0]} castShadow><sphereGeometry args={[0.34, 24, 24]} /><meshStandardMaterial color="#111827" metalness={0.85} roughness={0.22} emissive={agent.color} emissiveIntensity={selected ? 0.8 : 0.22} /></mesh>
         <mesh position={[0, 0.58, 0]} castShadow><capsuleGeometry args={[0.32, 0.58, 8, 20]} /><meshStandardMaterial color="#10131d" metalness={0.72} roughness={0.28} /></mesh>
@@ -23,11 +23,11 @@ function AgentNpc({ agent, selected, onSelect }: { agent: FounderAgent; selected
         <mesh position={[-0.43, 0.62, 0]} rotation={[0, 0, -0.2]}><capsuleGeometry args={[0.075, 0.45, 6, 12]} /><meshStandardMaterial color={agent.color} metalness={0.5} /></mesh>
         <mesh position={[0.43, 0.62, 0]} rotation={[0, 0, 0.2]}><capsuleGeometry args={[0.075, 0.45, 6, 12]} /><meshStandardMaterial color={agent.color} metalness={0.5} /></mesh>
         <pointLight position={[0, 1.15, 0.35]} color={agent.color} intensity={selected ? 2.8 : 1.25} distance={3} />
-        <Html position={[0, 2.05, 0]} center distanceFactor={7.5} transform={false}>
+        {(hovered || selected) && <Html position={[0, 2.05, 0]} center distanceFactor={7.5} transform={false}>
           <button className={`npc-bubble ${selected ? 'selected' : ''}`} onClick={onSelect}>
             <strong>{agent.name}</strong><span>{agent.task}</span><i><b style={{ width: `${agent.progress}%`, background: agent.color }} /></i>
           </button>
-        </Html>
+        </Html>}
       </group>
     </Float>
   )
@@ -53,7 +53,7 @@ function TowerScene({ department, agents, onSelect, selectedId }: WorldProps & {
 
 export function FounderTower({ department, agents, selected, onSelect }: WorldProps & { selected: FounderAgent }) {
   return (
-    <div className="world-canvas" role="img" aria-label="Sala futurista da Founder Tower com quatro agentes configurados, executores desconectados">
+    <div className="world-canvas" role="img" aria-label={`Escritório com ${agents.length} agentes configurados, executores desconectados`}>
       <Canvas shadows dpr={[1, 1.7]} gl={{ antialias: true }}>
         <Suspense fallback={null}><TowerScene department={department} agents={agents} selectedId={selected.id} onSelect={onSelect} /></Suspense>
       </Canvas>

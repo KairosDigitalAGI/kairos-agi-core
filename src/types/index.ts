@@ -1,5 +1,6 @@
 export type ModuleKey =
   | 'world'
+  | 'agents'
   | 'dashboard'
   | 'missions'
   | 'clients'
@@ -23,7 +24,7 @@ export interface Metric {
 }
 
 export interface FounderAgent {
-  id: 'orion' | 'kairos' | 'instagram-ai' | 'hunter-ai'
+  id: string
   name: string
   role: string
   status: 'Trabalhando' | 'Aguardando' | 'Em revisão'

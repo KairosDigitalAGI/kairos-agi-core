@@ -1,3 +1,5 @@
+import registry from '../data/agentRegistry.json'
+import '../features/dashboard/agents.css'
 import type { Department } from './departments'
 import { Bot, Building2, Maximize2, Radio, X } from 'lucide-react'
 import { useState } from 'react'
@@ -9,8 +11,10 @@ import { FounderTower } from './FounderTower'
 export function WorldPage({ department }: { department: Department }) {
   const agents = useFounderAgents()
   const [selectedId, setSelectedId] = useState<FounderAgent['id']>('orion')
+  const [inspectorOpen, setInspectorOpen] = useState(true)
   const selected = agents.find(agent => agent.id === selectedId) || agents[0]
-  const setSelected = (agent: FounderAgent) => setSelectedId(agent.id)
+  const setSelected = (agent: FounderAgent) => { setSelectedId(agent.id); setInspectorOpen(true) }
+  const profile = registry.find(a => a.id === selected.id)
   const openFullscreen = () => {
     const world = document.querySelector('.world-shell')
     if (world instanceof HTMLElement && document.fullscreenElement === null) void world.requestFullscreen()
@@ -22,14 +26,13 @@ export function WorldPage({ department }: { department: Department }) {
         <div><span><Building2 size={15} /> {department.area}</span><button aria-label="Abrir World em tela cheia" onClick={openFullscreen}><Maximize2 size={16} /></button></div>
       </div>
       <FounderTower department={department} agents={agents} selected={selected} onSelect={setSelected} />
-      <aside className="agent-inspector" aria-label={`Detalhes de ${selected.name}`}>
-        <div className="inspector-top"><span className="agent-glyph large" style={{ '--agent-color': selected.color } as React.CSSProperties}><Bot size={22} /></span><button aria-label="Fechar painel" onClick={() => setSelected(agents[0])}><X size={17} /></button></div>
+      {inspectorOpen && <aside className="agent-inspector" aria-label={`Detalhes de ${selected.name}`}>
+        <div className="inspector-top"><span className="agent-glyph large" style={{ '--agent-color': selected.color } as React.CSSProperties}><Bot size={22} /></span><button aria-label="Fechar painel" onClick={() => setInspectorOpen(false)}><X size={17} /></button></div>
         <span className="eyebrow">{selected.role}</span><h3>{selected.name}</h3><span className="working-state">{selected.status}</span>
         <div className="inspector-task"><small>Tarefa atual</small><strong>{selected.task}</strong><ProgressBar value={selected.progress} color={selected.color} /><div><span>Execução automática</span><b>Desconectada</b></div></div>
-      </aside>
-      <div className="world-roster" aria-label="Selecionar agente">
-        {agents.map((agent) => <button key={agent.id} className={selected.id === agent.id ? 'active' : ''} onClick={() => setSelected(agent)}><i style={{ background: agent.color }} />{agent.name}</button>)}
-      </div>
+        <p>{profile?.responsibility}</p><small>{profile?.department} · {profile?.source}</small>
+      </aside>}
+      <label className="world-agent-selector">Selecionar agente · {agents.length} configurados<select value={selectedId} onChange={event => { const agent = agents.find(a => a.id === event.target.value); if (agent) setSelected(agent) }}>{agents.map(agent => <option key={agent.id} value={agent.id}>{agent.name} · {registry.find(a => a.id === agent.id)?.department}</option>)}</select></label>
     </section>
   )
 }

@@ -1,0 +1,11 @@
+.agent-directory { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+.agent-directory article { border-top-width: 3px; }
+.agent-directory h3 { font-size: 1.3rem; }
+.agent-directory dl { font-size: .875rem; line-height: 1.5; }
+.agent-directory dt { color: #aebdd8; margin-top: 12px; }
+.agent-directory dd { margin: 4px 0 0; }
+.agent-directory p { line-height: 1.6; }
+.world-agent-selector { position: absolute; z-index: 6; bottom: 22px; left: 24px; display: grid; gap: 6px; font-size: .875rem; padding: 12px; background: rgba(8,14,28,.9); border: 1px solid #566381; border-radius: 12px; }
+.world-agent-selector select { max-width: 300px; background: #10182b; color: white; border: 1px solid #566381; padding: 10px; border-radius: 8px; font-size: .875rem; }
+@media(max-width:1100px) { .agent-directory { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media(max-width:700px) { .agent-directory { grid-template-columns: 1fr; } .world-agent-selector { left: 12px; right: 12px; bottom: 12px; } }

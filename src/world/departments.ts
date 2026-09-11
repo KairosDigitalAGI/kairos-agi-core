@@ -7,7 +7,7 @@ const studio: Department = { name: 'Studio District', area: 'Clone do Founder', 
 const money: Department = { name: 'Money Lab', area: 'Inteligência de negócios', color: '#34d399', camera: [-6, 7, -2], target: [4, 2, -14] }
 const infra: Department = { name: 'Infrastructure', area: 'Controle da plataforma', color: '#60a5fa', camera: [12, 7, 7], target: [12, 2, -10] }
 export const departments: Record<ModuleKey, Department> = {
-  dashboard: founder, missions: founder, world: founder,
+  agents: founder, dashboard: founder, missions: founder, world: founder,
   clients: sales, crm: sales, hunter: { ...sales, area: 'Hunter · prospecção' },
   instagram: social, clone: studio, 'money-lab': money,
   analytics: { ...infra, area: 'Analytics' }, settings: infra,

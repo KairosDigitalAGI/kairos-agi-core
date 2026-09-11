@@ -5,6 +5,7 @@ import { departments } from './world/departments'
 import './world/immersive.css'
 import { Sidebar } from './ui/Sidebar'
 import { Topbar } from './ui/Topbar'
+import { AgentsPage } from './features/dashboard/AgentsPage'
 import { DashboardPage } from './features/dashboard/DashboardPage'
 import { MissionsPage } from './features/tasks/MissionsPage'
 import { CrmPage } from './features/crm/CrmPage'
@@ -16,7 +17,7 @@ const DepartmentBackdrop = lazy(() => import('./world/DepartmentBackdrop').then(
 const WorldPage = lazy(() => import('./world/WorldPage').then((module) => ({ default: module.WorldPage })))
 
 const titles: Record<ModuleKey, string> = {
-  world: 'Kairos World', dashboard: 'Visão geral', missions: 'Missões', clients: 'Clientes', crm: 'CRM',
+  agents: 'Agentes e departamentos', world: 'Kairos World', dashboard: 'Visão geral', missions: 'Missões', clients: 'Clientes', crm: 'CRM',
   instagram: 'Instagram', clone: 'Clone Engine', hunter: 'Hunter', 'money-lab': 'Money Lab', analytics: 'Analytics', vault: 'Vault', settings: 'Configurações',
 }
 
@@ -30,6 +31,7 @@ export function App() {
   const navigate = (module: ModuleKey) => { if (module === 'world' && active !== 'world') setWorldModule(active); setActive(module) }
   const content = (() => {
     switch (active) {
+      case 'agents': return <AgentsPage navigate={navigate} />
       case 'dashboard': return <DashboardPage navigate={navigate} />
       case 'world': return <Suspense fallback={<div className="world-loading">Abrindo Founder Tower…</div>}><WorldPage department={department} /></Suspense>
       case 'missions': return <MissionsPage />

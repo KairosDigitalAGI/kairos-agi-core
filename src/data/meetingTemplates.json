@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Daily CEO",
+    "time": "08:00",
+    "participants": [
+      "orion",
+      "cfo",
+      "cmo",
+      "cro",
+      "cto",
+      "cpo"
+    ],
+    "agenda": [
+      "Receita de ontem.",
+      "Meta de hoje.",
+      "Problemas / bloqueios.",
+      "Novos testes a rodar."
+    ]
+  },
+  {
+    "name": "Finance Review",
+    "time": "12:00",
+    "participants": [
+      "orion",
+      "cfo"
+    ],
+    "agenda": [
+      "CFO apresenta: receita parcial · ROI · CAC. CEO decide ajustes de orçamento."
+    ]
+  },
+  {
+    "name": "Marketing Review",
+    "time": "18:00",
+    "participants": [
+      "cmo",
+      "orion"
+    ],
+    "agenda": [
+      "CMO apresenta: criativos vencedores · criativos perdedores · próximas campanhas."
+    ]
+  },
+  {
+    "name": "Retrospectiva",
+    "time": "23:00",
+    "participants": [
+      "orion",
+      "cfo",
+      "cpo",
+      "hunter-ai",
+      "kairos",
+      "analytics",
+      "cmo",
+      "crm",
+      "cro",
+      "cto",
+      "money-lab",
+      "site-maker",
+      "ads",
+      "social",
+      "youtube"
+    ],
+    "agenda": [
+      "Todos apresentam. CEO consolida aprendizados em `company/memory.md` e monta o plano de amanhã."
+    ]
+  }
+]

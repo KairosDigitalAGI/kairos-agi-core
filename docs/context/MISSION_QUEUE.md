@@ -14,3 +14,5 @@
 | 010 | Planejada | World 0.2, incluindo Money Hunter |
 
 A numeração 003–008 anterior foi substituída por esta fila em 11/09/2026. Ordem atual do Founder: executar somente a Missão 003. Nenhuma automação contínua, publicação ou serviço externo deve ser ativado nesta entrega.
+
+Correção autorizada após Missão 003: organograma completo importado e exposto no painel/World; sem iniciar Video Engine ou serviços externos.

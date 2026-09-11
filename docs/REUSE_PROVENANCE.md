@@ -19,3 +19,6 @@ Commit: `686bdff72848573b36e9d7e1ca4093310b81e702`. Blob: `bedb74fc39835ad4be21e
 - `src/world/DepartmentBackdrop.tsx`: novo adaptador de câmera por departamento; transição com render sob demanda, limite de resolução e fallback sem WebGL.
 
 A triagem dos demais repositórios está no relatório privado local. Não afirmar que todo o acervo foi fundido ou executado. Componentes de vídeo/CRM/financeiro do Command ainda exigem adaptadores autenticados e não foram conectados nesta missão.
+
+## Organograma e reuniões
+Cadastro consultado no GitHub em 11/09/2026: [data/agents/agents.json](https://github.com/matheusschelle/kairos-os/blob/7113aac7ea727090ebf714e889b2df353d6f6233/data/agents/agents.json). Quinze papéis preservados com sourceId; quatro modelos de reunião preservados. Metadados de implementação são declarações da origem, sem execução ou confirmação de conectividade neste Core. Doze papéis adicionais vêm do Blueprint e adendos e têm origem identificada separadamente.

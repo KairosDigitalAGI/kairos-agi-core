@@ -36,9 +36,9 @@ export function DashboardPage({ navigate }: { navigate: (module: ModuleKey) => v
         </article>
 
         <article className="glass-panel agent-panel">
-          <SectionHeader eyebrow="Operação" title="Agentes configurados" action={<span>Executores desconectados</span>} />
+          <SectionHeader eyebrow="Operação" title={`${agents.length} agentes configurados`} action={<button onClick={() => navigate('agents')}>Ver organograma completo</button>} />
           <div className="agent-list">
-            {agents.map((agent) => (
+            {agents.slice(0, 6).map((agent) => (
               <div className="agent-row" key={agent.id}>
                 <span className="agent-glyph" style={{ '--agent-color': agent.color } as React.CSSProperties}><Bot size={17} /></span>
                 <div className="agent-copy"><strong>{agent.name}</strong><span>{agent.task}</span></div>

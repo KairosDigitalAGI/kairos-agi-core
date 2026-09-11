@@ -59,3 +59,6 @@ Não colocar segredos em Git. Exportações brutas e dados privados ficam locais
 
 ## Painel imersivo
 Escritório 3D do kairos-os reaproveitado como fundo contextual do painel de vidro. Alterne entre departamentos, visite o ambiente ou use modo foco. A trilha de preparação do Clone reflete cadastros e aprovações reais locais. [Proveniência](docs/REUSE_PROVENANCE.md) e [guia](docs/modules/IMMERSIVE_WORKSPACE.md).
+
+## Organograma consolidado
+A página Agentes reúne 15 papéis importados do Kairos OS e 12 do Blueprint/adendos. O World usa os mesmos 27 registros. Responsabilidades e modelos de reunião preservados; nenhum executor foi conectado automaticamente. Ver docs/modules/AGENT_ORGANOGRAM.md.
