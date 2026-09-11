@@ -5,6 +5,7 @@ export type ModuleKey =
   | 'clients'
   | 'crm'
   | 'instagram'
+  | 'clone'
   | 'hunter'
   | 'money-lab'
   | 'analytics'

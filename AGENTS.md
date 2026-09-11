@@ -11,3 +11,28 @@ Trabalhar em planos gratuitos. Não conectar APIs, publicar em redes sociais, co
 Estado editorial compartilhado no EditorialProvider; regras em engines/instagram/domain.ts. World e Dashboard consomem useFounderAgents. Não duplicar essas regras nos componentes.
 
 Validação da engine: `npm test` (Node 24) e `npm run build`. Dados locais não constituem Vault, autenticação ou auditoria inviolável.
+
+
+## Adendo V1.1 e escopo atual
+Ler também KAIROS_MEMORY_SYNC_V1_1.md. A missão atual é somente 003 (Clone Engine arquitetural, sem serviços externos). A fila 004–010 substitui a numeração anterior. Não ativar missões futuras a partir da documentação.
+
+Usar somente dados reais cadastrados ou consultados em fonte autorizada. Dado externo desconhecido = indisponível, nunca zero estimado, receita inventada ou agente fingindo trabalhar. Configuração de um papel não comprova execução. Não importar dados privados de clientes para o repositório público.
+
+## Papéis oficiais
+| Papel | Responsabilidade | Limite |
+| --- | --- | --- |
+| ORION | Priorizar missões, coordenar Dispatcher e usar Score Kairos | Não confundir metas com receita realizada; orçamento zero |
+| KAIROS | Assistente pessoal do Founder, CRM e agenda | Arthur é agente de cliente, nunca infraestrutura Founder |
+| Money Hunter | Inteligência de oportunidades: Trend, Content, Business, Tool Hunter e Opportunity Builder | Pesquisa contínua é arquitetura futura; nada publica sem aprovação |
+| Instagram AI | Conteúdo, calendário, revisão e métricas verificadas | Só usa fontes conectadas; sem publicação automática |
+| Hunter AI | Prospecção e qualificação para CRM | Isolar tenant, fonte e consentimentos; sem disparos nesta missão |
+| Clone AI | Identidade autorizada, referências de voz/rosto, produção e revisão | Não gera nem clona mídia na Missão 003 |
+| Video AI | Adaptadores de geração e edição de mídia | Missão 004 futura; nenhuma chamada ou cobrança agora |
+| QA AI | Validar regras, regressões, integridade dos dados e entregas | Relatar limites e falhas sem inventar verificações |
+| Vault AI | Contratos de referências seguras a credenciais | Vault vazio, sem valores secretos no frontend |
+| Shield AI | Isolamento, políticas, eventos e prevenção de vazamentos | Sem mudanças em outros projetos ou processos ativos |
+
+Os papéis acima são definições do produto, não processos em execução nem autorização para criar agentes em segundo plano.
+
+## Adendo visual do Founder — 11/09/2026
+Reutilizar componentes comprovados dos repositórios existentes. Dashboard 2D em vidro sobre o escritório 3D contextual ao departamento. Progresso visual sempre derivado de ações reais, sem receita fictícia ou promessas de retorno. Registrar fontes/commits em docs/REUSE_PROVENANCE.md.

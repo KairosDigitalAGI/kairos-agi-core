@@ -6,15 +6,17 @@ O documento [KAIROS_AGI_BLUEPRINT_V1.md](KAIROS_AGI_BLUEPRINT_V1.md) é a consti
 
 ## Estado atual
 
-**Missão 002 — Instagram editorial:** crie e edite ideias, organize datas, avance no pipeline, mantenha prompts e aprove conteúdos pelo Dashboard. Os dados editoriais ficam neste navegador. Analytics são fictícios, imagens/vídeos são briefings e a Graph API está desconectada. Nenhuma publicação automática ocorre.
+**Missão 003 — Clone Engine:** Identity Manager, Voice Profile, Face Profile, Avatar Library, Prompt Library, Video Queue, Approval Queue, Asset Library e Content Brain. Cadastre seus dados, referências a arquivos reais e produções; revise e aprove localmente. Não há clonagem, geração, upload ou publicação automática.
 
-Comece por [contexto](docs/context/MASTER_CONTEXT.md), [changelog](docs/context/CHANGELOG.md), [fila de missões](docs/context/MISSION_QUEUE.md) e [guia da Engine](docs/modules/INSTAGRAM_ENGINE_V0_2.md). O protocolo para futuras sessões está em AGENTS.md. As missões 003–008 estão planejadas; não estão implementadas.
+Sem dados fictícios na interface. Receita, clientes, XP, Coins e métricas do Instagram permanecem indisponíveis até conexão com fontes reais. O perfil informado pelo Founder é [_kairosdigital_](https://www.instagram.com/_kairosdigital_/); não está autenticado na API.
 
-O Kairos Core v0.1 implementa a primeira Founder Edition funcional com Dashboard, World 3D, Missões, CRM, Instagram Engine e Kairos Coins. Os dados são mockados e nenhuma API externa está conectada. A aplicação está publicada na Vercel Hobby, com deploy automático a partir da branch `main` do GitHub. O backend dedicado ainda aguarda uma vaga no plano Free do Supabase.
+A aplicação continua em React/Vite/TypeScript, hospedada na Vercel e sincronizada com main. Dados de edição ficam somente no navegador. Clone oferece exportação JSON para backup; não é Vault nem banco autenticado. Missões 004–010 estão planejadas, não implementadas.
 
-- GitHub: <https://github.com/KairosDigitalAGI/kairos-agi-core>
-- Produção: <https://kairos-agi-core.vercel.app/>
-- Vercel: <https://vercel.com/kairos-digital-s-projects/kairos-agi-core>
+- [Produção](https://kairos-agi-core.vercel.app/)
+- [GitHub](https://github.com/KairosDigitalAGI/kairos-agi-core)
+- [Guia Clone](docs/modules/CLONE_ENGINE_V0_3.md)
+- [Dados reais e migração](docs/modules/REAL_DATA_POLICY.md)
+- [Contexto](docs/context/MASTER_CONTEXT.md), [histórico](docs/context/CHANGELOG.md), [fila](docs/context/MISSION_QUEUE.md)
 
 ## Organização
 
@@ -24,7 +26,7 @@ src/world/        Founder Tower e agentes em React Three Fiber
 src/engines/      Engines operacionais, começando pelo Instagram
 src/features/     Dashboard, Missões, CRM e recursos de produto
 src/ui/           Componentes visuais reutilizáveis
-src/data/mock/    Dados demonstrativos sem informações reais
+src/data/         Configuração operacional; fixtures mock isoladas dos componentes
 src/types/        Contratos compartilhados
 apps/             Aplicações e serviços futuros
 packages/         Bibliotecas, contratos e conectores compartilhados
@@ -54,3 +56,6 @@ Para validar a entrega: `npm test`, `npm run typecheck` e `npm run build`.
 Branch principal: `main`. Mudanças futuras em branches `codex/`. O frontend usa React, TypeScript, Vite, React Three Fiber, Drei e Lucide. Decisões duradouras devem ser registradas em `memory/decisions/`.
 
 Não colocar segredos em Git. Exportações brutas e dados privados ficam locais até revisão e autorização de destino. Manter os serviços em planos gratuitos. Qualquer recurso pago exige autorização explícita. Os nomes da stack que não têm status acima são componentes planejados.
+
+## Painel imersivo
+Escritório 3D do kairos-os reaproveitado como fundo contextual do painel de vidro. Alterne entre departamentos, visite o ambiente ou use modo foco. A trilha de preparação do Clone reflete cadastros e aprovações reais locais. [Proveniência](docs/REUSE_PROVENANCE.md) e [guia](docs/modules/IMMERSIVE_WORKSPACE.md).

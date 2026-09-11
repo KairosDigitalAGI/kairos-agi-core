@@ -1,4 +1,4 @@
-import { agents } from '../data/mock'
+import { agents } from '../data/operational'
 import { useEditorial } from './EditorialProvider'
 import type { FounderAgent } from '../types'
 export function useFounderAgents(): FounderAgent[] {
@@ -9,6 +9,6 @@ export function useFounderAgents(): FounderAgent[] {
     ...agent,
     task: pending ? pending + ' conteúdo(s) aguardando revisão do Founder.' : approved ? approved + ' conteúdo(s) aprovado(s); API desconectada.' : 'Organizando ' + state.items.length + ' conteúdos locais.',
     status: pending ? 'Em revisão' : 'Aguardando',
-    progress: state.items.length ? Math.round(approved / state.items.length * 100) : 0,
+    progress: 0,
   })
 }

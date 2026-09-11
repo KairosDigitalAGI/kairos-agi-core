@@ -1,0 +1,8 @@
+.clone-engine h2 { margin: 8px 0; font-size: 1.7rem; }
+.clone-engine dl { display: grid; gap: 12px; }
+.clone-engine dt { font-size: .875rem; color: #c4b5fd; }
+.clone-engine dd { margin: 4px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.clone-channels { border: 1px solid #514460; padding: 16px; border-radius: 12px; display: flex; flex-wrap: wrap; gap: 14px; }
+.editorial .clone-channels label,.editorial .clone-confirm { display: flex; align-items: center; gap: 8px; font-size: .875rem; }
+.editorial .clone-channels input,.editorial .clone-confirm input { width: 18px; height: 18px; flex-shrink: 0; accent-color: #7c3aed; }
+.editorial button:focus-visible { outline: 2px solid #c4b5fd; outline-offset: 3px; }

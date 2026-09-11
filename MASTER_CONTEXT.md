@@ -69,3 +69,6 @@ Exportações completas de ChatGPT e Claude serão recebidas posteriormente em `
 ## Produtos
 
 Dashboard Kairos OS: Hunter, Carlos WhatsApp AI (legado), Kairos Ads, Site Maker, Financeiro, Conteúdo e Infraestrutura. ORB significa Operational Runtime Beacon: produto de hardware IA futuro, fora do escopo atual.
+
+## Atualização V1.1
+Consultar docs/context/MASTER_CONTEXT.md para o estado atual. Clone Engine arquitetural entregue na Missão 003; nenhuma geração automática. Perfil informado: https://www.instagram.com/_kairosdigital_/ . Somente dados reais; informações externas ausentes ficam indisponíveis. Money Hunter é departamento oficial futuro.

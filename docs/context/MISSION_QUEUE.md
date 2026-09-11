@@ -1,14 +1,16 @@
-# Fila de missões
+# Fila de missões — Memory Sync V1.1
 
-| Missão | Estado | Escopo | Condição para avançar |
-| --- | --- | --- | --- |
-| 001 | Entregue, com limitações documentadas | Founder Core v0.1 | Evoluir sem reiniciar |
-| 002 | Implementada e validada localmente | Instagram editorial, prompts, aprovações, analytics mock | API real continua bloqueada |
-| 003 | Próxima sugerida | Clone Engine, pipeline de vídeo, biblioteca de voz | Começar por organização local; uso de voz/rosto autorizado e custos avaliados antes de provedores |
-| 004 | Planejada | KAIROS WhatsApp, agenda, notificações, resumo diário | Acesso ao canal e escopo autorizados |
-| 005 | Planejada | Supabase, eventos, OS, Memory | Resolver quota Free e modelo de acesso |
-| 006 | Planejada | Billing, franquias, consumo, Coins | Pagamentos e cobranças exigem autorização |
-| 007 | Planejada | Founder Mobile, aprovações, push | Contratos e acesso definidos |
-| 008 | Planejada | World 0.2, cidade, distritos e NPCs | Reutilizar estado e contratos existentes |
+| Missão | Estado | Escopo |
+| --- | --- | --- |
+| 001 | Fundação entregue; fontes externas pendentes | Dashboard, World e módulos iniciais; exemplos retirados |
+| 002 | Editorial local entregue | Instagram, prompts, aprovação; Graph API desconectada |
+| 003 | Implementada | Clone Engine arquitetural, catálogo local e pipeline; sem clonagem ou geração |
+| 004 | Planejada, não iniciada | Video Engine; avaliar reaproveitamento de FFmpeg existente e remover dependências pagas do caminho local |
+| 005 | Planejada | KAIROS WhatsApp; preservar operação existente e validar conexão separada |
+| 006 | Planejada | Supabase Core; definir fonte, identidade e RLS sem afetar bases existentes |
+| 007 | Planejada | Billing Center; sem cobrança ou upgrade automático autorizado |
+| 008 | Planejada | Money Hunter Intelligence Center e Ideas Vault |
+| 009 | Planejada | Founder Mobile App |
+| 010 | Planejada | World 0.2, incluindo Money Hunter |
 
-ORB (Operational Runtime Beacon) é produto de hardware futuro, fora destas implementações. Não ativar pesquisa contínua, anúncios ou publicações automaticamente a partir desta fila.
+A numeração 003–008 anterior foi substituída por esta fila em 11/09/2026. Ordem atual do Founder: executar somente a Missão 003. Nenhuma automação contínua, publicação ou serviço externo deve ser ativado nesta entrega.

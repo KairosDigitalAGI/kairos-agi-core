@@ -1,13 +1,12 @@
-import { agents, crmClients, founderEconomy, metrics, missions } from '../data/mock'
+import { agents, crmClients, metrics, missions } from '../data/operational'
 
 export const kairosCore = {
   edition: 'Founder Edition',
   company: 'Kairos Digital',
   version: '0.1.0',
-  dataMode: 'Mock',
+  dataMode: 'Fontes reais; integrações pendentes',
   agents,
   clients: crmClients,
-  economy: founderEconomy,
   metrics,
   missions,
 } as const

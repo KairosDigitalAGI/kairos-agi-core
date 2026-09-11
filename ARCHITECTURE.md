@@ -76,3 +76,15 @@ ContentEditor, PromptLibrary e ApprovalQueue compõem a Engine. O Dashboard reut
 Aprovar marca a revisão e move para Publicação, que continua bloqueada. Edição invalida a aprovação. O InstagramGateway é um contrato futuro; disconnectedGateway rejeita publicação sem tráfego externo. Aprovações locais não são autorização confiável de servidor.
 
 Limites: sem backend, autenticação, geração de mídia, integração Meta ou sincronização entre dispositivos/abas. Os dados editoriais sobrevivem à navegação e recarga no mesmo navegador; Tasks da Missão 001 mantêm o comportamento legado. Documentação: docs/modules/INSTAGRAM_ENGINE_V0_2.md.
+
+## Incremento Missão 003 — prevalece sobre os estados históricos acima
+Memory Sync V1.1 e AGENTS.md definem papéis, Money Hunter e fila 003–010. A interface de produção não consome mais mocks; src/data/operational.ts contém configurações e indisponibilidade explícita. Não representa backend conectado.
+
+CloneProvider é a fonte única do Clone; domain.ts concentra revisão e pipeline. LibraryPanel é reutilizado entre identidade, voz, rosto, avatar, prompts, ativos e Content Brain. CloneApprovalQueue serve Engine e Dashboard. VideoProvider define limite substituível de provedores, sem chamadas. Contratos Founder/Client não concedem acesso: Client Edition aguarda autenticação/tenant no servidor.
+
+Vault continua sem armazenamento de valores secretos. Separar referências operacionais públicas da documentação privada ignorada pelo Git. Estado manual local não é log confiável de servidor. Integrações futuras devem autenticar aprovação e revalidar versões e direitos no servidor.
+
+A revisão dos repositórios fundamenta reaproveitamento por adaptadores: memória documental separada de telemetria, executores legados isolados, edição de vídeo separada de publicação. Não fundir bancos nem instâncias de clientes. Detalhes em docs/REPOSITORY_REUSE_STRATEGY.md e docs/modules/CLONE_ENGINE_V0_3.md.
+
+## Ambiente imersivo contextual
+Geometria do escritório do kairos-os extraída como módulo Three.js sem seus loaders ou mocks e compartilhada com o World via OfficeGeometry. App escolhe departamento/câmera por ModuleKey; painel de vidro sobre fundo desfocado, com modo foco. ProductionProgress deriva progresso dos providers reais locais. EmptyState reaproveitado do kairos-command. Fontes em docs/REUSE_PROVENANCE.md; comportamento em docs/modules/IMMERSIVE_WORKSPACE.md.

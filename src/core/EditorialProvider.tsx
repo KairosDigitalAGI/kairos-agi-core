@@ -1,16 +1,18 @@
 import { createContext, useContext, useEffect, useReducer, useState, type ReactNode } from 'react'
-import { editorialSeed } from '../data/mock/editorial'
+import { emptyEditorial, migrateLegacyEditorial } from './editorialMigration'
 import { editorialReducer, parseEditorial, type EditorialAction } from '../engines/instagram/domain'
 import type { EditorialState } from '../types/instagram'
-const KEY = 'kairos.editorial.v1'
+const KEY = 'kairos.editorial.real.v1'
+const LEGACY_KEY = 'kairos.editorial.v1'
 interface EditorialContext { state: EditorialState; dispatch: React.Dispatch<EditorialAction>; storageError: string }
 const Context = createContext<EditorialContext | null>(null)
 function load() {
   try {
     const raw = localStorage.getItem(KEY)
-    return { state: raw ? parseEditorial(raw) : editorialSeed, error: '', blocked: false }
+    const legacy = raw === null ? localStorage.getItem(LEGACY_KEY) : null
+    return { state: raw ? parseEditorial(raw) : legacy ? migrateLegacyEditorial(parseEditorial(legacy)) : emptyEditorial, error: '', blocked: false }
   } catch {
-    return { state: editorialSeed, error: 'Não foi possível ler os dados locais. Usando exemplos nesta sessão, sem sobrescrever o conteúdo salvo.', blocked: true }
+    return { state: emptyEditorial, error: 'Não foi possível ler os dados locais. Nenhum exemplo será exibido e o conteúdo salvo será preservado.', blocked: true }
   }
 }
 export function EditorialProvider({ children }: { children: ReactNode }) {

@@ -1,26 +1,29 @@
-import { Activity, ArrowRight, Bot, CheckCircle2, CircleDollarSign, Clock3, Target } from 'lucide-react'
-import { founderEconomy, metrics, missions } from '../../data/mock'
+import { Activity, Bot, Clock3, Target } from 'lucide-react'
+import { metrics, missions } from '../../data/operational'
 import { useFounderAgents } from '../../core/useFounderAgents'
-import { ProgressBar } from '../../ui/ProgressBar'
+import { ProductionProgress } from './ProductionProgress'
+import type { ModuleKey } from '../../types'
+import { EmptyState } from '../../ui/EmptyState'
 import { SectionHeader } from '../../ui/SectionHeader'
 import { StatCard } from '../../ui/StatCard'
+import { CloneApprovalQueue } from '../../engines/clone/CloneApprovalQueue'
 import { ApprovalQueue } from '../../engines/instagram/ApprovalQueue'
 
-export function DashboardPage() {
+export function DashboardPage({ navigate }: { navigate: (module: ModuleKey) => void }) {
   const agents = useFounderAgents()
   const activeMissions = missions.filter((mission) => mission.status !== 'Concluída').slice(0, 4)
 
   return (
-    <div className="page-stack">
+    <div className="page-stack"><ProductionProgress navigate={navigate} />
       <section className="metric-grid" aria-label="Indicadores da Kairos Digital">
         {metrics.map((metric) => <StatCard key={metric.id} metric={metric} />)}
       </section>
 
-      <ApprovalQueue />
+      <ApprovalQueue /><CloneApprovalQueue />
       <section className="dashboard-grid">
         <article className="glass-panel mission-panel">
-          <SectionHeader eyebrow="Prioridades" title="Missões em curso" action={<button className="text-button">Ver todas <ArrowRight size={14} /></button>} />
-          <div className="mission-list compact">
+          <SectionHeader eyebrow="Prioridades" title="Missões em curso" />
+          <div className="mission-list compact"><EmptyState title="Missões aguardando conexão" text="Acompanhe a preparação real do Clone no painel acima." />
             {activeMissions.map((mission) => (
               <div className="mission-row" key={mission.id}>
                 <span className={`priority-dot ${mission.priority.toLowerCase()}`} />
@@ -33,13 +36,13 @@ export function DashboardPage() {
         </article>
 
         <article className="glass-panel agent-panel">
-          <SectionHeader eyebrow="Operação" title="Agentes ativos" action={<span className="live-label"><i /> AO VIVO</span>} />
+          <SectionHeader eyebrow="Operação" title="Agentes configurados" action={<span>Executores desconectados</span>} />
           <div className="agent-list">
             {agents.map((agent) => (
               <div className="agent-row" key={agent.id}>
                 <span className="agent-glyph" style={{ '--agent-color': agent.color } as React.CSSProperties}><Bot size={17} /></span>
-                <div className="agent-copy"><strong>{agent.name}</strong><span>{agent.task}</span><ProgressBar value={agent.progress} color={agent.color} /></div>
-                <b>{agent.progress}%</b>
+                <div className="agent-copy"><strong>{agent.name}</strong><span>{agent.task}</span></div>
+                <b>{agent.status}</b>
               </div>
             ))}
           </div>
@@ -47,26 +50,16 @@ export function DashboardPage() {
 
         <article className="glass-panel revenue-panel">
           <SectionHeader eyebrow="Últimos 7 dias" title="Pulso de receita" action={<Activity size={18} />} />
-          <div className="chart-wrap" aria-label="Receita diária simulada">
-            {[38, 52, 46, 68, 61, 84, 72].map((height, index) => (
-              <div className="bar-column" key={index}><span style={{ height: `${height}%` }} /><small>{['S', 'T', 'Q', 'Q', 'S', 'S', 'D'][index]}</small></div>
-            ))}
-          </div>
-          <div className="revenue-footer"><span><CircleDollarSign size={15} /> Melhor dia: sábado</span><strong>R$ 3.240</strong></div>
+          <p>Receita indisponível. Aguardando conexão com registros financeiros reais.</p>
         </article>
 
         <article className="glass-panel founder-panel">
-          <SectionHeader eyebrow="Founder progression" title={`Nível ${founderEconomy.level}`} action={<Target size={18} />} />
-          <div className="xp-score"><strong>{founderEconomy.xp.toLocaleString('pt-BR')}</strong><span>/ {founderEconomy.nextLevelXp.toLocaleString('pt-BR')} XP</span></div>
-          <ProgressBar value={(founderEconomy.xp / founderEconomy.nextLevelXp) * 100} />
-          <div className="coin-balance"><span className="coin-icon">K</span><div><span>Saldo disponível</span><strong>{founderEconomy.balance} Kairos Coins</strong></div></div>
-          <div className="economy-history">
-            {founderEconomy.history.map((item) => <div key={item.id}><CheckCircle2 size={14} /><span>{item.label}</span><b>+{item.amount} KC</b></div>)}
-          </div>
+          <SectionHeader eyebrow="Founder" title="Kairos Coins e XP" action={<Target size={18} />} />
+          <p>Saldo e nível indisponíveis. Nenhum registro de recompensa verificado foi conectado.</p>
         </article>
       </section>
 
-      <footer className="system-strip"><span><Clock3 size={14} /> Última sincronização: agora</span><span><i /> Mock mode</span><span>Kairos Core v0.1</span></footer>
+      <footer className="system-strip"><span><Clock3 size={14} /> Sem sincronização externa</span><span>Sem dados demonstrativos</span><span>Kairos Core v0.1</span></footer>
     </div>
   )
 }

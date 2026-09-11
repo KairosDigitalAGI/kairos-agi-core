@@ -1,17 +1,20 @@
-# Contexto operacional
+# Contexto operacional — 11/09/2026
 
-## Leitura
-A identidade, stack e regras fundadoras permanecem no [MASTER_CONTEXT da raiz](../../MASTER_CONTEXT.md). A constituição está em [Blueprint V1](../../KAIROS_AGI_BLUEPRINT_V1.md); o adendo adotado está em [Memory Sync V1](../../KAIROS_MEMORY_SYNC_V1.md). Este documento é a entrada operacional, sem duplicar a constituição.
+Constituição: KAIROS_AGI_BLUEPRINT_V1.md. Adendos: KAIROS_MEMORY_SYNC_V1.md e KAIROS_MEMORY_SYNC_V1_1.md. AGENTS.md define papéis. Não reiniciar a arquitetura.
 
-## Estado após Missão 002
-- Missão 001: aplicação React/Vite/TypeScript com Dashboard, World, CRM e Tasks demonstrativos.
-- Missão 002: criação e edição de ideias, pipeline de oito etapas, calendário, prompts, revisão e aprovação compartilhadas entre Instagram e Dashboard.
-- Dados editoriais persistem no localStorage deste navegador, chave kairos.editorial.v1. Não há sincronização entre abas/dispositivos ou contas; usar uma aba de edição por vez.
-- Aprovação pertence a uma revisão. Qualquer edição invalida aprovação. A fila Publicação contém aprovados ainda não publicados.
-- Analytics são fictícios, não métricas da conta. Imagem e vídeo são briefings textuais, não mídia gerada.
-- KAIROS é o robô do Founder. Arthur não participa da Founder Edition.
-- ORB = Operational Runtime Beacon, hardware futuro.
-- APIs, banco, Vault real, autenticação e modelos de IA permanecem desconectados.
+## Estado atual
+- Missão 003 implementada como arquitetura operacional local: oito módulos Clone, Content Brain, pipeline e aprovação versionada. Nenhum serviço externo conectado.
+- Dados demonstrativos removidos da interface. Receita, CRM, Coins e métricas externas indisponíveis até conexão real. Contadores editoriais/Clone vêm de registros do navegador.
+- Instagram oficial informado: `_kairosdigital_`. Sem autenticação Meta, sem métricas consultadas.
+- Clone: `kairos.clone.v1`; editorial: `kairos.editorial.real.v1`. Acervo demonstrativo antigo preservado na chave anterior, fora da interface.
+- KAIROS é robô do Founder; Arthur e memórias de cliente continuam isolados.
+- Adendo V1.1 inclui Money Hunter, Score Kairos e Ideas Vault como arquitetura futura. Papéis configurados não significam agentes executando.
+- Triagem do GitHub: 49 repositórios acessíveis inventariados; metadados, árvores e documentos técnicos selecionados. Não é auditoria integral nem validação de serviços em produção. Relatório detalhado fica em memory/private/repository-audit/REPOSITORY_COMPOSITION.md, fora do Git público.
+- Clone não gera voz, rosto, imagem nem vídeo. VideoProvider preparado e desligado. Client Edition não ativada. Vault vazio.
+- Nenhuma despesa contratada; outros repositórios e processos de produção não alterados.
 
-## Operação
-Começar por [fila](MISSION_QUEUE.md) e [histórico](CHANGELOG.md). Evoluir os módulos existentes e documentar todas as mudanças. Manter custo zero. Não confundir estado editorial local com produção autônoma.
+## Próxima missão
+Somente 003 autorizada nesta etapa. Missão 004 (Video Engine) fica na fila, sem execução. Ver docs/modules/CLONE_ENGINE_V0_3.md, REAL_DATA_POLICY.md e docs/REPOSITORY_REUSE_STRATEGY.md.
+
+## Adendo visual
+Painel transparente sobre escritório 3D contextual, reaproveitado do kairos-os. EmptyState adaptado do kairos-command. Progresso ligado aos registros locais e às aprovações; sem atividade ou ganhos fictícios. Não representa World 0.2 completo.

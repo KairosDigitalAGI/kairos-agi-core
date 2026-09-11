@@ -18,3 +18,14 @@ Founder Core v0.1 com Dashboard, World 0.1, CRM mock, Tasks, Coins e placeholder
 
 ## Fundação — 66e954c
 Adoção inicial do Blueprint V1, preservando arquitetura e infraestrutura existentes.
+
+## Missão 003 — 11/09/2026
+- Adotado Memory Sync V1.1; papéis oficiais no AGENTS.md; fila renumerada até 010.
+- Clone Engine: catálogos vazios, produção manual, pipeline com requisitos, revisão, consentimento e aprovação versionada; providers desconectados.
+- Removidos exemplos da interface e falsa telemetria; migração editorial preserva o acervo antigo.
+- Perfil Instagram informado pelo Founder registrado sem alegar integração.
+- Inventariados 49 repositórios; análise técnica seletiva e plano de composição privado, sem alterar fontes.
+- Validação de domínio e build; sem conexão externa, despesas, treinamento de clone ou publicação social.
+
+### Adendo visual na entrega 003
+Escritório 3D legado extraído e compartilhado entre World e fundo do painel; câmeras por departamento, modo foco, transparência e progresso real de preparação/produção. EmptyState do Command adaptado. Removidos controles de cabeçalho sem ação. Proveniência documentada.

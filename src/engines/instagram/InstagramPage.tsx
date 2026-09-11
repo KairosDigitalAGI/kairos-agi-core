@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Camera, Plus } from 'lucide-react'
 import { useEditorial } from '../../core/EditorialProvider'
-import { instagramAnalytics } from '../../data/mock/editorial'
+import { instagramProfile } from '../../data/operational'
 import { SectionHeader } from '../../ui/SectionHeader'
 import { ApprovalQueue } from './ApprovalQueue'
 import { ContentEditor } from './ContentEditor'
@@ -22,7 +22,7 @@ export function InstagramPage() {
   return <div className="page-stack editorial">
     <section className="instagram-hero">
       <div className="instagram-orb"><Camera size={30} /></div>
-      <div><span className="eyebrow">Cliente Zero · Instagram Engine</span><h2>Estúdio editorial</h2><p>Planeje, prepare e aprove conteúdos da Kairos.</p></div>
+      <div><span className="eyebrow">Cliente Zero · Instagram Engine</span><h2><a href={instagramProfile.url} target="_blank" rel="noreferrer">@{instagramProfile.handle}</a></h2><p>Planeje, prepare e aprove conteúdos da Kairos.</p></div>
       <div className="ig-kpis"><span><strong>{state.items.length}</strong> conteúdos</span><span><strong>{state.items.filter(i => i.stage === 'Aprovação').length}</strong> para aprovar</span></div>
     </section>
     <p className="editorial-muted">Edição local neste navegador · sem sincronização entre dispositivos · API desconectada</p>
@@ -46,7 +46,7 @@ export function InstagramPage() {
               if (error) { setNotice(error); return }
               dispatch({ type: 'advance', id: item.id, at: new Date().toISOString() }); setNotice('Etapa atualizada.')
             }}>Avançar</button>}
-          </div><details><summary>Histórico ({item.history.length})</summary>{item.history.length ? <ol>{item.history.map((h, n) => <li key={n}>{h.action} <small>{new Date(h.at).toLocaleString('pt-BR')}</small></li>)}</ol> : <p>Conteúdo demonstrativo inicial.</p>}</details>
+          </div><details><summary>Histórico ({item.history.length})</summary>{item.history.length ? <ol>{item.history.map((h, n) => <li key={n}>{h.action} <small>{new Date(h.at).toLocaleString('pt-BR')}</small></li>)}</ol> : <p>Sem eventos registrados.</p>}</details>
         </article>)}
         {!items.some(i => i.stage === stage) && <p className="empty-editorial">Nenhum conteúdo</p>}
       </div>)}</section>}
@@ -62,9 +62,9 @@ export function InstagramPage() {
       {tab === 'Prompts' && <PromptLibrary />}
       {tab === 'Aprovações' && <ApprovalQueue />}
       {tab === 'Analytics' && <section className="glass-panel">
-        <SectionHeader eyebrow="Exemplo · últimos 30 dias" title="Analytics demonstrativos" />
-        <p className="editorial-muted">Valores fictícios independentes do pipeline. Aprovar um conteúdo não aumenta o número de posts publicados.</p>
-        <div className="editorial-metrics">{instagramAnalytics.map(m => <article key={m.label}><span>{m.label}</span><strong>{m.value}</strong></article>)}</div>
+        <SectionHeader eyebrow="Instagram" title="Métricas da conta" />
+        <p className="editorial-muted">Métricas indisponíveis: conta ainda não autenticada. O perfil foi informado pelo Founder; seguidores, alcance e publicações não foram consultados.</p>
+        <div className="editorial-metrics">{['Seguidores', 'Alcance', 'Cliques', 'Leads', 'Posts publicados'].map(label => <article key={label}><span>{label}</span><strong>—</strong></article>)}</div>
       </section>}
       {tab === 'Integração' && <section className="glass-panel">
         <SectionHeader eyebrow="Instagram Graph API" title={disconnectedGateway.connected ? 'Conectada' : 'Desconectada'} />

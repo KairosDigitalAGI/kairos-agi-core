@@ -59,3 +59,10 @@ ORB definido como Operational Runtime Beacon, hardware futuro. KAIROS continua r
 Instagram passa de tela mock para fluxo editorial manual local: ideias, materiais, pipeline, calendário, prompts, decisão do Founder e histórico. Estado editorial compartilhado em Core; Dashboard e World refletem a mesma fila. Dados persistem apenas no navegador, com validação e aviso de falha. API, IA e publicação reais continuam desconectadas.
 
 Missões 003–008 registradas na fila; não implementadas por este sync. Recomendação de separar estratégia em repositório privado registrada sem mudar a visibilidade do repositório existente.
+
+## 11/09/2026 — Memory Sync V1.1 e Missão 003
+Adendo oficial preservado em KAIROS_MEMORY_SYNC_V1_1.md: Money Hunter com cinco equipes, Score Kairos, Ideas Vault, Clone Engine modular, VideoProvider, Content Brain, Asset Library, separação pública/privada e fila renumerada. Missão ativa limitada a 003.
+A instrução direta de usar apenas dados reais substitui o requisito antigo de mocks na interface. O Blueprint original não foi refeito. Dados ausentes ficam indisponíveis; nenhum agente simula execução.
+
+### Adendo escrito pelo Founder
+Interface séria e imersiva: painel 2D transparente sobre ambiente 3D contextual, reaproveitando o acervo. Progresso corresponde a trabalho cadastrado e revisão, sem inventar ganhos. Mantido foco econômico, sem promessa de receita.

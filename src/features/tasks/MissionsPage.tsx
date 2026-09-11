@@ -1,6 +1,6 @@
 import { Check, ChevronRight, Coins, Flag, Sparkles } from 'lucide-react'
 import { useState } from 'react'
-import { missions as initialMissions } from '../../data/mock'
+import { missions as initialMissions } from '../../data/operational'
 import type { Mission } from '../../types'
 import { SectionHeader } from '../../ui/SectionHeader'
 
@@ -25,7 +25,7 @@ export function MissionsPage() {
   return (
     <div className="page-stack">
       <section className="missions-hero glass-panel">
-        <div><span className="eyebrow">Task System</span><h2>Transforme trabalho em progresso visível.</h2><p>Cada missão gera XP, Kairos Coins e uma trilha clara de responsabilidade.</p></div>
+        <div><span className="eyebrow">Task System</span><h2>Transforme trabalho em progresso visível.</h2><p>Aguardando conexão com as missões reais. Recompensas não estão ativas.</p></div>
         <div className="mission-summary"><strong>{openCount}</strong><span>abertas</span><i /><strong>{availableXp}</strong><span>XP disponível</span></div>
       </section>
       <section className="kanban" aria-label="Quadro de missões">

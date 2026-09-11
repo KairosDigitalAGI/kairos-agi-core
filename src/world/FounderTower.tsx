@@ -1,9 +1,11 @@
-import { Float, Grid, Html, OrbitControls, PerspectiveCamera, Sparkles } from '@react-three/drei'
+import { Float, Html, OrbitControls, PerspectiveCamera, Sparkles } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Suspense, useState } from 'react'
+import { OfficeGeometry } from './OfficeGeometry'
+import type { Department } from './departments'
 import type { FounderAgent } from '../types'
 
-interface WorldProps { agents: FounderAgent[]; onSelect: (agent: FounderAgent) => void }
+interface WorldProps { department: Department; agents: FounderAgent[]; onSelect: (agent: FounderAgent) => void }
 
 function AgentNpc({ agent, selected, onSelect }: { agent: FounderAgent; selected: boolean; onSelect: () => void }) {
   const [hovered, setHovered] = useState(false)
@@ -31,33 +33,29 @@ function AgentNpc({ agent, selected, onSelect }: { agent: FounderAgent; selected
   )
 }
 
-function TowerScene({ agents, onSelect, selectedId }: WorldProps & { selectedId?: FounderAgent['id'] }) {
+function TowerScene({ department, agents, onSelect, selectedId }: WorldProps & { selectedId?: FounderAgent['id'] }) {
   return (
     <>
       <color attach="background" args={['#04050a']} />
       <fog attach="fog" args={['#060713', 8, 22]} />
-      <PerspectiveCamera makeDefault position={[0, 4.2, 8.5]} fov={46} />
+      <PerspectiveCamera makeDefault position={department.camera.map(value => value * .3) as [number, number, number]} fov={55} />
       <ambientLight intensity={0.5} />
       <directionalLight position={[4, 8, 3]} intensity={2.2} color="#dbeafe" castShadow />
       <pointLight position={[-5, 2, -3]} color="#7c3aed" intensity={8} distance={12} />
       <pointLight position={[5, 2, 1]} color="#0ea5e9" intensity={5} distance={10} />
-      <mesh position={[0, -0.1, 0]} receiveShadow><boxGeometry args={[10, 0.15, 7]} /><meshStandardMaterial color="#090b14" metalness={0.65} roughness={0.38} /></mesh>
-      <Grid position={[0, 0, 0]} args={[10, 7]} cellColor="#241047" sectionColor="#7c3aed" cellSize={0.5} sectionSize={2} fadeDistance={14} infiniteGrid={false} />
-      <mesh position={[0, 2.5, -3.45]}><boxGeometry args={[10, 5, 0.12]} /><meshStandardMaterial color="#080b15" metalness={0.72} roughness={0.25} /></mesh>
-      <mesh position={[0, 2.5, -3.36]}><planeGeometry args={[5.5, 2.3]} /><meshBasicMaterial color="#0b1838" transparent opacity={0.7} /></mesh>
-      <mesh position={[0, 2.5, -3.28]}><ringGeometry args={[0.85, 1, 64]} /><meshBasicMaterial color="#8b5cf6" /></mesh>
+      <OfficeGeometry color={department.color} scale={0.3} />
       <Sparkles count={70} scale={[9, 4, 6]} size={1.4} speed={0.2} color="#8b5cf6" />
       {agents.map((agent) => <AgentNpc key={agent.id} agent={agent} selected={selectedId === agent.id} onSelect={() => onSelect(agent)} />)}
-      <OrbitControls enablePan={false} minDistance={6.5} maxDistance={11} minPolarAngle={0.75} maxPolarAngle={1.35} target={[0, 0.8, -0.4]} />
+      <OrbitControls enablePan={false} minDistance={2.5} maxDistance={16} minPolarAngle={0.75} maxPolarAngle={1.35} target={department.target.map(value => value * .3) as [number, number, number]} />
     </>
   )
 }
 
-export function FounderTower({ agents, selected, onSelect }: WorldProps & { selected: FounderAgent }) {
+export function FounderTower({ department, agents, selected, onSelect }: WorldProps & { selected: FounderAgent }) {
   return (
-    <div className="world-canvas" role="img" aria-label="Sala futurista da Founder Tower com quatro agentes operacionais">
+    <div className="world-canvas" role="img" aria-label="Sala futurista da Founder Tower com quatro agentes configurados, executores desconectados">
       <Canvas shadows dpr={[1, 1.7]} gl={{ antialias: true }}>
-        <Suspense fallback={null}><TowerScene agents={agents} selectedId={selected.id} onSelect={onSelect} /></Suspense>
+        <Suspense fallback={null}><TowerScene department={department} agents={agents} selectedId={selected.id} onSelect={onSelect} /></Suspense>
       </Canvas>
     </div>
   )
