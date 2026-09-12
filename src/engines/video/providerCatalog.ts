@@ -54,6 +54,10 @@ export function estimateCampaign(brief: CampaignBrief): CampaignEstimate {
 export function buildConversionScript(brief: CampaignBrief) {
   const fields = [brief.product, brief.audience, brief.promise, brief.callToAction]
   if (fields.some(value => value.trim().length < 3)) return ''
+  if (brief.durationSeconds <= 10) return [
+    `${brief.audience.trim()}: ${brief.promise.trim()}.`,
+    `${brief.proof.trim() ? `${brief.proof.trim()}. ` : ''}${brief.product.trim()}. ${brief.callToAction.trim()}`,
+  ].join('\n')
   return [
     `${brief.audience.trim()}, isto está travando seu resultado?`,
     brief.promise.trim(),

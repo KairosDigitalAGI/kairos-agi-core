@@ -11,6 +11,13 @@ YouTube e TikTok aparecem como destinos desconectados. A futura implementação 
 
 Fontes oficiais: [Runway API Pricing](https://docs.dev.runwayml.com/guides/pricing/), [YouTube Data API](https://developers.google.com/youtube/v3/getting-started), [YouTube upload](https://developers.google.com/youtube/v3/guides/uploading_a_video), [TikTok Content Posting API](https://developers.tiktok.com/products/content-posting-api) e [TikTok Content Sharing Guidelines](https://developers.tiktok.com/docs/en/content-sharing-guidelines).
 
+## Estratégia gratuita de oito segundos
+O modo curto usa oito segundos e duas cenas por padrão. Google Flow informa 50 créditos gratuitos diários e cobra 10 créditos por geração Veo 3.1 Lite de quatro, seis ou oito segundos, equivalendo a até cinco clipes diários quando esse modelo está disponível na conta. Runway Free concede 125 créditos uma única vez, sem renovação, com modelos variáveis e marca d'água. Higgsfield Free permanece dependente do saldo mostrado na própria conta. Kairos Motion local é o fallback sem cota externa.
+
+O roteador não alterna identidades nem mantém banco de senhas para contornar limites. Cada provedor conectado terá uma única identidade autorizada, saldo real, data de renovação e estado pausado quando a cota acabar.
+
+Instagram exige conta profissional e permissão de publicação. X cobra atualmente US$ 0,015 por criação de conteúdo sem URL; portanto, postagem automática no X não é custo zero. O fluxo gratuito para X é exportar e publicar manualmente após aprovação. Fontes: [Google Flow credits](https://support.google.com/flow/answer/16526234), [Runway Free](https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details), [Instagram API](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/content-publishing) e [X API Pricing](https://docs.x.com/x-api/getting-started/pricing).
+
 ## O que funciona
 O fluxo principal cria um vídeo do zero a partir de título e roteiro. Cada frase ou linha vira uma cena animada com tipografia, fundo procedural, partículas, transição, identidade de cor, marca e trilha ambiente sintetizada opcional. O storyboard aparece antes da geração. Não é necessário enviar um vídeo de entrada.
 

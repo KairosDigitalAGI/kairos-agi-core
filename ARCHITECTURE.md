@@ -3,7 +3,9 @@
 ## Evolução da Video Engine
 `providerCatalog.ts` mantém capacidades, unidade de cobrança, preço em USD, fonte e data de verificação. `ProductionPlanner` transforma somente os campos informados pelo Founder em roteiro e calcula o orçamento antes de gerar. O provedor local é executável; todos os modelos pagos ficam desconectados até existir adaptador server-side, segredo no Vault e limite de orçamento.
 
-`distribution.ts` registra YouTube e TikTok como destinos desconectados. A publicação futura passa por backend autenticado, armazenamento privado de tokens, aprovação por ativo e consulta do status remoto. Nenhum segredo, OAuth ou chamada de publicação vive no frontend público.
+`distribution.ts` registra Instagram, YouTube, TikTok e X como destinos desconectados. A publicação futura passa por backend autenticado, armazenamento privado de tokens, aprovação por ativo e consulta do status remoto. Nenhum segredo, OAuth ou chamada de publicação vive no frontend público.
+
+`freeTierCatalog.ts` descreve cotas verificadas, renovação, capacidade de clipes de oito segundos e marca d'água. O roteador futuro usa um vínculo OAuth por provedor, registra saldo real e pausa no esgotamento; não alterna contas para evitar limites. `distribution.ts` também cobre Instagram e X. Como o X API cobra por escrita, a estratégia gratuita exporta o pacote para publicação manual aprovada.
 
 Esta arquitetura implementa progressivamente a constituição em `KAIROS_AGI_BLUEPRINT_V1.md`. O Blueprint define os domínios; este documento registra como eles serão separados e integrados.
 

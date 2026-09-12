@@ -10,6 +10,8 @@ O documento [KAIROS_AGI_BLUEPRINT_V1.md](KAIROS_AGI_BLUEPRINT_V1.md) é a consti
 
 **Missão 004 — Video Engine:** planeje um criativo com oferta, público, promessa, prova e CTA; compare custo real de modelos generativos antes de produzir; crie motion videos locais a partir do roteiro; ou edite um vídeo real. Resultados concluídos são salvos na galeria IndexedDB. Runway, Veo, Gemini Image, GPT Image, YouTube e TikTok estão catalogados, mas desconectados até existir backend seguro e autorização.
 
+O modo curto usa oito segundos por padrão e condensa o roteiro em duas cenas. O roteador gratuito registra Kairos Motion local, Google Flow, Runway Free e Higgsfield Free sem alternar contas para contornar limites. Instagram, YouTube, TikTok e X aparecem como destinos; o X API é pago e o caminho sem custo é publicação manual aprovada.
+
 Sem dados fictícios na interface. Receita, clientes, XP, Coins e métricas do Instagram permanecem indisponíveis até conexão com fontes reais. O perfil informado pelo Founder é [_kairosdigital_](https://www.instagram.com/_kairosdigital_/); não está autenticado na API.
 
 A aplicação continua em React/Vite/TypeScript, hospedada na Vercel e sincronizada com main. Dados de edição ficam somente no navegador. Clone oferece exportação JSON para backup; não é Vault nem banco autenticado. As Missões 003 e 004 estão implementadas; as Missões 005–010 permanecem planejadas.

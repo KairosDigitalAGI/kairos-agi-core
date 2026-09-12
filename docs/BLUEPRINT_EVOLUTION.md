@@ -5,6 +5,8 @@ Video AI passa a planejar cada criativo a partir de oferta, público, promessa v
 
 A estratégia inicial reduz integrações usando a API da Runway como gateway de múltiplos modelos. O render local continua como alternativa de custo zero. YouTube e TikTok são destinos planejados e exigem OAuth, backend e consentimento antes do envio. Monetização é objetivo de negócio, não dado presumido: receita só entra no Core quando vier de fonte conectada e auditável.
 
+Adendo gratuito: o formato padrão passa a oito segundos. Cotas legítimas podem ser combinadas por provedor, sempre com uma identidade autorizada por serviço e pausa ao esgotar. Google Flow é a principal fonte diária verificada; Kairos Motion local garante continuidade. Instagram e X entram na distribuição, sendo que X automático possui custo por chamada e requer autorização financeira futura.
+
 Este registro preserva a evolução da constituição `KAIROS_AGI_BLUEPRINT_V1.md`. O texto fundador permanece versionado; alterações de arquitetura são aditivas, rastreáveis e ligadas a decisões técnicas.
 
 ## 2026-09-10 — Adoção do Blueprint V1

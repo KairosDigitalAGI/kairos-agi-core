@@ -3,7 +3,7 @@ export type VideoQuality = 'economy' | 'balanced' | 'high'
 export type VideoGenerationStyle = 'kairos' | 'minimal' | 'energy'
 export type VideoProviderKind = 'local' | 'runway'
 export type VideoCostUnit = 'second' | 'image'
-export type DistributionChannel = 'youtube' | 'tiktok'
+export type DistributionChannel = 'instagram' | 'youtube' | 'tiktok' | 'x'
 
 export interface GenerativeModel {
   id: string
@@ -43,6 +43,18 @@ export interface DistributionConnection {
   connected: boolean
   publishCostUsd: number
   requirement: string
+  sourceUrl: string
+}
+
+export interface FreeTierProvider {
+  id: string
+  label: string
+  connected: boolean
+  access: 'local' | 'manual-web'
+  allowance: string
+  eightSecondCapacity: string
+  renewal: string
+  watermark: string
   sourceUrl: string
 }
 

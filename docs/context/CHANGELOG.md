@@ -6,6 +6,9 @@
 - Runway adotada como gateway proposto para Gen-4, Veo, Gemini Image e GPT Image; APIs seguem desconectadas.
 - YouTube e TikTok registrados como destinos com custo de API zero, requisitos reais e estado desconectado.
 - Nenhuma conta foi conectada, mídia publicada ou despesa gerada.
+- Modo curto alterado para oito segundos com roteiro em duas cenas.
+- Roteador gratuito documenta Flow, Runway Free, Higgsfield Free e fallback local; não alterna contas para contornar cotas.
+- Instagram e X adicionados aos destinos; custo real do X API registrado e caminho manual gratuito preservado.
 
 ## Missão 002 — Instagram editorial e Memory Sync V1
 - Adotados contexto, fila de missões, protocolo AGENTS.md e índice modular do Blueprint.

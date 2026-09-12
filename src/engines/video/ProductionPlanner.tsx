@@ -2,10 +2,11 @@ import { useMemo, useState } from 'react'
 import { ArrowRight, BadgeDollarSign, BrainCircuit, Link2Off, ShieldCheck } from 'lucide-react'
 import type { CampaignBrief } from '../../types/video'
 import { distributionConnections } from './distribution'
+import { freeTierProviders } from './freeTierCatalog'
 import { buildConversionScript, estimateCampaign, generativeModels, VIDEO_PRICING_VERIFIED_AT } from './providerCatalog'
 
 const initialBrief: CampaignBrief = {
-  product: '', audience: '', promise: '', proof: '', callToAction: '', durationSeconds: 30,
+  product: '', audience: '', promise: '', proof: '', callToAction: '', durationSeconds: 8,
   videoModelId: 'browser-local', imageModelId: 'runway-gemini-2.5-flash', imageCount: 0,
 }
 
@@ -38,7 +39,7 @@ export function ProductionPlanner({ onUseScript }: Props) {
     <aside className="glass-panel cost-planner">
       <div><span className="eyebrow"><BadgeDollarSign size={13} /> ORÇAMENTO ANTES DE GERAR</span><h3>{estimate.status === 'free' ? 'Custo de API zero' : `${money(estimate.totalUsd)} estimados`}</h3><p>{selectedVideo.capability}</p></div>
       <label>Modelo de vídeo<select value={brief.videoModelId} onChange={event => setBrief({ ...brief, videoModelId: event.target.value })}>{videoModels.map(model => <option key={model.id} value={model.id}>{model.label} · {model.usdPerUnit ? `${money(model.usdPerUnit)}/s` : 'grátis'}</option>)}</select></label>
-      <div className="video-fields"><label>Duração<input type="number" min="5" max="180" step="5" value={brief.durationSeconds} onChange={event => setBrief({ ...brief, durationSeconds: Number(event.target.value) })} /></label><label>Frames<input type="number" min="0" max="30" value={brief.imageCount} onChange={event => setBrief({ ...brief, imageCount: Number(event.target.value) })} /></label></div>
+      <div className="video-fields"><label>Duração<input type="number" min="4" max="180" step="1" value={brief.durationSeconds} onChange={event => setBrief({ ...brief, durationSeconds: Number(event.target.value) })} /></label><label>Frames<input type="number" min="0" max="30" value={brief.imageCount} onChange={event => setBrief({ ...brief, imageCount: Number(event.target.value) })} /></label></div>
       <label>Modelo de imagem<select value={brief.imageModelId} onChange={event => setBrief({ ...brief, imageModelId: event.target.value })}>{imageModels.map(model => <option key={model.id} value={model.id}>{model.label} · até {money(model.usdPerUnit)}/imagem</option>)}</select></label>
       <div className="cost-breakdown"><span>Vídeo <strong>{money(estimate.videoUsd)}</strong></span><span>Imagens <strong>{money(estimate.imagesUsd)}</strong></span><span>Total máximo exibido <strong>{money(estimate.totalUsd)}</strong></span></div>
       {selectedVideo.connected ? <p className="connection-state connected"><ShieldCheck size={15} />Disponível neste navegador</p> : <p className="connection-state"><Link2Off size={15} />API ainda não conectada; nenhum gasto pode ocorrer.</p>}
@@ -49,6 +50,10 @@ export function ProductionPlanner({ onUseScript }: Props) {
       <div><span className="eyebrow">DISTRIBUIÇÃO</span><h3>Publicação preparada, contas desconectadas</h3></div>
       <div>{distributionConnections.map(connection => <article key={connection.channel}><div><strong>{connection.label}</strong><span>Envio por API: {money(connection.publishCostUsd)}</span></div><p>{connection.requirement}</p><a href={connection.sourceUrl} target="_blank" rel="noreferrer">Documentação oficial</a></article>)}</div>
       <p className="distribution-note">A publicação só será liberada depois do login, revisão do vídeo e confirmação explícita do envio.</p>
+    </article>
+    <article className="glass-panel free-tier-panel">
+      <div><span className="eyebrow">ROTEADOR GRATUITO</span><h3>Cotas legítimas, sem troca de contas</h3><p>Quando uma cota terminar, o fluxo pausa esse provedor e usa o render local. O saldo real será lido somente depois da conexão autorizada.</p></div>
+      <div className="free-tier-grid">{freeTierProviders.map(provider => <article key={provider.id} className={provider.connected ? 'available' : ''}><div><strong>{provider.label}</strong><span>{provider.connected ? 'Disponível' : 'Aguardando conexão'}</span></div><p>{provider.allowance}</p><small>8 segundos: {provider.eightSecondCapacity}</small><small>{provider.renewal} · {provider.watermark}</small>{provider.sourceUrl && <a href={provider.sourceUrl} target="_blank" rel="noreferrer">Regra oficial</a>}</article>)}</div>
     </article>
   </section>
 }

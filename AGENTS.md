@@ -34,6 +34,8 @@ Usar somente dados reais cadastrados ou consultados em fonte autorizada. Dado ex
 
 Os papéis acima são definições do produto, não processos em execução nem autorização para criar agentes em segundo plano.
 
+O roteador de mídia pode usar cotas gratuitas legítimas de provedores conectados e deve pausar cada provedor quando o saldo terminar. Não criar, armazenar ou alternar contas para contornar limites, créditos, planos ou termos de serviço. O fallback permanente de custo zero é o render local.
+
 ## Adendo visual do Founder — 11/09/2026
 Reutilizar componentes comprovados dos repositórios existentes. Dashboard 2D em vidro sobre o escritório 3D contextual ao departamento. Progresso visual sempre derivado de ações reais, sem receita fictícia ou promessas de retorno. Registrar fontes/commits em docs/REUSE_PROVENANCE.md.
 
