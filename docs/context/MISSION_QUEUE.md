@@ -6,6 +6,7 @@
 | 002 | Editorial local entregue | Instagram, prompts, aprovação; Graph API desconectada |
 | 003 | Implementada | Clone Engine arquitetural, catálogo local e pipeline; sem clonagem ou geração |
 | 004 | Implementada e corrigida | Geração motion do zero por roteiro e pós-produção local; render e download WebM |
+| 004.1 | Implementada | Control Plane de integrações e plano operacional de sete dias; credenciais ainda pendentes |
 | 005 | Planejada | KAIROS WhatsApp; preservar operação existente e validar conexão separada |
 | 006 | Planejada | Supabase Core; definir fonte, identidade e RLS sem afetar bases existentes |
 | 007 | Planejada | Billing Center; sem cobrança ou upgrade automático autorizado |

@@ -1,5 +1,11 @@
 # Changelog
 
+## Control Plane de integrações — preparação do lançamento em sete dias
+- Página Integrações adicionada ao Founder OS com status obtido de função server-side.
+- Endpoint Vercel informa presença de configuração Meta, Google e token store sem expor segredos.
+- Instagram e YouTube permanecem desconectados até OAuth e Supabase; X permanece manual para custo zero.
+- Cronograma de sete dias registrado no produto e na documentação.
+
 ## Evolução da Video Engine — pipeline generativo e custo
 - Briefing real de oferta, público, promessa, prova e CTA com roteiro derivado apenas do que o Founder informar.
 - Catálogo versionado de modelos de vídeo e imagem com preços oficiais em USD e orçamento antes da geração.

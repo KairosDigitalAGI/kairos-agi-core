@@ -13,6 +13,7 @@ Constituição: KAIROS_AGI_BLUEPRINT_V1.md. Adendos: KAIROS_MEMORY_SYNC_V1.md e 
 - Clone não gera voz, rosto, imagem nem vídeo. VideoProvider preparado e desligado. Client Edition não ativada. Vault vazio.
 - Nenhuma despesa contratada; outros repositórios e processos de produção não alterados.
 - Missão 004: Video Engine cria motion videos do zero a partir de roteiro e também edita vídeo real local. Storyboard, animação, marca, trilha, corte e download WebM rodam no navegador; arquivos e roteiro não são enviados a servidor.
+- Integration Control Plane: página e endpoint server-side verificam configuração de Meta, Google, X e do futuro token store. Nenhuma credencial ou conta está conectada ainda.
 
 ## Próxima missão
 Missão 005 (KAIROS WhatsApp) permanece planejada. Exige mapear a instância real e seu acesso antes de conectar o Core, sem interromper o processo atual. Ver docs/modules/VIDEO_ENGINE_V0_4.md.

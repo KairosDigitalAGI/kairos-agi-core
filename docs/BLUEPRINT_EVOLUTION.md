@@ -7,6 +7,8 @@ A estratégia inicial reduz integrações usando a API da Runway como gateway de
 
 Adendo gratuito: o formato padrão passa a oito segundos. Cotas legítimas podem ser combinadas por provedor, sempre com uma identidade autorizada por serviço e pausa ao esgotar. Google Flow é a principal fonte diária verificada; Kairos Motion local garante continuidade. Instagram e X entram na distribuição, sendo que X automático possui custo por chamada e requer autorização financeira futura.
 
+O Integration Control Plane introduz a primeira função server-side de diagnóstico. Estado de configuração e conexão passam a ser contratos distintos: presença de credenciais não significa conta conectada. Meta e Google exigem OAuth e token store; X permanece manual no orçamento zero. Um roteiro de sete dias ordena fundação segura, publicação, métricas e operação acompanhada.
+
 Este registro preserva a evolução da constituição `KAIROS_AGI_BLUEPRINT_V1.md`. O texto fundador permanece versionado; alterações de arquitetura são aditivas, rastreáveis e ligadas a decisões técnicas.
 
 ## 2026-09-10 — Adoção do Blueprint V1

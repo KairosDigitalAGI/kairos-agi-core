@@ -10,6 +10,6 @@ export const departments: Record<ModuleKey, Department> = {
   agents: founder, dashboard: founder, missions: founder, world: founder,
   clients: sales, crm: sales, hunter: { ...sales, area: 'Hunter · prospecção' },
   instagram: social, clone: studio, video: { ...studio, area: 'Estúdio de vídeo local' }, 'money-lab': money,
-  analytics: { ...infra, area: 'Analytics' }, settings: infra,
+  analytics: { ...infra, area: 'Analytics' }, integrations: { ...infra, area: 'Central de integrações' }, settings: infra,
   vault: { ...infra, name: 'Vault District', area: 'Identidades · ainda vazio' },
 }

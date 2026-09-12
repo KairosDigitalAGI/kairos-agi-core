@@ -7,6 +7,10 @@
 
 `freeTierCatalog.ts` descreve cotas verificadas, renovação, capacidade de clipes de oito segundos e marca d'água. O roteador futuro usa um vínculo OAuth por provedor, registra saldo real e pausa no esgotamento; não alterna contas para evitar limites. `distribution.ts` também cobre Instagram e X. Como o X API cobra por escrita, a estratégia gratuita exporta o pacote para publicação manual aprovada.
 
+## Integration Control Plane
+
+`api/integrations/status.mjs` é a primeira função server-side do Core. Ela informa se a configuração necessária existe sem expor valores. `IntegrationsPage` consome esse contrato e mantém `connected: false` até existir prova do OAuth persistida no servidor. A Missão 006 implementará o token store com Supabase, criptografia e RLS antes dos callbacks OAuth. O X usa exportação e publicação manual no orçamento zero.
+
 Esta arquitetura implementa progressivamente a constituição em `KAIROS_AGI_BLUEPRINT_V1.md`. O Blueprint define os domínios; este documento registra como eles serão separados e integrados.
 
 ## Camadas

@@ -11,6 +11,7 @@ export type ModuleKey =
   | 'hunter'
   | 'money-lab'
   | 'analytics'
+  | 'integrations'
   | 'vault'
   | 'settings'
 

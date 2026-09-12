@@ -1,6 +1,6 @@
 import {
   BarChart3, Bot, Camera, CircleDollarSign, Clapperboard, Contact, Database,
-  Globe2, LayoutDashboard, ListChecks, Search, Settings, Users,
+  Globe2, LayoutDashboard, ListChecks, PlugZap, Search, Settings, Users,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import type { ModuleKey } from '../types'
@@ -23,6 +23,7 @@ const navigation: Array<{ id: ModuleKey; label: string; icon: LucideIcon }> = [
   { id: 'hunter', label: 'Hunter', icon: Search },
   { id: 'money-lab', label: 'Money Lab', icon: CircleDollarSign },
   { id: 'analytics', label: 'Analytics', icon: BarChart3 },
+  { id: 'integrations', label: 'Integrações', icon: PlugZap },
   { id: 'vault', label: 'Vault', icon: Database },
   { id: 'settings', label: 'Configurações', icon: Settings },
 ]

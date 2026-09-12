@@ -13,13 +13,14 @@ import { InstagramPage } from './engines/instagram/InstagramPage'
 import { ClonePage } from './engines/clone/ClonePage'
 import { VideoPage } from './engines/video/VideoPage'
 import { ModulePlaceholder } from './features/shared/ModulePlaceholder'
+import { IntegrationsPage } from './features/integrations/IntegrationsPage'
 
 const DepartmentBackdrop = lazy(() => import('./world/DepartmentBackdrop').then(module => ({ default: module.DepartmentBackdrop })))
 const WorldPage = lazy(() => import('./world/WorldPage').then((module) => ({ default: module.WorldPage })))
 
 const titles: Record<ModuleKey, string> = {
   agents: 'Agentes e departamentos', world: 'Kairos World', dashboard: 'Visão geral', missions: 'Missões', clients: 'Clientes', crm: 'CRM',
-  instagram: 'Instagram', clone: 'Clone Engine', video: 'Video Engine', hunter: 'Hunter', 'money-lab': 'Money Lab', analytics: 'Analytics', vault: 'Vault', settings: 'Configurações',
+  instagram: 'Instagram', clone: 'Clone Engine', video: 'Video Engine', hunter: 'Hunter', 'money-lab': 'Money Lab', analytics: 'Analytics', integrations: 'Integrações', vault: 'Vault', settings: 'Configurações',
 }
 
 export function App() {
@@ -44,6 +45,7 @@ export function App() {
       case 'hunter': return <ModulePlaceholder title="Hunter" description="Descoberta, qualificação e encaminhamento de oportunidades para o CRM." icon={Search} />
       case 'money-lab': return <ModulePlaceholder title="Money Lab" description="Pesquisa de oportunidades de receita com aprovação obrigatória do Founder." icon={CircleDollarSign} />
       case 'analytics': return <ModulePlaceholder title="Analytics" description="Indicadores de receita, operação, audiência e desempenho dos agentes." icon={BarChart3} />
+      case 'integrations': return <IntegrationsPage />
       case 'vault': return <ModulePlaceholder title="Vault" description="Centro futuro de identidades e referências seguras para credenciais." icon={Database} vault />
       case 'settings': return <ModulePlaceholder title="Configurações" description="Preferências da Founder Edition, limites e políticas operacionais." icon={Settings} />
     }
