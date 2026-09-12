@@ -6,6 +6,7 @@ import { MAX_INPUT_BYTES, safeOutputName, validateRenderPlan } from './renderPla
 import { VideoGenerator } from './VideoGenerator'
 import { VideoGallery } from './VideoGallery'
 import { saveVideo } from './videoLibrary'
+import { ProductionPlanner } from './ProductionPlanner'
 import './video.css'
 
 const HISTORY_KEY = 'kairos.video.jobs.v1'
@@ -36,6 +37,7 @@ export function VideoPage() {
   const [notice, setNotice] = useState('')
   const [history, setHistory] = useState(loadHistory)
   const [libraryRevision, setLibraryRevision] = useState(0)
+  const [generationSeed, setGenerationSeed] = useState<{ title: string; script: string; revision: number }>()
   const abortRef = useRef<AbortController | null>(null)
 
   useEffect(() => () => abortRef.current?.abort(), [])
@@ -86,7 +88,10 @@ export function VideoPage() {
 
   return <div className="page-stack video-engine">
     <section className="glass-panel video-mode-hero"><div><span className="eyebrow">MISSÃO 004 · VIDEO ENGINE</span><h2>Criação e pós-produção local</h2><p>Comece por um roteiro ou refine um arquivo real. Os dois fluxos funcionam no navegador.</p></div><div className="video-mode-tabs" role="tablist"><button className={mode === 'generate' ? 'active' : ''} onClick={() => setMode('generate')}><Sparkles size={17} />Criar do zero</button><button className={mode === 'edit' ? 'active' : ''} onClick={() => setMode('edit')}><Scissors size={17} />Editar arquivo</button></div></section>
-    {mode === 'generate' ? <VideoGenerator onJob={saveJob} onStored={() => setLibraryRevision(current => current + 1)} /> : <>
+    {mode === 'generate' ? <>
+      <ProductionPlanner onUseScript={(title, script) => setGenerationSeed({ title, script, revision: Date.now() })} />
+      <VideoGenerator seed={generationSeed} onJob={saveJob} onStored={() => setLibraryRevision(current => current + 1)} />
+    </> : <>
     <section className="video-workspace glass-panel">
       <div className="video-heading"><span className="eyebrow">MISSÃO 004 · PROCESSAMENTO LOCAL</span><h2>Video Engine</h2><p>Selecione um vídeo real, escolha o enquadramento e gere um WebM sem enviar o arquivo para servidores.</p></div>
       <label className="video-drop"><Upload size={26} /><strong>{status === 'loading' ? 'Lendo vídeo…' : videoFile ? videoFile.name : 'Selecionar vídeo'}</strong><span>MP4, MOV, WebM ou outro formato aceito pelo navegador · até 500 MB</span><input type="file" accept="video/*" disabled={status !== 'idle'} onChange={event => void selectVideo(event.target.files?.[0] || null)} /></label>

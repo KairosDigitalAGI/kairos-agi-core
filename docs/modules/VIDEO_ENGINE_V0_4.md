@@ -1,5 +1,16 @@
 # Video Engine — Missão 004
 
+## Planejamento generativo e distribuição
+Em 11/09/2026 a estação ganhou um planejador de criativos baseado apenas nos dados preenchidos pelo Founder. Oferta, público, promessa, prova e chamada para ação compõem um roteiro determinístico que pode alimentar o render local gratuito. O painel não afirma geração externa quando nenhuma API foi chamada.
+
+O catálogo inicial propõe a Runway como gateway de vídeo e imagem porque sua API pública reúne modelos Runway, Veo e geradores de imagem. Os preços são versionados com data e fonte oficial. O orçamento é calculado antes da geração e mostrado em USD; câmbio, impostos e tentativas descartadas ficam fora da estimativa. Todas as APIs pagas permanecem desconectadas, portanto nenhum gasto pode ocorrer.
+
+Modelos catalogados: Kairos Motion local, Runway Gen-4 Turbo, Runway Gen-4.5, Seedance 2.5 em 480p, Veo 3.1 Fast com áudio, Gemini 2.5 Flash Image e GPT Image 2.5 em alta qualidade 1K/2K. Higgsfield permanece uma opção manual futura porque a documentação pública consultada trabalha com planos e créditos e ainda não definiu neste Core um contrato de API verificável.
+
+YouTube e TikTok aparecem como destinos desconectados. A futura implementação será server-side: OAuth, armazenamento seguro de tokens, upload, consulta de status, auditoria e confirmação explícita antes de publicar. No TikTok, o produto deve respeitar as opções de privacidade retornadas pela API e suas regras de marca d'água.
+
+Fontes oficiais: [Runway API Pricing](https://docs.dev.runwayml.com/guides/pricing/), [YouTube Data API](https://developers.google.com/youtube/v3/getting-started), [YouTube upload](https://developers.google.com/youtube/v3/guides/uploading_a_video), [TikTok Content Posting API](https://developers.tiktok.com/products/content-posting-api) e [TikTok Content Sharing Guidelines](https://developers.tiktok.com/docs/en/content-sharing-guidelines).
+
 ## O que funciona
 O fluxo principal cria um vídeo do zero a partir de título e roteiro. Cada frase ou linha vira uma cena animada com tipografia, fundo procedural, partículas, transição, identidade de cor, marca e trilha ambiente sintetizada opcional. O storyboard aparece antes da geração. Não é necessário enviar um vídeo de entrada.
 

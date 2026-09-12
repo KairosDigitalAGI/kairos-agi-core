@@ -1,5 +1,10 @@
 # Evolução do Blueprint
 
+## 2026-09-11 — Video Engine profissional
+Video AI passa a planejar cada criativo a partir de oferta, público, promessa verificável, prova e chamada para ação. O pipeline oficial é: briefing, roteiro, frames de referência, cenas generativas, composição, QA, galeria, aprovação e distribuição. Cada execução externa deverá registrar provedor, modelo, estimativa, custo real, artefatos e aprovação.
+
+A estratégia inicial reduz integrações usando a API da Runway como gateway de múltiplos modelos. O render local continua como alternativa de custo zero. YouTube e TikTok são destinos planejados e exigem OAuth, backend e consentimento antes do envio. Monetização é objetivo de negócio, não dado presumido: receita só entra no Core quando vier de fonte conectada e auditável.
+
 Este registro preserva a evolução da constituição `KAIROS_AGI_BLUEPRINT_V1.md`. O texto fundador permanece versionado; alterações de arquitetura são aditivas, rastreáveis e ligadas a decisões técnicas.
 
 ## 2026-09-10 — Adoção do Blueprint V1

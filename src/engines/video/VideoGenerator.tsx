@@ -12,11 +12,11 @@ const initialPlan: VideoGenerationPlan = {
   watermark: '@_kairosdigital_', soundtrack: true,
 }
 
-interface Props { onJob: (job: VideoJob) => void; onStored: () => void }
+interface Props { onJob: (job: VideoJob) => void; onStored: () => void; seed?: { title: string; script: string; revision: number } }
 
 function fileSize(bytes: number) { return new Intl.NumberFormat('pt-BR', { style: 'unit', unit: 'megabyte', maximumFractionDigits: 1 }).format(bytes / 1024 / 1024) }
 
-export function VideoGenerator({ onJob, onStored }: Props) {
+export function VideoGenerator({ onJob, onStored, seed }: Props) {
   const [plan, setPlan] = useState(initialPlan)
   const [status, setStatus] = useState<'idle' | 'rendering'>('idle')
   const [progress, setProgress] = useState(0)
@@ -28,6 +28,9 @@ export function VideoGenerator({ onJob, onStored }: Props) {
 
   useEffect(() => () => abortRef.current?.abort(), [])
   useEffect(() => () => { if (output?.url) URL.revokeObjectURL(output.url) }, [output])
+  useEffect(() => {
+    if (seed) setPlan(current => ({ ...current, title: seed.title, script: seed.script }))
+  }, [seed])
 
   const generate = async () => {
     const issue = validateGenerationPlan(plan)

@@ -1,5 +1,10 @@
 # Arquitetura — proposta inicial
 
+## Evolução da Video Engine
+`providerCatalog.ts` mantém capacidades, unidade de cobrança, preço em USD, fonte e data de verificação. `ProductionPlanner` transforma somente os campos informados pelo Founder em roteiro e calcula o orçamento antes de gerar. O provedor local é executável; todos os modelos pagos ficam desconectados até existir adaptador server-side, segredo no Vault e limite de orçamento.
+
+`distribution.ts` registra YouTube e TikTok como destinos desconectados. A publicação futura passa por backend autenticado, armazenamento privado de tokens, aprovação por ativo e consulta do status remoto. Nenhum segredo, OAuth ou chamada de publicação vive no frontend público.
+
 Esta arquitetura implementa progressivamente a constituição em `KAIROS_AGI_BLUEPRINT_V1.md`. O Blueprint define os domínios; este documento registra como eles serão separados e integrados.
 
 ## Camadas

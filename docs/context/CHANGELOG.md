@@ -1,5 +1,12 @@
 # Changelog
 
+## Evolução da Video Engine — pipeline generativo e custo
+- Briefing real de oferta, público, promessa, prova e CTA com roteiro derivado apenas do que o Founder informar.
+- Catálogo versionado de modelos de vídeo e imagem com preços oficiais em USD e orçamento antes da geração.
+- Runway adotada como gateway proposto para Gen-4, Veo, Gemini Image e GPT Image; APIs seguem desconectadas.
+- YouTube e TikTok registrados como destinos com custo de API zero, requisitos reais e estado desconectado.
+- Nenhuma conta foi conectada, mídia publicada ou despesa gerada.
+
 ## Missão 002 — Instagram editorial e Memory Sync V1
 - Adotados contexto, fila de missões, protocolo AGENTS.md e índice modular do Blueprint.
 - Banco de ideias com tema, categoria, prioridade, data e materiais editáveis.

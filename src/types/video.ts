@@ -1,6 +1,50 @@
 export type VideoAspect = 'original' | '9:16' | '1:1' | '16:9'
 export type VideoQuality = 'economy' | 'balanced' | 'high'
 export type VideoGenerationStyle = 'kairos' | 'minimal' | 'energy'
+export type VideoProviderKind = 'local' | 'runway'
+export type VideoCostUnit = 'second' | 'image'
+export type DistributionChannel = 'youtube' | 'tiktok'
+
+export interface GenerativeModel {
+  id: string
+  provider: VideoProviderKind
+  label: string
+  media: 'video' | 'image'
+  capability: string
+  usdPerUnit: number
+  unit: VideoCostUnit
+  connected: boolean
+  sourceUrl: string
+  verifiedAt: string
+}
+
+export interface CampaignBrief {
+  product: string
+  audience: string
+  promise: string
+  proof: string
+  callToAction: string
+  durationSeconds: number
+  videoModelId: string
+  imageModelId: string
+  imageCount: number
+}
+
+export interface CampaignEstimate {
+  videoUsd: number
+  imagesUsd: number
+  totalUsd: number
+  status: 'free' | 'estimate' | 'unavailable'
+}
+
+export interface DistributionConnection {
+  channel: DistributionChannel
+  label: string
+  connected: boolean
+  publishCostUsd: number
+  requirement: string
+  sourceUrl: string
+}
 
 export interface VideoRenderPlan {
   title: string

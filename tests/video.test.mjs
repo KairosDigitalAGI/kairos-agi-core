@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { MAX_INPUT_BYTES, MAX_RENDER_SECONDS, outputDimensions, safeOutputName, selectRecorderMime, validateRenderPlan } from '../src/engines/video/renderPlan.ts'
 import { compileStoryboard, generationDuration, validateGenerationPlan } from '../src/engines/video/storyboard.ts'
+import { buildConversionScript, estimateCampaign } from '../src/engines/video/providerCatalog.ts'
 
 const plan = { title: 'Reel Kairos', startSeconds: 3, endSeconds: 33, aspect: '9:16', quality: 'balanced', watermark: '@_kairosdigital_', includeAudio: true, musicVolume: .15 }
 
@@ -43,4 +44,19 @@ test('generation rejects empty, oversized and unsafe timing plans', () => {
   assert.match(validateGenerationPlan({ ...generation, script: 'curto' }), /roteiro/)
   assert.match(validateGenerationPlan({ ...generation, secondsPerScene: 3 }), /4 e 8/)
   assert.equal(compileStoryboard({ ...generation, script: '' }).length, 0)
+})
+
+test('campaign estimator exposes zero-cost local mode and deterministic paid estimates', () => {
+  const base = { product: 'Kairos AGI', audience: 'donos de empresas', promise: 'organiza a operação', proof: 'painel único', callToAction: 'Fale com a Kairos', durationSeconds: 30, videoModelId: 'browser-local', imageModelId: 'runway-gemini-2.5-flash', imageCount: 6 }
+  assert.deepEqual(estimateCampaign(base), { videoUsd: 0, imagesUsd: .3, totalUsd: .3, status: 'estimate' })
+  assert.deepEqual(estimateCampaign({ ...base, imageCount: 0 }), { videoUsd: 0, imagesUsd: 0, totalUsd: 0, status: 'free' })
+  assert.deepEqual(estimateCampaign({ ...base, videoModelId: 'runway-gen4-turbo' }), { videoUsd: 1.5, imagesUsd: .3, totalUsd: 1.8, status: 'estimate' })
+})
+
+test('conversion script only uses real brief fields supplied by the founder', () => {
+  const brief = { product: 'Kairos AGI', audience: 'donos de empresas', promise: 'organiza a operação', proof: 'painel único', callToAction: 'Fale com a Kairos', durationSeconds: 30, videoModelId: 'browser-local', imageModelId: 'runway-gemini-2.5-flash', imageCount: 6 }
+  const script = buildConversionScript(brief)
+  assert.match(script, /donos de empresas/)
+  assert.match(script, /painel único/)
+  assert.equal(buildConversionScript({ ...brief, product: '' }), '')
 })
