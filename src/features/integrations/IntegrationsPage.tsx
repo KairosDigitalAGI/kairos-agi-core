@@ -34,7 +34,7 @@ export function IntegrationsPage() {
     {error && <p className="integration-alert" role="alert">{error}</p>}
     <div className="integration-summary">
       <article className="glass-panel"><ShieldCheck size={19} /><span>Armazenamento seguro</span><strong>{status.tokenStoreConfigured ? 'Configurado' : 'Pendente'}</strong><small>Supabase + chave de criptografia no servidor</small></article>
-      <article className="glass-panel"><KeyRound size={19} /><span>OAuth pronto</span><strong>{status.providers.filter(item => item.oauthConfigured).length}/{status.providers.filter(item => item.mode === 'oauth').length}</strong><small>Credenciais detectadas sem revelar valores</small></article>
+      <article className="glass-panel"><KeyRound size={19} /><span>OAuth pronto</span><strong>{status.providers.filter(item => item.mode === 'oauth' && item.oauthConfigured).length}/{status.providers.filter(item => item.mode === 'oauth').length}</strong><small>Credenciais detectadas sem revelar valores</small></article>
       <article className="glass-panel"><CheckCircle2 size={19} /><span>Contas conectadas</span><strong>{status.providers.filter(item => item.connected).length}</strong><small>Nenhuma conta é inferida pelo login do navegador</small></article>
     </div>
     <div className="integration-grid">{integrationCatalog.map(definition => {
