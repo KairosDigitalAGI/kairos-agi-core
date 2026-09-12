@@ -16,6 +16,8 @@ O modo curto usa oito segundos e duas cenas por padrão. Google Flow informa 50 
 
 O roteador não alterna identidades nem mantém banco de senhas para contornar limites. Cada provedor conectado terá uma única identidade autorizada, saldo real, data de renovação e estado pausado quando a cota acabar.
 
+A galeria aceita um texto real informado pelo Founder para cada vídeo e gera um manifesto JSON de distribuição para o X. O botão Abrir X preenche apenas o texto no compositor oficial; o vídeo continua sendo anexado e a publicação confirmada manualmente. O manifesto nasce com `published: false` e não é prova de publicação.
+
 Instagram exige conta profissional e permissão de publicação. X cobra atualmente US$ 0,015 por criação de conteúdo sem URL; portanto, postagem automática no X não é custo zero. O fluxo gratuito para X é exportar e publicar manualmente após aprovação. Fontes: [Google Flow credits](https://support.google.com/flow/answer/16526234), [Runway Free](https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details), [Instagram API](https://developers.facebook.com/docs/instagram-platform/instagram-api-with-instagram-login/content-publishing) e [X API Pricing](https://docs.x.com/x-api/getting-started/pricing).
 
 ## O que funciona

@@ -12,6 +12,8 @@ O documento [KAIROS_AGI_BLUEPRINT_V1.md](KAIROS_AGI_BLUEPRINT_V1.md) é a consti
 
 O modo curto usa oito segundos por padrão e condensa o roteiro em duas cenas. O roteador gratuito registra Kairos Motion local, Google Flow, Runway Free e Higgsfield Free sem alternar contas para contornar limites. Instagram, YouTube, TikTok e X aparecem como destinos; o X API é pago e o caminho sem custo é publicação manual aprovada.
 
+Na galeria, cada vídeo real pode receber um texto para X. A aplicação baixa um manifesto de distribuição com `published: false` e abre o compositor oficial; anexo e envio continuam sob revisão do Founder.
+
 **Integration Control Plane:** a página Integrações consulta uma função da Vercel e mostra somente o estado real das configurações Meta, Google, X e do futuro token store. Valores secretos nunca chegam ao frontend. O cronograma operacional de sete dias está visível no próprio painel.
 
 Sem dados fictícios na interface. Receita, clientes, XP, Coins e métricas do Instagram permanecem indisponíveis até conexão com fontes reais. O perfil informado pelo Founder é [_kairosdigital_](https://www.instagram.com/_kairosdigital_/); não está autenticado na API.

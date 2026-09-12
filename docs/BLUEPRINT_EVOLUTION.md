@@ -9,6 +9,8 @@ Adendo gratuito: o formato padrão passa a oito segundos. Cotas legítimas podem
 
 O Integration Control Plane introduz a primeira função server-side de diagnóstico. Estado de configuração e conexão passam a ser contratos distintos: presença de credenciais não significa conta conectada. Meta e Google exigem OAuth e token store; X permanece manual no orçamento zero. Um roteiro de sete dias ordena fundação segura, publicação, métricas e operação acompanhada.
 
+A distribuição manual do X nasce na galeria: texto validado, vídeo real e manifesto JSON compõem o pacote, sempre com `published: false`. Abrir o compositor não equivale a publicar e o envio permanece uma decisão explícita do Founder.
+
 Este registro preserva a evolução da constituição `KAIROS_AGI_BLUEPRINT_V1.md`. O texto fundador permanece versionado; alterações de arquitetura são aditivas, rastreáveis e ligadas a decisões técnicas.
 
 ## 2026-09-10 — Adoção do Blueprint V1

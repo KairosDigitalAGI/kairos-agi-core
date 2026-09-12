@@ -5,6 +5,7 @@
 - Endpoint Vercel informa presença de configuração Meta, Google e token store sem expor segredos.
 - Instagram e YouTube permanecem desconectados até OAuth e Supabase; X permanece manual para custo zero.
 - Cronograma de sete dias registrado no produto e na documentação.
+- Galeria de vídeos passa a preparar manifesto e texto para publicação manual gratuita no X, sem marcar o conteúdo como publicado.
 
 ## Evolução da Video Engine — pipeline generativo e custo
 - Briefing real de oferta, público, promessa, prova e CTA com roteiro derivado apenas do que o Founder informar.

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 import { MAX_INPUT_BYTES, MAX_RENDER_SECONDS, outputDimensions, safeOutputName, selectRecorderMime, validateRenderPlan } from '../src/engines/video/renderPlan.ts'
 import { compileStoryboard, generationDuration, validateGenerationPlan } from '../src/engines/video/storyboard.ts'
 import { buildConversionScript, estimateCampaign } from '../src/engines/video/providerCatalog.ts'
+import { distributionManifest, validateXCaption, xComposeUrl } from '../src/engines/video/distributionPackage.ts'
 
 const plan = { title: 'Reel Kairos', startSeconds: 3, endSeconds: 33, aspect: '9:16', quality: 'balanced', watermark: '@_kairosdigital_', includeAudio: true, musicVolume: .15 }
 
@@ -44,6 +45,16 @@ test('generation rejects empty, oversized and unsafe timing plans', () => {
   assert.match(validateGenerationPlan({ ...generation, script: 'curto' }), /roteiro/)
   assert.match(validateGenerationPlan({ ...generation, secondsPerScene: 3 }), /4 e 8/)
   assert.equal(compileStoryboard({ ...generation, script: '' }).length, 0)
+})
+
+test('manual X package uses a real stored video and never marks it published', () => {
+  const video = { id: 'v1', name: 'kairos.webm', createdAt: '2026-09-11T12:00:00Z', durationSeconds: 8, width: 720, height: 1280, mimeType: 'video/webm', bytes: 1200, kind: 'generated', blob: new Blob() }
+  assert.equal(validateXCaption(''), 'Escreva o texto que acompanhará o vídeo.')
+  assert.match(xComposeUrl('Kairos Digital: produção inteligente.'), /^https:\/\/x\.com\/intent\/post\?text=/)
+  const manifest = JSON.parse(distributionManifest(video, 'Kairos Digital: produção inteligente.'))
+  assert.equal(manifest.video.name, 'kairos.webm')
+  assert.equal(manifest.published, false)
+  assert.equal(manifest.mode, 'manual-free')
 })
 
 test('campaign estimator exposes zero-cost local mode and deterministic paid estimates', () => {
