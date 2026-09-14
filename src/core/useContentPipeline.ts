@@ -118,6 +118,71 @@ export function useContentPipeline() {
     [header, refresh],
   )
 
+  // O Founder aciona a geração do vídeo de UM job em etapa "imagem" (clique
+  // explícito, nunca em lote). tier="free" tenta Veo → fallback Kling v1.6;
+  // tier="paid" usa Kling v2.1 Master e exige job.aprovado (mesmo gate da
+  // imagem). Reaproveita generatingJobId/generateError. Ver
+  // api/_content.js#generateVideo.
+  const generateVideo = useCallback(
+    async (jobId: string, tier: 'free' | 'paid' = 'free') => {
+      if (!header) return false
+      setGeneratingJobId(jobId)
+      setGenerateError(null)
+      try {
+        const response = await fetch('/api/content-jobs/generate-video', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', authorization: header },
+          body: JSON.stringify({ jobId, tier }),
+        })
+        if (!response.ok) {
+          const body = await response.json().catch(() => ({}))
+          setGenerateError(body.erro || `/api/content-jobs/generate-video respondeu ${response.status}.`)
+          return false
+        }
+        await refresh()
+        return true
+      } catch {
+        setGenerateError('Não foi possível gerar o vídeo neste ambiente. Nenhum conteúdo foi presumido criado.')
+        return false
+      } finally {
+        setGeneratingJobId(null)
+      }
+    },
+    [header, refresh],
+  )
+
+  // O Founder aciona a publicação de UM job em etapa "video" no YouTube já
+  // conectado (clique explícito, ação irreversível — sobe como privado).
+  // Reaproveita generatingJobId/generateError, mesmo espírito das outras
+  // ações de pipeline. Ver api/_content.js#postToYoutube.
+  const postToYoutube = useCallback(
+    async (jobId: string) => {
+      if (!header) return false
+      setGeneratingJobId(jobId)
+      setGenerateError(null)
+      try {
+        const response = await fetch('/api/content-jobs/post-youtube', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', authorization: header },
+          body: JSON.stringify({ jobId }),
+        })
+        if (!response.ok) {
+          const body = await response.json().catch(() => ({}))
+          setGenerateError(body.erro || `/api/content-jobs/post-youtube respondeu ${response.status}.`)
+          return false
+        }
+        await refresh()
+        return true
+      } catch {
+        setGenerateError('Não foi possível publicar no YouTube neste ambiente. Nenhuma publicação foi presumida feita.')
+        return false
+      } finally {
+        setGeneratingJobId(null)
+      }
+    },
+    [header, refresh],
+  )
+
   // Aprova o gasto de UM job antes de gerar conteúdo pago — passo separado
   // de "Gerar roteiro", exigido pelo próprio schema (aprovado:true).
   const approveJob = useCallback(
@@ -156,6 +221,8 @@ export function useContentPipeline() {
     submitError,
     generateScript,
     generateImage,
+    generateVideo,
+    postToYoutube,
     generatingJobId,
     generateError,
     approveJob,

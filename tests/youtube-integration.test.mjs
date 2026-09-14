@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { encrypt, decrypt, signState, verifyState } from '../api/_crypto.js'
-import { buildConnectUrl, computeYoutubeStatus, completeConnection, disconnectYoutube } from '../api/_youtube.js'
+import { buildConnectUrl, computeYoutubeStatus, completeConnection, disconnectYoutube, getValidAccessToken, uploadVideo } from '../api/_youtube.js'
 
 const KEYS = ['KAIROS_TOKEN_ENCRYPTION_KEY', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'GOOGLE_OAUTH_REDIRECT_URI', 'SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY']
 
@@ -122,4 +122,116 @@ test('disconnectYoutube fails closed (503) without Supabase configured', async (
   await withEnv({}, async () => {
     await assert.rejects(disconnectYoutube(), /SUPABASE_URL/)
   })
+})
+
+// --- getValidAccessToken: Fase 8, decide entre devolver o token salvo ou renovar ---
+
+test('getValidAccessToken fails closed (503) without Supabase configured', async () => {
+  await withEnv({}, async () => {
+    await assert.rejects(getValidAccessToken(), /SUPABASE_URL/)
+  })
+})
+
+test('getValidAccessToken reports 404 when no channel is connected', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async () => new Response(JSON.stringify([]), { status: 200 })
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
+      await assert.rejects(getValidAccessToken(), /Nenhum canal/)
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
+test('getValidAccessToken returns the saved token directly when it has not expired yet, without calling Google', async () => {
+  const originalFetch = globalThis.fetch
+  await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', KAIROS_TOKEN_ENCRYPTION_KEY: 'chave-de-teste-bem-longa' }, async () => {
+    const ciphertext = encrypt('token-valido')
+    globalThis.fetch = async (url) => {
+      if (String(url).includes('oauth2.googleapis.com')) throw new Error('não deveria renovar um token ainda válido')
+      return new Response(JSON.stringify([{ access_token_enc: ciphertext, refresh_token_enc: null, expires_at: new Date(Date.now() + 3600_000).toISOString() }]), { status: 200 })
+    }
+    const token = await getValidAccessToken()
+    assert.equal(token, 'token-valido')
+  })
+  globalThis.fetch = originalFetch
+})
+
+test('getValidAccessToken fails closed (401) when the token expired and there is no refresh_token saved', async () => {
+  const originalFetch = globalThis.fetch
+  await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', KAIROS_TOKEN_ENCRYPTION_KEY: 'chave-de-teste-bem-longa' }, async () => {
+    const ciphertext = encrypt('token-vencido')
+    globalThis.fetch = async () => new Response(JSON.stringify([{ access_token_enc: ciphertext, refresh_token_enc: null, expires_at: new Date(Date.now() - 10_000).toISOString() }]), { status: 200 })
+    await assert.rejects(getValidAccessToken(), /reconecte o canal/)
+  })
+  globalThis.fetch = originalFetch
+})
+
+test('getValidAccessToken refreshes an expired token via refresh_token and persists the new access_token_enc/expires_at', async () => {
+  const originalFetch = globalThis.fetch
+  await withEnv(
+    { SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', KAIROS_TOKEN_ENCRYPTION_KEY: 'chave-de-teste-bem-longa', GOOGLE_CLIENT_ID: 'id', GOOGLE_CLIENT_SECRET: 'segredo', GOOGLE_OAUTH_REDIRECT_URI: 'https://kairos-agi-core.vercel.app/api/integrations/youtube/callback' },
+    async () => {
+      const oldAccess = encrypt('token-vencido')
+      const refresh = encrypt('refresh-token-real')
+      globalThis.fetch = async (url, opts = {}) => {
+        const href = String(url)
+        if (href.includes('oauth2.googleapis.com/token')) {
+          const body = new URLSearchParams(opts.body)
+          assert.equal(body.get('refresh_token'), 'refresh-token-real')
+          assert.equal(body.get('grant_type'), 'refresh_token')
+          return new Response(JSON.stringify({ access_token: 'token-novo', expires_in: 3600 }), { status: 200 })
+        }
+        if (href.includes('integracoes_tokens') && (!opts.method || opts.method === 'GET')) {
+          return new Response(JSON.stringify([{ access_token_enc: oldAccess, refresh_token_enc: refresh, expires_at: new Date(Date.now() - 10_000).toISOString() }]), { status: 200 })
+        }
+        if (href.includes('integracoes_tokens') && opts.method === 'POST') {
+          const body = JSON.parse(opts.body)
+          assert.equal(decrypt(body.access_token_enc), 'token-novo')
+          assert.ok(body.expires_at)
+          return new Response(JSON.stringify([{ provider: 'youtube', ...body }]), { status: 200 })
+        }
+        throw new Error(`fetch inesperado neste teste: ${opts.method || 'GET'} ${href}`)
+      }
+      const token = await getValidAccessToken()
+      assert.equal(token, 'token-novo')
+    },
+  )
+  globalThis.fetch = originalFetch
+})
+
+// --- uploadVideo: multipart real (metadata + binário), sem SDK ---
+
+test('uploadVideo requires accessToken and a non-empty videoBuffer before calling the network', async () => {
+  await assert.rejects(uploadVideo({ accessToken: '', videoBuffer: Buffer.from('x') }), /accessToken/)
+  await assert.rejects(uploadVideo({ accessToken: 'tok', videoBuffer: Buffer.alloc(0) }), /videoBuffer/)
+})
+
+test('uploadVideo sends a multipart/related body and returns the videoId on success', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async (url, opts = {}) => {
+    assert.equal(String(url), 'https://www.googleapis.com/upload/youtube/v3/videos?uploadType=multipart&part=snippet,status')
+    assert.equal(opts.headers.Authorization, 'Bearer tok-123')
+    assert.match(opts.headers['Content-Type'], /^multipart\/related; boundary=/)
+    assert.ok(Buffer.isBuffer(opts.body))
+    assert.ok(opts.body.includes('"privacyStatus":"private"'))
+    return new Response(JSON.stringify({ id: 'yt-video-id-1' }), { status: 200 })
+  }
+  try {
+    const out = await uploadVideo({ accessToken: 'tok-123', title: 'título', description: 'desc', tags: ['a', 'b'], videoBuffer: Buffer.from('binario-fake') })
+    assert.equal(out.videoId, 'yt-video-id-1')
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
+test('uploadVideo fails closed with the real Google error message on rejection', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async () => new Response(JSON.stringify({ error: { message: 'invalidVideoMetadata' } }), { status: 400 })
+  try {
+    await assert.rejects(uploadVideo({ accessToken: 'tok', videoBuffer: Buffer.from('x') }), /invalidVideoMetadata/)
+  } finally {
+    globalThis.fetch = originalFetch
+  }
 })

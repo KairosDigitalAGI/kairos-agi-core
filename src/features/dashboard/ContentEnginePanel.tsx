@@ -17,9 +17,14 @@ const ETAPA_LABEL: Record<ContentJobEtapa, string> = {
 }
 
 // Pipeline real do Content Engine (command.content_jobs). Registra ideias,
-// gera roteiro (ideia→roteiro) e imagem de capa (roteiro→imagem) com
-// provider pago, um clique do Founder por vez, sempre atrás de aprovação
-// explícita de gasto (job.aprovado) — vídeo/legenda ainda não têm motor.
+// gera roteiro (ideia→roteiro), imagem de capa (roteiro→imagem) e vídeo
+// (imagem→video) com provider pago, um clique do Founder por vez, sempre
+// atrás de aprovação explícita de gasto (job.aprovado) — legenda ainda não
+// tem motor. Vídeo tem dois botões: "grátis" (Veo → fallback Kling v1.6,
+// esse fallback também exige aprovado) e "premium" (Kling v2.1 Master).
+// "Postar no YouTube" reaproveita o mesmo aprovado:true como sinal de
+// publicação (etapa aprovacao ainda não tem motor — ver comentário em
+// api/_content.js#postToYoutube) e sobe o vídeo como privado no canal.
 export function ContentEnginePanel() {
   const {
     state,
@@ -28,6 +33,8 @@ export function ContentEnginePanel() {
     submitError,
     generateScript,
     generateImage,
+    generateVideo,
+    postToYoutube,
     generatingJobId,
     generateError,
     approveJob,
@@ -111,6 +118,36 @@ export function ContentEnginePanel() {
                       onClick={() => void generateImage(job.id)}
                     >
                       {generatingJobId === job.id ? 'Gerando…' : 'Gerar imagem'}
+                    </button>
+                  )}
+                  {job.etapa === 'imagem' && (
+                    <button
+                      type="button"
+                      className="content-engine-generate"
+                      disabled={generatingJobId === job.id}
+                      onClick={() => void generateVideo(job.id, 'free')}
+                    >
+                      {generatingJobId === job.id ? 'Gerando…' : 'Gerar vídeo (grátis)'}
+                    </button>
+                  )}
+                  {job.etapa === 'imagem' && job.aprovado && (
+                    <button
+                      type="button"
+                      className="content-engine-generate"
+                      disabled={generatingJobId === job.id}
+                      onClick={() => void generateVideo(job.id, 'paid')}
+                    >
+                      {generatingJobId === job.id ? 'Gerando…' : 'Gerar vídeo (premium)'}
+                    </button>
+                  )}
+                  {job.etapa === 'video' && job.aprovado && (
+                    <button
+                      type="button"
+                      className="content-engine-generate"
+                      disabled={generatingJobId === job.id}
+                      onClick={() => void postToYoutube(job.id)}
+                    >
+                      {generatingJobId === job.id ? 'Publicando…' : 'Postar no YouTube'}
                     </button>
                   )}
                 </li>

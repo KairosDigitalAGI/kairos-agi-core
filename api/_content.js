@@ -8,7 +8,10 @@
 import { readCommand, writeCommand, patchCommand, commandConfigured } from './_command.js'
 import { selectProvider } from './_providers/index.js'
 import * as openai from './_providers/openai.js'
+import * as veo from './_providers/veo.js'
+import * as fal from './_providers/fal.js'
 import { uploadToStorage, safePath } from './_storage.js'
+import { getValidAccessToken, uploadVideo } from './_youtube.js'
 
 const MIGRATION_HINT =
   'A migration supabase/migrations/0020_content_engine.sql (repo kairos-command) ainda não foi aplicada em produção — colar no SQL Editor do Supabase para ativar o Content Engine.'
@@ -297,6 +300,288 @@ export async function generateImage({ jobId }) {
     return { job: updatedJob || { ...job, etapa: 'imagem' }, asset }
   } catch (e) {
     const err = new Error(`${MIGRATION_HINT} (${e.message})`)
+    err.status = 503
+    throw err
+  }
+}
+
+/**
+ * Gera o vídeo de um job em etapa "imagem" e avança para "video".
+ *
+ * Dois motores, escolhidos por `tier`:
+ *  - tier="free" (padrão): Google Veo via AI Studio primeiro (GOOGLE_AI_KEY,
+ *    cota grátis de verdade) — só cai para o Kling v1.6 do fal.ai quando o
+ *    Veo devolve 429 (cota esgotada) ou não está configurado. O Kling do
+ *    fal.ai NÃO é gratuito de fato (fal.ai cobra por segundo de vídeo), então
+ *    esse fallback só roda com o MESMO gate de aprovação de gasto das outras
+ *    etapas pagas (content_jobs.aprovado:true) — rotular um provider de
+ *    "fallback free" no pedido não basta para pular a regra inviolável de
+ *    nunca gastar sem aprovação explícita do Founder.
+ *  - tier="paid": Kling v2.1 Master (qualidade premium, fal.ai), sempre
+ *    exige aprovado:true — idêntico ao gate de generateImage.
+ *
+ * O vídeo não é baixado para o Storage deste Core: a URL que o provider
+ * devolve é gravada direto em content_assets.storage_path (pode ser externa,
+ * ao contrário da imagem que sobe para o bucket content-assets). Fase 8
+ * (post no YouTube) busca o binário direto dessa URL — por isso ela deve ser
+ * consumida logo após gerada, antes de expirar.
+ */
+export async function generateVideo({ jobId, tier = 'free' }) {
+  if (typeof jobId !== 'string' || !jobId.trim()) {
+    const err = new Error('jobId é obrigatório')
+    err.status = 400
+    throw err
+  }
+  if (tier !== 'free' && tier !== 'paid') {
+    const err = new Error(`tier inválido: "${tier}" (use "free" ou "paid")`)
+    err.status = 400
+    throw err
+  }
+  if (!commandConfigured()) {
+    const err = new Error('SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.')
+    err.status = 503
+    throw err
+  }
+
+  let job
+  try {
+    const rows = await readCommand('content_jobs', `?select=id,titulo,etapa,briefing,aprovado&id=eq.${encodeURIComponent(jobId)}&limit=1`)
+    job = rows?.[0]
+  } catch (e) {
+    const err = new Error(`${MIGRATION_HINT} (${e.message})`)
+    err.status = 503
+    throw err
+  }
+  if (!job) {
+    const err = new Error(`content_job ${jobId} não encontrado.`)
+    err.status = 404
+    throw err
+  }
+  if (job.etapa !== 'imagem') {
+    const err = new Error(`content_job ${jobId} está em etapa "${job.etapa}", não "imagem" — gere a imagem antes, ou o vídeo já foi gerado.`)
+    err.status = 409
+    throw err
+  }
+  if (tier === 'paid' && !job.aprovado) {
+    const err = new Error(
+      `content_job ${jobId} ainda não foi aprovado para gasto (aprovado:false). O Founder precisa aprovar este job antes de gerar vídeo com o motor pago (Kling v2.1 Master).`,
+    )
+    err.status = 402
+    throw err
+  }
+
+  const briefing = job.briefing && typeof job.briefing === 'object' ? job.briefing : {}
+  const prompt = [
+    `Vídeo curto (Short/Reel) para a Kairos Digital, tema: ${job.titulo}.`,
+    briefing.publico && `Público-alvo: ${briefing.publico}.`,
+    briefing.promessa && `Promessa central: ${briefing.promessa}.`,
+    'Estilo profissional e moderno, sem texto sobreposto, sem logotipo inventado.',
+  ].filter(Boolean).join(' ')
+
+  let resultado
+  let provedor
+  let gratuito
+
+  if (tier === 'paid') {
+    if (!fal.hasCredentials()) {
+      const err = new Error('nenhum provider de vídeo pago configurado: defina FAL_KEY na Vercel (Kling v2.1 Master roda via fal.ai).')
+      err.status = 503
+      throw err
+    }
+    try {
+      resultado = await fal.generateVideo({ prompt, model: fal.MODEL_PAID })
+    } catch (e) {
+      const err = new Error(`provider fal: ${e.message}`)
+      err.status = e.status && e.status >= 400 && e.status < 600 ? e.status : 502
+      throw err
+    }
+    provedor = 'fal'
+    gratuito = false
+  } else {
+    let veoErro = null
+    if (veo.hasCredentials()) {
+      try {
+        resultado = await veo.generateVideo({ prompt })
+        provedor = 'veo'
+        gratuito = true
+      } catch (e) {
+        if (e.status !== 429) {
+          const err = new Error(`provider veo: ${e.message}`)
+          err.status = e.status && e.status >= 400 && e.status < 600 ? e.status : 502
+          throw err
+        }
+        veoErro = e
+      }
+    }
+    if (!resultado) {
+      // Veo não configurado ou com cota esgotada (429) — cai para o Kling
+      // v1.6 do fal.ai, que É geração paga de verdade apesar do nome
+      // "fallback free" na spec original: exige aprovado:true antes de gastar.
+      if (!job.aprovado) {
+        const err = new Error(
+          `content_job ${jobId} ainda não foi aprovado para gasto (aprovado:false). O Veo${veoErro ? ' esgotou a cota gratuita' : ' não está configurado (GOOGLE_AI_KEY ausente)'} e o fallback Kling v1.6 (fal.ai) é geração paga — o Founder precisa aprovar este job antes.`,
+        )
+        err.status = 402
+        throw err
+      }
+      if (!fal.hasCredentials()) {
+        const err = new Error(
+          `nenhum provider de vídeo disponível: GOOGLE_AI_KEY ${veoErro ? `esgotou a cota (${veoErro.message})` : 'não configurada'} e FAL_KEY (fallback Kling) também não configurada.`,
+        )
+        err.status = 503
+        throw err
+      }
+      try {
+        resultado = await fal.generateVideo({ prompt, model: fal.MODEL_FREE })
+      } catch (e) {
+        const err = new Error(`provider fal: ${e.message}`)
+        err.status = e.status && e.status >= 400 && e.status < 600 ? e.status : 502
+        throw err
+      }
+      provedor = 'fal'
+      gratuito = false
+    }
+  }
+
+  try {
+    const [asset] = await writeCommand('content_assets', {
+      job_id: job.id,
+      tipo: 'video',
+      storage_path: resultado.url,
+      provedor,
+      gratuito,
+      metadata: { model: resultado.model, tier, prompt },
+    })
+    const [updatedJob] = await patchCommand('content_jobs', `?id=eq.${encodeURIComponent(job.id)}`, { etapa: 'video' })
+    return { job: updatedJob || { ...job, etapa: 'video' }, asset }
+  } catch (e) {
+    const err = new Error(`${MIGRATION_HINT} (${e.message})`)
+    err.status = 503
+    throw err
+  }
+}
+
+/**
+ * Publica o vídeo de um job em etapa "video" no YouTube e avança para
+ * "publicado" — a ação mais irreversível do pipeline até aqui: sai do
+ * Supabase e vira um vídeo real no canal do Founder.
+ *
+ * Desvio deliberado e documentado do plano original da migration 0020: o
+ * comentário de content_jobs diz "etapa=aprovacao é o gate do Founder; nada
+ * publica antes disso" — mas as etapas legenda/aprovacao ainda não têm motor
+ * (ninguém avança um job até lá). Em vez de deixar Fase 8 morta esperando
+ * Fase 9/10, reaproveita o MESMO `content_jobs.aprovado` que já cobre todo o
+ * gasto pago do job (mesma convenção da Fase 5/6/7: aprovação é por job
+ * inteiro) como o sinal explícito do Founder para publicar também — postar
+ * exige etapa="video" E aprovado:true, nunca um vídeo não aprovado. Quando a
+ * etapa legenda/aprovacao ganhar motor de verdade, revisitar esta função
+ * para gatear por etapa="aprovacao" em vez de reusar `aprovado`.
+ *
+ * Sobe com privacyStatus="private" por padrão (ver api/_youtube.js#uploadVideo)
+ * — o vídeo existe no canal do Founder, mas só ele decide torná-lo público.
+ */
+export async function postToYoutube({ jobId, title, description, tags }) {
+  if (typeof jobId !== 'string' || !jobId.trim()) {
+    const err = new Error('jobId é obrigatório')
+    err.status = 400
+    throw err
+  }
+  if (!commandConfigured()) {
+    const err = new Error('SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.')
+    err.status = 503
+    throw err
+  }
+
+  let job
+  try {
+    const rows = await readCommand('content_jobs', `?select=id,titulo,etapa,briefing,aprovado&id=eq.${encodeURIComponent(jobId)}&limit=1`)
+    job = rows?.[0]
+  } catch (e) {
+    const err = new Error(`${MIGRATION_HINT} (${e.message})`)
+    err.status = 503
+    throw err
+  }
+  if (!job) {
+    const err = new Error(`content_job ${jobId} não encontrado.`)
+    err.status = 404
+    throw err
+  }
+  if (job.etapa !== 'video') {
+    const err = new Error(`content_job ${jobId} está em etapa "${job.etapa}", não "video" — gere o vídeo antes, ou o job já foi publicado.`)
+    err.status = 409
+    throw err
+  }
+  if (!job.aprovado) {
+    const err = new Error(
+      `content_job ${jobId} ainda não foi aprovado (aprovado:false). O Founder precisa aprovar este job antes de publicar no YouTube.`,
+    )
+    err.status = 402
+    throw err
+  }
+
+  let asset
+  try {
+    const rows = await readCommand(
+      'content_assets',
+      `?select=id,storage_path&job_id=eq.${encodeURIComponent(job.id)}&tipo=eq.video&order=criado_em.desc&limit=1`,
+    )
+    asset = rows?.[0]
+  } catch (e) {
+    const err = new Error(`${MIGRATION_HINT} (${e.message})`)
+    err.status = 503
+    throw err
+  }
+  if (!asset?.storage_path) {
+    const err = new Error(`content_job ${jobId} está em etapa "video" mas não tem nenhum content_asset de vídeo gravado — nada para publicar.`)
+    err.status = 409
+    throw err
+  }
+
+  let videoBuffer
+  try {
+    const videoRes = await fetch(asset.storage_path)
+    if (!videoRes.ok) throw new Error(`HTTP ${videoRes.status}`)
+    videoBuffer = Buffer.from(await videoRes.arrayBuffer())
+  } catch (e) {
+    const err = new Error(`falha ao baixar o vídeo gerado (${asset.storage_path}) para subir no YouTube: ${e.message}`)
+    err.status = 502
+    throw err
+  }
+
+  const accessToken = await getValidAccessToken()
+
+  let resultado
+  try {
+    resultado = await uploadVideo({
+      accessToken,
+      title: title || job.titulo,
+      description: description || (job.briefing?.promessa ? String(job.briefing.promessa) : ''),
+      tags,
+      videoBuffer,
+    })
+  } catch (e) {
+    const err = new Error(`youtube: ${e.message}`)
+    err.status = e.status && e.status >= 400 && e.status < 600 ? e.status : 502
+    throw err
+  }
+
+  // Neste ponto o vídeo JÁ está no YouTube (resultado.videoId existe) — uma
+  // falha daqui pra frente é só registro local desatualizado, nunca motivo
+  // pra tentar subir de novo (duplicaria o vídeo no canal). Se a escrita
+  // falhar, o erro cita o videoId real para o Founder conferir manualmente.
+  try {
+    await writeCommand('content_calendar', {
+      asset_id: asset.id,
+      canal: 'youtube',
+      publicar_em: new Date().toISOString(),
+      status: 'publicado',
+      publicado_em: new Date().toISOString(),
+      referencia_externa: resultado.videoId,
+    })
+    const [updatedJob] = await patchCommand('content_jobs', `?id=eq.${encodeURIComponent(job.id)}`, { etapa: 'publicado' })
+    return { job: updatedJob || { ...job, etapa: 'publicado' }, videoId: resultado.videoId }
+  } catch (e) {
+    const err = new Error(`${MIGRATION_HINT} (${e.message}) — o vídeo já foi publicado no YouTube com id ${resultado.videoId}, só o registro em content_calendar/content_jobs falhou.`)
     err.status = 503
     throw err
   }

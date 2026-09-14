@@ -162,6 +162,123 @@ export async function disconnectYoutube() {
   return { connected: false }
 }
 
+const UPLOAD_URL = 'https://www.googleapis.com/upload/youtube/v3/videos?uploadType=multipart&part=snippet,status'
+const REFRESH_SLACK_MS = 60 * 1000 // renova um pouco antes do vencimento real, nunca depois
+
+/**
+ * Devolve um access_token válido do canal conectado — decifra o que está
+ * salvo e, se estiver vencido (ou perto disso), troca pelo refresh_token
+ * antes de devolver. Nunca decide sozinho reconectar do zero: sem
+ * refresh_token salvo, falha fechado e pede pro Founder reconectar em
+ * Integrações (fluxo completo de consentimento, não algo automatizável).
+ */
+export async function getValidAccessToken() {
+  if (!commandConfigured()) {
+    const err = new Error('SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.')
+    err.status = 503
+    throw err
+  }
+  let row
+  try {
+    const rows = await readCommand('integracoes_tokens', '?select=access_token_enc,refresh_token_enc,expires_at&provider=eq.youtube&limit=1')
+    row = rows?.[0]
+  } catch (e) {
+    const err = new Error(`${MIGRATION_HINT} (${e.message})`)
+    err.status = 503
+    throw err
+  }
+  if (!row) {
+    const err = new Error('Nenhum canal do YouTube conectado. Conecte em Integrações antes de postar.')
+    err.status = 404
+    throw err
+  }
+
+  const expiresAt = row.expires_at ? new Date(row.expires_at).getTime() : 0
+  const expired = !expiresAt || Date.now() > expiresAt - REFRESH_SLACK_MS
+  if (!expired) return decrypt(row.access_token_enc)
+
+  if (!row.refresh_token_enc) {
+    const err = new Error('O token do YouTube venceu e não há refresh_token salvo — reconecte o canal em Integrações.')
+    err.status = 401
+    throw err
+  }
+  const { clientId, clientSecret } = oauthEnv()
+  const refreshToken = decrypt(row.refresh_token_enc)
+
+  const tokenRes = await fetch(TOKEN_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      refresh_token: refreshToken,
+      client_id: clientId,
+      client_secret: clientSecret,
+      grant_type: 'refresh_token',
+    }),
+  })
+  const tokenBody = await tokenRes.json().catch(() => ({}))
+  if (!tokenRes.ok) {
+    const err = new Error(`Google recusou a renovação do token: ${tokenBody.error_description || tokenBody.error || tokenRes.status} — reconecte o canal em Integrações.`)
+    err.status = 401
+    throw err
+  }
+
+  try {
+    await upsertCommand(
+      'integracoes_tokens',
+      {
+        provider: 'youtube',
+        access_token_enc: encrypt(tokenBody.access_token),
+        expires_at: tokenBody.expires_in ? new Date(Date.now() + tokenBody.expires_in * 1000).toISOString() : null,
+      },
+      'provider',
+    )
+  } catch (e) {
+    const err = new Error(`${MIGRATION_HINT} (${e.message})`)
+    err.status = 503
+    throw err
+  }
+
+  return tokenBody.access_token
+}
+
+/**
+ * Upload multipart real (metadados JSON + binário do vídeo) — sem SDK, corpo
+ * multipart/related montado à mão com um boundary aleatório, mesmo espírito
+ * zero-dependência do resto do Core. `privacyStatus` vem "private" por
+ * padrão de propósito: o agente publica no canal do Founder, mas não torna o
+ * vídeo público sozinho — ele decide isso manualmente no Studio antes de
+ * divulgar. Devolve o id do vídeo criado.
+ */
+export async function uploadVideo({ accessToken, title, description, tags, videoBuffer, mimeType = 'video/mp4', privacyStatus = 'private' }) {
+  if (!accessToken) throw new Error('uploadVideo: accessToken é obrigatório')
+  if (!Buffer.isBuffer(videoBuffer) || videoBuffer.length === 0) throw new Error('uploadVideo: videoBuffer vazio')
+
+  const boundary = `kairos-${Math.random().toString(16).slice(2)}${Date.now().toString(16)}`
+  const metadata = {
+    snippet: { title: String(title || '').slice(0, 100), description: description || '', tags: Array.isArray(tags) ? tags.slice(0, 30) : undefined },
+    status: { privacyStatus },
+  }
+  const preamble = `--${boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n${JSON.stringify(metadata)}\r\n--${boundary}\r\nContent-Type: ${mimeType}\r\n\r\n`
+  const closing = `\r\n--${boundary}--`
+  const body = Buffer.concat([Buffer.from(preamble, 'utf8'), videoBuffer, Buffer.from(closing, 'utf8')])
+
+  const res = await fetch(UPLOAD_URL, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': `multipart/related; boundary=${boundary}` },
+    body,
+  })
+  const text = await res.text()
+  let json
+  try { json = JSON.parse(text) } catch { json = null }
+  if (!res.ok || !json?.id) {
+    const msg = (json && json.error && json.error.message) || text.slice(0, 200) || `HTTP ${res.status}`
+    const err = new Error(`youtube upload: ${msg}`)
+    err.status = res.status && res.status >= 400 && res.status < 600 ? res.status : 502
+    throw err
+  }
+  return { videoId: json.id }
+}
+
 // Exportado só para os testes conseguirem decifrar o que `completeConnection`
 // gravaria, sem duplicar a lógica de cifra em lugar nenhum.
 export const _internals = { decrypt }
