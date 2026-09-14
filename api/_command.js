@@ -30,3 +30,28 @@ export async function readCommand(table, query = '') {
   }
   return res.json()
 }
+
+// Escrita server-side no schema `command`. Usada só onde o próprio Core é
+// dono do dado (ex.: content_jobs criado pelo Founder pelo Painel), nunca
+// para tabelas que outro produto (kairos-command) já governa. Sem
+// credencial configurada, lança — quem chama decide como reportar.
+export async function writeCommand(table, payload) {
+  if (!commandConfigured()) throw new Error('SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.')
+  const base = process.env.SUPABASE_URL.replace(/\/+$/, '')
+  const res = await fetch(`${base}/rest/v1/${table}`, {
+    method: 'POST',
+    headers: {
+      apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+      Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
+      'Content-Profile': 'command',
+      'Content-Type': 'application/json',
+      Prefer: 'return=representation',
+    },
+    body: JSON.stringify(payload),
+  })
+  if (!res.ok) {
+    const corpo = await res.text().catch(() => '')
+    throw new Error(`command.${table} respondeu ${res.status}: ${corpo.slice(0, 200)}`)
+  }
+  return res.json()
+}

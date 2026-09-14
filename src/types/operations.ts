@@ -51,3 +51,29 @@ export interface AgentChatResponse {
   model: string
   usage?: { inputTokens?: number; outputTokens?: number }
 }
+
+export type ContentJobEtapa =
+  | 'ideia'
+  | 'roteiro'
+  | 'imagem'
+  | 'video'
+  | 'legenda'
+  | 'aprovacao'
+  | 'publicado'
+  | 'rejeitado'
+
+export interface ContentJob {
+  id: string
+  titulo: string
+  etapa: ContentJobEtapa
+  aprovado: boolean
+  criado_em: string
+}
+
+export interface ContentPipelineResponse {
+  source: DataSource
+  checkedAt?: string
+  reason?: string
+  jobs: ContentJob[]
+  porEtapa: Partial<Record<ContentJobEtapa, number>>
+}

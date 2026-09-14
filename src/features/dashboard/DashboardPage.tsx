@@ -12,6 +12,7 @@ import { CloneApprovalQueue } from '../../engines/clone/CloneApprovalQueue'
 import { ApprovalQueue } from '../../engines/instagram/ApprovalQueue'
 import { OperationsUnlock } from './OperationsUnlock'
 import { FleetPanel } from './FleetPanel'
+import { ContentEnginePanel } from './ContentEnginePanel'
 
 const brl = (value: number) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 
@@ -96,6 +97,7 @@ export function DashboardPage({ navigate }: { navigate: (module: ModuleKey) => v
         </article>
 
         <FleetPanel state={fleetStatus} />
+        <ContentEnginePanel />
       </section>
 
       <footer className="system-strip"><span><Clock3 size={14} /> Sem sincronização externa</span><span>Sem dados demonstrativos</span><span>Kairos Core v0.1</span></footer>

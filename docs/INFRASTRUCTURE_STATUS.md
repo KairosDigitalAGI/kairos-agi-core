@@ -10,7 +10,7 @@ Atualizado em 10 de setembro de 2026.
 | Codex web | Pendente | Sem compra | Autorização do conector GitHub não conclui no fluxo web |
 | Vercel | Ativo | Hobby gratuito | <https://kairos-agi-core.vercel.app/> |
 | Deploy automático | Ativo | Incluído no Hobby | Commits em `main` geram deployments |
-| Supabase | Em uso (leitura) | Free, projeto do kairos-command | Fase 1 da Missão 006 lê schema `command` via Service Role, server-side; nenhum projeto pausado, criado ou alterado |
+| Supabase | Em uso (leitura + 1ª escrita) | Free, projeto do kairos-command | Fase 1/2 da Missão 006 leem schema `command` via Service Role, server-side; Fase 3 grava `command.content_jobs` (ideias do Founder). Migration `0020_content_engine.sql` redigida, pendente de aplicar em produção pelo Founder. Nenhum projeto pausado, criado ou alterado |
 | OpenAI (ChatGPT/API) | Ativo | Plano pago do Founder | Prioridade para agentes que operam a empresa (chat, Content Engine) |
 | Anthropic (Claude) | Ativo | Plano pago do Founder | Prioridade junto com OpenAI para agentes que operam a empresa |
 | OpenRouter | Reserva | Créditos | Usar só quando os planos OpenAI/Anthropic não cobrirem o caso; não é o default |

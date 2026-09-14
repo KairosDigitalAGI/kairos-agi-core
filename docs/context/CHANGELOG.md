@@ -1,5 +1,12 @@
 # Changelog
 
+## Consolidação Kairos — Missão 006, Fase 3: schema do Content Engine (14/09/2026)
+- Migration `kairos-command/supabase/migrations/0020_content_engine.sql` redigida: `command.content_jobs`, `command.content_assets`, `command.content_calendar`, `command.avatars`, `command.prompt_library`; idempotente, RLS `command.is_operador()` só leitura, escrita exclusivamente service_role. **Pendente de aplicar em produção** — o Founder precisa colar no SQL Editor do Supabase.
+- `api/content-jobs.mjs` (GET lista o pipeline real, POST registra uma ideia nova) + `api/_content.js`; `ContentEnginePanel` no Dashboard com formulário de nova ideia e lista por etapa.
+- Sem a migration aplicada: GET reporta `source: 'unavailable'` citando o arquivo pendente; POST falha fechado com 503. Nunca fabrica job nem etapa.
+- `api/_command.js` ganhou `writeCommand()` (POST via PostgREST, `Content-Profile: command`) — primeira escrita real feita por este Core em `command` (as anteriores, Fases 1/2, eram só leitura).
+- 4 testes novos (`tests/content-engine.test.mjs`): unavailable sem credencial, hint de migration pendente na leitura e na escrita — total 40/40 passando.
+
 ## Consolidação Kairos — Missão 006, Fase 2: chat de agentes (14/09/2026)
 - Chat consultivo com qualquer um dos 27 agentes do organograma, via `api/agent-chat.mjs` + `AgentChatPanel` (botão "Conversar" em `AgentsPage`).
 - Provider de LLM trocável (`api/_providers`): Anthropic (Claude) e OpenAI (GPT) primeiro — planos pagos já assinados pelo Founder —, OpenRouter só como reserva de último caso. Seleção automática por credencial presente; nenhuma chave aparece no cliente.
