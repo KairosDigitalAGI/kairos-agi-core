@@ -1,5 +1,13 @@
 # Changelog
 
+## Consolidação Kairos — Missão 006, Fase 2: chat de agentes (14/09/2026)
+- Chat consultivo com qualquer um dos 27 agentes do organograma, via `api/agent-chat.mjs` + `AgentChatPanel` (botão "Conversar" em `AgentsPage`).
+- Provider de LLM trocável (`api/_providers`): Anthropic (Claude) e OpenAI (GPT) primeiro — planos pagos já assinados pelo Founder —, OpenRouter só como reserva de último caso. Seleção automática por credencial presente; nenhuma chave aparece no cliente.
+- System prompt inclui a identidade real do agente e os números reais de receita/MRR/clientes/frota (mesmo cálculo da Fase 1); deixa explícito que o chat não executa nada — nenhum agente tem executor conectado a este Core ainda.
+- Mesma Basic Auth do Painel Operacional (Fase 1); sem credencial, o painel de chat fica trancado.
+- `api/business-metrics.mjs` e `api/agent-status.mjs` refatorados para reusar `api/_business.js`, evitando duas fontes de verdade para o mesmo cálculo.
+- 36/36 testes passando (6 novos cobrindo prioridade de provider, fail-closed sem credencial, e não-fabricação de número).
+
 ## Consolidação Kairos — Missão 006, Fase 1 (14/09/2026)
 - Dashboard passa a ler receita do mês, receita total, MRR e clientes ativos/total do Supabase mestre (schema `command`, mesmo banco do kairos-command), via `api/business-metrics.mjs` server-side.
 - Frota de agentes WhatsApp (pm2, `command.agents`) e últimos alertas críticos (`command.events`) expostos em painel próprio (`FleetPanel`), via `api/agent-status.mjs`; somente leitura, nunca chama pm2.

@@ -39,3 +39,15 @@ export interface FleetStatusResponse {
   fleet: FleetAgent[]
   alertasCriticos?: FleetAlert[]
 }
+
+export interface ChatMessage {
+  role: 'user' | 'assistant'
+  content: string
+}
+
+export interface AgentChatResponse {
+  text: string
+  provider: string
+  model: string
+  usage?: { inputTokens?: number; outputTokens?: number }
+}
