@@ -1,5 +1,15 @@
 # Changelog
 
+## Consolidação Kairos — Missão 006, Fase 5: geração real de roteiro no Content Engine (14/09/2026)
+- `api/_content.js` ganhou `generateScript({jobId})`: primeiro estágio do motor de geração do Content Engine, `etapa ideia→roteiro`. Um clique do Founder por job, nunca em lote — mesma fronteira de autorização já entregue e sem objeção na Fase 2 (chat de agentes).
+- Validações em cascata, cada uma com status HTTP próprio: 400 sem `jobId`, 503 sem Supabase configurado, 404 job não encontrado, 409 job que não está em `etapa=ideia` (nunca regenera silenciosamente um roteiro já existente), 503 sem provider de LLM pago configurado, 502/status-do-provider se a chamada ao LLM falhar, 503 com o nome da migration pendente se a escrita final falhar.
+- Usa `selectProvider` (mesmo seletor da Fase 2): Anthropic → OpenAI → OpenRouter, prioridade do Founder. Prompt montado a partir do `titulo`/`briefing` real do job — nunca inventa contexto.
+- `api/_command.js` ganhou `patchCommand()` (PATCH via PostgREST, usado para avançar `content_jobs.etapa` depois de gravar o asset em `content_assets`).
+- Rota `api/content-jobs/generate-script.mjs`, atrás da mesma Basic Auth do Painel Operacional. `useContentPipeline` ganhou `generateScript()`/`generatingJobId`/`generateError`; botão "Gerar roteiro" em `ContentEnginePanel` aparece só nos jobs em etapa `ideia`.
+- Nota de design: o campo `aprovacao`/`aprovado` do schema é o portão de pré-*publicação*, mais adiante na cadeia `ideia → roteiro → imagem → video → legenda → aprovacao → publicado/rejeitado` — não bloqueia a geração de roteiro a partir de uma ideia.
+- 6 testes novos (`tests/content-engine.test.mjs`): 400 sem jobId, 503 sem Supabase, 404 job inexistente, 409 etapa errada, 503 sem provider, e um caminho de sucesso completo com mock de fetch roteado por URL (Anthropic + `content_jobs` GET/PATCH + `content_assets` POST) — total 56/56 passando.
+- Fora de escopo desta fase: imagem, vídeo, legenda — ainda sem motor de geração conectado.
+
 ## Consolidação Kairos — Missão 006, Fase 4: OAuth do YouTube (14/09/2026)
 - Migration `kairos-command/supabase/migrations/0021_integracoes_tokens.sql` redigida: `command.integracoes_tokens`, uma linha por provedor, `access_token`/`refresh_token` sempre cifrados antes de tocar o Supabase. RLS habilitado sem NENHUMA policy — nem o operador logado no painel lê; só `service_role`. **Pendente de aplicar em produção** — o Founder precisa colar no SQL Editor do Supabase.
 - `api/_crypto.js`: AES-256-GCM (`encrypt`/`decrypt`) para os tokens e HMAC-SHA256 com janela de 10 min (`signState`/`verifyState`) para o `state` do OAuth — sem tabela de nonce, a assinatura + o tempo bastam para provar que o callback corresponde a um `connect-url` recente deste backend.

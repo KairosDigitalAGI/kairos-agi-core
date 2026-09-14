@@ -81,6 +81,29 @@ export async function upsertCommand(table, payload, conflictColumn) {
   return res.json()
 }
 
+// Atualiza por filtro PostgREST (ex.: `?id=eq.<uuid>`). Usada para avançar
+// etapa de um content_job já existente — nunca para criar linha nova.
+export async function patchCommand(table, query, payload) {
+  if (!commandConfigured()) throw new Error('SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.')
+  const base = process.env.SUPABASE_URL.replace(/\/+$/, '')
+  const res = await fetch(`${base}/rest/v1/${table}${query}`, {
+    method: 'PATCH',
+    headers: {
+      apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+      Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
+      'Content-Profile': 'command',
+      'Content-Type': 'application/json',
+      Prefer: 'return=representation',
+    },
+    body: JSON.stringify(payload),
+  })
+  if (!res.ok) {
+    const corpo = await res.text().catch(() => '')
+    throw new Error(`command.${table} respondeu ${res.status}: ${corpo.slice(0, 200)}`)
+  }
+  return res.json()
+}
+
 // Apaga por filtro PostgREST (ex.: `?provider=eq.youtube`). Usada só para
 // "Desconectar" — o Founder revogando uma integração que ele mesmo conectou.
 export async function deleteCommand(table, query) {

@@ -16,11 +16,11 @@ const ETAPA_LABEL: Record<ContentJobEtapa, string> = {
   rejeitado: 'Rejeitado',
 }
 
-// Pipeline real do Content Engine (command.content_jobs). Só registra ideias
-// aqui — roteiro/imagem/vídeo/legenda ainda não têm motor conectado neste
-// Core; o job fica parado em etapa=ideia até essa fase futura existir.
+// Pipeline real do Content Engine (command.content_jobs). Registra ideias e
+// gera roteiro (etapa ideia→roteiro) com um provider pago, um clique do
+// Founder por vez — imagem/vídeo/legenda ainda não têm motor conectado.
 export function ContentEnginePanel() {
-  const { state, createJob, submitting, submitError } = useContentPipeline()
+  const { state, createJob, submitting, submitError, generateScript, generatingJobId, generateError } = useContentPipeline()
   const [titulo, setTitulo] = useState('')
 
   async function onSubmit(event: FormEvent) {
@@ -58,6 +58,7 @@ export function ContentEnginePanel() {
         </form>
       )}
       {submitError && <p className="content-engine-error">{submitError}</p>}
+      {generateError && <p className="content-engine-error">{generateError}</p>}
 
       {state.status === 'ok' && state.data.source === 'real' && (
         state.data.jobs.length === 0
@@ -68,6 +69,16 @@ export function ContentEnginePanel() {
                 <li key={job.id}>
                   <span className={`content-engine-etapa etapa-${job.etapa}`}>{ETAPA_LABEL[job.etapa] ?? job.etapa}</span>
                   <span className="content-engine-titulo">{job.titulo}</span>
+                  {job.etapa === 'ideia' && (
+                    <button
+                      type="button"
+                      className="content-engine-generate"
+                      disabled={generatingJobId === job.id}
+                      onClick={() => void generateScript(job.id)}
+                    >
+                      {generatingJobId === job.id ? 'Gerando…' : 'Gerar roteiro'}
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>

@@ -36,3 +36,6 @@
 .content-engine-etapa.etapa-rejeitado { color: #f87171; border-color: rgba(248,113,113,.4); }
 .content-engine-etapa.etapa-aprovacao { color: #facc15; border-color: rgba(250,204,21,.4); }
 .content-engine-titulo { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.content-engine-generate { flex-shrink: 0; font-size: .68rem; border: 1px solid rgba(155,108,255,.4); background: rgba(124,58,237,.14); color: #e4d9ff; border-radius: 7px; padding: 4px 9px; cursor: pointer; }
+.content-engine-generate:hover { background: rgba(124,58,237,.28); }
+.content-engine-generate:disabled { opacity: .5; cursor: wait; }

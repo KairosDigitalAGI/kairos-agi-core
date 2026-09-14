@@ -8,7 +8,7 @@
 | 004 | Implementada e corrigida | Geração motion do zero por roteiro e pós-produção local; render e download WebM |
 | 004.1 | Implementada | Control Plane de integrações e plano operacional de sete dias; credenciais ainda pendentes |
 | 005 | Planejada | KAIROS WhatsApp; preservar operação existente e validar conexão separada |
-| 006 | Fase 4 entregue (14/09/2026) | Supabase Core (Fase 1: leitura real de `command.receitas`/`command.clientes`/`command.agents`); chat de agentes com provider Anthropic/OpenAI > OpenRouter (Fase 2); schema + primeira fatia do Content Engine, migration `0020_content_engine.sql` redigida e pendente de aplicar (Fase 3); OAuth do YouTube com cofre de tokens cifrado, migration `0021_integracoes_tokens.sql` redigida e pendente de aplicar, ativação real bloqueada até o Founder criar o OAuth Client no Google Cloud (Fase 4). RLS e schemas de origem não foram alterados |
+| 006 | Fase 5 entregue (14/09/2026) | Supabase Core (Fase 1: leitura real de `command.receitas`/`command.clientes`/`command.agents`); chat de agentes com provider Anthropic/OpenAI > OpenRouter (Fase 2); schema + primeira fatia do Content Engine, migration `0020_content_engine.sql` redigida e pendente de aplicar (Fase 3); OAuth do YouTube com cofre de tokens cifrado, migration `0021_integracoes_tokens.sql` redigida e pendente de aplicar, ativação real bloqueada até o Founder criar o OAuth Client no Google Cloud (Fase 4); geração real de roteiro (ideia→roteiro) via provider pago, um clique do Founder por job (Fase 5). RLS e schemas de origem não foram alterados |
 | 007 | Planejada | Billing Center; sem cobrança ou upgrade automático autorizado |
 | 008 | Planejada | Money Hunter Intelligence Center e Ideas Vault |
 | 009 | Planejada | Founder Mobile App |
