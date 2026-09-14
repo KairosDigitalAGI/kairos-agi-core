@@ -1,5 +1,11 @@
 # Changelog
 
+## Consolidação Kairos — Missão 006, investigação Hunter Skill encerrada (14/09/2026)
+- Sem mudança de código neste Core. Auditoria (git history + leitura de código em `kairos-command`, `kairos-hunter-skill`, `kairos-leadgen`) corrigiu o framing herdado de sessão anterior ("3 implementações divergentes precisando consolidação"): não havia consolidação pendente.
+- O Hunter que atende a Sofia é feature madura e funcionando ponta a ponta: painel em `kairos-command` (Supabase **separado**, projeto da VPS da Sofia) + motor de coleta na própria VPS + ponte HTTP (`/hunter/status`, `/hunter/cacar`) já aplicada em produção e confirmada ao vivo por `curl` público (200 real vs 404 de rota inexistente).
+- `kairos-hunter-skill` é template genérico não instalado em nenhum cliente ativo; `kairos-leadgen` é produto diferente (funil B2B frio por e-mail). Nenhum dos dois precisa de consolidação com o Hunter da Sofia.
+- Único ajuste necessário: comentários/copy desatualizados em `kairos-command` (`src/lib/sofia/hunter.ts`, `src/components/cliente/CacarLeads.tsx`) que ainda descreviam a ponte HTTP como ausente — corrigidos nesse repo, commit `834cc7d`.
+
 ## Consolidação Kairos — Missão 006, Fase 3: schema do Content Engine (14/09/2026)
 - Migration `kairos-command/supabase/migrations/0020_content_engine.sql` redigida: `command.content_jobs`, `command.content_assets`, `command.content_calendar`, `command.avatars`, `command.prompt_library`; idempotente, RLS `command.is_operador()` só leitura, escrita exclusivamente service_role. **Pendente de aplicar em produção** — o Founder precisa colar no SQL Editor do Supabase.
 - `api/content-jobs.mjs` (GET lista o pipeline real, POST registra uma ideia nova) + `api/_content.js`; `ContentEnginePanel` no Dashboard com formulário de nova ideia e lista por etapa.
