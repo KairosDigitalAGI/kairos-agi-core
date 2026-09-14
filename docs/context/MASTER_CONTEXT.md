@@ -15,6 +15,11 @@ Constituição: KAIROS_AGI_BLUEPRINT_V1.md. Adendos: KAIROS_MEMORY_SYNC_V1.md e 
 - Missão 004: Video Engine cria motion videos do zero a partir de roteiro e também edita vídeo real local. Storyboard, animação, marca, trilha, corte e download WebM rodam no navegador; arquivos e roteiro não são enviados a servidor.
 - Integration Control Plane: página e endpoint server-side verificam configuração de Meta, Google, X e do futuro token store. Nenhuma credencial ou conta está conectada ainda.
 
+## Consolidação Kairos — 14/09/2026
+Founder autorizou consolidar kairos-command, kairos-os e kairos-agi-core num único braço operacional ("usar o que já tem, e se não tiver, criar"). Este Core segue como base (decisão registrada em docs/REUSE_PROVENANCE.md e docs/REPOSITORY_REUSE_STRATEGY.md). Arthur é bot de cliente (Allfix), fora de escopo; KAIROS é o agente WhatsApp pessoal do Founder (`62981554992`, pm2 `kairos`, VPS 2.24.199.205).
+
+Missão 006, Fase 1 entregue: Dashboard lê receita do mês, receita total, MRR e clientes ativos/total do Supabase mestre (schema `command`, mesmo banco do kairos-command) via `api/business-metrics.mjs`; frota de agentes WhatsApp e alertas críticos via `api/agent-status.mjs`. Ambas as rotas são server-side, só leitura, atrás de Basic Auth própria deste projeto e desbloqueadas por sessão. Nenhuma migration/RLS de origem alterada. Próximas fases planejadas: chat de agentes reaproveitando o motor OpenRouter do kairos-os, consolidação do Hunter Skill, e Content Engine (Supabase `content_jobs`/`content_assets`/`content_calendar`/`avatars`/`prompt_library`). Agentes que operam a empresa devem priorizar os planos pagos OpenAI (GPT) e Anthropic (Claude) já assinados pelo Founder; créditos OpenRouter são reserva de último caso, não default.
+
 ## Próxima missão
 Missão 005 (KAIROS WhatsApp) permanece planejada. Exige mapear a instância real e seu acesso antes de conectar o Core, sem interromper o processo atual. Ver docs/modules/VIDEO_ENGINE_V0_4.md.
 

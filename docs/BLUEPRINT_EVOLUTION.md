@@ -91,3 +91,10 @@ A nova página Agentes contém busca, departamento, responsabilidades, indicador
 Dashboard e World usam o mesmo cadastro operacional. O Dashboard resume seis agentes e oferece acesso explícito ao organograma completo. O World instancia os 27, exibe balão apenas na seleção/hover para reduzir sobreposição e permite selecionar qualquer agente pelo nome. Fechar o inspetor agora oculta o painel.
 
 O código do motor/importador existente na origem é evidência de implementação, não prova de conexão com este Core. Os executores continuam desconectados. A hierarquia dos 15 papéis originais responde a ORION; vínculos dos especialistas dos adendos são organização adotada neste Core, não importação literal do organograma original.
+
+## 14/09/2026 — Consolidação Kairos e Missão 006, Fase 1
+Founder autorizou reunir os três repositórios reais (kairos-command, kairos-os, kairos-agi-core) num único braço operacional, reaproveitando o que já existe e construindo apenas o que faltar. Este Core é a base confirmada (ver docs/REUSE_PROVENANCE.md). Arthur segue restrito a cliente Allfix, fora deste escopo; KAIROS é o robô pessoal do Founder no WhatsApp `62981554992`.
+
+Fase 1 conecta o Dashboard ao Supabase mestre do kairos-command (schema `command`) por leitura server-side: receita do mês, receita total, MRR e clientes ativos/total (`api/business-metrics.mjs`), e frota de agentes WhatsApp com alertas críticos (`api/agent-status.mjs`). Ambas as rotas exigem Basic Auth própria deste projeto, desbloqueada por sessão via `OperationsUnlock`; sem credencial ou sem configuração, o Dashboard mantém os placeholders reais (`—`), nunca inventa número. Nenhuma migration, RLS ou processo pm2 de origem foi tocado.
+
+Diretriz do Founder para as próximas fases (chat de agentes, Content Engine): os agentes que operam a empresa devem rodar preferencialmente nos planos pagos já assinados (OpenAI GPT, Anthropic Claude); créditos OpenRouter são reserva de último caso, não escolha padrão.

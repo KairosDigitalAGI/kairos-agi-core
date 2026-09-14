@@ -1,5 +1,11 @@
 # Changelog
 
+## Consolidação Kairos — Missão 006, Fase 1 (14/09/2026)
+- Dashboard passa a ler receita do mês, receita total, MRR e clientes ativos/total do Supabase mestre (schema `command`, mesmo banco do kairos-command), via `api/business-metrics.mjs` server-side.
+- Frota de agentes WhatsApp (pm2, `command.agents`) e últimos alertas críticos (`command.events`) expostos em painel próprio (`FleetPanel`), via `api/agent-status.mjs`; somente leitura, nunca chama pm2.
+- Ambas as rotas ficam atrás de Basic Auth própria deste projeto (`KAIROS_USER`/`KAIROS_PASS`), desbloqueada por sessão via `OperationsUnlock`; sem credencial, o Dashboard mantém os placeholders `—` normalmente.
+- Nenhuma migration, RLS ou schema de origem foi alterado; nenhum dado foi fabricado — indisponibilidade é sempre reportada com o motivo real.
+
 ## Control Plane de integrações — preparação do lançamento em sete dias
 - Página Integrações adicionada ao Founder OS com status obtido de função server-side.
 - Endpoint Vercel informa presença de configuração Meta, Google e token store sem expor segredos.

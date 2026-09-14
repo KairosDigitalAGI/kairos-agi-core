@@ -1,22 +1,46 @@
 import { Activity, Bot, Clock3, Target } from 'lucide-react'
 import { metrics, missions } from '../../data/operational'
 import { useFounderAgents } from '../../core/useFounderAgents'
+import { useBusinessMetrics } from '../../core/useBusinessMetrics'
+import { useFleetStatus } from '../../core/useFleetStatus'
 import { ProductionProgress } from './ProductionProgress'
-import type { ModuleKey } from '../../types'
+import type { Metric, ModuleKey } from '../../types'
 import { EmptyState } from '../../ui/EmptyState'
 import { SectionHeader } from '../../ui/SectionHeader'
 import { StatCard } from '../../ui/StatCard'
 import { CloneApprovalQueue } from '../../engines/clone/CloneApprovalQueue'
 import { ApprovalQueue } from '../../engines/instagram/ApprovalQueue'
+import { OperationsUnlock } from './OperationsUnlock'
+import { FleetPanel } from './FleetPanel'
+
+const brl = (value: number) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+
+// Substitui os placeholders '—' pelos números reais do schema `command`
+// quando o Painel Operacional está desbloqueado e a rota respondeu 'real'.
+// Sem credencial, erro ou 'unavailable': mantém o placeholder, nunca inventa.
+function withRealBusinessMetrics(base: Metric[], businessMetrics: ReturnType<typeof useBusinessMetrics>['state']): Metric[] {
+  if (businessMetrics.status !== 'ok' || businessMetrics.data.source !== 'real') return base
+  const { receitaTotal, receitaMes, clientesAtivos } = businessMetrics.data
+  const overrides: Record<string, Partial<Metric>> = {
+    'total-revenue': receitaTotal !== undefined ? { value: brl(receitaTotal), delta: 'Supabase command.receitas', tone: 'active' } : {},
+    'monthly-revenue': receitaMes !== undefined ? { value: brl(receitaMes), delta: 'Mês corrente · command.receitas', tone: 'active' } : {},
+    'active-clients': clientesAtivos !== undefined ? { value: String(clientesAtivos), delta: 'Supabase command.clientes', tone: 'active' } : {},
+  }
+  return base.map((metric) => ({ ...metric, ...overrides[metric.id] }))
+}
 
 export function DashboardPage({ navigate }: { navigate: (module: ModuleKey) => void }) {
   const agents = useFounderAgents()
   const activeMissions = missions.filter((mission) => mission.status !== 'Concluída').slice(0, 4)
+  const { state: businessMetrics } = useBusinessMetrics()
+  const { state: fleetStatus } = useFleetStatus()
+  const liveMetrics = withRealBusinessMetrics(metrics, businessMetrics)
 
   return (
     <div className="page-stack"><ProductionProgress navigate={navigate} />
+      <OperationsUnlock />
       <section className="metric-grid" aria-label="Indicadores da Kairos Digital">
-        {metrics.map((metric) => <StatCard key={metric.id} metric={metric} />)}
+        {liveMetrics.map((metric) => <StatCard key={metric.id} metric={metric} />)}
       </section>
 
       <ApprovalQueue /><CloneApprovalQueue />
@@ -49,14 +73,29 @@ export function DashboardPage({ navigate }: { navigate: (module: ModuleKey) => v
         </article>
 
         <article className="glass-panel revenue-panel">
-          <SectionHeader eyebrow="Últimos 7 dias" title="Pulso de receita" action={<Activity size={18} />} />
-          <p>Receita indisponível. Aguardando conexão com registros financeiros reais.</p>
+          <SectionHeader eyebrow="Mês corrente" title="Pulso de receita" action={<Activity size={18} />} />
+          {businessMetrics.status === 'sem-credencial' && <p>Trancado. Desbloqueie o Painel Operacional acima para ver a receita real.</p>}
+          {businessMetrics.status === 'carregando' && <p>Consultando receita…</p>}
+          {businessMetrics.status === 'erro' && <p>{businessMetrics.mensagem}</p>}
+          {businessMetrics.status === 'ok' && businessMetrics.data.source === 'unavailable' && (
+            <p>Receita indisponível: {businessMetrics.data.reason ?? 'schema command não configurado.'}</p>
+          )}
+          {businessMetrics.status === 'ok' && businessMetrics.data.source === 'real' && (
+            <ul className="revenue-breakdown">
+              <li><span>Receita do mês</span><b>{businessMetrics.data.receitaMes !== undefined ? brl(businessMetrics.data.receitaMes) : '—'}</b></li>
+              <li><span>MRR</span><b>{businessMetrics.data.mrr !== undefined ? brl(businessMetrics.data.mrr) : '—'}</b></li>
+              <li><span>Receita total</span><b>{businessMetrics.data.receitaTotal !== undefined ? brl(businessMetrics.data.receitaTotal) : '—'}</b></li>
+              <li><span>Clientes ativos</span><b>{businessMetrics.data.clientesAtivos ?? '—'} / {businessMetrics.data.clientesTotal ?? '—'}</b></li>
+            </ul>
+          )}
         </article>
 
         <article className="glass-panel founder-panel">
           <SectionHeader eyebrow="Founder" title="Kairos Coins e XP" action={<Target size={18} />} />
           <p>Saldo e nível indisponíveis. Nenhum registro de recompensa verificado foi conectado.</p>
         </article>
+
+        <FleetPanel state={fleetStatus} />
       </section>
 
       <footer className="system-strip"><span><Clock3 size={14} /> Sem sincronização externa</span><span>Sem dados demonstrativos</span><span>Kairos Core v0.1</span></footer>
