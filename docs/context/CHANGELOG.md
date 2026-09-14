@@ -1,5 +1,15 @@
 # Changelog
 
+## Consolidação Kairos — Missão 006, Fase 4: OAuth do YouTube (14/09/2026)
+- Migration `kairos-command/supabase/migrations/0021_integracoes_tokens.sql` redigida: `command.integracoes_tokens`, uma linha por provedor, `access_token`/`refresh_token` sempre cifrados antes de tocar o Supabase. RLS habilitado sem NENHUMA policy — nem o operador logado no painel lê; só `service_role`. **Pendente de aplicar em produção** — o Founder precisa colar no SQL Editor do Supabase.
+- `api/_crypto.js`: AES-256-GCM (`encrypt`/`decrypt`) para os tokens e HMAC-SHA256 com janela de 10 min (`signState`/`verifyState`) para o `state` do OAuth — sem tabela de nonce, a assinatura + o tempo bastam para provar que o callback corresponde a um `connect-url` recente deste backend.
+- `api/_youtube.js`: monta a URL de consentimento do Google, troca o código pelo access/refresh token, confirma o canal via YouTube Data API (`channels?part=snippet&mine=true`) e grava cifrado; falha fechada com o env var exato faltando quando o cliente OAuth do Google está incompleto, e com o nome da migration pendente quando a tabela não existe.
+- Rotas `api/integrations/youtube/{connect-url,status,disconnect}.mjs` atrás da Basic Auth do Painel Operacional; `callback.mjs` sem essa guarda de propósito (o Google não manda header de auth no redirect), validado pelo `state` assinado.
+- `api/_command.js` ganhou `upsertCommand()` (escrita idempotente por coluna de conflito — reconectar substitui, não duplica) e `deleteCommand()` (usado só por "Desconectar").
+- `IntegrationsPage`: botão "Conectar canal"/"Desconectar" no card do YouTube, atrás do mesmo `OperationsUnlock` do Dashboard; lê o sinal `?youtube=connected|error` que o `callback` deixa na volta do Google e limpa a URL.
+- 12 testes novos (`tests/youtube-integration.test.mjs`): cifra/decifra com chave errada, assinatura e expiração do `state`, fail-closed sem credencial do Google e sem a migration — total 50/50 passando.
+- Ativação real (o Founder de fato conseguir conectar um canal) depende de ele criar um OAuth Client Web no Google Cloud Console e habilitar a YouTube Data API v3 — criação de conta/credencial não é automatizada por este agente.
+
 ## Consolidação Kairos — Missão 006, investigação Hunter Skill encerrada (14/09/2026)
 - Sem mudança de código neste Core. Auditoria (git history + leitura de código em `kairos-command`, `kairos-hunter-skill`, `kairos-leadgen`) corrigiu o framing herdado de sessão anterior ("3 implementações divergentes precisando consolidação"): não havia consolidação pendente.
 - O Hunter que atende a Sofia é feature madura e funcionando ponta a ponta: painel em `kairos-command` (Supabase **separado**, projeto da VPS da Sofia) + motor de coleta na própria VPS + ponte HTTP (`/hunter/status`, `/hunter/cacar`) já aplicada em produção e confirmada ao vivo por `curl` público (200 real vs 404 de rota inexistente).

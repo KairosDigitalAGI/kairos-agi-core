@@ -13,3 +13,9 @@ export interface IntegrationStatusResponse {
   tokenStoreConfigured: boolean
   providers: IntegrationProviderStatus[]
 }
+
+// Estado real da conexão do YouTube (command.integracoes_tokens). Nunca
+// carrega token — só o que já é público (nome do canal, validade).
+export type YoutubeConnectionStatus =
+  | { connected: true; accountLabel: string | null; scope: string | null; expiresAt: string | null; atualizadoEm: string | null }
+  | { connected: false; reason: string }

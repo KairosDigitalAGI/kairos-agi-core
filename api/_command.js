@@ -55,3 +55,49 @@ export async function writeCommand(table, payload) {
   }
   return res.json()
 }
+
+// Escrita idempotente: cria a linha ou atualiza a existente quando
+// `conflictColumn` já tem valor igual (ex.: provider='youtube' em
+// integracoes_tokens — reconectar substitui o token antigo, não duplica
+// linha). Mesma credencial e mesmo fail-closed da escrita simples.
+export async function upsertCommand(table, payload, conflictColumn) {
+  if (!commandConfigured()) throw new Error('SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.')
+  const base = process.env.SUPABASE_URL.replace(/\/+$/, '')
+  const res = await fetch(`${base}/rest/v1/${table}?on_conflict=${encodeURIComponent(conflictColumn)}`, {
+    method: 'POST',
+    headers: {
+      apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+      Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
+      'Content-Profile': 'command',
+      'Content-Type': 'application/json',
+      Prefer: 'resolution=merge-duplicates,return=representation',
+    },
+    body: JSON.stringify(payload),
+  })
+  if (!res.ok) {
+    const corpo = await res.text().catch(() => '')
+    throw new Error(`command.${table} respondeu ${res.status}: ${corpo.slice(0, 200)}`)
+  }
+  return res.json()
+}
+
+// Apaga por filtro PostgREST (ex.: `?provider=eq.youtube`). Usada só para
+// "Desconectar" — o Founder revogando uma integração que ele mesmo conectou.
+export async function deleteCommand(table, query) {
+  if (!commandConfigured()) throw new Error('SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.')
+  const base = process.env.SUPABASE_URL.replace(/\/+$/, '')
+  const res = await fetch(`${base}/rest/v1/${table}${query}`, {
+    method: 'DELETE',
+    headers: {
+      apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+      Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
+      'Content-Profile': 'command',
+      Prefer: 'return=representation',
+    },
+  })
+  if (!res.ok) {
+    const corpo = await res.text().catch(() => '')
+    throw new Error(`command.${table} respondeu ${res.status}: ${corpo.slice(0, 200)}`)
+  }
+  return res.json()
+}

@@ -24,10 +24,21 @@ const titles: Record<ModuleKey, string> = {
 }
 
 export function App() {
-  const [active, setActive] = useState<ModuleKey>('dashboard')
+  // Suporte mínimo a `?module=` na volta do redirect OAuth do YouTube — este
+  // app não tem router de URL, então só lemos uma vez no boot e limpamos a
+  // query string, sem virar um sistema de rotas.
+  const initialModule = (new URLSearchParams(window.location.search).get('module') as ModuleKey | null) ?? 'dashboard'
+  const [active, setActive] = useState<ModuleKey>(initialModule in titles ? initialModule : 'dashboard')
   const [worldModule, setWorldModule] = useState<ModuleKey>('dashboard')
   const [immersive, setImmersive] = useState(true)
   const [reduced, setReduced] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  useEffect(() => {
+    const url = new URL(window.location.href)
+    if (url.searchParams.has('module')) {
+      url.searchParams.delete('module')
+      window.history.replaceState(null, '', url.pathname + url.search + url.hash)
+    }
+  }, [])
   useEffect(() => { const media = window.matchMedia('(prefers-reduced-motion: reduce)'); const update = () => setReduced(media.matches); media.addEventListener('change', update); return () => media.removeEventListener('change', update) }, [])
   const department = departments[active === 'world' ? worldModule : active]
   const navigate = (module: ModuleKey) => { if (module === 'world' && active !== 'world') setWorldModule(active); setActive(module) }

@@ -26,6 +26,8 @@ Missão 006, Fase 3 entregue: schema do Content Engine desenhado em `kairos-comm
 
 Missão 006 — Hunter Skill: investigação encerrada em 14/09/2026 sem mudança neste Core. Não havia consolidação pendente: o Hunter da Sofia (painel em `kairos-command` + motor na VPS da Sofia + ponte HTTP já aplicada em produção) já funciona ponta a ponta; `kairos-hunter-skill` é template não usado e `kairos-leadgen` é produto diferente. Ajuste feito ficou só em `kairos-command` (correção de doc/comentário desatualizado, commit `834cc7d`).
 
+Missão 006, Fase 4 entregue: OAuth do YouTube — primeira integração de publicação ativada de verdade (Instagram/TikTok seguem esperando aprovação da Meta). Cofre de tokens cifrados em `kairos-command/supabase/migrations/0021_integracoes_tokens.sql` (`command.integracoes_tokens`, RLS sem nenhuma policy — só `service_role` lê) — **pendente de aplicar em produção**. Neste Core: `api/_crypto.js` (AES-256-GCM para os tokens, HMAC com janela de 10 min para o `state` do OAuth) e `api/_youtube.js` orquestram consentimento → troca de código → confirmação do canal → gravação cifrada; rotas em `api/integrations/youtube/`; botão "Conectar canal" na `IntegrationsPage`. Sem a migration ou sem o cliente OAuth do Google configurado (`GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET`/`GOOGLE_OAUTH_REDIRECT_URI`), tudo falha fechado com o motivo exato. Ativação real depende do Founder criar o OAuth Client Web no Google Cloud Console — fora do que este agente pode fazer sozinho.
+
 ## Próxima missão
 Missão 005 (KAIROS WhatsApp) permanece planejada. Exige mapear a instância real e seu acesso antes de conectar o Core, sem interromper o processo atual. Ver docs/modules/VIDEO_ENGINE_V0_4.md.
 
