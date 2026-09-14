@@ -1,5 +1,14 @@
 # Changelog
 
+## Consolidação Kairos — Missão 006, Fase 6: geração real de imagem no Content Engine (14/09/2026)
+- `api/_providers/openai.js` ganhou `generateImage({prompt, size})`: Images API da OpenAI (`gpt-image-1`), devolve `b64_json`. Único provider deste Core com geração de imagem — Anthropic não tem esse recurso, sem fallback quando `OPENAI_API_KEY` ausente.
+- Migration `kairos-command/supabase/migrations/0022_content_assets_bucket.sql` redigida: cria o bucket público `content-assets` no Supabase Storage (`insert into storage.buckets ... on conflict do nothing`, idempotente) — mesmo padrão do bucket `videos` já usado pelo kairos-command. `command.content_assets.storage_path` já existia desde a migration 0020, mas nenhum bucket real existia até agora. **Pendente de aplicar em produção.**
+- `api/_storage.js` (novo): `uploadToStorage()`/`publicStorageUrl()`/`safePath()` via REST puro (zero dependência, mesmo espírito de `_command.js`), sem SDK.
+- `api/_content.js` ganhou `generateImage({jobId})`: mesma cascata de falha fechada de `generateScript` (400/503/404/409), reaproveita o gate `content_jobs.aprovado` (402) da correção anterior — uma única aprovação por job cobre todas as etapas pagas, roteiro e imagem inclusive. Sem `OPENAI_API_KEY`, falha citando exatamente essa variável. Monta o prompt a partir do título/briefing do job e do roteiro já gerado (contexto real, nunca inventado); grava `content_assets.storage_path` e avança `content_jobs.etapa` para `imagem`.
+- Rota `api/content-jobs/generate-image.mjs`, mesma Basic Auth. `useContentPipeline` ganhou `generateImage()` (reaproveita `generatingJobId`/`generateError`, já que roteiro e imagem nunca ficam disponíveis ao mesmo tempo no mesmo job). Botão "Gerar imagem" em `ContentEnginePanel` para jobs em `etapa=roteiro`.
+- 7 testes novos (`tests/content-engine.test.mjs`): 400/503/404/409/402/503(sem OPENAI_API_KEY) e um caminho de sucesso completo com mock de fetch roteado por URL (Images API + upload de Storage + `content_assets` POST + `content_jobs` PATCH) — total 67/67 passando.
+- Fora de escopo: vídeo, legenda — ainda sem motor de geração conectado.
+
 ## Consolidação Kairos — Missão 006, correção pós-Fase 5: gate de aprovação de gasto (14/09/2026)
 - Auto-revisão no mesmo dia da Fase 5 encontrou uma lacuna: `generateScript` chamava o provider pago só checando `etapa === 'ideia'`, sem checar `content_jobs.aprovado` — o schema (comentário em `command.content_assets.gratuito`, migration 0020) já exigia `aprovado:true` explícito do Founder antes de qualquer geração paga, e isso não estava sendo checado. O gate de etapa `aprovacao` (pré-publicação, mais adiante no pipeline) é uma coisa diferente do booleano `content_jobs.aprovado` (gate de gasto, checável a qualquer momento) — a Fase 5 original conflou os dois.
 - `generateScript` agora recusa com **402** quando `job.aprovado !== true`, antes mesmo de selecionar o provider.

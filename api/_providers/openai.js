@@ -41,3 +41,35 @@ export async function chat({ system, messages, maxTokens = 800, model = MODEL })
     stopReason: choice.finish_reason || null,
   }
 }
+
+// Geração de imagem — só a OpenAI tem esse recurso entre os providers deste
+// Core (Claude/Anthropic não gera imagem). Sem fallback de provider aqui:
+// quem chama decide o que fazer se OPENAI_API_KEY não estiver configurada.
+// Contrato: generateImage({prompt, size}) → {b64, model}
+export const IMAGE_MODEL = process.env.OPENAI_IMAGE_MODEL || 'gpt-image-1'
+
+export async function generateImage({ prompt, size = '1024x1024', model = IMAGE_MODEL }) {
+  const key = process.env.OPENAI_API_KEY
+  if (!key) throw new Error('OPENAI_API_KEY não configurada')
+  if (typeof prompt !== 'string' || !prompt.trim()) throw new Error('openai generateImage: prompt vazio')
+  const res = await fetch('https://api.openai.com/v1/images/generations', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${key}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ model, prompt, size, n: 1 }),
+  })
+  const text = await res.text()
+  let json
+  try { json = JSON.parse(text) } catch { json = null }
+  if (!res.ok || (json && json.error)) {
+    const msg = (json && json.error && json.error.message) || text.slice(0, 200) || `HTTP ${res.status}`
+    const err = new Error(`openai: ${msg}`)
+    err.status = res.status
+    throw err
+  }
+  const b64 = json.data?.[0]?.b64_json
+  if (!b64) throw new Error('openai generateImage: resposta sem imagem (b64_json ausente)')
+  return { b64, model: json.model || model }
+}

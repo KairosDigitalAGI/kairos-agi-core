@@ -85,6 +85,39 @@ export function useContentPipeline() {
     [header, refresh],
   )
 
+  // O Founder aciona a geração da imagem de capa de UM job em etapa
+  // "roteiro" (clique explícito, nunca em lote) — só a OpenAI gera imagem
+  // neste Core. Reaproveita generatingJobId/generateError: as duas ações
+  // (roteiro/imagem) nunca ficam disponíveis ao mesmo tempo no mesmo job.
+  // Ver api/_content.js#generateImage.
+  const generateImage = useCallback(
+    async (jobId: string) => {
+      if (!header) return false
+      setGeneratingJobId(jobId)
+      setGenerateError(null)
+      try {
+        const response = await fetch('/api/content-jobs/generate-image', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', authorization: header },
+          body: JSON.stringify({ jobId }),
+        })
+        if (!response.ok) {
+          const body = await response.json().catch(() => ({}))
+          setGenerateError(body.erro || `/api/content-jobs/generate-image respondeu ${response.status}.`)
+          return false
+        }
+        await refresh()
+        return true
+      } catch {
+        setGenerateError('Não foi possível gerar a imagem neste ambiente. Nenhum conteúdo foi presumido criado.')
+        return false
+      } finally {
+        setGeneratingJobId(null)
+      }
+    },
+    [header, refresh],
+  )
+
   // Aprova o gasto de UM job antes de gerar conteúdo pago — passo separado
   // de "Gerar roteiro", exigido pelo próprio schema (aprovado:true).
   const approveJob = useCallback(
@@ -122,6 +155,7 @@ export function useContentPipeline() {
     submitting,
     submitError,
     generateScript,
+    generateImage,
     generatingJobId,
     generateError,
     approveJob,

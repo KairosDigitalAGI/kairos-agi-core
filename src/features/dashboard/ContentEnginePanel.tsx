@@ -16,9 +16,10 @@ const ETAPA_LABEL: Record<ContentJobEtapa, string> = {
   rejeitado: 'Rejeitado',
 }
 
-// Pipeline real do Content Engine (command.content_jobs). Registra ideias e
-// gera roteiro (etapa ideia→roteiro) com um provider pago, um clique do
-// Founder por vez — imagem/vídeo/legenda ainda não têm motor conectado.
+// Pipeline real do Content Engine (command.content_jobs). Registra ideias,
+// gera roteiro (ideia→roteiro) e imagem de capa (roteiro→imagem) com
+// provider pago, um clique do Founder por vez, sempre atrás de aprovação
+// explícita de gasto (job.aprovado) — vídeo/legenda ainda não têm motor.
 export function ContentEnginePanel() {
   const {
     state,
@@ -26,6 +27,7 @@ export function ContentEnginePanel() {
     submitting,
     submitError,
     generateScript,
+    generateImage,
     generatingJobId,
     generateError,
     approveJob,
@@ -99,6 +101,16 @@ export function ContentEnginePanel() {
                       onClick={() => void generateScript(job.id)}
                     >
                       {generatingJobId === job.id ? 'Gerando…' : 'Gerar roteiro'}
+                    </button>
+                  )}
+                  {job.etapa === 'roteiro' && job.aprovado && (
+                    <button
+                      type="button"
+                      className="content-engine-generate"
+                      disabled={generatingJobId === job.id}
+                      onClick={() => void generateImage(job.id)}
+                    >
+                      {generatingJobId === job.id ? 'Gerando…' : 'Gerar imagem'}
                     </button>
                   )}
                 </li>

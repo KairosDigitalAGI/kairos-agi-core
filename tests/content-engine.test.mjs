@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { computeContentPipeline, createContentJob, generateScript, approveContentJob } from '../api/_content.js'
+import { computeContentPipeline, createContentJob, generateScript, approveContentJob, generateImage } from '../api/_content.js'
 
 const KEYS = ['SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY', 'ANTHROPIC_API_KEY', 'OPENAI_API_KEY', 'OPENROUTER_API_KEY', 'KAIROS_LLM_PROVIDER']
 
@@ -190,6 +190,102 @@ test('approveContentJob writes aprovado:true/aprovado_por/aprovado_em on success
     await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
       const job = await approveContentJob({ jobId: 'abc', aprovadoPor: 'founder' })
       assert.equal(job.aprovado, true)
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
+// --- generateImage: etapa roteiro→imagem, só OpenAI gera imagem neste Core ---
+
+test('generateImage requires a jobId (400) before touching anything', async () => {
+  await assert.rejects(generateImage({}), /jobId/)
+})
+
+test('generateImage fails closed (503) without Supabase configured', async () => {
+  await withEnv({}, async () => {
+    await assert.rejects(generateImage({ jobId: 'abc' }), /SUPABASE_URL/)
+  })
+})
+
+test('generateImage reports 404 when the job does not exist', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async () => new Response(JSON.stringify([]), { status: 200 })
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
+      await assert.rejects(generateImage({ jobId: 'abc' }), /não encontrado/)
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
+test('generateImage refuses (409) a job that is not in etapa=roteiro', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'ideia', briefing: {}, aprovado: true }]), { status: 200 })
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
+      await assert.rejects(generateImage({ jobId: 'abc' }), /etapa "ideia"/)
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
+test('generateImage refuses (402) a job that has not been approved for paid spend', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'roteiro', briefing: {}, aprovado: false }]), { status: 200 })
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', OPENAI_API_KEY: 'x' }, async () => {
+      await assert.rejects(generateImage({ jobId: 'abc' }), /aprovado:false/)
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
+test('generateImage fails closed (503) without OPENAI_API_KEY — the only image provider in this Core', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'roteiro', briefing: {}, aprovado: true }]), { status: 200 })
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
+      await assert.rejects(generateImage({ jobId: 'abc' }), /OPENAI_API_KEY/)
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
+test('generateImage writes the real image and advances the job to etapa=imagem on success', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async (url, opts = {}) => {
+    const href = String(url)
+    if (href.includes('api.openai.com/v1/images/generations')) {
+      return new Response(JSON.stringify({ data: [{ b64_json: Buffer.from('fake-png').toString('base64') }], model: 'gpt-image-1' }), { status: 200 })
+    }
+    if (href.includes('/storage/v1/object/')) {
+      return new Response('{}', { status: 200 })
+    }
+    if (href.includes('content_jobs') && (!opts.method || opts.method === 'GET')) {
+      return new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'roteiro', briefing: {}, aprovado: true }]), { status: 200 })
+    }
+    if (href.includes('content_assets') && (!opts.method || opts.method === 'GET')) {
+      return new Response(JSON.stringify([{ conteudo: 'CENA 1: ...' }]), { status: 200 })
+    }
+    if (href.includes('content_assets') && opts.method === 'POST') {
+      return new Response(JSON.stringify([{ id: 'asset-2', job_id: 'abc', tipo: 'imagem', storage_path: 'content-assets/content-jobs/abc/imagem-1.png' }]), { status: 201 })
+    }
+    if (href.includes('content_jobs') && opts.method === 'PATCH') {
+      return new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'imagem' }]), { status: 200 })
+    }
+    throw new Error(`fetch inesperado neste teste: ${opts.method || 'GET'} ${href}`)
+  }
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', OPENAI_API_KEY: 'x' }, async () => {
+      const out = await generateImage({ jobId: 'abc' })
+      assert.equal(out.job.etapa, 'imagem')
+      assert.equal(out.asset.tipo, 'imagem')
+      assert.ok(out.asset.storage_path)
     })
   } finally {
     globalThis.fetch = originalFetch
