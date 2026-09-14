@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { computeContentPipeline, createContentJob, generateScript } from '../api/_content.js'
+import { computeContentPipeline, createContentJob, generateScript, approveContentJob } from '../api/_content.js'
 
 const KEYS = ['SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY', 'ANTHROPIC_API_KEY', 'OPENAI_API_KEY', 'OPENROUTER_API_KEY', 'KAIROS_LLM_PROVIDER']
 
@@ -92,9 +92,25 @@ test('generateScript refuses (409) a job that is not in etapa=ideia — never re
   }
 })
 
-test('generateScript fails closed without any paid LLM provider configured', async () => {
+// --- gate de aprovação: o schema (comentário em content_assets.gratuito na
+// migration 0020) exige aprovado:true antes de qualquer gasto com provider
+// pago — separado do clique "Gerar roteiro" em si. ---
+
+test('generateScript refuses (402) a job that has not been explicitly approved for paid spend', async () => {
   const originalFetch = globalThis.fetch
-  globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'ideia', briefing: {} }]), { status: 200 })
+  globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'ideia', briefing: {}, aprovado: false }]), { status: 200 })
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', ANTHROPIC_API_KEY: 'x' }, async () => {
+      await assert.rejects(generateScript({ jobId: 'abc' }), /aprovado:false/)
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
+test('generateScript fails closed without any paid LLM provider configured (job already approved)', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'ideia', briefing: {}, aprovado: true }]), { status: 200 })
   try {
     await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
       await assert.rejects(generateScript({ jobId: 'abc' }), /nenhum provider de LLM configurado/)
@@ -104,7 +120,7 @@ test('generateScript fails closed without any paid LLM provider configured', asy
   }
 })
 
-test('generateScript writes the real script and advances the job to etapa=roteiro on success', async () => {
+test('generateScript writes the real script and advances the job to etapa=roteiro on success (already approved)', async () => {
   const originalFetch = globalThis.fetch
   globalThis.fetch = async (url, opts = {}) => {
     const href = String(url)
@@ -112,7 +128,7 @@ test('generateScript writes the real script and advances the job to etapa=roteir
       return new Response(JSON.stringify({ content: [{ type: 'text', text: 'CENA 1: ...' }], usage: { input_tokens: 10, output_tokens: 20 }, model: 'claude-sonnet-5', stop_reason: 'end_turn' }), { status: 200 })
     }
     if (href.includes('content_jobs') && (!opts.method || opts.method === 'GET')) {
-      return new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'ideia', briefing: { publico: 'clínicas' } }]), { status: 200 })
+      return new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'ideia', briefing: { publico: 'clínicas' }, aprovado: true }]), { status: 200 })
     }
     if (href.includes('content_assets') && opts.method === 'POST') {
       return new Response(JSON.stringify([{ id: 'asset-1', job_id: 'abc', tipo: 'roteiro', conteudo: 'CENA 1: ...' }]), { status: 201 })
@@ -128,6 +144,52 @@ test('generateScript writes the real script and advances the job to etapa=roteir
       assert.equal(out.job.etapa, 'roteiro')
       assert.equal(out.asset.tipo, 'roteiro')
       assert.equal(out.asset.conteudo, 'CENA 1: ...')
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
+// --- approveContentJob: a ação que liga o "interruptor" de aprovado:true ---
+
+test('approveContentJob fails closed (503) without Supabase configured, never pretending approval happened', async () => {
+  await withEnv({}, async () => {
+    await assert.rejects(approveContentJob({ jobId: 'abc' }), /SUPABASE_URL/)
+  })
+})
+
+test('approveContentJob reports 404 when the job does not exist', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async () => new Response(JSON.stringify([]), { status: 200 })
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
+      await assert.rejects(approveContentJob({ jobId: 'abc' }), /não encontrado/)
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
+test('approveContentJob writes aprovado:true/aprovado_por/aprovado_em on success', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async (url, opts = {}) => {
+    const href = String(url)
+    if (!opts.method || opts.method === 'GET') {
+      return new Response(JSON.stringify([{ id: 'abc' }]), { status: 200 })
+    }
+    if (opts.method === 'PATCH') {
+      const body = JSON.parse(opts.body)
+      assert.equal(body.aprovado, true)
+      assert.equal(body.aprovado_por, 'founder')
+      assert.ok(body.aprovado_em)
+      return new Response(JSON.stringify([{ id: 'abc', etapa: 'ideia', ...body }]), { status: 200 })
+    }
+    throw new Error(`fetch inesperado neste teste: ${opts.method || 'GET'} ${href}`)
+  }
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
+      const job = await approveContentJob({ jobId: 'abc', aprovadoPor: 'founder' })
+      assert.equal(job.aprovado, true)
     })
   } finally {
     globalThis.fetch = originalFetch

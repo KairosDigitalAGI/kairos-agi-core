@@ -10,6 +10,8 @@ export function useContentPipeline() {
   const [submitError, setSubmitError] = useState<string | null>(null)
   const [generatingJobId, setGeneratingJobId] = useState<string | null>(null)
   const [generateError, setGenerateError] = useState<string | null>(null)
+  const [approvingJobId, setApprovingJobId] = useState<string | null>(null)
+  const [approveError, setApproveError] = useState<string | null>(null)
 
   const refresh = useCallback(async () => {
     if (!header) {
@@ -83,5 +85,47 @@ export function useContentPipeline() {
     [header, refresh],
   )
 
-  return { state, refresh, createJob, submitting, submitError, generateScript, generatingJobId, generateError }
+  // Aprova o gasto de UM job antes de gerar conteúdo pago — passo separado
+  // de "Gerar roteiro", exigido pelo próprio schema (aprovado:true).
+  const approveJob = useCallback(
+    async (jobId: string) => {
+      if (!header) return false
+      setApprovingJobId(jobId)
+      setApproveError(null)
+      try {
+        const response = await fetch('/api/content-jobs/approve', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', authorization: header },
+          body: JSON.stringify({ jobId }),
+        })
+        if (!response.ok) {
+          const body = await response.json().catch(() => ({}))
+          setApproveError(body.erro || `/api/content-jobs/approve respondeu ${response.status}.`)
+          return false
+        }
+        await refresh()
+        return true
+      } catch {
+        setApproveError('Não foi possível aprovar o job neste ambiente. Nenhuma aprovação foi presumida.')
+        return false
+      } finally {
+        setApprovingJobId(null)
+      }
+    },
+    [header, refresh],
+  )
+
+  return {
+    state,
+    refresh,
+    createJob,
+    submitting,
+    submitError,
+    generateScript,
+    generatingJobId,
+    generateError,
+    approveJob,
+    approvingJobId,
+    approveError,
+  }
 }

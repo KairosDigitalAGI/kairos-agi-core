@@ -27,6 +27,52 @@ export async function computeContentPipeline() {
   }
 }
 
+/**
+ * Aprova o gasto de geração paga de UM job — ação explícita e separada do
+ * clique "Gerar roteiro". Grava `aprovado:true`/`aprovado_por`/`aprovado_em`
+ * em content_jobs. Sem isso, `generateScript` recusa chamar qualquer
+ * provider pago (ver comentário em command.content_assets.gratuito na
+ * migration 0020: "Geração paga só existe quando o job carrega aprovado:true
+ * explícito do Founder" — regra do próprio schema, não só do código).
+ */
+export async function approveContentJob({ jobId, aprovadoPor }) {
+  if (typeof jobId !== 'string' || !jobId.trim()) {
+    const err = new Error('jobId é obrigatório')
+    err.status = 400
+    throw err
+  }
+  if (!commandConfigured()) {
+    const err = new Error('SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.')
+    err.status = 503
+    throw err
+  }
+  let rows
+  try {
+    rows = await readCommand('content_jobs', `?select=id&id=eq.${encodeURIComponent(jobId)}&limit=1`)
+  } catch (e) {
+    const err = new Error(`${MIGRATION_HINT} (${e.message})`)
+    err.status = 503
+    throw err
+  }
+  if (!rows?.[0]) {
+    const err = new Error(`content_job ${jobId} não encontrado.`)
+    err.status = 404
+    throw err
+  }
+  try {
+    const [job] = await patchCommand('content_jobs', `?id=eq.${encodeURIComponent(jobId)}`, {
+      aprovado: true,
+      aprovado_por: aprovadoPor || null,
+      aprovado_em: new Date().toISOString(),
+    })
+    return job
+  } catch (e) {
+    const err = new Error(`${MIGRATION_HINT} (${e.message})`)
+    err.status = 503
+    throw err
+  }
+}
+
 export async function createContentJob({ titulo, briefing, criadoPor }) {
   if (!commandConfigured()) {
     const err = new Error('SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.')
@@ -71,7 +117,7 @@ export async function generateScript({ jobId, providerName }) {
 
   let job
   try {
-    const rows = await readCommand('content_jobs', `?select=id,titulo,etapa,briefing&id=eq.${encodeURIComponent(jobId)}&limit=1`)
+    const rows = await readCommand('content_jobs', `?select=id,titulo,etapa,briefing,aprovado&id=eq.${encodeURIComponent(jobId)}&limit=1`)
     job = rows?.[0]
   } catch (e) {
     const err = new Error(`${MIGRATION_HINT} (${e.message})`)
@@ -86,6 +132,13 @@ export async function generateScript({ jobId, providerName }) {
   if (job.etapa !== 'ideia') {
     const err = new Error(`content_job ${jobId} está em etapa "${job.etapa}", não "ideia" — o roteiro já foi gerado ou o job avançou.`)
     err.status = 409
+    throw err
+  }
+  if (!job.aprovado) {
+    const err = new Error(
+      `content_job ${jobId} ainda não foi aprovado para gasto (aprovado:false). O Founder precisa aprovar este job antes de gerar conteúdo com provider pago.`,
+    )
+    err.status = 402
     throw err
   }
 

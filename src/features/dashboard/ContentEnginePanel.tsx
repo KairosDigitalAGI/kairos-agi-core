@@ -20,7 +20,18 @@ const ETAPA_LABEL: Record<ContentJobEtapa, string> = {
 // gera roteiro (etapa ideia→roteiro) com um provider pago, um clique do
 // Founder por vez — imagem/vídeo/legenda ainda não têm motor conectado.
 export function ContentEnginePanel() {
-  const { state, createJob, submitting, submitError, generateScript, generatingJobId, generateError } = useContentPipeline()
+  const {
+    state,
+    createJob,
+    submitting,
+    submitError,
+    generateScript,
+    generatingJobId,
+    generateError,
+    approveJob,
+    approvingJobId,
+    approveError,
+  } = useContentPipeline()
   const [titulo, setTitulo] = useState('')
 
   async function onSubmit(event: FormEvent) {
@@ -59,6 +70,7 @@ export function ContentEnginePanel() {
       )}
       {submitError && <p className="content-engine-error">{submitError}</p>}
       {generateError && <p className="content-engine-error">{generateError}</p>}
+      {approveError && <p className="content-engine-error">{approveError}</p>}
 
       {state.status === 'ok' && state.data.source === 'real' && (
         state.data.jobs.length === 0
@@ -69,7 +81,17 @@ export function ContentEnginePanel() {
                 <li key={job.id}>
                   <span className={`content-engine-etapa etapa-${job.etapa}`}>{ETAPA_LABEL[job.etapa] ?? job.etapa}</span>
                   <span className="content-engine-titulo">{job.titulo}</span>
-                  {job.etapa === 'ideia' && (
+                  {job.etapa === 'ideia' && !job.aprovado && (
+                    <button
+                      type="button"
+                      className="content-engine-generate"
+                      disabled={approvingJobId === job.id}
+                      onClick={() => void approveJob(job.id)}
+                    >
+                      {approvingJobId === job.id ? 'Aprovando…' : 'Aprovar geração paga'}
+                    </button>
+                  )}
+                  {job.etapa === 'ideia' && job.aprovado && (
                     <button
                       type="button"
                       className="content-engine-generate"

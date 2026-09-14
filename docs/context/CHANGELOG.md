@@ -1,5 +1,12 @@
 # Changelog
 
+## Consolidação Kairos — Missão 006, correção pós-Fase 5: gate de aprovação de gasto (14/09/2026)
+- Auto-revisão no mesmo dia da Fase 5 encontrou uma lacuna: `generateScript` chamava o provider pago só checando `etapa === 'ideia'`, sem checar `content_jobs.aprovado` — o schema (comentário em `command.content_assets.gratuito`, migration 0020) já exigia `aprovado:true` explícito do Founder antes de qualquer geração paga, e isso não estava sendo checado. O gate de etapa `aprovacao` (pré-publicação, mais adiante no pipeline) é uma coisa diferente do booleano `content_jobs.aprovado` (gate de gasto, checável a qualquer momento) — a Fase 5 original conflou os dois.
+- `generateScript` agora recusa com **402** quando `job.aprovado !== true`, antes mesmo de selecionar o provider.
+- `approveContentJob({jobId})` (novo em `api/_content.js`) + rota `api/content-jobs/approve.mjs`: grava `aprovado:true`/`aprovado_por`/`aprovado_em` via `patchCommand` — ação explícita e separada do clique "Gerar roteiro".
+- UI: `ContentEnginePanel` mostra "Aprovar geração paga" primeiro nos jobs em `etapa=ideia` ainda não aprovados; "Gerar roteiro" só aparece depois. `useContentPipeline` ganhou `approveJob()`/`approvingJobId`/`approveError`.
+- 6 testes novos (`tests/content-engine.test.mjs`): 402 sem aprovação, os testes de sucesso/sem-provider atualizados para partir de um job já aprovado, mais 3 testes de `approveContentJob` (503 sem Supabase, 404 job inexistente, sucesso gravando os três campos) — total 60/60 passando.
+
 ## Consolidação Kairos — Missão 006, Fase 5: geração real de roteiro no Content Engine (14/09/2026)
 - `api/_content.js` ganhou `generateScript({jobId})`: primeiro estágio do motor de geração do Content Engine, `etapa ideia→roteiro`. Um clique do Founder por job, nunca em lote — mesma fronteira de autorização já entregue e sem objeção na Fase 2 (chat de agentes).
 - Validações em cascata, cada uma com status HTTP próprio: 400 sem `jobId`, 503 sem Supabase configurado, 404 job não encontrado, 409 job que não está em `etapa=ideia` (nunca regenera silenciosamente um roteiro já existente), 503 sem provider de LLM pago configurado, 502/status-do-provider se a chamada ao LLM falhar, 503 com o nome da migration pendente se a escrita final falhar.
