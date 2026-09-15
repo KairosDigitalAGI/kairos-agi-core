@@ -112,6 +112,25 @@ test('computeYoutubeStatus surfaces the pending-migration hint when the table do
   }
 })
 
+test('computeYoutubeStatus builds a clickable channel URL from the real channel id, and omits it when there is none to build from', async () => {
+  const originalFetch = globalThis.fetch
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
+      globalThis.fetch = async () => new Response(JSON.stringify([{ account_id: 'UCabc123', account_label: 'Kairos Digital', scope: 'x', expires_at: null, atualizado_em: null }]), { status: 200 })
+      const withChannel = await computeYoutubeStatus()
+      assert.equal(withChannel.connected, true)
+      assert.equal(withChannel.profileUrl, 'https://www.youtube.com/channel/UCabc123')
+
+      globalThis.fetch = async () => new Response(JSON.stringify([{ account_id: null, account_label: 'Kairos Digital', scope: 'x', expires_at: null, atualizado_em: null }]), { status: 200 })
+      const withoutChannel = await computeYoutubeStatus()
+      assert.equal(withoutChannel.connected, true)
+      assert.equal(withoutChannel.profileUrl, null)
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
 test('completeConnection rejects an unsigned or foreign state before ever touching Supabase', async () => {
   await withEnv({ KAIROS_TOKEN_ENCRYPTION_KEY: 'chave-de-teste-bem-longa' }, async () => {
     await assert.rejects(completeConnection({ code: 'abc', state: 'lixo' }), /expirou|não veio deste painel/)

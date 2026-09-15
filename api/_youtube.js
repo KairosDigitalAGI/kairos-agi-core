@@ -130,12 +130,16 @@ export async function computeYoutubeStatus() {
     return { connected: false, reason: 'SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.' }
   }
   try {
-    const rows = await readCommand('integracoes_tokens', '?select=account_label,scope,expires_at,atualizado_em&provider=eq.youtube&limit=1')
+    const rows = await readCommand('integracoes_tokens', '?select=account_id,account_label,scope,expires_at,atualizado_em&provider=eq.youtube&limit=1')
     const row = rows?.[0]
     if (!row) return { connected: false, reason: 'Nenhum canal conectado ainda.' }
     return {
       connected: true,
       accountLabel: row.account_label,
+      // channel.id é o ID real e estável do canal (Fase 4, gravado em
+      // completeConnection) — dá pra montar a URL pública do canal sem
+      // precisar de nenhuma chamada nova à API do Google.
+      profileUrl: row.account_id ? `https://www.youtube.com/channel/${row.account_id}` : null,
       scope: row.scope,
       expiresAt: row.expires_at,
       atualizadoEm: row.atualizado_em,

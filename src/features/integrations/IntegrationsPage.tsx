@@ -56,8 +56,10 @@ export function IntegrationsPage() {
 
   const youtubeConnected = youtube.state.status === 'ok' && youtube.state.data.connected
   const youtubeAccountLabel = youtube.state.status === 'ok' && youtube.state.data.connected ? youtube.state.data.accountLabel : null
+  const youtubeProfileUrl = youtube.state.status === 'ok' && youtube.state.data.connected ? youtube.state.data.profileUrl : null
   const instagramConnected = instagram.state.status === 'ok' && instagram.state.data.connected
   const instagramAccountLabel = instagram.state.status === 'ok' && instagram.state.data.connected ? instagram.state.data.accountLabel : null
+  const instagramProfileUrl = instagram.state.status === 'ok' && instagram.state.data.connected ? instagram.state.data.profileUrl : null
 
   return <section className="page-stack integrations-page">
     <header className="glass-panel integrations-hero">
@@ -77,6 +79,7 @@ export function IntegrationsPage() {
       const integration = definition.id === 'youtube' ? youtube : definition.id === 'instagram' ? instagram : null
       const connected = definition.id === 'youtube' ? youtubeConnected : definition.id === 'instagram' ? instagramConnected : provider.connected
       const accountLabel = definition.id === 'youtube' ? youtubeAccountLabel : definition.id === 'instagram' ? instagramAccountLabel : null
+      const profileUrl = definition.id === 'youtube' ? youtubeProfileUrl : definition.id === 'instagram' ? instagramProfileUrl : null
       const ready = provider.mode === 'manual-free' || (provider.oauthConfigured && status.tokenStoreConfigured)
       return <article className="glass-panel integration-card" key={definition.id}>
         <div className="integration-card-head"><div><span className="eyebrow">{definition.cost}</span><h3>{definition.label}</h3></div><span className={`integration-state ${connected ? 'connected' : ready ? 'ready' : ''}`}>{connected ? 'Conectada' : ready ? 'Preparada' : 'Configuração pendente'}</span></div>
@@ -86,6 +89,8 @@ export function IntegrationsPage() {
           {!header && <small>Desbloqueie o Painel Operacional acima para conectar.</small>}
           {header && connected && <>
             <small>Conta conectada: <strong>{accountLabel || 'sem nome informado pelo provedor'}</strong></small>
+            {profileUrl && <a className="integration-open-account" href={profileUrl} target="_blank" rel="noreferrer">Ver conta conectada <ExternalLink size={14} /></a>}
+            {!profileUrl && <small>O provedor não devolveu um identificador público para montar o link direto da conta.</small>}
             <button type="button" onClick={() => void integration.disconnect()}>Desconectar</button>
           </>}
           {header && !connected && <>

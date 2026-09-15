@@ -70,6 +70,25 @@ test('Instagram validates the professional profile and stores only encrypted tok
   } finally { globalThis.fetch = originalFetch }
 })
 
+test('Instagram status builds a clickable profile URL from the @username label, and omits it when the label is a display name instead', async () => {
+  const originalFetch = globalThis.fetch
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
+      globalThis.fetch = async () => new Response(JSON.stringify([{ account_label: '@_kairosdigital_', scope: 'x', expires_at: null, atualizado_em: null }]), { status: 200 })
+      const withUsername = await computeInstagramStatus()
+      assert.equal(withUsername.connected, true)
+      assert.equal(withUsername.profileUrl, 'https://www.instagram.com/_kairosdigital_/')
+
+      globalThis.fetch = async () => new Response(JSON.stringify([{ account_label: 'Kairos Digital', scope: 'x', expires_at: null, atualizado_em: null }]), { status: 200 })
+      const withoutUsername = await computeInstagramStatus()
+      assert.equal(withoutUsername.connected, true)
+      assert.equal(withoutUsername.profileUrl, null)
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
 test('Instagram status and disconnect fail closed without Supabase', async () => {
   await withEnv({}, async () => {
     const status = await computeInstagramStatus()

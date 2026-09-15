@@ -114,7 +114,18 @@ export async function computeInstagramStatus() {
     const rows = await readCommand('integracoes_tokens', '?select=account_label,scope,expires_at,atualizado_em&provider=eq.instagram&limit=1')
     const row = rows?.[0]
     if (!row) return { connected: false, reason: 'Nenhum perfil profissional conectado ainda.' }
-    return { connected: true, accountLabel: row.account_label, scope: row.scope, expiresAt: row.expires_at, atualizadoEm: row.atualizado_em }
+    // account_label só vira @username quando o Instagram devolveu um
+    // (completeInstagramConnection); sem isso vira o nome de exibição, que
+    // não é um handle válido de URL — nesse caso não inventa link.
+    const username = typeof row.account_label === 'string' && row.account_label.startsWith('@') ? row.account_label.slice(1) : null
+    return {
+      connected: true,
+      accountLabel: row.account_label,
+      profileUrl: username ? `https://www.instagram.com/${username}/` : null,
+      scope: row.scope,
+      expiresAt: row.expires_at,
+      atualizadoEm: row.atualizado_em,
+    }
   } catch (e) {
     return { connected: false, reason: `${MIGRATION_HINT} (${e.message})` }
   }
