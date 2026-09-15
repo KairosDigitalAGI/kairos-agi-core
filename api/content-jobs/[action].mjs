@@ -21,6 +21,7 @@ import {
   generateScript,
   generateVideo,
   postToYoutube,
+  postToInstagram,
 } from '../_content.js'
 
 function jobIdFromBody(req) {
@@ -63,6 +64,17 @@ const ACTIONS = {
     const { title, description, tags } = req.body || {}
     const { job, videoId } = await postToYoutube({ jobId, title, description, tags })
     return { status: 200, body: { job, videoId } }
+  },
+
+  async 'post-instagram'(req) {
+    const jobId = jobIdFromBody(req)
+    if (!jobId) return { status: 400, body: { erro: 'jobId é obrigatório' } }
+    const caption = typeof req.body?.caption === 'string' ? req.body.caption : undefined
+    const resultado = await postToInstagram({ jobId, caption })
+    // status:"processando" não é erro — o container do Reels ainda está
+    // sendo processado pelo Instagram; 202 sinaliza "aceito, ainda não
+    // concluído" pro cliente decidir se tenta de novo.
+    return { status: resultado.status === 'processando' ? 202 : 200, body: resultado }
   },
 }
 

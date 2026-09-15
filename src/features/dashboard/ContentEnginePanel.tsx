@@ -22,9 +22,10 @@ const ETAPA_LABEL: Record<ContentJobEtapa, string> = {
 // atrás de aprovação explícita de gasto (job.aprovado) — legenda ainda não
 // tem motor. Vídeo tem dois botões: "grátis" (Veo → fallback Kling v1.6,
 // esse fallback também exige aprovado) e "premium" (Kling v2.1 Master).
-// "Postar no YouTube" reaproveita o mesmo aprovado:true como sinal de
-// publicação (etapa aprovacao ainda não tem motor — ver comentário em
-// api/_content.js#postToYoutube) e sobe o vídeo como privado no canal.
+// "Postar no YouTube"/"Postar no Instagram" reaproveitam o mesmo
+// aprovado:true como sinal de publicação (etapa aprovacao ainda não tem
+// motor — ver comentário em api/_content.js#postToYoutube) e sobem o
+// vídeo como privado no canal / Reels via container assíncrono.
 export function ContentEnginePanel() {
   const {
     state,
@@ -35,6 +36,7 @@ export function ContentEnginePanel() {
     generateImage,
     generateVideo,
     postToYoutube,
+    postToInstagram,
     generatingJobId,
     generateError,
     approveJob,
@@ -148,6 +150,16 @@ export function ContentEnginePanel() {
                       onClick={() => void postToYoutube(job.id)}
                     >
                       {generatingJobId === job.id ? 'Publicando…' : 'Postar no YouTube'}
+                    </button>
+                  )}
+                  {job.etapa === 'video' && job.aprovado && (
+                    <button
+                      type="button"
+                      className="content-engine-generate"
+                      disabled={generatingJobId === job.id}
+                      onClick={() => void postToInstagram(job.id)}
+                    >
+                      {generatingJobId === job.id ? 'Publicando…' : 'Postar no Instagram'}
                     </button>
                   )}
                 </li>

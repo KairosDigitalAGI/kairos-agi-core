@@ -12,9 +12,21 @@ import * as veo from './_providers/veo.js'
 import * as fal from './_providers/fal.js'
 import { uploadToStorage, safePath } from './_storage.js'
 import { getValidAccessToken, uploadVideo } from './_youtube.js'
+import { getValidInstagramAccess, createReelsContainer, checkContainerStatus, publishReelsContainer } from './_instagram.js'
 
 const MIGRATION_HINT =
   'A migration supabase/migrations/0020_content_engine.sql (repo kairos-command) ainda não foi aplicada em produção — colar no SQL Editor do Supabase para ativar o Content Engine.'
+
+// Lidas a cada chamada (não numa const de módulo), mesma convenção de
+// api/_providers/fal.js#pollIntervalMs/pollTimeoutMs — assim os testes
+// conseguem acelerar o polling do container do Reels via env var sem
+// depender da ordem de import.
+function instagramPollIntervalMs() {
+  return Number(process.env.INSTAGRAM_POLL_INTERVAL_MS) || 3000
+}
+function instagramPollMaxTentativas() {
+  return Number(process.env.INSTAGRAM_POLL_MAX_TENTATIVAS) || 8
+}
 
 export async function computeContentPipeline() {
   if (!commandConfigured()) {
@@ -582,6 +594,181 @@ export async function postToYoutube({ jobId, title, description, tags }) {
     return { job: updatedJob || { ...job, etapa: 'publicado' }, videoId: resultado.videoId }
   } catch (e) {
     const err = new Error(`${MIGRATION_HINT} (${e.message}) — o vídeo já foi publicado no YouTube com id ${resultado.videoId}, só o registro em content_calendar/content_jobs falhou.`)
+    err.status = 503
+    throw err
+  }
+}
+
+/**
+ * Publica o vídeo aprovado como Reels no Instagram. Mesmo gate de
+ * `postToYoutube` (etapa="video" && aprovado:true — ver comentário lá em
+ * cima) e mesma fonte de vídeo (content_assets.storage_path, já público).
+ *
+ * Diferente do YouTube, a API do Instagram processa o vídeo de forma
+ * assíncrona num "container": criar, esperar terminar de processar, só
+ * depois publicar. Por isso o creation_id é gravado em content_calendar
+ * (status "agendado", único valor do enum que serve pra "ainda não
+ * publicado") ANTES de esperar — se a function for encerrada no meio da
+ * espera, a PRÓXIMA chamada lê esse mesmo registro e retoma do mesmo
+ * container, nunca cria um segundo nem duplica o Reels. A espera tem
+ * orçamento curto (até ~24s por padrão — INSTAGRAM_POLL_INTERVAL_MS ×
+ * INSTAGRAM_POLL_MAX_TENTATIVAS, mesma convenção de configurabilidade de
+ * api/_providers/fal.js) pra não estourar o timeout da function; se o
+ * Instagram ainda não terminou de processar, devolve status:"processando"
+ * sem erro — o Founder clica de novo em instantes.
+ */
+export async function postToInstagram({ jobId, caption }) {
+  if (typeof jobId !== 'string' || !jobId.trim()) {
+    const err = new Error('jobId é obrigatório')
+    err.status = 400
+    throw err
+  }
+  if (!commandConfigured()) {
+    const err = new Error('SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.')
+    err.status = 503
+    throw err
+  }
+
+  let job
+  try {
+    const rows = await readCommand('content_jobs', `?select=id,titulo,etapa,briefing,aprovado&id=eq.${encodeURIComponent(jobId)}&limit=1`)
+    job = rows?.[0]
+  } catch (e) {
+    const err = new Error(`${MIGRATION_HINT} (${e.message})`)
+    err.status = 503
+    throw err
+  }
+  if (!job) {
+    const err = new Error(`content_job ${jobId} não encontrado.`)
+    err.status = 404
+    throw err
+  }
+  if (job.etapa !== 'video') {
+    const err = new Error(`content_job ${jobId} está em etapa "${job.etapa}", não "video" — gere o vídeo antes, ou o job já foi publicado.`)
+    err.status = 409
+    throw err
+  }
+  if (!job.aprovado) {
+    const err = new Error(
+      `content_job ${jobId} ainda não foi aprovado (aprovado:false). O Founder precisa aprovar este job antes de publicar no Instagram.`,
+    )
+    err.status = 402
+    throw err
+  }
+
+  let asset
+  try {
+    const rows = await readCommand(
+      'content_assets',
+      `?select=id,storage_path&job_id=eq.${encodeURIComponent(job.id)}&tipo=eq.video&order=criado_em.desc&limit=1`,
+    )
+    asset = rows?.[0]
+  } catch (e) {
+    const err = new Error(`${MIGRATION_HINT} (${e.message})`)
+    err.status = 503
+    throw err
+  }
+  if (!asset?.storage_path) {
+    const err = new Error(`content_job ${jobId} está em etapa "video" mas não tem nenhum content_asset de vídeo gravado — nada para publicar.`)
+    err.status = 409
+    throw err
+  }
+
+  // Idempotência: reaproveita o agendamento já criado pra este asset em vez
+  // de abrir um segundo container a cada clique/retry.
+  let agendamento
+  try {
+    const rows = await readCommand(
+      'content_calendar',
+      `?select=id,status,referencia_externa&asset_id=eq.${encodeURIComponent(asset.id)}&canal=eq.instagram&order=criado_em.desc&limit=1`,
+    )
+    agendamento = rows?.[0]
+  } catch (e) {
+    const err = new Error(`${MIGRATION_HINT} (${e.message})`)
+    err.status = 503
+    throw err
+  }
+  if (agendamento?.status === 'publicado') {
+    const [updatedJob] = await patchCommand('content_jobs', `?id=eq.${encodeURIComponent(job.id)}`, { etapa: 'publicado' }).catch(() => [null])
+    return { job: updatedJob || { ...job, etapa: 'publicado' }, mediaId: agendamento.referencia_externa, status: 'publicado' }
+  }
+
+  const { accessToken, igUserId } = await getValidInstagramAccess()
+
+  let creationId = agendamento?.status === 'agendado' ? agendamento.referencia_externa : null
+  if (!creationId) {
+    try {
+      creationId = await createReelsContainer({ accessToken, igUserId, videoUrl: asset.storage_path, caption: caption || job.titulo })
+    } catch (e) {
+      const err = new Error(`instagram: ${e.message}`)
+      err.status = e.status && e.status >= 400 && e.status < 600 ? e.status : 502
+      throw err
+    }
+    try {
+      if (agendamento) {
+        await patchCommand('content_calendar', `?id=eq.${encodeURIComponent(agendamento.id)}`, { referencia_externa: creationId, status: 'agendado' })
+      } else {
+        await writeCommand('content_calendar', {
+          asset_id: asset.id,
+          canal: 'instagram',
+          publicar_em: new Date().toISOString(),
+          status: 'agendado',
+          referencia_externa: creationId,
+        })
+      }
+    } catch (e) {
+      const err = new Error(`${MIGRATION_HINT} (${e.message}) — o container ${creationId} já foi criado no Instagram, só o registro em content_calendar falhou.`)
+      err.status = 503
+      throw err
+    }
+  }
+
+  let statusCode = 'IN_PROGRESS'
+  const maxTentativas = instagramPollMaxTentativas()
+  for (let tentativa = 0; tentativa < maxTentativas; tentativa += 1) {
+    try {
+      statusCode = await checkContainerStatus({ accessToken, creationId })
+    } catch (e) {
+      const err = new Error(`instagram: ${e.message}`)
+      err.status = e.status && e.status >= 400 && e.status < 600 ? e.status : 502
+      throw err
+    }
+    if (statusCode === 'FINISHED' || statusCode === 'ERROR' || statusCode === 'EXPIRED') break
+    await new Promise((resolve) => setTimeout(resolve, instagramPollIntervalMs()))
+  }
+
+  if (statusCode === 'IN_PROGRESS') {
+    return { job, status: 'processando', creationId }
+  }
+  if (statusCode !== 'FINISHED') {
+    await patchCommand('content_calendar', `?asset_id=eq.${encodeURIComponent(asset.id)}&canal=eq.instagram`, { status: 'falhou' }).catch(() => {})
+    const err = new Error(`instagram: o Reels não pôde ser processado (status ${statusCode}).`)
+    err.status = 502
+    throw err
+  }
+
+  let mediaId
+  try {
+    mediaId = await publishReelsContainer({ accessToken, igUserId, creationId })
+  } catch (e) {
+    const err = new Error(`instagram: ${e.message}`)
+    err.status = e.status && e.status >= 400 && e.status < 600 ? e.status : 502
+    throw err
+  }
+
+  // Neste ponto o Reels JÁ está publicado (mediaId existe) — mesma regra do
+  // YouTube logo acima: uma falha daqui pra frente é só registro local
+  // desatualizado, nunca motivo pra tentar de novo (duplicaria o Reels).
+  try {
+    await patchCommand('content_calendar', `?asset_id=eq.${encodeURIComponent(asset.id)}&canal=eq.instagram`, {
+      status: 'publicado',
+      publicado_em: new Date().toISOString(),
+      referencia_externa: mediaId,
+    })
+    const [updatedJob] = await patchCommand('content_jobs', `?id=eq.${encodeURIComponent(job.id)}`, { etapa: 'publicado' })
+    return { job: updatedJob || { ...job, etapa: 'publicado' }, mediaId, status: 'publicado' }
+  } catch (e) {
+    const err = new Error(`${MIGRATION_HINT} (${e.message}) — o Reels já foi publicado no Instagram com id ${mediaId}, só o registro em content_calendar/content_jobs falhou.`)
     err.status = 503
     throw err
   }

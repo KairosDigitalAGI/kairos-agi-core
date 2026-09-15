@@ -29,6 +29,10 @@ O aplicativo deve usar Instagram API with Instagram Login. Variáveis privadas n
 
 Escopos solicitados: `instagram_business_basic` e `instagram_business_content_publish`. A conta deve ser profissional. O callback troca o token curto por token de longa duração e consulta o perfil antes de persistir.
 
+## Publicação de Reels
+
+Missão 006, Fase 12: `postToInstagram({jobId, caption})` em `api/_content.js` publica de verdade um job em `etapa="video"` já aprovado, usando o `content_assets.storage_path` público do vídeo (não faz upload binário — a Content Publishing API da Meta exige URL, diferente do YouTube). As chamadas HTTP ficam em `api/_instagram.js` (`getValidInstagramAccess`, `createReelsContainer`, `checkContainerStatus`, `publishReelsContainer`). Fluxo assíncrono de três passos: cria o container → faz polling do `status_code` (orçamento curto, configurável por `INSTAGRAM_POLL_INTERVAL_MS`/`INSTAGRAM_POLL_MAX_TENTATIVAS`) → publica quando `FINISHED`. O `creation_id` é gravado em `command.content_calendar` (`status:"agendado"`) antes de esperar, para retomar do mesmo container em vez de duplicar o Reels se a function for encerrada no meio do polling; se o orçamento de espera esgotar antes do Instagram terminar, devolve `status:"processando"` sem erro — o Founder clica de novo em instantes. Ver `docs/context/CHANGELOG.md` (Fase 12) para o detalhamento completo.
+
 ## Limites
 
-Esta fase conecta e identifica a conta. Ela não publica Reels. O envio de mídia exige URL pública do ativo, aprovação server-side, idempotência, consulta do status do container e registro em `content_calendar`. Desconectar remove o token do Kairos, mas não revoga o aplicativo diretamente no provedor.
+Desconectar remove o token do Kairos, mas não revoga o aplicativo diretamente no provedor.

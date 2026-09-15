@@ -183,6 +183,44 @@ export function useContentPipeline() {
     [header, refresh],
   )
 
+  // O Founder aciona a publicação de UM job em etapa "video" no Instagram
+  // já conectado (clique explícito, ação irreversível). A API do Instagram
+  // processa o vídeo de forma assíncrona: se o backend devolver
+  // status:"processando" (container ainda não terminou), NÃO é erro — o
+  // job continua em etapa "video" e o botão segue disponível pro Founder
+  // clicar de novo em instantes; ver api/_content.js#postToInstagram.
+  const postToInstagram = useCallback(
+    async (jobId: string, caption?: string) => {
+      if (!header) return false
+      setGeneratingJobId(jobId)
+      setGenerateError(null)
+      try {
+        const response = await fetch('/api/content-jobs/post-instagram', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', authorization: header },
+          body: JSON.stringify({ jobId, caption }),
+        })
+        const body = await response.json().catch(() => ({}))
+        if (!response.ok) {
+          setGenerateError(body.erro || `/api/content-jobs/post-instagram respondeu ${response.status}.`)
+          return false
+        }
+        await refresh()
+        if (body.status === 'processando') {
+          setGenerateError('O Instagram ainda está processando o Reels — clique de novo em instantes para concluir a publicação.')
+          return false
+        }
+        return true
+      } catch {
+        setGenerateError('Não foi possível publicar no Instagram neste ambiente. Nenhuma publicação foi presumida feita.')
+        return false
+      } finally {
+        setGeneratingJobId(null)
+      }
+    },
+    [header, refresh],
+  )
+
   // Aprova o gasto de UM job antes de gerar conteúdo pago — passo separado
   // de "Gerar roteiro", exigido pelo próprio schema (aprovado:true).
   const approveJob = useCallback(
@@ -223,6 +261,7 @@ export function useContentPipeline() {
     generateImage,
     generateVideo,
     postToYoutube,
+    postToInstagram,
     generatingJobId,
     generateError,
     approveJob,
