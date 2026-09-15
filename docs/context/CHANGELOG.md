@@ -1,5 +1,12 @@
 # Changelog
 
+## Ativação operacional do YouTube — canal real conectado (15/09/2026)
+- Habilitada a YouTube Data API v3 no projeto Google Cloud `kairos-495011`, permanecendo na cota gratuita padrão.
+- OAuth concluído com os escopos mínimos já implementados: `youtube.readonly` e `youtube.upload`.
+- Canal validado pelo backend de produção: `Kairos Digital`, handle `@KairosDigitalAGI`, channel ID `UC2TqvTgMsTkywGQS3oiYDsg` e link público `https://www.youtube.com/channel/UC2TqvTgMsTkywGQS3oiYDsg`.
+- O token permanece cifrado no cofre `command.integracoes_tokens`; nenhum segredo foi escrito no repositório. Uploads da Fase 8 continuam privados por padrão e só partem de job real aprovado.
+- Nenhuma alteração de código foi necessária para a conexão. Esta entrada corrige os estados documentais antigos que ainda diziam que o consentimento estava pendente.
+
 ## Missão 006, Fase 13 — link direto para a conta social conectada (15/09/2026)
 - `api/_youtube.js#computeYoutubeStatus()` passou a selecionar `account_id` (o ID real e estável do canal, gravado desde a Fase 4 em `completeConnection`) e devolve `profileUrl: https://www.youtube.com/channel/{account_id}` — zero chamada nova à API do Google, é só montar a URL a partir de um dado que já estava salvo.
 - `api/_instagram.js#computeInstagramStatus()` deriva um `username` a partir de `account_label` só quando ele começa com `@` (formato gravado por `completeInstagramConnection` quando a Graph API devolve `username`); nesse caso devolve `profileUrl: https://www.instagram.com/{username}/`. Quando `account_label` é um nome de exibição sem `@` (a Graph API não devolveu `username`), devolve `profileUrl: null` — nunca inventa um link a partir de um nome que não é garantidamente um handle válido de URL.

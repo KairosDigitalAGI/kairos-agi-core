@@ -2,14 +2,14 @@
 
 O Centro de Integrações expõe somente o estado real da configuração no servidor. A função `api/integrations/status.mjs` verifica a presença das variáveis necessárias e nunca retorna seus valores. O frontend não presume conexão com base em uma sessão aberta no navegador.
 
-Instagram e YouTube usarão OAuth de aplicação web. Tokens serão persistidos apenas depois da Missão 006, com Supabase, criptografia de aplicação e RLS. Até essa fundação existir, os botões conduzem aos portais oficiais e o estado permanece pendente.
+Instagram e YouTube usam OAuth de aplicação web. Tokens são persistidos no Supabase apenas pelo backend, cifrados na aplicação e protegidos por RLS sem policy pública. O YouTube está conectado ao canal real Kairos Digital; o Instagram continua pendente até configurar o app Meta e concluir o consentimento da conta profissional.
 
 O X permanece em modo manual de custo zero porque sua API é paga por uso. A etapa futura exportará vídeo, texto e link, abrirá o compositor e exigirá confirmação do Founder antes da publicação.
 
 ## Variáveis de servidor
 
-- Meta: `META_APP_ID`, `META_APP_SECRET`.
-- Google: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`.
+- Meta: `META_APP_ID`, `META_APP_SECRET`, `META_OAUTH_REDIRECT_URI`.
+- Google: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_OAUTH_REDIRECT_URI`.
 - Token store: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `KAIROS_TOKEN_ENCRYPTION_KEY`.
 
 Os nomes ficam em `.env.example`; os valores reais entram somente nas variáveis de ambiente da Vercel. Senhas pessoais nunca são solicitadas pela aplicação ou salvas no repositório.

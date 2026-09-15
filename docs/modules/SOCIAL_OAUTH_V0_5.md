@@ -2,7 +2,7 @@
 
 ## Estado
 
-YouTube e Instagram usam a mesma fronteira de segurança do Painel Operacional e o cofre `command.integracoes_tokens`. O YouTube já possui cliente OAuth configurado em produção, mas ainda não há conexão confirmada. O Instagram está implementado e aguarda as três variáveis Meta.
+YouTube e Instagram usam a mesma fronteira de segurança do Painel Operacional e o cofre `command.integracoes_tokens`. O YouTube está conectado em produção ao canal Kairos Digital (`@KairosDigitalAGI`, channel ID `UC2TqvTgMsTkywGQS3oiYDsg`) e foi validado pelo endpoint de status em 15/09/2026. O Instagram está implementado e aguarda as três variáveis Meta.
 
 ## Contrato
 

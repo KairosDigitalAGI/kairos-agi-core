@@ -15,7 +15,7 @@
 
 O token store já existe em `command.integracoes_tokens`. `api/_youtube.js` e `api/_instagram.js` validam a identidade remota e cifram tokens com AES-256-GCM. A rota dinâmica `api/integrations/[provider]/[action].mjs` preserva `connect-url`, `callback`, `status` e `disconnect` para ambos os provedores em uma única função Vercel. A contagem caiu de 12 para 9 funções públicas, mantendo margem no plano Hobby.
 
-Início, status e desconexão exigem o Basic Auth do Painel Operacional. O callback valida `state` HMAC com validade curta, pois o provedor não reenvia o cabeçalho Basic Auth. O YouTube possui renovação e upload privado; o Instagram desta fase limita-se ao vínculo OAuth. Publicação de Reels requer fila e aprovação server-side próprias.
+Início, status e desconexão exigem o Basic Auth do Painel Operacional. O callback valida `state` HMAC com validade curta, pois o provedor não reenvia o cabeçalho Basic Auth. O YouTube possui renovação e upload privado e está conectado ao canal real Kairos Digital. O Instagram possui vínculo OAuth e publicação assíncrona de Reels implementados; a ativação aguarda o app Meta e consentimento da conta profissional. Ambos exigem job aprovado no servidor antes de publicar.
 
 Esta arquitetura implementa progressivamente a constituição em `KAIROS_AGI_BLUEPRINT_V1.md`. O Blueprint define os domínios; este documento registra como eles serão separados e integrados.
 

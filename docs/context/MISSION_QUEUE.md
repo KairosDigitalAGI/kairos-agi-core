@@ -8,13 +8,13 @@
 | 004 | Implementada e corrigida | Geração motion do zero por roteiro e pós-produção local; render e download WebM |
 | 004.1 | Implementada | Control Plane de integrações e plano operacional de sete dias; credenciais ainda pendentes |
 | 005 | Planejada | KAIROS WhatsApp; preservar operação existente e validar conexão separada |
-| 006 | Fase 5 entregue (14/09/2026) | Supabase Core (Fase 1: leitura real de `command.receitas`/`command.clientes`/`command.agents`); chat de agentes com provider Anthropic/OpenAI > OpenRouter (Fase 2); schema + primeira fatia do Content Engine, migration `0020_content_engine.sql` redigida e pendente de aplicar (Fase 3); OAuth do YouTube com cofre de tokens cifrado, migration `0021_integracoes_tokens.sql` redigida e pendente de aplicar, ativação real bloqueada até o Founder criar o OAuth Client no Google Cloud (Fase 4); geração real de roteiro (ideia→roteiro) via provider pago, um clique do Founder por job, exigindo aprovação explícita de gasto (`content_jobs.aprovado:true`) separada do clique de gerar (Fase 5); geração real de imagem de capa (roteiro→imagem) via OpenAI, gravada no bucket Storage `content-assets`, migration `0022_content_assets_bucket.sql` redigida e pendente de aplicar (Fase 6). RLS e schemas de origem não foram alterados |
+| 006 | Fase 13 entregue; YouTube real conectado (15/09/2026) | Supabase Core, Content Engine, geração de roteiro/imagem/vídeo, publicação privada no YouTube, Story/Avatar, OAuth social consolidado, publicação de Reels e links de contas. Canal Kairos Digital conectado e validado em produção. Próximo bloqueio externo: criar/configurar o app Meta e conectar o Instagram profissional. |
 | 007 | Planejada | Billing Center; sem cobrança ou upgrade automático autorizado |
 | 008 | Planejada | Money Hunter Intelligence Center e Ideas Vault |
 | 009 | Planejada | Founder Mobile App |
 | 010 | Planejada | World 0.2, incluindo Money Hunter |
 
-A numeração 003–008 anterior foi substituída por esta fila em 11/09/2026. Missão 004 foi autorizada posteriormente. Nenhuma publicação ou integração externa foi ativada.
+A numeração 003–008 anterior foi substituída por esta fila em 11/09/2026. Missão 004 foi autorizada posteriormente. O YouTube tornou-se a primeira integração externa real conectada em 15/09/2026; publicação continua privada por padrão e exige aprovação do Founder.
 
 Correção autorizada após Missão 003: organograma completo importado e exposto no painel/World. A Missão 004 foi ampliada após validação do Founder: criação do zero é o fluxo principal; edição virou pós-produção. Nenhum serviço externo foi ativado.
 

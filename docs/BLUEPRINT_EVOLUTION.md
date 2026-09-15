@@ -1,5 +1,9 @@
 # Evolução do Blueprint
 
+## 15/09/2026 — ativação real do canal YouTube
+
+O primeiro vínculo externo de publicação foi concluído sem alterar a arquitetura: YouTube Data API v3 habilitada na cota gratuita, OAuth com `youtube.readonly` e `youtube.upload`, e canal Kairos Digital (`@KairosDigitalAGI`, ID `UC2TqvTgMsTkywGQS3oiYDsg`) confirmado pelo backend de produção. Tokens continuam cifrados no cofre server-side. A publicação permanece privada por padrão e condicionada ao job aprovado, preservando a autoridade do Founder. Instagram é a próxima ativação externa e depende do app Meta.
+
 ## 15/09/2026 — Missão 006, Fase 11: Social OAuth consolidado
 
 Instagram profissional passa a usar o mesmo cofre cifrado, autenticação operacional e prova HMAC do YouTube. A identidade é consultada no Graph antes da persistência; configuração não é tratada como conexão. Uma rota dinâmica substitui as quatro funções isoladas do YouTube e serve os dois provedores sem mudar os callbacks públicos, reduzindo o total de funções Vercel de 12 para 9. O vínculo Instagram não publica Reels nesta fase.
