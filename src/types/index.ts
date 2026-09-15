@@ -12,6 +12,7 @@ export type ModuleKey =
   | 'money-lab'
   | 'analytics'
   | 'integrations'
+  | 'avatars'
   | 'vault'
   | 'settings'
 

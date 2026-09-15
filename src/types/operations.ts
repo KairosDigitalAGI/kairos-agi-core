@@ -77,3 +77,51 @@ export interface ContentPipelineResponse {
   jobs: ContentJob[]
   porEtapa: Partial<Record<ContentJobEtapa, number>>
 }
+
+// Avatar Studio (Fase 9) — identidade vem de src/data/agentRegistry.json,
+// progresso vem de command.avatars. hasProgress:false = agente ainda sem
+// linha gravada no Supabase, nivel/xp/coins mostrados são o baseline (1/0/0),
+// nunca um número fabricado.
+export interface AvatarProgress {
+  slug: string
+  name: string
+  role: string
+  department: string
+  hasProgress: boolean
+  nivel: number
+  xp: number
+  coins: number
+  conquistas: unknown[]
+  atualizadoEm: string | null
+}
+
+export interface AvatarStudioResponse {
+  source: DataSource
+  checkedAt?: string
+  reason?: string
+  avatars: AvatarProgress[]
+}
+
+// Story Engine (Fase 10)
+export interface StoryNarrativeResponse {
+  source: DataSource
+  checkedAt?: string
+  reason?: string
+  narrative?: string
+  provider?: string
+}
+
+export interface AgentActivityItem {
+  jobId: string
+  titulo: string
+  etapa: ContentJobEtapa
+  atualizadoEm: string
+  agente: { slug: string; name: string; department: string }
+}
+
+export interface AgentActivityResponse {
+  source: DataSource
+  checkedAt?: string
+  reason?: string
+  activity: AgentActivityItem[]
+}

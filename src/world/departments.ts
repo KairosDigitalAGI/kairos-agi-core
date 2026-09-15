@@ -12,4 +12,5 @@ export const departments: Record<ModuleKey, Department> = {
   instagram: social, clone: studio, video: { ...studio, area: 'Estúdio de vídeo local' }, 'money-lab': money,
   analytics: { ...infra, area: 'Analytics' }, integrations: { ...infra, area: 'Central de integrações' }, settings: infra,
   vault: { ...infra, name: 'Vault District', area: 'Identidades · ainda vazio' },
+  avatars: { ...studio, area: 'Avatar Studio · gamificação' },
 }
