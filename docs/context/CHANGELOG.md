@@ -1,6 +1,7 @@
 # Changelog
 
 ## Missão 006, Fase 11 — Social OAuth consolidado (15/09/2026)
+- Corrigido o travamento observado ao conectar YouTube: o formulário agora valida Basic Auth no servidor antes de salvar a sessão, credenciais antigas inválidas são removidas e respostas 401 de API não acionam o prompt HTTP nativo do navegador.
 - Sincronizadas e preservadas as Fases 1–10 que chegaram ao `main` remoto.
 - Instagram profissional ganhou OAuth real, token longo cifrado e validação do perfil antes de persistir.
 - YouTube e Instagram agora compartilham um hook de interface e uma rota dinâmica por provedor/ação.

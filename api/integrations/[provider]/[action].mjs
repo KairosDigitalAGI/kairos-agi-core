@@ -40,6 +40,7 @@ export default async function handler(req, res) {
   }
   if (!checkAuth(req)) return unauthorized(res)
   try {
+    if (action === 'auth-check' && req.method === 'GET') return res.status(200).json({ ok: true })
     if (action === 'connect-url' && req.method === 'GET') return res.status(200).json({ url: adapter.build() })
     if (action === 'status' && req.method === 'GET') return res.status(200).json(await adapter.status())
     if (action === 'disconnect' && req.method === 'POST') return res.status(200).json(await adapter.disconnect())

@@ -4,6 +4,8 @@
 .ops-unlock input:focus { outline: 1px solid rgba(155,108,255,.55); }
 .ops-unlock button { display: inline-flex; align-items: center; gap: 6px; border: 1px solid rgba(155,108,255,.4); background: rgba(124,58,237,.16); color: #f2eefb; border-radius: 8px; padding: 7px 12px; font-size: .76rem; cursor: pointer; white-space: nowrap; }
 .ops-unlock button:hover { background: rgba(124,58,237,.28); }
+.ops-unlock button:disabled { opacity: .55; cursor: wait; }
+.ops-unlock-error { width: 100%; color: #fca5a5; text-align: right; }
 .ops-unlock-active { color: var(--success, #4ade80); }
 .ops-unlock-active button { background: transparent; border-color: var(--border); color: var(--muted); }
 

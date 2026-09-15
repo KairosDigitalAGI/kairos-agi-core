@@ -8,9 +8,11 @@ import './operations.css'
 // nunca é a mesma do login do site — é o KAIROS_USER/KAIROS_PASS configurado
 // só para este projeto na Vercel do kairos-agi-core (ver api/_auth.js).
 export function OperationsUnlock() {
-  const { header, setCredentials, clear } = useOperationsAuth()
+  const { header, unlock, clear } = useOperationsAuth()
   const [user, setUser] = useState('')
   const [pass, setPass] = useState('')
+  const [checking, setChecking] = useState(false)
+  const [error, setError] = useState('')
 
   if (header) {
     return (
@@ -22,10 +24,13 @@ export function OperationsUnlock() {
     )
   }
 
-  const onSubmit = (event: FormEvent) => {
+  const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
     if (!user || !pass) return
-    setCredentials(user, pass)
+    setChecking(true); setError('')
+    const valid = await unlock(user, pass)
+    setChecking(false)
+    if (!valid) return setError('Usuário ou senha recusados pelo servidor.')
     setPass('')
   }
 
@@ -47,7 +52,8 @@ export function OperationsUnlock() {
         value={pass}
         onChange={(event) => setPass(event.target.value)}
       />
-      <button type="submit"><Unlock size={14} /> Desbloquear</button>
+      <button type="submit" disabled={checking}><Unlock size={14} /> {checking ? 'Validando…' : 'Desbloquear'}</button>
+      {error && <small className="ops-unlock-error" role="alert">{error}</small>}
     </form>
   )
 }

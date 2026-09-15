@@ -37,7 +37,9 @@ export function checkAuth(req) {
 }
 
 export function unauthorized(res) {
-  res.setHeader('WWW-Authenticate', 'Basic realm="Kairos AGI Core", charset="UTF-8"')
+  // Estas rotas são chamadas por fetch a partir do formulário próprio do
+  // Core. WWW-Authenticate faria o navegador abrir um prompt HTTP nativo e
+  // deixaria a Promise pendente quando a credencial estivesse errada.
   res.setHeader('Cache-Control', 'no-store')
   return res.status(401).end()
 }

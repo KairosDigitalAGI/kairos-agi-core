@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 
 // Guarda a credencial Basic Auth do "Painel Operacional" (business-metrics,
 // agent-status) só em sessionStorage — some ao fechar a aba, nunca vai para
@@ -10,7 +10,7 @@ const KEY = 'kairos.ops.basic.v1'
 
 interface OperationsAuthValue {
   header: string | null
-  setCredentials: (user: string, pass: string) => void
+  unlock: (user: string, pass: string) => Promise<boolean>
   clear: () => void
 }
 
@@ -27,17 +27,35 @@ function load(): string | null {
 export function OperationsAuthProvider({ children }: { children: ReactNode }) {
   const [header, setHeader] = useState<string | null>(load)
 
-  const setCredentials = (user: string, pass: string) => {
+  useEffect(() => {
+    if (!header) return
+    let active = true
+    void fetch('/api/integrations/youtube/auth-check', { headers: { authorization: header }, cache: 'no-store' })
+      .then(response => { if (active && !response.ok) clear() })
+      .catch(() => { /* indisponibilidade temporária não apaga a credencial da sessão */ })
+    return () => { active = false }
+  }, [header])
+
+  const unlock = async (user: string, pass: string) => {
     const token = `Basic ${btoa(`${user}:${pass}`)}`
+    try {
+      const response = await fetch('/api/integrations/youtube/auth-check', {
+        headers: { authorization: token, accept: 'application/json' }, cache: 'no-store',
+      })
+      if (!response.ok) return false
+    } catch {
+      return false
+    }
     try {
       sessionStorage.setItem(KEY, token)
     } catch {
       // Sem storage: a credencial ainda funciona nesta renderização, só não sobrevive a reload.
     }
     setHeader(token)
+    return true
   }
 
-  const clear = () => {
+  function clear() {
     try {
       sessionStorage.removeItem(KEY)
     } catch {
@@ -46,7 +64,7 @@ export function OperationsAuthProvider({ children }: { children: ReactNode }) {
     setHeader(null)
   }
 
-  return <Context.Provider value={{ header, setCredentials, clear }}>{children}</Context.Provider>
+  return <Context.Provider value={{ header, unlock, clear }}>{children}</Context.Provider>
 }
 
 export function useOperationsAuth() {

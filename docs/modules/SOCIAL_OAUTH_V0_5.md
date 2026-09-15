@@ -7,6 +7,7 @@ YouTube e Instagram usam a mesma fronteira de segurança do Painel Operacional e
 ## Contrato
 
 - `GET /api/integrations/{provider}/connect-url`: exige Basic Auth e devolve a URL oficial de consentimento.
+- `GET /api/integrations/youtube/auth-check`: valida a credencial operacional antes de marcar a sessão local como desbloqueada.
 - `GET /api/integrations/{provider}/callback`: valida o `state` HMAC com janela de dez minutos, troca o código e consulta a conta real.
 - `GET /api/integrations/{provider}/status`: exige Basic Auth e devolve apenas nome público, escopo e validade.
 - `POST /api/integrations/{provider}/disconnect`: exige Basic Auth e remove o vínculo local cifrado.
