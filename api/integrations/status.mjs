@@ -1,5 +1,5 @@
 const definitions = [
-  { id: 'instagram', mode: 'oauth', required: ['META_APP_ID', 'META_APP_SECRET'] },
+  { id: 'instagram', mode: 'oauth', required: ['META_APP_ID', 'META_APP_SECRET', 'META_OAUTH_REDIRECT_URI'] },
   { id: 'youtube', mode: 'oauth', required: ['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'GOOGLE_OAUTH_REDIRECT_URI'] },
   { id: 'x', mode: 'manual-free', required: [] },
 ]

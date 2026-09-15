@@ -1,5 +1,14 @@
 # Changelog
 
+## Missão 006, Fase 11 — Social OAuth consolidado (15/09/2026)
+- Sincronizadas e preservadas as Fases 1–10 que chegaram ao `main` remoto.
+- Instagram profissional ganhou OAuth real, token longo cifrado e validação do perfil antes de persistir.
+- YouTube e Instagram agora compartilham um hook de interface e uma rota dinâmica por provedor/ação.
+- As quatro funções separadas do YouTube foram consolidadas; o total público caiu de 12 para 9 no plano Vercel Hobby.
+- URLs e comportamento do YouTube foram preservados, incluindo Basic Auth, HMAC, refresh token e upload privado.
+- Instagram permanece desconectado até `META_APP_ID`, `META_APP_SECRET` e `META_OAUTH_REDIRECT_URI` existirem na Vercel e o Founder concluir o consentimento.
+- 110 testes passam; typecheck e build passam. Nenhuma mídia foi publicada nesta fase.
+
 ## Consolidação Kairos — Missão 006, Fase 8: publicação real no YouTube (14/09/2026)
 - `api/_youtube.js` ganhou `getValidAccessToken()`: decifra o access_token salvo (Fase 4), e se estiver vencido (ou a <60s de vencer) troca pelo `refresh_token` via `grant_type=refresh_token`, persiste o novo `access_token_enc`/`expires_at` via `upsertCommand` (payload parcial — não mexe em `account_id`/`refresh_token_enc`/etc.) e devolve o token pronto pra usar. Sem canal conectado, 404; sem `refresh_token` salvo e token vencido, 401 pedindo reconexão manual — nunca tenta reautenticar sozinho.
 - `api/_youtube.js` ganhou `uploadVideo({accessToken, title, description, tags, videoBuffer})`: multipart/related montado à mão (boundary aleatório, zero SDK), `POST .../upload/youtube/v3/videos?uploadType=multipart`. Sobe com `privacyStatus:"private"` por padrão de propósito — o agente publica no canal do Founder, mas não torna o vídeo público sozinho.

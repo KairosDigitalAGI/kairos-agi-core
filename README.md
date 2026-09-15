@@ -14,7 +14,7 @@ O modo curto usa oito segundos por padrão e condensa o roteiro em duas cenas. O
 
 Na galeria, cada vídeo real pode receber um texto para X. A aplicação baixa um manifesto de distribuição com `published: false` e abre o compositor oficial; anexo e envio continuam sob revisão do Founder.
 
-**Integration Control Plane:** a página Integrações consulta uma função da Vercel e mostra somente o estado real das configurações Meta, Google, X e do futuro token store. Valores secretos nunca chegam ao frontend. O cronograma operacional de sete dias está visível no próprio painel.
+**Integration Control Plane:** YouTube e Instagram compartilham OAuth server-side, `state` assinado, identidade consultada no provedor e o cofre cifrado `command.integracoes_tokens`. As URLs sociais foram consolidadas em uma função dinâmica para manter a Vercel Hobby gratuita. YouTube está configurado e aguarda concluir o consentimento real; Instagram aguarda o aplicativo Meta e `META_OAUTH_REDIRECT_URI`. Valores secretos nunca chegam ao frontend e conexão não equivale a publicação.
 
 Sem dados fictícios na interface. Receita, clientes, XP, Coins e métricas do Instagram permanecem indisponíveis até conexão com fontes reais. O perfil informado pelo Founder é [_kairosdigital_](https://www.instagram.com/_kairosdigital_/); não está autenticado na API.
 

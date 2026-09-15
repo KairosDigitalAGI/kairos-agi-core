@@ -1,4 +1,5 @@
 export type IntegrationProviderId = 'instagram' | 'youtube' | 'x'
+export type SocialOAuthProvider = 'instagram' | 'youtube'
 
 export interface IntegrationProviderStatus {
   id: IntegrationProviderId
@@ -16,6 +17,8 @@ export interface IntegrationStatusResponse {
 
 // Estado real da conexão do YouTube (command.integracoes_tokens). Nunca
 // carrega token — só o que já é público (nome do canal, validade).
-export type YoutubeConnectionStatus =
+export type SocialConnectionStatus =
   | { connected: true; accountLabel: string | null; scope: string | null; expiresAt: string | null; atualizadoEm: string | null }
   | { connected: false; reason: string }
+
+export type YoutubeConnectionStatus = SocialConnectionStatus

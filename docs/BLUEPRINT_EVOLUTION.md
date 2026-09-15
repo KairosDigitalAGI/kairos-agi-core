@@ -1,5 +1,9 @@
 # Evolução do Blueprint
 
+## 15/09/2026 — Missão 006, Fase 11: Social OAuth consolidado
+
+Instagram profissional passa a usar o mesmo cofre cifrado, autenticação operacional e prova HMAC do YouTube. A identidade é consultada no Graph antes da persistência; configuração não é tratada como conexão. Uma rota dinâmica substitui as quatro funções isoladas do YouTube e serve os dois provedores sem mudar os callbacks públicos, reduzindo o total de funções Vercel de 12 para 9. O vínculo Instagram não publica Reels nesta fase.
+
 ## 2026-09-11 — Video Engine profissional
 Video AI passa a planejar cada criativo a partir de oferta, público, promessa verificável, prova e chamada para ação. O pipeline oficial é: briefing, roteiro, frames de referência, cenas generativas, composição, QA, galeria, aprovação e distribuição. Cada execução externa deverá registrar provedor, modelo, estimativa, custo real, artefatos e aprovação.
 

@@ -4,7 +4,7 @@ import { readIntegrationStatus } from '../api/integrations/status.mjs'
 
 test('integration status exposes configuration names without leaking values', () => {
   const secret = 'do-not-leak'
-  const status = readIntegrationStatus({ META_APP_ID: secret, META_APP_SECRET: secret }, new Date('2026-09-11T12:00:00Z'))
+  const status = readIntegrationStatus({ META_APP_ID: secret, META_APP_SECRET: secret, META_OAUTH_REDIRECT_URI: 'https://example.test/callback' }, new Date('2026-09-11T12:00:00Z'))
   assert.equal(status.providers.find(item => item.id === 'instagram').oauthConfigured, true)
   assert.equal(status.providers.find(item => item.id === 'youtube').oauthConfigured, false)
   assert.equal(status.providers.find(item => item.id === 'x').mode, 'manual-free')

@@ -11,6 +11,12 @@
 
 `api/integrations/status.mjs` é a primeira função server-side do Core. Ela informa se a configuração necessária existe sem expor valores. `IntegrationsPage` consome esse contrato e mantém `connected: false` até existir prova do OAuth persistida no servidor. A Missão 006 implementará o token store com Supabase, criptografia e RLS antes dos callbacks OAuth. O X usa exportação e publicação manual no orçamento zero.
 
+### Social OAuth consolidado — 15/09/2026
+
+O token store já existe em `command.integracoes_tokens`. `api/_youtube.js` e `api/_instagram.js` validam a identidade remota e cifram tokens com AES-256-GCM. A rota dinâmica `api/integrations/[provider]/[action].mjs` preserva `connect-url`, `callback`, `status` e `disconnect` para ambos os provedores em uma única função Vercel. A contagem caiu de 12 para 9 funções públicas, mantendo margem no plano Hobby.
+
+Início, status e desconexão exigem o Basic Auth do Painel Operacional. O callback valida `state` HMAC com validade curta, pois o provedor não reenvia o cabeçalho Basic Auth. O YouTube possui renovação e upload privado; o Instagram desta fase limita-se ao vínculo OAuth. Publicação de Reels requer fila e aprovação server-side próprias.
+
 Esta arquitetura implementa progressivamente a constituição em `KAIROS_AGI_BLUEPRINT_V1.md`. O Blueprint define os domínios; este documento registra como eles serão separados e integrados.
 
 ## Camadas
