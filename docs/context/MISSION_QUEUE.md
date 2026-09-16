@@ -8,7 +8,7 @@
 | 004 | Implementada e corrigida | Geração motion do zero por roteiro e pós-produção local; render e download WebM |
 | 004.1 | Implementada | Control Plane de integrações e plano operacional de sete dias; credenciais ainda pendentes |
 | 005 | Planejada | KAIROS WhatsApp; preservar operação existente e validar conexão separada |
-| 006 | Fase 13 entregue; YouTube real conectado (15/09/2026) | Supabase Core, Content Engine, geração de roteiro/imagem/vídeo, publicação privada no YouTube, Story/Avatar, OAuth social consolidado, publicação de Reels e links de contas. Canal Kairos Digital conectado e validado em produção. Próximo bloqueio externo: criar/configurar o app Meta e conectar o Instagram profissional. |
+| 006 | Fase 13 entregue; ativação Instagram em andamento (15/09/2026) | Supabase Core, Content Engine, geração de roteiro/imagem/vídeo, publicação privada no YouTube, Story/Avatar, OAuth social consolidado, publicação de Reels e links de contas. YouTube real conectado. App Meta, callback e permissões de perfil/publicação/comentários/Direct configurados; faltam segredo em produção e consentimento da conta profissional. |
 | 007 | Planejada | Billing Center; sem cobrança ou upgrade automático autorizado |
 | 008 | Planejada | Money Hunter Intelligence Center e Ideas Vault |
 | 009 | Planejada | Founder Mobile App |

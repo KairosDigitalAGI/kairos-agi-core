@@ -27,7 +27,7 @@ O aplicativo deve usar Instagram API with Instagram Login. Variáveis privadas n
 - `META_APP_SECRET`
 - `META_OAUTH_REDIRECT_URI`
 
-Escopos solicitados: `instagram_business_basic` e `instagram_business_content_publish`. A conta deve ser profissional. O callback troca o token curto por token de longa duração e consulta o perfil antes de persistir.
+Escopos solicitados: `instagram_business_basic`, `instagram_business_content_publish`, `instagram_business_manage_comments` e `instagram_business_manage_messages`. A conta deve ser profissional. O callback troca o token curto por token de longa duração e consulta o perfil antes de persistir. Os dois últimos escopos autorizam a futura moderação de comentários e a caixa de entrada Direct; o OAuth não cria sozinho os endpoints, webhooks ou interface desses recursos.
 
 ## Publicação de Reels
 

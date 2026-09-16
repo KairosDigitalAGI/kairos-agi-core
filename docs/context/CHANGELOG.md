@@ -1,5 +1,11 @@
 # Changelog
 
+## Ativação Instagram — permissões operacionais (15/09/2026)
+- App Meta `Kairos AGI Core` configurado para Instagram Login com callback de produção.
+- Escopos mínimos prontos para teste: perfil profissional, publicação de conteúdo, moderação de comentários e mensagens Direct.
+- O backend passa a pedir os quatro escopos no mesmo OAuth e continua cifrando o token no cofre existente.
+- Nenhum escopo de anúncios ou insights foi adicionado. Comentários e Direct ainda precisam de handlers/webhooks e interface antes de serem operados pelo Core.
+
 ## Ativação operacional do YouTube — canal real conectado (15/09/2026)
 - Habilitada a YouTube Data API v3 no projeto Google Cloud `kairos-495011`, permanecendo na cota gratuita padrão.
 - OAuth concluído com os escopos mínimos já implementados: `youtube.readonly` e `youtube.upload`.

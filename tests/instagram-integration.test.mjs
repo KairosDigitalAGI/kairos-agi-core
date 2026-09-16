@@ -29,6 +29,8 @@ test('Instagram connect URL uses professional scopes and signed provider state',
     assert.equal(url.searchParams.get('client_id'), 'meta-app-id')
     assert.match(url.searchParams.get('scope'), /instagram_business_basic/)
     assert.match(url.searchParams.get('scope'), /instagram_business_content_publish/)
+    assert.match(url.searchParams.get('scope'), /instagram_business_manage_comments/)
+    assert.match(url.searchParams.get('scope'), /instagram_business_manage_messages/)
     assert.equal(verifyState(url.searchParams.get('state')).p, 'instagram')
   })
 })

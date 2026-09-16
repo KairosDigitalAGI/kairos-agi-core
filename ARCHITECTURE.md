@@ -13,7 +13,7 @@
 
 ### Social OAuth consolidado — 15/09/2026
 
-O token store já existe em `command.integracoes_tokens`. `api/_youtube.js` e `api/_instagram.js` validam a identidade remota e cifram tokens com AES-256-GCM. A rota dinâmica `api/integrations/[provider]/[action].mjs` preserva `connect-url`, `callback`, `status` e `disconnect` para ambos os provedores em uma única função Vercel. A contagem caiu de 12 para 9 funções públicas, mantendo margem no plano Hobby.
+O token store já existe em `command.integracoes_tokens`. `api/_youtube.js` e `api/_instagram.js` validam a identidade remota e cifram tokens com AES-256-GCM. A rota dinâmica `api/integrations/[provider]/[action].mjs` preserva `connect-url`, `callback`, `status` e `disconnect` para ambos os provedores em uma única função Vercel. A contagem caiu de 12 para 9 funções públicas, mantendo margem no plano Hobby. O Instagram solicita somente `instagram_business_basic`, `instagram_business_content_publish`, `instagram_business_manage_comments` e `instagram_business_manage_messages`; comentários e mensagens ainda exigem handlers e webhooks próprios antes de aparecerem no produto.
 
 Início, status e desconexão exigem o Basic Auth do Painel Operacional. O callback valida `state` HMAC com validade curta, pois o provedor não reenvia o cabeçalho Basic Auth. O YouTube possui renovação e upload privado e está conectado ao canal real Kairos Digital. O Instagram possui vínculo OAuth e publicação assíncrona de Reels implementados; a ativação aguarda o app Meta e consentimento da conta profissional. Ambos exigem job aprovado no servidor antes de publicar.
 

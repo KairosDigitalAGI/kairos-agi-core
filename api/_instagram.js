@@ -8,7 +8,12 @@ const AUTH_URL = 'https://www.instagram.com/oauth/authorize'
 const TOKEN_URL = 'https://api.instagram.com/oauth/access_token'
 const LONG_TOKEN_URL = 'https://graph.instagram.com/access_token'
 const PROFILE_URL = 'https://graph.instagram.com/me'
-const SCOPES = ['instagram_business_basic', 'instagram_business_content_publish']
+const SCOPES = [
+  'instagram_business_basic',
+  'instagram_business_content_publish',
+  'instagram_business_manage_comments',
+  'instagram_business_manage_messages',
+]
 
 function oauthEnv() {
   const appId = process.env.META_APP_ID
