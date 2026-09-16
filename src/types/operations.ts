@@ -125,3 +125,28 @@ export interface AgentActivityResponse {
   reason?: string
   activity: AgentActivityItem[]
 }
+
+// Mapa do Projeto (Fase 14) — diário de bordo append-only do próprio
+// desenvolvimento (command.project_log), nunca editado/apagado por este
+// projeto. `agent` é quem registrou a entrada, não um agente do organograma.
+export type ProjectLogAgent = 'claude-code' | 'codex' | 'founder'
+export type ProjectLogType = 'done' | 'todo' | 'idea' | 'bug'
+
+export interface ProjectLogEntry {
+  id: string
+  created_at: string
+  agent: ProjectLogAgent
+  phase: string | null
+  type: ProjectLogType
+  title: string
+  description: string | null
+  commit: string | null
+  deployed: boolean
+}
+
+export interface ProjectLogResponse {
+  source: DataSource
+  checkedAt?: string
+  reason?: string
+  entries: ProjectLogEntry[]
+}

@@ -47,3 +47,19 @@ A nova página Agentes contém busca, departamento, responsabilidades, indicador
 Dashboard e World usam o mesmo cadastro operacional. O Dashboard resume seis agentes e oferece acesso explícito ao organograma completo. O World instancia os 27, exibe balão apenas na seleção/hover para reduzir sobreposição e permite selecionar qualquer agente pelo nome. Fechar o inspetor agora oculta o painel.
 
 O código do motor/importador existente na origem é evidência de implementação, não prova de conexão com este Core. Os executores continuam desconectados. A hierarquia dos 15 papéis originais responde a ORION; vínculos dos especialistas dos adendos são organização adotada neste Core, não importação literal do organograma original.
+
+## Regra obrigatória — atualização do Mapa (Missão 006, Fase 14 — 15/09/2026)
+Ao fim de toda sessão, o agente (Claude Code, Codex ou o próprio Founder) DEVE inserir no Mapa do Projeto (`command.project_log`, página "Mapa do Projeto" no dashboard) pelo menos uma entrada resumindo o que aconteceu na sessão:
+
+- O que foi feito (`type: "done"`), sempre com o `commit` associado quando existir.
+- O que ficou pendente para uma próxima sessão (`type: "todo"`).
+- Bugs encontrados, mesmo que já corrigidos na própria sessão (`type: "bug"`).
+- Ideias novas que surgiram mas ainda não viraram trabalho (`type: "idea"`).
+
+Comando padrão (usa as mesmas credenciais `KAIROS_USER`/`KAIROS_PASS` do Painel Operacional, nenhum segredo novo):
+
+```
+node scripts/log-update.mjs --agent="claude-code" --phase="Fase 14" --type="done" --title="..." --description="..." --commit="abc1234" --deployed
+```
+
+O Mapa é append-only por convenção: nenhuma entrada antiga é editada ou apagada — histórico completo, sempre. Ver `docs/context/CHANGELOG.md` para o registro técnico detalhado desta fase (schema, API, página).

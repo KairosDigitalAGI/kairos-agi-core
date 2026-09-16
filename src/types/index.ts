@@ -13,6 +13,7 @@ export type ModuleKey =
   | 'analytics'
   | 'integrations'
   | 'avatars'
+  | 'roadmap'
   | 'vault'
   | 'settings'
 

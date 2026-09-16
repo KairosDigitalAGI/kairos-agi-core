@@ -1,5 +1,14 @@
 # Changelog
 
+## Missão 006, Fase 14 — Mapa do Projeto (15/09/2026)
+- Nova tabela `command.project_log` (migration `supabase/migrations/0023_project_log.sql`, repo kairos-command, **pendente de aplicar em produção**): diário de bordo append-only (`agent`, `phase`, `type`, `title`, `description`, `commit`, `deployed`) do próprio desenvolvimento do Core — nunca editado/apagado por este projeto, RLS habilitado sem policy de escrita (só `service_role`).
+- `api/_project-log.js` (`listProjectLog`/`addProjectLogEntry`) + rota própria `api/project-log.mjs`: `GET` lista tudo sem Basic Auth (o Mapa é feito pra ser visível sem desbloquear o Painel Operacional — nunca carrega segredo), `POST` exige a mesma Basic Auth do Painel. Rota nova, não consolidada num `[action].mjs` — havia margem (9/12 antes desta fase), fecha em 10/12.
+- Nova página `ProjectMapPage` (rota `roadmap` no sidebar): contador de progresso, filtros por tipo (feito/pendente/ideia/bug), grid de cards com fase/agente/commit/timestamp, formulário "Adicionar entrada" atrás do Painel Operacional.
+- `scripts/log-update.mjs`: CLI que qualquer agente roda ao fim de uma sessão para gravar uma entrada (mesmas credenciais `KAIROS_USER`/`KAIROS_PASS`, nenhum segredo novo). `scripts/seed-project-log.mjs`: semeia o histórico real das Fases 1-13 desta missão (extraído deste próprio CHANGELOG e do git log) assim que a migration 0023 for aplicada.
+- `AGENTS.md` ganhou a seção "Regra obrigatória — atualização do Mapa": todo agente deve registrar o que fez, o que ficou pendente e bugs encontrados ao fim de cada sessão.
+- 8 testes novos (`tests/project-log.test.mjs`): fail-closed sem Supabase, hint de migration pendente, leitura real, validação de `agent`/`type`/`title`, normalização de campos opcionais — total 132/132 passando. Typecheck e build limpos.
+- Bloqueado para uso real até o Founder aplicar a migration 0023 em produção — mesma pendência de toda migration nova deste Core.
+
 ## Ativação Instagram — permissões operacionais (15/09/2026)
 - App Meta `Kairos AGI Core` configurado para Instagram Login com callback de produção.
 - Escopos mínimos prontos para teste: perfil profissional, publicação de conteúdo, moderação de comentários e mensagens Direct.

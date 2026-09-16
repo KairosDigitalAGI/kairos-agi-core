@@ -1,0 +1,44 @@
+.project-map-hero { display: flex; align-items: center; justify-content: space-between; gap: 20px; background: radial-gradient(circle at 10% 0, rgba(96,165,250,.17), transparent 42%), var(--panel); }
+.project-map-hero h2 { margin: 7px 0; font-size: clamp(1.35rem, 2.5vw, 2rem); letter-spacing: -.045em; }
+.project-map-hero p { margin: 0; color: var(--muted); font-size: .78rem; max-width: 46ch; }
+.project-map-progress { text-align: right; }
+.project-map-progress strong { display: block; font-size: 1.6rem; color: #93c5fd; }
+.project-map-progress span { color: var(--muted); font-size: .68rem; white-space: nowrap; }
+.project-map-alert { margin: 0; padding: 11px 13px; border: 1px solid rgba(251,191,36,.22); border-radius: 10px; background: rgba(251,191,36,.06); color: #fcd34d; font-size: .74rem; }
+
+.project-map-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.project-map-filters { display: flex; gap: 6px; }
+.project-map-filters button { border: 1px solid var(--border); border-radius: 99px; padding: 6px 13px; background: rgba(255,255,255,.03); color: var(--muted); font-size: .72rem; cursor: pointer; }
+.project-map-filters button.active { background: rgba(96,165,250,.14); color: #bfdbfe; border-color: rgba(96,165,250,.3); }
+.project-map-add { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; border: 1px solid rgba(96,165,250,.25); border-radius: 9px; padding: 0 12px; background: rgba(37,99,235,.12); color: #bfdbfe; font-size: .72rem; cursor: pointer; }
+.project-map-toolbar > small { color: var(--muted); font-size: .7rem; }
+
+.project-map-form { display: flex; flex-direction: column; gap: 11px; }
+.project-map-form-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.project-map-form label { display: flex; flex-direction: column; gap: 4px; font-size: .68rem; color: var(--muted); flex: 1; min-width: 140px; }
+.project-map-form-full { width: 100%; }
+.project-map-form input[type="text"], .project-map-form input:not([type]), .project-map-form select, .project-map-form textarea {
+  border: 1px solid var(--border); border-radius: 8px; padding: 7px 9px; background: rgba(255,255,255,.03); color: #eae7f2; font-size: .78rem; font-family: inherit;
+}
+.project-map-form-checkbox { flex-direction: row; align-items: center; gap: 7px; }
+.project-map-form button[type="submit"] { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; min-height: 34px; border: 1px solid rgba(52,211,153,.3); border-radius: 9px; padding: 0 14px; background: rgba(52,211,153,.1); color: #6ee7b7; font-size: .74rem; cursor: pointer; }
+.project-map-form button[type="submit"]:disabled { opacity: .5; cursor: wait; }
+.project-map-form small[role="alert"] { color: #fca5a5; }
+
+.project-map-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+.project-map-card { display: flex; flex-direction: column; gap: 8px; }
+.project-map-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.project-map-type { display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; border-radius: 99px; font-size: .64rem; white-space: nowrap; }
+.project-map-type.done { background: rgba(52,211,153,.12); color: #6ee7b7; }
+.project-map-type.todo { background: rgba(96,165,250,.12); color: #93c5fd; }
+.project-map-type.idea { background: rgba(251,191,36,.12); color: #fcd34d; }
+.project-map-type.bug { background: rgba(248,113,113,.12); color: #fca5a5; }
+.project-map-phase { color: var(--muted); font-size: .64rem; }
+.project-map-card h3 { margin: 0; font-size: .95rem; }
+.project-map-card p { margin: 0; color: #d6d1df; font-size: .74rem; line-height: 1.5; }
+.project-map-card-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: auto; color: var(--muted); font-size: .66rem; }
+.project-map-card-foot code { padding: 2px 6px; border-radius: 5px; background: rgba(255,255,255,.045); color: #b9b2c4; }
+.project-map-deployed { color: #6ee7b7; }
+
+@media (max-width: 1050px) { .project-map-grid { grid-template-columns: 1fr; } }
+@media (max-width: 700px) { .project-map-hero { flex-direction: column; align-items: flex-start; } .project-map-progress { text-align: left; } }

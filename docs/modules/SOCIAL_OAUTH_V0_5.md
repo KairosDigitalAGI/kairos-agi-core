@@ -33,6 +33,10 @@ Escopos solicitados: `instagram_business_basic`, `instagram_business_content_pub
 
 Missão 006, Fase 12: `postToInstagram({jobId, caption})` em `api/_content.js` publica de verdade um job em `etapa="video"` já aprovado, usando o `content_assets.storage_path` público do vídeo (não faz upload binário — a Content Publishing API da Meta exige URL, diferente do YouTube). As chamadas HTTP ficam em `api/_instagram.js` (`getValidInstagramAccess`, `createReelsContainer`, `checkContainerStatus`, `publishReelsContainer`). Fluxo assíncrono de três passos: cria o container → faz polling do `status_code` (orçamento curto, configurável por `INSTAGRAM_POLL_INTERVAL_MS`/`INSTAGRAM_POLL_MAX_TENTATIVAS`) → publica quando `FINISHED`. O `creation_id` é gravado em `command.content_calendar` (`status:"agendado"`) antes de esperar, para retomar do mesmo container em vez de duplicar o Reels se a function for encerrada no meio do polling; se o orçamento de espera esgotar antes do Instagram terminar, devolve `status:"processando"` sem erro — o Founder clica de novo em instantes. Ver `docs/context/CHANGELOG.md` (Fase 12) para o detalhamento completo.
 
+## Ver conta conectada
+
+Missão 006, Fase 13: `GET /api/integrations/{provider}/status` passou a devolver `profileUrl`. No YouTube, monta `https://www.youtube.com/channel/{account_id}` a partir do `channel.id` real gravado na Fase 4 — zero chamada nova à API do Google. No Instagram, só monta `https://www.instagram.com/{username}/` quando `account_label` já é um `@username` real (gravado pela Fase 11); senão devolve `null` em vez de inventar link a partir de um nome de exibição. A interface mostra o botão "Ver conta conectada" (abre em nova aba) quando o link existe, e uma frase explicando a ausência quando não existe.
+
 ## Limites
 
-Desconectar remove o token do Kairos, mas não revoga o aplicativo diretamente no provedor.
+Desconectar remove o token do Kairos, mas não revoga o aplicativo diretamente no provedor. X (Twitter) não tem OAuth nem conta armazenada nesta versão — `api/integrations/status.mjs` trata X como `mode:"manual-free"`, sem cofre no `command.integracoes_tokens`.

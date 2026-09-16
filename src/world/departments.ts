@@ -13,4 +13,5 @@ export const departments: Record<ModuleKey, Department> = {
   analytics: { ...infra, area: 'Analytics' }, integrations: { ...infra, area: 'Central de integrações' }, settings: infra,
   vault: { ...infra, name: 'Vault District', area: 'Identidades · ainda vazio' },
   avatars: { ...studio, area: 'Avatar Studio · gamificação' },
+  roadmap: { ...founder, area: 'Mapa do Projeto · histórico vivo' },
 }

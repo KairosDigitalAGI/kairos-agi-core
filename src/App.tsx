@@ -15,13 +15,14 @@ import { VideoPage } from './engines/video/VideoPage'
 import { ModulePlaceholder } from './features/shared/ModulePlaceholder'
 import { IntegrationsPage } from './features/integrations/IntegrationsPage'
 import { AvatarStudioPage } from './features/avatars/AvatarStudioPage'
+import { ProjectMapPage } from './features/projectmap/ProjectMapPage'
 
 const DepartmentBackdrop = lazy(() => import('./world/DepartmentBackdrop').then(module => ({ default: module.DepartmentBackdrop })))
 const WorldPage = lazy(() => import('./world/WorldPage').then((module) => ({ default: module.WorldPage })))
 
 const titles: Record<ModuleKey, string> = {
   agents: 'Agentes e departamentos', world: 'Kairos World', dashboard: 'Visão geral', missions: 'Missões', clients: 'Clientes', crm: 'CRM',
-  instagram: 'Instagram', clone: 'Clone Engine', video: 'Video Engine', hunter: 'Hunter', 'money-lab': 'Money Lab', analytics: 'Analytics', integrations: 'Integrações', avatars: 'Avatar Studio', vault: 'Vault', settings: 'Configurações',
+  instagram: 'Instagram', clone: 'Clone Engine', video: 'Video Engine', hunter: 'Hunter', 'money-lab': 'Money Lab', analytics: 'Analytics', integrations: 'Integrações', avatars: 'Avatar Studio', roadmap: 'Mapa do Projeto', vault: 'Vault', settings: 'Configurações',
 }
 
 export function App() {
@@ -59,6 +60,7 @@ export function App() {
       case 'analytics': return <ModulePlaceholder title="Analytics" description="Indicadores de receita, operação, audiência e desempenho dos agentes." icon={BarChart3} />
       case 'integrations': return <IntegrationsPage />
       case 'avatars': return <AvatarStudioPage />
+      case 'roadmap': return <ProjectMapPage />
       case 'vault': return <ModulePlaceholder title="Vault" description="Centro futuro de identidades e referências seguras para credenciais." icon={Database} vault />
       case 'settings': return <ModulePlaceholder title="Configurações" description="Preferências da Founder Edition, limites e políticas operacionais." icon={Settings} />
     }
