@@ -1,5 +1,11 @@
 # Changelog
 
+## 17/09/2026 — Atendimento Instagram, implementação local
+- OAuth da conta profissional `_kairosdigital_` concluído e status real `connected:true` confirmado em produção. YouTube continua conectado.
+- Adicionado webhook Instagram em rota dinâmica já existente, com challenge, HMAC do corpo bruto e deduplicação persistente.
+- Criados inbox server-side, resposta manual e regras de palavra-chave pausadas por padrão; ativação exige aprovação explícita do texto pelo Founder. DMs respeitam janela de 24 horas e a automação limita uma resposta por pessoa/canal/dia.
+- Migration `0024_instagram_engagement.sql`, painel Atendimento, testes e documentação entregues no repositório. Sem migration no Supabase mestre, verify token e assinatura dos campos na Meta, nenhuma resposta automática opera em produção.
+
 ## Missão 006, Fase 14 — Mapa do Projeto (15/09/2026)
 - Nova tabela `command.project_log` (migration `supabase/migrations/0023_project_log.sql`, repo kairos-command, **pendente de aplicar em produção**): diário de bordo append-only (`agent`, `phase`, `type`, `title`, `description`, `commit`, `deployed`) do próprio desenvolvimento do Core — nunca editado/apagado por este projeto, RLS habilitado sem policy de escrita (só `service_role`).
 - `api/_project-log.js` (`listProjectLog`/`addProjectLogEntry`) + rota própria `api/project-log.mjs`: `GET` lista tudo sem Basic Auth (o Mapa é feito pra ser visível sem desbloquear o Painel Operacional — nunca carrega segredo), `POST` exige a mesma Basic Auth do Painel. Rota nova, não consolidada num `[action].mjs` — havia margem (9/12 antes desta fase), fecha em 10/12.

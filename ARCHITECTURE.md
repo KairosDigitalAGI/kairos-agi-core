@@ -1,5 +1,9 @@
 # Arquitetura — proposta inicial
 
+## Atendimento Instagram — incremento 17/09/2026
+
+`api/integrations/[provider]/[action].mjs` mantém o webhook e as operações autenticadas na função dinâmica existente, preservando a margem da Vercel Hobby. `api/_instagramEngagement.js` valida HMAC sobre bytes brutos, normaliza comentários/Direct e usa `command.instagram_engagement_events` como fonte de verdade da fila. Regras aprovadas em `command.instagram_automation_rules` não saem do backend; cooldown persistente impede mais de uma resposta automática por pessoa/canal/dia. A UI apenas mostra estado e coleta a aprovação literal do Founder. Falha ambígua fica em revisão, sem retry que duplique mensagens. Ver `docs/modules/INSTAGRAM_ENGAGEMENT.md`. O módulo não está ativo externamente até migration, verify token, assinatura Meta e teste real.
+
 ## Evolução da Video Engine
 `providerCatalog.ts` mantém capacidades, unidade de cobrança, preço em USD, fonte e data de verificação. `ProductionPlanner` transforma somente os campos informados pelo Founder em roteiro e calcula o orçamento antes de gerar. O provedor local é executável; todos os modelos pagos ficam desconectados até existir adaptador server-side, segredo no Vault e limite de orçamento.
 
@@ -15,7 +19,7 @@
 
 O token store já existe em `command.integracoes_tokens`. `api/_youtube.js` e `api/_instagram.js` validam a identidade remota e cifram tokens com AES-256-GCM. A rota dinâmica `api/integrations/[provider]/[action].mjs` preserva `connect-url`, `callback`, `status` e `disconnect` para ambos os provedores em uma única função Vercel. A contagem caiu de 12 para 9 funções públicas, mantendo margem no plano Hobby. O Instagram solicita somente `instagram_business_basic`, `instagram_business_content_publish`, `instagram_business_manage_comments` e `instagram_business_manage_messages`; comentários e mensagens ainda exigem handlers e webhooks próprios antes de aparecerem no produto.
 
-Início, status e desconexão exigem o Basic Auth do Painel Operacional. O callback valida `state` HMAC com validade curta, pois o provedor não reenvia o cabeçalho Basic Auth. O YouTube possui renovação e upload privado e está conectado ao canal real Kairos Digital. O Instagram possui vínculo OAuth e publicação assíncrona de Reels implementados; a ativação aguarda o app Meta e consentimento da conta profissional. Ambos exigem job aprovado no servidor antes de publicar.
+Início, status e desconexão exigem o Basic Auth do Painel Operacional. O callback valida `state` HMAC com validade curta, pois o provedor não reenvia o cabeçalho Basic Auth. O YouTube possui renovação e upload privado e está conectado ao canal real Kairos Digital. O Instagram também está conectado à conta `_kairosdigital_`; a publicação assíncrona de Reels exige job aprovado no servidor. O novo webhook de atendimento depende de configuração e teste externos, separados do OAuth.
 
 Esta arquitetura implementa progressivamente a constituição em `KAIROS_AGI_BLUEPRINT_V1.md`. O Blueprint define os domínios; este documento registra como eles serão separados e integrados.
 

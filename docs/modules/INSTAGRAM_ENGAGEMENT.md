@@ -1,0 +1,28 @@
+# Atendimento Instagram — comentários e Direct
+
+Incremento da Missão 006, 17/09/2026. Usa somente a Instagram API com Instagram Login da conta profissional conectada ao Core. Não há scraping, automação de navegador, troca de contas nem provedor pago.
+
+## Contrato operacional
+
+- `GET /api/integrations/instagram/webhook` responde ao challenge da Meta com `META_WEBHOOK_VERIFY_TOKEN`.
+- `POST` no mesmo caminho valida `X-Hub-Signature-256` sobre o corpo bruto usando `META_APP_SECRET`, limita o payload e aceita apenas `object=instagram`.
+- Comentários e DMs de texto geram eventos únicos em `command.instagram_engagement_events`. Ecos, anexos sem texto, outras contas e duplicatas são ignorados. Dados privados ficam no schema `command`, sem policy RLS pública.
+- Regras nascem pausadas. O Founder revisa o texto literal e ativa uma regra de palavra-chave por canal no painel Instagram → Atendimento. Só regras com `approved_at` e `enabled=true` enviam respostas automáticas. Não há LLM nem gasto por geração.
+- Direct automático exige mensagem iniciada pela pessoa nas últimas 24 horas. Há no máximo uma resposta automática por pessoa/canal/dia UTC. Resposta manual usa o mesmo intervalo do Direct.
+- O envio passa por estado `pending → sending → sent`; falha ambígua vira `review`, sem retry automático. O identificador remoto e horário ficam registrados. Reenvio de webhook não duplica resposta.
+- `GET inbox`, `POST rule`, `POST rule-toggle` e `POST reply` exigem Basic Auth do Painel Operacional. A tela nunca recebe o token da Meta.
+
+## Ativação externa pendente
+
+1. Aplicar `supabase/migrations/0024_instagram_engagement.sql` no **Supabase mestre da Kairos**, o mesmo que contém `command.integracoes_tokens`; verificar as três tabelas pelo backend. Não aplicar em outro projeto Supabase.
+2. Criar `META_WEBHOOK_VERIFY_TOKEN` de alta entropia nas variáveis de produção da Vercel e fazer redeploy. Nunca registrar o valor no Git.
+3. No app Meta **Kairos AGI Core**, configurar callback `https://kairos-agi-core.vercel.app/api/integrations/instagram/webhook`, inserir o mesmo verify token e assinar `comments` e `messages` no produto Instagram. Validar que o challenge retorna 200.
+4. Enviar um comentário e um Direct a partir de uma conta de teste autorizada. Confirmar que chegam uma vez à fila, sem resposta automática; revisar um texto, criar/ativar a regra e repetir o teste com nova interação. Não usar clientes reais antes de confirmar o acesso avançado exigido pela Meta.
+
+O app Meta estava em modo de teste quando este incremento foi escrito. A conexão OAuth da própria `_kairosdigital_` comprova o token, não comprova entrega de webhooks de usuários externos nem App Review. Até os testes ponta a ponta, o status é **implementado localmente, não ativado**. A ausência da migration ou do verify token falha fechado.
+
+## Privacidade e limites
+
+O banco guarda até 2.000 caracteres de cada interação e IDs do Instagram para permitir atendimento e deduplicação. A retenção e exclusão desses dados precisam de uma política operacional antes de abrir o serviço para clientes. O estado `review` exige inspeção humana porque um timeout pode ter ocorrido após a Meta aceitar a resposta. A aplicação não promete resposta para anexos, stories, reações ou comentários sem texto.
+
+Referências primárias: [Instagram API oficial da Meta no Postman](https://www.postman.com/meta/workspace/instagram/documentation/23987686-9386f468-7714-490f-9bfc-9442db5c8f00), [Send API da Meta](https://www.postman.com/meta/instagram/request/scob1z4/text-message).

@@ -8,7 +8,7 @@
 | 004 | Implementada e corrigida | Geração motion do zero por roteiro e pós-produção local; render e download WebM |
 | 004.1 | Implementada | Control Plane de integrações e plano operacional de sete dias; credenciais ainda pendentes |
 | 005 | Planejada | KAIROS WhatsApp; preservar operação existente e validar conexão separada |
-| 006 | Fase 14 entregue; ativação Instagram em andamento (15/09/2026) | Supabase Core, Content Engine, geração de roteiro/imagem/vídeo, publicação privada no YouTube, Story/Avatar, OAuth social consolidado, publicação de Reels, links de contas e Mapa do Projeto (`command.project_log`, migration 0023 pendente). YouTube real conectado. App Meta, callback e permissões de perfil/publicação/comentários/Direct configurados; faltam segredo em produção e consentimento da conta profissional. |
+| 006 | Fase 14 entregue; atendimento Instagram em ativação (17/09/2026) | YouTube e Instagram reais conectados. Mapa do Projeto (migration 0023 pendente), webhook, inbox e regras de comentários/Direct (migration 0024 pendente) implementados; faltam verify token, assinatura Meta e teste ponta a ponta. |
 | 007 | Planejada | Billing Center; sem cobrança ou upgrade automático autorizado |
 | 008 | Planejada | Money Hunter Intelligence Center e Ideas Vault |
 | 009 | Planejada | Founder Mobile App |

@@ -7,8 +7,8 @@ import { ApprovalQueue } from './ApprovalQueue'
 import { ContentEditor } from './ContentEditor'
 import { PromptLibrary } from './PromptLibrary'
 import { nextStepError, pipeline } from './domain'
-import { disconnectedGateway } from './graphGateway'
-const tabs = ['Pipeline', 'Calendário', 'Prompts', 'Aprovações', 'Analytics', 'Integração'] as const
+import { InstagramEngagementPanel } from './InstagramEngagementPanel'
+const tabs = ['Pipeline', 'Calendário', 'Prompts', 'Aprovações', 'Analytics', 'Atendimento', 'Integração'] as const
 
 export function InstagramPage() {
   const { state, dispatch, storageError } = useEditorial()
@@ -25,7 +25,7 @@ export function InstagramPage() {
       <div><span className="eyebrow">Cliente Zero · Instagram Engine</span><h2><a href={instagramProfile.url} target="_blank" rel="noreferrer">@{instagramProfile.handle}</a></h2><p>Planeje, prepare e aprove conteúdos da Kairos.</p></div>
       <div className="ig-kpis"><span><strong>{state.items.length}</strong> conteúdos</span><span><strong>{state.items.filter(i => i.stage === 'Aprovação').length}</strong> para aprovar</span></div>
     </section>
-    <p className="editorial-muted">Edição local neste navegador · sem sincronização entre dispositivos · API desconectada</p>
+    <p className="editorial-muted">Planejamento editorial local neste navegador · preparação do atendimento via webhook na aba Atendimento</p>
     {storageError && <p role="alert" className="editorial-alert">{storageError}</p>}
     <div className="editorial-tabs" aria-label="Seções do Instagram">{tabs.map(t => <button key={t} aria-pressed={tab === t} onClick={() => { setTab(t); setEditing(null); setNotice('') }}>{t}</button>)}</div>
     {editing !== null ? <ContentEditor key={editing} item={edit} onSaved={() => { setEditing(null); setNotice('Conteúdo salvo.'); }} onCancel={() => setEditing(null)} /> : <>
@@ -61,15 +61,15 @@ export function InstagramPage() {
       </section>}
       {tab === 'Prompts' && <PromptLibrary />}
       {tab === 'Aprovações' && <ApprovalQueue />}
+      {tab === 'Atendimento' && <InstagramEngagementPanel />}
       {tab === 'Analytics' && <section className="glass-panel">
         <SectionHeader eyebrow="Instagram" title="Métricas da conta" />
-        <p className="editorial-muted">Métricas indisponíveis: conta ainda não autenticada. O perfil foi informado pelo Founder; seguidores, alcance e publicações não foram consultados.</p>
+        <p className="editorial-muted">Métricas indisponíveis neste módulo: seguidores, alcance e publicações ainda não são consultados pela API.</p>
         <div className="editorial-metrics">{['Seguidores', 'Alcance', 'Cliques', 'Leads', 'Posts publicados'].map(label => <article key={label}><span>{label}</span><strong>—</strong></article>)}</div>
       </section>}
       {tab === 'Integração' && <section className="glass-panel">
-        <SectionHeader eyebrow="Instagram Graph API" title={disconnectedGateway.connected ? 'Conectada' : 'Desconectada'} />
-        <p>O contrato de integração está preparado. Autenticação, tokens e publicação real serão implementados no servidor em uma missão futura.</p>
-        <p>Nesta versão você prepara textos e briefings manualmente, reutiliza prompts e aprova revisões. Não há chamadas à Meta ou a modelos de IA.</p>
+        <SectionHeader eyebrow="Instagram Engine" title="Planejamento local e conta real" />
+        <p>O planejamento editorial desta página permanece local. Conexão OAuth e estado real da conta aparecem na Central de Integrações. O atendimento por webhook fica na aba Atendimento.</p>
       </section>}
     </>}
     <p role="status" className="editorial-notice">{notice}</p>

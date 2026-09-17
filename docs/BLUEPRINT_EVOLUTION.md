@@ -1,5 +1,9 @@
 # Evolução do Blueprint
 
+## 17/09/2026 — Social Engine: atendimento responsivo
+
+O vínculo OAuth do Instagram foi confirmado para `_kairosdigital_`. Como evolução modular da Social Engine, comentários e Direct passam a ter ingress autenticado por assinatura, fila persistente e respostas por regras literais aprovadas. Nenhum papel de agente vira executor por causa disso. O Founder mantém a decisão de ativar cada regra; envios limitam-se a interações recebidas, com janela de Direct e cooldown. A fase está implementada localmente e aguarda ativação externa descrita em `docs/modules/INSTAGRAM_ENGAGEMENT.md`; o Blueprint V1 permanece inalterado.
+
 ## 15/09/2026 — ativação real do canal YouTube
 
 O primeiro vínculo externo de publicação foi concluído sem alterar a arquitetura: YouTube Data API v3 habilitada na cota gratuita, OAuth com `youtube.readonly` e `youtube.upload`, e canal Kairos Digital (`@KairosDigitalAGI`, ID `UC2TqvTgMsTkywGQS3oiYDsg`) confirmado pelo backend de produção. Tokens continuam cifrados no cofre server-side. A publicação permanece privada por padrão e condicionada ao job aprovado, preservando a autoridade do Founder. Instagram é a próxima ativação externa e depende do app Meta.

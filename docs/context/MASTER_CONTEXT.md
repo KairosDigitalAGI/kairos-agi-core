@@ -1,11 +1,15 @@
 # Contexto operacional — 11/09/2026
 
+## Atualização 17/09/2026 — Instagram real e atendimento
+
+O status autenticado de produção confirmou `_kairosdigital_` conectado via OAuth ao Kairos AGI Core; YouTube Kairos Digital permanece conectado. A automação de comentários e Direct foi implementada no código com webhook assinado, inbox privada, regras aprovadas e limites de envio, mas **ainda não foi ativada em produção**. Pendente: migration `0024_instagram_engagement.sql` no Supabase mestre correto, `META_WEBHOOK_VERIFY_TOKEN` na Vercel, assinatura de `comments`/`messages` no app Meta e teste com uma conta autorizada. O app Meta está em modo de teste; vínculo OAuth não comprova acesso avançado a usuários externos. Nenhum comentário/DM foi enviado por este incremento.
+
 Constituição: KAIROS_AGI_BLUEPRINT_V1.md. Adendos: KAIROS_MEMORY_SYNC_V1.md e KAIROS_MEMORY_SYNC_V1_1.md. AGENTS.md define papéis. Não reiniciar a arquitetura.
 
 ## Estado atual
 - Missão 003 implementada como arquitetura operacional local: oito módulos Clone, Content Brain, pipeline e aprovação versionada. Nenhum serviço externo conectado.
 - Dados demonstrativos removidos da interface. Receita, CRM, Coins e métricas externas indisponíveis até conexão real. Contadores editoriais/Clone vêm de registros do navegador.
-- Instagram oficial informado: `_kairosdigital_`. Sem autenticação Meta, sem métricas consultadas.
+- Instagram oficial `_kairosdigital_`: OAuth conectado em 17/09/2026; métricas ainda não consultadas neste módulo.
 - Clone: `kairos.clone.v1`; editorial: `kairos.editorial.real.v1`. Acervo demonstrativo antigo preservado na chave anterior, fora da interface.
 - KAIROS é robô do Founder; Arthur e memórias de cliente continuam isolados.
 - Adendo V1.1 inclui Money Hunter, Score Kairos e Ideas Vault como arquitetura futura. Papéis configurados não significam agentes executando.
@@ -13,7 +17,7 @@ Constituição: KAIROS_AGI_BLUEPRINT_V1.md. Adendos: KAIROS_MEMORY_SYNC_V1.md e 
 - Clone não gera voz, rosto, imagem nem vídeo. VideoProvider preparado e desligado. Client Edition não ativada. Vault vazio.
 - Nenhuma despesa contratada; outros repositórios e processos de produção não alterados.
 - Missão 004: Video Engine cria motion videos do zero a partir de roteiro e também edita vídeo real local. Storyboard, animação, marca, trilha, corte e download WebM rodam no navegador; arquivos e roteiro não são enviados a servidor.
-- Integration Control Plane: página e endpoint server-side verificam configuração de Meta, Google e X sem expor valores. O token store e Google OAuth estão configurados em produção; o canal real Kairos Digital (`@KairosDigitalAGI`, ID `UC2TqvTgMsTkywGQS3oiYDsg`) foi conectado em 15/09/2026 e validado pelo endpoint de status. O app Meta e o callback do Instagram foram criados; quatro permissões mínimas estão prontas para teste (perfil, publicação, comentários e Direct). A conexão real ainda depende do segredo em produção e do consentimento da conta profissional. As rotas sociais foram consolidadas; o Core usa 9 funções públicas no plano Hobby.
+- Integration Control Plane: página e endpoint server-side verificam configuração de Meta, Google e X sem expor valores. O token store e os OAuth estão configurados em produção; o canal Kairos Digital e o perfil `_kairosdigital_` foram confirmados conectados. O app Meta tem quatro permissões (perfil, publicação, comentários e Direct), ainda em modo de teste. As rotas sociais foram consolidadas; o novo webhook reutiliza a mesma função dinâmica, preservando o plano Hobby. Atendimento real depende das pendências de ativação acima.
 
 ## Consolidação Kairos — 14/09/2026
 Founder autorizou consolidar kairos-command, kairos-os e kairos-agi-core num único braço operacional ("usar o que já tem, e se não tiver, criar"). Este Core segue como base (decisão registrada em docs/REUSE_PROVENANCE.md e docs/REPOSITORY_REUSE_STRATEGY.md). Arthur é bot de cliente (Allfix), fora de escopo; KAIROS é o agente WhatsApp pessoal do Founder (`62981554992`, pm2 `kairos`, VPS 2.24.199.205).
