@@ -28,9 +28,13 @@ export function verifyWebhookChallenge(query) {
 }
 
 export async function readWebhookBody(req) {
-  if (Buffer.isBuffer(req.body)) return req.body
-  if (typeof req.body === 'string') return Buffer.from(req.body)
-  if (req.body != null) throw fail('O corpo bruto do webhook não está disponível.', 503)
+  // Vercel expõe req.body por um getter que consome e parseia o stream.
+  // Nunca acessar esse getter em uma requisição HTTP real.
+  if (typeof req[Symbol.asyncIterator] !== 'function') {
+    if (Buffer.isBuffer(req.body)) return req.body
+    if (typeof req.body === 'string') return Buffer.from(req.body)
+    throw fail('O corpo bruto do webhook não está disponível.', 503)
+  }
   const chunks = []
   let size = 0
   for await (const chunk of req) {

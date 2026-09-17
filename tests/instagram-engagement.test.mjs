@@ -1,8 +1,9 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { createHmac } from 'node:crypto'
+import { Readable } from 'node:stream'
 import { encrypt } from '../api/_crypto.js'
-import { verifyWebhookChallenge, parseSignedWebhook, normalizeInstagramEvents, receiveInstagramWebhook } from '../api/_instagramEngagement.js'
+import { verifyWebhookChallenge, readWebhookBody, parseSignedWebhook, normalizeInstagramEvents, receiveInstagramWebhook } from '../api/_instagramEngagement.js'
 import handler, { config } from '../api/integrations/[provider]/[action].mjs'
 import staticWebhook, { config as staticConfig } from '../api/integrations/instagram/webhook.mjs'
 
@@ -53,6 +54,12 @@ test('public webhook route verifies the challenge and refuses unsigned POST befo
   assert.equal(res.statusCode, 200)
   assert.equal(res.body, 'static-ok')
 }))
+
+test('raw body is read from the stream without triggering Vercel parsed-body getter', async () => {
+  const request = Readable.from([Buffer.from('{"object":"instagram"}')])
+  Object.defineProperty(request, 'body', { get() { throw new Error('parsed-body getter must not run') } })
+  assert.equal((await readWebhookBody(request)).toString(), '{"object":"instagram"}')
+})
 
 test('normalizer ignores echoes and non-text messages', () => {
   const events = normalizeInstagramEvents({ entry: [{ id: 'ig-1', time: 1789600000,
