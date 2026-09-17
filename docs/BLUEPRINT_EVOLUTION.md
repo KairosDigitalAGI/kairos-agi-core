@@ -209,3 +209,5 @@ Rota nova consolidada (narrative/activity) — com essa, o Core soma exatamente 
 # 15/09/2026 — Instagram operacional: escopos de interação
 
 O conector Meta evolui do vínculo de perfil/publicação para solicitar também `instagram_business_manage_comments` e `instagram_business_manage_messages`. Essa autorização prepara moderação e Direct sem introduzir anúncios, insights ou automação de envio. A autorização OAuth não prova execução: handlers, webhooks, UI e auditoria permanecem requisitos explícitos antes de qualquer resposta automática.
+
+Em 17/09/2026, o webhook foi publicado com assinatura HMAC, idempotência persistente, fila privada e regras literais aprovadas. O app Meta correto salvou o callback e assinou apenas `comments`/`messages`; o challenge retornou 200 e POST sem assinatura 403. O Blueprint segue modular: a implementação paralela de respostas por LLM não é o caminho ativo, evitando custos e envios sem revisão. Migration 0025, publicação/análise Meta e teste ponta a ponta continuam pendentes; nenhuma resposta real foi comprovada.

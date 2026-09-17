@@ -8,7 +8,7 @@
 | 004 | Implementada e corrigida | Geração motion do zero por roteiro e pós-produção local; render e download WebM |
 | 004.1 | Implementada | Control Plane de integrações e plano operacional de sete dias; credenciais ainda pendentes |
 | 005 | Planejada | KAIROS WhatsApp; preservar operação existente e validar conexão separada |
-| 006 | Fase 14 entregue; atendimento Instagram em ativação (17/09/2026) | YouTube e Instagram reais conectados. Mapa do Projeto (migration 0023 pendente), webhook, inbox e regras de comentários/Direct (migration 0025 pendente) implementados; verify token presente na Vercel; faltam assinatura Meta e teste ponta a ponta. |
+| 006 | Fase 14 entregue; atendimento Instagram em ativação (17/09/2026) | YouTube e Instagram reais conectados. Mapa do Projeto (migration 0023 pendente); webhook publicado e verificado, `comments`/`messages` assinados, inbox e regras implementados (migration 0025 pendente). Faltam política de privacidade, análise/publicação Meta e teste ponta a ponta. |
 | 007 | Planejada | Billing Center; sem cobrança ou upgrade automático autorizado |
 | 008 | Planejada | Money Hunter Intelligence Center e Ideas Vault |
 | 009 | Planejada | Founder Mobile App |

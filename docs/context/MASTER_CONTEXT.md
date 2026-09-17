@@ -2,7 +2,7 @@
 
 ## Atualização 17/09/2026 — Instagram real e atendimento
 
-O status autenticado de produção confirmou `_kairosdigital_` conectado via OAuth ao Kairos AGI Core; YouTube Kairos Digital permanece conectado. A automação de comentários e Direct foi implementada no código com webhook assinado, inbox privada, regras aprovadas e limites de envio, mas **ainda não foi ativada em produção**. Pendente: migration `0025_instagram_engagement.sql` no Supabase mestre correto, assinatura de `comments`/`messages` no app Meta e teste com uma conta autorizada. `META_WEBHOOK_VERIFY_TOKEN` já consta na Vercel. O app Meta está em modo de teste; vínculo OAuth não comprova acesso avançado a usuários externos. Nenhum comentário/DM foi enviado por este incremento.
+O status autenticado de produção confirmou `_kairosdigital_` conectado via OAuth ao Kairos AGI Core; YouTube Kairos Digital permanece conectado. A automação de comentários e Direct foi publicada no código com webhook assinado, inbox privada, regras aprovadas e limites de envio, mas **ainda não foi ativada para eventos reais**. O callback está salvo no app Meta `1572077540519784`, com apenas `comments` e `messages` assinados; GET challenge retornou 200 e POST sem assinatura 403 em produção. Pendente: migration `0025_instagram_engagement.sql` no Supabase mestre correto, política de privacidade e análise/publicação do app Meta, depois teste com conta autorizada. `META_WEBHOOK_VERIFY_TOKEN` já consta na Vercel. Nenhum comentário/DM foi enviado por este incremento.
 
 Constituição: KAIROS_AGI_BLUEPRINT_V1.md. Adendos: KAIROS_MEMORY_SYNC_V1.md e KAIROS_MEMORY_SYNC_V1_1.md. AGENTS.md define papéis. Não reiniciar a arquitetura.
 

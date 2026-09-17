@@ -1,10 +1,12 @@
 # Changelog
 
 ## 17/09/2026 — Atendimento Instagram, conciliação das implementações
+- Produção em `main` atualizada até `99e0bcd`; challenge GET retornou 200 e POST sem assinatura foi recusado com 403. Corrigida a leitura do stream bruto da Vercel, que antes retornava 503 ao tocar no getter de `req.body`.
+- No app Meta correto (`1572077540519784`), callback salvo e campos `comments` e `messages` confirmados como assinados. Assinaturas extras foram removidas. O app segue não publicado: a tela de publicação exige URL de política de privacidade e análise do app; nenhum webhook real de cliente foi validado.
 - OAuth da conta profissional `_kairosdigital_` concluído e status real `connected:true` confirmado em produção. YouTube continua conectado.
 - O webhook da rota estática e o da rota dinâmica usam o mesmo processador: challenge, HMAC do corpo bruto e deduplicação persistente. A implementação paralela que enviava texto gerado por LLM foi substituída no endpoint ativo, evitando custo inesperado e respostas duplicadas.
 - Criados inbox server-side, resposta manual e regras de palavra-chave pausadas por padrão; ativação exige aprovação explícita do texto pelo Founder. DMs respeitam janela de 24 horas e a automação limita uma resposta por pessoa/canal/dia.
-- Migration `0025_instagram_engagement.sql`, painel Atendimento, testes e documentação entregues no repositório. `META_WEBHOOK_VERIFY_TOKEN` consta na Vercel; faltam migration no Supabase mestre, assinatura dos campos na Meta e teste ponta a ponta. A migration legada 0024 do Claude foi preservada, mas não é usada pelo novo fluxo.
+- Migration `0025_instagram_engagement.sql`, painel Atendimento, testes e documentação entregues no repositório. `META_WEBHOOK_VERIFY_TOKEN` consta na Vercel; faltam migration no Supabase mestre, publicação/análise do app Meta e teste ponta a ponta. A migration legada 0024 do Claude foi preservada, mas não é usada pelo novo fluxo.
 
 ## Missão 006, Fase 14 — Mapa do Projeto (15/09/2026)
 - Nova tabela `command.project_log` (migration `supabase/migrations/0023_project_log.sql`, repo kairos-command, **pendente de aplicar em produção**): diário de bordo append-only (`agent`, `phase`, `type`, `title`, `description`, `commit`, `deployed`) do próprio desenvolvimento do Core — nunca editado/apagado por este projeto, RLS habilitado sem policy de escrita (só `service_role`).
