@@ -3,7 +3,7 @@
 import { checkAuth, unauthorized } from '../../_auth.js'
 import { buildConnectUrl, completeConnection, computeYoutubeStatus, disconnectYoutube } from '../../_youtube.js'
 import { buildInstagramConnectUrl, completeInstagramConnection, computeInstagramStatus, disconnectInstagram } from '../../_instagram.js'
-import { verifyWebhookChallenge, readWebhookBody, parseSignedWebhook, receiveInstagramWebhook, listInstagramInbox, createInstagramRule, setInstagramRuleEnabled, replyToInstagramEvent } from '../../_instagramEngagement.js'
+import { handleInstagramWebhook, readWebhookBody, listInstagramInbox, createInstagramRule, setInstagramRuleEnabled, replyToInstagramEvent } from '../../_instagramEngagement.js'
 
 // A assinatura da Meta exige os bytes originais, antes de JSON.parse.
 export const config = { api: { bodyParser: false } }
@@ -38,15 +38,7 @@ export default async function handler(req, res) {
   const adapter = providers[provider]
   if (!adapter) return res.status(404).json({ erro: 'provedor não suportado' })
 
-  if (provider === 'instagram' && action === 'webhook') {
-    try {
-      if (req.method === 'GET') return res.status(200).send(verifyWebhookChallenge(req.query))
-      if (req.method !== 'POST') return res.status(405).json({ erro: 'use GET ou POST' })
-      const raw = await readWebhookBody(req)
-      const payload = parseSignedWebhook(raw, req.headers['x-hub-signature-256'])
-      return res.status(200).json(await receiveInstagramWebhook(payload))
-    } catch (error) { return res.status(error.status || 500).json({ erro: error.message }) }
-  }
+  if (provider === 'instagram' && action === 'webhook') return handleInstagramWebhook(req, res)
 
   if (action === 'callback') {
     if (req.method !== 'GET') return res.status(405).json({ erro: 'use GET' })

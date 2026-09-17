@@ -1,4 +1,6 @@
 -- Migration 0024: Instagram Automation
+-- Legado: preservado para histórico. O webhook ativo não usa estas tabelas;
+-- para o atendimento atual, aplicar supabase/migrations/0025_instagram_engagement.sql.
 -- Tabelas para automação de comentários e DMs do Instagram.
 -- Aplicar no Supabase SQL Editor (schema: command).
 

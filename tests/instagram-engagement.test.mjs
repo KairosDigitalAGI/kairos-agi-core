@@ -4,6 +4,7 @@ import { createHmac } from 'node:crypto'
 import { encrypt } from '../api/_crypto.js'
 import { verifyWebhookChallenge, parseSignedWebhook, normalizeInstagramEvents, receiveInstagramWebhook } from '../api/_instagramEngagement.js'
 import handler, { config } from '../api/integrations/[provider]/[action].mjs'
+import staticWebhook, { config as staticConfig } from '../api/integrations/instagram/webhook.mjs'
 
 const env = {
   META_APP_SECRET: 'secret-for-test', META_WEBHOOK_VERIFY_TOKEN: 'verify-for-test',
@@ -45,6 +46,12 @@ test('public webhook route verifies the challenge and refuses unsigned POST befo
   await handler({ method: 'POST', query: { provider: 'instagram', action: 'webhook' }, headers: {}, body: Buffer.from('{"object":"instagram","entry":[]}') }, res)
   assert.equal(res.statusCode, 403)
   assert.match(res.body.erro, /Assinatura/)
+
+  assert.equal(staticConfig.api.bodyParser, false)
+  res = respond()
+  await staticWebhook({ method: 'GET', query: { 'hub.mode': 'subscribe', 'hub.verify_token': env.META_WEBHOOK_VERIFY_TOKEN, 'hub.challenge': 'static-ok' } }, res)
+  assert.equal(res.statusCode, 200)
+  assert.equal(res.body, 'static-ok')
 }))
 
 test('normalizer ignores echoes and non-text messages', () => {

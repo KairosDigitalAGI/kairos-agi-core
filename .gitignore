@@ -24,3 +24,4 @@ memory/private/
 Thumbs.db
 .vercel
 .env*
+supabase/.temp/

@@ -14,12 +14,12 @@ Incremento da Missão 006, 17/09/2026. Usa somente a Instagram API com Instagram
 
 ## Ativação externa pendente
 
-1. Aplicar `supabase/migrations/0024_instagram_engagement.sql` no **Supabase mestre da Kairos**, o mesmo que contém `command.integracoes_tokens`; verificar as três tabelas pelo backend. Não aplicar em outro projeto Supabase.
-2. Criar `META_WEBHOOK_VERIFY_TOKEN` de alta entropia nas variáveis de produção da Vercel e fazer redeploy. Nunca registrar o valor no Git.
+1. Aplicar `supabase/migrations/0025_instagram_engagement.sql` no **Supabase mestre da Kairos**, o mesmo que contém `command.integracoes_tokens`; verificar as três tabelas pelo backend. Não aplicar em outro projeto Supabase. A migration 0024 do Claude, em `docs/migrations`, criou tabelas legadas sem deduplicação e não é usada por este fluxo.
+2. `META_WEBHOOK_VERIFY_TOKEN` já consta como variável criptografada de produção na Vercel. Verificar o challenge depois do novo deploy, sem registrar o valor no Git.
 3. No app Meta **Kairos AGI Core**, configurar callback `https://kairos-agi-core.vercel.app/api/integrations/instagram/webhook`, inserir o mesmo verify token e assinar `comments` e `messages` no produto Instagram. Validar que o challenge retorna 200.
 4. Enviar um comentário e um Direct a partir de uma conta de teste autorizada. Confirmar que chegam uma vez à fila, sem resposta automática; revisar um texto, criar/ativar a regra e repetir o teste com nova interação. Não usar clientes reais antes de confirmar o acesso avançado exigido pela Meta.
 
-O app Meta estava em modo de teste quando este incremento foi escrito. A conexão OAuth da própria `_kairosdigital_` comprova o token, não comprova entrega de webhooks de usuários externos nem App Review. Até os testes ponta a ponta, o status é **implementado localmente, não ativado**. A ausência da migration ou do verify token falha fechado.
+O app Meta estava em modo de teste quando este incremento foi escrito. O app acessível no painel é `Kairos AGI Core` (ID `1572077540519784`, Instagram App ID `1114179454878605`); o ID `2559962444448696` de uma instrução externa não apareceu nesta conta. A conexão OAuth da própria `_kairosdigital_` comprova o token, não comprova entrega de webhooks de usuários externos nem App Review. Até os testes ponta a ponta, o status é **implementado, não ativado**. A ausência da migration ou do verify token falha fechado.
 
 ## Privacidade e limites
 

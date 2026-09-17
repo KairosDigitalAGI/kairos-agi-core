@@ -1,10 +1,10 @@
 # Changelog
 
-## 17/09/2026 — Atendimento Instagram, implementação local
+## 17/09/2026 — Atendimento Instagram, conciliação das implementações
 - OAuth da conta profissional `_kairosdigital_` concluído e status real `connected:true` confirmado em produção. YouTube continua conectado.
-- Adicionado webhook Instagram em rota dinâmica já existente, com challenge, HMAC do corpo bruto e deduplicação persistente.
+- O webhook da rota estática e o da rota dinâmica usam o mesmo processador: challenge, HMAC do corpo bruto e deduplicação persistente. A implementação paralela que enviava texto gerado por LLM foi substituída no endpoint ativo, evitando custo inesperado e respostas duplicadas.
 - Criados inbox server-side, resposta manual e regras de palavra-chave pausadas por padrão; ativação exige aprovação explícita do texto pelo Founder. DMs respeitam janela de 24 horas e a automação limita uma resposta por pessoa/canal/dia.
-- Migration `0024_instagram_engagement.sql`, painel Atendimento, testes e documentação entregues no repositório. Sem migration no Supabase mestre, verify token e assinatura dos campos na Meta, nenhuma resposta automática opera em produção.
+- Migration `0025_instagram_engagement.sql`, painel Atendimento, testes e documentação entregues no repositório. `META_WEBHOOK_VERIFY_TOKEN` consta na Vercel; faltam migration no Supabase mestre, assinatura dos campos na Meta e teste ponta a ponta. A migration legada 0024 do Claude foi preservada, mas não é usada pelo novo fluxo.
 
 ## Missão 006, Fase 14 — Mapa do Projeto (15/09/2026)
 - Nova tabela `command.project_log` (migration `supabase/migrations/0023_project_log.sql`, repo kairos-command, **pendente de aplicar em produção**): diário de bordo append-only (`agent`, `phase`, `type`, `title`, `description`, `commit`, `deployed`) do próprio desenvolvimento do Core — nunca editado/apagado por este projeto, RLS habilitado sem policy de escrita (só `service_role`).

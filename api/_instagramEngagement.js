@@ -7,7 +7,7 @@ import { getValidInstagramAccess } from './_instagram.js'
 
 const MAX_BODY = 256 * 1024
 const MAX_REPLY = 500
-const MIGRATION_HINT = 'Aplique supabase/migrations/0024_instagram_engagement.sql no Supabase mestre.'
+const MIGRATION_HINT = 'Aplique supabase/migrations/0025_instagram_engagement.sql no Supabase mestre.'
 
 function fail(message, status = 400) {
   const error = new Error(message)
@@ -54,6 +54,19 @@ export function parseSignedWebhook(raw, signature) {
   try { payload = JSON.parse(raw.toString('utf8')) } catch { throw fail('JSON inválido.') }
   if (payload?.object !== 'instagram') throw fail('Objeto de webhook inesperado.')
   return payload
+}
+
+export async function handleInstagramWebhook(req, res) {
+  res.setHeader('Cache-Control', 'no-store')
+  try {
+    if (req.method === 'GET') return res.status(200).send(verifyWebhookChallenge(req.query))
+    if (req.method !== 'POST') return res.status(405).json({ erro: 'use GET ou POST' })
+    const raw = await readWebhookBody(req)
+    const payload = parseSignedWebhook(raw, req.headers['x-hub-signature-256'])
+    return res.status(200).json(await receiveInstagramWebhook(payload))
+  } catch (error) {
+    return res.status(error.status || 500).json({ erro: error.message })
+  }
 }
 
 export function normalizeInstagramEvents(payload) {
