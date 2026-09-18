@@ -110,7 +110,23 @@ export async function completeInstagramConnection({ code, state }) {
     err.status = 503
     throw err
   }
+  // Subscreve automaticamente os eventos da conta no webhook da Meta.
+  // Falha silenciosa: não impede a conexão se a chamada falhar.
+  try { await subscribeInstagramWebhook(longBody.access_token, String(profile.user_id || profile.id)) } catch {}
   return { accountLabel: profile.username ? `@${profile.username}` : profile.name || null }
+}
+
+/** Inscreve a conta no webhook da Meta para receber comentários e mensagens. */
+export async function subscribeInstagramWebhook(accessToken, igUserId) {
+  const url = new URL(`https://graph.instagram.com/${igUserId}/subscribed_apps`)
+  url.searchParams.set('subscribed_fields', 'comments,messages')
+  url.searchParams.set('access_token', accessToken)
+  const res = await fetch(url, { method: 'POST' })
+  const json = await res.json().catch(() => ({}))
+  if (!res.ok && !json.success) {
+    throw new Error(`Falha ao inscrever webhook: ${json.error?.message || res.status}`)
+  }
+  return { subscribed: true }
 }
 
 export async function computeInstagramStatus() {

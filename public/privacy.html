@@ -1,8 +1,4 @@
-// Página de Política de Privacidade — requisito obrigatório para Meta App Review.
-// Retorna HTML estático em PT-BR. Acessível publicamente sem autenticação.
-export const config = { api: { bodyParser: false } }
-
-const HTML = `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -66,10 +62,4 @@ const HTML = `<!DOCTYPE html>
     &copy; 2026 Kairos Digital. Esta política se aplica ao aplicativo <em>Kairos AGI Core</em> integrado à plataforma Meta (Instagram).
   </footer>
 </body>
-</html>`
-
-export default function handler(req, res) {
-  res.setHeader('Cache-Control', 'public, max-age=86400')
-  res.setHeader('Content-Type', 'text/html; charset=utf-8')
-  return res.status(200).send(HTML)
-}
+</html>

@@ -1,127 +1,69 @@
-import { useState } from 'react'
-import { Bot, ChevronDown, ChevronUp, RefreshCw, ToggleLeft, ToggleRight, Zap } from 'lucide-react'
-import { useInstagramAutomation, type AutomationLog } from '../../core/useInstagramAutomation'
+import { useCallback, useEffect, useState } from 'react'
+import { Bell, ExternalLink, MessageSquare, RefreshCw } from 'lucide-react'
+import { useOperationsAuth } from '../../core/OperationsAuthProvider'
 
-const DEFAULT_PROMPT = 'Você é o assistente digital da Kairos Digital, empresa brasileira especializada em automação com IA para pequenas e médias empresas. Responda de forma amigável, profissional e concisa em português brasileiro. Objetivo: qualificar o interesse do lead e direcioná-lo para falar com um especialista da Kairos. Nunca invente preços, prazos ou funcionalidades técnicas. Máximo 2 a 3 frases por resposta.'
-
-function fmtDate(iso: string) {
-  try { return new Date(iso).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) }
-  catch { return iso }
-}
-
-function LogRow({ log }: { log: AutomationLog }) {
-  const [open, setOpen] = useState(false)
-  const hasDetail = !!(log.incoming_text || log.response_text || log.error)
-  return (
-    <div className={`ig-auto-log-row ${log.error ? 'error' : ''}`}>
-      <div className="ig-auto-log-meta">
-        <span className={`ig-auto-type ${log.type}`}>{log.type === 'comment' ? 'Comentário' : 'DM'}</span>
-        <span className="ig-auto-log-date">{fmtDate(log.created_at)}</span>
-        {log.error && <span className="ig-auto-log-err">Erro</span>}
-        {hasDetail && (
-          <button className="ig-auto-expand" onClick={() => setOpen(v => !v)}>
-            {open ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
-          </button>
-        )}
-      </div>
-      {open && (
-        <div className="ig-auto-log-detail">
-          {log.incoming_text && <p><strong>Recebido:</strong> {log.incoming_text}</p>}
-          {log.response_text && <p><strong>Resposta:</strong> {log.response_text}</p>}
-          {log.error && <p className="err"><strong>Erro:</strong> {log.error}</p>}
-        </div>
-      )}
-    </div>
-  )
+interface InboxData {
+  rules: Array<{ id: string; keyword: string; kind: string; enabled: boolean }>
+  events: Array<{ id: string; status: string; kind: string }>
 }
 
 interface Props { active: boolean }
 
 export function InstagramAutomationPanel({ active }: Props) {
-  const { config, logs, loading, saving, error, save, refreshLogs } = useInstagramAutomation(active)
-  const [editingPrompt, setEditingPrompt] = useState(false)
-  const [promptDraft, setPromptDraft] = useState('')
-  const [showLogs, setShowLogs] = useState(false)
+  const { header } = useOperationsAuth()
+  const [data, setData] = useState<InboxData | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [subscribing, setSubscribing] = useState(false)
+  const [subscribeMsg, setSubscribeMsg] = useState('')
+
+  const load = useCallback(async () => {
+    if (!header) return
+    setLoading(true)
+    try {
+      const res = await fetch('/api/integrations/instagram/inbox', { headers: { Authorization: header } })
+      if (res.ok) setData(await res.json())
+    } catch { /* silent */ } finally { setLoading(false) }
+  }, [header])
+
+  useEffect(() => { if (active) void load() }, [active, load])
+
+  async function activateWebhook() {
+    if (!header) return
+    setSubscribing(true); setSubscribeMsg('')
+    try {
+      const res = await fetch('/api/integrations/instagram/subscribe-webhook', { method: 'POST', headers: { Authorization: header } })
+      const json = await res.json().catch(() => ({}))
+      setSubscribeMsg(res.ok ? 'Webhook ativado — Meta enviará eventos para este painel.' : (json.erro || 'Falha ao ativar.'))
+    } catch { setSubscribeMsg('Falha ao ativar.') } finally { setSubscribing(false) }
+  }
 
   if (!active) return null
 
-  function startEditPrompt() {
-    setPromptDraft(config.prompt_base || DEFAULT_PROMPT)
-    setEditingPrompt(true)
-  }
-
-  function cancelEditPrompt() { setEditingPrompt(false) }
-
-  function savePrompt() {
-    void save({ prompt_base: promptDraft.trim() || null })
-    setEditingPrompt(false)
-  }
-
-  function toggleEnabled() { void save({ enabled: !config.enabled }) }
+  const rulesEnabled = data?.rules.filter(r => r.enabled).length ?? 0
+  const pending = data?.events.filter(e => e.status === 'pending').length ?? 0
 
   return (
     <div className="ig-auto-panel">
       <div className="ig-auto-header">
-        <span className="ig-auto-title"><Bot size={14} /> Automação IA</span>
-        {loading && <span className="ig-auto-loading"><RefreshCw size={12} /> Carregando…</span>}
+        <span className="ig-auto-title"><MessageSquare size={14} /> Atendimento IA</span>
+        {loading && <span className="ig-auto-loading"><RefreshCw size={12} className="spin" /> Carregando…</span>}
       </div>
-
-      {error && <small className="ig-auto-error" role="alert">{error}</small>}
-
-      <div className="ig-auto-toggle">
-        <button
-          className={`ig-auto-toggle-btn ${config.enabled ? 'on' : 'off'}`}
-          onClick={toggleEnabled}
-          disabled={saving || loading}
-          title={config.enabled ? 'Clique para desativar' : 'Clique para ativar'}
-        >
-          {config.enabled ? <ToggleRight size={22} /> : <ToggleLeft size={22} />}
-          <span>{config.enabled ? 'Ativa' : 'Inativa'}</span>
-          {saving && <RefreshCw size={12} className="spin" />}
-        </button>
-        <small>{config.enabled ? 'Respondendo comentários e DMs automaticamente via IA.' : 'Automação pausada — nenhuma resposta será enviada.'}</small>
+      <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
+        <small style={{ color: 'var(--muted)' }}>Regras ativas: <strong style={{ color: '#6ee7b7' }}>{rulesEnabled}</strong></small>
+        <small style={{ color: 'var(--muted)' }}>Eventos pendentes: <strong style={{ color: '#fcd34d' }}>{pending}</strong></small>
       </div>
-
-      <div className="ig-auto-prompt-section">
-        <div className="ig-auto-prompt-head">
-          <span className="ig-auto-sub"><Zap size={12} /> Prompt base</span>
-          {!editingPrompt && <button className="ig-auto-link-btn" onClick={startEditPrompt}>Editar</button>}
-        </div>
-        {!editingPrompt && (
-          <p className="ig-auto-prompt-preview">{config.prompt_base || DEFAULT_PROMPT}</p>
-        )}
-        {editingPrompt && (
-          <>
-            <textarea
-              className="ig-auto-textarea"
-              value={promptDraft}
-              onChange={e => setPromptDraft(e.target.value)}
-              rows={5}
-              placeholder="Instruções para o agente IA responder em seu nome…"
-            />
-            <div className="ig-auto-prompt-actions">
-              <button className="ig-auto-save-btn" onClick={savePrompt} disabled={saving}>Salvar</button>
-              <button className="ig-auto-cancel-btn" onClick={cancelEditPrompt}>Cancelar</button>
-            </div>
-          </>
-        )}
-      </div>
-
-      <div className="ig-auto-logs-section">
-        <div className="ig-auto-prompt-head">
-          <span className="ig-auto-sub">Últimas respostas</span>
-          <div style={{ display: 'flex', gap: 8 }}>
-            <button className="ig-auto-link-btn" onClick={() => void refreshLogs()}>Atualizar</button>
-            <button className="ig-auto-link-btn" onClick={() => setShowLogs(v => !v)}>{showLogs ? 'Ocultar' : 'Ver'}</button>
-          </div>
-        </div>
-        {showLogs && (
-          <div className="ig-auto-logs">
-            {logs.length === 0 && <small className="ig-auto-empty">Nenhuma resposta registrada ainda.</small>}
-            {logs.slice(0, 15).map(log => <LogRow key={log.id} log={log} />)}
-          </div>
-        )}
-      </div>
+      <button
+        type="button"
+        onClick={() => void activateWebhook()}
+        disabled={subscribing}
+        style={{ display: 'inline-flex', alignItems: 'center', gap: 6, minHeight: 28, padding: '0 10px', border: '1px solid rgba(52,211,153,.3)', borderRadius: 7, background: 'rgba(52,211,153,.08)', color: '#6ee7b7', fontSize: '.65rem', cursor: 'pointer' }}
+      >
+        <Bell size={12} />{subscribing ? 'Ativando…' : 'Ativar recebimento de eventos'}
+      </button>
+      {subscribeMsg && <small role="alert" style={{ color: subscribeMsg.includes('ativado') ? '#6ee7b7' : '#fca5a5', fontSize: '.65rem' }}>{subscribeMsg}</small>}
+      <a href="/?module=instagram" style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: '.65rem', color: '#93c5fd', textDecoration: 'none' }}>
+        Gerenciar regras e caixa de entrada <ExternalLink size={11} />
+      </a>
     </div>
   )
 }
