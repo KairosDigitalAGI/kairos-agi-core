@@ -1,6 +1,6 @@
 // OAuth oficial do Instagram para conta profissional. Reusa o cofre
 // command.integracoes_tokens e a cifra server-side já adotados pelo YouTube.
-import { readCommand, upsertCommand, deleteCommand, commandConfigured } from './_command.js'
+import { readCommand, writeCommand, upsertCommand, deleteCommand, commandConfigured } from './_command.js'
 import { encrypt, decrypt, signState, verifyState } from './_crypto.js'
 
 const MIGRATION_HINT = 'A tabela command.integracoes_tokens precisa existir no Supabase mestre.'

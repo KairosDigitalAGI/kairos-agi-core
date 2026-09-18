@@ -4,6 +4,7 @@ import { integrationCatalog } from '../../core/integrationCatalog'
 import { useOperationsAuth } from '../../core/OperationsAuthProvider'
 import { useSocialIntegration } from '../../core/useSocialIntegration'
 import { OperationsUnlock } from '../dashboard/OperationsUnlock'
+import { InstagramAutomationPanel } from './InstagramAutomationPanel'
 import type { IntegrationStatusResponse } from '../../types/integration'
 import './integrations.css'
 
@@ -91,6 +92,7 @@ export function IntegrationsPage() {
             <small>Conta conectada: <strong>{accountLabel || 'sem nome informado pelo provedor'}</strong></small>
             {profileUrl && <a className="integration-open-account" href={profileUrl} target="_blank" rel="noreferrer">Ver conta conectada <ExternalLink size={14} /></a>}
             {!profileUrl && <small>O provedor não devolveu um identificador público para montar o link direto da conta.</small>}
+            {definition.id === 'instagram' && <InstagramAutomationPanel active={true} />}
             <button type="button" onClick={() => void integration.disconnect()}>Desconectar</button>
           </>}
           {header && !connected && <>
