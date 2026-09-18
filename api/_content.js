@@ -8,7 +8,6 @@
 import { readCommand, writeCommand, patchCommand, commandConfigured } from './_command.js'
 import { selectProvider } from './_providers/index.js'
 import * as openai from './_providers/openai.js'
-import * as veo from './_providers/veo.js'
 import * as fal from './_providers/fal.js'
 import { uploadToStorage, safePath } from './_storage.js'
 import { getValidAccessToken, uploadVideo } from './_youtube.js'
@@ -16,6 +15,16 @@ import { getValidInstagramAccess, createReelsContainer, checkContainerStatus, pu
 
 const MIGRATION_HINT =
   'A migration supabase/migrations/0020_content_engine.sql (repo kairos-command) ainda não foi aplicada em produção — colar no SQL Editor do Supabase para ativar o Content Engine.'
+
+// O plano do Founder é custo zero. Um job historicamente marcado como
+// aprovado não libera chamadas pagas nesta implantação.
+function assertPaidMediaEnabled() {
+  if (process.env.KAIROS_ENABLE_PAID_MEDIA !== 'true') {
+    const err = new Error('Geração por API paga está desligada no modo custo zero. Use Google Flow com créditos gratuitos ou a Video Engine local.')
+    err.status = 402
+    throw err
+  }
+}
 
 // Lidas a cada chamada (não numa const de módulo), mesma convenção de
 // api/_providers/fal.js#pollIntervalMs/pollTimeoutMs — assim os testes
@@ -159,6 +168,8 @@ export async function generateScript({ jobId, providerName }) {
     throw err
   }
 
+  assertPaidMediaEnabled()
+
   let provider
   try {
     provider = selectProvider(providerName)
@@ -251,6 +262,8 @@ export async function generateImage({ jobId }) {
     err.status = 402
     throw err
   }
+
+  assertPaidMediaEnabled()
   if (!openai.hasCredentials()) {
     const err = new Error('nenhum provider de geração de imagem configurado: defina OPENAI_API_KEY na Vercel (só a OpenAI gera imagem neste Core).')
     err.status = 503
@@ -320,17 +333,10 @@ export async function generateImage({ jobId }) {
 /**
  * Gera o vídeo de um job em etapa "imagem" e avança para "video".
  *
- * Dois motores, escolhidos por `tier`:
- *  - tier="free" (padrão): Google Veo via AI Studio primeiro (GOOGLE_AI_KEY,
- *    cota grátis de verdade) — só cai para o Kling v1.6 do fal.ai quando o
- *    Veo devolve 429 (cota esgotada) ou não está configurado. O Kling do
- *    fal.ai NÃO é gratuito de fato (fal.ai cobra por segundo de vídeo), então
- *    esse fallback só roda com o MESMO gate de aprovação de gasto das outras
- *    etapas pagas (content_jobs.aprovado:true) — rotular um provider de
- *    "fallback free" no pedido não basta para pular a regra inviolável de
- *    nunca gastar sem aprovação explícita do Founder.
- *  - tier="paid": Kling v2.1 Master (qualidade premium, fal.ai), sempre
- *    exige aprovado:true — idêntico ao gate de generateImage.
+ * A API Veo não oferece faixa gratuita; tier="free" é recusado. A produção
+ * gratuita ocorre na interface oficial do Google Flow e o arquivo gerado
+ * pode ser importado na galeria local. tier="paid" usa Kling v2.1 Master,
+ * somente com aprovação do job e KAIROS_ENABLE_PAID_MEDIA=true.
  *
  * O vídeo não é baixado para o Storage deste Core: a URL que o provider
  * devolve é gravada direto em content_assets.storage_path (pode ser externa,
@@ -374,6 +380,11 @@ export async function generateVideo({ jobId, tier = 'free' }) {
     err.status = 409
     throw err
   }
+  if (tier === 'free') {
+    const err = new Error('A API Veo não tem faixa gratuita. O modo zero custo usa os créditos diários do Google Flow na interface oficial e importa o MP4 para a galeria Kairos.')
+    err.status = 402
+    throw err
+  }
   if (tier === 'paid' && !job.aprovado) {
     const err = new Error(
       `content_job ${jobId} ainda não foi aprovado para gasto (aprovado:false). O Founder precisa aprovar este job antes de gerar vídeo com o motor pago (Kling v2.1 Master).`,
@@ -381,6 +392,8 @@ export async function generateVideo({ jobId, tier = 'free' }) {
     err.status = 402
     throw err
   }
+
+  assertPaidMediaEnabled()
 
   const briefing = job.briefing && typeof job.briefing === 'object' ? job.briefing : {}
   const prompt = [
@@ -390,70 +403,21 @@ export async function generateVideo({ jobId, tier = 'free' }) {
     'Estilo profissional e moderno, sem texto sobreposto, sem logotipo inventado.',
   ].filter(Boolean).join(' ')
 
-  let resultado
-  let provedor
-  let gratuito
-
-  if (tier === 'paid') {
-    if (!fal.hasCredentials()) {
-      const err = new Error('nenhum provider de vídeo pago configurado: defina FAL_KEY na Vercel (Kling v2.1 Master roda via fal.ai).')
-      err.status = 503
-      throw err
-    }
-    try {
-      resultado = await fal.generateVideo({ prompt, model: fal.MODEL_PAID })
-    } catch (e) {
-      const err = new Error(`provider fal: ${e.message}`)
-      err.status = e.status && e.status >= 400 && e.status < 600 ? e.status : 502
-      throw err
-    }
-    provedor = 'fal'
-    gratuito = false
-  } else {
-    let veoErro = null
-    if (veo.hasCredentials()) {
-      try {
-        resultado = await veo.generateVideo({ prompt })
-        provedor = 'veo'
-        gratuito = true
-      } catch (e) {
-        if (e.status !== 429) {
-          const err = new Error(`provider veo: ${e.message}`)
-          err.status = e.status && e.status >= 400 && e.status < 600 ? e.status : 502
-          throw err
-        }
-        veoErro = e
-      }
-    }
-    if (!resultado) {
-      // Veo não configurado ou com cota esgotada (429) — cai para o Kling
-      // v1.6 do fal.ai, que É geração paga de verdade apesar do nome
-      // "fallback free" na spec original: exige aprovado:true antes de gastar.
-      if (!job.aprovado) {
-        const err = new Error(
-          `content_job ${jobId} ainda não foi aprovado para gasto (aprovado:false). O Veo${veoErro ? ' esgotou a cota gratuita' : ' não está configurado (GOOGLE_AI_KEY ausente)'} e o fallback Kling v1.6 (fal.ai) é geração paga — o Founder precisa aprovar este job antes.`,
-        )
-        err.status = 402
-        throw err
-      }
-      if (!fal.hasCredentials()) {
-        const err = new Error(
-          `nenhum provider de vídeo disponível: GOOGLE_AI_KEY ${veoErro ? `esgotou a cota (${veoErro.message})` : 'não configurada'} e FAL_KEY (fallback Kling) também não configurada.`,
-        )
-        err.status = 503
-        throw err
-      }
-      try {
-        resultado = await fal.generateVideo({ prompt, model: fal.MODEL_FREE })
-      } catch (e) {
-        const err = new Error(`provider fal: ${e.message}`)
-        err.status = e.status && e.status >= 400 && e.status < 600 ? e.status : 502
-        throw err
-      }
-      provedor = 'fal'
-      gratuito = false
-    }
+  if (!fal.hasCredentials()) {
+    const err = new Error('nenhum provider de vídeo pago configurado: defina FAL_KEY na Vercel (Kling v2.1 Master roda via fal.ai).')
+    err.status = 503
+    throw err
   }
+  let resultado
+  try {
+    resultado = await fal.generateVideo({ prompt, model: fal.MODEL_PAID })
+  } catch (e) {
+    const err = new Error(`provider fal: ${e.message}`)
+    err.status = e.status && e.status >= 400 && e.status < 600 ? e.status : 502
+    throw err
+  }
+  const provedor = 'fal'
+  const gratuito = false
 
   try {
     const [asset] = await writeCommand('content_assets', {

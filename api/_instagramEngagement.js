@@ -4,6 +4,7 @@
 import { createHmac, timingSafeEqual } from 'node:crypto'
 import { readCommand, writeCommand, patchCommand } from './_command.js'
 import { getValidInstagramAccess } from './_instagram.js'
+import { freeGreetingConfigured, generateFounderGreeting } from './_providers/geminiFree.js'
 
 const MAX_BODY = 256 * 1024
 const MAX_REPLY = 500
@@ -120,6 +121,13 @@ function matchRule(event, rules) {
     rule.keyword && content.includes(String(rule.keyword).normalize('NFKC').toLocaleLowerCase('pt-BR')))
 }
 
+function isFounderGreeting(event) {
+  const founderId = process.env.KAIROS_IG_FOUNDER_TEST_SENDER_ID
+  return freeGreetingConfigured() && Boolean(founderId) &&
+    event.sender_id === founderId && /^oi[!?.\s]*$/iu.test(event.content.trim()) &&
+    (event.kind !== 'message' || withinMessageWindow(event.event_time))
+}
+
 function withinMessageWindow(timestamp) {
   const age = Date.now() - new Date(timestamp || 0).getTime()
   return Number.isFinite(age) && age >= 0 && age <= 24 * 60 * 60 * 1000
@@ -176,7 +184,19 @@ export async function receiveInstagramWebhook(payload) {
     catch (error) { if (/respondeu 409/.test(error.message)) continue; throw fail(`${MIGRATION_HINT} ${error.message}`, 503) }
     received += 1
     const rule = matchRule(event, rules || [])
-    if (rule) {
+    const founderGreeting = isFounderGreeting(event)
+    if (rule || founderGreeting) {
+      let responseText
+      if (founderGreeting) {
+        try { responseText = await generateFounderGreeting(event.kind) }
+        catch (error) {
+          await patchCommand('instagram_engagement_events', `?event_key=eq.${encodeURIComponent(event.event_key)}&status=eq.pending`,
+            { status: 'review', error: String(error.message).slice(0, 300) }).catch(() => {})
+          continue
+        }
+      } else {
+        responseText = String(rule.response_text)
+      }
       // No máximo uma resposta automática por pessoa/canal/dia UTC.
       // A chave única no banco mantém o limite mesmo com functions paralelas.
       try {
@@ -187,7 +207,7 @@ export async function receiveInstagramWebhook(payload) {
         if (/respondeu 409/.test(error.message)) continue
         throw fail(`${MIGRATION_HINT} ${error.message}`, 503)
       }
-      await deliver(event, String(rule.response_text), rule.id)
+      await deliver(event, responseText, rule?.id || null)
     }
   }
   return { received }

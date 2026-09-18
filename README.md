@@ -1,5 +1,7 @@
 # Kairos AGI Core
 
+Atualização 18/09/2026: [primeiros vídeos e imagens generativos reais no Google Flow](docs/modules/VIDEO_ENGINE_V0_4.md) (duas cenas de 8 s e montagem de 16 s); a Video Engine importa MP4/WebM na galeria local. A API Veo não é gratuita e foi desligada no modo custo zero. O teste de [resposta “oi” do Founder no Instagram](docs/modules/FOUNDER_GREETING_V0_1.md) está implementado, mas ainda aguarda identificação do remetente, chave Gemini Free Tier verificada e evento real da Meta. Não há postagem nem resposta automática comprovada.
+
 Atendimento Instagram: o webhook autentica eventos da Meta por HMAC e só envia respostas automáticas a regras aprovadas. A conexão OAuth ou a assinatura de campos, isoladamente, não comprova entrega de eventos; acompanhe o estado no painel de Integrações.
 
 Ambiente oficial de desenvolvimento da **Kairos Digital**, destinado à construção de uma empresa operada por agentes de IA com supervisão humana.

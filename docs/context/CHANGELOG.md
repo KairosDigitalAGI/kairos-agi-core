@@ -1,5 +1,13 @@
 # Changelog
 
+## 18/09/2026 — mídia generativa gratuita e saudação restrita
+
+- Três imagens e duas cenas de 8 s geradas no Flow; cena composta de 16 s exportada, arquivos privados locais e projeto Flow preservado.
+- Galeria aceita MP4/WebM importados com duração/resolução verificadas no navegador; sem upload automático.
+- Corrigido `tier=free` do Veo: API sem faixa gratuita e sem fallback pago. APIs pagas dependem agora também de `KAIROS_ENABLE_PAID_MEDIA=true`.
+- Preparado teste de “oi” via Gemini Flash-Lite gratuito para ID exato do Founder em comentários/Direct, desligado até confirmação do projeto sem faturamento e do webhook real.
+- Consulta autenticada da assinatura `comments,messages` da conta Instagram; token saiu da URL para header Bearer na chamada de inscrição.
+
 ## 18/09/2026 — segurança e custo do Instagram
 
 - Removido o fallback de IA paga para comentários/DMs sem regra aprovada.

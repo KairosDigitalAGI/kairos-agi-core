@@ -1,6 +1,12 @@
 # Arquitetura — proposta inicial
 
-O webhook de Instagram rejeita todo POST sem `META_APP_SECRET` ou HMAC válido. Eventos são processados somente após validação, com deduplicação, conta vinculada e regras de resposta aprovadas; mensagens sem regra exigem revisão humana. A resposta livre por LLM e o token direto sem verificação da conta não integram o caminho de produção.
+## 18/09/2026 — mídia gratuita e saudação de teste
+
+O Flow oficial produz ativos generativos usando a cota exibida na própria conta; o navegador baixa os MP4/JPEG originais e a Video Engine importa MP4/WebM para IndexedDB, sem servidor de upload nem publicação implícita. A API `generateVideo(tier=free)` recusa a antiga suposição de Veo gratuito. Roteiro, imagem e vídeo por APIs pagas exigem `KAIROS_ENABLE_PAID_MEDIA=true` além da aprovação do job; o modo custo zero deixa a flag ausente. O fallback permanente é o render Canvas/WebM local. O projeto do Flow e os arquivos produzidos são descritos em `docs/modules/VIDEO_ENGINE_V0_4.md`.
+
+O Instagram preserva HMAC, conta OAuth vinculada, deduplicação, janela de 24 h e cooldown. Um caminho adicional, isolado, responde somente ao “oi” do ID numérico do Founder com `gemini-2.5-flash-lite` de projeto Free Tier confirmado; nenhuma mensagem do remetente além da palavra fixa é enviada à LLM. Flags ausentes deixam esse caminho desligado. A assinatura `subscribed_apps` da conta agora é consultável via rota autenticada, sem token na URL. O app Meta publicado e evento real continuam requisitos independentes. Ver `docs/modules/FOUNDER_GREETING_V0_1.md`.
+
+O webhook de Instagram rejeita todo POST sem `META_APP_SECRET` ou HMAC válido. Eventos são processados somente após validação, com deduplicação, conta vinculada e regras de resposta aprovadas; mensagens sem regra exigem revisão humana, exceto o teste restrito de saudação do Founder quando suas flags e ID estiverem configurados. A resposta livre por LLM e o token direto sem verificação da conta não integram o caminho de produção.
 
 ## Atendimento Instagram — incremento 17/09/2026
 

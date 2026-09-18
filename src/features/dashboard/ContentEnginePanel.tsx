@@ -16,12 +16,9 @@ const ETAPA_LABEL: Record<ContentJobEtapa, string> = {
   rejeitado: 'Rejeitado',
 }
 
-// Pipeline real do Content Engine (command.content_jobs). Registra ideias,
-// gera roteiro (ideia→roteiro), imagem de capa (roteiro→imagem) e vídeo
-// (imagem→video) com provider pago, um clique do Founder por vez, sempre
-// atrás de aprovação explícita de gasto (job.aprovado) — legenda ainda não
-// tem motor. Vídeo tem dois botões: "grátis" (Veo → fallback Kling v1.6,
-// esse fallback também exige aprovado) e "premium" (Kling v2.1 Master).
+// Pipeline real do Content Engine (command.content_jobs). Nesta implantação
+// de custo zero, a criação por APIs pagas fica fechada no backend. O Flow
+// gratuito gera ativos, e a Video Engine importa seus MP4 na galeria local.
 // "Postar no YouTube"/"Postar no Instagram" reaproveitam o mesmo
 // aprovado:true como sinal de publicação (etapa aprovacao ainda não tem
 // motor — ver comentário em api/_content.js#postToYoutube) e sobem o
@@ -32,15 +29,10 @@ export function ContentEnginePanel() {
     createJob,
     submitting,
     submitError,
-    generateScript,
-    generateImage,
-    generateVideo,
     postToYoutube,
     postToInstagram,
     generatingJobId,
     generateError,
-    approveJob,
-    approvingJobId,
     approveError,
   } = useContentPipeline()
   const [titulo, setTitulo] = useState('')
@@ -56,6 +48,7 @@ export function ContentEnginePanel() {
   return (
     <article className="glass-panel content-engine-panel">
       <SectionHeader eyebrow="Content Engine" title="Pipeline de conteúdo" action={<Sparkles size={18} />} />
+      <p>Modo custo zero: a API Veo e os modelos de imagem não têm faixa gratuita. Crie imagens e clipes com os créditos diários no <a href="https://flow.google.com/" target="_blank" rel="noreferrer">Google Flow</a> e importe os MP4 na <a href="/?module=video">Video Engine</a>. Nenhuma chamada paga é iniciada por este painel.</p>
 
       {state.status === 'sem-credencial' && <p>Trancado. Desbloqueie o Painel Operacional acima para ver o pipeline real.</p>}
       {state.status === 'carregando' && <p>Consultando pipeline…</p>}
@@ -92,56 +85,7 @@ export function ContentEnginePanel() {
                 <li key={job.id}>
                   <span className={`content-engine-etapa etapa-${job.etapa}`}>{ETAPA_LABEL[job.etapa] ?? job.etapa}</span>
                   <span className="content-engine-titulo">{job.titulo}</span>
-                  {job.etapa === 'ideia' && !job.aprovado && (
-                    <button
-                      type="button"
-                      className="content-engine-generate"
-                      disabled={approvingJobId === job.id}
-                      onClick={() => void approveJob(job.id)}
-                    >
-                      {approvingJobId === job.id ? 'Aprovando…' : 'Aprovar geração paga'}
-                    </button>
-                  )}
-                  {job.etapa === 'ideia' && job.aprovado && (
-                    <button
-                      type="button"
-                      className="content-engine-generate"
-                      disabled={generatingJobId === job.id}
-                      onClick={() => void generateScript(job.id)}
-                    >
-                      {generatingJobId === job.id ? 'Gerando…' : 'Gerar roteiro'}
-                    </button>
-                  )}
-                  {job.etapa === 'roteiro' && job.aprovado && (
-                    <button
-                      type="button"
-                      className="content-engine-generate"
-                      disabled={generatingJobId === job.id}
-                      onClick={() => void generateImage(job.id)}
-                    >
-                      {generatingJobId === job.id ? 'Gerando…' : 'Gerar imagem'}
-                    </button>
-                  )}
-                  {job.etapa === 'imagem' && (
-                    <button
-                      type="button"
-                      className="content-engine-generate"
-                      disabled={generatingJobId === job.id}
-                      onClick={() => void generateVideo(job.id, 'free')}
-                    >
-                      {generatingJobId === job.id ? 'Gerando…' : 'Gerar vídeo (grátis)'}
-                    </button>
-                  )}
-                  {job.etapa === 'imagem' && job.aprovado && (
-                    <button
-                      type="button"
-                      className="content-engine-generate"
-                      disabled={generatingJobId === job.id}
-                      onClick={() => void generateVideo(job.id, 'paid')}
-                    >
-                      {generatingJobId === job.id ? 'Gerando…' : 'Gerar vídeo (premium)'}
-                    </button>
-                  )}
+                  {['ideia', 'roteiro', 'imagem'].includes(job.etapa) && <small>Geração por API pausada no modo custo zero.</small>}
                   {job.etapa === 'video' && job.aprovado && (
                     <button
                       type="button"

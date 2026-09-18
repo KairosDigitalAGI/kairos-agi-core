@@ -15,14 +15,21 @@ export function InstagramAutomationPanel({ active }: Props) {
   const [loading, setLoading] = useState(false)
   const [subscribing, setSubscribing] = useState(false)
   const [subscribeMsg, setSubscribeMsg] = useState('')
+  const [subscription, setSubscription] = useState<string>('Não verificada')
+  const [inboxError, setInboxError] = useState('')
 
   const load = useCallback(async () => {
     if (!header) return
     setLoading(true)
     try {
       const res = await fetch('/api/integrations/instagram/inbox', { headers: { Authorization: header } })
-      if (res.ok) setData(await res.json())
-    } catch { /* silent */ } finally { setLoading(false) }
+      const body = await res.json().catch(() => ({}))
+      if (res.ok) { setData(body); setInboxError('') }
+      else setInboxError(body.erro || `Caixa de entrada indisponível (${res.status}).`)
+      const statusRes = await fetch('/api/integrations/instagram/webhook-subscription', { headers: { Authorization: header } })
+      const status = await statusRes.json().catch(() => ({}))
+      setSubscription(statusRes.ok ? (status.subscribed ? 'comments e messages assinados na conta' : 'Assinatura da conta incompleta') : (status.erro || 'Assinatura não verificada'))
+    } catch { setInboxError('Não foi possível consultar o servidor.') } finally { setLoading(false) }
   }, [header])
 
   useEffect(() => { if (active) void load() }, [active, load])
@@ -33,7 +40,8 @@ export function InstagramAutomationPanel({ active }: Props) {
     try {
       const res = await fetch('/api/integrations/instagram/subscribe-webhook', { method: 'POST', headers: { Authorization: header } })
       const json = await res.json().catch(() => ({}))
-      setSubscribeMsg(res.ok ? 'Webhook ativado — Meta enviará eventos para este painel.' : (json.erro || 'Falha ao ativar.'))
+      setSubscribeMsg(res.ok ? 'Assinatura da conta solicitada à Meta. Entrega real ainda exige app publicado e teste com evento.' : (json.erro || 'Falha ao ativar.'))
+      if (res.ok) void load()
     } catch { setSubscribeMsg('Falha ao ativar.') } finally { setSubscribing(false) }
   }
 
@@ -48,7 +56,9 @@ export function InstagramAutomationPanel({ active }: Props) {
         <span className="ig-auto-title"><MessageSquare size={14} /> Atendimento Instagram</span>
         {loading && <span className="ig-auto-loading"><RefreshCw size={12} className="spin" /> Carregando…</span>}
       </div>
-      <p>Respostas automáticas usam somente regras de palavra-chave aprovadas. As demais mensagens aguardam revisão; nenhuma chamada a IA paga é feita.</p>
+      <p>Regras aprovadas podem responder automaticamente. O teste de “oi” com LLM gratuita exige remetente por ID e projeto Free Tier verificados; demais mensagens aguardam revisão.</p>
+      <small>Assinatura da conta: {subscription}. Isso não comprova entrega de eventos.</small>
+      {inboxError && <small role="alert">{inboxError}</small>}
       <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
         <small style={{ color: 'var(--muted)' }}>Regras ativas: <strong style={{ color: '#6ee7b7' }}>{rulesEnabled}</strong></small>
         <small style={{ color: 'var(--muted)' }}>Eventos pendentes: <strong style={{ color: '#fcd34d' }}>{pending}</strong></small>
@@ -61,7 +71,7 @@ export function InstagramAutomationPanel({ active }: Props) {
       >
         <Bell size={12} />{subscribing ? 'Ativando…' : 'Ativar recebimento de eventos'}
       </button>
-      {subscribeMsg && <small role="alert" style={{ color: subscribeMsg.includes('ativado') ? '#6ee7b7' : '#fca5a5', fontSize: '.65rem' }}>{subscribeMsg}</small>}
+      {subscribeMsg && <small role="alert" style={{ fontSize: '.65rem' }}>{subscribeMsg}</small>}
       <a href="/?module=instagram" style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: '.65rem', color: '#93c5fd', textDecoration: 'none' }}>
         Gerenciar regras e caixa de entrada <ExternalLink size={11} />
       </a>

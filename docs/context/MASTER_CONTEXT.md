@@ -1,5 +1,11 @@
 # Contexto operacional — 11/09/2026
 
+## Atualização 18/09/2026 — primeiro lote generativo e teste de saudação
+
+O Flow da conta do Founder gerou três imagens verticais e duas cenas MP4 720p de 8 s; uma montagem de 16 s foi exportada. Projeto: `https://flow.google.com/project/e00db19b-f1a0-44b4-9c74-34507f8c7085`. Cópias ficam em `memory/private/media/2026-09-18/`, ignoradas pelo Git. A Video Engine ganhou importação local de MP4/WebM para galeria IndexedDB. O Content Engine não deve chamar Veo/Gemini Image via API no modo zero custo: o Flow UI possui créditos gratuitos, mas a API de imagem/vídeo não. `KAIROS_ENABLE_PAID_MEDIA` permanece ausente.
+
+O pedido de resposta automática a “oi” do Founder em Direct e comentário gerou um caminho isolado por ID de remetente e Gemini Flash-Lite Free Tier. Está **implementado, não ativado**: faltam projeto/chave Free Tier verificados, ID de evento real, assinatura da conta confirmada e entrega Meta. A produção publicada foi observada em versão anterior; é preciso implantar esta revisão e validar. Não declarar envio antes de `remote_reply_id` e confirmação visível.
+
 ## Atualização 18/09/2026 — proteção do atendimento Instagram
 
 O webhook exige sempre `META_APP_SECRET` e assinatura HMAC válida. A resposta automática usa apenas regras de palavra-chave aprovadas; mensagens sem regra ficam para revisão. O fallback de IA paga, o bypass sem chave, o token direto sem conferência da conta e logs de prefixos de segredo foram removidos. O handoff de outro agente não comprova entrega real de DMs; essa validação permanece pendente.

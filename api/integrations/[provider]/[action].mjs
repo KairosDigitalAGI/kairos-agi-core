@@ -2,7 +2,7 @@
 // limite de Serverless Functions do plano Vercel Hobby.
 import { checkAuth, unauthorized } from '../../_auth.js'
 import { buildConnectUrl, completeConnection, computeYoutubeStatus, disconnectYoutube } from '../../_youtube.js'
-import { buildInstagramConnectUrl, completeInstagramConnection, computeInstagramStatus, disconnectInstagram, getValidInstagramAccess, subscribeInstagramWebhook } from '../../_instagram.js'
+import { buildInstagramConnectUrl, completeInstagramConnection, computeInstagramStatus, disconnectInstagram, getValidInstagramAccess, subscribeInstagramWebhook, getInstagramWebhookSubscriptionStatus } from '../../_instagram.js'
 import { handleInstagramWebhook, readWebhookBody, listInstagramInbox, createInstagramRule, setInstagramRuleEnabled, replyToInstagramEvent } from '../../_instagramEngagement.js'
 
 // A assinatura da Meta exige os bytes originais, antes de JSON.parse.
@@ -51,6 +51,7 @@ export default async function handler(req, res) {
     if (action === 'status' && req.method === 'GET') return res.status(200).json(await adapter.status())
     if (action === 'disconnect' && req.method === 'POST') return res.status(200).json(await adapter.disconnect())
     if (provider === 'instagram' && action === 'inbox' && req.method === 'GET') return res.status(200).json(await listInstagramInbox())
+    if (provider === 'instagram' && action === 'webhook-subscription' && req.method === 'GET') return res.status(200).json(await getInstagramWebhookSubscriptionStatus())
     if (provider === 'instagram' && action === 'subscribe-webhook' && req.method === 'POST') {
       const { accessToken, igUserId } = await getValidInstagramAccess()
       return res.status(200).json(await subscribeInstagramWebhook(accessToken, igUserId))

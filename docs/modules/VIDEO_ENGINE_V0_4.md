@@ -1,5 +1,13 @@
 # Video Engine — Missão 004
 
+## Produção generativa gratuita verificada em 18/09/2026
+
+Foi criado o projeto [Kairos Digital — Primeiras cenas generativas](https://flow.google.com/project/e00db19b-f1a0-44b4-9c74-34507f8c7085) na conta oficial do Founder. Três imagens verticais reais foram geradas no Nano Banana 2 (a interface exibiu 0 créditos por imagem). Duas cenas Veo 3.1 Lite de 8 s foram geradas na cota diária do Flow (10 créditos por vídeo na interface), baixadas em MP4 720p e compostas em uma cena de 16 s, também baixada. Os arquivos originais foram preservados em `memory/private/media/2026-09-18/`, fora do Git público. O roteiro visual mostra escritório, operação do CRM e estúdio de conteúdo; não faz afirmações comerciais ou mostra métricas inventadas.
+
+A Galeria Local agora importa MP4/WebM reais de até 500 MB e 10 minutos, mede a duração/resolução do próprio arquivo, armazena o Blob em IndexedDB e permite assistir/baixar. A importação não faz upload nem significa postagem. Arquivos ficam por navegador e domínio; o MP4 original deve ser mantido como backup. Vídeo de 16 s já comprova composição de clipes; durações maiores podem usar cenas adicionais e exportação do Flow conforme os créditos legítimos disponíveis.
+
+**Correção de orçamento:** a interface do Flow e a API Veo têm modelos de cobrança diferentes. A API Veo e os modelos de imagem por API não possuem faixa gratuita; o `tier=free` antigo do Content Engine foi desligado. A geração por APIs pagas só roda com aprovação do job **e** `KAIROS_ENABLE_PAID_MEDIA=true`, ausente no ambiente de custo zero. Não há integração estável/permitida do Flow por API gratuita para geração diária autônoma; o trabalho no Flow permanece supervisionado, e o render local segue como fallback sem créditos externos. Fontes: [preços Gemini API](https://ai.google.dev/gemini-api/docs/pricing), [créditos Flow](https://support.google.com/flow/answer/16526234).
+
 ## Planejamento generativo e distribuição
 Em 11/09/2026 a estação ganhou um planejador de criativos baseado apenas nos dados preenchidos pelo Founder. Oferta, público, promessa, prova e chamada para ação compõem um roteiro determinístico que pode alimentar o render local gratuito. O painel não afirma geração externa quando nenhuma API foi chamada.
 

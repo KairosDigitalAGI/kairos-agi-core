@@ -82,7 +82,7 @@ export interface VideoJob {
   durationSeconds: number
   mimeType: string | null
   error: string
-  kind?: 'generated' | 'edited'
+  kind?: 'generated' | 'edited' | 'imported' | 'sequence'
 }
 
 export interface VideoGenerationPlan {
@@ -123,6 +123,6 @@ export interface StoredVideo {
   height: number
   mimeType: string
   bytes: number
-  kind: 'generated' | 'edited'
+  kind: 'generated' | 'edited' | 'imported' | 'sequence'
   blob: Blob
 }

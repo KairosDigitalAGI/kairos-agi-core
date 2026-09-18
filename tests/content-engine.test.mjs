@@ -7,6 +7,7 @@ const KEYS = [
   'SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY', 'ANTHROPIC_API_KEY', 'OPENAI_API_KEY', 'OPENROUTER_API_KEY', 'KAIROS_LLM_PROVIDER',
   'GOOGLE_AI_KEY', 'FAL_KEY', 'VEO_POLL_INTERVAL_MS', 'VEO_POLL_TIMEOUT_MS', 'FAL_POLL_INTERVAL_MS', 'FAL_POLL_TIMEOUT_MS',
   'KAIROS_TOKEN_ENCRYPTION_KEY', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'GOOGLE_OAUTH_REDIRECT_URI',
+  'KAIROS_ENABLE_PAID_MEDIA',
 ]
 
 function withEnv(vars, fn) {
@@ -105,7 +106,7 @@ test('generateScript refuses (402) a job that has not been explicitly approved f
   const originalFetch = globalThis.fetch
   globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'ideia', briefing: {}, aprovado: false }]), { status: 200 })
   try {
-    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', ANTHROPIC_API_KEY: 'x' }, async () => {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', ANTHROPIC_API_KEY: 'x', KAIROS_ENABLE_PAID_MEDIA: 'true' }, async () => {
       await assert.rejects(generateScript({ jobId: 'abc' }), /aprovado:false/)
     })
   } finally {
@@ -117,7 +118,7 @@ test('generateScript fails closed without any paid LLM provider configured (job 
   const originalFetch = globalThis.fetch
   globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'ideia', briefing: {}, aprovado: true }]), { status: 200 })
   try {
-    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', KAIROS_ENABLE_PAID_MEDIA: 'true' }, async () => {
       await assert.rejects(generateScript({ jobId: 'abc' }), /nenhum provider de LLM configurado/)
     })
   } finally {
@@ -144,7 +145,7 @@ test('generateScript writes the real script and advances the job to etapa=roteir
     throw new Error(`fetch inesperado neste teste: ${opts.method || 'GET'} ${href}`)
   }
   try {
-    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', ANTHROPIC_API_KEY: 'x' }, async () => {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', ANTHROPIC_API_KEY: 'x', KAIROS_ENABLE_PAID_MEDIA: 'true' }, async () => {
       const out = await generateScript({ jobId: 'abc' })
       assert.equal(out.job.etapa, 'roteiro')
       assert.equal(out.asset.tipo, 'roteiro')
@@ -253,7 +254,7 @@ test('generateImage fails closed (503) without OPENAI_API_KEY — the only image
   const originalFetch = globalThis.fetch
   globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'roteiro', briefing: {}, aprovado: true }]), { status: 200 })
   try {
-    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', KAIROS_ENABLE_PAID_MEDIA: 'true' }, async () => {
       await assert.rejects(generateImage({ jobId: 'abc' }), /OPENAI_API_KEY/)
     })
   } finally {
@@ -286,7 +287,7 @@ test('generateImage writes the real image and advances the job to etapa=imagem o
     throw new Error(`fetch inesperado neste teste: ${opts.method || 'GET'} ${href}`)
   }
   try {
-    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', OPENAI_API_KEY: 'x' }, async () => {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', OPENAI_API_KEY: 'x', KAIROS_ENABLE_PAID_MEDIA: 'true' }, async () => {
       const out = await generateImage({ jobId: 'abc' })
       assert.equal(out.job.etapa, 'imagem')
       assert.equal(out.asset.tipo, 'imagem')
@@ -353,7 +354,7 @@ test('generateVideo tier=paid fails closed (503) without FAL_KEY (job already ap
   const originalFetch = globalThis.fetch
   globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'imagem', briefing: {}, aprovado: true }]), { status: 200 })
   try {
-    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', KAIROS_ENABLE_PAID_MEDIA: 'true' }, async () => {
       await assert.rejects(generateVideo({ jobId: 'abc', tier: 'paid' }), /FAL_KEY/)
     })
   } finally {
@@ -361,35 +362,37 @@ test('generateVideo tier=paid fails closed (503) without FAL_KEY (job already ap
   }
 })
 
-test('generateVideo tier=free without Veo configured refuses (402) the paid Kling fallback on an unapproved job — labeling it "free" in the request does not skip the spend gate', async () => {
+test('generateVideo tier=free refuses the paid Veo API even for an unapproved job', async () => {
   const originalFetch = globalThis.fetch
   globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'imagem', briefing: {}, aprovado: false }]), { status: 200 })
   try {
     await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
-      await assert.rejects(generateVideo({ jobId: 'abc', tier: 'free' }), /aprovado:false/)
+      await assert.rejects(generateVideo({ jobId: 'abc', tier: 'free' }), /API Veo não tem faixa gratuita/)
     })
   } finally {
     globalThis.fetch = originalFetch
   }
 })
 
-test('generateVideo tier=free fails closed (503) when neither Veo nor the Kling fallback is configured (job already approved)', async () => {
+test('generateVideo tier=free remains disabled even when the old job approval is true', async () => {
   const originalFetch = globalThis.fetch
   globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'imagem', briefing: {}, aprovado: true }]), { status: 200 })
   try {
     await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
-      await assert.rejects(generateVideo({ jobId: 'abc', tier: 'free' }), /GOOGLE_AI_KEY.*FAL_KEY/s)
+      await assert.rejects(generateVideo({ jobId: 'abc', tier: 'free' }), /API Veo não tem faixa gratuita/)
     })
   } finally {
     globalThis.fetch = originalFetch
   }
 })
 
-test('generateVideo tier=free writes the real video via Veo and advances the job to etapa=video on success', async () => {
+test('generateVideo tier=free never calls Veo despite a configured key', async () => {
   const originalFetch = globalThis.fetch
+  let providerCalls = 0
   globalThis.fetch = async (url, opts = {}) => {
     const href = String(url)
     if (href.includes('generativelanguage.googleapis.com') && href.includes(':generateVideo')) {
+      providerCalls += 1
       return new Response(JSON.stringify({
         name: 'operations/abc123',
         done: true,
@@ -409,25 +412,25 @@ test('generateVideo tier=free writes the real video via Veo and advances the job
   }
   try {
     await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', GOOGLE_AI_KEY: 'x' }, async () => {
-      const out = await generateVideo({ jobId: 'abc', tier: 'free' })
-      assert.equal(out.job.etapa, 'video')
-      assert.equal(out.asset.tipo, 'video')
-      assert.equal(out.asset.provedor, 'veo')
-      assert.equal(out.asset.gratuito, true)
+      await assert.rejects(generateVideo({ jobId: 'abc', tier: 'free' }), /API Veo não tem faixa gratuita/)
+      assert.equal(providerCalls, 0)
     })
   } finally {
     globalThis.fetch = originalFetch
   }
 })
 
-test('generateVideo tier=free falls back to the paid Kling v1.6 when Veo returns 429 (quota exhausted) and the job is approved', async () => {
+test('generateVideo tier=free never falls back to paid Kling', async () => {
   const originalFetch = globalThis.fetch
+  let providerCalls = 0
   globalThis.fetch = async (url, opts = {}) => {
     const href = String(url)
     if (href.includes('generativelanguage.googleapis.com') && href.includes(':generateVideo')) {
+      providerCalls += 1
       return new Response(JSON.stringify({ error: { message: 'quota exceeded' } }), { status: 429 })
     }
     if (href.includes('queue.fal.run/fal-ai/kling-video/v1.6/standard/text-to-video')) {
+      providerCalls += 1
       return new Response(JSON.stringify({
         status: 'COMPLETED',
         status_url: 'https://queue.fal.run/status/1',
@@ -450,10 +453,8 @@ test('generateVideo tier=free falls back to the paid Kling v1.6 when Veo returns
   }
   try {
     await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', GOOGLE_AI_KEY: 'x', FAL_KEY: 'x' }, async () => {
-      const out = await generateVideo({ jobId: 'abc', tier: 'free' })
-      assert.equal(out.job.etapa, 'video')
-      assert.equal(out.asset.provedor, 'fal')
-      assert.equal(out.asset.gratuito, false)
+      await assert.rejects(generateVideo({ jobId: 'abc', tier: 'free' }), /API Veo não tem faixa gratuita/)
+      assert.equal(providerCalls, 0)
     })
   } finally {
     globalThis.fetch = originalFetch
@@ -486,7 +487,7 @@ test('generateVideo tier=paid writes the real video via Kling v2.1 Master and ad
     throw new Error(`fetch inesperado neste teste: ${opts.method || 'GET'} ${href}`)
   }
   try {
-    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', FAL_KEY: 'x' }, async () => {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', FAL_KEY: 'x', KAIROS_ENABLE_PAID_MEDIA: 'true' }, async () => {
       const out = await generateVideo({ jobId: 'abc', tier: 'paid' })
       assert.equal(out.job.etapa, 'video')
       assert.equal(out.asset.provedor, 'fal')
