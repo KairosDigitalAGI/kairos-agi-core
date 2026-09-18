@@ -1,5 +1,9 @@
 # Atendimento Instagram — comentários e Direct
 
+Revisão de 18/09/2026: alterações que permitiam webhook sem segredo, LLM automática paga e token direto sem checar o ID da conta foram revertidas. A assinatura inválida continua retornando 403; problemas de configuração e persistência retornam erro em vez de fingir entrega. A efetiva chegada de eventos da Meta ainda precisa de teste real.
+
+Incremento posterior: o teste isolado de “oi” do Founder com Gemini Flash-Lite foi preparado em [FOUNDER_GREETING_V0_1.md](FOUNDER_GREETING_V0_1.md). Continua desligado até verificar ID real do remetente, projeto Gemini Free Tier sem faturamento, assinatura da conta e entrega da Meta. Nenhuma LLM paga ou resposta geral a clientes foi ativada.
+
 Incremento da Missão 006, 17/09/2026. Usa somente a Instagram API com Instagram Login da conta profissional conectada ao Core. Não há scraping, automação de navegador, troca de contas nem provedor pago.
 
 ## Contrato operacional
@@ -11,6 +15,7 @@ Incremento da Missão 006, 17/09/2026. Usa somente a Instagram API com Instagram
 - Direct automático exige mensagem iniciada pela pessoa nas últimas 24 horas. Há no máximo uma resposta automática por pessoa/canal/dia UTC. Resposta manual usa o mesmo intervalo do Direct.
 - O envio passa por estado `pending → sending → sent`; falha ambígua vira `review`, sem retry automático. O identificador remoto e horário ficam registrados. Reenvio de webhook não duplica resposta.
 - `GET inbox`, `POST rule`, `POST rule-toggle` e `POST reply` exigem Basic Auth do Painel Operacional. A tela nunca recebe o token da Meta.
+- `GET webhook-subscription` consulta a assinatura da **conta** na Graph API; `POST subscribe-webhook` tenta assinar `comments,messages`. Token vai em header Bearer, não na URL. Assinatura da conta não comprova app publicado nem evento recebido.
 
 ## Ativação externa pendente
 

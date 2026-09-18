@@ -120,15 +120,25 @@ export async function completeInstagramConnection({ code, state }) {
 export async function subscribeInstagramWebhook(accessToken, igUserId) {
   const url = new URL(`https://graph.instagram.com/${igUserId}/subscribed_apps`)
   url.searchParams.set('subscribed_fields', 'comments,messages')
-  url.searchParams.set('access_token', accessToken)
-  const res = await fetch(url, { method: 'POST' })
+  const res = await fetch(url, { method: 'POST', headers: { Authorization: `Bearer ${accessToken}` } })
   const json = await res.json().catch(() => ({}))
-  if (!res.ok && !json.success) {
+  if (!res.ok || json.success !== true) {
     throw new Error(`Falha ao inscrever webhook: ${json.error?.message || res.status}`)
   }
   return { subscribed: true }
 }
 
+export async function getInstagramWebhookSubscriptionStatus() {
+  const { accessToken, igUserId } = await getValidInstagramAccess()
+  const res = await fetch(`https://graph.instagram.com/${encodeURIComponent(igUserId)}/subscribed_apps`, {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  })
+  const json = await res.json().catch(() => ({}))
+  if (!res.ok) throw new Error(`Falha ao consultar assinatura Instagram: ${json.error?.message || res.status}`)
+  const subscriptions = Array.isArray(json.data) ? json.data : []
+  const fields = [...new Set(subscriptions.flatMap(item => Array.isArray(item.subscribed_fields) ? item.subscribed_fields : []))]
+  return { subscribed: fields.includes('comments') && fields.includes('messages'), fields }
+}
 export async function computeInstagramStatus() {
   if (!commandConfigured()) return { connected: false, reason: 'SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.' }
   try {

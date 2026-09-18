@@ -1,5 +1,11 @@
 # Fila de missões — Memory Sync V1.1
 
+Atualização 18/09/2026, mídia: três imagens, duas cenas de 8 s e uma montagem de 16 s reais no Flow; importação local MP4/WebM implementada. Próximo: disponibilizar no deploy, confirmar galeria em produção, ampliar montagem se houver cota gratuita legítima e preparar pacote editorial para postagem futura. A geração diária por Flow ainda requer operação supervisionada; não há API gratuita de vídeo.
+
+Atualização 18/09/2026, atendimento: saudação “oi” do Founder por LLM gratuita implementada para remetente identificado por ID, mas **desligada** até chave Free Tier sem faturamento, ID do Founder obtido por evento real, assinatura da conta, migration e app Meta apto a entregar webhooks. Ver `docs/modules/FOUNDER_GREETING_V0_1.md`. Nenhuma DM/comentário foi comprovadamente respondido automaticamente.
+
+Atualização 18/09/2026: proteção do webhook e do orçamento aplicada. A entrega efetiva de comentários/DMs da Meta, publicação do app e teste com a conta real continuam por verificar; código implantado não equivale a evento recebido.
+
 | Missão | Estado | Escopo |
 | --- | --- | --- |
 | 001 | Fundação entregue; fontes externas pendentes | Dashboard, World e módulos iniciais; exemplos retirados |

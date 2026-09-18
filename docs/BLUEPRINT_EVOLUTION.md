@@ -1,5 +1,13 @@
 # Evolução do Blueprint
 
+## 18/09/2026 — criação generativa sem gasto e ensaio de atendimento
+
+Sem alterar a arquitetura do Blueprint V1, a Video Engine passa a aceitar ativos MP4/WebM gerados legitimamente na interface do Flow e a exibi-los na galeria local. A interface de Flow não é tratada como API: geração totalmente autônoma permanece pendente. Toda chamada de API paga da Content Engine ganhou interruptor de implantação além da aprovação de cada job. Para o Instagram, KAIROS ganha um teste restrito de saudação por LLM gratuita com ID numérico do Founder, sem alterar as regras aprovadas para outras pessoas. Ambos os incrementos mantêm dados reais e falha fechada.
+
+## 18/09/2026 — proteção do atendimento
+
+O módulo Instagram mantém a arquitetura de inbox e regras, mas elimina fallback automático de IA paga. Segurança e orçamento prevalecem: sem segredo HMAC, token de conta vinculada ou regra aprovada não existe envio automático.
+
 ## 17/09/2026 — Social Engine: atendimento responsivo
 
 O vínculo OAuth do Instagram foi confirmado para `_kairosdigital_`. Como evolução modular da Social Engine, comentários e Direct passam a ter ingress autenticado por assinatura, fila persistente e respostas por regras literais aprovadas. Nenhum papel de agente vira executor por causa disso. O Founder mantém a decisão de ativar cada regra; envios limitam-se a interações recebidas, com janela de Direct e cooldown. A fase está implementada localmente e aguarda ativação externa descrita em `docs/modules/INSTAGRAM_ENGAGEMENT.md`; o Blueprint V1 permanece inalterado.

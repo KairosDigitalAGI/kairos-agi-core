@@ -1,5 +1,13 @@
 # Arquitetura — proposta inicial
 
+## 18/09/2026 — mídia gratuita e saudação de teste
+
+O Flow oficial produz ativos generativos usando a cota exibida na própria conta; o navegador baixa os MP4/JPEG originais e a Video Engine importa MP4/WebM para IndexedDB, sem servidor de upload nem publicação implícita. A API `generateVideo(tier=free)` recusa a antiga suposição de Veo gratuito. Roteiro, imagem e vídeo por APIs pagas exigem `KAIROS_ENABLE_PAID_MEDIA=true` além da aprovação do job; o modo custo zero deixa a flag ausente. O fallback permanente é o render Canvas/WebM local. O projeto do Flow e os arquivos produzidos são descritos em `docs/modules/VIDEO_ENGINE_V0_4.md`.
+
+O Instagram preserva HMAC, conta OAuth vinculada, deduplicação, janela de 24 h e cooldown. Um caminho adicional, isolado, responde somente ao “oi” do ID numérico do Founder com `gemini-2.5-flash-lite` de projeto Free Tier confirmado; nenhuma mensagem do remetente além da palavra fixa é enviada à LLM. Flags ausentes deixam esse caminho desligado. A assinatura `subscribed_apps` da conta agora é consultável via rota autenticada, sem token na URL. O app Meta publicado e evento real continuam requisitos independentes. Ver `docs/modules/FOUNDER_GREETING_V0_1.md`.
+
+O webhook de Instagram rejeita todo POST sem `META_APP_SECRET` ou HMAC válido. Eventos são processados somente após validação, com deduplicação, conta vinculada e regras de resposta aprovadas; mensagens sem regra exigem revisão humana, exceto o teste restrito de saudação do Founder quando suas flags e ID estiverem configurados. A resposta livre por LLM e o token direto sem verificação da conta não integram o caminho de produção.
+
 ## Atendimento Instagram — incremento 17/09/2026
 
 `api/integrations/instagram/webhook.mjs` e a rota dinâmica `api/integrations/[provider]/[action].mjs` delegam ao mesmo processador; a rota estática é o endpoint efetivo na Vercel. `api/_instagramEngagement.js` valida HMAC sobre bytes brutos, normaliza comentários/Direct e usa `command.instagram_engagement_events` como fonte de verdade da fila. Regras aprovadas em `command.instagram_automation_rules` não saem do backend; cooldown persistente impede mais de uma resposta automática por pessoa/canal/dia. A UI apenas mostra estado e coleta a aprovação literal do Founder. Falha ambígua fica em revisão, sem retry que duplique mensagens. Ver `docs/modules/INSTAGRAM_ENGAGEMENT.md`. O callback foi verificado e `comments`/`messages` assinados; o recebimento real ainda depende da migration, publicação/análise Meta e teste real.

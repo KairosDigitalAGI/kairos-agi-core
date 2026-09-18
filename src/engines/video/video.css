@@ -48,6 +48,8 @@
 .scene-list article small,.scene-list article strong { display: block; }.scene-list article small { color: #8d9ab1; font: .61rem "DM Mono",monospace; }.scene-list article strong { margin-top: 5px; line-height: 1.35; }.scene-list article em { color: #b9c4d7; font: normal .68rem "DM Mono",monospace; }
 .job-kind { display: block; margin-top: 4px; color: #7f8ba0; font-weight: 400; text-transform: uppercase; letter-spacing: .06em; font-size: .58rem; }
 .library-storage { color: #8290a6; font: .67rem "DM Mono",monospace; }
+.video-import { display:inline-flex; align-items:center; margin: 0 0 16px; padding: 10px 14px; border:1px solid rgba(167,139,250,.45); border-radius:9px; color:#dfd1ff; background:rgba(124,58,237,.11); cursor:pointer; font-size:.85rem; }
+.video-import input { position:absolute; opacity:0; width:1px; height:1px; }
 .gallery-empty { min-height: 170px; display: grid; place-items: center; align-content: center; gap: 9px; text-align: center; color: #8592a8; border: 1px dashed rgba(255,255,255,.12); border-radius: 13px; }
 .gallery-empty strong { color: #dce5f4; }.gallery-empty p { max-width: 520px; margin: 0; line-height: 1.5; }
 .video-gallery-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 14px; }

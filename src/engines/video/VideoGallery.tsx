@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react'
 import { Download, ExternalLink, Film, PackageCheck, Trash2 } from 'lucide-react'
 import type { StoredVideo } from '../../types/video'
-import { deleteVideo, listVideos } from './videoLibrary'
+import { deleteVideo, listVideos, saveVideo } from './videoLibrary'
+import { inspectVideo } from './browserRenderer'
 import { distributionManifest, validateXCaption, X_CHARACTER_LIMIT, xComposeUrl } from './distributionPackage'
 
 interface GalleryVideo extends StoredVideo { url: string }
-interface Props { revision: number }
+interface Props { revision: number; onImported: () => void }
 
 function fileSize(bytes: number) { return new Intl.NumberFormat('pt-BR', { style: 'unit', unit: 'megabyte', maximumFractionDigits: 1 }).format(bytes / 1024 / 1024) }
 function clock(seconds: number) { const whole = Math.max(0, Math.round(seconds)); return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}` }
 
-export function VideoGallery({ revision }: Props) {
+export function VideoGallery({ revision, onImported }: Props) {
   const [videos, setVideos] = useState<GalleryVideo[]>([])
   const [notice, setNotice] = useState('')
   const [captions, setCaptions] = useState<Record<string, string>>({})
+  const [importing, setImporting] = useState(false)
 
   useEffect(() => {
     let active = true; let urls: string[] = []
@@ -30,6 +32,32 @@ export function VideoGallery({ revision }: Props) {
     catch (error) { setNotice(error instanceof Error ? error.message : 'O vídeo não pôde ser removido.') }
   }
 
+  const importFiles = async (files: FileList | null) => {
+    if (!files?.length) return
+    setImporting(true); setNotice('')
+    let imported = 0
+    const errors: string[] = []
+    for (const file of Array.from(files)) {
+      if (!file.type.startsWith('video/') || file.size > 500 * 1024 * 1024) {
+        errors.push(`${file.name}: selecione um vídeo de até 500 MB.`); continue
+      }
+      let url: string | null = null
+      try {
+        const info = await inspectVideo(file)
+        url = info.url
+        if (!Number.isFinite(info.duration) || info.duration <= 0 || info.duration > 600) throw new Error('A duração deve ser de até 10 minutos.')
+        await saveVideo({ id: crypto.randomUUID(), name: file.name, createdAt: new Date().toISOString(),
+          durationSeconds: info.duration, width: info.width, height: info.height, mimeType: file.type,
+          bytes: file.size, kind: 'imported', blob: file })
+        imported += 1
+      } catch (error) { errors.push(`${file.name}: ${error instanceof Error ? error.message : 'Falha na importação.'}`) }
+      finally { if (url) URL.revokeObjectURL(url) }
+    }
+    if (imported) onImported()
+    setNotice(`${imported} vídeo(s) real(is) importado(s) nesta galeria.${errors.length ? ` ${errors.join(' ')}` : ''}`)
+    setImporting(false)
+  }
+
   const downloadPackage = (video: GalleryVideo) => {
     const caption = captions[video.id] || ''
     const issue = validateXCaption(caption)
@@ -41,8 +69,9 @@ export function VideoGallery({ revision }: Props) {
   }
 
   return <section className="glass-panel video-library"><div className="editorial-row"><div><span className="eyebrow"><Film size={13} /> GALERIA LOCAL</span><h3>{videos.length} vídeos salvos</h3></div><span className="library-storage">IndexedDB · este navegador</span></div>
+    <label className="video-import">{importing ? 'Importando vídeos…' : 'Importar vídeos gerados (MP4/WebM)'}<input type="file" accept="video/*" multiple disabled={importing} onChange={event => { void importFiles(event.target.files); event.target.value = '' }} /></label>
     {notice && <p className="editorial-alert" role="status">{notice}</p>}
     {!videos.length && !notice && <div className="gallery-empty"><Film size={28} /><strong>Nenhum vídeo salvo ainda</strong><p>As próximas gerações e edições concluídas aparecerão aqui e continuarão disponíveis após recarregar.</p></div>}
-    <div className="video-gallery-grid">{videos.map(video => { const caption = captions[video.id] || ''; const issue = validateXCaption(caption); return <article key={video.id}><video src={video.url} controls preload="metadata" playsInline /><div className="gallery-card-copy"><span>{video.kind === 'generated' ? 'Criado do zero' : 'Editado'}</span><strong>{video.name}</strong><small>{new Date(video.createdAt).toLocaleString('pt-BR')} · {clock(video.durationSeconds)} · {fileSize(video.bytes)}</small><label className="x-caption">Texto para X<textarea rows={3} maxLength={X_CHARACTER_LIMIT} value={caption} onChange={event => setCaptions(current => ({ ...current, [video.id]: event.target.value }))} /><small>{[...caption].length}/{X_CHARACTER_LIMIT}</small></label><div><a href={video.url} download={video.name}><Download size={15} />Baixar vídeo</a><button onClick={() => downloadPackage(video)}><PackageCheck size={15} />Pacote X</button>{!issue && <a href={xComposeUrl(caption)} target="_blank" rel="noreferrer"><ExternalLink size={15} />Abrir X</a>}<button onClick={() => void remove(video)} aria-label={`Remover ${video.name}`}><Trash2 size={15} />Remover</button></div></div></article> })}</div>
+    <div className="video-gallery-grid">{videos.map(video => { const caption = captions[video.id] || ''; const issue = validateXCaption(caption); return <article key={video.id}><video src={video.url} controls preload="metadata" playsInline /><div className="gallery-card-copy"><span>{video.kind === 'generated' ? 'Criado do zero' : video.kind === 'sequence' ? 'Vídeo longo' : video.kind === 'imported' ? 'Importado' : 'Editado'}</span><strong>{video.name}</strong><small>{new Date(video.createdAt).toLocaleString('pt-BR')} · {clock(video.durationSeconds)} · {fileSize(video.bytes)}</small><label className="x-caption">Texto para X<textarea rows={3} maxLength={X_CHARACTER_LIMIT} value={caption} onChange={event => setCaptions(current => ({ ...current, [video.id]: event.target.value }))} /><small>{[...caption].length}/{X_CHARACTER_LIMIT}</small></label><div><a href={video.url} download={video.name}><Download size={15} />Baixar vídeo</a><button onClick={() => downloadPackage(video)}><PackageCheck size={15} />Pacote X</button>{!issue && <a href={xComposeUrl(caption)} target="_blank" rel="noreferrer"><ExternalLink size={15} />Abrir X</a>}<button onClick={() => void remove(video)} aria-label={`Remover ${video.name}`}><Trash2 size={15} />Remover</button></div></div></article> })}</div>
   </section>
 }

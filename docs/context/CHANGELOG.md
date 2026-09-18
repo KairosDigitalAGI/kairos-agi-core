@@ -1,5 +1,20 @@
 # Changelog
 
+## 18/09/2026 — mídia generativa gratuita e saudação restrita
+
+- Três imagens e duas cenas de 8 s geradas no Flow; cena composta de 16 s exportada, arquivos privados locais e projeto Flow preservado.
+- Galeria aceita MP4/WebM importados com duração/resolução verificadas no navegador; sem upload automático.
+- Corrigido `tier=free` do Veo: API sem faixa gratuita e sem fallback pago. APIs pagas dependem agora também de `KAIROS_ENABLE_PAID_MEDIA=true`.
+- Preparado teste de “oi” via Gemini Flash-Lite gratuito para ID exato do Founder em comentários/Direct, desligado até confirmação do projeto sem faturamento e do webhook real.
+- Consulta autenticada da assinatura `comments,messages` da conta Instagram; token saiu da URL para header Bearer na chamada de inscrição.
+
+## 18/09/2026 — segurança e custo do Instagram
+
+- Removido o fallback de IA paga para comentários/DMs sem regra aprovada.
+- Restaurada a rejeição de POST sem segredo ou HMAC válido, sem expor prefixos de chaves em logs.
+- Removido o token direto que ignorava a vinculação ao ID da conta conectada.
+- O painel informa que respostas automáticas dependem de regra aprovada. Testes e build validados.
+
 ## 17/09/2026 — Atendimento Instagram, conciliação das implementações
 - Produção em `main` atualizada até `99e0bcd`; challenge GET retornou 200 e POST sem assinatura foi recusado com 403. Corrigida a leitura do stream bruto da Vercel, que antes retornava 503 ao tocar no getter de `req.body`.
 - No app Meta correto (`1572077540519784`), callback salvo e campos `comments` e `messages` confirmados como assinados. Assinaturas extras foram removidas. O app segue não publicado: a tela de publicação exige URL de política de privacidade e análise do app; nenhum webhook real de cliente foi validado.

@@ -7,6 +7,7 @@
 - [Instagram Engine](INSTAGRAM_ENGINE.md)
 - [Instagram Engine — Missão 002](INSTAGRAM_ENGINE_V0_2.md)
 - [Atendimento Instagram — comentários e Direct](INSTAGRAM_ENGAGEMENT.md)
+- [Saudação de teste do Founder por LLM gratuita](FOUNDER_GREETING_V0_1.md)
 - [Clone Engine — Missão 003](CLONE_ENGINE_V0_3.md)
 - [Video Engine — Missão 004](VIDEO_ENGINE_V0_4.md)
 - [Política de dados reais](REAL_DATA_POLICY.md)
