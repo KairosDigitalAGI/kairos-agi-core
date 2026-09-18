@@ -1,5 +1,7 @@
 # Atendimento Instagram — comentários e Direct
 
+Revisão de 18/09/2026: alterações que permitiam webhook sem segredo, LLM automática paga e token direto sem checar o ID da conta foram revertidas. A assinatura inválida continua retornando 403; problemas de configuração e persistência retornam erro em vez de fingir entrega. A efetiva chegada de eventos da Meta ainda precisa de teste real.
+
 Incremento da Missão 006, 17/09/2026. Usa somente a Instagram API com Instagram Login da conta profissional conectada ao Core. Não há scraping, automação de navegador, troca de contas nem provedor pago.
 
 ## Contrato operacional

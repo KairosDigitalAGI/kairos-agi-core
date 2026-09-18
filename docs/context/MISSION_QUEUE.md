@@ -1,5 +1,7 @@
 # Fila de missões — Memory Sync V1.1
 
+Atualização 18/09/2026: proteção do webhook e do orçamento aplicada. A entrega efetiva de comentários/DMs da Meta, publicação do app e teste com a conta real continuam por verificar; código implantado não equivale a evento recebido.
+
 | Missão | Estado | Escopo |
 | --- | --- | --- |
 | 001 | Fundação entregue; fontes externas pendentes | Dashboard, World e módulos iniciais; exemplos retirados |

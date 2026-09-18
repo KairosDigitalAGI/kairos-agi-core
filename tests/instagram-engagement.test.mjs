@@ -55,6 +55,17 @@ test('public webhook route verifies the challenge and refuses unsigned POST befo
   assert.equal(res.body, 'static-ok')
 }))
 
+test('webhook fails closed when the signing secret is absent', () => {
+  const previous = process.env.META_APP_SECRET
+  delete process.env.META_APP_SECRET
+  try {
+    assert.throws(() => parseSignedWebhook(Buffer.from('{"object":"instagram","entry":[]}'), ''), /META_APP_SECRET ausente/)
+  } finally {
+    if (previous === undefined) delete process.env.META_APP_SECRET
+    else process.env.META_APP_SECRET = previous
+  }
+})
+
 test('raw body is read from the stream without triggering Vercel parsed-body getter', async () => {
   const request = Readable.from([Buffer.from('{"object":"instagram"}')])
   Object.defineProperty(request, 'body', { get() { throw new Error('parsed-body getter must not run') } })

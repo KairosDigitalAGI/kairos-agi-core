@@ -45,9 +45,10 @@ export function InstagramAutomationPanel({ active }: Props) {
   return (
     <div className="ig-auto-panel">
       <div className="ig-auto-header">
-        <span className="ig-auto-title"><MessageSquare size={14} /> Atendimento IA</span>
+        <span className="ig-auto-title"><MessageSquare size={14} /> Atendimento Instagram</span>
         {loading && <span className="ig-auto-loading"><RefreshCw size={12} className="spin" /> Carregando…</span>}
       </div>
+      <p>Respostas automáticas usam somente regras de palavra-chave aprovadas. As demais mensagens aguardam revisão; nenhuma chamada a IA paga é feita.</p>
       <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
         <small style={{ color: 'var(--muted)' }}>Regras ativas: <strong style={{ color: '#6ee7b7' }}>{rulesEnabled}</strong></small>
         <small style={{ color: 'var(--muted)' }}>Eventos pendentes: <strong style={{ color: '#fcd34d' }}>{pending}</strong></small>

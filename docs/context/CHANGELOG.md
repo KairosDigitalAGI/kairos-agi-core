@@ -1,5 +1,12 @@
 # Changelog
 
+## 18/09/2026 — segurança e custo do Instagram
+
+- Removido o fallback de IA paga para comentários/DMs sem regra aprovada.
+- Restaurada a rejeição de POST sem segredo ou HMAC válido, sem expor prefixos de chaves em logs.
+- Removido o token direto que ignorava a vinculação ao ID da conta conectada.
+- O painel informa que respostas automáticas dependem de regra aprovada. Testes e build validados.
+
 ## 17/09/2026 — Atendimento Instagram, conciliação das implementações
 - Produção em `main` atualizada até `99e0bcd`; challenge GET retornou 200 e POST sem assinatura foi recusado com 403. Corrigida a leitura do stream bruto da Vercel, que antes retornava 503 ao tocar no getter de `req.body`.
 - No app Meta correto (`1572077540519784`), callback salvo e campos `comments` e `messages` confirmados como assinados. Assinaturas extras foram removidas. O app segue não publicado: a tela de publicação exige URL de política de privacidade e análise do app; nenhum webhook real de cliente foi validado.

@@ -1,5 +1,7 @@
 # Arquitetura — proposta inicial
 
+O webhook de Instagram rejeita todo POST sem `META_APP_SECRET` ou HMAC válido. Eventos são processados somente após validação, com deduplicação, conta vinculada e regras de resposta aprovadas; mensagens sem regra exigem revisão humana. A resposta livre por LLM e o token direto sem verificação da conta não integram o caminho de produção.
+
 ## Atendimento Instagram — incremento 17/09/2026
 
 `api/integrations/instagram/webhook.mjs` e a rota dinâmica `api/integrations/[provider]/[action].mjs` delegam ao mesmo processador; a rota estática é o endpoint efetivo na Vercel. `api/_instagramEngagement.js` valida HMAC sobre bytes brutos, normaliza comentários/Direct e usa `command.instagram_engagement_events` como fonte de verdade da fila. Regras aprovadas em `command.instagram_automation_rules` não saem do backend; cooldown persistente impede mais de uma resposta automática por pessoa/canal/dia. A UI apenas mostra estado e coleta a aprovação literal do Founder. Falha ambígua fica em revisão, sem retry que duplique mensagens. Ver `docs/modules/INSTAGRAM_ENGAGEMENT.md`. O callback foi verificado e `comments`/`messages` assinados; o recebimento real ainda depende da migration, publicação/análise Meta e teste real.

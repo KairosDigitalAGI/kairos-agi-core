@@ -1,15 +1,9 @@
-// Instagram Login: recebe eventos oficiais, responde por regras keyword OU por IA livre.
-// O webhook nunca usa Basic Auth; a assinatura X-Hub-Signature-256 autentica cada payload.
+// Instagram Login: recebe eventos oficiais e responde somente a regras
+// explicitamente aprovadas pelo Founder. O webhook nunca usa Basic Auth;
+// a assinatura X-Hub-Signature-256 autentica cada payload da Meta.
 import { createHmac, timingSafeEqual } from 'node:crypto'
 import { readCommand, writeCommand, patchCommand } from './_command.js'
 import { getValidInstagramAccess } from './_instagram.js'
-import { selectProvider } from './_providers/index.js'
-
-const DEFAULT_IG_SYSTEM_PROMPT = `Você é o assistente digital da Kairos Digital, empresa brasileira especializada em automação com IA para pequenas e médias empresas.
-Responda de forma amigável, profissional e concisa em português brasileiro.
-Objetivo: qualificar o interesse do lead e direcioná-lo para uma conversa com um especialista da Kairos Digital.
-Nunca invente preços, prazos ou funcionalidades técnicas específicas.
-Máximo 2 a 3 frases por resposta. Seja direto e útil.`
 
 const MAX_BODY = 256 * 1024
 const MAX_REPLY = 500
@@ -53,28 +47,13 @@ export async function readWebhookBody(req) {
 
 export function parseSignedWebhook(raw, signature) {
   const secret = process.env.META_APP_SECRET
+  if (!secret) throw fail('META_APP_SECRET ausente.', 503)
   if (!Buffer.isBuffer(raw) || raw.length > MAX_BODY) throw fail('Evento inválido.', 413)
-
-  if (!secret) {
-    // Bypass: sem secret configurado, aceita em dev para diagnóstico
-    console.warn('[Instagram Webhook] META_APP_SECRET ausente — bypass de assinatura ativo')
-  } else {
-    const expected = `sha256=${createHmac('sha256', secret).update(raw).digest('hex')}`
-    const actual = String(signature || '')
-    // Log diagnóstico sempre, removível após estabilizar
-    console.log('[Instagram Webhook] Signature check:', {
-      hasSignatureHeader: !!actual,
-      signaturePrefix: actual.substring(0, 20),
-      hasSecret: true,
-      secretHint: secret.substring(0, 8) + '...',
-      expectedPrefix: expected.substring(0, 20),
-      match: actual === expected,
-    })
-    const a = Buffer.from(expected)
-    const b = Buffer.from(actual)
-    if (a.length !== b.length || !timingSafeEqual(a, b)) throw fail('Assinatura do webhook inválida.', 403)
-  }
-
+  const expected = `sha256=${createHmac('sha256', secret).update(raw).digest('hex')}`
+  const actual = String(signature || '')
+  const a = Buffer.from(expected)
+  const b = Buffer.from(actual)
+  if (a.length !== b.length || !timingSafeEqual(a, b)) throw fail('Assinatura do webhook inválida.', 403)
   let payload
   try { payload = JSON.parse(raw.toString('utf8')) } catch { throw fail('JSON inválido.') }
   if (payload?.object !== 'instagram') throw fail('Objeto de webhook inesperado.')
@@ -87,20 +66,10 @@ export async function handleInstagramWebhook(req, res) {
     if (req.method === 'GET') return res.status(200).send(verifyWebhookChallenge(req.query))
     if (req.method !== 'POST') return res.status(405).json({ erro: 'use GET ou POST' })
     const raw = await readWebhookBody(req)
-    let payload
-    try {
-      payload = parseSignedWebhook(raw, req.headers['x-hub-signature-256'])
-    } catch (sigError) {
-      // Assina erro mas retorna 200 para Meta não retentrar indefinidamente
-      console.error('[Instagram Webhook] Erro de validação:', sigError.message)
-      return res.status(sigError.status === 403 ? 403 : 200).json({ erro: sigError.message })
-    }
-    // Responde 200 para Meta imediatamente; processa em background
-    res.status(200).json({ received: true })
-    await receiveInstagramWebhook(payload).catch(e => console.error('[Instagram Webhook] Erro no processamento:', e.message))
+    const payload = parseSignedWebhook(raw, req.headers['x-hub-signature-256'])
+    return res.status(200).json(await receiveInstagramWebhook(payload))
   } catch (error) {
-    console.error('[Instagram Webhook] Erro inesperado:', error.message)
-    return res.status(200).json({ erro: error.message })
+    return res.status(error.status || 500).json({ erro: error.message })
   }
 }
 
@@ -157,19 +126,8 @@ function withinMessageWindow(timestamp) {
 }
 
 async function sendReply(event, text) {
-  // Prioridade: token direto da env (sem Supabase) → token do Supabase
-  const directToken = process.env.INSTAGRAM_ACCESS_TOKEN
-  let accessToken, igUserId
-  if (directToken) {
-    accessToken = directToken
-    igUserId = event.account_id
-    console.log('[Instagram] Usando INSTAGRAM_ACCESS_TOKEN direto da env')
-  } else {
-    const result = await getValidInstagramAccess()
-    accessToken = result.accessToken
-    igUserId = result.igUserId
-    if (String(igUserId) !== String(event.account_id)) throw fail('Evento de outra conta Instagram.', 403)
-  }
+  const { accessToken, igUserId } = await getValidInstagramAccess()
+  if (String(igUserId) !== String(event.account_id)) throw fail('Evento de outra conta Instagram.', 403)
   let url, options
   if (event.kind === 'comment') {
     url = `https://graph.instagram.com/${encodeURIComponent(event.source_id)}/replies`
@@ -181,18 +139,8 @@ async function sendReply(event, text) {
   }
   const response = await fetch(url, options)
   const body = await response.json().catch(() => ({}))
-  console.log('[Instagram] Reply result:', { kind: event.kind, ok: response.ok, body: JSON.stringify(body).substring(0, 150) })
   if (!response.ok || !(body.id || body.message_id)) throw fail(`Instagram recusou a resposta: ${body.error?.message || response.status}`, 502)
   return String(body.id || body.message_id)
-}
-
-async function aiReply(event) {
-  let provider
-  try { provider = selectProvider() } catch { return null }
-  const system = process.env.IG_AI_SYSTEM_PROMPT || DEFAULT_IG_SYSTEM_PROMPT
-  const result = await provider.chat({ system, messages: [{ role: 'user', content: event.content }], maxTokens: 250 })
-  const text = result.text?.trim()
-  return text && text.length > 0 && text.length <= 500 ? text : null
 }
 
 async function deliver(event, text, ruleId = null) {
@@ -228,20 +176,18 @@ export async function receiveInstagramWebhook(payload) {
     catch (error) { if (/respondeu 409/.test(error.message)) continue; throw fail(`${MIGRATION_HINT} ${error.message}`, 503) }
     received += 1
     const rule = matchRule(event, rules || [])
-    const cooldownKey = { account_id: accountId, sender_id: event.sender_id, kind: event.kind, day: new Date().toISOString().slice(0, 10) }
-    // No máximo uma resposta automática por pessoa/canal/dia UTC.
-    try {
-      await writeCommand('instagram_engagement_cooldowns', cooldownKey)
-    } catch (error) {
-      if (/respondeu 409/.test(error.message)) continue
-      throw fail(`${MIGRATION_HINT} ${error.message}`, 503)
-    }
     if (rule) {
+      // No máximo uma resposta automática por pessoa/canal/dia UTC.
+      // A chave única no banco mantém o limite mesmo com functions paralelas.
+      try {
+        await writeCommand('instagram_engagement_cooldowns', {
+          account_id: accountId, sender_id: event.sender_id, kind: event.kind, day: new Date().toISOString().slice(0, 10),
+        })
+      } catch (error) {
+        if (/respondeu 409/.test(error.message)) continue
+        throw fail(`${MIGRATION_HINT} ${error.message}`, 503)
+      }
       await deliver(event, String(rule.response_text), rule.id)
-    } else {
-      // Sem regra keyword → resposta IA livre (requer provider LLM configurado).
-      const text = await aiReply(event).catch(() => null)
-      if (text) await deliver(event, text)
     }
   }
   return { received }

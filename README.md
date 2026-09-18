@@ -1,5 +1,7 @@
 # Kairos AGI Core
 
+Atendimento Instagram: o webhook autentica eventos da Meta por HMAC e só envia respostas automáticas a regras aprovadas. A conexão OAuth ou a assinatura de campos, isoladamente, não comprova entrega de eventos; acompanhe o estado no painel de Integrações.
+
 Ambiente oficial de desenvolvimento da **Kairos Digital**, destinado à construção de uma empresa operada por agentes de IA com supervisão humana.
 
 O documento [KAIROS_AGI_BLUEPRINT_V1.md](KAIROS_AGI_BLUEPRINT_V1.md) é a constituição arquitetural do produto. Novas decisões devem evoluir essa base de forma modular e registrar alterações em [docs/BLUEPRINT_EVOLUTION.md](docs/BLUEPRINT_EVOLUTION.md).
