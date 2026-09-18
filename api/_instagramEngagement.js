@@ -1,9 +1,15 @@
-// Instagram Login: recebe eventos oficiais e responde somente a regras
-// explicitamente aprovadas pelo Founder. O webhook nunca usa Basic Auth;
-// a assinatura X-Hub-Signature-256 autentica cada payload da Meta.
+// Instagram Login: recebe eventos oficiais, responde por regras keyword OU por IA livre.
+// O webhook nunca usa Basic Auth; a assinatura X-Hub-Signature-256 autentica cada payload.
 import { createHmac, timingSafeEqual } from 'node:crypto'
 import { readCommand, writeCommand, patchCommand } from './_command.js'
 import { getValidInstagramAccess } from './_instagram.js'
+import { selectProvider } from './_providers/index.js'
+
+const DEFAULT_IG_SYSTEM_PROMPT = `Você é o assistente digital da Kairos Digital, empresa brasileira especializada em automação com IA para pequenas e médias empresas.
+Responda de forma amigável, profissional e concisa em português brasileiro.
+Objetivo: qualificar o interesse do lead e direcioná-lo para uma conversa com um especialista da Kairos Digital.
+Nunca invente preços, prazos ou funcionalidades técnicas específicas.
+Máximo 2 a 3 frases por resposta. Seja direto e útil.`
 
 const MAX_BODY = 256 * 1024
 const MAX_REPLY = 500
@@ -143,6 +149,15 @@ async function sendReply(event, text) {
   return String(body.id || body.message_id)
 }
 
+async function aiReply(event) {
+  let provider
+  try { provider = selectProvider() } catch { return null }
+  const system = process.env.IG_AI_SYSTEM_PROMPT || DEFAULT_IG_SYSTEM_PROMPT
+  const result = await provider.chat({ system, messages: [{ role: 'user', content: event.content }], maxTokens: 250 })
+  const text = result.text?.trim()
+  return text && text.length > 0 && text.length <= 500 ? text : null
+}
+
 async function deliver(event, text, ruleId = null) {
   if (!text || text.length > MAX_REPLY) throw fail(`Resposta deve ter 1 a ${MAX_REPLY} caracteres.`)
   // Mudança condicional: um webhook repetido ou dois operadores não enviam
@@ -176,18 +191,20 @@ export async function receiveInstagramWebhook(payload) {
     catch (error) { if (/respondeu 409/.test(error.message)) continue; throw fail(`${MIGRATION_HINT} ${error.message}`, 503) }
     received += 1
     const rule = matchRule(event, rules || [])
+    const cooldownKey = { account_id: accountId, sender_id: event.sender_id, kind: event.kind, day: new Date().toISOString().slice(0, 10) }
+    // No máximo uma resposta automática por pessoa/canal/dia UTC.
+    try {
+      await writeCommand('instagram_engagement_cooldowns', cooldownKey)
+    } catch (error) {
+      if (/respondeu 409/.test(error.message)) continue
+      throw fail(`${MIGRATION_HINT} ${error.message}`, 503)
+    }
     if (rule) {
-      // No máximo uma resposta automática por pessoa/canal/dia UTC.
-      // A chave única no banco mantém o limite mesmo com functions paralelas.
-      try {
-        await writeCommand('instagram_engagement_cooldowns', {
-          account_id: accountId, sender_id: event.sender_id, kind: event.kind, day: new Date().toISOString().slice(0, 10),
-        })
-      } catch (error) {
-        if (/respondeu 409/.test(error.message)) continue
-        throw fail(`${MIGRATION_HINT} ${error.message}`, 503)
-      }
       await deliver(event, String(rule.response_text), rule.id)
+    } else {
+      // Sem regra keyword → resposta IA livre (requer provider LLM configurado).
+      const text = await aiReply(event).catch(() => null)
+      if (text) await deliver(event, text)
     }
   }
   return { received }
