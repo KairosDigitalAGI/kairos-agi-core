@@ -104,3 +104,7 @@ A Clone Engine possui uma Character Bible local para registrar as referências q
 ## Clone, Personagens e Biblioteca
 
 A navegação separa a identidade autorizada do Founder, as bíblias de personagens e a galeria privada de filmes. A Video Engine cria e edita; a Biblioteca mantém os resultados locais.
+
+## Série Kairos: A Hora Certa
+
+A narrativa oficial inicial para os canais da Kairos é uma série curta sobre construir uma empresa com evidência e entregas reais. A bíblia, o arco, o piloto e o processo de blockout estão em `docs/series/KAIROS_SERIES_BIBLE_V0_1.md`. Referências pessoais do Founder ficam privadas.

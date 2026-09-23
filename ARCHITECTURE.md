@@ -172,3 +172,7 @@ A Clone Engine inclui uma Character Bible local para continuidade de personagens
 ## 2026-09-23 — Navegação de criação separada
 
 Clone, Personagens e Biblioteca de filmes foram separados em superfícies próprias para evitar mistura entre biometria autorizada do Founder, continuidade ficcional e acervo de mídia local.
+
+## 2026-09-23 — Série e continuidade do Founder
+
+Foi adotado um fluxo de produção cinematográfica controlada: blockout 3D, referências de personagem e cenário, cenas curtas e montagem. A série original “Kairos: A Hora Certa” usa o Founder somente com referências autorizadas armazenadas em área privada e sem prometer resultados financeiros.

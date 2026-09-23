@@ -273,3 +273,9 @@ Foi adicionado o contrato server-side de descoberta do Freelancer (`api/hunter.m
 - Clone Engine agora contém apenas dados de identidade autorizada do Founder.
 - Personagens ganhou página própria para Character Bible e press kit.
 - Biblioteca de filmes ganhou página própria para a galeria local de MP4/WebM; a Video Engine mantém criação e pós-produção.
+
+## 2026-09-23 — Bíblia de série “A Hora Certa”
+
+- Preparada uma série original vertical com arco de oito episódios e piloto de 65 s, inspirada no processo técnico de blockout, referências e cenas curtas observado no vídeo enviado pelo Founder.
+- Três imagens de press kit do Founder foram copiadas para `memory/private/clones/founder/2026-09-23/`, ignorado pelo Git, com manifesto de integridade. Nenhum treino, upload externo, clonagem ou publicação foi iniciado.
+- Próxima etapa: cadastrar a autorização e referências no Clone Engine e criar o blockout do piloto antes de qualquer geração externa.

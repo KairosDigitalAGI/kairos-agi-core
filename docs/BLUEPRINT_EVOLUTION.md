@@ -250,3 +250,7 @@ O Blueprint evolui com um catálogo local de bíblias de personagem para manter 
 ## 2026-09-23 — Domínios separados de criação
 
 Clone, personagens ficcionais e acervo de filmes passaram a ter superfícies separadas. A regra evita a mistura de referências pessoais autorizadas com assets ficcionais e mídia de produção.
+
+## 2026-09-23 — Narrativa audiovisual inicial
+
+O Blueprint evolui com a série original “Kairos: A Hora Certa”: episódios verticais curtos, continuidade visual controlada por Character Bible e blocos 3D, sem copiar a referência externa. A narrativa representa tarefas e entregas como estado verificável, sem fabricar receita ou execução.

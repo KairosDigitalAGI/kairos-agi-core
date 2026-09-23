@@ -107,3 +107,7 @@ Implementar contrato e interface para registrar arquivos de imagem, vídeo e voz
 ## Próxima missão concreta — Ingestão privada de referências
 
 Estruturar o armazenamento autenticado para imagens, vídeos e voz autorizados do Founder, mantendo Clone, Personagens e Biblioteca como domínios separados. Não chamar provedores de biometria ou geração até haver consentimento e conector escolhido.
+
+## Próxima missão concreta — Blockout do piloto
+
+Criar o pacote de produção do piloto “O minuto zero”: lista de planos, prompts por cena, referências de cenário e dados para blockout, sem acionar modelo externo ou publicar.
