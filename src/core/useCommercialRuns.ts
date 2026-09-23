@@ -2,4 +2,10 @@ import { useCallback, useEffect, useState } from 'react'
 import { useOperationsAuth } from './OperationsAuthProvider'
 import { fetchOperations, type OperationsFetchState } from './operationsClient'
 export interface CommercialRunRecord { id:string; channel:string; step:string; state:string; updated_at:string; remote_id:string|null; reason:string|null }
-export function useCommercialRuns(){const {header}=useOperationsAuth();const [state,setState]=useState<OperationsFetchState<{source:'real';runs:CommercialRunRecord[]}>>({status:'sem-credencial'});const refresh=useCallback(async()=>{if(!header)return setState({status:'sem-credencial'});setState({status:'carregando'});setState(await fetchOperations('/api/hunter?action=runs',header))},[header]);useEffect(()=>{void refresh()},[refresh]);const create=useCallback(async(input:{channel:string;step:string;sourceUrl?:string;opportunityId?:string;proposalText?:string})=>{if(!header)throw new Error('Painel Operacional bloqueado.');const response=await fetch('/api/hunter?action=run',{method:'POST',headers:{'content-type':'application/json',authorization:header},body:JSON.stringify(input)});if(!response.ok)throw new Error(`Não foi possível criar execução (${response.status}).`);await refresh();return response.json()},[header,refresh]);return{state,refresh,create}}
+export function useCommercialRuns(){
+ const {header}=useOperationsAuth(); const [state,setState]=useState<OperationsFetchState<{source:'real';runs:CommercialRunRecord[]}>>({status:'sem-credencial'})
+ const refresh=useCallback(async()=>{if(!header){setState({status:'sem-credencial'});return}setState({status:'carregando'});setState(await fetchOperations('/api/hunter?action=runs',header))},[header])
+ useEffect(()=>{void refresh()},[refresh])
+ const create=useCallback(async(input:{channel:string;step:string;sourceUrl?:string;opportunityId?:string;proposalText?:string})=>{if(!header)throw new Error('Painel Operacional bloqueado.');const response=await fetch('/api/hunter?action=run',{method:'POST',headers:{'content-type':'application/json',authorization:header},body:JSON.stringify(input)});if(!response.ok)throw new Error(`NÃ£o foi possÃ­vel criar execuÃ§Ã£o (${response.status}).`);await refresh();return response.json()},[header,refresh])
+ return {state,refresh,create}
+}
