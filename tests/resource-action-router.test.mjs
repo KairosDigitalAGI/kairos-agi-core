@@ -25,7 +25,7 @@ function authedReq(overrides) {
 test('every resource/action route requires Basic Auth before dispatch', async () => {
   delete process.env.KAIROS_USER
   delete process.env.KAIROS_PASS
-  for (const [resource, action] of [['avatars', 'list'], ['story', 'activity'], ['content-jobs', 'approve']]) {
+  for (const [resource, action] of [['avatars', 'list'], ['story', 'activity'], ['content-jobs', 'approve'], ['studio', 'list-characters']]) {
     const req = { method: 'GET', headers: {}, query: { resource, action } }
     const res = fakeRes()
     await handler(req, res)
@@ -67,4 +67,61 @@ test('avatars/list rejects POST (still GET-only)', async () => {
   const res = fakeRes()
   await handler(req, res)
   assert.equal(res.statusCode, 405)
+})
+
+test('studio/list-characters reports unavailable (200, never a fake list) without Supabase configured', async () => {
+  delete process.env.SUPABASE_URL
+  delete process.env.SUPABASE_SERVICE_ROLE_KEY
+  const req = authedReq({ method: 'GET', query: { resource: 'studio', action: 'list-characters' } })
+  const res = fakeRes()
+  await handler(req, res)
+  assert.equal(res.statusCode, 200)
+  assert.equal(res.body.source, 'unavailable')
+  assert.deepEqual(res.body.characters, [])
+})
+
+test('studio/create-character validates the body before touching anything', async () => {
+  const req = authedReq({ method: 'POST', body: {}, query: { resource: 'studio', action: 'create-character' } })
+  const res = fakeRes()
+  await handler(req, res)
+  assert.equal(res.statusCode, 400)
+  assert.match(res.body.erro, /nome/)
+})
+
+test('studio/generate-character-portrait requires characterId in the body', async () => {
+  const req = authedReq({ method: 'POST', body: {}, query: { resource: 'studio', action: 'generate-character-portrait' } })
+  const res = fakeRes()
+  await handler(req, res)
+  assert.equal(res.statusCode, 400)
+  assert.match(res.body.erro, /characterId/)
+})
+
+test('studio/list-scenes requires reelId as a query string param', async () => {
+  const req = authedReq({ method: 'GET', query: { resource: 'studio', action: 'list-scenes' } })
+  const res = fakeRes()
+  await handler(req, res)
+  assert.equal(res.statusCode, 400)
+  assert.match(res.body.erro, /reelId/)
+})
+
+test('studio/generate-strategy requires titulo (fails via the agent, MOCK-free — no OpenRouter call happens before the 400)', async () => {
+  const req = authedReq({ method: 'POST', body: {}, query: { resource: 'studio', action: 'generate-strategy' } })
+  const res = fakeRes()
+  await handler(req, res)
+  assert.equal(res.statusCode, 400)
+  assert.match(res.body.erro, /titulo/)
+})
+
+test('studio/approve-reel rejects GET (POST-only)', async () => {
+  const req = authedReq({ method: 'GET', query: { resource: 'studio', action: 'approve-reel' } })
+  const res = fakeRes()
+  await handler(req, res)
+  assert.equal(res.statusCode, 405)
+})
+
+test('unknown studio action is a 404', async () => {
+  const req = authedReq({ method: 'GET', query: { resource: 'studio', action: 'delete-everything' } })
+  const res = fakeRes()
+  await handler(req, res)
+  assert.equal(res.statusCode, 404)
 })
