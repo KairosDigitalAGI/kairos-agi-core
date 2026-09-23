@@ -1,10 +1,14 @@
 # Contexto operacional — 11/09/2026
 
+## Verificação em produção — 18/09/2026
+
+A versão com galeria MP4/WebM e saudação restrita foi implantada na Vercel Hobby e recarregada no site oficial. A inbox autenticada de @_kairosdigital_ retornou uma regra de Direct ativa, confirmando as tabelas de atendimento no Supabase mestre. A consulta `subscribed_apps` mostrou `comments` e `messages` assinados na conta. Nenhum evento real apareceu na fila. O app Meta `1572077540519784` informa que precisa ser publicado para receber webhooks; sua URL de política de privacidade ainda está vazia. O Google AI Studio mostra KAIROS AGI e Kairos em Nível gratuito, mas nenhuma chave Free Tier foi vinculada ao caminho de saudação. O ID numérico de Matheus Schelle não foi observado em evento real. Assim, a resposta por LLM segue desligada; não afirmar funcionamento ponta a ponta.
+
 ## Atualização 18/09/2026 — primeiro lote generativo e teste de saudação
 
 O Flow da conta do Founder gerou três imagens verticais e duas cenas MP4 720p de 8 s; uma montagem de 16 s foi exportada. Projeto: `https://flow.google.com/project/e00db19b-f1a0-44b4-9c74-34507f8c7085`. Cópias ficam em `memory/private/media/2026-09-18/`, ignoradas pelo Git. A Video Engine ganhou importação local de MP4/WebM para galeria IndexedDB. O Content Engine não deve chamar Veo/Gemini Image via API no modo zero custo: o Flow UI possui créditos gratuitos, mas a API de imagem/vídeo não. `KAIROS_ENABLE_PAID_MEDIA` permanece ausente.
 
-O pedido de resposta automática a “oi” do Founder em Direct e comentário gerou um caminho isolado por ID de remetente e Gemini Flash-Lite Free Tier. Está **implementado, não ativado**: faltam projeto/chave Free Tier verificados, ID de evento real, assinatura da conta confirmada e entrega Meta. A produção publicada foi observada em versão anterior; é preciso implantar esta revisão e validar. Não declarar envio antes de `remote_reply_id` e confirmação visível.
+O pedido de resposta automática a “oi” do Founder em Direct e comentário gerou um caminho isolado por ID de remetente e Gemini Flash-Lite Free Tier. Está **implementado, não ativado**. O estado posterior da implantação e das verificações está registrado acima. Não declarar envio antes de `remote_reply_id` e confirmação visível.
 
 ## Atualização 18/09/2026 — proteção do atendimento Instagram
 
@@ -80,3 +84,17 @@ A nova página Agentes contém busca, departamento, responsabilidades, indicador
 Dashboard e World usam o mesmo cadastro operacional. O Dashboard resume seis agentes e oferece acesso explícito ao organograma completo. O World instancia os 27, exibe balão apenas na seleção/hover para reduzir sobreposição e permite selecionar qualquer agente pelo nome. Fechar o inspetor agora oculta o painel.
 
 O código do motor/importador existente na origem é evidência de implementação, não prova de conexão com este Core. Os executores continuam desconectados. A hierarquia dos 15 papéis originais responde a ORION; vínculos dos especialistas dos adendos são organização adotada neste Core, não importação literal do organograma original.
+
+## Kit modular reutilizável do KAIROS — em preparação
+
+O Core agora contém `templates/kairos-agent-kit/` e `scripts/export-kairos-agent-kit.sh`. O template declara configuração, contratos de evento, isolamento por tenant, auditoria e skills; o exportador exclui por padrão `.env`, sessões de WhatsApp, bancos, mídia, logs e chaves, além de bloquear a saída diante de provável segredo literal. O runtime real da VPS ainda não foi exportado, testado ou publicado. A conexão de WhatsApp não é pré-requisito para esta preparação e não foi alterada nesta fase.
+
+## Central de Demandas persistente — 22/09/2026
+
+A primeira versão do Money Hunter recebeu persistência local validada. O estado de oportunidades reais inseridas pelo Founder não se perde ao recarregar e as regras de transição foram movidas para um contrato de domínio. O armazenamento continua local ao navegador; não há coleta automática, CRM remoto, comunicação ou execução conectada.
+
+## 23/09/2026 — Central financeira e visibilidade operacional
+
+- Analytics e Money Lab são telas funcionais, não placeholders: reaproveitam as fontes autenticadas existentes e distinguem `real`, indisponível, erro e sessão bloqueada.
+- O Money Hunter segue local e assistido. Há um adaptador de descoberta oficial, porém sem URL/token configurados não consulta fonte alguma e não aciona plataformas.
+- Próxima decisão: configurar uma fonte oficial de descoberta com escopo somente leitura e implementar uma importação revisável; depois adicionar métricas sociais oficiais quando forem expostas pelas integrações.

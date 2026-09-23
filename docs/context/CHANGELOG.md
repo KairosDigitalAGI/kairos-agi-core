@@ -1,5 +1,19 @@
 # Changelog
 
+## 22/09/2026 — preparação de migração da VPS KAIROS
+
+- Corrigida a origem: a instância atual do agente KAIROS é HostGator, com cobrança mensal informada de R$ 54,98; não Hostinger.
+- Adicionado `scripts/kairos-vps-inventory.sh`, inventário de sistema, capacidade, PM2 e portas que exclui `.env`, sessões, tokens e logs.
+- A Hostinger KVM 2 foi registrada apenas como opção de contrato de dois anos: o preço anunciado dividido por mês não configura cobrança mensal. Nenhuma nova VPS foi contratada e a origem permanece intacta.
+
+## 18/09/2026 — diagnóstico de produção do atendimento
+
+- Versão com galeria de MP4/WebM implantada e observada no site oficial; tabela de inbox funcional e uma regra de Direct ativa carregada.
+- `subscribed_apps` confirma `comments` e `messages` para @_kairosdigital_; a fila ainda não contém evento real.
+- Meta mantém o app não publicado e informa que webhooks ao vivo exigem publicação. A URL de política de privacidade segue vazia no app.
+- Google AI Studio mostra projetos Kairos em Nível gratuito, mas o caminho de LLM não ganhou chave nem ID do remetente. Continua desligado.
+- Inbox agora indica prontidão da saudação sem expor segredo/ID; política pública corrigida para não prometer exclusão automática inexistente.
+
 ## 18/09/2026 — mídia generativa gratuita e saudação restrita
 
 - Três imagens e duas cenas de 8 s geradas no Flow; cena composta de 16 s exportada, arquivos privados locais e projeto Flow preservado.
@@ -218,3 +232,28 @@ O código do motor/importador existente na origem é evidência de implementaç�
 - Adicionados storyboard determinístico, três direções visuais, cenas animadas, transições, marca e trilha ambiente sintetizada localmente.
 - A geração parte somente do título e roteiro do Founder e produz um arquivo real, sem mídia de entrada, upload ou custo de API.
 - Galeria local persistente adicionada com blobs em IndexedDB, player, download e remoção confirmada; vídeos antigos que existiam apenas como URL temporária não podem ser recuperados.
+## 22/09/2026 — Money Hunter v0.1
+
+- Substituído o placeholder do Hunter pela Central de Demandas local.
+- Adicionada captura explícita de fonte, URL, orçamento informado e escopo observado; a interface não infere dados externos.
+- Adicionado pipeline local de triagem → qualificada → proposta pronta → aguardando resposta.
+- Documentação: `docs/modules/MONEY_HUNTER_V0_1.md`.
+
+## 22/09/2026 — Kit modular reutilizável do KAIROS
+
+- Criado `templates/kairos-agent-kit/` com contratos TypeScript de configuração, eventos, isolamento por tenant, auditoria e catálogo de skills. É uma base sem credenciais, sessões ou dados reais.
+- Criado `scripts/export-kairos-agent-kit.sh` para copiar uma origem de VPS de forma sanitizada, excluir sessões, `.env`, bancos, mídias, logs e chaves, gerar somente nomes de variáveis em `.env.example` e interromper caso o scanner encontre prováveis segredos.
+- Documentadas as capacidades `whatsapp-gateway`, `llm-router`, `lead-intelligence`, `content-ops` e `memory-state`. Nenhuma delas está ligada a execução externa por este incremento.
+- Pendente: executar a exportação no servidor, revisar o resultado, validar o kit e só então criar/publicar `KairosDigitalAGI/kairos-agent-kit`.
+
+## 22/09/2026 — Central de Demandas persistente
+
+- A Central de Demandas agora mantém oportunidades capturadas localmente entre recargas, com contratos em `src/features/hunter/domain.ts` e `storage.ts`.
+- Dados inválidos no armazenamento local são descartados; o módulo não estima orçamento, receita ou resultado de proposta.
+- Não houve integração de scraping, login, mensagem, proposta ou WhatsApp. A persistência é local ao navegador e não substitui CRM/auditoria de servidor.
+
+## Incremento 23/09/2026 — Money Lab, Analytics e descoberta autenticada
+
+As superfícies `money-lab` e `analytics` deixaram de ser placeholders. `AnalyticsPage` reutiliza `useBusinessMetrics`, `useFleetStatus` e o mesmo desbloqueio do Painel Operacional para mostrar receita, MRR, clientes, saúde da frota e alertas somente quando a fonte responde `real`; indisponibilidade, credencial ausente e erro aparecem explicitamente. `MoneyLabPage` separa receita registrada da fila local do Money Hunter e não converte oportunidade em caixa.
+
+Foi adicionado o contrato server-side de descoberta do Freelancer (`api/hunter.mjs` e `api/_freelancerDiscovery.js`). Ele só consulta uma URL oficial configurada no ambiente com token server-side e normaliza projetos completos; sem configuração, falha fechado. Não existe scraping, envio de proposta, mensagem, lance ou automação de contato. Testes do adaptador foram incluídos. Ver `docs/modules/MONEYLAB_ANALYTICS_V0_1.md`.

@@ -1,0 +1,24 @@
+import { useMemo } from 'react'
+import { ArrowUpRight, CircleDollarSign, FileSearch, ReceiptText, Target } from 'lucide-react'
+import { useBusinessMetrics } from '../../core/useBusinessMetrics'
+import { loadHunterOpportunities } from '../hunter/storage'
+import { hunterStages, type HunterStage } from '../hunter/domain'
+import { OperationsUnlock } from '../dashboard/OperationsUnlock'
+import { SectionHeader } from '../../ui/SectionHeader'
+import './moneylab.css'
+
+const brl=(value:number|undefined)=>value===undefined?'—':value.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})
+const stageLabel:Record<HunterStage,string>={triagem:'Triagem',qualificada:'Qualificada','proposta pronta':'Proposta pronta','aguardando resposta':'Aguardando resposta'}
+
+export function MoneyLabPage({ navigate }: { navigate: (module: 'hunter' | 'analytics' | 'integrations') => void }) {
+ const { state, refresh }=useBusinessMetrics()
+ const opportunities=useMemo(()=>loadHunterOpportunities(),[])
+ const real=state.status==='ok'&&state.data.source==='real'?state.data:null
+ const ready=opportunities.filter(item=>item.stage==='proposta pronta').length
+ const waiting=opportunities.filter(item=>item.stage==='aguardando resposta').length
+ return <section className="page-stack moneylab-page"><header className="glass-panel moneylab-hero"><div><span className="eyebrow"><CircleDollarSign size={14}/> MONEY LAB · DECISÕES DE RECEITA</span><h2>Transformar trabalho comprovado em caixa</h2><p>O laboratório reúne a receita já registrada e a fila comercial capturada. Uma oportunidade não é faturamento até existir contrato, entrega e registro na fonte operacional.</p></div><button onClick={()=>void refresh()}><ArrowUpRight size={15}/> Atualizar receita</button></header><OperationsUnlock/>
+ <div className="moneylab-kpis"><article className="glass-panel"><span>Receita do mês</span><strong>{real?brl(real.receitaMes):'—'}</strong><small>{real?'Fonte: command.receitas':'Aguardando fonte autenticada'}</small></article><article className="glass-panel"><span>MRR registrado</span><strong>{real?brl(real.mrr):'—'}</strong><small>{real?.mrrNota??'Sem cálculo presumido'}</small></article><article className="glass-panel"><span>Propostas para revisão</span><strong>{ready}</strong><small>Fila local do Money Hunter</small></article><article className="glass-panel"><span>Aguardando resposta</span><strong>{waiting}</strong><small>Sem confirmação de leitura ou venda</small></article></div>
+ <div className="moneylab-grid"><article className="glass-panel moneylab-card"><SectionHeader eyebrow="Opportunity Builder" title="Funil comercial observado" action={<button onClick={()=>navigate('hunter')}>Abrir Hunter</button>}/><div className="moneylab-funnel">{hunterStages.map(stage=>{const count=opportunities.filter(item=>item.stage===stage).length;return <div key={stage}><span>{stageLabel[stage]}</span><strong>{count}</strong><small>{stage==='triagem'?'Origem e escopo ainda em revisão':stage==='qualificada'?'Viabilidade analisada':stage==='proposta pronta'?'Texto requer revisão antes de envio':'Registrada como enviada na plataforma'}</small></div>})}</div>{opportunities.length===0&&<p className="moneylab-empty">Ainda não há demanda registrada localmente. Capture somente oportunidades vistas em fontes autorizadas.</p>}</article>
+ <article className="glass-panel moneylab-card"><SectionHeader eyebrow="Controladoria" title="Caixa e evidência" action={<button onClick={()=>navigate('analytics')}>Ver Analytics</button>}/>{state.status==='sem-credencial'&&<p className="moneylab-empty">Desbloqueie o Painel Operacional para consultar receita, MRR e clientes reais.</p>}{state.status==='carregando'&&<p className="moneylab-empty">Consultando fonte operacional…</p>}{state.status==='erro'&&<p className="moneylab-empty">{state.mensagem}</p>}{state.status==='ok'&&state.data.source==='unavailable'&&<p className="moneylab-empty">{state.data.reason??'Dados financeiros indisponíveis.'}</p>}{real&&<dl className="moneylab-ledger"><div><dt>Receita total</dt><dd>{brl(real.receitaTotal)}</dd></div><div><dt>Clientes ativos</dt><dd>{real.clientesAtivos??'—'} / {real.clientesTotal??'—'}</dd></div><div><dt>Período consultado</dt><dd>{real.periodo?`${real.periodo.desde} → ${real.periodo.ate}`:'Não informado'}</dd></div></dl>}</article>
+ <article className="glass-panel moneylab-card moneylab-rules"><SectionHeader eyebrow="Política de execução" title="Ações que preservam a margem"/><ul><li><Target size={15}/> Registrar fonte, escopo e orçamento antes de desenhar proposta.</li><li><FileSearch size={15}/> Preparar amostra somente com materiais e direitos disponíveis.</li><li><ReceiptText size={15}/> Registrar receita apenas após a fonte operacional confirmar o fato.</li></ul><button className="moneylab-outline" onClick={()=>navigate('integrations')}>Revisar integrações e canais</button></article></div></section>
+}

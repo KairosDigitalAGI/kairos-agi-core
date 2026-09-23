@@ -6,7 +6,7 @@ O Flow oficial produz ativos generativos usando a cota exibida na própria conta
 
 O Instagram preserva HMAC, conta OAuth vinculada, deduplicação, janela de 24 h e cooldown. Um caminho adicional, isolado, responde somente ao “oi” do ID numérico do Founder com `gemini-2.5-flash-lite` de projeto Free Tier confirmado; nenhuma mensagem do remetente além da palavra fixa é enviada à LLM. Flags ausentes deixam esse caminho desligado. A assinatura `subscribed_apps` da conta agora é consultável via rota autenticada, sem token na URL. O app Meta publicado e evento real continuam requisitos independentes. Ver `docs/modules/FOUNDER_GREETING_V0_1.md`.
 
-O webhook de Instagram rejeita todo POST sem `META_APP_SECRET` ou HMAC válido. Eventos são processados somente após validação, com deduplicação, conta vinculada e regras de resposta aprovadas; mensagens sem regra exigem revisão humana, exceto o teste restrito de saudação do Founder quando suas flags e ID estiverem configurados. A resposta livre por LLM e o token direto sem verificação da conta não integram o caminho de produção.
+O webhook de Instagram rejeita todo POST sem `META_APP_SECRET` ou HMAC válido. Eventos são processados somente após validação, com deduplicação, conta vinculada e regras de resposta aprovadas; mensagens sem regra exigem revisão humana, exceto o teste restrito de saudação do Founder quando suas flags e ID estiverem configurados. O endpoint autenticado de inbox expõe apenas indicadores booleanos de prontidão, nunca a chave ou o ID. A resposta livre por LLM e o token direto sem verificação da conta não integram o caminho de produção.
 
 ## Atendimento Instagram — incremento 17/09/2026
 
@@ -133,3 +133,24 @@ O código do motor/importador existente na origem é evidência de implementaç�
 O histórico em `localStorage` contém metadados da execução. A galeria em IndexedDB armazena os blobs concluídos por origem do navegador e permite reproduzir, baixar ou remover após recarregar. Falhas de cota não convertem um render real em resultado fictício: o arquivo temporário permanece disponível para download imediato. Google Flow, Higgsfield, Kling, Runway e Pika permanecem adaptadores desconectados. O pipeline FFmpeg do `kairos3` serviu como referência de capacidades e limites, mas não foi executado nem acoplado à Vercel.
 
 Após validação do Founder, `storyboard.ts` passou a compilar roteiro em cenas determinísticas e `motionRenderer.ts` gera frames e trilha diretamente em Canvas/Web Audio. `VideoGenerator` é o fluxo principal; o renderizador de arquivos permanece como pós-produção. A geração nativa cria motion graphics, sem afirmar síntese fotorealista ou uso de modelos externos.
+## Money Hunter v0.1
+
+`src/features/hunter/HunterPage.tsx` é uma superfície local de operação comercial. Ela aceita apenas oportunidades que já foram observadas em fonte autorizada e mantém o estado no navegador. Não realiza coleta externa, automação de login, comunicação com clientes, nem envia propostas. Uma integração futura deve persistir dados no servidor, guardar prova de origem e manter aprovação explícita antes de qualquer ação externa.
+
+## Migração do runtime KAIROS
+
+A VPS do agente é uma dependência externa isolada da Vercel e do Supabase. A troca usa paralelismo: inventário sem segredos, réplica endurecida, reconexão oficial do WhatsApp, validação e sobreposição antes do desligamento da origem. O Core não recebe credenciais, sessões ou histórico da instância. Ver `docs/modules/KAIROS_VPS_MIGRATION.md`.
+
+## Kit reutilizável do agente KAIROS
+
+`templates/kairos-agent-kit` é uma fonte pública de contratos TypeScript para novas instalações. `scripts/export-kairos-agent-kit.sh` acrescenta o código auditável de uma origem sem sessões, credenciais, bancos, mídia e logs. A fronteira entre `config`, `core`, `tenancy`, `audit` e `skills` evita que o runtime de um cliente seja copiado como se fosse outro. O Core não executa esse exportador nem recebe seu resultado; a operação ocorre somente no servidor de origem e exige varredura antes de um push público.
+
+## Money Hunter persistente
+
+A Central de Demandas retém oportunidades registradas pelo Founder entre recargas no mesmo navegador. Os contratos de domínio e armazenamento deixam explícito que se trata de estado local, não CRM ou prova de execução. A integração com uma fonte, um banco ou um canal de comunicação permanece fora desta fase.
+
+## Incremento — Money Lab, Analytics e descoberta
+
+- `src/features/analytics` é uma camada de visualização de `useBusinessMetrics` e `useFleetStatus`; não cria fonte paralela de receita ou frota.
+- `src/features/moneylab` consome a fila local do Hunter como sinal comercial, separado de dados financeiros do servidor.
+- `api/_freelancerDiscovery.js` é um adaptador somente leitura configurado por ambiente. `api/hunter.mjs` mantém o mesmo Basic Auth das rotas operacionais. Nenhuma credencial vai ao browser.

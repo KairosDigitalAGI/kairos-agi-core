@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
-import { BarChart3, CircleDollarSign, Database, Search, Settings, Users } from 'lucide-react'
+import { Database, Settings, Users } from 'lucide-react'
 import type { ModuleKey } from './types'
 import { departments } from './world/departments'
 import './world/immersive.css'
@@ -13,9 +13,12 @@ import { InstagramPage } from './engines/instagram/InstagramPage'
 import { ClonePage } from './engines/clone/ClonePage'
 import { VideoPage } from './engines/video/VideoPage'
 import { ModulePlaceholder } from './features/shared/ModulePlaceholder'
+import { AnalyticsPage } from './features/analytics/AnalyticsPage'
+import { MoneyLabPage } from './features/moneylab/MoneyLabPage'
 import { IntegrationsPage } from './features/integrations/IntegrationsPage'
 import { AvatarStudioPage } from './features/avatars/AvatarStudioPage'
 import { ProjectMapPage } from './features/projectmap/ProjectMapPage'
+import { HunterPage } from './features/hunter/HunterPage'
 
 const DepartmentBackdrop = lazy(() => import('./world/DepartmentBackdrop').then(module => ({ default: module.DepartmentBackdrop })))
 const WorldPage = lazy(() => import('./world/WorldPage').then((module) => ({ default: module.WorldPage })))
@@ -55,9 +58,9 @@ export function App() {
       case 'clone': return <ClonePage />
       case 'video': return <VideoPage />
       case 'clients': return <ModulePlaceholder title="Clientes" description="Visão consolidada dos clientes e das Engines contratadas." icon={Users} />
-      case 'hunter': return <ModulePlaceholder title="Hunter" description="Descoberta, qualificação e encaminhamento de oportunidades para o CRM." icon={Search} />
-      case 'money-lab': return <ModulePlaceholder title="Money Lab" description="Pesquisa de oportunidades de receita com aprovação obrigatória do Founder." icon={CircleDollarSign} />
-      case 'analytics': return <ModulePlaceholder title="Analytics" description="Indicadores de receita, operação, audiência e desempenho dos agentes." icon={BarChart3} />
+      case 'hunter': return <HunterPage />
+      case 'money-lab': return <MoneyLabPage navigate={navigate} />
+      case 'analytics': return <AnalyticsPage />
       case 'integrations': return <IntegrationsPage />
       case 'avatars': return <AvatarStudioPage />
       case 'roadmap': return <ProjectMapPage />

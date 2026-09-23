@@ -1,6 +1,6 @@
 # Kairos AGI Core
 
-Atualização 18/09/2026: [primeiros vídeos e imagens generativos reais no Google Flow](docs/modules/VIDEO_ENGINE_V0_4.md) (duas cenas de 8 s e montagem de 16 s); a Video Engine importa MP4/WebM na galeria local. A API Veo não é gratuita e foi desligada no modo custo zero. O teste de [resposta “oi” do Founder no Instagram](docs/modules/FOUNDER_GREETING_V0_1.md) está implementado, mas ainda aguarda identificação do remetente, chave Gemini Free Tier verificada e evento real da Meta. Não há postagem nem resposta automática comprovada.
+Atualização 18/09/2026: [primeiros vídeos e imagens generativos reais no Google Flow](docs/modules/VIDEO_ENGINE_V0_4.md) (duas cenas de 8 s e montagem de 16 s); a Video Engine importa MP4/WebM na galeria local. A API Veo não é gratuita e foi desligada no modo custo zero. O teste de [resposta “oi” do Founder no Instagram](docs/modules/FOUNDER_GREETING_V0_1.md) está implementado; as tabelas de atendimento e a assinatura da conta foram confirmadas em produção. Falta o app Meta publicar e entregar um evento real, identificar o ID do Founder e vincular uma chave Gemini de projeto Free Tier. Não há postagem nem resposta automática comprovada.
 
 Atendimento Instagram: o webhook autentica eventos da Meta por HMAC e só envia respostas automáticas a regras aprovadas. A conexão OAuth ou a assinatura de campos, isoladamente, não comprova entrega de eventos; acompanhe o estado no painel de Integrações.
 
@@ -20,7 +20,7 @@ Na galeria, cada vídeo real pode receber um texto para X. A aplicação baixa u
 
 **Integration Control Plane:** YouTube e Instagram compartilham OAuth server-side, `state` assinado, identidade consultada no provedor e o cofre cifrado `command.integracoes_tokens`. As URLs sociais foram consolidadas em uma função dinâmica para manter a Vercel Hobby gratuita. O canal real [Kairos Digital](https://www.youtube.com/channel/UC2TqvTgMsTkywGQS3oiYDsg) (`@KairosDigitalAGI`) e o perfil [_kairosdigital_](https://www.instagram.com/_kairosdigital_/) aparecem conectados no status autenticado de produção em 17/09/2026. Uploads para YouTube continuam privados por padrão e dependem de aprovação explícita no job. Valores secretos nunca chegam ao frontend e conexão não equivale a publicação.
 
-**Atendimento Instagram:** webhook assinado, fila de comentários/Direct, resposta manual e regras de palavra-chave com aprovação do Founder foram implementados e publicados. As regras começam pausadas. Callback verificado e `comments`/`messages` assinados no Meta; o recebimento real ainda depende da migration 0025 no Supabase mestre, política de privacidade, análise/publicação do app Meta e teste ponta a ponta. Detalhes em [Atendimento Instagram](docs/modules/INSTAGRAM_ENGAGEMENT.md).
+**Atendimento Instagram:** webhook assinado, fila de comentários/Direct, resposta manual e regras de palavra-chave com aprovação do Founder foram implementados e publicados. Há uma regra de Direct ativa cadastrada no banco; a inbox e a assinatura `comments`/`messages` da conta respondem em produção. O app Meta ainda não está publicado e nenhum evento real chegou à fila; faltam análise/publicação e teste ponta a ponta. Detalhes em [Atendimento Instagram](docs/modules/INSTAGRAM_ENGAGEMENT.md).
 
 Sem dados fictícios na interface. Métricas do Instagram ainda não são consultadas por este módulo; receita, clientes, XP e Coins só aparecem quando sua fonte real está disponível.
 
@@ -77,3 +77,22 @@ Escritório 3D do kairos-os reaproveitado como fundo contextual do painel de vid
 
 ## Organograma consolidado
 A página Agentes reúne 15 papéis importados do Kairos OS e 12 do Blueprint/adendos. O World usa os mesmos 27 registros. Responsabilidades e modelos de reunião preservados; nenhum executor foi conectado automaticamente. Ver docs/modules/AGENT_ORGANOGRAM.md.
+## Money Hunter v0.1
+
+O módulo Hunter possui uma Central de Demandas para registrar oportunidades reais já vistas em fonte autorizada, qualificar o escopo e preparar a fila comercial. A automação de coleta e comunicação continua desligada até existir fonte permitida, persistência e aprovação por ação.
+
+## Migração da infraestrutura KAIROS
+
+O agente pessoal do Founder permanece na VPS de origem até uma réplica ser validada. O roteiro e o inventário seguro estão em `docs/modules/KAIROS_VPS_MIGRATION.md` e `scripts/kairos-vps-inventory.sh`; ambos excluem segredos, sessões e dados de conversas.
+
+## Kairos Agent Kit
+
+A base reutilizável do agente está em `templates/kairos-agent-kit/`. O exportador `scripts/export-kairos-agent-kit.sh` monta uma cópia sanitizada do runtime de uma VPS e inclui contratos TypeScript para configuração, tenancy, auditoria e skills. Ela não inclui `.env`, sessões de WhatsApp, bancos, mídias, logs ou chaves. A publicação em um repositório público continua bloqueada até a exportação passar pelo scanner e por uma revisão de `git status`. Veja [guia do kit](docs/modules/KAIROS_AGENT_KIT.md) e [contratos de skills](docs/modules/KAIROS_AGENT_SKILLS.md).
+
+## Central de Demandas persistente
+
+O Money Hunter mantém registros inseridos pelo Founder no navegador entre recargas. Esta persistência é local, validada e separada do contrato de domínio; ela não conecta fontes, não acessa plataformas e não envia propostas. A evolução para CRM server-side exige isolamento de tenant, prova de origem e auditoria.
+
+## Money Lab, Analytics e descoberta autenticada
+
+A central financeira e o Analytics agora saíram de placeholder. Eles são leitura segura de dados reais quando as rotas autenticadas estão disponíveis e exibem indisponibilidade sem preencher lacunas. O Money Hunter permanece uma fila local revisável; o adaptador Freelancer é somente leitura, requer configuração server-side e não executa ações na plataforma. Documentação: `docs/modules/MONEYLAB_ANALYTICS_V0_1.md`.

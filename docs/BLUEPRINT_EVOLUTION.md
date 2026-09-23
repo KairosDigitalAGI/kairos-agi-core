@@ -1,5 +1,9 @@
 # Evolução do Blueprint
 
+## 18/09/2026 — observabilidade da saudação
+
+O painel de atendimento passa a mostrar apenas booleanos de prontidão para Free Tier, chave e remetente, sem publicar valores sensíveis. A verificação operacional distingue tabela e assinatura de conta funcionando de entrega real de evento; o app Meta ainda não foi publicado. Nenhuma nova automação foi ativada por esta revisão.
+
 ## 18/09/2026 — criação generativa sem gasto e ensaio de atendimento
 
 Sem alterar a arquitetura do Blueprint V1, a Video Engine passa a aceitar ativos MP4/WebM gerados legitimamente na interface do Flow e a exibi-los na galeria local. A interface de Flow não é tratada como API: geração totalmente autônoma permanece pendente. Toda chamada de API paga da Content Engine ganhou interruptor de implantação além da aprovação de cada job. Para o Instagram, KAIROS ganha um teste restrito de saudação por LLM gratuita com ID numérico do Founder, sem alterar as regras aprovadas para outras pessoas. Ambos os incrementos mantêm dados reais e falha fechada.
@@ -219,3 +223,22 @@ Rota nova consolidada (narrative/activity) — com essa, o Core soma exatamente 
 O conector Meta evolui do vínculo de perfil/publicação para solicitar também `instagram_business_manage_comments` e `instagram_business_manage_messages`. Essa autorização prepara moderação e Direct sem introduzir anúncios, insights ou automação de envio. A autorização OAuth não prova execução: handlers, webhooks, UI e auditoria permanecem requisitos explícitos antes de qualquer resposta automática.
 
 Em 17/09/2026, o webhook foi publicado com assinatura HMAC, idempotência persistente, fila privada e regras literais aprovadas. O app Meta correto salvou o callback e assinou apenas `comments`/`messages`; o challenge retornou 200 e POST sem assinatura 403. O Blueprint segue modular: a implementação paralela de respostas por LLM não é o caminho ativo, evitando custos e envios sem revisão. Migration 0025, publicação/análise Meta e teste ponta a ponta continuam pendentes; nenhuma resposta real foi comprovada.
+## 22/09/2026 — Money Hunter v0.1
+
+O Blueprint evolui com uma Central de Demandas local como primeira superfície da Missão 008. O fluxo preserva a sequência pesquisa → análise → proposta → aprovação, mas não representa pesquisa contínua nem executor ativo. A implementação não altera os limites do Money Hunter: nenhuma oportunidade é coletada, contactada ou enviada automaticamente.
+
+## 22/09/2026 — transição de infraestrutura do KAIROS
+
+O Blueprint passa a registrar a migração do runtime do agente KAIROS como uma transição reversível: a origem HostGator permanece ativa até haver réplica testada, e nenhum segredo de runtime passa para o Core ou para a documentação pública. A execução começa por inventário técnico privado e termina somente após reconexão oficial do WhatsApp, validação observável e período de sobreposição.
+
+## 22/09/2026 — Kit modular do agente KAIROS
+
+Evolução aprovada: o runtime do agente passa a ter uma base exportável por instalação, com contratos de configuração, eventos, isolamento de tenant, auditoria e skills. A evolução preserva a separação entre Founder e clientes e proíbe transferir sessões, credenciais, banco, mídia, logs ou conversas entre instalações. A publicação pública só ocorre após varredura e revisão do artefato sanitizado. Não cria um novo executor em segundo plano nem muda a conexão de WhatsApp existente.
+
+## Central de Demandas persistente
+
+O Money Hunter evolui a captura local para uma fila persistente por navegador, usando domínio e armazenamento separados. A evolução não altera o limite do Blueprint: oportunidade externa só entra quando observada em fonte autorizada; proposta e contato continuam dependentes de revisão/autorizações. A migração para servidor exigirá prova de origem, isolamento de tenant e auditoria.
+
+## 23/09/2026 — Evolução v0.1
+
+A Constituição foi evoluída modularmente com duas superfícies operacionais: Money Lab (decisão comercial) e Analytics (fontes autenticadas). A separação entre oportunidade, proposta e receita foi preservada. O adaptador de descoberta segue o princípio de least privilege: somente leitura, configuração de servidor e falha fechada; nenhuma conta, limite de plataforma ou comunicação é automatizada.

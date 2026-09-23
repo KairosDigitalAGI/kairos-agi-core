@@ -1,5 +1,7 @@
 # Fila de missões — Memory Sync V1.1
 
+Verificação de 18/09/2026: deploy e galeria confirmados; migration 0025 inferida pela regra persistida retornada pela inbox de produção; `subscribed_apps` confirma os dois campos na conta. Próximo bloqueio externo: cadastrar a política de privacidade no app Meta, concluir análise/publicação e receber um evento real de Matheus Schelle para obter o ID. Depois vincular chave de projeto Gemini Free Tier sem faturamento, ativar a saudação e provar Direct + comentário por `remote_reply_id` e resposta visível. Até lá, não declarar automação ao vivo.
+
 Atualização 18/09/2026, mídia: três imagens, duas cenas de 8 s e uma montagem de 16 s reais no Flow; importação local MP4/WebM implementada. Próximo: disponibilizar no deploy, confirmar galeria em produção, ampliar montagem se houver cota gratuita legítima e preparar pacote editorial para postagem futura. A geração diária por Flow ainda requer operação supervisionada; não há API gratuita de vídeo.
 
 Atualização 18/09/2026, atendimento: saudação “oi” do Founder por LLM gratuita implementada para remetente identificado por ID, mas **desligada** até chave Free Tier sem faturamento, ID do Founder obtido por evento real, assinatura da conta, migration e app Meta apto a entregar webhooks. Ver `docs/modules/FOUNDER_GREETING_V0_1.md`. Nenhuma DM/comentário foi comprovadamente respondido automaticamente.
@@ -55,3 +57,33 @@ Missão 006 — Fase 12 (15/09/2026): publicação real de Reels no Instagram (`
 Missão 006 — Fase 13 (15/09/2026): link direto para a conta conectada, a pedido explícito do Founder ("quero poder ver e clicar ali, pra entrar dentro do canal que tá"). `api/_youtube.js#computeYoutubeStatus` passou a selecionar também `account_id` (ID real e estável do canal, já gravado desde a Fase 4 em `completeConnection`) e devolve `profileUrl: https://www.youtube.com/channel/{account_id}` — nenhuma chamada nova à API do Google, é só montar a URL com um dado que já estava salvo. `api/_instagram.js#computeInstagramStatus` deriva um `username` de `account_label` só quando ele já começa com `@` (formato gravado pela Fase 11 quando a Graph API devolve `username` no connect); nesse caso monta `profileUrl: https://www.instagram.com/{username}/`, senão devolve `profileUrl: null` — nunca monta um link a partir de um nome de exibição que não é garantidamente um handle de URL válido (regra "nunca inventar dado" aplicada aqui a um link, não só a uma métrica). `src/types/integration.ts#SocialConnectionStatus` ganhou `profileUrl: string | null` na variante conectada; a rota `api/integrations/[provider]/[action].mjs` não mudou (a ação `status` é pass-through puro do adapter, o campo novo já chega ao frontend sem tocar na camada de rota). `IntegrationsPage.tsx` mostra o botão "Ver conta conectada" (abre em nova aba) quando `profileUrl` existe, e uma frase explicando a ausência quando não existe — nunca esconde silenciosamente. X (Twitter) fica de fora desta fase: hoje não existe OAuth nem `integracoes_tokens` para X no Core (`api/integrations/status.mjs` trata X como `mode:'manual-free'`, sem conta armazenada), então não há "conta conectada" real pra linkar ainda — gap registrado, não resolvido aqui, fica para decisão/planejamento de fase futura. 2 testes novos (um em cada arquivo de integração), total 124/124 passando; typecheck e build limpos.
 
 Missão 006 — Fase 14 (15/09/2026): Mapa do Projeto, a pedido explícito do Founder ("construir uma página persistente no dashboard que registra tudo que foi feito, tudo que falta e novas ideias... qualquer agente atualiza ao fim de cada sessão, nunca perde histórico"). Nova tabela `command.project_log` (migration `supabase/migrations/0023_project_log.sql` no repo kairos-command, **pendente de aplicar em produção** como toda migration nova deste Core) guarda `agent`/`phase`/`type`/`title`/`description`/`commit`/`deployed`, append-only por convenção (nenhuma linha editada/apagada por este projeto), RLS habilitado sem nenhuma policy de escrita — só `service_role` grava. `api/_project-log.js` expõe `listProjectLog()`/`addProjectLogEntry()`; rota própria `api/project-log.mjs` (não consolidada num `[action].mjs` porque havia margem: 9/12 antes desta fase, fecha em 10/12) com `GET` **sem Basic Auth de propósito** (o Mapa é feito pra ser visível sem desbloquear o Painel Operacional — nunca carrega segredo, só o diário de bordo) e `POST` atrás da mesma Basic Auth do Painel. Nova página `ProjectMapPage` no sidebar (`roadmap`): contador de progresso (% `done`), filtros por tipo, grid de cards com fase/agente/commit/timestamp/link "em produção", formulário "Adicionar entrada" só com o Painel desbloqueado. `scripts/log-update.mjs` é o comando padrão que qualquer agente roda ao fim de uma sessão (mesmas credenciais `KAIROS_USER`/`KAIROS_PASS`, nenhum segredo novo); `scripts/seed-project-log.mjs` semeia as 13 fases já entregues desta missão (mais uma entrada `todo` sobre a lacuna do X e uma `idea` sobre a Missão 007), extraídas deste próprio arquivo e do git log — roda assim que o Founder aplicar a migration 0023. `AGENTS.md` ganhou a seção "Regra obrigatória — atualização do Mapa" documentando o comando padrão e a obrigação de registrar feito/pendente/bug ao fim de cada sessão. 8 testes novos (`tests/project-log.test.mjs`), total 132/132 passando; typecheck e build limpos. Bloqueado para uso real (ler/escrever de fato) até a migration 0023 ser aplicada.
+## Atualização 22/09/2026 — Money Hunter v0.1
+
+Iniciada a superfície operacional da Missão 008: `Hunter` agora possui Central de Demandas local para captura de oportunidades vistas em fontes autorizadas, triagem, qualificação, proposta pronta e acompanhamento. Não existe executor de coleta, scraping, login, envio de proposta ou conversa conectado por esta entrega. A próxima fatia exige fonte autorizada e persistência server-side, sem exceder o plano gratuito.
+
+## Preparação operacional — migração da VPS KAIROS
+
+Antes da Missão 005, executar o inventário privado da origem com `scripts/kairos-vps-inventory.sh`, selecionar uma VPS de destino com preço total confirmado e validar a réplica em paralelo. Não há compra, cancelamento ou corte da instância de origem neste registro.
+
+## Próxima fatia — Kit reutilizável do agente KAIROS
+
+Estado: **template e exportador implementados localmente; exportação da VPS pendente**.
+
+1. Executar `scripts/export-kairos-agent-kit.sh` na origem apenas quando a conexão administrativa estiver estável.
+2. Revisar a saída sanitizada, executar typecheck e confirmar que não há dados de tenant, `.env`, sessões, banco, mídia ou logs.
+3. Criar o repositório público `KairosDigitalAGI/kairos-agent-kit` somente após essa auditoria.
+4. Configurar uma instalação nova com ambiente, armazenamento e conexão oficial isolados antes de habilitar qualquer canal.
+
+## Money Hunter — persistência local
+
+Estado: **implementada localmente; backend e fontes continuam pendentes**.
+
+A Central de Demandas persiste somente oportunidades registradas pelo Founder no navegador. Próxima evolução técnica: backend com prova de origem, tenant e auditoria antes de qualquer integração autorizada; comunicação externa permanece sujeita a aprovação explícita.
+
+## 23/09/2026 — Visibilidade operacional e central comercial
+
+**done** — Criados Money Lab e Analytics usando fontes autenticadas reais quando disponíveis, e adaptador somente-leitura de descoberta Freelancer. Commit pendente nesta sessão.
+
+**todo** — Configurar uma fonte oficial de descoberta de projetos, com escopo read-only, e implementar importação revisável antes de qualquer proposta.
+
+**todo** — Expor métricas sociais por APIs autorizadas e validar a ativação de webhooks Meta sem declarar atendimento automático como concluído.
