@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { MAX_INPUT_BYTES, MAX_RENDER_SECONDS, outputDimensions, safeOutputName, selectRecorderMime, validateRenderPlan } from '../src/engines/video/renderPlan.ts'
 import { compileStoryboard, generationDuration, validateGenerationPlan } from '../src/engines/video/storyboard.ts'
 import { buildConversionScript, estimateCampaign } from '../src/engines/video/providerCatalog.ts'
-import { distributionManifest, validateXCaption, xComposeUrl } from '../src/engines/video/distributionPackage.ts'
+import { buildXShareText, distributionManifest, validateXCaption, validateXShareCaption, xComposeUrl, xShareComposeUrl } from '../src/engines/video/distributionPackage.ts'
 
 const plan = { title: 'Reel Kairos', startSeconds: 3, endSeconds: 33, aspect: '9:16', quality: 'balanced', watermark: '@_kairosdigital_', includeAudio: true, musicVolume: .15 }
 
@@ -55,6 +55,22 @@ test('manual X package uses a real stored video and never marks it published', (
   assert.equal(manifest.video.name, 'kairos.webm')
   assert.equal(manifest.published, false)
   assert.equal(manifest.mode, 'manual-free')
+})
+
+test('X share (Content Engine, real remote video URL) only builds a compose link — never calls the X API', () => {
+  const videoUrl = 'https://example.supabase.co/storage/v1/object/public/content-assets/reel-1.mp4'
+  assert.equal(validateXShareCaption('', videoUrl), 'Escreva o texto que acompanhará o link do vídeo.')
+  assert.equal(buildXShareText('Kairos Digital no ar.', videoUrl), `Kairos Digital no ar.\n\n${videoUrl}`)
+  const url = xShareComposeUrl('Kairos Digital no ar.', videoUrl)
+  assert.match(url, /^https:\/\/x\.com\/intent\/post\?text=/)
+  assert.ok(decodeURIComponent(url.split('text=')[1]).includes(videoUrl))
+})
+
+test('X share rejects a caption+link combo over the real X character limit', () => {
+  const videoUrl = 'https://example.supabase.co/storage/v1/object/public/content-assets/reel-1.mp4'
+  const longCaption = 'a'.repeat(280)
+  assert.match(validateXShareCaption(longCaption, videoUrl), /máximo 280 caracteres/)
+  assert.throws(() => xShareComposeUrl(longCaption, videoUrl), /máximo 280 caracteres/)
 })
 
 test('campaign estimator exposes zero-cost local mode and deterministic paid estimates', () => {

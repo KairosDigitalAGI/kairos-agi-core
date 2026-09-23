@@ -31,7 +31,7 @@
 .content-engine-form button:disabled { opacity: .5; cursor: not-allowed; }
 .content-engine-error { color: #f87171; font-size: .76rem; margin: 0 0 10px; }
 .content-engine-jobs { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none; }
-.content-engine-jobs li { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: .8rem; }
+.content-engine-jobs li { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: .8rem; }
 .content-engine-jobs li:last-child { border-bottom: 0; }
 .content-engine-etapa { flex-shrink: 0; font-size: .68rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; }
 .content-engine-etapa.etapa-publicado { color: #4ade80; border-color: rgba(74,222,128,.4); }
@@ -41,6 +41,10 @@
 .content-engine-generate { flex-shrink: 0; font-size: .68rem; border: 1px solid rgba(155,108,255,.4); background: rgba(124,58,237,.14); color: #e4d9ff; border-radius: 7px; padding: 4px 9px; cursor: pointer; }
 .content-engine-generate:hover { background: rgba(124,58,237,.28); }
 .content-engine-generate:disabled { opacity: .5; cursor: wait; }
+.content-engine-x-share { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.content-engine-x-share textarea { flex: 1; min-width: 200px; min-height: 32px; resize: vertical; background: rgba(255,255,255,.04); border: 1px solid var(--border); border-radius: 7px; color: inherit; font: inherit; padding: 6px 8px; }
+.content-engine-x-share a { flex-shrink: 0; font-size: .68rem; border: 1px solid rgba(155,108,255,.4); background: rgba(124,58,237,.14); color: #e4d9ff; border-radius: 7px; padding: 4px 9px; text-decoration: none; white-space: nowrap; }
+.content-engine-x-share small { color: #f87171; font-size: .7rem; }
 
 .operations-feed-list { display: flex; flex-direction: column; gap: 6px; margin: 0 0 12px; padding: 0; list-style: none; }
 .operations-feed-list li { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.05); font-size: .8rem; }

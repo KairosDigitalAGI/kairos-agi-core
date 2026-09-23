@@ -3,6 +3,7 @@ import { Sparkles } from 'lucide-react'
 import { useContentPipeline } from '../../core/useContentPipeline'
 import { SectionHeader } from '../../ui/SectionHeader'
 import type { ContentJobEtapa } from '../../types/operations'
+import { X_CHARACTER_LIMIT, validateXShareCaption, xShareComposeUrl } from '../../engines/video/distributionPackage'
 import './operations.css'
 
 const ETAPA_LABEL: Record<ContentJobEtapa, string> = {
@@ -44,6 +45,7 @@ export function ContentEnginePanel() {
     approveError,
   } = useContentPipeline()
   const [titulo, setTitulo] = useState('')
+  const [xCaptions, setXCaptions] = useState<Record<string, string>>({})
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault()
@@ -162,6 +164,23 @@ export function ContentEnginePanel() {
                       {generatingJobId === job.id ? 'Publicando…' : 'Postar no Instagram'}
                     </button>
                   )}
+                  {job.videoUrl && (() => {
+                    const caption = xCaptions[job.id] ?? ''
+                    const issue = validateXShareCaption(caption, job.videoUrl)
+                    return (
+                      <div className="content-engine-x-share">
+                        <textarea
+                          value={caption}
+                          onChange={(e) => setXCaptions((prev) => ({ ...prev, [job.id]: e.target.value }))}
+                          placeholder="Texto para o X — o link do vídeo entra sozinho"
+                          maxLength={X_CHARACTER_LIMIT}
+                        />
+                        {issue
+                          ? <small role="alert">{issue}</small>
+                          : <a href={xShareComposeUrl(caption, job.videoUrl)} target="_blank" rel="noreferrer">Abrir compositor do X</a>}
+                      </div>
+                    )
+                  })()}
                 </li>
               ))}
             </ul>

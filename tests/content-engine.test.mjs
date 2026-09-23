@@ -43,6 +43,35 @@ test('content pipeline surfaces the pending-migration hint instead of a generic 
   }
 })
 
+test('content pipeline exposes videoUrl from content_assets (tipo=video) alongside each job, null when there is none', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async (url, opts = {}) => {
+    const href = String(url)
+    if (href.includes('content_jobs') && (!opts.method || opts.method === 'GET')) {
+      return new Response(JSON.stringify([
+        { id: 'job-1', titulo: 'com vídeo', etapa: 'video', aprovado: true, criado_em: '2026-09-23T00:00:00Z' },
+        { id: 'job-2', titulo: 'sem vídeo ainda', etapa: 'imagem', aprovado: true, criado_em: '2026-09-22T00:00:00Z' },
+      ]), { status: 200 })
+    }
+    if (href.includes('content_assets') && (!opts.method || opts.method === 'GET')) {
+      assert.match(href, /tipo=eq\.video/)
+      assert.match(href, /job_id=in\.\(job-1,job-2\)/)
+      return new Response(JSON.stringify([{ job_id: 'job-1', storage_path: 'https://example.test/storage/reel-1.mp4' }]), { status: 200 })
+    }
+    throw new Error(`fetch inesperado neste teste: ${opts.method || 'GET'} ${href}`)
+  }
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x' }, async () => {
+      const out = await computeContentPipeline()
+      assert.equal(out.source, 'real')
+      assert.equal(out.jobs.find((job) => job.id === 'job-1').videoUrl, 'https://example.test/storage/reel-1.mp4')
+      assert.equal(out.jobs.find((job) => job.id === 'job-2').videoUrl, null)
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
 test('createContentJob fails closed (503) without Supabase configured, never pretending a job was created', async () => {
   await withEnv({}, async () => {
     await assert.rejects(createContentJob({ titulo: 'ideia nova' }), /SUPABASE_URL/)

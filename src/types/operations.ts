@@ -68,6 +68,7 @@ export interface ContentJob {
   etapa: ContentJobEtapa
   aprovado: boolean
   criado_em: string
+  videoUrl: string | null
 }
 
 export interface ContentPipelineResponse {

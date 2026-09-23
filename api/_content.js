@@ -34,11 +34,23 @@ export async function computeContentPipeline() {
   }
   try {
     const jobs = await readCommand('content_jobs', '?select=id,titulo,etapa,aprovado,criado_em&order=criado_em.desc&limit=50')
+    // videoUrl vem de content_assets (tipo='video'), nunca de content_jobs —
+    // é o mesmo storage_path público já usado por postToYoutube/postToInstagram.
+    // Segunda consulta em vez de embed do PostgREST: mesmo estilo simples de
+    // query já usado no resto deste arquivo, sem depender de FK reconhecida
+    // no schema cache da produção.
+    const videoUrlByJob = {}
+    if (jobs.length > 0) {
+      const ids = jobs.map((job) => job.id).join(',')
+      const assets = await readCommand('content_assets', `?select=job_id,storage_path&tipo=eq.video&job_id=in.(${ids})`)
+      for (const asset of assets) videoUrlByJob[asset.job_id] = asset.storage_path
+    }
+    const jobsComVideo = jobs.map((job) => ({ ...job, videoUrl: videoUrlByJob[job.id] ?? null }))
     const porEtapa = jobs.reduce((acc, job) => {
       acc[job.etapa] = (acc[job.etapa] || 0) + 1
       return acc
     }, {})
-    return { source: 'real', checkedAt: new Date().toISOString(), jobs, porEtapa }
+    return { source: 'real', checkedAt: new Date().toISOString(), jobs: jobsComVideo, porEtapa }
   } catch (e) {
     return { source: 'unavailable', reason: `${MIGRATION_HINT} (${e.message})`, jobs: [], porEtapa: {} }
   }
