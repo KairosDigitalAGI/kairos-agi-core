@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { readIntegrationStatus } from '../api/integrations/status.mjs'
+import { readIntegrationStatus } from '../api/_integrations.js'
 
 test('integration status exposes configuration names without leaking values', () => {
   const secret = 'do-not-leak'
