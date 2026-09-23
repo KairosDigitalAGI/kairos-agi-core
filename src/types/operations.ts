@@ -144,6 +144,60 @@ export interface ProjectLogEntry {
   deployed: boolean
 }
 
+// Estúdio Kairos (Fase 16) — personagem/reel/cena, mesma convenção de fonte
+// real vs. indisponível de todo o resto do Painel: nunca lista fabricada
+// enquanto a migration 0025 não é aplicada.
+export type ReelEtapa = 'ideia' | 'roteiro' | 'cenas' | 'aprovacao' | 'producao' | 'pronto' | 'publicado' | 'rejeitado'
+
+export interface StudioCharacter {
+  id: string
+  nome: string
+  descricao: string | null
+  prompt_visual: string
+  imagem_referencia_path: string | null
+  status: 'rascunho' | 'ativo' | 'arquivado'
+  criado_em: string
+}
+
+export interface StudioReel {
+  id: string
+  titulo: string
+  character_id: string | null
+  etapa: ReelEtapa
+  aprovado: boolean
+  custo_estimado_usd: number | null
+  criado_em: string
+}
+
+export interface StudioScene {
+  id: string
+  reel_id: string
+  ordem: number
+  roteiro: string | null
+  prompt_video: string | null
+  imagem_path: string | null
+  video_path: string | null
+  status: 'rascunho' | 'gerando_imagem' | 'gerando_video' | 'pronta' | 'erro'
+}
+
+export interface StudioCharactersResponse {
+  source: DataSource
+  reason?: string
+  characters: StudioCharacter[]
+}
+
+export interface StudioReelsResponse {
+  source: DataSource
+  reason?: string
+  reels: StudioReel[]
+}
+
+export interface StudioScenesResponse {
+  source: DataSource
+  reason?: string
+  scenes: StudioScene[]
+}
+
 export interface ProjectLogResponse {
   source: DataSource
   checkedAt?: string
