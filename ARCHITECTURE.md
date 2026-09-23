@@ -17,6 +17,10 @@ O token store já existe em `command.integracoes_tokens`. `api/_youtube.js` e `a
 
 Início, status e desconexão exigem o Basic Auth do Painel Operacional. O callback valida `state` HMAC com validade curta, pois o provedor não reenvia o cabeçalho Basic Auth. O YouTube possui renovação e upload privado e está conectado ao canal real Kairos Digital. O Instagram possui vínculo OAuth e publicação assíncrona de Reels implementados; a ativação aguarda o app Meta e consentimento da conta profissional. Ambos exigem job aprovado no servidor antes de publicar.
 
+### Consolidação geral de rotas — Fase 15 (23/09/2026)
+
+`api/integrations/status.mjs` e `api/integrations/[provider]/[action].mjs` (parágrafos acima) foram fundidos em `api/integrations/[...route].mjs`; a lógica de `status` migrou para `api/_integrations.js`. Ao mesmo tempo, as demais rotas de nível superior (`agent-chat`, `agent-status`, `business-metrics`, `content-jobs`, `project-log`) migraram para `api/[route].mjs`, e as rotas por recurso (`avatars`, `story`, `content-jobs` com ação) migraram para `api/[resource]/[action].mjs`. O Core inteiro passa a expor 3 Serverless Functions no plano Hobby (era 10), mesmo contrato externo em todas — ver `docs/context/CHANGELOG.md`.
+
 Esta arquitetura implementa progressivamente a constituição em `KAIROS_AGI_BLUEPRINT_V1.md`. O Blueprint define os domínios; este documento registra como eles serão separados e integrados.
 
 ## Camadas

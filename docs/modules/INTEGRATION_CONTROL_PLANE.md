@@ -1,6 +1,6 @@
 # Integration Control Plane
 
-O Centro de Integrações expõe somente o estado real da configuração no servidor. A função `api/integrations/status.mjs` verifica a presença das variáveis necessárias e nunca retorna seus valores. O frontend não presume conexão com base em uma sessão aberta no navegador.
+O Centro de Integrações expõe somente o estado real da configuração no servidor. A rota `status` de `api/integrations/[...route].mjs` (lógica em `api/_integrations.js`; era o arquivo próprio `api/integrations/status.mjs` até a consolidação da Fase 15, 23/09/2026) verifica a presença das variáveis necessárias e nunca retorna seus valores. O frontend não presume conexão com base em uma sessão aberta no navegador.
 
 Instagram e YouTube usam OAuth de aplicação web. Tokens são persistidos no Supabase apenas pelo backend, cifrados na aplicação e protegidos por RLS sem policy pública. O YouTube está conectado ao canal real Kairos Digital; o Instagram continua pendente até configurar o app Meta e concluir o consentimento da conta profissional.
 

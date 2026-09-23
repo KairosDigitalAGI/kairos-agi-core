@@ -27,7 +27,7 @@ RLS habilitado, sem policy de insert/update/delete (só `service_role` escreve, 
 - `GET /api/project-log`: lista todas as entradas, mais recentes primeiro. **Sem Basic Auth de propósito** — o Mapa é feito pra ser visível sem desbloquear o Painel Operacional, e nunca carrega segredo.
 - `POST /api/project-log`: registra uma entrada nova. Exige a mesma Basic Auth do Painel Operacional (`KAIROS_USER`/`KAIROS_PASS`).
 
-Lógica em `api/_project-log.js`; rota em `api/project-log.mjs` (arquivo próprio — havia margem no teto de 12 Serverless Functions do plano Hobby, 10/12 depois desta fase).
+Lógica em `api/_project-log.js`; rota `route="project-log"` dentro de `api/[route].mjs` desde a consolidação geral da Fase 15 (era arquivo próprio, `api/project-log.mjs`, quando esta página foi entregue na Fase 14 — 10/12 Serverless Functions naquele momento; ver `docs/context/CHANGELOG.md`).
 
 ## Interface
 

@@ -12,7 +12,7 @@ YouTube e Instagram usam a mesma fronteira de segurança do Painel Operacional e
 - `GET /api/integrations/{provider}/status`: exige Basic Auth e devolve apenas nome público, escopo e validade.
 - `POST /api/integrations/{provider}/disconnect`: exige Basic Auth e remove o vínculo local cifrado.
 
-Os quatro caminhos são implementados por uma função dinâmica, `api/integrations/[provider]/[action].mjs`, para preservar o plano Vercel Hobby. Os adaptadores ficam em `api/_youtube.js` e `api/_instagram.js`; a interface compartilha `useSocialIntegration`.
+Os quatro caminhos, mais `status`, são implementados por uma função catch-all, `api/integrations/[...route].mjs` (Fase 15, 23/09/2026 — antes eram dois arquivos, `api/integrations/status.mjs` e `api/integrations/[provider]/[action].mjs`), para preservar o plano Vercel Hobby. Os adaptadores ficam em `api/_youtube.js` e `api/_instagram.js`; a lógica de `status` em `api/_integrations.js`; a interface compartilha `useSocialIntegration`.
 
 ## Callbacks
 
@@ -39,4 +39,4 @@ Missão 006, Fase 13: `GET /api/integrations/{provider}/status` passou a devolve
 
 ## Limites
 
-Desconectar remove o token do Kairos, mas não revoga o aplicativo diretamente no provedor. X (Twitter) não tem OAuth nem conta armazenada nesta versão — `api/integrations/status.mjs` trata X como `mode:"manual-free"`, sem cofre no `command.integracoes_tokens`.
+Desconectar remove o token do Kairos, mas não revoga o aplicativo diretamente no provedor. X (Twitter) não tem OAuth nem conta armazenada nesta versão — `readIntegrationStatus()` (`api/_integrations.js`) trata X como `mode:"manual-free"`, sem cofre no `command.integracoes_tokens`.

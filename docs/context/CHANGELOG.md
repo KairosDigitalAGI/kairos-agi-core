@@ -1,5 +1,12 @@
 # Changelog
 
+## Missão 006, Fase 15 — consolidação geral de rotas Vercel (23/09/2026)
+- As 10 Serverless Functions existentes foram fundidas em 3 arquivos dinâmicos: `api/[route].mjs` (`agent-chat`, `agent-status`, `business-metrics`, `content-jobs`, `project-log` — rotas de nível superior sem sub-recurso), `api/[resource]/[action].mjs` (`avatars`, `story`, `content-jobs` com ação) e `api/integrations/[...route].mjs` (catch-all: `status` + `[provider]/[action]` do OAuth). Consolidação de arquivo, não de comportamento — mesmo padrão já usado nas Fases 8/10/11 (`content-jobs/[action].mjs`, `story/[action].mjs`, `integrations/[provider]/[action].mjs`).
+- Nenhuma URL pública, método HTTP, Basic Auth ou formato de resposta mudou. Os callbacks OAuth do YouTube (`/api/integrations/youtube/callback`) e do Instagram (`/api/integrations/instagram/callback`) continuam no mesmo endereço já cadastrado nos respectivos apps — mudar essa URL quebraria a reconexão de quem já autorizou.
+- `readIntegrationStatus()` saiu de `api/integrations/status.mjs` (arquivo de rota, removido) para `api/_integrations.js` (módulo de lógica), seguindo o mesmo padrão de `api/_business.js`/`api/_content.js`/`api/_youtube.js`.
+- 19 testes novos de roteador (`tests/top-level-router.test.mjs`, `tests/resource-action-router.test.mjs`, `tests/integrations-router.test.mjs`): cada rota migrada testada isoladamente (Basic Auth fail-closed, método errado, ação/recurso desconhecido, callback com erro do provedor) — total 151/151 passando. Typecheck e build limpos.
+- Resultado: Core cai de 10/12 para 3/12 Serverless Functions no plano Hobby, liberando 9 slots para o Estúdio Kairos (Fase 16) e o webhook de DM/comentários do Instagram sem exigir upgrade de plano.
+
 ## Missão 006, Fase 14 — Mapa do Projeto (15/09/2026)
 - Nova tabela `command.project_log` (migration `supabase/migrations/0023_project_log.sql`, repo kairos-command, **pendente de aplicar em produção**): diário de bordo append-only (`agent`, `phase`, `type`, `title`, `description`, `commit`, `deployed`) do próprio desenvolvimento do Core — nunca editado/apagado por este projeto, RLS habilitado sem policy de escrita (só `service_role`).
 - `api/_project-log.js` (`listProjectLog`/`addProjectLogEntry`) + rota própria `api/project-log.mjs`: `GET` lista tudo sem Basic Auth (o Mapa é feito pra ser visível sem desbloquear o Painel Operacional — nunca carrega segredo), `POST` exige a mesma Basic Auth do Painel. Rota nova, não consolidada num `[action].mjs` — havia margem (9/12 antes desta fase), fecha em 10/12.
