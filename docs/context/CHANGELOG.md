@@ -1,5 +1,12 @@
 # Changelog
 
+## 23/09/2026 — Seedance 2.5 com Gateway limitada
+
+- Adicionado `api/_providers/seedance.js`, adaptador de vídeo para `bytedance/seedance-2.5` via Vercel AI Gateway e `experimental_generateVideo` do AI SDK.
+- Adicionado tier `gateway` ao Content Engine, limitado a 8 s, 9:16, 1280×720 e áudio, com persistência de `usage` retornado em `content_assets`.
+- Separado o gate `KAIROS_ENABLE_SEEDANCE_GATEWAY` do gate genérico de APIs pagas: ativar o teste Seedance não abre OpenAI ou fal.ai. Job aprovado, migrations e autenticação OIDC continuam obrigatórios; não há retry automático.
+- Criada a documentação operacional/custo em `docs/modules/SEEDANCE_GATEWAY_V0_1.md`. Nenhuma chamada ao modelo, gasto, upload de referência pessoal ou publicação foi executada.
+
 ## 22/09/2026 — preparação de migração da VPS KAIROS
 
 - Corrigida a origem: a instância atual do agente KAIROS é HostGator, com cobrança mensal informada de R$ 54,98; não Hostinger.

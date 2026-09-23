@@ -7,7 +7,7 @@ const KEYS = [
   'SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY', 'ANTHROPIC_API_KEY', 'OPENAI_API_KEY', 'OPENROUTER_API_KEY', 'KAIROS_LLM_PROVIDER',
   'GOOGLE_AI_KEY', 'FAL_KEY', 'VEO_POLL_INTERVAL_MS', 'VEO_POLL_TIMEOUT_MS', 'FAL_POLL_INTERVAL_MS', 'FAL_POLL_TIMEOUT_MS',
   'KAIROS_TOKEN_ENCRYPTION_KEY', 'GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'GOOGLE_OAUTH_REDIRECT_URI',
-  'KAIROS_ENABLE_PAID_MEDIA',
+  'KAIROS_ENABLE_PAID_MEDIA', 'KAIROS_ENABLE_SEEDANCE_GATEWAY', 'AI_GATEWAY_API_KEY', 'VERCEL_OIDC_TOKEN',
 ]
 
 function withEnv(vars, fn) {
@@ -356,6 +356,30 @@ test('generateVideo tier=paid fails closed (503) without FAL_KEY (job already ap
   try {
     await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', KAIROS_ENABLE_PAID_MEDIA: 'true' }, async () => {
       await assert.rejects(generateVideo({ jobId: 'abc', tier: 'paid' }), /FAL_KEY/)
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
+test('generateVideo tier=gateway remains disabled until the Seedance-specific feature flag is enabled', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'imagem', briefing: {}, aprovado: true }]), { status: 200 })
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', KAIROS_ENABLE_PAID_MEDIA: 'true', VERCEL_OIDC_TOKEN: 'oidc' }, async () => {
+      await assert.rejects(generateVideo({ jobId: 'abc', tier: 'gateway' }), /Seedance pela AI Gateway está desligado/)
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
+test('generateVideo tier=gateway fails closed without a Gateway credential after the feature flag is enabled', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'imagem', briefing: {}, aprovado: true }]), { status: 200 })
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', KAIROS_ENABLE_SEEDANCE_GATEWAY: 'true' }, async () => {
+      await assert.rejects(generateVideo({ jobId: 'abc', tier: 'gateway' }), /AI Gateway não autenticado/)
     })
   } finally {
     globalThis.fetch = originalFetch

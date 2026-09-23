@@ -21,6 +21,7 @@ O status autenticado de produção confirmou `_kairosdigital_` conectado via OAu
 Constituição: KAIROS_AGI_BLUEPRINT_V1.md. Adendos: KAIROS_MEMORY_SYNC_V1.md e KAIROS_MEMORY_SYNC_V1_1.md. AGENTS.md define papéis. Não reiniciar a arquitetura.
 
 ## Estado atual
+- Seedance 2.5 via Vercel AI Gateway está implementado como adaptador isolado no Content Engine, ainda desligado. A chave de contingência da Gateway tem limite único de US$ 5 e sem recarga; o deployment deve usar OIDC e não armazena essa chave. A primeira chamada continua bloqueada até migrations 0020/0022, job real aprovado e flag específica. Não houve geração, gasto, upload do press kit ou publicação nesta etapa.
 - Missão 003 implementada como arquitetura operacional local: oito módulos Clone, Content Brain, pipeline e aprovação versionada. Nenhum serviço externo conectado.
 - Dados demonstrativos removidos da interface. Receita, CRM, Coins e métricas externas indisponíveis até conexão real. Contadores editoriais/Clone vêm de registros do navegador.
 - Instagram oficial `_kairosdigital_`: OAuth conectado em 17/09/2026; métricas ainda não consultadas neste módulo.

@@ -254,3 +254,7 @@ Clone, personagens ficcionais e acervo de filmes passaram a ter superfícies sep
 ## 2026-09-23 — Narrativa audiovisual inicial
 
 O Blueprint evolui com a série original “Kairos: A Hora Certa”: episódios verticais curtos, continuidade visual controlada por Character Bible e blocos 3D, sem copiar a referência externa. A narrativa representa tarefas e entregas como estado verificável, sem fabricar receita ou execução.
+
+## 2026-09-23 — Geração externa com orçamento isolado
+
+O Blueprint passa a permitir um adaptador de vídeo por Gateway somente quando cada execução tiver job aprovado, orçamento técnico limitado, uso retornado pelo provedor e armazenamento operacional. Seedance 2.5 é o primeiro adaptador: OIDC do deployment, flag exclusiva, sem retry automático e sem referência biométrica por padrão. A integração não autoriza compra, recarga, postagem ou transmissão de materiais do Founder.

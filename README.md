@@ -2,6 +2,8 @@
 
 Atualização 18/09/2026: [primeiros vídeos e imagens generativos reais no Google Flow](docs/modules/VIDEO_ENGINE_V0_4.md) (duas cenas de 8 s e montagem de 16 s); a Video Engine importa MP4/WebM na galeria local. A API Veo não é gratuita e foi desligada no modo custo zero. O teste de [resposta “oi” do Founder no Instagram](docs/modules/FOUNDER_GREETING_V0_1.md) está implementado; as tabelas de atendimento e a assinatura da conta foram confirmadas em produção. Falta o app Meta publicar e entregar um evento real, identificar o ID do Founder e vincular uma chave Gemini de projeto Free Tier. Não há postagem nem resposta automática comprovada.
 
+Atualização 23/09/2026: o Content Engine recebeu adaptador isolado para Seedance 2.5 pela Vercel AI Gateway. Ele usa OIDC do deployment, exige aprovação por job e uma flag exclusiva; não gera, não publica nem envia referências do Founder até as migrations do Engine estarem aplicadas. Veja [Seedance Gateway](docs/modules/SEEDANCE_GATEWAY_V0_1.md).
+
 Atendimento Instagram: o webhook autentica eventos da Meta por HMAC e só envia respostas automáticas a regras aprovadas. A conexão OAuth ou a assinatura de campos, isoladamente, não comprova entrega de eventos; acompanhe o estado no painel de Integrações.
 
 Ambiente oficial de desenvolvimento da **Kairos Digital**, destinado à construção de uma empresa operada por agentes de IA com supervisão humana.

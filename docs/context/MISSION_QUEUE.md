@@ -8,6 +8,8 @@ Atualização 18/09/2026, atendimento: saudação “oi” do Founder por LLM gr
 
 Atualização 18/09/2026: proteção do webhook e do orçamento aplicada. A entrega efetiva de comentários/DMs da Meta, publicação do app e teste com a conta real continuam por verificar; código implantado não equivale a evento recebido.
 
+Atualização 23/09/2026, Seedance: adaptador da Vercel AI Gateway pronto e desligado. Próximo passo de mídia: aplicar migrations 0020 e 0022 no Supabase mestre; depois registrar/aprovar um job textual de establishing shot, ativar apenas `KAIROS_ENABLE_SEEDANCE_GATEWAY=true` para uma chamada e verificar o `usage`. Não usar press kit, compra ou recarga nesta primeira geração.
+
 | Missão | Estado | Escopo |
 | --- | --- | --- |
 | 001 | Fundação entregue; fontes externas pendentes | Dashboard, World e módulos iniciais; exemplos retirados |

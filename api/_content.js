@@ -9,6 +9,7 @@ import { readCommand, writeCommand, patchCommand, commandConfigured } from './_c
 import { selectProvider } from './_providers/index.js'
 import * as openai from './_providers/openai.js'
 import * as fal from './_providers/fal.js'
+import * as seedance from './_providers/seedance.js'
 import { uploadToStorage, safePath } from './_storage.js'
 import { getValidAccessToken, uploadVideo } from './_youtube.js'
 import { getValidInstagramAccess, createReelsContainer, checkContainerStatus, publishReelsContainer } from './_instagram.js'
@@ -21,6 +22,18 @@ const MIGRATION_HINT =
 function assertPaidMediaEnabled() {
   if (process.env.KAIROS_ENABLE_PAID_MEDIA !== 'true') {
     const err = new Error('Geração por API paga está desligada no modo custo zero. Use Google Flow com créditos gratuitos ou a Video Engine local.')
+    err.status = 402
+    throw err
+  }
+}
+
+// A Gateway é um caminho separado do catálogo pago genérico. Ele só é aberto
+// para o Seedance quando o Founder ativa a flag específica no deployment e o
+// job aprovado chega a esta função. Assim, habilitar o primeiro teste não
+// libera por acidente OpenAI, fal.ai ou qualquer outro provider deste Core.
+function assertSeedanceGatewayEnabled() {
+  if (process.env.KAIROS_ENABLE_SEEDANCE_GATEWAY !== 'true') {
+    const err = new Error('Seedance pela AI Gateway está desligado. Ative KAIROS_ENABLE_SEEDANCE_GATEWAY=true somente para um job aprovado e dentro do orçamento.')
     err.status = 402
     throw err
   }
@@ -336,7 +349,9 @@ export async function generateImage({ jobId }) {
  * A API Veo não oferece faixa gratuita; tier="free" é recusado. A produção
  * gratuita ocorre na interface oficial do Google Flow e o arquivo gerado
  * pode ser importado na galeria local. tier="paid" usa Kling v2.1 Master,
- * somente com aprovação do job e KAIROS_ENABLE_PAID_MEDIA=true.
+ * somente com aprovação do job e KAIROS_ENABLE_PAID_MEDIA=true. tier="gateway"
+ * usa somente Seedance 2.5, em clipe vertical de 8 s, com a flag isolada
+ * KAIROS_ENABLE_SEEDANCE_GATEWAY=true; não habilita os demais providers pagos.
  *
  * O vídeo não é baixado para o Storage deste Core: a URL que o provider
  * devolve é gravada direto em content_assets.storage_path (pode ser externa,
@@ -350,8 +365,8 @@ export async function generateVideo({ jobId, tier = 'free' }) {
     err.status = 400
     throw err
   }
-  if (tier !== 'free' && tier !== 'paid') {
-    const err = new Error(`tier inválido: "${tier}" (use "free" ou "paid")`)
+  if (tier !== 'free' && tier !== 'paid' && tier !== 'gateway') {
+    const err = new Error(`tier inválido: "${tier}" (use "free", "paid" ou "gateway")`)
     err.status = 400
     throw err
   }
@@ -385,15 +400,13 @@ export async function generateVideo({ jobId, tier = 'free' }) {
     err.status = 402
     throw err
   }
-  if (tier === 'paid' && !job.aprovado) {
+  if ((tier === 'paid' || tier === 'gateway') && !job.aprovado) {
     const err = new Error(
       `content_job ${jobId} ainda não foi aprovado para gasto (aprovado:false). O Founder precisa aprovar este job antes de gerar vídeo com o motor pago (Kling v2.1 Master).`,
     )
     err.status = 402
     throw err
   }
-
-  assertPaidMediaEnabled()
 
   const briefing = job.briefing && typeof job.briefing === 'object' ? job.briefing : {}
   const prompt = [
@@ -402,6 +415,45 @@ export async function generateVideo({ jobId, tier = 'free' }) {
     briefing.promessa && `Promessa central: ${briefing.promessa}.`,
     'Estilo profissional e moderno, sem texto sobreposto, sem logotipo inventado.',
   ].filter(Boolean).join(' ')
+
+  if (tier === 'gateway') {
+    assertSeedanceGatewayEnabled()
+    if (!seedance.hasCredentials()) {
+      const err = new Error('AI Gateway não autenticado nesta implantação. O deployment deve ter VERCEL_OIDC_TOKEN ou uma AI_GATEWAY_API_KEY restrita.')
+      err.status = 503
+      throw err
+    }
+    let resultado
+    try {
+      resultado = await seedance.generateSeedanceVideo({ prompt, duration: 8, aspectRatio: '9:16', resolution: '1280x720', generateAudio: true })
+    } catch (e) {
+      const err = new Error(`provider vercel-ai-gateway: ${e.message}`)
+      err.status = e.status && e.status >= 400 && e.status < 600 ? e.status : 502
+      throw err
+    }
+    let storagePath
+    try {
+      storagePath = await uploadToStorage(safePath(`content-jobs/${job.id}/seedance-${Date.now()}.mp4`), resultado.bytes, resultado.mediaType)
+    } catch (e) {
+      const err = new Error(`Seedance concluiu, mas o vídeo não foi persistido: ${e.message}`)
+      err.status = 502
+      throw err
+    }
+    try {
+      const [asset] = await writeCommand('content_assets', {
+        job_id: job.id, tipo: 'video', storage_path: storagePath, provedor: seedance.name, gratuito: false,
+        metadata: { model: resultado.model, tier, prompt, usage: resultado.usage },
+      })
+      const [updatedJob] = await patchCommand('content_jobs', `?id=eq.${encodeURIComponent(job.id)}`, { etapa: 'video' })
+      return { job: updatedJob || { ...job, etapa: 'video' }, asset }
+    } catch (e) {
+      const err = new Error(`${MIGRATION_HINT} (${e.message})`)
+      err.status = 503
+      throw err
+    }
+  }
+
+  assertPaidMediaEnabled()
 
   if (!fal.hasCredentials()) {
     const err = new Error('nenhum provider de vídeo pago configurado: defina FAL_KEY na Vercel (Kling v2.1 Master roda via fal.ai).')

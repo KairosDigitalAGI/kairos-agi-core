@@ -62,3 +62,7 @@ Logo e música devem pertencer ao Founder ou ter licença. O sistema não valida
 Video AI abre este painel pelo organograma. Produções aprovadas no Clone ainda não transferem arquivos automaticamente: o catálogo do Clone armazena referências textuais, enquanto esta Engine manipula arquivos temporários. A união exige backend/armazenamento seguro na Missão Supabase.
 
 Google Flow, Higgsfield, Kling, Runway e Pika permanecem desligados. A geração nativa cria motion graphics a partir do roteiro; ela não sintetiza pessoas ou cenas fotorealistas. Esse tipo de geração exige um modelo externo ou infraestrutura local pesada. O pipeline FFmpeg já existente no `kairos3` continua candidato a worker de alta fidelidade; conectar o processo produtivo e seus arquivos requer validação separada para não interromper a instância ativa.
+
+## Seedance pela Vercel AI Gateway
+
+O Content Engine também possui o tier isolado `gateway` para `bytedance/seedance-2.5`. Ele cria somente um clipe vertical de 8 segundos, exige job aprovado e a flag específica `KAIROS_ENABLE_SEEDANCE_GATEWAY=true`; não abre os providers pagos genéricos. A autenticação preferencial usa OIDC do deployment da Vercel, sem segredo persistido no projeto. O contrato, custo verificável, teto e limites de referências do Founder estão em [SEEDANCE_GATEWAY_V0_1.md](SEEDANCE_GATEWAY_V0_1.md).

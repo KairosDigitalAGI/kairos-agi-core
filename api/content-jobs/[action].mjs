@@ -53,7 +53,7 @@ const ACTIONS = {
   async 'generate-video'(req) {
     const jobId = jobIdFromBody(req)
     if (!jobId) return { status: 400, body: { erro: 'jobId é obrigatório' } }
-    const tier = req.body?.tier === 'paid' ? 'paid' : 'free'
+    const tier = req.body?.tier === 'paid' ? 'paid' : req.body?.tier === 'gateway' ? 'gateway' : 'free'
     const { job, asset } = await generateVideo({ jobId, tier })
     return { status: 200, body: { job, asset } }
   },
