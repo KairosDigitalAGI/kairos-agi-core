@@ -33,8 +33,8 @@ export function Sidebar({ active, onNavigate }: SidebarProps) {
   return (
     <aside className="sidebar">
       <div className="brand">
-        <div className="brand-mark"><Bot size={21} /></div>
-        <div><strong>KAIROS</strong><span>FOUNDER OS</span></div>
+        <div className="brand-mark brand-hourglass"><img src="/brand/kairos-digital-hourglass.jpg" alt="Ampulheta Kairos Digital" /></div>
+        <div><strong>KAIROS</strong><span>DIGITAL · FOUNDER OS</span></div>
       </div>
 
       <nav className="nav-list" aria-label="Navegação principal">

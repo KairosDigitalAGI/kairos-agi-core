@@ -284,3 +284,8 @@ O Blueprint evolui para tratar criação audiovisual como um domínio único de 
 
 A evolução define a ampulheta como símbolo recorrente da Kairos e organiza a história como uma empresa ficcional dentro da Founder Tower: avatares representam funções de agentes, mas não alegam autonomia executada. Roteiros podem ser modificados no Studio e cada cena deverá ter frame, prompt, origem e aprovação antes de entrar em vídeo. Identidade humana continua em armazenamento privado autenticado.
 
+
+
+## 2026-09-23 — Assinatura Kairos Digital
+
+A ampulheta azul, violeta e magenta fornecida pelo Founder passa a ser a assinatura recorrente do universo Kairos: marca de interface, arquitetura da Founder Tower e identificador de avatares ficcionais. Cada personagem deve expressá-la por emblema, núcleo, tatuagem, roupa, holograma ou geometria, preservando a identidade do papel. A regra é editorial e visual; não transforma configurações em agentes ativos.

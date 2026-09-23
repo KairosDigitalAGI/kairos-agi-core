@@ -204,3 +204,8 @@ src/features/studio/StudioPage.tsx concentra a navegação criativa sem fundir d
 
 O Studio armazena rascunhos editoriais de episódios em localStorage sob kairos.signal.episodes; isso não é job, fonte operacional nem publicação. Referências visuais públicas de personagens ficcionais ficam em public/characters; a imagem do Founder permanece privada e exige armazenamento autenticado antes de aparecer na versão hospedada.
 
+
+
+## Identidade visual Kairos Digital
+
+`public/brand/kairos-digital-hourglass.jpg` é o asset corporativo público da assinatura Kairos Digital. `Sidebar` e `StudioPage` o consomem como elemento de marca; a orientação de arte fica no Studio, sem duplicar identidade humana ou dados privados. A ampulheta é uma regra de direção de arte para personagens ficcionais, não um indicador de execução de agentes.

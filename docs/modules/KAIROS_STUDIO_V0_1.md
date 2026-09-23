@@ -24,3 +24,10 @@ O Studio não expõe nem replica imagens do Founder. Para uma geração que use 
 O Studio agora conserva o roteiro integral por episódio no navegador: título, resumo, narração, cenas, gancho e alterações do Founder. A leitura guiada combina esses textos com as referências visuais públicas já existentes de KAIROS e ORION. Novas artes de agentes devem entrar no acervo somente após uma geração verificável e com sua origem registrada.
 
 A direção atual do universo usa a ampulheta como símbolo visual da Kairos, avatares de estúdio cinematográfico e equipes distintas dentro da Founder Tower. Ela não afirma atividade automática nem transforma personagens em executores reais.
+
+
+## Assinatura visual Kairos Digital
+
+A marca oficial agora está disponível em `public/brand/kairos-digital-hourglass.jpg`, a partir do asset fornecido pelo Founder. A barra lateral e o Studio exibem a ampulheta. A bíblia visual do elenco define que a ampulheta deve ser identificador recorrente de agentes e cenários: selo, holograma, arquitetura, joia, tatuagem, núcleo ou emblema de roupa. A paleta é violeta, azul elétrico, magenta e preto profundo; o lockup Kairos Digital e “Construa a hora certa” fecham episódios.
+
+O asset é público por ser a identidade corporativa fornecida pelo Founder. Referências humanas, incluindo Founder e Wilson, continuam no cofre local privado e não usam esse caminho público.

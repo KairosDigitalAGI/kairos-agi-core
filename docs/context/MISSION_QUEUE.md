@@ -132,3 +132,10 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - Criar bucket/fluxo autenticado de referências pessoais para exibir o clone somente após autenticação.
 - Gerar e registrar frames de storyboard por cena depois que o gerador de imagem tiver crédito disponível, sem publicar as referências humanas.
 
+
+
+## Missão 014 — Assinatura Kairos Digital (entregue)
+
+- Exibir a ampulheta oficial na plataforma e no Studio.
+- Formalizar os elementos de marca para personagens, cenários e encerramentos de episódio.
+- Próxima: criar referências visuais ficcionais seguindo a bíblia, sempre registrando a origem e sem enviar material humano a provedores.

@@ -132,3 +132,8 @@ O menu agora reúne **História, Elenco, Produção e Biblioteca** no [Kairos St
 
 O Studio agora inclui roteiro integral editável por episódio, cenas, falas e a leitura guiada com referências visuais públicas de KAIROS e ORION. Rascunhos ficam no navegador até se tornarem jobs aprovados; imagens pessoais seguem fora do site público.
 
+
+
+## Identidade Kairos Digital
+
+A ampulheta oficial está aplicada à navegação e ao Kairos Studio. Ela é a assinatura do universo audiovisual: violeta, azul elétrico, magenta, vidro e preto profundo. A [bíblia visual do Studio](docs/modules/KAIROS_STUDIO_V0_1.md) orienta personagens e cenários, mantendo os clones pessoais no cofre privado local.

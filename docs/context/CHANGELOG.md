@@ -325,3 +325,10 @@ pm run build concluídos.
 - KAIROS e ORION passaram a aparecer com suas referências visuais públicas no elenco do Studio. A imagem do Founder não foi exposta nem enviada.
 - A tentativa de gerar novas artes pelo gerador do plano retornou limite de uso; nenhuma imagem nova foi fabricada ou enviada.
 
+
+
+## 2026-09-23 — Identidade Kairos Digital visível
+
+- Incorporada a marca fornecida pelo Founder em `public/brand/` e aplicada à barra lateral e ao Kairos Studio.
+- Criada a bíblia visual visível do elenco: ampulheta, paleta violeta/azul/magenta/preto, emblema por avatar e fechamento Kairos Digital.
+- KAIROS e ORION receberam diretrizes de evolução que incluem a assinatura sem transformar referências de pessoas em assets públicos.
