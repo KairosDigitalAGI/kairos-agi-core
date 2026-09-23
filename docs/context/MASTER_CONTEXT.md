@@ -100,3 +100,11 @@ A primeira versão do Money Hunter recebeu persistência local validada. O estad
 - O Money Hunter segue local e assistido. Há um adaptador de descoberta oficial, porém sem URL/token configurados não consulta fonte alguma e não aciona plataformas.
 - Próxima decisão: configurar uma fonte oficial de descoberta com escopo somente leitura e implementar uma importação revisável; depois adicionar métricas sociais oficiais quando forem expostas pelas integrações.
 - Biblioteca operacional: a UI consulta `content_assets` junto com `content_jobs` e expõe a origem/modelo/uso retornado de cada vídeo sem copiar binários para o navegador. A galeria IndexedDB local continua independente. Uma ideia aprovada pode disparar o Seedance como texto; flags, OIDC, migrations e orçamento ainda são guardas obrigatórios.
+
+## 23/09/2026 — Trilogia Kairos Signal e press kits separados
+
+A narrativa audiovisual evolui da série inicial para uma trilogia vertical original que começa dentro da interface e termina no ambiente real. O arco mantém uma fronteira explícita entre ficção e estado operacional: interfaces mostram intenção e revisão, não tarefas ou receita inventadas. A direção, planos, prompts textuais e teste de 8 segundos estão em `docs/series/KAIROS_SIGNAL_TRILOGY_V0_1.md`.
+
+O programa de press kits separa pessoas reais de personagens ficcionais. KAIROS e ORION podem receber direção abstrata; Wilson permanece bloqueado até imagens e consentimento explícito; qualquer transmissão das referências privadas do Founder requer autorização de destino. Ver `docs/series/CHARACTER_PRESS_KIT_PROGRAM_V0_1.md`.
+
+A confirmação do schema precisa ocorrer antes de executar SQL: o histórico técnico registra 0020/0022 como aplicado no Supabase mestre, enquanto comentários legados no Core ainda os tratam como pendentes. A próxima operação deve consultar a existência das tabelas e do bucket antes de reaplicar migrations idempotentes.

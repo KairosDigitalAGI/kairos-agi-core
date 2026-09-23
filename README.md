@@ -114,3 +114,9 @@ A narrativa oficial inicial para os canais da Kairos é uma série curta sobre c
 ## Acervo operacional da Gateway
 
 A Biblioteca de filmes agora mostra os vídeos persistidos em `command.content_assets` juntamente com a galeria local. O registro da Gateway guarda provider, modelo, uso devolvido e job de origem. Seedance aceita texto de uma ideia aprovada para o primeiro establishing shot; esse caminho não recebe referências do Founder. Migrations, OIDC, flag e teto de custo continuam obrigatórios. Consulte `docs/modules/SEEDANCE_GATEWAY_V0_1.md`.
+
+## Trilogia audiovisual e press kits
+
+A história ativa de lançamento agora é a [Trilogia Kairos Signal](docs/series/KAIROS_SIGNAL_TRILOGY_V0_1.md): três vídeos verticais que saem de um mundo dentro da tela para uma cena real, sem promessa financeira ou automação fictícia. O [programa de press kits](docs/series/CHARACTER_PRESS_KIT_PROGRAM_V0_1.md) mantém clones autorizados, personagens ficcionais e biblioteca de filmes em domínios separados.
+
+O primeiro teste de vídeo continua sendo um plano textual de 8 segundos. Antes de acionar a Gateway, o Core precisa confirmar a disponibilidade real de `content_jobs`, `content_assets` e do bucket `content-assets`; o uso retornado pelo provedor, e não uma estimativa, decide os próximos planos.

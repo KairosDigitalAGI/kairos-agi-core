@@ -262,3 +262,7 @@ O Blueprint passa a permitir um adaptador de vídeo por Gateway somente quando c
 ## 23/09/2026 — Acervo operacional e Seedance textual
 
 A Biblioteca de filmes passa a mostrar, além do IndexedDB local, os vídeos persistidos em `command.content_assets` com job, provider, modelo e indicação de uso devolvido. Uma ideia aprovada pode seguir diretamente para um clipe textual Seedance de 8 segundos pela Gateway; isto não transfere press kit nem habilita publicação. O estado/custo continuam vindo do servidor e falham fechados quando migrations, flag, OIDC ou crédito não estiverem disponíveis.
+
+## 23/09/2026 — Trilogia e continuidade visual
+
+O Blueprint incorpora uma trilogia audiovisual original que cruza interface e realidade para explicar o uso responsável de IA pela Kairos. A produção é planejada como planos curtos, rastreáveis e revisáveis; cada geração externa guarda modelo, prompt, versão de personagem e `usage` retornado. Pessoas reais seguem sob consentimento e referências privadas; entidades ficcionais ficam em Character Bibles separadas. O primeiro teste Seedance permanece textual e isolado por orçamento.

@@ -178,3 +178,13 @@ Clone, Personagens e Biblioteca de filmes foram separados em superfícies própr
 Foi adotado um fluxo de produção cinematográfica controlada: blockout 3D, referências de personagem e cenário, cenas curtas e montagem. A série original “Kairos: A Hora Certa” usa o Founder somente com referências autorizadas armazenadas em área privada e sem prometer resultados financeiros.
 
 A Biblioteca de filmes separa galeria local IndexedDB de acervo operacional `command.content_assets`. O pipeline Seedance pode criar o primeiro establishing shot diretamente de texto para uma ideia aprovada, mantendo o press kit do Founder fora desse caminho. Modelos, uso e URLs são derivados do registro do servidor; a interface não inventa custo nem disponibilidade.
+
+## Narrativa audiovisual e referências privadas
+
+A série é definida em `docs/series/KAIROS_SIGNAL_TRILOGY_V0_1.md`. Ela não é uma fonte de dados operacionais: roteiro, storyboard e prompt são documentos de criação. Um resultado de geração só entra em `command.content_assets` depois de uma resposta verificável do provider, com metadados de modelo/uso.
+
+O programa `docs/series/CHARACTER_PRESS_KIT_PROGRAM_V0_1.md` define as folhas de referência e uma fronteira de privacidade: bíblias de KAIROS/ORION podem ser públicas e abstratas; pessoas reais ficam em `memory/private` e requerem consentimento e autorização de destino antes de envio externo. A Biblioteca de filmes não contém press kits.
+
+## Verificação de migrations do Content Engine
+
+As migrations canônicas vivem em `C:\Users\Matheus\kairos-command\supabase\migrations\0020_content_engine.sql` e `0022_content_assets_bucket.sql`. Registros de sessão anteriores afirmam que foram aplicadas, mas há comentários legados que as chamam de pendentes. Antes de rodar SQL, o operador deve consultar `command.content_jobs`, `command.content_assets` e `storage.buckets(id='content-assets')`; só ausências confirmadas justificam reaplicar os scripts idempotentes.

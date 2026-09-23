@@ -292,3 +292,9 @@ Foi adicionado o contrato server-side de descoberta do Freelancer (`api/hunter.m
 - O Content Engine agora exibe o status da Seedance 2.5, ações por job e acesso direto ao acervo.
 - A Biblioteca de filmes consulta os vídeos reais em `command.content_assets` além da galeria IndexedDB local, sem fundir os dois armazenamentos.
 - O tier `gateway` aceita uma ideia aprovada como entrada textual para o primeiro establishing shot; o caminho não recebe material do Founder e continua condicionado à flag, OIDC e saldo.
+
+## 23/09/2026 — Kairos Signal e programa de press kits
+
+- Criada `docs/series/KAIROS_SIGNAL_TRILOGY_V0_1.md`: três episódios originais, com duração, planos de 8 s, câmera, voz, transição mundo virtual→real e prompt textual do establishing shot. O plano respeita o teto técnico de US$ 5: primeiro um único clipe textual e só depois decidir o restante por `usage` real.
+- Criada `docs/series/CHARACTER_PRESS_KIT_PROGRAM_V0_1.md`: catálogo, entregáveis de vistas/figurino/movimento, convenção privada de arquivos e gate de consentimento. Nenhuma imagem, voz ou referência pessoal foi enviada a provedor.
+- A aplicação das migrations 0020/0022 ainda não foi repetida: há registro de aplicação anterior no contexto e não havia credencial Supabase disponível nesta sessão para confirmar remotamente. A próxima execução deve verificar schema/bucket antes de qualquer SQL.
