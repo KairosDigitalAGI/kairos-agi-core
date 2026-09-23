@@ -3,6 +3,11 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "scripts": { "typecheck": "tsc --noEmit" },
-  "devDependencies": { "typescript": "^5.0.0" }
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "verify": "node scripts/verify-kit.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
 }

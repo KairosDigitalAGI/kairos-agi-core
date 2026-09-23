@@ -46,3 +46,14 @@ A exportação da VPS copia o código auditável para `apps/founder-agent/` sem 
 ## Estado atual
 
 O template e o exportador estão prontos neste Core. O runtime da VPS ainda não foi exportado nem publicado; pareamento e sessões de mensageria permanecem fora do kit por desenho.
+
+## Verificação antes de publicar
+
+Dentro de `apps/founder-agent`, execute:
+
+```bash
+npm run verify
+npm run typecheck
+```
+
+`verify` bloqueia sessões, bancos, logs, mídia, chaves e padrões de segredo literal. Esta verificação complementa, mas não substitui, a revisão humana do diff.
