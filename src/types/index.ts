@@ -6,6 +6,7 @@ export type ModuleKey =
   | 'clients'
   | 'crm'
   | 'instagram'
+  | 'studio'
   | 'clone'
   | 'characters'
   | 'library'

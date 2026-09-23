@@ -306,3 +306,14 @@ A página Personagens passa a expor press kits visuais originais de KAIROS e ORI
 ## 23/09/2026 — Job guiado para Kairos Signal
 
 A interface ganhou briefing opcional por job e um template local do primeiro plano da trilogia. O template não escreve no banco por si só, não ativa a flag da Gateway e não faz geração. Ele permite que a criação real carregue uma descrição auditável de cena, incluindo a regra de não transmitir referências do Founder.
+
+## 2026-09-23 — Kairos Studio v0.1
+
+- A barra lateral passou a oferecer um único Studio para História, Elenco, Produção e Biblioteca.
+- Kairos Signal ficou navegável por episódios, resumo, narração e gancho; a continuidade começa em Pausada e o modo Manual não executa jobs.
+- O Founder aparece como referência privada local, sem imagem pública ou envio a provider. KAIROS/ORION seguem fictícios; Wilson permanece pendente de autorização.
+- Pedido de edição é um rascunho local. Content Engine, Video Engine e acervo preservam seus gates de custo, provider e publicação.
+- Validação: 
+pm test (149 testes) e 
+pm run build concluídos.
+

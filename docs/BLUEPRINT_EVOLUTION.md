@@ -274,3 +274,8 @@ KAIROS e ORION receberam press kits de direção de arte como personagens não h
 ## 23/09/2026 — Briefing guiado sem execução implícita
 
 O Blueprint evolui o Content Engine para transportar um briefing estruturado ao job de conteúdo e expor um template da Kairos Signal. Preparar uma descrição visual não é aprovação nem geração: os gates de consentimento, orçamento, persistência e revisão continuam independentes.
+
+## 2026-09-23 — Studio de histórias unificado
+
+O Blueprint evolui para tratar criação audiovisual como um domínio único de Studio, com história, elenco, produção e acervo navegáveis no mesmo centro. Isso não funde os dados: identidade humana autorizada permanece privada; personagens ficcionais têm Character Bible; filmes têm registros de origem e uso. Continuidade automática segue proibida até que crédito, provider, orçamento, aprovação e confirmação remota sejam verificáveis.
+

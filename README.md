@@ -124,3 +124,8 @@ O primeiro teste de vídeo continua sendo um plano textual de 8 segundos. Antes 
 A página **Personagens** agora mostra os primeiros press kits ficcionais de KAIROS e ORION. Eles são referências de direção de arte para os vídeos; clones de pessoas continuam privados e sujeitos a consentimento.
 
 O Content Engine passou a aceitar briefing por job e disponibiliza um template de preenchimento do establishing shot da Kairos Signal. O template não muda o gate de custo nem dá autorização de execução; a origem do job e sua aprovação continuam no servidor.
+
+## Kairos Studio
+
+O menu agora reúne **História, Elenco, Produção e Biblioteca** no [Kairos Studio](docs/modules/KAIROS_STUDIO_V0_1.md). A série ativa fica visível com roteiro e narração; clones pessoais continuam privados, e qualquer produção automática fica pausada até haver provedor, crédito, aprovação e confirmação de publicação.
+

@@ -4,14 +4,14 @@ import { useContentPipeline } from '../../core/useContentPipeline'
 import { VideoGallery } from './VideoGallery'
 import './video.css'
 
-export function FilmLibraryPage() {
+export function FilmLibraryPage({ embedded = false }: { embedded?: boolean }) {
   const [revision, setRevision] = useState(0)
   const { state, refresh } = useContentPipeline()
   const remote = state.status === 'ok' && state.data.source === 'real' ? state.data.assets.filter(asset => asset.tipo === 'video') : []
   const jobs = state.status === 'ok' && state.data.source === 'real' ? new Map(state.data.jobs.map(job => [job.id, job.titulo])) : new Map<string, string>()
 
-  return <div className="page-stack video-engine">
-    <section className="glass-panel video-mode-hero"><div><span className="eyebrow">ACERVO PRIVADO · FILMES E CENAS</span><h2>Biblioteca de filmes</h2><p>Vídeos locais ficam neste navegador. Vídeos gerados pela Gateway ficam no banco operacional do Content Engine, vinculados ao job que os criou.</p></div><Film size={34} /></section>
+  return <div className={`page-stack video-engine ${embedded ? 'video-engine-embedded' : ''}`}>
+    {!embedded && <section className="glass-panel video-mode-hero"><div><span className="eyebrow">ACERVO PRIVADO · FILMES E CENAS</span><h2>Biblioteca de filmes</h2><p>Vídeos locais ficam neste navegador. Vídeos gerados pela Gateway ficam no banco operacional do Content Engine, vinculados ao job que os criou.</p></div><Film size={34} /></section>}
 
     <section className="glass-panel remote-film-library">
       <div className="editorial-row"><div><span className="eyebrow"><Cloud size={13} /> ACERVO OPERACIONAL</span><h3>Seedance, providers e pipeline</h3></div><button type="button" onClick={() => void refresh()}>Atualizar</button></div>

@@ -194,3 +194,8 @@ As migrations canônicas vivem em `C:\Users\Matheus\kairos-command\supabase\migr
 `CharactersPage` exibe referências estáticas de KAIROS e ORION provenientes de `public/characters/`. Elas são assets ficcionais de direção de arte, não registros do CloneProvider e não substituem as Character Bibles ou os gates de direito/consentimento. O app serve os PNGs como arquivos públicos apenas porque não contêm pessoa, cliente, credencial ou referência privada.
 
 O formulário do Content Engine carrega `titulo` e `briefing` para `command.content_jobs`. O atalho da Kairos Signal atua somente no estado de formulário; nenhum POST acontece até o Founder enviar o job. Essa separação impede que a preparação de prompt vire gasto ou execução implícita.
+
+## Kairos Studio v0.1
+
+src/features/studio/StudioPage.tsx concentra a navegação criativa sem fundir domínios: a história é editorial documentada, elenco contém apenas metadados públicos/fictícios ou status de referência privada, pedidos de edição são locais e biblioteca preserva a origem IndexedDB/command.content_assets. O estado Pausada/Manual é armazenado no navegador e não é um scheduler; autopilot continua indisponível até as provas operacionais previstas.
+

@@ -119,3 +119,10 @@ Atualização 23/09/2026, acervo: a Biblioteca de filmes vai ler os ativos reais
 ## Missão 011 — Kairos Signal (em andamento)
 
 Confirmar schema/bucket do Content Engine, registrar o establishing shot textual e, após a confirmação do uso, decidir próximos planos. Press kits de KAIROS/ORION; Wilson aguarda consentimento e referências.
+
+## Missão 012 — Studio de histórias (entregue)
+
+- Consolidar História, Elenco, Produção e Biblioteca em uma única experiência criativa.
+- Preservar clones privados e deixar autopilot condicionado a crédito, provider, job persistido, orçamento e confirmação remota.
+- Próxima: armazenamento autenticado de referências do Founder e uma integração de edição escolhida e autorizada por destino.
+
