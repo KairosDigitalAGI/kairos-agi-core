@@ -126,3 +126,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - Preservar clones privados e deixar autopilot condicionado a crédito, provider, job persistido, orçamento e confirmação remota.
 - Próxima: armazenamento autenticado de referências do Founder e uma integração de edição escolhida e autorizada por destino.
 
+
+## Missão 013 — Visual privado do Founder e storyboard ilustrado (próxima)
+
+- Criar bucket/fluxo autenticado de referências pessoais para exibir o clone somente após autenticação.
+- Gerar e registrar frames de storyboard por cena depois que o gerador de imagem tiver crédito disponível, sem publicar as referências humanas.
+

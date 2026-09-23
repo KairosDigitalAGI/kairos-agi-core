@@ -18,3 +18,9 @@ Autopilot não está ativado. Ele depende de crédito verificável, provider con
 ## Privacidade
 
 O Studio não expõe nem replica imagens do Founder. Para uma geração que use semelhança pessoal, deve haver autorização específica para o provedor de destino, armazenamento autenticado e registro de consentimento. O Studio não é Vault.
+
+## Roteiro guiado e galeria de referências
+
+O Studio agora conserva o roteiro integral por episódio no navegador: título, resumo, narração, cenas, gancho e alterações do Founder. A leitura guiada combina esses textos com as referências visuais públicas já existentes de KAIROS e ORION. Novas artes de agentes devem entrar no acervo somente após uma geração verificável e com sua origem registrada.
+
+A direção atual do universo usa a ampulheta como símbolo visual da Kairos, avatares de estúdio cinematográfico e equipes distintas dentro da Founder Tower. Ela não afirma atividade automática nem transforma personagens em executores reais.

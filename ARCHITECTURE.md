@@ -199,3 +199,8 @@ O formulário do Content Engine carrega `titulo` e `briefing` para `command.cont
 
 src/features/studio/StudioPage.tsx concentra a navegação criativa sem fundir domínios: a história é editorial documentada, elenco contém apenas metadados públicos/fictícios ou status de referência privada, pedidos de edição são locais e biblioteca preserva a origem IndexedDB/command.content_assets. O estado Pausada/Manual é armazenado no navegador e não é um scheduler; autopilot continua indisponível até as provas operacionais previstas.
 
+
+## Roteiro e leitura guiada no Studio
+
+O Studio armazena rascunhos editoriais de episódios em localStorage sob kairos.signal.episodes; isso não é job, fonte operacional nem publicação. Referências visuais públicas de personagens ficcionais ficam em public/characters; a imagem do Founder permanece privada e exige armazenamento autenticado antes de aparecer na versão hospedada.
+

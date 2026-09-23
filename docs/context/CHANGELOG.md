@@ -317,3 +317,11 @@ A interface ganhou briefing opcional por job e um template local do primeiro pla
 pm test (149 testes) e 
 pm run build concluídos.
 
+
+## 2026-09-23 — Roteiro editável e leitura guiada
+
+- Kairos Signal ganhou três roteiros integrais editáveis, com cenas, falas e ganchos; o estado é local até conversão explícita em job.
+- A direção de arte passou a usar ampulheta, paleta Kairos e avatares cinematográficos como guia para o elenco futuro.
+- KAIROS e ORION passaram a aparecer com suas referências visuais públicas no elenco do Studio. A imagem do Founder não foi exposta nem enviada.
+- A tentativa de gerar novas artes pelo gerador do plano retornou limite de uso; nenhuma imagem nova foi fabricada ou enviada.
+

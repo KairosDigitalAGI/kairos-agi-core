@@ -279,3 +279,8 @@ O Blueprint evolui o Content Engine para transportar um briefing estruturado ao 
 
 O Blueprint evolui para tratar criação audiovisual como um domínio único de Studio, com história, elenco, produção e acervo navegáveis no mesmo centro. Isso não funde os dados: identidade humana autorizada permanece privada; personagens ficcionais têm Character Bible; filmes têm registros de origem e uso. Continuidade automática segue proibida até que crédito, provider, orçamento, aprovação e confirmação remota sejam verificáveis.
 
+
+## 2026-09-23 — Narrativa guiada e universo de avatares
+
+A evolução define a ampulheta como símbolo recorrente da Kairos e organiza a história como uma empresa ficcional dentro da Founder Tower: avatares representam funções de agentes, mas não alegam autonomia executada. Roteiros podem ser modificados no Studio e cada cena deverá ter frame, prompt, origem e aprovação antes de entrar em vídeo. Identidade humana continua em armazenamento privado autenticado.
+

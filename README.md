@@ -129,3 +129,6 @@ O Content Engine passou a aceitar briefing por job e disponibiliza um template d
 
 O menu agora reúne **História, Elenco, Produção e Biblioteca** no [Kairos Studio](docs/modules/KAIROS_STUDIO_V0_1.md). A série ativa fica visível com roteiro e narração; clones pessoais continuam privados, e qualquer produção automática fica pausada até haver provedor, crédito, aprovação e confirmação de publicação.
 
+
+O Studio agora inclui roteiro integral editável por episódio, cenas, falas e a leitura guiada com referências visuais públicas de KAIROS e ORION. Rascunhos ficam no navegador até se tornarem jobs aprovados; imagens pessoais seguem fora do site público.
+
