@@ -332,3 +332,10 @@ pm run build concluídos.
 - Incorporada a marca fornecida pelo Founder em `public/brand/` e aplicada à barra lateral e ao Kairos Studio.
 - Criada a bíblia visual visível do elenco: ampulheta, paleta violeta/azul/magenta/preto, emblema por avatar e fechamento Kairos Digital.
 - KAIROS e ORION receberam diretrizes de evolução que incluem a assinatura sem transformar referências de pessoas em assets públicos.
+
+
+## 2026-09-23 — Kairos Signal coral
+
+- Os três episódios do Studio foram reescritos para 96 s, com doze cenas e diálogo entre o elenco.
+- Incluídos oito personagens ficcionais adicionais no elenco e uma pauta de vozes visível por episódio.
+- O roteiro usa persistência local versionada para a nova história aparecer mesmo quando existir rascunho da versão anterior.

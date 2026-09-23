@@ -84,3 +84,10 @@ A abertura parece acontecer dentro de um computador: Founder Tower, interfaces d
 - KAIROS e ORION: são entidades ficcionais/abstratas; usar suas bíblias visuais, não identidade humana.
 - Toda cena recebe identificador, prompt, modelo, seed se o provedor devolver, versão do personagem, custo/usage quando disponível e status de aprovação.
 - A Biblioteca é a fonte operacional do vídeo concluído; o press kit não entra nela.
+
+
+## Evolução coral v0.2
+
+A trilogia passa a ter **96 segundos por episódio**, em doze planos de oito segundos. A nova versão substitui a locução contínua por conversas curtas entre KAIROS, ORION, Instagram AI, Hunter AI, CFO, Money Hunter, QA AI, CPO, Founder e Cliente-arquétipo. O conflito dramático é produtivo: velocidade versus direção, oportunidade versus evidência, criatividade versus limite e execução versus decisão humana.
+
+Os agentes são personagens ficcionais que dramatizam papéis configurados do produto; a fala não afirma que um executor real trabalhou, pesquisou, gastou, falou com cliente ou concluiu tarefa. O Founder mantém a decisão final.

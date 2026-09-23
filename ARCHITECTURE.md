@@ -209,3 +209,8 @@ O Studio armazena rascunhos editoriais de episódios em localStorage sob kairos.
 ## Identidade visual Kairos Digital
 
 `public/brand/kairos-digital-hourglass.jpg` é o asset corporativo público da assinatura Kairos Digital. `Sidebar` e `StudioPage` o consomem como elemento de marca; a orientação de arte fica no Studio, sem duplicar identidade humana ou dados privados. A ampulheta é uma regra de direção de arte para personagens ficcionais, não um indicador de execução de agentes.
+
+
+## Kairos Signal coral
+
+`StudioPage` mantém os roteiros de 96 s e seus beats de diálogo como conteúdo editorial local. A chave versionada `kairos.signal.episodes.v2` separa o novo arco de rascunhos anteriores. Personagens adicionais são metadados de narrativa; o registro operacional dos 27 papéis continua sendo a única fonte para estrutura de agentes.

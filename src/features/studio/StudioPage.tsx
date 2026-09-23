@@ -9,23 +9,180 @@ import './studio.css'
 type StudioTab = 'story' | 'cast' | 'production' | 'library'
 type Continuation = 'paused' | 'manual'
 type Episode = { number: string; title: string; status: string; summary: string; narration: string; hook: string; screenplay: string }
+const EPISODE_STORAGE_KEY = 'kairos.signal.episodes.v2'
 
 const episodes: Episode[] = [
-  { number: '01', title: 'A hora certa desperta', status: 'Em desenvolvimento', summary: 'No interior de um computador, os agentes recebem uma ideia enviada de madrugada e transformam caos em um caminho visível. A ampulheta conecta o mundo virtual ao Founder.', narration: '“Uma ideia não precisa esperar a hora perfeita. Ela precisa encontrar a hora certa.”', hook: 'Quando a ampulheta vira, a máquina acorda.', screenplay: `CENA 1 · TELA PRETA · 0–8s\nUm grão violeta cai no vazio. Ao tocar o fundo, ele desenha uma ampulheta de luz, sem texto.\nVOZ: “Toda ideia começa pequena.”\n\nCENA 2 · FOUNDER TOWER · 8–16s\nA ampulheta se abre como portal. A câmera entra num estúdio de vidro: missões, mapas e janelas vazias aguardam decisão.\nVOZ: “Mas uma ideia muda quando encontra direção.”\n\nCENA 3 · KAIROS · 16–24s\nKAIROS surge como avatar humanoide sofisticado, não como robô simples. Ele recebe um sinal do celular do Founder e organiza alternativas, todas marcadas para revisão.\nVOZ: “Kairos organiza o que importa.”\n\nCENA 4 · ORION E O ELENCO · 24–40s\nORION projeta um mapa; Instagram AI constrói storyboard; Hunter AI encontra sinais de oportunidade. Nenhuma ação é enviada.\nVOZ: “Cada agente enxerga uma parte. Juntos, eles constroem o caminho.”\n\nCENA 5 · QUEBRA DA QUARTA PAREDE · 40–56s\nA câmera atravessa o vidro do painel. A ampulheta ocupa a lente e vira a luz real de um monitor.\nVOZ: “Você não está olhando uma tela. Está olhando tempo devolvido.”\n\nCENA 6 · GANCHO · 56–64s\nA ampulheta gira. Corte seco.\nTEXTO: “Kairos Digital · construa a hora certa.”` },
-  { number: '02', title: 'A cidade que trabalha junto', status: 'Roteiro editável', summary: 'A cidade virtual revela avatares trabalhando como uma equipe: criação, pesquisa, organização e revisão. A ficção mostra a promessa com limites humanos no centro.', narration: '“A pergunta não é quem a tecnologia substitui. É o que pessoas ganham quando recuperam o próprio tempo.”', hook: 'A próxima decisão sai da tela.', screenplay: `CENA 1 · CIDADE KAIROS · 0–8s\nTrilhas de luz saem da ampulheta e conectam pequenos negócios fictícios dentro de uma cidade digital.\nVOZ: “No futuro, trabalho não some. Ele muda de forma.”\n\nCENA 2 · INSTAGRAM AI · 8–20s\nA avatar de cabelo azul recebe um briefing aprovado e transforma a ideia em uma sequência de painéis visuais.\nVOZ: “Uma ideia vira roteiro. Um roteiro vira cena.”\n\nCENA 3 · HUNTER AI · 20–32s\nUm orc analista navega mapas holográficos e separa oportunidades em ‘revisar’, sem falar com ninguém.\nVOZ: “Oportunidade sem contexto é só ruído.”\n\nCENA 4 · ORION · 32–44s\nORION equilibra prioridades numa grande ampulheta transparente.\nVOZ: “Automação não escolhe propósito. Pessoas escolhem.”\n\nCENA 5 · PORTAL · 44–60s\nO mapa se transforma na tela de um celular real. Uma mão humana toca ‘aprovar’, mas o botão não mostra dados reais.\nVOZ: “A ferramenta trabalha melhor quando alguém sabe para onde ir.”` },
-  { number: '03', title: 'Do outro lado da ampulheta', status: 'Roteiro editável', summary: 'O mundo virtual volta para a vida real. O Founder recebe uma ideia de madrugada, acompanha a organização sem perder o tempo com família e assume a decisão final quando estiver pronto.', narration: '“A máquina pode preparar o caminho. Mas a vida continua sendo o motivo da viagem.”', hook: 'A história continua na próxima missão.', screenplay: `CENA 1 · TRANSIÇÃO · 0–8s\nA ampulheta fecha dentro de uma tela de celular. A câmera faz zoom-out abrupto para um ambiente real.\nVOZ: “Tudo isso parecia distante.”\n\nCENA 2 · IDEIA DE MADRUGADA · 8–20s\nO Founder registra uma ideia curta no celular. Dentro da interface, KAIROS recebe a missão e chama o elenco.\nVOZ: “Às vezes a ideia chega quando o mundo já parou.”\n\nCENA 3 · VIDA REAL · 20–34s\nCenas reais de presença: casa, família, uma bola no gramado. Nenhuma marca de terceiros.\nVOZ: “E tempo com quem importa não deveria ser o preço de construir.”\n\nCENA 4 · RETORNO · 34–48s\nNo fim do dia, o Founder vê no celular: roteiro, prioridades e opções prontas para aprovação, sem alegar envio ou venda feita.\nVOZ: “A Kairos não decide por você. Ela deixa a decisão mais clara.”\n\nCENA 5 · FINAL · 48–64s\nFounder olha para câmera. A ampulheta se reflete no olho e vira a marca final.\nVOZ: “Kairos Digital. Construa a hora certa.”` },
+  { number: '01', title: 'A hora certa desperta', status: 'Roteiro coral · 96 s', summary: 'Dentro da Founder Tower, uma ideia enviada de madrugada acorda um elenco de agentes. Eles discordam sobre velocidade, contexto e risco até o Founder escolher a primeira missão.', narration: '“Uma ideia não precisa esperar a hora perfeita. Ela precisa encontrar a hora certa.”', hook: 'Quando a ampulheta vira, todo mundo precisa escolher o que fazer com o tempo.', screenplay: `CENA 1 · O GRÃO · 0–8s
+Um grão violeta cai no vazio e desenha a ampulheta Kairos. Dolly-out revela a Founder Tower.
+NARRADOR: “Toda ideia começa pequena.”
+
+CENA 2 · SINAL · 8–16s
+Um celular real vibra; a frase “e se a gente criasse algo útil?” entra como luz na torre.
+KAIROS: “Recebi uma ideia. Querem que eu abra uma missão?”
+
+CENA 3 · ORION · 16–24s
+ORION emerge de uma ampulheta orbital.
+ORION: “Antes: qual problema ela resolve? Velocidade sem direção é só barulho.”
+
+CENA 4 · HUNTER AI · 24–32s
+Hunter AI, um orc analista com selo de ampulheta no ombro, abre um mapa holográfico.
+HUNTER AI: “Posso procurar sinais. Mas sinal não é cliente, e oportunidade não é promessa.”
+
+CENA 5 · INSTAGRAM AI · 32–40s
+A avatar azul desenha três quadros no ar.
+INSTAGRAM AI: “Se a ideia for clara, eu transformo em história. Primeiro, alguém precisa sentir.”
+
+CENA 6 · CFO · 40–48s
+Uma figura de vidro azul segura uma moeda luminosa sem valor exibido.
+CFO: “E antes de gastar, definimos o limite. Criatividade também precisa de um orçamento.”
+
+CENA 7 · QA AI · 48–56s
+QA AI marca cada quadro com uma luz verde ou âmbar.
+QA AI: “Eu não marco ‘pronto’. Eu marco o que foi provado.”
+
+CENA 8 · KAIROS RESPONDE · 56–64s
+KAIROS reúne os painéis, nenhum deles é enviado.
+KAIROS: “Então eu preparo opções, o elenco revisa e o Founder escolhe.”
+
+CENA 9 · MONEY HUNTER · 64–72s
+Uma mensageira futurista atravessa uma ponte de luz com relatórios em branco.
+MONEY HUNTER: “Dinheiro não é o começo da história. Valor é. Sem valor, não existe conversa que dure.”
+
+CENA 10 · O FUNDADOR · 72–80s
+A câmera sai pela tela e encontra o Founder em silhueta; ele não fala, apenas toca “revisar”.
+ORION: “Decisão humana registrada.”
+
+CENA 11 · QUARTA PAREDE · 80–88s
+KAIROS olha para a câmera; a ampulheta se reflete no visor.
+KAIROS: “Você não precisa fazer tudo sozinho. Mas precisa saber o que não vai delegar.”
+
+CENA 12 · MARCA · 88–96s
+A torre se dobra até virar a ampulheta da Kairos Digital.
+TEXTO: “Kairos Digital · construa a hora certa.”` },
+  { number: '02', title: 'A cidade que trabalha junto', status: 'Roteiro coral · 96 s', summary: 'O elenco visita uma cidade virtual onde cada agente enxerga uma parte do problema. A conversa mostra que ferramenta, criatividade, dinheiro e responsabilidade precisam caminhar juntos.', narration: '“A pergunta não é quem a tecnologia substitui. É o que pessoas ganham quando recuperam o próprio tempo.”', hook: 'A próxima decisão sai da tela.', screenplay: `CENA 1 · CIDADE KAIROS · 0–8s
+Trilhas da ampulheta conectam negócios fictícios em uma cidade de vidro.
+INSTAGRAM AI: “Cada janela tem uma história. Qual merece ser contada primeiro?”
+
+CENA 2 · HUNTER E KAIROS · 8–16s
+Hunter AI aponta sinais; KAIROS organiza cartões em ‘revisar’.
+HUNTER AI: “Encontrei pedidos. Não vou prometer nada antes de entender o contexto.”
+KAIROS: “Eu transformo contexto em próxima ação.”
+
+CENA 3 · CPO · 16–24s
+CPO monta um protótipo holográfico.
+CPO: “Uma boa ferramenta não faz alguém parecer ocupado. Ela faz a próxima entrega ficar mais clara.”
+
+CENA 4 · CFO E MONEY HUNTER · 24–32s
+Os dois observam um relógio de energia, sem números.
+CFO: “Quanto custa tentar?”
+MONEY HUNTER: “Menos do que prometer o que não podemos cumprir.”
+
+CENA 5 · INSTAGRAM AI · 32–40s
+Ela projeta uma cena e a descarta.
+INSTAGRAM AI: “Não quero viralizar uma mentira. Quero uma pessoa reconhecer a própria dor.”
+
+CENA 6 · QA AI · 40–48s
+QA interrompe com uma faixa âmbar.
+QA AI: “Então comprovem a origem, mostrem o limite e deixem a escolha visível.”
+
+CENA 7 · ORION · 48–56s
+ORION equilibra os avatares dentro de uma ampulheta transparente.
+ORION: “Estratégia é escolher o que fica de fora para o essencial caber.”
+
+CENA 8 · PULSE ARENA · 56–64s
+Avatares cooperam numa arena de energia não violenta.
+KAIROS: “Aqui ninguém ganha por apertar o botão mais rápido. Ganha quem resolve junto.”
+
+CENA 9 · O CLIENTE-ARQUÉTIPO · 64–72s
+Uma personagem ficcional vê a cidade pelo celular.
+CLIENTE: “Então vocês fazem tudo por mim?”
+
+CENA 10 · RESPOSTA DO ELENCO · 72–80s
+Coro de agentes, em sobreposição suave.
+ELENCO: “Não. Nós preparamos o caminho para você decidir melhor.”
+
+CENA 11 · PORTAL · 80–88s
+O mapa torna-se tela de celular real; a mão humana toca ‘aprovar’.
+ORION: “A ferramenta é rápida. O propósito continua humano.”
+
+CENA 12 · GANCHO · 88–96s
+A ampulheta cria um portal para o mundo físico.
+TEXTO: “Agora sai da tela.”` },
+  { number: '03', title: 'Do outro lado da ampulheta', status: 'Roteiro coral · 96 s', summary: 'A ficção atravessa o monitor e encontra a vida real. O Founder escolhe presença, enquanto o elenco prepara uma opção clara para o dia seguinte.', narration: '“A máquina pode preparar o caminho. Mas a vida continua sendo o motivo da viagem.”', hook: 'A próxima missão começa quando a tela apaga.', screenplay: `CENA 1 · CORTE ABRUPTO · 0–8s
+O portal vira a luz de um monitor em uma sala real. Zoom-out revela o Founder.
+FOUNDER: “Eu tive uma ideia. Não tenho uma noite inteira.”
+
+CENA 2 · KAIROS NO CELULAR · 8–16s
+KAIROS surge no painel, com a ampulheta no visor.
+KAIROS: “Me diga o objetivo. Eu devolvo opções, não decisões.”
+
+CENA 3 · TOWER RESPONDE · 16–24s
+Cada agente acende em seu andar.
+ORION: “Uma missão. Um responsável. Uma prova.”
+
+CENA 4 · CONFLITO · 24–32s
+Hunter AI quer explorar um caminho; QA AI segura a faixa.
+HUNTER AI: “Existe um sinal lá fora.”
+QA AI: “Então trazemos evidência antes de transformar sinal em verdade.”
+
+CENA 5 · HISTÓRIA · 32–40s
+Instagram AI projeta o primeiro frame do filme.
+INSTAGRAM AI: “Eu conto a jornada. Sem fingir que a chegada já aconteceu.”
+
+CENA 6 · LIMITE · 40–48s
+CFO fecha um círculo de luz.
+CFO: “E o limite?”
+KAIROS: “Todo gasto precisa de aprovação. Toda publicação precisa de confirmação.”
+
+CENA 7 · VIDA · 48–56s
+O Founder fecha o celular e segue para um momento com a família; não há rostos identificáveis.
+NARRADOR: “Tempo com quem importa não deveria ser o preço de construir.”
+
+CENA 8 · TURNO DA NOITE · 56–64s
+Na Tower, o elenco prepara roteiro, referências e perguntas para revisão.
+MONEY HUNTER: “Amanhã, valor primeiro. A conversa vem depois.”
+
+CENA 9 · MANHÃ · 64–72s
+O Founder abre o painel com escolhas claras, nada marcado como enviado.
+FOUNDER: “Agora eu entendo o próximo passo.”
+
+CENA 10 · QUARTA PAREDE · 72–80s
+KAIROS atravessa o vidro do monitor, sem sair dele fisicamente.
+KAIROS: “Essa não é uma história sobre robôs substituindo pessoas.”
+
+CENA 11 · CORO FINAL · 80–88s
+Todos os agentes se organizam em volta da ampulheta.
+ELENCO: “É uma história sobre pessoas com mais tempo para criar.”
+
+CENA 12 · MARCA · 88–96s
+A ampulheta gira; a cidade e a sala real se unem no mesmo reflexo.
+TEXTO: “Kairos Digital · construa a hora certa.”` },
 ]
 
+const dialogueBeats: Record<string, Array<{ speaker: string; line: string }>> = {
+  '01': [{ speaker: 'KAIROS', line: 'Recebi uma ideia. Querem que eu abra uma missão?' }, { speaker: 'ORION', line: 'Velocidade sem direção é só barulho.' }, { speaker: 'HUNTER AI', line: 'Sinal não é cliente; oportunidade não é promessa.' }, { speaker: 'INSTAGRAM AI', line: 'Primeiro, alguém precisa sentir.' }, { speaker: 'QA AI', line: 'Eu marco o que foi provado.' }, { speaker: 'FOUNDER', line: 'Revisar.' }],
+  '02': [{ speaker: 'INSTAGRAM AI', line: 'Qual história merece ser contada primeiro?' }, { speaker: 'CFO', line: 'Quanto custa tentar?' }, { speaker: 'QA AI', line: 'Mostrem o limite e deixem a escolha visível.' }, { speaker: 'CLIENTE', line: 'Então vocês fazem tudo por mim?' }, { speaker: 'ELENCO', line: 'Nós preparamos o caminho para você decidir melhor.' }],
+  '03': [{ speaker: 'FOUNDER', line: 'Eu tive uma ideia. Não tenho uma noite inteira.' }, { speaker: 'KAIROS', line: 'Eu devolvo opções, não decisões.' }, { speaker: 'QA AI', line: 'Evidência antes de transformar sinal em verdade.' }, { speaker: 'FOUNDER', line: 'Agora eu entendo o próximo passo.' }, { speaker: 'ELENCO', line: 'Pessoas com mais tempo para criar.' }],
+}
+
+
 const cast = [
-  { name: 'Founder', role: 'Narrador e presença humana', state: 'Referências privadas locais', detail: 'O press kit do Founder não é público nem é enviado por esta tela. A visualização pública não recebe dados biométricos; o cofre privado será a próxima entrega.' },
-  { name: 'KAIROS', role: 'Assistente pessoal · avatar humanoide', state: 'Conceito visual v0.3', image: '/characters/kairos-press-kit-v1.png', detail: 'Avatar humanoide cinematográfico com selo da ampulheta no peito ou visor, detalhes violeta, azul e magenta e assinatura Kairos Digital. Esta é a referência atual, não o resultado final.' },
-  { name: 'ORION', role: 'Coordenação estratégica · avatar cósmico', state: 'Conceito visual v0.3', image: '/characters/orion-press-kit-v1.png', detail: 'Entidade ficcional de vidro e órbitas cuja geometria e núcleo reproduzem a ampulheta Kairos. A imagem atual é uma referência de arte, não uma pessoa real.' },
-  { name: 'Wilson', role: 'Participação futura autorizada', state: 'Aguardando referências e consentimento', detail: 'Ainda não há material autorizado no Studio. A série usa enquadramento sem rosto ou omite essa participação até o registro correto.' },
+  { name: 'Founder', role: 'Narrador e presença humana', state: 'Referências privadas locais', detail: 'A decisão final é humana. O press kit do Founder permanece no cofre privado local e não é enviado por esta tela.' },
+  { name: 'KAIROS', role: 'Assistente pessoal · avatar humanoide', state: 'Conceito visual v0.3', image: '/characters/kairos-press-kit-v1.png', detail: 'Mediador do elenco: recebe a ideia, organiza opções e devolve a decisão ao Founder. Selo da ampulheta no peito ou visor.' },
+  { name: 'ORION', role: 'Coordenação estratégica · avatar cósmico', state: 'Conceito visual v0.3', image: '/characters/orion-press-kit-v1.png', detail: 'Guardião de contexto e prioridades. Sua órbita e núcleo repetem a geometria da ampulheta Kairos.' },
+  { name: 'Instagram AI', role: 'Direção criativa · avatar azul', state: 'Personagem ficcional', detail: 'Traduz intenção em narrativa, storyboard e conversa. Cabelo azul, lentes de holograma e emblema magenta.' },
+  { name: 'Hunter AI', role: 'Pesquisa e qualificação · orc analista', state: 'Personagem ficcional', detail: 'Procura sinais e os entrega para revisão; nunca confunde oportunidade com resultado. Ombreira com ampulheta gravada.' },
+  { name: 'CFO', role: 'Limites e custo · entidade de vidro azul', state: 'Personagem ficcional', detail: 'Pergunta pelo limite antes de qualquer avanço. Sua ampulheta tem grãos azuis e nunca exibe saldo inventado.' },
+  { name: 'Money Hunter', role: 'Valor e estratégia comercial · mensageira futurista', state: 'Personagem ficcional', detail: 'Liga necessidade humana a uma proposta de valor, sem prometer dinheiro ou conversão automática.' },
+  { name: 'QA AI', role: 'Qualidade e evidência · sentinela âmbar', state: 'Personagem ficcional', detail: 'Interrompe atalhos e exige prova. Carrega uma ampulheta em forma de selo de validação.' },
+  { name: 'CPO', role: 'Produto e experiências · arquiteto de protótipos', state: 'Personagem ficcional', detail: 'Transforma hipótese em protótipo revisável. O capacete projeta a marca Kairos como uma ampulheta geométrica.' },
+  { name: 'Cliente-arquétipo', role: 'Olhar do público · personagem ficcional', state: 'Personagem ficcional', detail: 'Faz as perguntas que a audiência faria. Não representa nem reproduz uma pessoa ou cliente real.' },
+  { name: 'Wilson', role: 'Participação futura autorizada', state: 'Aguardando referências e consentimento', detail: 'Ainda não há material autorizado no Studio. A série usa enquadramento sem rosto ou omite a participação até o registro correto.' },
 ]
 
 function initialEpisodeDrafts() {
   const original = Object.fromEntries(episodes.map(episode => [episode.number, episode])) as Record<string, Episode>
-  try { return { ...original, ...JSON.parse(localStorage.getItem('kairos.signal.episodes') ?? '{}') } } catch { return original }
+  try { return { ...original, ...JSON.parse(localStorage.getItem(EPISODE_STORAGE_KEY) ?? '{}') } } catch { return original }
 }
 
 export function StudioPage() {
@@ -38,14 +195,14 @@ export function StudioPage() {
   useEffect(() => { localStorage.setItem('kairos.signal.continuation', continuation) }, [continuation])
   const flashSaved = () => { setSaved(true); window.setTimeout(() => setSaved(false), 2500) }
   const saveEditRequest = () => { localStorage.setItem('kairos.signal.edit-request', editRequest.trim()); flashSaved() }
-  const saveEpisodes = () => { localStorage.setItem('kairos.signal.episodes', JSON.stringify(episodeDrafts)); flashSaved() }
+  const saveEpisodes = () => { localStorage.setItem(EPISODE_STORAGE_KEY, JSON.stringify(episodeDrafts)); flashSaved() }
   const episode = episodeDrafts[selectedEpisode]
   const updateEpisode = (field: keyof Episode, value: string) => setEpisodeDrafts(current => ({ ...current, [selectedEpisode]: { ...current[selectedEpisode], [field]: value } }))
 
   return <div className="page-stack studio-page">
     <section className="glass-panel studio-hero"><div><span className="eyebrow">KAIROS STUDIO · HISTÓRIAS, ELENCO E PRODUÇÃO</span><h2>O centro criativo da Kairos</h2><p>Uma única sala para construir a história, manter o elenco consistente, preparar cenas, acompanhar geração e preservar os filmes. A ampulheta Kairos guia cada peça visual. É o ponto de encontro entre as ferramentas conectadas e o acervo da Founder Edition.</p></div><div className="studio-hero-state"><img className="studio-brand-seal" src="/brand/kairos-digital-hourglass.jpg" alt="Assinatura Kairos Digital" /><span>HISTÓRIA ATIVA</span><strong>Kairos Signal</strong><small>Trilogia vertical · 3 episódios</small></div></section>
     <nav className="studio-tabs" aria-label="Áreas do Studio"><button className={tab === 'story' ? 'active' : ''} onClick={() => setTab('story')}><FileText size={16} />História</button><button className={tab === 'cast' ? 'active' : ''} onClick={() => setTab('cast')}><UsersRound size={16} />Elenco</button><button className={tab === 'production' ? 'active' : ''} onClick={() => setTab('production')}><Clapperboard size={16} />Produção</button><button className={tab === 'library' ? 'active' : ''} onClick={() => setTab('library')}><LibraryBig size={16} />Biblioteca</button></nav>
-    {tab === 'story' && <><section className="glass-panel studio-continuation"><div><span className="eyebrow">CONTINUIDADE DA SÉRIE</span><h3>Como a Kairos Signal continua</h3><p>{continuation === 'paused' ? 'A produção está pausada. Nada é gerado, gasto ou publicado automaticamente.' : 'Modo manual: o roteiro e os pedidos ficam prontos, mas cada geração e publicação exige a ação correspondente no pipeline operacional.'}</p></div><div className="studio-switch"><button className={continuation === 'paused' ? 'selected' : ''} onClick={() => setContinuation('paused')}><Pause size={15} />Pausada</button><button className={continuation === 'manual' ? 'selected' : ''} onClick={() => setContinuation('manual')}><Play size={15} />Manual</button></div></section><section className="studio-autopilot-note"><LockKeyhole size={18} /><div><strong>Autopilot ainda não está liberado</strong><p>Ele só pode ser ativado após crédito real, provider configurado, job persistido, limite de gasto e uma integração social que confirme remotamente cada publicação.</p></div></section><section className="studio-episode-grid">{Object.values(episodeDrafts).map(item => <article className={`glass-panel studio-episode ${selectedEpisode === item.number ? 'selected' : ''}`} key={item.number} onClick={() => setSelectedEpisode(item.number)}><span>EPISÓDIO {item.number}</span><h3>{item.title}</h3><small>{item.status}</small><p>{item.summary}</p><blockquote>{item.narration}</blockquote><footer>{item.hook}</footer></article>)}</section><section className="glass-panel studio-screenplay"><div className="editorial-row"><div><span className="eyebrow">ROTEIRO COMPLETO · EPISÓDIO {episode.number}</span><h3>{episode.title}</h3><p>Edite a história, as falas, as cenas e o gancho. O rascunho fica salvo neste navegador até virar um job aprovado.</p></div><button className="primary-button" onClick={saveEpisodes}><Save size={15} />Salvar roteiro</button></div><div className="studio-script-fields"><label>Título<input value={episode.title} onChange={event => updateEpisode('title', event.target.value)} /></label><label>Resumo<input value={episode.summary} onChange={event => updateEpisode('summary', event.target.value)} /></label><label>Narração principal<textarea value={episode.narration} onChange={event => updateEpisode('narration', event.target.value)} rows={3} /></label><label>Roteiro e cenas<textarea value={episode.screenplay} onChange={event => updateEpisode('screenplay', event.target.value)} rows={18} /></label><label>Gancho final<input value={episode.hook} onChange={event => updateEpisode('hook', event.target.value)} /></label></div>{saved && <span className="studio-saved">Roteiro salvo neste navegador.</span>}</section></>}
+    {tab === 'story' && <><section className="glass-panel studio-continuation"><div><span className="eyebrow">CONTINUIDADE DA SÉRIE</span><h3>Como a Kairos Signal continua</h3><p>{continuation === 'paused' ? 'A produção está pausada. Nada é gerado, gasto ou publicado automaticamente.' : 'Modo manual: o roteiro e os pedidos ficam prontos, mas cada geração e publicação exige a ação correspondente no pipeline operacional.'}</p></div><div className="studio-switch"><button className={continuation === 'paused' ? 'selected' : ''} onClick={() => setContinuation('paused')}><Pause size={15} />Pausada</button><button className={continuation === 'manual' ? 'selected' : ''} onClick={() => setContinuation('manual')}><Play size={15} />Manual</button></div></section><section className="studio-autopilot-note"><LockKeyhole size={18} /><div><strong>Autopilot ainda não está liberado</strong><p>Ele só pode ser ativado após crédito real, provider configurado, job persistido, limite de gasto e uma integração social que confirme remotamente cada publicação.</p></div></section><section className="glass-panel studio-dialogue-deck"><div><span className="eyebrow">CONVERSA DO ELENCO · EPISÓDIO {episode.number}</span><h3>A história acontece entre as vozes</h3><p>Estas falas são a espinha do episódio. O roteiro completo abaixo traz a encenação e pode ser editado antes de qualquer geração.</p></div><ol>{(dialogueBeats[episode.number] ?? []).map((beat, index) => <li key={`${beat.speaker}-${index}`}><strong>{beat.speaker}</strong><span>“{beat.line}”</span></li>)}</ol></section><section className="studio-episode-grid">{Object.values(episodeDrafts).map(item => <article className={`glass-panel studio-episode ${selectedEpisode === item.number ? 'selected' : ''}`} key={item.number} onClick={() => setSelectedEpisode(item.number)}><span>EPISÓDIO {item.number}</span><h3>{item.title}</h3><small>{item.status}</small><p>{item.summary}</p><blockquote>{item.narration}</blockquote><footer>{item.hook}</footer></article>)}</section><section className="glass-panel studio-screenplay"><div className="editorial-row"><div><span className="eyebrow">ROTEIRO COMPLETO · EPISÓDIO {episode.number}</span><h3>{episode.title}</h3><p>Edite a história, as falas, as cenas e o gancho. O rascunho fica salvo neste navegador até virar um job aprovado.</p></div><button className="primary-button" onClick={saveEpisodes}><Save size={15} />Salvar roteiro</button></div><div className="studio-script-fields"><label>Título<input value={episode.title} onChange={event => updateEpisode('title', event.target.value)} /></label><label>Resumo<input value={episode.summary} onChange={event => updateEpisode('summary', event.target.value)} /></label><label>Narração principal<textarea value={episode.narration} onChange={event => updateEpisode('narration', event.target.value)} rows={3} /></label><label>Roteiro e cenas<textarea value={episode.screenplay} onChange={event => updateEpisode('screenplay', event.target.value)} rows={18} /></label><label>Gancho final<input value={episode.hook} onChange={event => updateEpisode('hook', event.target.value)} /></label></div>{saved && <span className="studio-saved">Roteiro salvo neste navegador.</span>}</section></>}
     {tab === 'cast' && <><section className="glass-panel studio-cast-intro"><div><span className="eyebrow">ELENCO · KAIROS SIGNAL</span><h3>Personagens organizados por história</h3><p>Este é o elenco da trilogia. Cada história futura terá sua própria ficha de elenco, referências, objetos, roupas e versões.</p></div><img className="studio-cast-brand" src="/brand/kairos-digital-hourglass.jpg" alt="Ampulheta Kairos Digital" /></section><PrivateCloneVault /><section className="glass-panel studio-brand-bible"><span className="eyebrow">BÍBLIA VISUAL · KAIROS DIGITAL</span><h3>Uma assinatura que atravessa o universo</h3><div><p><strong>Ícone recorrente:</strong> a ampulheta aparece como selo, holograma, arquitetura, joia, tatuagem ou núcleo de cada agente.</p><p><strong>Paleta:</strong> violeta Kairos, azul elétrico, magenta e preto profundo; luz de borda e vidro dão unidade ao mundo físico e digital.</p><p><strong>Tipografia e encerramento:</strong> cada episódio reserva o lockup Kairos Digital e a frase “Construa a hora certa” para a marca final.</p></div></section><section className="studio-cast-grid">{cast.map(member => <article className="glass-panel studio-cast-card" key={member.name}>{member.image && <img src={member.image} alt={`Referência atual de ${member.name}`} />}<div><span className="studio-cast-mark">{member.name === 'Founder' ? <LockKeyhole size={18} /> : <Sparkles size={18} />}</span><div><strong>{member.name}</strong><small>{member.role}</small></div></div><em>{member.state}</em><p>{member.detail}</p>{member.name === 'Founder' && <button onClick={() => setTab('production')}>Preparar edição segura</button>}</article>)}</section></>}
     {tab === 'production' && <><section className="glass-panel studio-edit-request"><div><span className="eyebrow"><ImagePlus size={13} /> PEDIDO DE EDIÇÃO</span><h3>Melhorar imagem ou preparar uma nova cena</h3><p>Descreva a alteração: personagem, episódio, enquadramento, roupa, objeto, luz ou continuidade. O pedido fica salvo neste navegador para ser usado no gerador escolhido.</p></div><textarea value={editRequest} onChange={event => setEditRequest(event.target.value)} maxLength={2400} placeholder="Ex.: Episódio 1, plano 5: manter a paleta violeta, corrigir o reflexo do visor de KAIROS e deixar espaço para legenda…" rows={6} /><div><button className="primary-button" onClick={saveEditRequest}>Salvar pedido local</button>{saved && <span className="studio-saved">Pedido salvo neste navegador.</span>}</div></section><section className="studio-provider-note"><LockKeyhole size={18} /><p>O Studio organiza o pedido e o acervo. Enviar imagens do Founder, Wilson ou qualquer clone para GPT, Higgsfield, Seedance ou outro destino continua bloqueado até a escolha explícita do provedor e a autorização daquele envio.</p></section><ContentEnginePanel /><VideoPage /></>}
     {tab === 'library' && <><section className="glass-panel studio-library-intro"><LibraryBig size={28} /><div><span className="eyebrow">ACERVO DA HISTÓRIA</span><h3>Filmes, cenas e versões</h3><p>O acervo operacional mostra apenas itens devolvidos por um provider ou salvos localmente. A ausência de vídeo significa que ainda não houve geração verificável.</p></div></section><FilmLibraryPage embedded /></>}

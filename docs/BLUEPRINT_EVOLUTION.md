@@ -289,3 +289,8 @@ A evolução define a ampulheta como símbolo recorrente da Kairos e organiza a 
 ## 2026-09-23 — Assinatura Kairos Digital
 
 A ampulheta azul, violeta e magenta fornecida pelo Founder passa a ser a assinatura recorrente do universo Kairos: marca de interface, arquitetura da Founder Tower e identificador de avatares ficcionais. Cada personagem deve expressá-la por emblema, núcleo, tatuagem, roupa, holograma ou geometria, preservando a identidade do papel. A regra é editorial e visual; não transforma configurações em agentes ativos.
+
+
+## 2026-09-23 — Kairos Signal coral
+
+A narrativa audiovisual evolui de locução expositiva para elenco coral. KAIROS, ORION, Instagram AI, Hunter AI, CFO, Money Hunter, QA AI e CPO representam tensões saudáveis de uma operação: intenção, contexto, criação, pesquisa, custo, valor, qualidade e produto. A obra deixa claro que personagens são ficção e que decisões continuam humanas e verificáveis.

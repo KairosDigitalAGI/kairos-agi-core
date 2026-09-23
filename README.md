@@ -137,3 +137,8 @@ O Studio agora inclui roteiro integral editável por episódio, cenas, falas e a
 ## Identidade Kairos Digital
 
 A ampulheta oficial está aplicada à navegação e ao Kairos Studio. Ela é a assinatura do universo audiovisual: violeta, azul elétrico, magenta, vidro e preto profundo. A [bíblia visual do Studio](docs/modules/KAIROS_STUDIO_V0_1.md) orienta personagens e cenários, mantendo os clones pessoais no cofre privado local.
+
+
+## Kairos Signal coral
+
+O [Kairos Studio](https://kairos-agi-core.vercel.app/?module=studio) traz uma trilogia editável de três episódios de 96 segundos, com conversas entre os personagens da Founder Tower. São roteiros ficcionais: os diálogos explicam a visão da Kairos sem declarar ações reais, vendas, gastos ou agentes executando.

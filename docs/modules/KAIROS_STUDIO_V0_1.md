@@ -31,3 +31,8 @@ A direção atual do universo usa a ampulheta como símbolo visual da Kairos, av
 A marca oficial agora está disponível em `public/brand/kairos-digital-hourglass.jpg`, a partir do asset fornecido pelo Founder. A barra lateral e o Studio exibem a ampulheta. A bíblia visual do elenco define que a ampulheta deve ser identificador recorrente de agentes e cenários: selo, holograma, arquitetura, joia, tatuagem, núcleo ou emblema de roupa. A paleta é violeta, azul elétrico, magenta e preto profundo; o lockup Kairos Digital e “Construa a hora certa” fecham episódios.
 
 O asset é público por ser a identidade corporativa fornecida pelo Founder. Referências humanas, incluindo Founder e Wilson, continuam no cofre local privado e não usam esse caminho público.
+
+
+## Elenco e conversação v0.2
+
+A área História agora exibe uma pauta de diálogos para o episódio selecionado e roteiros corais de 96 segundos. O rascunho editorial usa a chave local `kairos.signal.episodes.v2` para a versão de elenco não ser ocultada por rascunhos da trilogia anterior. O elenco contém personagens ficcionais adicionais, cada um com função dramática e regra de marca; isso não cria agentes executores.

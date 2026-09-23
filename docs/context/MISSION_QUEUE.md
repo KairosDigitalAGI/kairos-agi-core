@@ -139,3 +139,10 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - Exibir a ampulheta oficial na plataforma e no Studio.
 - Formalizar os elementos de marca para personagens, cenários e encerramentos de episódio.
 - Próxima: criar referências visuais ficcionais seguindo a bíblia, sempre registrando a origem e sem enviar material humano a provedores.
+
+
+## Missão 015 — Kairos Signal coral (entregue)
+
+- Transformar a trilogia em narrativa de elenco, com conversação e conflito dramático responsável.
+- Incluir papéis ficcionais para criação, pesquisa, produto, custo, valor e qualidade.
+- Próxima: criar frames de storyboard e press kits ficcionais para cada integrante, registrando origem e aprovação antes de qualquer vídeo externo.
