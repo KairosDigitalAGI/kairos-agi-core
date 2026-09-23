@@ -120,3 +120,5 @@ A Biblioteca de filmes agora mostra os vídeos persistidos em `command.content_a
 A história ativa de lançamento agora é a [Trilogia Kairos Signal](docs/series/KAIROS_SIGNAL_TRILOGY_V0_1.md): três vídeos verticais que saem de um mundo dentro da tela para uma cena real, sem promessa financeira ou automação fictícia. O [programa de press kits](docs/series/CHARACTER_PRESS_KIT_PROGRAM_V0_1.md) mantém clones autorizados, personagens ficcionais e biblioteca de filmes em domínios separados.
 
 O primeiro teste de vídeo continua sendo um plano textual de 8 segundos. Antes de acionar a Gateway, o Core precisa confirmar a disponibilidade real de `content_jobs`, `content_assets` e do bucket `content-assets`; o uso retornado pelo provedor, e não uma estimativa, decide os próximos planos.
+
+A página **Personagens** agora mostra os primeiros press kits ficcionais de KAIROS e ORION. Eles são referências de direção de arte para os vídeos; clones de pessoas continuam privados e sujeitos a consentimento.

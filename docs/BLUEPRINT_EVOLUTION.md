@@ -266,3 +266,7 @@ A Biblioteca de filmes passa a mostrar, além do IndexedDB local, os vídeos per
 ## 23/09/2026 — Trilogia e continuidade visual
 
 O Blueprint incorpora uma trilogia audiovisual original que cruza interface e realidade para explicar o uso responsável de IA pela Kairos. A produção é planejada como planos curtos, rastreáveis e revisáveis; cada geração externa guarda modelo, prompt, versão de personagem e `usage` retornado. Pessoas reais seguem sob consentimento e referências privadas; entidades ficcionais ficam em Character Bibles separadas. O primeiro teste Seedance permanece textual e isolado por orçamento.
+
+## 23/09/2026 — Referências visuais ficcionais
+
+KAIROS e ORION receberam press kits de direção de arte como personagens não humanos. A evolução serve à continuidade visual da trilogia e mantém uma fronteira rígida: referências de pessoas reais continuam privadas, condicionadas a consentimento e nunca são enviadas por padrão.

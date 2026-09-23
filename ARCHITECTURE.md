@@ -188,3 +188,7 @@ O programa `docs/series/CHARACTER_PRESS_KIT_PROGRAM_V0_1.md` define as folhas de
 ## Verificação de migrations do Content Engine
 
 As migrations canônicas vivem em `C:\Users\Matheus\kairos-command\supabase\migrations\0020_content_engine.sql` e `0022_content_assets_bucket.sql`. Registros de sessão anteriores afirmam que foram aplicadas, mas há comentários legados que as chamam de pendentes. Antes de rodar SQL, o operador deve consultar `command.content_jobs`, `command.content_assets` e `storage.buckets(id='content-assets')`; só ausências confirmadas justificam reaplicar os scripts idempotentes.
+
+## Referências visuais do universo
+
+`CharactersPage` exibe referências estáticas de KAIROS e ORION provenientes de `public/characters/`. Elas são assets ficcionais de direção de arte, não registros do CloneProvider e não substituem as Character Bibles ou os gates de direito/consentimento. O app serve os PNGs como arquivos públicos apenas porque não contêm pessoa, cliente, credencial ou referência privada.

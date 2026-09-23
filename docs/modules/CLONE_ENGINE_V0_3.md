@@ -59,3 +59,7 @@ A Clone Engine agora inclui **Character Bible**: um catálogo local para univers
 ## Separação de superfícies — Clone, Personagens e Biblioteca
 
 A navegação separa três responsabilidades: **Clone Engine** contém somente identidade, rosto, voz e avatares autorizados do Founder; **Personagens** contém a Character Bible e o press kit de cada personagem; **Biblioteca** mostra os MP4/WebM reais salvos no IndexedDB local. A Video Engine ficou focada em criação e edição, salvando suas saídas na Biblioteca.
+
+## 23/09/2026 — Referências visuais ficcionais no Character Studio
+
+Foram criados e versionados dois press kits originais de personagens não humanos: KAIROS (`public/characters/kairos-press-kit-v1.png`) e ORION (`public/characters/orion-press-kit-v1.png`). A página Personagens os apresenta como referências oficiais, separadas da Clone Engine. Os arquivos não representam pessoa real, não usam material do Founder/Wilson e não concedem permissão para copiar marcas ou personagens de terceiros.

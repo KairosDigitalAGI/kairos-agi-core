@@ -108,3 +108,5 @@ A narrativa audiovisual evolui da série inicial para uma trilogia vertical orig
 O programa de press kits separa pessoas reais de personagens ficcionais. KAIROS e ORION podem receber direção abstrata; Wilson permanece bloqueado até imagens e consentimento explícito; qualquer transmissão das referências privadas do Founder requer autorização de destino. Ver `docs/series/CHARACTER_PRESS_KIT_PROGRAM_V0_1.md`.
 
 A confirmação do schema precisa ocorrer antes de executar SQL: o histórico técnico registra 0020/0022 como aplicado no Supabase mestre, enquanto comentários legados no Core ainda os tratam como pendentes. A próxima operação deve consultar a existência das tabelas e do bucket antes de reaplicar migrations idempotentes.
+
+A Missão 011 também ganhou referências visuais ficcionais de KAIROS e ORION, visíveis no Character Studio. Próxima ação técnica continua sendo a confirmação remota de schema/bucket, antes do primeiro job textual Seedance.

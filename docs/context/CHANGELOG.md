@@ -298,3 +298,7 @@ Foi adicionado o contrato server-side de descoberta do Freelancer (`api/hunter.m
 - Criada `docs/series/KAIROS_SIGNAL_TRILOGY_V0_1.md`: três episódios originais, com duração, planos de 8 s, câmera, voz, transição mundo virtual→real e prompt textual do establishing shot. O plano respeita o teto técnico de US$ 5: primeiro um único clipe textual e só depois decidir o restante por `usage` real.
 - Criada `docs/series/CHARACTER_PRESS_KIT_PROGRAM_V0_1.md`: catálogo, entregáveis de vistas/figurino/movimento, convenção privada de arquivos e gate de consentimento. Nenhuma imagem, voz ou referência pessoal foi enviada a provedor.
 - A aplicação das migrations 0020/0022 ainda não foi repetida: há registro de aplicação anterior no contexto e não havia credencial Supabase disponível nesta sessão para confirmar remotamente. A próxima execução deve verificar schema/bucket antes de qualquer SQL.
+
+## 23/09/2026 — Character Studio visível
+
+A página Personagens passa a expor press kits visuais originais de KAIROS e ORION, carregados de `public/characters/` e destinados à continuidade do universo ficcional. Founder e Wilson não aparecem nessa superfície: as referências deles permanecem privadas e condicionadas por consentimento e destino. Nenhum vídeo ou postagem foi disparado.
