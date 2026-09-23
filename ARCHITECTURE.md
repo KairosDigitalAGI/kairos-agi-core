@@ -154,3 +154,7 @@ A Central de Demandas retém oportunidades registradas pelo Founder entre recarg
 - `src/features/analytics` é uma camada de visualização de `useBusinessMetrics` e `useFleetStatus`; não cria fonte paralela de receita ou frota.
 - `src/features/moneylab` consome a fila local do Hunter como sinal comercial, separado de dados financeiros do servidor.
 - `api/_freelancerDiscovery.js` é um adaptador somente leitura configurado por ambiente. `api/hunter.mjs` mantém o mesmo Basic Auth das rotas operacionais. Nenhuma credencial vai ao browser.
+
+## Runtime comercial v0.1
+
+`src/engines/commercial/runtime.ts` concentra a máquina de estados de execução comercial. Adaptadores não podem declarar envio concluído sem `remoteId`; falhas de acesso entram como `paused_auth` por canal. Documento: `docs/modules/COMMERCIAL_RUNTIME_V0_1.md`.

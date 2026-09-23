@@ -87,3 +87,9 @@ A Central de Demandas persiste somente oportunidades registradas pelo Founder no
 **todo** — Configurar uma fonte oficial de descoberta de projetos, com escopo read-only, e implementar importação revisável antes de qualquer proposta.
 
 **todo** — Expor métricas sociais por APIs autorizadas e validar a ativação de webhooks Meta sem declarar atendimento automático como concluído.
+
+## 23/09/2026 — Commercial Runtime v0.1
+
+**done** — Criado `src/engines/commercial/runtime.ts`: ciclos comerciais têm estados explícitos, pausa isolada por autenticação e confirmação remota obrigatória antes de registrar um envio. Testes cobrem pausa e confirmação.
+
+**todo** — Persistir execuções com auditoria no servidor e ligar o primeiro adaptador oficial autorizado ao runtime.
