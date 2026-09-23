@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { Bot, ExternalLink, FileText, Search, ShieldCheck, Sparkles, Target } from 'lucide-react'
 import { createHunterOpportunity, emptyHunterDraft, hunterSources, hunterStages, nextHunterStage, type HunterDraft, type HunterOpportunity, type HunterStage } from './domain'
 import { loadHunterOpportunities, saveHunterOpportunities } from './storage'
+import { CommercialRunsPanel } from './CommercialRunsPanel'
 import './hunter.css'
 
 const stages: Array<{ id: HunterStage; label: string; hint: string }> = [
@@ -77,6 +78,7 @@ export function HunterPage() {
           </aside>
         </div>
       </div>
+      <CommercialRunsPanel />
     </section>
   )
 }
