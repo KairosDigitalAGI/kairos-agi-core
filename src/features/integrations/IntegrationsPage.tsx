@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { CheckCircle2, ExternalLink, KeyRound, PlugZap, RefreshCw, ShieldCheck } from 'lucide-react'
 import { integrationCatalog } from '../../core/integrationCatalog'
+import { useAutoReplyToggle } from '../../core/useAutoReplyToggle'
 import { useOperationsAuth } from '../../core/OperationsAuthProvider'
 import { useSocialIntegration } from '../../core/useSocialIntegration'
 import { OperationsUnlock } from '../dashboard/OperationsUnlock'
@@ -38,6 +39,7 @@ export function IntegrationsPage() {
   const { header } = useOperationsAuth()
   const youtube = useSocialIntegration('youtube')
   const instagram = useSocialIntegration('instagram')
+  const instagramAutoReply = useAutoReplyToggle('instagram')
   const redirectBanner = useSocialRedirectBanner()
 
   const refresh = useCallback(async () => {
@@ -100,6 +102,21 @@ export function IntegrationsPage() {
             {integration.connectError && <small role="alert">{integration.connectError}</small>}
             {integration.state.status === 'erro' && <small role="alert">{integration.state.mensagem}</small>}
           </>}
+        </div>}
+        {definition.id === 'instagram' && header && <div className="integration-actions integration-auto-reply">
+          <label>
+            <input
+              type="checkbox"
+              checked={instagramAutoReply.state.status === 'ok' && instagramAutoReply.state.data.enabled}
+              disabled={instagramAutoReply.state.status !== 'ok' || instagramAutoReply.saving}
+              onChange={event => void instagramAutoReply.setEnabled(event.target.checked)}
+            />
+            Rascunhar resposta por IA em DM e comentários (nunca envia sozinho)
+          </label>
+          {instagramAutoReply.state.status === 'erro' && <small role="alert">{instagramAutoReply.state.mensagem}</small>}
+          {instagramAutoReply.state.status === 'ok' && instagramAutoReply.state.data.source === 'unavailable' && (
+            <small role="alert">{instagramAutoReply.state.data.reason || 'Indisponível nesta implantação.'}</small>
+          )}
         </div>}
         <a href={definition.portalUrl} target="_blank" rel="noreferrer">Abrir portal oficial <ExternalLink size={14} /></a>
       </article>

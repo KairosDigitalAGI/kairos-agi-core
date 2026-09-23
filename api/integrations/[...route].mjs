@@ -7,10 +7,15 @@
 // callbacks OAuth do YouTube e do Instagram, cujo redirect_uri está
 // registrado nos apps dos provedores e não pode mudar. Lógica de negócio
 // segue em api/_integrations.js, api/_youtube.js e api/_instagram.js.
+// Fase 17 somou a ação 'auto-reply' (GET/POST) para o interruptor de
+// rascunho de resposta por IA do webhook do Instagram — o webhook em si
+// (recepção real da Meta) é um arquivo físico separado, ver
+// api/integrations/instagram-webhook.mjs, por exigir corpo bruto.
 import { checkAuth, unauthorized } from '../_auth.js'
 import { readIntegrationStatus } from '../_integrations.js'
 import { buildConnectUrl, completeConnection, computeYoutubeStatus, disconnectYoutube } from '../_youtube.js'
 import { buildInstagramConnectUrl, completeInstagramConnection, computeInstagramStatus, disconnectInstagram } from '../_instagram.js'
+import { getAutoReplyEnabled, setAutoReplyEnabled } from '../_instagram_webhook.js'
 
 const providers = {
   youtube: { build: buildConnectUrl, complete: completeConnection, status: computeYoutubeStatus, disconnect: disconnectYoutube },
@@ -60,6 +65,10 @@ export default async function handler(req, res) {
       if (action === 'connect-url' && req.method === 'GET') return res.status(200).json({ url: adapter.build() })
       if (action === 'status' && req.method === 'GET') return res.status(200).json(await adapter.status())
       if (action === 'disconnect' && req.method === 'POST') return res.status(200).json(await adapter.disconnect())
+      // Interruptor de rascunho de resposta por IA (Fase 17) — UI toggle
+      // OFF por padrão, só existe de verdade para 'instagram' hoje.
+      if (action === 'auto-reply' && req.method === 'GET') return res.status(200).json(await getAutoReplyEnabled(provider))
+      if (action === 'auto-reply' && req.method === 'POST') return res.status(200).json(await setAutoReplyEnabled({ provider, enabled: Boolean(req.body?.enabled) }))
       return res.status(405).json({ erro: 'método ou ação inválida' })
     } catch (e) {
       return res.status(e.status || 500).json({ erro: e.message })
