@@ -220,7 +220,15 @@ export async function listInstagramInbox() {
       readCommand('instagram_engagement_events', `?select=event_key,kind,sender_username,content,status,reply_text,sent_at,error,created_at&account_id=eq.${encodeURIComponent(accountId)}&order=created_at.desc&limit=100`),
       readCommand('instagram_automation_rules', `?select=id,kind,keyword,response_text,enabled,approved_at,created_at&account_id=eq.${encodeURIComponent(accountId)}&order=created_at.desc&limit=100`),
     ])
-    return { events: events || [], rules: rules || [] }
+    return {
+      events: events || [], rules: rules || [],
+      founderGreeting: {
+        freeTierConfirmed: process.env.KAIROS_GEMINI_FREE_TIER_CONFIRMED === 'true',
+        keyConfigured: Boolean(process.env.KAIROS_GEMINI_FREE_API_KEY),
+        senderIdConfigured: Boolean(process.env.KAIROS_IG_FOUNDER_TEST_SENDER_ID),
+        enabled: freeGreetingConfigured() && Boolean(process.env.KAIROS_IG_FOUNDER_TEST_SENDER_ID),
+      },
+    }
   } catch (error) { throw fail(`${MIGRATION_HINT} ${error.message}`, 503) }
 }
 

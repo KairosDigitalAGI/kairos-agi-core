@@ -1,3 +1,0 @@
-import { checkAuth, unauthorized } from './_auth.js'
-import { createCommercialRun, listCommercialRuns } from './_commercial.js'
-export default async function handler(req,res){ if(!checkAuth(req))return unauthorized(res); try{if(req.method==='GET'){const runs=await listCommercialRuns();if(!runs)return res.status(503).json({source:'unavailable',reason:'Supabase não configurado.'});return res.status(200).json({source:'real',runs})}if(req.method==='POST')return res.status(201).json(await createCommercialRun(req.body));return res.status(405).end()}catch(error){return res.status(503).json({erro:error.message})}}
