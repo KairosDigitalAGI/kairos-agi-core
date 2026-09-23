@@ -7,6 +7,8 @@ export type ModuleKey =
   | 'crm'
   | 'instagram'
   | 'clone'
+  | 'characters'
+  | 'library'
   | 'video'
   | 'hunter'
   | 'money-lab'

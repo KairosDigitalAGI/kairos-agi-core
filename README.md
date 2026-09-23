@@ -100,3 +100,7 @@ A central financeira e o Analytics agora saíram de placeholder. Eles são leitu
 ## Character Bible / Press kit
 
 A Clone Engine possui uma Character Bible local para registrar as referências que tornam um personagem consistente entre cenas: vistas de rosto e corpo, expressões, figurino, paleta, cenário, invariantes visuais e direitos. Materiais do Founder permanecem privados e não são enviados ao repositório.
+
+## Clone, Personagens e Biblioteca
+
+A navegação separa a identidade autorizada do Founder, as bíblias de personagens e a galeria privada de filmes. A Video Engine cria e edita; a Biblioteca mantém os resultados locais.

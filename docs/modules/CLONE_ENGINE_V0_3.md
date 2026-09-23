@@ -55,3 +55,7 @@ Validação: npm test cobre sequência, consentimento, tipo dos ativos, revisão
 ## Press kit e continuidade de personagem
 
 A Clone Engine agora inclui **Character Bible**: um catálogo local para universo, papel narrativo, traços visuais invariáveis, figurino, referências do press kit e autorização de uso. O guia lista rosto frontal, 3/4, perfis, corpo inteiro em três ângulos, expressões, figurino, paleta e cenário. Ele organiza referências; não envia, treina ou hospeda biometria. Materiais do Founder ficam privados e fora do Git.
+
+## Separação de superfícies — Clone, Personagens e Biblioteca
+
+A navegação separa três responsabilidades: **Clone Engine** contém somente identidade, rosto, voz e avatares autorizados do Founder; **Personagens** contém a Character Bible e o press kit de cada personagem; **Biblioteca** mostra os MP4/WebM reais salvos no IndexedDB local. A Video Engine ficou focada em criação e edição, salvando suas saídas na Biblioteca.

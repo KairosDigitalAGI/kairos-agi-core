@@ -1,5 +1,5 @@
 import {
-  BarChart3, Bot, Camera, CircleDollarSign, Clapperboard, Contact, Database,
+  BarChart3, Bot, Camera, CircleDollarSign, Clapperboard, Contact, Database, LibraryBig,
   Globe2, LayoutDashboard, ListChecks, Map, PlugZap, Search, Settings, Sparkles, Users,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
@@ -19,6 +19,8 @@ const navigation: Array<{ id: ModuleKey; label: string; icon: LucideIcon }> = [
   { id: 'crm', label: 'CRM', icon: Contact },
   { id: 'instagram', label: 'Instagram', icon: Camera },
   { id: 'clone', label: 'Clone Engine', icon: Bot },
+  { id: 'characters', label: 'Personagens', icon: Sparkles },
+  { id: 'library', label: 'Biblioteca', icon: LibraryBig },
   { id: 'video', label: 'Video Engine', icon: Clapperboard },
   { id: 'hunter', label: 'Hunter', icon: Search },
   { id: 'money-lab', label: 'Money Lab', icon: CircleDollarSign },

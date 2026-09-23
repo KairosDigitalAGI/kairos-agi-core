@@ -9,7 +9,7 @@ const infra: Department = { name: 'Infrastructure', area: 'Controle da plataform
 export const departments: Record<ModuleKey, Department> = {
   agents: founder, dashboard: founder, missions: founder, world: founder,
   clients: sales, crm: sales, hunter: { ...sales, area: 'Hunter · prospecção' },
-  instagram: social, clone: studio, video: { ...studio, area: 'Estúdio de vídeo local' }, 'money-lab': money,
+  instagram: social, clone: { ...studio, area: 'Identidade do Founder' }, characters: { ...studio, area: 'Character Studio' }, library: { ...studio, area: 'Biblioteca de filmes' }, video: { ...studio, area: 'Estúdio de vídeo local' }, 'money-lab': money,
   analytics: { ...infra, area: 'Analytics' }, integrations: { ...infra, area: 'Central de integrações' }, settings: infra,
   vault: { ...infra, name: 'Vault District', area: 'Identidades · ainda vazio' },
   avatars: { ...studio, area: 'Avatar Studio · gamificação' },

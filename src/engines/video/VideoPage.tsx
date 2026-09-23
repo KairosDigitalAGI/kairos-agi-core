@@ -4,7 +4,6 @@ import type { VideoJob, VideoQuality, VideoRenderPlan } from '../../types/video'
 import { inspectVideo, renderVideo } from './browserRenderer'
 import { MAX_INPUT_BYTES, safeOutputName, validateRenderPlan } from './renderPlan'
 import { VideoGenerator } from './VideoGenerator'
-import { VideoGallery } from './VideoGallery'
 import { saveVideo } from './videoLibrary'
 import { ProductionPlanner } from './ProductionPlanner'
 import './video.css'
@@ -36,7 +35,6 @@ export function VideoPage() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'rendering'>('idle')
   const [notice, setNotice] = useState('')
   const [history, setHistory] = useState(loadHistory)
-  const [libraryRevision, setLibraryRevision] = useState(0)
   const [generationSeed, setGenerationSeed] = useState<{ title: string; script: string; revision: number }>()
   const abortRef = useRef<AbortController | null>(null)
 
@@ -77,7 +75,7 @@ export function VideoPage() {
       saveJob({ id: jobId, kind: 'edited', sourceName: videoFile.name, outputName, createdAt, finishedAt: new Date().toISOString(), status: 'completed', progress: 100, inputBytes: videoFile.size, outputBytes: result.blob.size, durationSeconds: result.durationSeconds, mimeType: result.mimeType, error: '' })
       try {
         await saveVideo({ id: jobId, name: outputName, createdAt, durationSeconds: result.durationSeconds, width: result.width, height: result.height, mimeType: result.mimeType, bytes: result.blob.size, kind: 'edited', blob: result.blob })
-        setLibraryRevision(current => current + 1); setNotice('Vídeo processado e salvo na galeria deste navegador.')
+        setNotice('Vídeo processado e salvo na Biblioteca de filmes deste navegador.')
       } catch { setNotice('Vídeo processado, mas o navegador não conseguiu salvá-lo na galeria. Baixe o arquivo agora.') }
     } catch (error) {
       const cancelled = error instanceof DOMException && error.name === 'AbortError'
@@ -90,7 +88,7 @@ export function VideoPage() {
     <section className="glass-panel video-mode-hero"><div><span className="eyebrow">MISSÃO 004 · VIDEO ENGINE</span><h2>Criação e pós-produção local</h2><p>Comece por um roteiro ou refine um arquivo real. Os dois fluxos funcionam no navegador.</p></div><div className="video-mode-tabs" role="tablist"><button className={mode === 'generate' ? 'active' : ''} onClick={() => setMode('generate')}><Sparkles size={17} />Criar do zero</button><button className={mode === 'edit' ? 'active' : ''} onClick={() => setMode('edit')}><Scissors size={17} />Editar arquivo</button></div></section>
     {mode === 'generate' ? <>
       <ProductionPlanner onUseScript={(title, script) => setGenerationSeed({ title, script, revision: Date.now() })} />
-      <VideoGenerator seed={generationSeed} onJob={saveJob} onStored={() => setLibraryRevision(current => current + 1)} />
+      <VideoGenerator seed={generationSeed} onJob={saveJob} onStored={() => setNotice('Vídeo gerado e salvo na Biblioteca de filmes.')} />
     </> : <>
     <section className="video-workspace glass-panel">
       <div className="video-heading"><span className="eyebrow">MISSÃO 004 · PROCESSAMENTO LOCAL</span><h2>Video Engine</h2><p>Selecione um vídeo real, escolha o enquadramento e gere um WebM sem enviar o arquivo para servidores.</p></div>
@@ -117,7 +115,6 @@ export function VideoPage() {
     {output && <section className="glass-panel output-panel"><div><span className="eyebrow">RESULTADO LOCAL</span><h3>{output.name}</h3><p>{output.width} × {output.height} · {fileSize(output.bytes)} · não publicado</p></div><a className="primary-button" href={outputUrl} download={output.name}><Download size={17} />Baixar vídeo</a></section>}
     {notice && <p className="editorial-alert" role="status">{notice}</p>}</>}
     <section className="glass-panel local-security"><ShieldCheck size={24} /><div><h3>Privacidade e custo</h3><p>Roteiro e mídias são processados pelo navegador. A saída é WebM. Nada é enviado à Kairos, Meta ou provedores de IA; custo de API zero.</p></div></section>
-    <VideoGallery revision={libraryRevision} onImported={() => setLibraryRevision(current => current + 1)} />
     <section className="glass-panel"><div className="editorial-row"><div><span className="eyebrow">HISTÓRICO DESTE NAVEGADOR</span><h3>{history.length} renderizações registradas</h3></div>{history.length > 0 && <button onClick={() => { localStorage.removeItem(HISTORY_KEY); setHistory([]) }}>Limpar histórico</button>}</div>
       {!history.length && <p>Nenhum vídeo renderizado neste navegador.</p>}
       <div className="render-history">{history.map(job => <article key={job.id}><span className={`render-state ${job.status}`}>{job.status === 'completed' ? 'Concluído' : job.status === 'cancelled' ? 'Cancelado' : 'Falhou'}</span><strong>{job.outputName}<small className="job-kind">{job.kind === 'generated' ? 'criado do zero' : job.kind === 'edited' ? 'editado' : 'legado'}</small></strong><small>{new Date(job.createdAt).toLocaleString('pt-BR')} · {clock(job.durationSeconds)}{job.outputBytes ? ` · ${fileSize(job.outputBytes)}` : ''}</small>{job.error && <p>{job.error}</p>}</article>)}</div>

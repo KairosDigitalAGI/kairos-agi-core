@@ -246,3 +246,7 @@ A Constituição foi evoluída modularmente com duas superfícies operacionais: 
 ## 2026-09-23 — Continuidade visual e Character Bible
 
 O Blueprint evolui com um catálogo local de bíblias de personagem para manter identidade visual entre roteiros, imagens e vídeos. O press kit mínimo contém rosto frontal/3-4/perfis, corpo inteiro frontal/lateral/traseiro, expressões, figurino/adereços e paleta/cenário. É uma camada de referência e direitos; não concede treinamento, armazenamento de biometria ou publicação.
+
+## 2026-09-23 — Domínios separados de criação
+
+Clone, personagens ficcionais e acervo de filmes passaram a ter superfícies separadas. A regra evita a mistura de referências pessoais autorizadas com assets ficcionais e mídia de produção.

@@ -2,40 +2,22 @@ import { useState } from 'react'
 import { useClone } from '../../core/CloneProvider'
 import { LibraryPanel } from '../../features/libraries/LibraryPanel'
 import type { LibraryKind } from '../../types/clone'
-import { libraryCatalog } from './catalog'
-import { clonePipeline, stageRequirement } from './domain'
-import { VideoEditor } from './VideoEditor'
-import { CloneApprovalQueue } from './CloneApprovalQueue'
-import { localBrowserVideo, videoProviders } from './videoProvider'
-import { pressKitViews } from './pressKit'
 import './clone.css'
+
+const cloneTabs: Array<[LibraryKind, string]> = [
+  ['identity', 'Minha identidade'],
+  ['face', 'Referências visuais'],
+  ['voice', 'Referências de voz'],
+  ['avatar', 'Avatares'],
+]
+
 export function ClonePage() {
-  const { state, dispatch, error } = useClone()
-  const [tab, setTab] = useState<LibraryKind | 'queue' | 'approval' | 'providers'>('queue')
-  const [editing, setEditing] = useState<string | null>(null)
-  const [notice, setNotice] = useState('')
-  const exportCatalog = () => {
-    const url = URL.createObjectURL(new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' }))
-    const a = document.createElement('a'); a.href = url; a.download = `kairos-clone-${new Date().toISOString().slice(0, 10)}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000)
-  }
-  return <div className="page-stack editorial clone-engine"><section className="glass-panel"><div className="editorial-row"><div><span className="eyebrow">Founder Edition · Missão 003</span><h2>Clone Engine</h2><p>Identidade, materiais e revisão do seu conteúdo.</p></div><button onClick={exportCatalog}>Exportar catálogo local</button></div>
-    <p className="editorial-muted">{state.records.length} registros · {state.videos.length} produções cadastradas neste navegador. Sem geração, upload ou publicação automática.</p>
-    <details className="clone-press-kit"><summary>Guia do press kit de personagem</summary><p>Para manter o mesmo personagem entre cenas, catalogue estas referências antes do vídeo:</p><ul>{pressKitViews.map(view => <li key={view}>{view}</li>)}</ul><p>As imagens geradas e os arquivos do Founder ficam fora do Git público; cadastre apenas a referência local e a autorização na Character Bible.</p></details>
-  </section>{error && <p role="alert" className="editorial-alert">{error}</p>}
-    <nav className="editorial-tabs" aria-label="Módulos do Clone">{([['queue','Video Queue'], ...Object.entries(libraryCatalog).map(([key, value]) => [key, value.label]), ['approval','Approval Queue'], ['providers','Video Providers']] as [typeof tab, string][]).map(([key,label]) => <button key={key} aria-pressed={tab === key} onClick={() => { setTab(key); setEditing(null); setNotice('') }}>{label}</button>)}</nav>
-    {tab in libraryCatalog && <LibraryPanel key={tab} kind={tab as LibraryKind} />}
-    {tab === 'approval' && <CloneApprovalQueue />}
-    {tab === 'providers' && <section className="glass-panel"><h3>Engines de vídeo</h3><p>O navegador local processa arquivos reais sem custo. Provedores externos continuam desligados.</p><div className="prompt-grid"><article className="prompt-card"><h3>{localBrowserVideo.label}</h3><p>{localBrowserVideo.available() ? 'Disponível neste navegador · saída WebM · custo de API zero.' : 'Indisponível neste navegador.'}</p></article>{videoProviders.map(provider => <article className="prompt-card" key={provider.id}><h3>{provider.id}</h3><p>{provider.id === 'manual' ? 'Catálogo de arquivos produzidos por você.' : 'Adaptador arquitetural desconectado.'}</p></article>)}</div></section>}
-    {tab === 'queue' && (editing !== null ? <VideoEditor key={editing} video={state.videos.find(v => v.id === editing)} close={() => setEditing(null)} /> : <>
-      <div className="editorial-row"><h3>Pipeline do Clone</h3><button className="primary-button" onClick={() => setEditing('new')}>Nova produção</button></div>
-      {!state.videos.length && <p>Comece cadastrando sua identidade autorizada. Depois crie uma produção e vincule os materiais reais.</p>}
-      <section className="editorial-pipeline">{clonePipeline.map(stage => <div className="editorial-column" key={stage}><h3>{stage}<span>{state.videos.filter(v => v.stage === stage).length}</span></h3>
-        {state.videos.filter(v => v.stage === stage).map(video => <article className="editorial-card" key={video.id}><h4>{video.title}</h4><p>v{video.revision} · {video.channels.join(', ')}</p>{video.feedback && <p>Ajustes: {video.feedback}</p>}{stage === 'Publicação' && <p>Aprovado localmente. Não publicado.</p>}
-          <div className="editorial-actions"><button onClick={() => setEditing(video.id)}>Editar</button>{stage === 'Aprovação Founder' ? <button onClick={() => setTab('approval')}>Revisar</button> : stage !== 'Publicação' && <button onClick={() => { const issue = stageRequirement(state, video); if (issue) { setNotice(issue); return }; dispatch({ type: 'advance', id: video.id, at: new Date().toISOString() }); setNotice('') }}>Avançar</button>}</div>
-          <details><summary>Histórico</summary><ol>{video.history.map((event,index) => <li key={index}>{event.action}<small>{new Date(event.at).toLocaleString('pt-BR')}</small></li>)}</ol></details>
-        </article>)}
-        {!state.videos.some(v => v.stage === stage) && <p className="empty-editorial">Nenhuma produção</p>}
-      </div>)}</section>
-    </>)}<p role="status" className="editorial-notice">{notice}</p>
+  const { state, error } = useClone()
+  const [tab, setTab] = useState<LibraryKind>('identity')
+  const cloneRecords = state.records.filter(record => cloneTabs.some(([kind]) => kind === record.kind))
+  return <div className="page-stack editorial clone-engine"><section className="glass-panel"><span className="eyebrow">FOUNDER EDITION · IDENTIDADE PRIVADA</span><h2>Clone Engine</h2><p>Somente o clone autorizado do Founder: identidade, rosto, voz e avatares. Personagens e filmes possuem áreas próprias.</p><p className="editorial-muted">{cloneRecords.length} referências do clone neste navegador. Nenhum arquivo é enviado, treinado ou publicado por esta página.</p></section>
+    {error && <p role="alert" className="editorial-alert">{error}</p>}
+    <nav className="editorial-tabs" aria-label="Biblioteca do Clone">{cloneTabs.map(([kind, label]) => <button key={kind} aria-pressed={tab === kind} onClick={() => setTab(kind)}>{label}</button>)}</nav>
+    <LibraryPanel key={tab} kind={tab} />
   </div>
 }

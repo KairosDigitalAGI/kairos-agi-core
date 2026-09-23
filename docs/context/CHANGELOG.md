@@ -267,3 +267,9 @@ Foi adicionado o contrato server-side de descoberta do Freelancer (`api/hunter.m
 - Entregue catálogo local `character` na Clone Engine para universo, papel, invariantes visuais, figurino, referências do press kit e direitos.
 - Adicionado guia de continuidade com dez referências mínimas e testes de validação.
 - Limite: o catálogo não armazena arquivos, não faz upload, treinamento biométrico, clonagem ou geração externa. Próxima etapa: fluxo privado de ingestão com consentimento e armazenamento autenticado.
+
+## 2026-09-23 — Superfícies separadas de Clone, Personagens e Biblioteca
+
+- Clone Engine agora contém apenas dados de identidade autorizada do Founder.
+- Personagens ganhou página própria para Character Bible e press kit.
+- Biblioteca de filmes ganhou página própria para a galeria local de MP4/WebM; a Video Engine mantém criação e pós-produção.

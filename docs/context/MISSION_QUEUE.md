@@ -103,3 +103,7 @@ A Central de Demandas persiste somente oportunidades registradas pelo Founder no
 ## Próxima missão concreta — Clone Engine: ingestão privada de referências
 
 Implementar contrato e interface para registrar arquivos de imagem, vídeo e voz do Founder em armazenamento autenticado, com consentimento, escopo e revogação. Não processar biometria nem chamar provedores de clonagem até os arquivos autorizados e a integração escolhida existirem.
+
+## Próxima missão concreta — Ingestão privada de referências
+
+Estruturar o armazenamento autenticado para imagens, vídeos e voz autorizados do Founder, mantendo Clone, Personagens e Biblioteca como domínios separados. Não chamar provedores de biometria ou geração até haver consentimento e conector escolhido.

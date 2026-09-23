@@ -11,6 +11,8 @@ import { MissionsPage } from './features/tasks/MissionsPage'
 import { CrmPage } from './features/crm/CrmPage'
 import { InstagramPage } from './engines/instagram/InstagramPage'
 import { ClonePage } from './engines/clone/ClonePage'
+import { CharactersPage } from './engines/clone/CharactersPage'
+import { FilmLibraryPage } from './engines/video/FilmLibraryPage'
 import { VideoPage } from './engines/video/VideoPage'
 import { ModulePlaceholder } from './features/shared/ModulePlaceholder'
 import { AnalyticsPage } from './features/analytics/AnalyticsPage'
@@ -25,7 +27,7 @@ const WorldPage = lazy(() => import('./world/WorldPage').then((module) => ({ def
 
 const titles: Record<ModuleKey, string> = {
   agents: 'Agentes e departamentos', world: 'Kairos World', dashboard: 'Visão geral', missions: 'Missões', clients: 'Clientes', crm: 'CRM',
-  instagram: 'Instagram', clone: 'Clone Engine', video: 'Video Engine', hunter: 'Hunter', 'money-lab': 'Money Lab', analytics: 'Analytics', integrations: 'Integrações', avatars: 'Avatar Studio', roadmap: 'Mapa do Projeto', vault: 'Vault', settings: 'Configurações',
+  instagram: 'Instagram', clone: 'Clone Engine', characters: 'Personagens', library: 'Biblioteca de filmes', video: 'Video Engine', hunter: 'Hunter', 'money-lab': 'Money Lab', analytics: 'Analytics', integrations: 'Integrações', avatars: 'Avatar Studio', roadmap: 'Mapa do Projeto', vault: 'Vault', settings: 'Configurações',
 }
 
 export function App() {
@@ -56,6 +58,8 @@ export function App() {
       case 'crm': return <CrmPage />
       case 'instagram': return <InstagramPage />
       case 'clone': return <ClonePage />
+      case 'characters': return <CharactersPage />
+      case 'library': return <FilmLibraryPage />
       case 'video': return <VideoPage />
       case 'clients': return <ModulePlaceholder title="Clientes" description="Visão consolidada dos clientes e das Engines contratadas." icon={Users} />
       case 'hunter': return <HunterPage />
