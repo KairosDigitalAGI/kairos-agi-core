@@ -3,6 +3,7 @@ import { Bot, ExternalLink, FileText, Search, ShieldCheck, Sparkles, Target } fr
 import { createHunterOpportunity, emptyHunterDraft, hunterSources, hunterStages, nextHunterStage, type HunterDraft, type HunterOpportunity, type HunterStage } from './domain'
 import { loadHunterOpportunities, saveHunterOpportunities } from './storage'
 import { CommercialRunsPanel } from './CommercialRunsPanel'
+import { useCommercialRuns } from '../../core/useCommercialRuns'
 import './hunter.css'
 
 const stages: Array<{ id: HunterStage; label: string; hint: string }> = [
@@ -13,6 +14,7 @@ const stages: Array<{ id: HunterStage; label: string; hint: string }> = [
 ]
 
 export function HunterPage() {
+  const { create: createRun } = useCommercialRuns()
   const [opportunities, setOpportunities] = useState<HunterOpportunity[]>(() => loadHunterOpportunities())
   const [form, setForm] = useState<HunterDraft>(emptyHunterDraft)
   const [selected, setSelected] = useState<string | null>(null)
@@ -28,6 +30,7 @@ export function HunterPage() {
       setOpportunities((items) => [item, ...items])
       setSelected(item.id)
       setForm(emptyHunterDraft)
+      void createRun({ channel: item.source, step: 'discover', sourceUrl: item.url, opportunityId: item.id }).catch(() => undefined)
     } catch {
       // O formulário já marca os campos obrigatórios; não inventa registro incompleto.
     }
