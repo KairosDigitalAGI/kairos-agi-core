@@ -158,3 +158,9 @@ A Central de Demandas retém oportunidades registradas pelo Founder entre recarg
 ## Runtime comercial v0.1
 
 `src/engines/commercial/runtime.ts` concentra a máquina de estados de execução comercial. Adaptadores não podem declarar envio concluído sem `remoteId`; falhas de acesso entram como `paused_auth` por canal. Documento: `docs/modules/COMMERCIAL_RUNTIME_V0_1.md`.
+
+## Ledger comercial e execução visível
+
+- `command.commercial_runs` é a fonte planejada de persistência de ciclos comerciais; a migration 0026 deve ser aplicada antes de usar o endpoint em produção.
+- A interface Hunter mostra o estado retornado pelo servidor e mantém os registros locais separados de execuções persistidas.
+- A consolidação em `api/hunter.mjs` preserva o plano gratuito da Vercel dentro do limite de funções.

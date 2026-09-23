@@ -93,3 +93,9 @@ A Central de Demandas persiste somente oportunidades registradas pelo Founder no
 **done** — Criado `src/engines/commercial/runtime.ts`: ciclos comerciais têm estados explícitos, pausa isolada por autenticação e confirmação remota obrigatória antes de registrar um envio. Testes cobrem pausa e confirmação.
 
 **todo** — Persistir execuções com auditoria no servidor e ligar o primeiro adaptador oficial autorizado ao runtime.
+
+## 23/09/2026 — Ledger comercial
+
+**done** — Consolidado o runtime no endpoint Hunter e implantado preview após corrigir o teto de 12 funções do Vercel Hobby. Commit `9f3fba2`.
+
+**todo** — Aplicar migration 0026 no Supabase e ligar criação de execuções à captura de oportunidade no Hunter.
