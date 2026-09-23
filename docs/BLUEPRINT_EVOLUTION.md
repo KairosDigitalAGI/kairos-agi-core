@@ -270,3 +270,7 @@ O Blueprint incorpora uma trilogia audiovisual original que cruza interface e re
 ## 23/09/2026 — Referências visuais ficcionais
 
 KAIROS e ORION receberam press kits de direção de arte como personagens não humanos. A evolução serve à continuidade visual da trilogia e mantém uma fronteira rígida: referências de pessoas reais continuam privadas, condicionadas a consentimento e nunca são enviadas por padrão.
+
+## 23/09/2026 — Briefing guiado sem execução implícita
+
+O Blueprint evolui o Content Engine para transportar um briefing estruturado ao job de conteúdo e expor um template da Kairos Signal. Preparar uma descrição visual não é aprovação nem geração: os gates de consentimento, orçamento, persistência e revisão continuam independentes.

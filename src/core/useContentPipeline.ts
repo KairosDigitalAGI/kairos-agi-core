@@ -27,7 +27,7 @@ export function useContentPipeline() {
   }, [refresh])
 
   const createJob = useCallback(
-    async (titulo: string) => {
+    async (titulo: string, briefing?: Record<string, string>) => {
       if (!header) return false
       setSubmitting(true)
       setSubmitError(null)
@@ -35,7 +35,7 @@ export function useContentPipeline() {
         const response = await fetch('/api/content-jobs', {
           method: 'POST',
           headers: { 'content-type': 'application/json', authorization: header },
-          body: JSON.stringify({ titulo }),
+          body: JSON.stringify({ titulo, briefing }),
         })
         if (!response.ok) {
           const body = await response.json().catch(() => ({}))

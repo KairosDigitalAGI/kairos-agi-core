@@ -192,3 +192,5 @@ As migrations canônicas vivem em `C:\Users\Matheus\kairos-command\supabase\migr
 ## Referências visuais do universo
 
 `CharactersPage` exibe referências estáticas de KAIROS e ORION provenientes de `public/characters/`. Elas são assets ficcionais de direção de arte, não registros do CloneProvider e não substituem as Character Bibles ou os gates de direito/consentimento. O app serve os PNGs como arquivos públicos apenas porque não contêm pessoa, cliente, credencial ou referência privada.
+
+O formulário do Content Engine carrega `titulo` e `briefing` para `command.content_jobs`. O atalho da Kairos Signal atua somente no estado de formulário; nenhum POST acontece até o Founder enviar o job. Essa separação impede que a preparação de prompt vire gasto ou execução implícita.

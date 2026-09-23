@@ -9,6 +9,9 @@ const ETAPA_LABEL: Record<ContentJobEtapa, string> = {
   ideia: 'Ideia', roteiro: 'Roteiro', imagem: 'Imagem', video: 'Vídeo', legenda: 'Legenda', aprovacao: 'Aprovação', publicado: 'Publicado', rejeitado: 'Rejeitado',
 }
 
+const SIGNAL_TEST_TITLE = 'Kairos Signal — Episódio 1 · establishing shot'
+const SIGNAL_TEST_BRIEF = 'Clipe textual original de 8 segundos, 9:16: um pixel violeta desperta na escuridão e revela a Founder Tower dentro de uma interface, cidade abstrata azul ao fundo, dolly-out lento, sem pessoas, sem texto legível, sem logotipos ou personagens existentes. Não enviar imagens, voz ou rosto do Founder.'
+
 // Painel operacional do Content Engine. O backend continua sendo a fonte de
 // verdade de autorização, saldo e execução; a interface mostra a recusa real
 // quando a Gateway estiver desligada, sem crédito ou sem migration.
@@ -19,13 +22,23 @@ export function ContentEnginePanel() {
     approveJob, approvingJobId, approveError,
   } = useContentPipeline()
   const [titulo, setTitulo] = useState('')
+  const [briefing, setBriefing] = useState('')
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault()
     const trimmed = titulo.trim()
     if (!trimmed) return
-    const ok = await createJob(trimmed)
-    if (ok) setTitulo('')
+    const cleanBriefing = briefing.trim()
+    const ok = await createJob(trimmed, cleanBriefing ? { roteiro: cleanBriefing } : undefined)
+    if (ok) {
+      setTitulo('')
+      setBriefing('')
+    }
+  }
+
+  function prepareSignalTest() {
+    setTitulo(SIGNAL_TEST_TITLE)
+    setBriefing(SIGNAL_TEST_BRIEF)
   }
 
   return (
@@ -45,7 +58,9 @@ export function ContentEnginePanel() {
 
       {state.status === 'ok' && (
         <form className="content-engine-form" onSubmit={onSubmit}>
+          <div className="content-engine-form-heading"><strong>Novo job</strong><button type="button" className="content-engine-template" onClick={prepareSignalTest} disabled={submitting}>Preparar teste Kairos Signal</button></div>
           <input type="text" value={titulo} onChange={(e) => setTitulo(e.target.value)} placeholder="Título da nova ideia" maxLength={200} disabled={submitting} />
+          <textarea value={briefing} onChange={(e) => setBriefing(e.target.value)} placeholder="Briefing opcional: mensagem, cena, público e limites" maxLength={2000} disabled={submitting} rows={4} />
           <button type="submit" disabled={submitting || !titulo.trim()}>{submitting ? 'Registrando…' : 'Registrar ideia'}</button>
         </form>
       )}

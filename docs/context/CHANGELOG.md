@@ -302,3 +302,7 @@ Foi adicionado o contrato server-side de descoberta do Freelancer (`api/hunter.m
 ## 23/09/2026 — Character Studio visível
 
 A página Personagens passa a expor press kits visuais originais de KAIROS e ORION, carregados de `public/characters/` e destinados à continuidade do universo ficcional. Founder e Wilson não aparecem nessa superfície: as referências deles permanecem privadas e condicionadas por consentimento e destino. Nenhum vídeo ou postagem foi disparado.
+
+## 23/09/2026 — Job guiado para Kairos Signal
+
+A interface ganhou briefing opcional por job e um template local do primeiro plano da trilogia. O template não escreve no banco por si só, não ativa a flag da Gateway e não faz geração. Ele permite que a criação real carregue uma descrição auditável de cena, incluindo a regra de não transmitir referências do Founder.

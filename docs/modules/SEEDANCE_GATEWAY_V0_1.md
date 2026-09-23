@@ -44,3 +44,7 @@ Aplicar as duas migrations pendentes, criar e aprovar o job do establishing shot
 A Biblioteca de filmes agora reúne duas fontes sem misturá-las: os arquivos locais da Video Engine continuam em IndexedDB, enquanto `content_assets` mostra os vídeos gerados por providers no Supabase. Cada ativo operacional exibe o job de origem, provider, modelo e indicação de uso retornado; ausência de dado continua sendo ausência, não custo estimado.
 
 Seedance pode partir diretamente de uma ideia aprovada usando texto, para o establishing shot inicial. Esse caminho não envia press kit, voz, imagem ou material biométrico do Founder. O botão só chama o servidor; o servidor mantém a flag, OIDC, teto e guarda de aprovação.
+
+## 23/09/2026 — Briefing de trilogia acionável
+
+O Content Engine agora aceita briefing textual ao registrar uma ideia e oferece o botão **Preparar teste Kairos Signal**. Ele apenas preenche título e briefing do establishing shot textual; o Founder ainda precisa registrar o job, aprová-lo e encontrar os guards de schema, flag, OIDC e orçamento antes de qualquer chamada da Gateway.

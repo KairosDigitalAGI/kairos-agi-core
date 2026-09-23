@@ -110,3 +110,5 @@ O programa de press kits separa pessoas reais de personagens ficcionais. KAIROS 
 A confirmação do schema precisa ocorrer antes de executar SQL: o histórico técnico registra 0020/0022 como aplicado no Supabase mestre, enquanto comentários legados no Core ainda os tratam como pendentes. A próxima operação deve consultar a existência das tabelas e do bucket antes de reaplicar migrations idempotentes.
 
 A Missão 011 também ganhou referências visuais ficcionais de KAIROS e ORION, visíveis no Character Studio. Próxima ação técnica continua sendo a confirmação remota de schema/bucket, antes do primeiro job textual Seedance.
+
+A Missão 011 passou a ter template local para registrar o establishing shot com briefing auditável, aguardando confirmação do schema/bucket para ser persistido. A etapa ainda não executa a Gateway.

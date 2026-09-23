@@ -122,3 +122,5 @@ A história ativa de lançamento agora é a [Trilogia Kairos Signal](docs/series
 O primeiro teste de vídeo continua sendo um plano textual de 8 segundos. Antes de acionar a Gateway, o Core precisa confirmar a disponibilidade real de `content_jobs`, `content_assets` e do bucket `content-assets`; o uso retornado pelo provedor, e não uma estimativa, decide os próximos planos.
 
 A página **Personagens** agora mostra os primeiros press kits ficcionais de KAIROS e ORION. Eles são referências de direção de arte para os vídeos; clones de pessoas continuam privados e sujeitos a consentimento.
+
+O Content Engine passou a aceitar briefing por job e disponibiliza um template de preenchimento do establishing shot da Kairos Signal. O template não muda o gate de custo nem dá autorização de execução; a origem do job e sua aprovação continuam no servidor.
