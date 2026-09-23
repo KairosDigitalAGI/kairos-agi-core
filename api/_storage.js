@@ -3,7 +3,10 @@
 // pelo Content Engine para guardar imagem/vídeo gerados (command.content_assets
 // grava só o `storage_path`, nunca o binário). Bucket público "content-assets"
 // (mesmo padrão do bucket "videos" já usado pelo kairos-command) — conteúdo é
-// material de marketing da própria Kairos Digital, não dado sensível.
+// material de marketing da própria Kairos Digital, não dado sensível. O
+// Estúdio Kairos (Fase 16) reusa esta mesma função com bucket "studio" —
+// personagem/cena são o mesmo tipo de material, outro bucket só para separar
+// o orçamento visualmente no painel do Supabase.
 const BUCKET = 'content-assets'
 
 function storageConfigured() {
@@ -12,10 +15,10 @@ function storageConfigured() {
 
 // Sobe um objeto binário. `path` já deve vir seguro (sem espaço/acento — ver
 // safePath()). Sem credencial, lança — quem chama decide como reportar.
-export async function uploadToStorage(path, buffer, contentType) {
+export async function uploadToStorage(path, buffer, contentType, bucket = BUCKET) {
   if (!storageConfigured()) throw new Error('SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.')
   const base = process.env.SUPABASE_URL.replace(/\/+$/, '')
-  const res = await fetch(`${base}/storage/v1/object/${BUCKET}/${path}`, {
+  const res = await fetch(`${base}/storage/v1/object/${bucket}/${path}`, {
     method: 'POST',
     headers: {
       apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
@@ -27,9 +30,9 @@ export async function uploadToStorage(path, buffer, contentType) {
   })
   if (!res.ok) {
     const corpo = await res.text().catch(() => '')
-    throw new Error(`storage ${BUCKET}/${path} respondeu ${res.status}: ${corpo.slice(0, 200)}`)
+    throw new Error(`storage ${bucket}/${path} respondeu ${res.status}: ${corpo.slice(0, 200)}`)
   }
-  return `${BUCKET}/${path}`
+  return `${bucket}/${path}`
 }
 
 export function publicStorageUrl(storagePath) {
