@@ -286,3 +286,9 @@ Foi adicionado o contrato server-side de descoberta do Freelancer (`api/hunter.m
 - Preparada uma série original vertical com arco de oito episódios e piloto de 65 s, inspirada no processo técnico de blockout, referências e cenas curtas observado no vídeo enviado pelo Founder.
 - Três imagens de press kit do Founder foram copiadas para `memory/private/clones/founder/2026-09-23/`, ignorado pelo Git, com manifesto de integridade. Nenhum treino, upload externo, clonagem ou publicação foi iniciado.
 - Próxima etapa: cadastrar a autorização e referências no Clone Engine e criar o blockout do piloto antes de qualquer geração externa.
+
+## 23/09/2026 — superfície visível da Gateway
+
+- O Content Engine agora exibe o status da Seedance 2.5, ações por job e acesso direto ao acervo.
+- A Biblioteca de filmes consulta os vídeos reais em `command.content_assets` além da galeria IndexedDB local, sem fundir os dois armazenamentos.
+- O tier `gateway` aceita uma ideia aprovada como entrada textual para o primeiro establishing shot; o caminho não recebe material do Founder e continua condicionado à flag, OIDC e saldo.

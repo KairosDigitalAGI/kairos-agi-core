@@ -10,7 +10,7 @@ import { selectProvider } from './_providers/index.js'
 import * as openai from './_providers/openai.js'
 import * as fal from './_providers/fal.js'
 import * as seedance from './_providers/seedance.js'
-import { uploadToStorage, safePath } from './_storage.js'
+import { uploadToStorage, safePath, publicStorageUrl } from './_storage.js'
 import { getValidAccessToken, uploadVideo } from './_youtube.js'
 import { getValidInstagramAccess, createReelsContainer, checkContainerStatus, publishReelsContainer } from './_instagram.js'
 
@@ -52,17 +52,30 @@ function instagramPollMaxTentativas() {
 
 export async function computeContentPipeline() {
   if (!commandConfigured()) {
-    return { source: 'unavailable', reason: 'SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.', jobs: [], porEtapa: {} }
+    return { source: 'unavailable', reason: 'SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY não configuradas nesta implantação.', jobs: [], assets: [], porEtapa: {} }
   }
   try {
-    const jobs = await readCommand('content_jobs', '?select=id,titulo,etapa,aprovado,criado_em&order=criado_em.desc&limit=50')
+    const [jobs, assets] = await Promise.all([
+      readCommand('content_jobs', '?select=id,titulo,etapa,aprovado,criado_em&order=criado_em.desc&limit=50'),
+      readCommand('content_assets', '?select=id,job_id,tipo,storage_path,provedor,gratuito,metadata,criado_em&order=criado_em.desc&limit=100'),
+    ])
     const porEtapa = jobs.reduce((acc, job) => {
       acc[job.etapa] = (acc[job.etapa] || 0) + 1
       return acc
     }, {})
-    return { source: 'real', checkedAt: new Date().toISOString(), jobs, porEtapa }
+    return {
+      source: 'real', checkedAt: new Date().toISOString(), jobs, porEtapa,
+      assets: assets.map((asset) => ({
+        ...asset,
+        // Só converte caminho do bucket conhecido em URL pública. URLs de
+        // providers já existentes (legado) continuam como vieram do banco.
+        url: asset.storage_path?.startsWith('content-assets/')
+          ? publicStorageUrl(asset.storage_path)
+          : asset.storage_path?.startsWith('https://') ? asset.storage_path : null,
+      })),
+    }
   } catch (e) {
-    return { source: 'unavailable', reason: `${MIGRATION_HINT} (${e.message})`, jobs: [], porEtapa: {} }
+    return { source: 'unavailable', reason: `${MIGRATION_HINT} (${e.message})`, jobs: [], assets: [], porEtapa: {} }
   }
 }
 
@@ -390,7 +403,8 @@ export async function generateVideo({ jobId, tier = 'free' }) {
     err.status = 404
     throw err
   }
-  if (job.etapa !== 'imagem') {
+  const gatewayTextOnly = tier === 'gateway' && job.etapa === 'ideia'
+  if (job.etapa !== 'imagem' && !gatewayTextOnly) {
     const err = new Error(`content_job ${jobId} está em etapa "${job.etapa}", não "imagem" — gere a imagem antes, ou o vídeo já foi gerado.`)
     err.status = 409
     throw err
@@ -442,7 +456,7 @@ export async function generateVideo({ jobId, tier = 'free' }) {
     try {
       const [asset] = await writeCommand('content_assets', {
         job_id: job.id, tipo: 'video', storage_path: storagePath, provedor: seedance.name, gratuito: false,
-        metadata: { model: resultado.model, tier, prompt, usage: resultado.usage },
+        metadata: { model: resultado.model, tier, prompt, usage: resultado.usage, input: gatewayTextOnly ? 'text-only' : 'imagem' },
       })
       const [updatedJob] = await patchCommand('content_jobs', `?id=eq.${encodeURIComponent(job.id)}`, { etapa: 'video' })
       return { job: updatedJob || { ...job, etapa: 'video' }, asset }

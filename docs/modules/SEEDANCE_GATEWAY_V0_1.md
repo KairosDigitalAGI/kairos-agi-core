@@ -38,3 +38,9 @@ Fontes oficiais: [modelo Seedance 2.5](https://vercel.com/ai-gateway/models/seed
 ## Próximo passo operacional
 
 Aplicar as duas migrations pendentes, criar e aprovar o job do establishing shot e ativar temporariamente apenas `KAIROS_ENABLE_SEEDANCE_GATEWAY=true` no ambiente Production. Depois de uma única chamada bem-sucedida ou recusada, desligar a flag e conferir o `usage` retornado antes de qualquer nova geração.
+
+## Biblioteca operacional e fluxo textual
+
+A Biblioteca de filmes agora reúne duas fontes sem misturá-las: os arquivos locais da Video Engine continuam em IndexedDB, enquanto `content_assets` mostra os vídeos gerados por providers no Supabase. Cada ativo operacional exibe o job de origem, provider, modelo e indicação de uso retornado; ausência de dado continua sendo ausência, não custo estimado.
+
+Seedance pode partir diretamente de uma ideia aprovada usando texto, para o establishing shot inicial. Esse caminho não envia press kit, voz, imagem ou material biométrico do Founder. O botão só chama o servidor; o servidor mantém a flag, OIDC, teto e guarda de aprovação.

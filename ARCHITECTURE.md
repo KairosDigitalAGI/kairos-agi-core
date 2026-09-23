@@ -176,3 +176,5 @@ Clone, Personagens e Biblioteca de filmes foram separados em superfícies própr
 ## 2026-09-23 — Série e continuidade do Founder
 
 Foi adotado um fluxo de produção cinematográfica controlada: blockout 3D, referências de personagem e cenário, cenas curtas e montagem. A série original “Kairos: A Hora Certa” usa o Founder somente com referências autorizadas armazenadas em área privada e sem prometer resultados financeiros.
+
+A Biblioteca de filmes separa galeria local IndexedDB de acervo operacional `command.content_assets`. O pipeline Seedance pode criar o primeiro establishing shot diretamente de texto para uma ideia aprovada, mantendo o press kit do Founder fora desse caminho. Modelos, uso e URLs são derivados do registro do servidor; a interface não inventa custo nem disponibilidade.

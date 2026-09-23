@@ -96,3 +96,14 @@
 .render-state.completed { color: #72e8cc; }.render-state.failed { color: #fb9b9b; }.render-state.cancelled { color: #f5cf79; }
 @media(max-width:980px) { .video-workspace,.video-grid,.generator-grid,.production-planner { grid-template-columns: 1fr; }.distribution-panel { grid-column: auto; }.storyboard-panel { position: static; max-height: none; }.free-tier-grid { grid-template-columns: 1fr 1fr; } }
 @media(max-width:620px) { .video-mode-hero { align-items: flex-start; flex-direction: column; }.video-mode-tabs { width: 100%; }.video-mode-tabs button { flex: 1; justify-content: center; }.video-fields,.brief-fields,.distribution-panel > div:last-of-type,.free-tier-grid { grid-template-columns: 1fr; }.brief-fields label:last-child { grid-column: auto; }.output-panel { align-items: flex-start; flex-direction: column; }.render-history article { grid-template-columns: 1fr; }.render-history p { grid-column: auto; } }
+.remote-film-library { display: grid; gap: 12px; }
+.remote-film-library .editorial-row button { border: 1px solid var(--border); border-radius: 8px; background: rgba(255,255,255,.04); color: var(--muted); padding: 6px 10px; cursor: pointer; font-size: .72rem; }
+.remote-film-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.remote-film-grid article { overflow: hidden; border: 1px solid var(--border); border-radius: 10px; background: rgba(7, 9, 22, .52); }
+.remote-film-grid video { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; background: #080912; }
+.remote-film-grid article > div { display: grid; gap: 6px; padding: 10px; }
+.remote-film-grid span { color: #93c5fd; font-size: .68rem; text-transform: uppercase; letter-spacing: .05em; }
+.remote-film-grid strong { font-size: .82rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.remote-film-grid small { color: var(--muted); font-size: .68rem; }
+.remote-film-grid a { display: inline-flex; align-items: center; gap: 5px; color: #c4b5fd; font-size: .73rem; }
+.remote-film-unavailable { min-height: 200px; display: grid; place-items: center; padding: 12px; color: var(--muted); font-size: .75rem; text-align: center; }

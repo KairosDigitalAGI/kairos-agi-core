@@ -258,3 +258,7 @@ O Blueprint evolui com a série original “Kairos: A Hora Certa”: episódios 
 ## 2026-09-23 — Geração externa com orçamento isolado
 
 O Blueprint passa a permitir um adaptador de vídeo por Gateway somente quando cada execução tiver job aprovado, orçamento técnico limitado, uso retornado pelo provedor e armazenamento operacional. Seedance 2.5 é o primeiro adaptador: OIDC do deployment, flag exclusiva, sem retry automático e sem referência biométrica por padrão. A integração não autoriza compra, recarga, postagem ou transmissão de materiais do Founder.
+
+## 23/09/2026 — Acervo operacional e Seedance textual
+
+A Biblioteca de filmes passa a mostrar, além do IndexedDB local, os vídeos persistidos em `command.content_assets` com job, provider, modelo e indicação de uso devolvido. Uma ideia aprovada pode seguir diretamente para um clipe textual Seedance de 8 segundos pela Gateway; isto não transfere press kit nem habilita publicação. O estado/custo continuam vindo do servidor e falham fechados quando migrations, flag, OIDC ou crédito não estiverem disponíveis.

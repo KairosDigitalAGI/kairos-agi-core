@@ -124,7 +124,7 @@ export function useContentPipeline() {
   // imagem). Reaproveita generatingJobId/generateError. Ver
   // api/_content.js#generateVideo.
   const generateVideo = useCallback(
-    async (jobId: string, tier: 'free' | 'paid' = 'free') => {
+    async (jobId: string, tier: 'free' | 'paid' | 'gateway' = 'free') => {
       if (!header) return false
       setGeneratingJobId(jobId)
       setGenerateError(null)

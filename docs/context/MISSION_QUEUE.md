@@ -113,3 +113,5 @@ Estruturar o armazenamento autenticado para imagens, vídeos e voz autorizados d
 ## Próxima missão concreta — Blockout do piloto
 
 Criar o pacote de produção do piloto “O minuto zero”: lista de planos, prompts por cena, referências de cenário e dados para blockout, sem acionar modelo externo ou publicar.
+
+Atualização 23/09/2026, acervo: a Biblioteca de filmes vai ler os ativos reais de `command.content_assets` após a migration, mantendo-os separados da galeria IndexedDB local. O primeiro job pode usar texto + Seedance após aprovação; permanece pendente aplicar migrations, ativar a flag de uma única execução e verificar o retorno de uso.

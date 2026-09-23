@@ -99,3 +99,4 @@ A primeira versão do Money Hunter recebeu persistência local validada. O estad
 - Analytics e Money Lab são telas funcionais, não placeholders: reaproveitam as fontes autenticadas existentes e distinguem `real`, indisponível, erro e sessão bloqueada.
 - O Money Hunter segue local e assistido. Há um adaptador de descoberta oficial, porém sem URL/token configurados não consulta fonte alguma e não aciona plataformas.
 - Próxima decisão: configurar uma fonte oficial de descoberta com escopo somente leitura e implementar uma importação revisável; depois adicionar métricas sociais oficiais quando forem expostas pelas integrações.
+- Biblioteca operacional: a UI consulta `content_assets` junto com `content_jobs` e expõe a origem/modelo/uso retornado de cada vídeo sem copiar binários para o navegador. A galeria IndexedDB local continua independente. Uma ideia aprovada pode disparar o Seedance como texto; flags, OIDC, migrations e orçamento ainda são guardas obrigatórios.

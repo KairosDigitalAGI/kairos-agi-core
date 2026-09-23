@@ -110,3 +110,7 @@ A navegação separa a identidade autorizada do Founder, as bíblias de personag
 ## Série Kairos: A Hora Certa
 
 A narrativa oficial inicial para os canais da Kairos é uma série curta sobre construir uma empresa com evidência e entregas reais. A bíblia, o arco, o piloto e o processo de blockout estão em `docs/series/KAIROS_SERIES_BIBLE_V0_1.md`. Referências pessoais do Founder ficam privadas.
+
+## Acervo operacional da Gateway
+
+A Biblioteca de filmes agora mostra os vídeos persistidos em `command.content_assets` juntamente com a galeria local. O registro da Gateway guarda provider, modelo, uso devolvido e job de origem. Seedance aceita texto de uma ideia aprovada para o primeiro establishing shot; esse caminho não recebe referências do Founder. Migrations, OIDC, flag e teto de custo continuam obrigatórios. Consulte `docs/modules/SEEDANCE_GATEWAY_V0_1.md`.

@@ -75,7 +75,20 @@ export interface ContentPipelineResponse {
   checkedAt?: string
   reason?: string
   jobs: ContentJob[]
+  assets: ContentAsset[]
   porEtapa: Partial<Record<ContentJobEtapa, number>>
+}
+
+export interface ContentAsset {
+  id: string
+  job_id: string
+  tipo: 'roteiro' | 'imagem' | 'video' | string
+  storage_path: string | null
+  url: string | null
+  provedor: string | null
+  gratuito: boolean | null
+  metadata: { model?: string; usage?: unknown; input?: string } | null
+  criado_em: string
 }
 
 // Avatar Studio (Fase 9) — identidade vem de src/data/agentRegistry.json,

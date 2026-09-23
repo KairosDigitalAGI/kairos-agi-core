@@ -374,6 +374,18 @@ test('generateVideo tier=gateway remains disabled until the Seedance-specific fe
   }
 })
 
+test('generateVideo allows an approved idea to use the text-only Gateway path, but keeps it disabled without its feature flag', async () => {
+  const originalFetch = globalThis.fetch
+  globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'Founder Tower', etapa: 'ideia', briefing: {}, aprovado: true }]), { status: 200 })
+  try {
+    await withEnv({ SUPABASE_URL: 'https://example.test', SUPABASE_SERVICE_ROLE_KEY: 'x', VERCEL_OIDC_TOKEN: 'oidc' }, async () => {
+      await assert.rejects(generateVideo({ jobId: 'abc', tier: 'gateway' }), /Seedance pela AI Gateway está desligado/)
+    })
+  } finally {
+    globalThis.fetch = originalFetch
+  }
+})
+
 test('generateVideo tier=gateway fails closed without a Gateway credential after the feature flag is enabled', async () => {
   const originalFetch = globalThis.fetch
   globalThis.fetch = async () => new Response(JSON.stringify([{ id: 'abc', titulo: 'x', etapa: 'imagem', briefing: {}, aprovado: true }]), { status: 200 })
