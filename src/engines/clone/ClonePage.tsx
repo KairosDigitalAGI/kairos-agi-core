@@ -7,6 +7,7 @@ import { clonePipeline, stageRequirement } from './domain'
 import { VideoEditor } from './VideoEditor'
 import { CloneApprovalQueue } from './CloneApprovalQueue'
 import { localBrowserVideo, videoProviders } from './videoProvider'
+import { pressKitViews } from './pressKit'
 import './clone.css'
 export function ClonePage() {
   const { state, dispatch, error } = useClone()
@@ -19,6 +20,7 @@ export function ClonePage() {
   }
   return <div className="page-stack editorial clone-engine"><section className="glass-panel"><div className="editorial-row"><div><span className="eyebrow">Founder Edition · Missão 003</span><h2>Clone Engine</h2><p>Identidade, materiais e revisão do seu conteúdo.</p></div><button onClick={exportCatalog}>Exportar catálogo local</button></div>
     <p className="editorial-muted">{state.records.length} registros · {state.videos.length} produções cadastradas neste navegador. Sem geração, upload ou publicação automática.</p>
+    <details className="clone-press-kit"><summary>Guia do press kit de personagem</summary><p>Para manter o mesmo personagem entre cenas, catalogue estas referências antes do vídeo:</p><ul>{pressKitViews.map(view => <li key={view}>{view}</li>)}</ul><p>As imagens geradas e os arquivos do Founder ficam fora do Git público; cadastre apenas a referência local e a autorização na Character Bible.</p></details>
   </section>{error && <p role="alert" className="editorial-alert">{error}</p>}
     <nav className="editorial-tabs" aria-label="Módulos do Clone">{([['queue','Video Queue'], ...Object.entries(libraryCatalog).map(([key, value]) => [key, value.label]), ['approval','Approval Queue'], ['providers','Video Providers']] as [typeof tab, string][]).map(([key,label]) => <button key={key} aria-pressed={tab === key} onClick={() => { setTab(key); setEditing(null); setNotice('') }}>{label}</button>)}</nav>
     {tab in libraryCatalog && <LibraryPanel key={tab} kind={tab as LibraryKind} />}

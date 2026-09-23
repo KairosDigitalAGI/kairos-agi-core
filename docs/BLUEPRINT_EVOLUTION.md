@@ -242,3 +242,7 @@ O Money Hunter evolui a captura local para uma fila persistente por navegador, u
 ## 23/09/2026 — Evolução v0.1
 
 A Constituição foi evoluída modularmente com duas superfícies operacionais: Money Lab (decisão comercial) e Analytics (fontes autenticadas). A separação entre oportunidade, proposta e receita foi preservada. O adaptador de descoberta segue o princípio de least privilege: somente leitura, configuração de servidor e falha fechada; nenhuma conta, limite de plataforma ou comunicação é automatizada.
+
+## 2026-09-23 — Continuidade visual e Character Bible
+
+O Blueprint evolui com um catálogo local de bíblias de personagem para manter identidade visual entre roteiros, imagens e vídeos. O press kit mínimo contém rosto frontal/3-4/perfis, corpo inteiro frontal/lateral/traseiro, expressões, figurino/adereços e paleta/cenário. É uma camada de referência e direitos; não concede treinamento, armazenamento de biometria ou publicação.

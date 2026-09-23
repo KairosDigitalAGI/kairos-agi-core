@@ -261,3 +261,9 @@ Foi adicionado o contrato server-side de descoberta do Freelancer (`api/hunter.m
 ## 23/09/2026 — Ledger comercial e limite Hobby
 
 `command.commercial_runs` foi definido em `supabase/migrations/0026_commercial_runtime.sql` para persistir ciclo, canal, etapa, proposta, origem, motivo e confirmação remota. A restrição de banco impede estado `completed` sem `remote_id`. A rota comercial foi consolidada em `api/hunter.mjs` (`GET ?action=runs`, `POST ?action=run`, `POST ?action=discover`) e o painel Hunter mostra execuções reais quando o Painel Operacional está desbloqueado. Os endpoints separados foram removidos para respeitar o teto de 12 funções do plano Vercel Hobby. Preview implantado com sucesso; migration continua pendente de aplicação no Supabase antes da persistência real.
+
+## 2026-09-23 — Character Bible e press kit
+
+- Entregue catálogo local `character` na Clone Engine para universo, papel, invariantes visuais, figurino, referências do press kit e direitos.
+- Adicionado guia de continuidade com dez referências mínimas e testes de validação.
+- Limite: o catálogo não armazena arquivos, não faz upload, treinamento biométrico, clonagem ou geração externa. Próxima etapa: fluxo privado de ingestão com consentimento e armazenamento autenticado.

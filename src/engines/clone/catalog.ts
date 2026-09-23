@@ -20,6 +20,11 @@ export const libraryCatalog: Record<LibraryKind, { label: string; description: s
     { key: 'reference', label: 'Referência do avatar', required: true }, { key: 'style', label: 'Estilo e uso pretendido' },
     { key: 'rights', label: 'Titularidade ou licença', required: true },
   ] },
+  character: { label: 'Character Bible', description: 'Defina a continuidade visual e narrativa de um personagem. O press kit referencia arquivos reais ou gerações aprovadas; não envia mídia.', fields: [
+    { key: 'series', label: 'Série ou universo', required: true }, { key: 'role', label: 'Papel narrativo', required: true },
+    { key: 'visualInvariant', label: 'Traços que não podem mudar', required: true }, { key: 'wardrobe', label: 'Figurino, cores e objetos recorrentes', required: true },
+    { key: 'pressKit', label: 'Referências do press kit', required: true }, { key: 'rights', label: 'Titularidade, autorização e limites de uso', required: true },
+  ] },
   prompt: { label: 'Prompt Library', description: 'Prompts versionados do Clone. Nenhum modelo é chamado.', fields: [
     { key: 'objective', label: 'Objetivo', required: true }, { key: 'input', label: 'Entrada esperada', required: true },
     { key: 'output', label: 'Saída esperada', required: true }, { key: 'engine', label: 'Engine', required: true, options: [...providerIds] },

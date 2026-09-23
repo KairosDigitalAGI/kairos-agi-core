@@ -1,5 +1,5 @@
 export type Edition = 'founder' | 'client'
-export type LibraryKind = 'identity' | 'voice' | 'face' | 'avatar' | 'prompt' | 'asset' | 'brain'
+export type LibraryKind = 'identity' | 'voice' | 'face' | 'avatar' | 'character' | 'prompt' | 'asset' | 'brain'
 export interface LibraryRecord {
   id: string
   kind: LibraryKind

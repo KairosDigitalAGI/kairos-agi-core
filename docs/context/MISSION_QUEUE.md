@@ -99,3 +99,7 @@ A Central de Demandas persiste somente oportunidades registradas pelo Founder no
 **done** — Consolidado o runtime no endpoint Hunter e implantado preview após corrigir o teto de 12 funções do Vercel Hobby. Commit `9f3fba2`.
 
 **todo** — Aplicar migration 0026 no Supabase e ligar criação de execuções à captura de oportunidade no Hunter.
+
+## Próxima missão concreta — Clone Engine: ingestão privada de referências
+
+Implementar contrato e interface para registrar arquivos de imagem, vídeo e voz do Founder em armazenamento autenticado, com consentimento, escopo e revogação. Não processar biometria nem chamar provedores de clonagem até os arquivos autorizados e a integração escolhida existirem.

@@ -96,3 +96,7 @@ O Money Hunter mantém registros inseridos pelo Founder no navegador entre recar
 ## Money Lab, Analytics e descoberta autenticada
 
 A central financeira e o Analytics agora saíram de placeholder. Eles são leitura segura de dados reais quando as rotas autenticadas estão disponíveis e exibem indisponibilidade sem preencher lacunas. O Money Hunter permanece uma fila local revisável; o adaptador Freelancer é somente leitura, requer configuração server-side e não executa ações na plataforma. Documentação: `docs/modules/MONEYLAB_ANALYTICS_V0_1.md`.
+
+## Character Bible / Press kit
+
+A Clone Engine possui uma Character Bible local para registrar as referências que tornam um personagem consistente entre cenas: vistas de rosto e corpo, expressões, figurino, paleta, cenário, invariantes visuais e direitos. Materiais do Founder permanecem privados e não são enviados ao repositório.

@@ -164,3 +164,7 @@ A Central de Demandas retém oportunidades registradas pelo Founder entre recarg
 - `command.commercial_runs` é a fonte planejada de persistência de ciclos comerciais; a migration 0026 deve ser aplicada antes de usar o endpoint em produção.
 - A interface Hunter mostra o estado retornado pelo servidor e mantém os registros locais separados de execuções persistidas.
 - A consolidação em `api/hunter.mjs` preserva o plano gratuito da Vercel dentro do limite de funções.
+
+## Incremento — Character Bible e press kit
+
+A Clone Engine inclui uma Character Bible local para continuidade de personagens: referências obrigatórias do press kit, universo, papel, invariantes visuais, figurino e direitos. A estrutura aceita referências a material do Founder mediante autorização, mas não implementa upload, treinamento ou síntese biométrica. Arquivos privados continuam fora do Git e requerem armazenamento privado antes de qualquer integração de geração.

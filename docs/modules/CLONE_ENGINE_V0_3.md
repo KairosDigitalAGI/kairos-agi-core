@@ -51,3 +51,7 @@ Preservadas as camadas Core/Engines/Features/UI e componentes SectionHeader. Do 
 Prompts novos do Clone ficam exclusivamente no catálogo. Prompts editoriais existentes do Instagram permanecem no armazenamento legado para evitar perda; unificação e migração para um catálogo autenticado continuam pendentes.
 
 Validação: npm test cobre sequência, consentimento, tipo dos ativos, revisão, dados corrompidos e bloqueio de provedores. npm run build valida TypeScript e bundle. Sem teste visual automatizado ou chamadas a APIs.
+
+## Press kit e continuidade de personagem
+
+A Clone Engine agora inclui **Character Bible**: um catálogo local para universo, papel narrativo, traços visuais invariáveis, figurino, referências do press kit e autorização de uso. O guia lista rosto frontal, 3/4, perfis, corpo inteiro em três ângulos, expressões, figurino, paleta e cenário. Ele organiza referências; não envia, treina ou hospeda biometria. Materiais do Founder ficam privados e fora do Git.
