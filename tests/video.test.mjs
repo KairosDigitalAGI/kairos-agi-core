@@ -5,7 +5,7 @@ import { compileStoryboard, generationDuration, validateGenerationPlan } from '.
 import { buildConversionScript, estimateCampaign } from '../src/engines/video/providerCatalog.ts'
 import { distributionManifest, validateXCaption, xComposeUrl } from '../src/engines/video/distributionPackage.ts'
 
-const plan = { title: 'Reel Kairos', startSeconds: 3, endSeconds: 33, aspect: '9:16', quality: 'balanced', watermark: '@_kairosdigital_', includeAudio: true, musicVolume: .15 }
+const plan = { title: 'Reel Kairos', startSeconds: 3, endSeconds: 33, aspect: '9:16', quality: 'balanced', watermark: '@_kairosdigital_', brandLockup: true, includeAudio: true, musicVolume: .15 }
 
 test('render plan accepts a real bounded local job and rejects unsafe intervals', () => {
   assert.equal(validateRenderPlan(plan, 60, 10_000_000), '')

@@ -65,6 +65,7 @@ export interface VideoRenderPlan {
   aspect: VideoAspect
   quality: VideoQuality
   watermark: string
+  brandLockup: boolean
   includeAudio: boolean
   musicVolume: number
 }

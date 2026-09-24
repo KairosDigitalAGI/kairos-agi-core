@@ -175,3 +175,7 @@ O Studio passou a exibir quatro folhas de assets ficcionais que cobrem o elenco 
 ## Episódio 01 em 60 segundos
 
 O prólogo de produção foi consolidado em `docs/series/KAIROS_SIGNAL_EPISODE_01_60S.md`: oito takes curtos, com diálogos, narrador, áudio nativo planejado e montagem vertical final. O Studio exibe a mesma ordem, o teto global de US$ 5 e o atalho para a cobrança protegida da Vercel. O aplicativo nunca solicita nem armazena cartão; o pagamento acontece somente no ambiente oficial da Gateway.
+
+## Lockup original e roteiro performático
+
+A Video Engine aplica o arquivo corporativo original da Kairos Digital no encerramento local de 1,5 s, separado de qualquer marca d'água. O Episódio 01 contém 22 beats de diálogo, direção de expressão, movimento, pausas, mixagem e prompts individuais por take. A geração por provider continua bloqueada até aprovação de job, saldo e confirmação operacional; o custo integral só pode ser estimado depois do uso real do take piloto.

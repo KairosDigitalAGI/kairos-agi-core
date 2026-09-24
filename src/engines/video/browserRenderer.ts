@@ -20,9 +20,10 @@ function eventOnce(target: EventTarget, event: string, signal: AbortSignal) {
   })
 }
 
-async function loadImage(file: File | null | undefined, signal: AbortSignal) {
-  if (!file) return null
-  const url = URL.createObjectURL(file)
+async function loadImage(source: File | string | null | undefined, signal: AbortSignal) {
+  if (!source) return null
+  const isFile = typeof File !== 'undefined' && source instanceof File
+  const url: string = isFile ? URL.createObjectURL(source as File) : source as string
   try {
     const image = new Image(); image.src = url
     await Promise.race([
@@ -31,7 +32,7 @@ async function loadImage(file: File | null | undefined, signal: AbortSignal) {
     ])
     if (signal.aborted) throw new DOMException('Renderização cancelada.', 'AbortError')
     return image
-  } finally { URL.revokeObjectURL(url) }
+  } finally { if (isFile) URL.revokeObjectURL(url) }
 }
 
 function drawCover(context: CanvasRenderingContext2D, video: HTMLVideoElement, width: number, height: number) {
@@ -73,6 +74,7 @@ export async function renderVideo({ videoFile, musicFile, logoFile, plan, onProg
     const dimensions = outputDimensions(video.videoWidth, video.videoHeight, plan.aspect, plan.quality)
     canvas.width = dimensions.width; canvas.height = dimensions.height
     const logo = await loadImage(logoFile, signal)
+    const brandLockup = plan.brandLockup ? await loadImage('/brand/kairos-digital-hourglass.jpg', signal) : null
     const canvasStream = canvas.captureStream(30)
     const tracks: MediaStreamTrack[] = [...canvasStream.getVideoTracks()]
     if (plan.includeAudio || music) {
@@ -102,6 +104,13 @@ export async function renderVideo({ videoFile, musicFile, logoFile, plan, onProg
         if (signal.aborted) { reject(new DOMException('Renderização cancelada.', 'AbortError')); return }
         context.fillStyle = '#05070d'; context.fillRect(0, 0, canvas.width, canvas.height)
         drawCover(context, video, canvas.width, canvas.height)
+        const remainingSeconds = plan.endSeconds - video.currentTime
+        if (brandLockup && remainingSeconds <= 1.5) {
+          const fade = Math.max(0, Math.min(1, (1.5 - remainingSeconds) / .45))
+          context.fillStyle = `rgba(3,6,15,${Math.max(.78, fade)})`; context.fillRect(0, 0, canvas.width, canvas.height)
+          const lockupHeight = canvas.height * .66; const lockupWidth = brandLockup.width / brandLockup.height * lockupHeight
+          context.globalAlpha = fade; context.drawImage(brandLockup, (canvas.width - lockupWidth) / 2, (canvas.height - lockupHeight) / 2, lockupWidth, lockupHeight); context.globalAlpha = 1
+        }
         if (plan.watermark.trim()) {
           context.font = `600 ${Math.max(18, Math.round(canvas.height * .026))}px Inter, sans-serif`
           context.textAlign = 'right'; context.textBaseline = 'bottom'

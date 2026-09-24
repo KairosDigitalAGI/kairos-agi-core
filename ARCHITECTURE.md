@@ -247,3 +247,7 @@ O Studio mantém `pressKits` como catálogo de quatro folhas de arte públicas e
 ## Correção de pré-voo Seedance
 
 O pré-voo público é consultado pela rota consolidada `api/integrations/status.mjs?scope=media`, que delega a `computeSeedanceReadiness()`. A antiga menção a `api/content-readiness.mjs` é histórica: criar essa função extra excederia a margem do plano Vercel Hobby.
+
+## Lockup Kairos Digital na pós-produção
+
+A Video Engine compõe `public/brand/kairos-digital-hourglass.jpg` no último 1,5 segundo de um render local quando `VideoRenderPlan.brandLockup` estiver ativo. A marca original não é pedida ao modelo de vídeo; ela é aplicada localmente depois da geração e continua separada da marca d’água configurável.

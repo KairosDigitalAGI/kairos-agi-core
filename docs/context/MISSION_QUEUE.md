@@ -201,3 +201,15 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - Roteiro coral com Matheus, expressões, gestos individuais e contraste explícito entre mundo digital e mundo real de 2026.
 - Saldo no Studio passa a ser uma ação prioritária que abre somente a cobrança oficial da Vercel; cartão não é coletado pelo Core.
 - Próxima: gerar o take 01 aprovado com teto de US$ 5, registrar uso e então calcular o orçamento verificável dos sete takes restantes.
+
+## Missão 023 — Bíblia de performance e lockup original (em andamento)
+
+- Enriquecer prompts por take, diálogo, expressão e movimento de todo o elenco do Episódio 01.
+- Aplicar o arquivo original da marca Kairos Digital como lockup de encerramento local, separado da futura marca d’água.
+- Próxima: validar o render de pós-produção do lockup e então iniciar o piloto Seedance após a confirmação do saldo.
+
+## Missão 023 — Bíblia de performance e lockup original (concluída)
+
+- Episódio 01 expandido para 22 beats de diálogo, direção de atuação, reações, pausas, mixagem e prompt global de qualidade.
+- Lockup final usa a arte original em pós-produção local e permanece distinto de marca d'água.
+- Próxima: validar o render de pós-produção e iniciar somente o take piloto Seedance aprovado, com teto total de US$ 5 e uso real registrado.

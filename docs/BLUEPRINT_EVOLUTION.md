@@ -331,3 +331,11 @@ A Kairos Signal passa a ter um prólogo final de 60 segundos dividido em oito ta
 ## 24/09/2026 — Prólogo coral e contraste entre mundos
 
 A narrativa audiovisual evolui para um prólogo coral de 60 segundos: os agentes têm voz, expressão e gesto próprios no universo dentro do computador; Matheus aparece no mundo real hiper-realista como Founder e cliente zero. A saída pela tela evidencia que a automação prepara escolhas e devolve tempo, mas não substitui o propósito humano. Referências de face e voz do Founder permanecem em domínio privado até o provedor e o envio serem aprovados.
+
+## 24/09/2026 — Bíblia de performance do prólogo
+
+A especificação do Episódio 01 agora inclui direção de atuação, gestos, pausas e prompt individual para cada take. O elenco funciona como uma equipe dramatizada dentro da Founder Tower: cada personagem interpreta uma função operacional por uma personalidade própria, sem copiar personagens ou roteiro de obras externas. Matheus tem dois takes hiper-realistas no mundo físico, condicionados a referência privada autorizada e seleção explícita de destino.
+
+## 24/09/2026 — Lockup original e roteiro performático
+
+A pós-produção local ganhou `brandLockup`, que aplica a imagem corporativa original da Kairos Digital durante o último 1,5 segundo do render. Essa camada é independente de watermark e nunca é delegada ao modelo generativo. O Episódio 01 foi ampliado para 22 beats de diálogo, mais reações, gestos, pausas, mixagem e uma instrução global de qualidade por take; o roteiro preserva dicção em 60 segundos em vez de acelerar falas.

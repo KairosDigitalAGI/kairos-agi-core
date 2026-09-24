@@ -9,7 +9,7 @@ import { ProductionPlanner } from './ProductionPlanner'
 import './video.css'
 
 const HISTORY_KEY = 'kairos.video.jobs.v1'
-const defaultPlan: VideoRenderPlan = { title: '', startSeconds: 0, endSeconds: 0, aspect: '9:16', quality: 'balanced', watermark: '@_kairosdigital_', includeAudio: true, musicVolume: .15 }
+const defaultPlan: VideoRenderPlan = { title: '', startSeconds: 0, endSeconds: 0, aspect: '9:16', quality: 'balanced', watermark: '@_kairosdigital_', brandLockup: true, includeAudio: true, musicVolume: .15 }
 
 function loadHistory(): VideoJob[] {
   try {
@@ -103,6 +103,8 @@ export function VideoPage() {
         <label>Nome do arquivo<input value={plan.title} maxLength={80} onChange={event => setPlan({ ...plan, title: event.target.value })} /></label>
         <div className="video-fields"><label>Início, segundos<input type="number" min="0" max={metadata.duration} step="0.1" value={plan.startSeconds} onChange={event => setPlan({ ...plan, startSeconds: Number(event.target.value) })} /></label><label>Fim, segundos<input type="number" min="0.1" max={metadata.duration} step="0.1" value={plan.endSeconds} onChange={event => setPlan({ ...plan, endSeconds: Number(event.target.value) })} /></label></div>
         <div className="video-fields"><label>Formato<select value={plan.aspect} onChange={event => setPlan({ ...plan, aspect: event.target.value as VideoRenderPlan['aspect'] })}><option value="9:16">Vertical · 9:16</option><option value="1:1">Quadrado · 1:1</option><option value="16:9">Horizontal · 16:9</option><option value="original">Original</option></select></label><label>Qualidade<select value={plan.quality} onChange={event => setPlan({ ...plan, quality: event.target.value as VideoQuality })}><option value="economy">Econômica · até 480p</option><option value="balanced">Equilibrada · até 720p</option><option value="high">Alta · até 1080p</option></select></label></div>
+        <label className="video-check"><input type="checkbox" checked={plan.brandLockup} onChange={event => setPlan({ ...plan, brandLockup: event.target.checked })} />Encerramento Kairos Digital original · 1,5 s</label>
+        <small className="brand-lockup-note">A ampulheta e a tipografia são aplicadas do arquivo oficial na montagem. Isso não é a marca d'água, que permanece configurável abaixo.</small>
         <label>Marca d'água<input value={plan.watermark} maxLength={80} onChange={event => setPlan({ ...plan, watermark: event.target.value })} /></label>
         <label className="video-file"><Film size={17} />Logo opcional<input type="file" accept="image/png,image/jpeg,image/webp" onChange={event => setLogoFile(event.target.files?.[0] || null)} /><span>{logoFile?.name || 'Nenhum logo'}</span></label>
         <label className="video-file"><Music2 size={17} />Música opcional<input type="file" accept="audio/*" onChange={event => setMusicFile(event.target.files?.[0] || null)} /><span>{musicFile?.name || 'Sem música'}</span></label>

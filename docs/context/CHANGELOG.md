@@ -387,3 +387,9 @@ O Content Engine mostra o orçamento do primeiro take Seedance: teto total de US
 - O episódio 01 foi revisado para oito takes com 18 intervenções curtas, expressões e gestos próprios para cada papel.
 - O mundo interno recebe direção sci-fi estilizada; a transição revela Matheus no mundo real hiper-realista de 2026, com fala própria e decisão humana explícita.
 - O Studio ganhou um bloco prioritário de saldo que leva à cobrança oficial da Vercel. O Core não recebe dados de cartão. O teto de US$ 5 cobre somente o piloto; o custo do filme usa o consumo real do primeiro take multiplicado pelos oito takes com margem de 20%.
+
+## 24/09/2026 — lockup corporativo e roteiro expandido
+
+- Video Engine: `brandLockup` aplica `public/brand/kairos-digital-hourglass.jpg` durante os 1,5 s finais da pós-produção local, separadamente da marca d'água.
+- Série: Episódio 01 ganhou 22 beats de voz, direção de atuação, reações, mixagem e instrução global de qualidade por take.
+- Próxima: validação local de render e take piloto Seedance explicitamente aprovado sob teto total de US$ 5.
