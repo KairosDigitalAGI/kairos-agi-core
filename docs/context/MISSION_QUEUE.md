@@ -219,3 +219,11 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - Referências de Vilson guardadas localmente em área privada, sem upload, Git ou envio a modelo.
 - Studio atualizado com oito retratos v3 de personagens ficcionais do Episódio 01.
 - Próxima: aguardar referências atualizadas do Founder; então registrar sua versão privada e reescrever as cenas humanas de Matheus e Vilson juntas.
+
+## Missão 011 — Cofre privado multi-referência e dossiê do episódio
+
+- [x] Evoluir o cofre local de clones para referências individuais com visualização protegida, inclusão, edição e remoção.
+- [x] Registrar intake privado de referências atualizadas do Founder fora do Git e sem transferência externa.
+- [x] Exibir Vilson como Co-CEO no elenco, mantendo sua identidade fora de assets públicos.
+- [x] Disponibilizar download do dossiê editorial do episódio no Studio.
+- [ ] Integrar um armazenamento autenticado privado para sincronização entre dispositivos, somente após contrato de acesso e consentimento de destino.

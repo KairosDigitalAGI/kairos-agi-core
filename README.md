@@ -179,3 +179,7 @@ O prólogo de produção foi consolidado em `docs/series/KAIROS_SIGNAL_EPISODE_0
 ## Lockup original e roteiro performático
 
 A Video Engine aplica o arquivo corporativo original da Kairos Digital no encerramento local de 1,5 s, separado de qualquer marca d'água. O Episódio 01 contém 22 beats de diálogo, direção de expressão, movimento, pausas, mixagem e prompts individuais por take. A geração por provider continua bloqueada até aprovação de job, saldo e confirmação operacional; o custo integral só pode ser estimado depois do uso real do take piloto.
+
+### Cofre privado de referências e dossiês do Studio
+
+O Studio agora mantém várias referências por clone no navegador, todas protegidas inicialmente e editáveis de forma local. Dossiês de episódios podem ser baixados em Markdown com roteiro e prompts. Referências humanas continuam privadas e não são parte do deploy público.

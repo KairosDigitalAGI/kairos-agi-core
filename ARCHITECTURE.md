@@ -251,3 +251,7 @@ O pré-voo público é consultado pela rota consolidada `api/integrations/status
 ## Lockup Kairos Digital na pós-produção
 
 A Video Engine compõe `public/brand/kairos-digital-hourglass.jpg` no último 1,5 segundo de um render local quando `VideoRenderPlan.brandLockup` estiver ativo. A marca original não é pedida ao modelo de vídeo; ela é aplicada localmente depois da geração e continua separada da marca d’água configurável.
+
+## Cofre privado de referências v0.2
+
+`PrivateCloneVault` usa IndexedDB apenas no navegador para armazenar coleções de referências humanas. A biblioteca não cria URL pública, não envia arquivos automaticamente e não é um Vault de servidor. A persistência entre dispositivos exige uma implementação autenticada e auditável separada. O Studio exporta dossiês Markdown editoriais localmente; os dossiês não são jobs nem autorização de gasto.

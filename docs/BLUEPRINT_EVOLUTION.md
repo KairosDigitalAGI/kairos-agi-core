@@ -343,3 +343,7 @@ A pós-produção local ganhou `brandLockup`, que aplica a imagem corporativa or
 ## 24/09/2026 — Elenco visual individual
 
 O Studio ganhou oito retratos individuais públicos de personagens ficcionais. Referências humanas de Founder e sócio permanecem em armazenamento privado e não possuem URL pública, mantendo a diferença entre continuidade de arte e identidade pessoal.
+
+## 2026-09-24 — Cofre multi-referência e dossiê editorial
+
+O Blueprint evolui o Clone Studio para uma biblioteca local de referências humanas com visibilidade individual protegida, edição e remoção. O material fica no navegador e continua fora de Git, Vercel e providers até autorização específica. O Studio também exporta o dossiê editorial completo de cada episódio em Markdown; exportar não gera mídia, despesa nem publicação.

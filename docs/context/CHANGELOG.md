@@ -397,3 +397,9 @@ O Content Engine mostra o orçamento do primeiro take Seedance: teto total de US
 ## 24/09/2026 — referências privadas do sócio e retratos do elenco
 
 Foram recebidas cinco referências de Vilson e armazenadas exclusivamente em área privada ignorada pelo Git. O material não foi enviado a nenhum provedor e o roteiro não foi alterado enquanto a atualização das referências do Founder não chega. O Studio agora usa retratos individuais v3 para KAIROS, ORION, Instagram AI, Hunter AI, Money Hunter, CFO, QA AI e CPO; são personagens ficcionais públicos de direção de arte, sem relação com os clones humanos.
+
+## 2026-09-24 — Biblioteca privada de referências e dossiê exportável
+
+O cofre local de clones evoluiu de uma imagem única para uma biblioteca editável de referências individuais. Cada imagem permanece no IndexedDB do navegador, começa protegida por botão de olho e pode ser nomeada, anotada, adicionada ou removida. Registros legados são convertidos localmente na leitura. A identidade humana não recebe URL pública, upload automático ou transferência a provedor.
+
+O Studio permite baixar um dossiê Markdown do episódio selecionado com visão, roteiro, falas, storyboard e prompts. O arquivo é editorial e não inicia geração, cobrança ou publicação. O elenco reconhece o segundo cofundador como Co-CEO, mantendo suas referências apenas no cofre privado.
