@@ -10,7 +10,7 @@ import { selectProvider } from './_providers/index.js'
 import * as openai from './_providers/openai.js'
 import * as fal from './_providers/fal.js'
 import * as seedance from './_providers/seedance.js'
-import { uploadToStorage, safePath, publicStorageUrl } from './_storage.js'
+import { checkContentStorage, uploadToStorage, safePath, publicStorageUrl } from './_storage.js'
 import { getValidAccessToken, uploadVideo } from './_youtube.js'
 import { getValidInstagramAccess, createReelsContainer, checkContainerStatus, publishReelsContainer } from './_instagram.js'
 
@@ -93,6 +93,26 @@ export async function computeContentPipeline() {
     }
   } catch (e) {
     return { source: 'unavailable', reason: `${MIGRATION_HINT} (${e.message})`, jobs: [], assets: [], porEtapa: {} }
+  }
+}
+
+// Pré-voo somente leitura do primeiro take.  Não cria job, não chama modelo
+// e não revela valores de ambiente. O browser recebe apenas os sinais que
+// precisa para explicar por que a geração está ou não disponível.
+export async function computeSeedanceReadiness() {
+  const pipeline = await computeContentPipeline()
+  const storage = await checkContentStorage()
+  return {
+    checkedAt: new Date().toISOString(),
+    model: seedance.MODEL,
+    contentStoreReady: pipeline.source === 'real',
+    contentStoreReason: pipeline.source === 'real' ? null : pipeline.reason || 'pipeline indisponível.',
+    storageReady: storage.ready,
+    storageReason: storage.ready ? null : storage.reason,
+    featureEnabled: process.env.KAIROS_ENABLE_SEEDANCE_GATEWAY === 'true',
+    gatewayAuthenticated: seedance.hasCredentials(),
+    requiresApprovedJob: true,
+    budgetCapUsd: 5,
   }
 }
 

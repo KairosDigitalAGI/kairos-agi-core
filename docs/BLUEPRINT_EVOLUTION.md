@@ -311,3 +311,7 @@ O Blueprint agora estabelece uma passagem explícita entre direção editorial e
 ## Prompt audiovisual verificável
 
 O Blueprint passa a exigir que o prompt exibido, editado e aprovado seja preservado integralmente até a chamada de geração. Resumos de compatibilidade só são aceitos para jobs legados sem prompt explícito; o log do asset continua guardando o prompt usado e o uso devolvido pelo provider.
+
+## Pré-voo de criação verificável
+
+O Blueprint inclui um estado de pré-voo legível pelo Founder antes da primeira geração. O estado só informa se pipeline, armazenamento, flag e autenticação estão disponíveis; não revela segredo, não presume saldo e não libera modelo por exibir um indicador.

@@ -10,6 +10,23 @@ function storageConfigured() {
   return Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY)
 }
 
+// Sinal de prontidão sem retornar URL, token ou conteúdo do bucket. É usado
+// pela tela de pré-voo antes de qualquer job Seedance, para separar "env
+// existe" de "bucket realmente acessível".
+export async function checkContentStorage() {
+  if (!storageConfigured()) return { ready: false, reason: 'SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY ausentes.' }
+  const base = process.env.SUPABASE_URL.replace(/\/+$/, '')
+  try {
+    const res = await fetch(`${base}/storage/v1/bucket/${BUCKET}`, {
+      headers: { apikey: process.env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}` },
+    })
+    if (!res.ok) return { ready: false, reason: `bucket ${BUCKET} respondeu ${res.status}.` }
+    return { ready: true }
+  } catch {
+    return { ready: false, reason: `não foi possível consultar o bucket ${BUCKET}.` }
+  }
+}
+
 // Sobe um objeto binário. `path` já deve vir seguro (sem espaço/acento — ver
 // safePath()). Sem credencial, lança — quem chama decide como reportar.
 export async function uploadToStorage(path, buffer, contentType) {

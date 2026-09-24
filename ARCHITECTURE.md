@@ -231,3 +231,7 @@ O storyboard envia apenas um rascunho local de título e briefing ao formulário
 ## Prompt integral do vídeo
 
 `api/_content.js#buildVideoPrompt` preserva o briefing explícito do Studio na chamada Seedance. Isso elimina a perda de direção de câmera, transições e restrições entre o campo visível e o modelo. Jobs antigos sem briefing continuam recebendo fallback compatível.
+
+## Pré-voo de geração
+
+`api/content-readiness.mjs` usa `computeSeedanceReadiness()` para expor ao Studio os sinais reais e sanitizados de pipeline, storage, flag e autenticação. A rota é somente leitura; nenhum segredo, job ou chamada de modelo cruza essa fronteira.

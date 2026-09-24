@@ -57,3 +57,7 @@ O prompt visível no Content Engine inclui macro de partículas e textura de vid
 ## Integridade do prompt Seedance
 
 A rota Gateway usa primeiro `briefing.roteiro` (depois `videoPrompt` ou `prompt`) como texto integral do modelo. O fallback descritivo serve somente para jobs legados que não tenham prompt explícito. Assim, o texto visível e aprovado no Studio é o mesmo material enviado à Gateway quando todos os gates forem atendidos.
+
+## Pré-voo verificável
+
+`GET /api/content-readiness` devolve somente sinais sanitizados de pré-voo: acesso ao pipeline, bucket, flag isolada e autenticação da Gateway. Ele não retorna credenciais nem cria jobs. O Content Engine o mostra antes da criação para que o Founder veja a diferença entre uma rota preparada e uma rota realmente habilitada.

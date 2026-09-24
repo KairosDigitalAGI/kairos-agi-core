@@ -1,9 +1,9 @@
-import { FormEvent, useState } from 'react'
-import { Clapperboard, ExternalLink, Play, Sparkles } from 'lucide-react'
+import { FormEvent, useEffect, useState } from 'react'
+import { CheckCircle2, Clapperboard, ExternalLink, Play, RefreshCw, Sparkles, XCircle } from 'lucide-react'
 import { useContentPipeline } from '../../core/useContentPipeline'
 import { STUDIO_PRODUCTION_DRAFT_KEY, type StudioProductionDraft } from '../studio/storyboard'
 import { SectionHeader } from '../../ui/SectionHeader'
-import type { ContentJobEtapa } from '../../types/operations'
+import type { ContentJobEtapa, SeedanceReadinessResponse } from '../../types/operations'
 import './operations.css'
 
 const ETAPA_LABEL: Record<ContentJobEtapa, string> = {
@@ -35,6 +35,20 @@ export function ContentEnginePanel() {
   const [briefing, setBriefing] = useState(() => storyboardDraft?.briefing ?? '')
   const [route, setRoute] = useState<'gateway' | 'local'>('gateway')
   const [gatewayPrompt, setGatewayPrompt] = useState(SIGNAL_TEST_BRIEF)
+  const [readiness, setReadiness] = useState<SeedanceReadinessResponse | null>(null)
+  const [checkingReadiness, setCheckingReadiness] = useState(true)
+
+  async function refreshReadiness() {
+    setCheckingReadiness(true)
+    try {
+      const response = await fetch('/api/content-readiness', { cache: 'no-store' })
+      if (!response.ok) throw new Error('status indisponível')
+      setReadiness(await response.json() as SeedanceReadinessResponse)
+    } catch { setReadiness(null) }
+    finally { setCheckingReadiness(false) }
+  }
+
+  useEffect(() => { void refreshReadiness() }, [])
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault()
@@ -68,6 +82,14 @@ export function ContentEnginePanel() {
       </div>
       <p>O Gateway só executa um job aprovado e com a flag específica ativada no servidor. A primeira criação não usa imagem, voz ou rosto do Founder; os vídeos retornados entram no acervo operacional e não são publicados automaticamente.</p>
       {storyboardDraft && <p className="generation-route-note"><strong>Rascunho do storyboard carregado.</strong> Revise título e prompt abaixo; “Registrar ideia” cria apenas o job, sem aprovar, gerar ou gastar.</p>}
+      <section className="seedance-readiness" aria-live="polite">
+        <div><span className="eyebrow">PRÉ-VOO REAL · SEEDANCE 2.5</span><strong>{checkingReadiness ? 'Verificando o servidor…' : readiness ? 'Estado confirmado pelo deployment' : 'Status não disponível'}</strong></div>
+        <button type="button" onClick={() => void refreshReadiness()} disabled={checkingReadiness}><RefreshCw size={14} />Atualizar</button>
+        {readiness && <ul>
+          {[[readiness.contentStoreReady, 'Pipeline e migrations'], [readiness.storageReady, 'Bucket content-assets'], [readiness.featureEnabled, 'Flag de uma geração Seedance'], [readiness.gatewayAuthenticated, 'Autenticação da AI Gateway']].map(([ready, label]) => <li key={String(label)} className={ready ? 'ready' : 'pending'}>{ready ? <CheckCircle2 size={15} /> : <XCircle size={15} />}<span>{label}</span></li>)}
+        </ul>}
+        {readiness && <small>Teto técnico: US$ {readiness.budgetCapUsd.toFixed(2)} · job aprovado obrigatório · sem publicação automática.</small>}
+      </section>
 
       <section className="generation-route" aria-label="Rota de geração">
         <div><span className="eyebrow">MODELO E PROMPT DO PRÓXIMO TAKE</span><h3>Escolha a rota antes de criar o job</h3></div>

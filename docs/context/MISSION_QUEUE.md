@@ -171,3 +171,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - Garantir que o prompt cinematográfico visível no Studio seja preservado até o adaptador Seedance.
 - Cobrir o contrato com testes e manter fallback apenas para jobs legados.
 - Próxima: superfície de prontidão que leia e explique o estado real de storage, gateway, aprovação e destino antes da primeira geração.
+
+## Missão 020 — Pré-voo verificável de Seedance (entregue)
+
+- Expor no Studio a prontidão real sanitizada de pipeline, Storage, flag e Gateway.
+- Não expor credenciais nem criar recursos na checagem.
+- Próxima: usar o pré-voo de produção para aplicar somente a configuração ausente e validar novamente antes de criar o primeiro job.

@@ -159,3 +159,7 @@ O Studio permite preparar um quadro para o Content Engine, carregando localmente
 ## Prompt integral para Seedance
 
 O campo de prompt no Content Engine passou a ser a fonte direta da chamada Seedance para jobs novos. Direção de câmera, restrições de personagens e marca não são reduzidas pelo backend. A chamada externa continua bloqueada até as condições operacionais reais; nenhum vídeo foi gerado nesta mudança.
+
+## Pré-voo real no Content Engine
+
+A área Produção agora mostra os sinais sanitizados de pipeline, bucket, flag Seedance e autenticação da AI Gateway. O painel não presume disponibilidade, saldo ou criação: consulta o deployment e apresenta o estado retornado.

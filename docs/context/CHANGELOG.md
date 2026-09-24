@@ -365,3 +365,9 @@ pm run build concluídos.
 - Corrigido o caminho do briefing: `briefing.roteiro` é agora o prompt integral usado pela rota Seedance, com fallback somente para jobs legados.
 - O painel declara a correspondência entre texto visível e texto enviado após aprovação, sem iniciar provider.
 - Dois testes cobrem preservação do prompt e fallback; `npm test` passou com 151 testes e o build foi concluído.
+
+## 2026-09-23 — Pré-voo Seedance no deployment
+
+- Criado endpoint somente leitura `api/content-readiness.mjs` para verificar pipeline, bucket, flag e autenticação da AI Gateway sem expor valores.
+- O Content Engine exibe os quatro sinais antes de um job; nenhum job, crédito ou provider é acionado por essa leitura.
+- Validação: `npm test` (151 aprovados) e `npm run build` concluídos.

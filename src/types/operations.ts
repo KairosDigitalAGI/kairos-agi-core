@@ -91,6 +91,19 @@ export interface ContentAsset {
   criado_em: string
 }
 
+export interface SeedanceReadinessResponse {
+  checkedAt: string
+  model: string
+  contentStoreReady: boolean
+  contentStoreReason?: string | null
+  storageReady: boolean
+  storageReason?: string | null
+  featureEnabled: boolean
+  gatewayAuthenticated: boolean
+  requiresApprovedJob: boolean
+  budgetCapUsd: number
+}
+
 // Avatar Studio (Fase 9) — identidade vem de src/data/agentRegistry.json,
 // progresso vem de command.avatars. hasProgress:false = agente ainda sem
 // linha gravada no Supabase, nivel/xp/coins mostrados são o baseline (1/0/0),
