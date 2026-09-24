@@ -41,7 +41,7 @@ export function ContentEnginePanel() {
   async function refreshReadiness() {
     setCheckingReadiness(true)
     try {
-      const response = await fetch('/api/content-readiness', { cache: 'no-store' })
+      const response = await fetch('/api/content-jobs?action=readiness', { cache: 'no-store' })
       if (!response.ok) throw new Error('status indisponível')
       setReadiness(await response.json() as SeedanceReadinessResponse)
     } catch { setReadiness(null) }
