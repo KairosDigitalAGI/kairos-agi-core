@@ -371,3 +371,7 @@ pm run build concluídos.
 - Criado endpoint somente leitura `api/content-readiness.mjs` para verificar pipeline, bucket, flag e autenticação da AI Gateway sem expor valores.
 - O Content Engine exibe os quatro sinais antes de um job; nenhum job, crédito ou provider é acionado por essa leitura.
 - Validação: `npm test` (151 aprovados) e `npm run build` concluídos.
+
+## 24/09/2026 — pré-orçamento e identidade visual v0.4
+
+O Content Engine mostra o orçamento do primeiro take Seedance: teto total de US$ 5 sem recarga, tarifa pública de US$ 10,70 por milhão de tokens de saída e valor realizado somente depois da resposta da Gateway. Não há estimativa inventada por segundo. A direção de arte foi revisada: ORION passa a ser guardião-ampulheta, com corpo, núcleo e silhueta derivados da marca Kairos; KAIROS passa a ser uma pessoa-avatar com marca de ampulheta integrada ao figurino. O próximo passo de arte depende das referências visuais que o Founder enviará; nenhum rosto, clone ou imagem pessoal será enviado a um provedor até então.

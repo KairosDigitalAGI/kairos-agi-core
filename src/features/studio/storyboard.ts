@@ -48,8 +48,8 @@ export const storyboards: Record<string, StoryboardFrame[]> = {
 }
 
 export const characterDirections = [
-  { name: 'KAIROS', archetype: 'Avatar humanoide de interface', marker: 'Crista de ampulheta no visor e peito', prop: 'Painel translúcido de opções', camera: 'Macro de visor; orbit curto; rack focus para o Founder' },
-  { name: 'ORION', archetype: 'Entidade cósmica estrategista', marker: 'Núcleo orbital em geometria de ampulheta', prop: 'Mapa de prioridades sem dados reais', camera: 'Dolly-in lento; órbita simétrica; contra-plongée' },
+  { name: 'KAIROS', archetype: 'Pessoa-avatar Kairos · mediador humano do sistema', marker: 'Tatuagem ou broche da ampulheta Kairos, discreto e sempre visível', prop: 'Painel translúcido de opções', camera: 'Close de olhar; orbit curto; rack focus para o Founder' },
+  { name: 'ORION', archetype: 'Guardião-ampulheta · entidade estratégica de vidro', marker: 'Corpo, núcleo e silhueta moldados como a ampulheta Kairos', prop: 'Mapa de prioridades sem dados reais', camera: 'Dolly-in lento; órbita simétrica; contra-plongée' },
   { name: 'Instagram AI', archetype: 'Diretora criativa de cabelo azul', marker: 'Lentes magenta e emblema de ampulheta', prop: 'Storyboard de vidro', camera: 'Dolly lateral; parallax; match-cut frame→cena' },
   { name: 'Hunter AI', archetype: 'Orc analista', marker: 'Ombreira gravada com ampulheta', prop: 'Mapa de sinais para revisão', camera: 'Over-the-shoulder; órbita curta; foco no gesto' },
   { name: 'QA AI', archetype: 'Sentinela âmbar', marker: 'Selo de validação em ampulheta', prop: 'Faixa de limite luminosa', camera: 'Macro de textura; zoom-out controlado; plano fixo de decisão' },

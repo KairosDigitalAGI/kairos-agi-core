@@ -12,6 +12,7 @@ const ETAPA_LABEL: Record<ContentJobEtapa, string> = {
 
 const SIGNAL_TEST_TITLE = 'Kairos Signal — Episódio 1 · establishing shot'
 const SIGNAL_TEST_BRIEF = 'Clipe vertical cinematográfico original, 9:16, 8 segundos. Um grão violeta desperta na escuridão e desenha uma ampulheta abstrata de luz azul, violeta e magenta. Dolly-out lento revela a Founder Tower dentro de uma interface de vidro, cidade digital abstrata ao fundo, partículas sutis, macro de textura de vidro e arquitetura precisa. Sem pessoas, sem rosto, sem voz, sem texto legível, sem logotipos de terceiros, sem personagens existentes, sem marca d’água. O quadro final deixa espaço limpo para a assinatura Kairos Digital adicionada depois na edição.'
+const SEEDANCE_OUTPUT_RATE_USD_PER_MILLION = 10.70
 
 function readStoryboardDraft(): StudioProductionDraft | null {
   try {
@@ -90,6 +91,13 @@ export function ContentEnginePanel() {
           {[[readiness.contentStoreReady, 'Pipeline e migrations'], [readiness.storageReady, 'Bucket content-assets'], [readiness.featureEnabled, 'Flag de uma geração Seedance'], [readiness.gatewayAuthenticated, 'Autenticação da AI Gateway']].map(([ready, label]) => <li key={String(label)} className={ready ? 'ready' : 'pending'}>{ready ? <CheckCircle2 size={15} /> : <XCircle size={15} />}<span>{label}</span></li>)}
         </ul>}
         {readiness && <small>Teto técnico: US$ {readiness.budgetCapUsd.toFixed(2)} · job aprovado obrigatório · sem publicação automática.</small>}
+      </section>
+
+      <section className="generation-budget" aria-label="Orçamento da geração">
+        <div><span className="eyebrow">ORÇAMENTO VISÍVEL · PRIMEIRO TAKE</span><strong>1 clipe Seedance de 8 s: US$ 0,00–US$ {readiness?.budgetCapUsd.toFixed(2) ?? '5.00'}</strong></div>
+        <dl><div><dt>Teto da chave</dt><dd>US$ {readiness?.budgetCapUsd.toFixed(2) ?? '5.00'} total, sem recarga.</dd></div><div><dt>Preço publicado</dt><dd>US$ {SEEDANCE_OUTPUT_RATE_USD_PER_MILLION.toFixed(2)} / 1 mi de tokens de saída.</dd></div><div><dt>Valor exato</dt><dd>A Gateway devolve o uso depois do render; o acervo registra esse dado.</dd></div></dl>
+        <p>Não há uma tarifa pública fixa por segundo para este modelo. Por isso o Kairos não inventa um preço por clipe: o intervalo é protegido pelo teto da chave, e o valor realizado aparece no acervo após a resposta da Gateway.</p>
+        <a href="https://vercel.com/ai-gateway/models/seedance-2.5" target="_blank" rel="noreferrer">Ver tabela de preços do modelo <ExternalLink size={13} /></a>
       </section>
 
       <section className="generation-route" aria-label="Rota de geração">

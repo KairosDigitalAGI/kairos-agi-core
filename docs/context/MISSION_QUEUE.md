@@ -177,3 +177,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - Expor no Studio a prontidão real sanitizada de pipeline, Storage, flag e Gateway.
 - Não expor credenciais nem criar recursos na checagem.
 - Próxima: usar o pré-voo de produção para aplicar somente a configuração ausente e validar novamente antes de criar o primeiro job.
+
+## Próxima missão concreta — press kit v0.4 e primeiro take
+
+1. Receber as referências autorizadas do Founder para KAIROS e demais personagens do episódio 1.
+2. Produzir as fichas visuais fictícias e o press kit completo antes de qualquer referência humana.
+3. Após crédito confirmado na AI Gateway, registrar e aprovar o establishing shot textual. O teto vigente é US$ 5 total e não há publicação automática.

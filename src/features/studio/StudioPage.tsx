@@ -169,8 +169,8 @@ const dialogueBeats: Record<string, Array<{ speaker: string; line: string }>> = 
 
 const cast = [
   { name: 'Founder', role: 'Narrador e presença humana', state: 'Referências privadas locais', detail: 'A decisão final é humana. O press kit do Founder permanece no cofre privado local e não é enviado por esta tela.' },
-  { name: 'KAIROS', role: 'Assistente pessoal · avatar humanoide', state: 'Conceito visual v0.3', image: '/characters/kairos-press-kit-v1.png', detail: 'Mediador do elenco: recebe a ideia, organiza opções e devolve a decisão ao Founder. Selo da ampulheta no peito ou visor.' },
-  { name: 'ORION', role: 'Coordenação estratégica · avatar cósmico', state: 'Conceito visual v0.3', image: '/characters/orion-press-kit-v1.png', detail: 'Guardião de contexto e prioridades. Sua órbita e núcleo repetem a geometria da ampulheta Kairos.' },
+  { name: 'KAIROS', role: 'Assistente pessoal · pessoa-avatar Kairos', state: 'Press kit v0.4 em revisão', image: '/characters/kairos-press-kit-v1.png', detail: 'Mediador humano do elenco: recebe a ideia, organiza opções e devolve a decisão ao Founder. A nova ficha usa a ampulheta como tatuagem, broche ou detalhe do figurino.' },
+  { name: 'ORION', role: 'Coordenação estratégica · guardião-ampulheta', state: 'Press kit v0.4 em revisão', image: '/characters/orion-press-kit-v1.png', detail: 'Guardião de contexto e prioridades. A nova direção faz corpo, núcleo e silhueta repetirem a geometria da ampulheta Kairos.' },
   { name: 'Instagram AI', role: 'Direção criativa · avatar azul', state: 'Personagem ficcional', detail: 'Traduz intenção em narrativa, storyboard e conversa. Cabelo azul, lentes de holograma e emblema magenta.' },
   { name: 'Hunter AI', role: 'Pesquisa e qualificação · orc analista', state: 'Personagem ficcional', detail: 'Procura sinais e os entrega para revisão; nunca confunde oportunidade com resultado. Ombreira com ampulheta gravada.' },
   { name: 'CFO', role: 'Limites e custo · entidade de vidro azul', state: 'Personagem ficcional', detail: 'Pergunta pelo limite antes de qualquer avanço. Sua ampulheta tem grãos azuis e nunca exibe saldo inventado.' },

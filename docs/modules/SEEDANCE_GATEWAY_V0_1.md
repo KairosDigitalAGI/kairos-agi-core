@@ -61,3 +61,7 @@ A rota Gateway usa primeiro `briefing.roteiro` (depois `videoPrompt` ou `prompt`
 ## Pré-voo verificável
 
 `GET /api/content-readiness` devolve somente sinais sanitizados de pré-voo: acesso ao pipeline, bucket, flag isolada e autenticação da Gateway. Ele não retorna credenciais nem cria jobs. O Content Engine o mostra antes da criação para que o Founder veja a diferença entre uma rota preparada e uma rota realmente habilitada.
+
+## 24/09/2026 — orçamento visível e identidade de personagens
+
+A rota Seedance 2.5 agora apresenta no Content Engine o intervalo de gasto do primeiro take, o teto da chave e o preço público do modelo. A tarifa é por tokens de saída; não há preço fixo público por segundo, logo o custo realizado é anotado apenas após a resposta do provider. A nova direção de arte adota ORION como guardião-ampulheta e KAIROS como pessoa-avatar. A geração do press kit depende de referências autorizadas; referências pessoais não são enviadas sem consentimento específico.

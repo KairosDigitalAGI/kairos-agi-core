@@ -235,3 +235,7 @@ O storyboard envia apenas um rascunho local de título e briefing ao formulário
 ## Pré-voo de geração
 
 `api/content-readiness.mjs` usa `computeSeedanceReadiness()` para expor ao Studio os sinais reais e sanitizados de pipeline, storage, flag e autenticação. A rota é somente leitura; nenhum segredo, job ou chamada de modelo cruza essa fronteira.
+
+## Atualização 24/09/2026 — orçamento e direção v0.4
+
+O Content Engine apresenta orçamento verificável por primeiro take e conserva a regra de registrar o uso devolvido pelo provider em vez de inventar valor por segundo. A direção de arte de ORION e KAIROS foi atualizada: ORION é o guardião-ampulheta da marca e KAIROS uma pessoa-avatar com o símbolo integrado ao figurino. O press kit renderizado depende das referências autorizadas e fica separado de qualquer clone humano.

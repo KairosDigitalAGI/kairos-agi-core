@@ -163,3 +163,7 @@ O campo de prompt no Content Engine passou a ser a fonte direta da chamada Seeda
 ## Pré-voo real no Content Engine
 
 A área Produção agora mostra os sinais sanitizados de pipeline, bucket, flag Seedance e autenticação da AI Gateway. O painel não presume disponibilidade, saldo ou criação: consulta o deployment e apresenta o estado retornado.
+
+### Orçamento de geração visível
+
+O Kairos Studio mostra o modelo, o prompt, as verificações de pré-voo e o teto de gasto do primeiro take. A previsão é apresentada como limite, não como custo inventado: Seedance 2.5 publica preço por tokens de saída; a cobrança exata é persistida no acervo depois do retorno da Gateway. A direção de arte v0.4 consolida ORION como guardião-ampulheta e KAIROS como pessoa-avatar, aguardando referências autorizadas antes do render do press kit.
