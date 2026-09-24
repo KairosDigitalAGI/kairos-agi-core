@@ -171,3 +171,7 @@ O Kairos Studio mostra o modelo, o prompt, as verificações de pré-voo e o tet
 ## Elenco visual completo da Kairos Signal
 
 O Studio passou a exibir quatro folhas de assets ficcionais que cobrem o elenco do episódio 01: ORION + KAIROS, Instagram AI + QA AI, Hunter AI + Money Hunter e CPO + CFO. Elas ficam em `public/characters/`, carregam a ampulheta Kairos como assinatura e servem de referência para continuidade. Não representam clones humanos, não treinam modelos e não acionam geração de vídeo.
+
+## Episódio 01 em 60 segundos
+
+O prólogo de produção foi consolidado em `docs/series/KAIROS_SIGNAL_EPISODE_01_60S.md`: oito takes curtos, com diálogos, narrador, áudio nativo planejado e montagem vertical final. O Studio exibe a mesma ordem, o teto global de US$ 5 e o atalho para a cobrança protegida da Vercel. O aplicativo nunca solicita nem armazena cartão; o pagamento acontece somente no ambiente oficial da Gateway.

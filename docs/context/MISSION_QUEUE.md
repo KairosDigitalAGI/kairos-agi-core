@@ -189,3 +189,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - Gerar e disponibilizar quatro folhas visuais ficcionais para os oito personagens do primeiro episódio da Kairos Signal.
 - Aplicar a ampulheta Kairos como invariante de marca e registrar função, roupa, objeto e papel narrativo no Studio.
 - Próxima: criar o primeiro job textual aprovado somente após a confirmação de crédito, mantendo as folhas como referência e sem anexar qualquer pessoa real.
+
+## Missão 022 — Prólogo de 60 segundos e plano de crédito (em revisão operacional)
+
+- Roteiro final do episódio 01 organizado em oito takes curtos com falas, narrador, áudio e direção de câmera.
+- Studio mostra o plano de montagem e encaminha o Founder para a cobrança oficial da Vercel; nenhum cartão é coletado pelo Kairos.
+- Próxima: confirmar saldo disponível e gerar somente o primeiro take aprovado; a continuação depende da revisão do resultado e do orçamento real devolvido pela Gateway.

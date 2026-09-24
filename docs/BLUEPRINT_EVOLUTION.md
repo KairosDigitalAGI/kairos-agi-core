@@ -323,3 +323,7 @@ O Studio usa uma direção de arte em que ORION é o guardião-ampulheta da Kair
 ## 24/09/2026 — Press kits ficcionais do elenco
 
 A evolução adiciona quatro folhas de assets visuais públicos para os oito papéis ficcionais do primeiro episódio da Kairos Signal. A ampulheta é o invariante visual de todos os papéis; ORION preserva sua geometria como guardião-ampulheta e KAIROS é uma pessoa-avatar. Os assets são referências de direção de arte e não contêm clone, pessoa real, cliente, treinamento biométrico ou autorização de geração externa.
+
+## 24/09/2026 — Prólogo audiovisual e cobrança protegida
+
+A Kairos Signal passa a ter um prólogo final de 60 segundos dividido em oito takes renderizáveis. O Studio mostra o plano e um link para a AI Gateway oficial, mas não recebe dados de cartão nem dispara compras. O orçamento da primeira rodada permanece com teto global de US$ 5, sem recarga automática; a cobrança exata continua dependente do uso que a Gateway devolver por take.

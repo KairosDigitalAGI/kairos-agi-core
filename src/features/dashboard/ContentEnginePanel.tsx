@@ -13,6 +13,17 @@ const ETAPA_LABEL: Record<ContentJobEtapa, string> = {
 const SIGNAL_TEST_TITLE = 'Kairos Signal — Episódio 1 · establishing shot'
 const SIGNAL_TEST_BRIEF = 'Clipe vertical cinematográfico original, 9:16, 8 segundos. Um grão violeta desperta na escuridão e desenha uma ampulheta abstrata de luz azul, violeta e magenta. Dolly-out lento revela a Founder Tower dentro de uma interface de vidro, cidade digital abstrata ao fundo, partículas sutis, macro de textura de vidro e arquitetura precisa. Sem pessoas, sem rosto, sem voz, sem texto legível, sem logotipos de terceiros, sem personagens existentes, sem marca d’água. O quadro final deixa espaço limpo para a assinatura Kairos Digital adicionada depois na edição.'
 const SEEDANCE_OUTPUT_RATE_USD_PER_MILLION = 10.70
+const VERCEL_GATEWAY_URL = 'https://vercel.com/ai-gateway'
+const sixtySecondPlan: ReadonlyArray<readonly [string, string, string, string]> = [
+  ['01', 'O grão', '7–8 s', 'Narrador: “Toda ideia começa pequena.”'],
+  ['02', 'O sinal', '7–8 s', 'KAIROS: “Recebi uma ideia. Abrimos uma missão?”'],
+  ['03', 'O contexto', '7–8 s', 'ORION: “Velocidade sem direção é só barulho.”'],
+  ['04', 'A investigação', '7–8 s', 'HUNTER: “Sinal não é cliente. Primeiro, evidência.”'],
+  ['05', 'A história', '7–8 s', 'INSTAGRAM AI: “Então vamos fazer alguém sentir.”'],
+  ['06', 'O limite', '7–8 s', 'CFO + QA: “Criar também exige limite e prova.”'],
+  ['07', 'A decisão', '7–8 s', 'KAIROS: “Eu preparo opções. Você decide.”'],
+  ['08', 'A hora certa', '7–8 s', 'Narrador: “Kairos Digital. Construa a hora certa.”'],
+]
 
 function readStoryboardDraft(): StudioProductionDraft | null {
   try {
@@ -97,7 +108,13 @@ export function ContentEnginePanel() {
         <div><span className="eyebrow">ORÇAMENTO VISÍVEL · PRIMEIRO TAKE</span><strong>1 clipe Seedance de 8 s: US$ 0,00–US$ {readiness?.budgetCapUsd.toFixed(2) ?? '5.00'}</strong></div>
         <dl><div><dt>Teto da chave</dt><dd>US$ {readiness?.budgetCapUsd.toFixed(2) ?? '5.00'} total, sem recarga.</dd></div><div><dt>Preço publicado</dt><dd>US$ {SEEDANCE_OUTPUT_RATE_USD_PER_MILLION.toFixed(2)} / 1 mi de tokens de saída.</dd></div><div><dt>Valor exato</dt><dd>A Gateway devolve o uso depois do render; o acervo registra esse dado.</dd></div></dl>
         <p>Não há uma tarifa pública fixa por segundo para este modelo. Por isso o Kairos não inventa um preço por clipe: o intervalo é protegido pelo teto da chave, e o valor realizado aparece no acervo após a resposta da Gateway.</p>
-        <a href="https://vercel.com/ai-gateway/models/seedance-2.5" target="_blank" rel="noreferrer">Ver tabela de preços do modelo <ExternalLink size={13} /></a>
+        <div className="generation-budget-links"><a href="https://vercel.com/ai-gateway/models/seedance-2.5" target="_blank" rel="noreferrer">Ver tabela de preços do modelo <ExternalLink size={13} /></a><a href={VERCEL_GATEWAY_URL} target="_blank" rel="noreferrer">Adicionar saldo protegido na Vercel <ExternalLink size={13} /></a></div>
+      </section>
+
+      <section className="sixty-second-plan" aria-label="Plano do filme de sessenta segundos">
+        <div><span className="eyebrow">FILME FINAL · 60 SEGUNDOS</span><h3>Oito takes, uma história e montagem final</h3><p>O Seedance renderiza takes curtos. A qualidade vem de fixar os mesmos press kits, paleta, lente e movimentos por take; depois o Kairos monta a sequência vertical com transições, trilha e a assinatura final.</p></div>
+        <ol>{sixtySecondPlan.map(([number, title, duration, audio]) => <li key={number}><span>{number}</span><strong>{title}</strong><small>{duration}</small><p>{audio}</p></li>)}</ol>
+        <footer><strong>Guardrail:</strong> cada take será um job separado, registrado e revisável. O teto de US$ 5 é global para esta primeira rodada; não há recarga automática nem publicação automática.</footer>
       </section>
 
       <section className="generation-route" aria-label="Rota de geração">
