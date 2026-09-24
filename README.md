@@ -147,3 +147,7 @@ O [Kairos Studio](https://kairos-agi-core.vercel.app/?module=studio) traz uma tr
 ## Produção controlada
 
 Na área Produção do Studio, escolha **Seedance 2.5** para o teste externo isolado ou **Kairos Motion local** para um render sem API. O prompt inicial fica visível e editável antes de virar job. A publicação automática segue bloqueada enquanto o Instagram não comprovar publicação e atendimento em produção.
+
+## Storyboard cinematográfico
+
+O Studio agora inclui uma [leitura visual guiada](docs/series/KAIROS_SIGNAL_STORYBOARD_V0_1.md) para cada episódio da Kairos Signal: direção de câmera, transição, intenção e prompt por quadro. Os cartões ainda não são imagens nem vídeos; eles preparam jobs aprovados sem gastar crédito ou expor clones.

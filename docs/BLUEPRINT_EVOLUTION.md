@@ -299,3 +299,7 @@ A narrativa audiovisual evolui de locução expositiva para elenco coral. KAIROS
 ## 2026-09-23 — Direção cinematográfica verificável
 
 O Blueprint passa a exigir uma gramática de câmera por plano: macro/microtextura, dolly, órbita, rack focus, zoom controlado, match-cut e plano fixo deliberado. Essa direção sustenta narrativa e continuidade; material humano continua sujeito a consentimento e autorização de destino antes de qualquer close ou envio.
+
+## 2026-09-23 — Storyboard e direção repetível
+
+O Blueprint passa a armazenar direção visual por quadro antes de geração: duração, intenção, transição, verbo de câmera e prompt. A Character Bible ganha press kits textuais de figurino, objeto e marca para personagens ficcionais. Esses planos reduzem perda de continuidade, mas não valem como mídia criada, execução de agente, aprovação de gasto ou licença de semelhança humana.

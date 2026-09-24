@@ -346,3 +346,10 @@ pm run build concluídos.
 - A Produção agora exibe e permite editar o prompt do primeiro take Seedance antes de copiar o texto para um job.
 - Criada escolha explícita entre Seedance Gateway e Kairos Motion local, sem alegar que providers desconectados podem gerar.
 - Adicionada gramática visual de macro, dolly, órbita, rack focus, zoom e match-cut; autopublicação continua bloqueada até provas remotas.
+
+## 2026-09-23 — Storyboard e press kit textual no Studio
+
+- Criado `src/features/studio/storyboard.ts` com seis quadros de direção por episódio, cada um com movimento, transição, intenção e prompt original para preparação futura.
+- O Studio exibe a leitura visual guiada e um press kit textual dos personagens ficcionais, mantendo Founder/Wilson fora dos prompts e dos assets públicos.
+- Nenhuma imagem, vídeo, job, chamada de Gateway, gasto ou publicação foi criada por este incremento.
+- Validação: `npm test` (149 aprovados) e `npm run build` concluídos.

@@ -41,3 +41,7 @@ A área História agora exibe uma pauta de diálogos para o episódio selecionad
 ## Modelo, prompt e câmera
 
 A Produção exibe duas rotas: Seedance 2.5 pela Vercel AI Gateway (quando os guards server-side estiverem ativos) e Kairos Motion local, sem API externa. O prompt do primeiro take é editável e só é copiado para o job quando o Founder usa a preparação explícita. Uma gramática de câmera visível define macro, dolly, órbita, rack focus, zoom e match-cut; ela é direção editorial, não uma geração iniciada.
+
+## Storyboard e press kit textual v0.1
+
+A aba História mostra seis quadros de direção por episódio: intenção, câmera, transição e prompt. A aba Elenco mostra as diretrizes repetíveis de personagens ficcionais. Os prompts são editáveis no pipeline apenas depois de virarem um job explícito; não representam imagens ou vídeos existentes. A geração externa, publicação e qualquer transmissão de clone humano permanecem bloqueadas pelos respectivos gates.

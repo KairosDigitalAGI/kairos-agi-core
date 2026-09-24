@@ -153,3 +153,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - Expor modelo, prompt e rota de criação antes de registrar o primeiro job.
 - Formalizar movimentos de câmera por plano e preservar close humano atrás dos gates de consentimento.
 - Próxima: associar o storyboard de cada episódio a prompts por plano e a versões de press kit ficcional.
+
+## Missão 017 — Storyboard e press kit textual (entregue)
+
+- Associar cenas da trilogia a direção de câmera, transições e prompts explícitos dentro do Studio.
+- Criar fichas repetíveis de direção para personagens ficcionais, sem gerar assets nem incluir pessoas reais.
+- Próxima: revisar o schema real do Content Engine e converter apenas o establishing shot textual em job, quando a configuração e o orçamento forem confirmados.

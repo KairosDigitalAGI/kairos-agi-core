@@ -219,3 +219,7 @@ O Studio armazena rascunhos editoriais de episódios em localStorage sob kairos.
 ## Console de geração e gramática de câmera
 
 `ContentEnginePanel` conserva a escolha local da rota de geração e o prompt textual do primeiro take. A Gateway continua sendo a única rota externa implementada; o render local é independente. A gramática de câmera é metadado editorial visível, sem enviar referências humanas ou iniciar provider. A autopublicação permanece bloqueada até confirmação remota de publicação e atendimento.
+
+## Storyboard cinematográfico e press kit textual
+
+`src/features/studio/storyboard.ts` concentra planos editoriais por episódio e direções repetíveis dos personagens ficcionais. `StudioPage` os mostra como leitura visual guiada e como press kit textual. Esses dados não são assets nem jobs: qualquer geração continua dependente dos guards de aprovação, provider, orçamento e consentimento.
