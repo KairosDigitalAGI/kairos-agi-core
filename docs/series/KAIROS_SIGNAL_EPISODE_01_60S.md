@@ -4,6 +4,10 @@
 
 O episódio inaugural é um prólogo coral de 60 segundos. A câmera apresenta o universo dentro do computador, onde cada agente vive e trabalha dentro da Founder Tower. A passagem para o mundo real revela Matheus, o Founder e cliente zero da Kairos: ele recupera tempo sem entregar a decisão humana. O fim abre a próxima história: uma missão real acaba de ser escolhida.
 
+## Premissa dramática
+
+O pedido de Matheus chega ao computador como um sinal luminoso. Dentro da Founder Tower, os agentes não são ferramentas silenciosas: são personagens autônomos ficcionais com pontos de vista complementares. KAIROS quer ajudar rápido; ORION pede contexto; Hunter quer investigar; Instagram AI quer fazer a mensagem ser sentida; CFO protege o limite; QA AI exige evidência; CPO procura uma forma concreta. Eles conversam, discordam com respeito e convergem numa opção que só Matheus pode aprovar. A analogia é uma operação dentro da máquina vista como uma equipe viva, mas personagens, diálogo e universo são originais da Kairos.
+
 ## Regra de imagem e som
 
 - **Takes 01–06 — dentro do computador:** ficção científica realista, textura de vidro, néon azul/violeta/magenta, partículas, ampulheta Kairos e personalidade visual aumentada. O acabamento é premium, mas propositalmente estilizado.
