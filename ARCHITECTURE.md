@@ -239,3 +239,11 @@ O storyboard envia apenas um rascunho local de título e briefing ao formulário
 ## Atualização 24/09/2026 — orçamento e direção v0.4
 
 O Content Engine apresenta orçamento verificável por primeiro take e conserva a regra de registrar o uso devolvido pelo provider em vez de inventar valor por segundo. A direção de arte de ORION e KAIROS foi atualizada: ORION é o guardião-ampulheta da marca e KAIROS uma pessoa-avatar com o símbolo integrado ao figurino. O press kit renderizado depende das referências autorizadas e fica separado de qualquer clone humano.
+
+## Elenco visual renderizado — Kairos Signal
+
+O Studio mantém `pressKits` como catálogo de quatro folhas de arte públicas em `public/characters/`. Cada item liga uma imagem a dois papéis ficcionais e à respectiva função narrativa; `characterDirections` continua responsável pelos invariantes usados em prompts. Esses PNGs não pertencem ao domínio Clone e não entram em `command.content_assets`, pois são referências estáticas da aplicação, não resultados de providers. A imagem do Founder continua no cofre privado e não participa dessa coleção.
+
+## Correção de pré-voo Seedance
+
+O pré-voo público é consultado pela rota consolidada `api/integrations/status.mjs?scope=media`, que delega a `computeSeedanceReadiness()`. A antiga menção a `api/content-readiness.mjs` é histórica: criar essa função extra excederia a margem do plano Vercel Hobby.

@@ -375,3 +375,9 @@ pm run build concluídos.
 ## 24/09/2026 — pré-orçamento e identidade visual v0.4
 
 O Content Engine mostra o orçamento do primeiro take Seedance: teto total de US$ 5 sem recarga, tarifa pública de US$ 10,70 por milhão de tokens de saída e valor realizado somente depois da resposta da Gateway. Não há estimativa inventada por segundo. A direção de arte foi revisada: ORION passa a ser guardião-ampulheta, com corpo, núcleo e silhueta derivados da marca Kairos; KAIROS passa a ser uma pessoa-avatar com marca de ampulheta integrada ao figurino. O próximo passo de arte depende das referências visuais que o Founder enviará; nenhum rosto, clone ou imagem pessoal será enviado a um provedor até então.
+
+## 24/09/2026 — Press kits ficcionais do elenco
+
+- Renderizadas quatro folhas de referência de arte para ORION + KAIROS, Instagram AI + QA AI, Hunter AI + Money Hunter e CPO + CFO.
+- A aba Elenco do Kairos Studio passou a tratar as folhas como o catálogo visual do episódio 01; as fichas textuais continuam a fonte dos invariantes de prompt.
+- Os assets são PNGs públicos de personagens ficcionais. Nenhuma referência pessoal, clone, job de vídeo, chamada Seedance, gasto ou publicação foi feita nesta entrega.

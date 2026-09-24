@@ -183,3 +183,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 1. Receber as referências autorizadas do Founder para KAIROS e demais personagens do episódio 1.
 2. Produzir as fichas visuais fictícias e o press kit completo antes de qualquer referência humana.
 3. Após crédito confirmado na AI Gateway, registrar e aprovar o establishing shot textual. O teto vigente é US$ 5 total e não há publicação automática.
+
+## Missão 021 — Press kits renderizados do elenco (entregue)
+
+- Gerar e disponibilizar quatro folhas visuais ficcionais para os oito personagens do primeiro episódio da Kairos Signal.
+- Aplicar a ampulheta Kairos como invariante de marca e registrar função, roupa, objeto e papel narrativo no Studio.
+- Próxima: criar o primeiro job textual aprovado somente após a confirmação de crédito, mantendo as folhas como referência e sem anexar qualquer pessoa real.

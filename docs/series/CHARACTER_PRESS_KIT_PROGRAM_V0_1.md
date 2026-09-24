@@ -14,6 +14,19 @@ Este programa organiza a continuidade visual de personagens para a série Kairos
 | ORION | personagem ficcional/abstrato | pronto para direção visual | Character Bible público |
 | Cliente-arquétipo | personagem ficcional | opcional, sem semelhança de cliente real | Character Bible público |
 
+## Elenco ficcional renderizado — 24/09/2026
+
+O primeiro conjunto de assets do episódio 01 foi renderizado como referência pública de arte e está visível no Kairos Studio. Cada folha é uma composição de direção, não uma imagem de pessoa real, nem material de treinamento biométrico.
+
+| Folha | Personagens | Função dramatúrgica | Asset público |
+| --- | --- | --- | --- |
+| Estratégia | ORION e KAIROS | contexto, priorização e mediação humana | `public/characters/orion-kairos-press-kit-v2.png` |
+| Criação e prova | Instagram AI e QA AI | narrativa, revisão e evidência | `public/characters/instagram-qa-press-kit-v1.png` |
+| Sinais e valor | Hunter AI e Money Hunter | pesquisa, qualificação e proposta de valor | `public/characters/hunter-money-press-kit-v1.png` |
+| Produto e limite | CPO e CFO | protótipo, experiência e orçamento | `public/characters/cpo-cfo-press-kit-v1.png` |
+
+Invariantes comuns: a ampulheta Kairos aparece como núcleo, emblema, joia, broche, selo ou geometria; a paleta combina violeta, azul elétrico, magenta, preto profundo e vidro. As folhas guiam prompts futuros, mas não são anexadas a uma chamada externa sem registro do job, do orçamento e do provedor.
+
 ## Entregáveis por personagem
 
 1. **Folha de identidade:** nome narrativo, papel, frase de direção, paleta, materiais, objetos e invariantes.

@@ -319,3 +319,7 @@ O Blueprint inclui um estado de pré-voo legível pelo Founder antes da primeira
 ## 24/09/2026 — orçamento de geração e personagens v0.4
 
 O Studio usa uma direção de arte em que ORION é o guardião-ampulheta da Kairos Digital, e KAIROS é uma pessoa-avatar marcada pela ampulheta. O Content Engine expõe o orçamento do primeiro take sem sugerir que uma tarifa por segundo seja conhecida: o modelo Seedance 2.5 publica US$ 10,70 por milhão de tokens de saída e a chave de teste limita toda a execução a US$ 5, sem recarga. O uso final é persistido no acervo quando a Gateway o devolver.
+
+## 24/09/2026 — Press kits ficcionais do elenco
+
+A evolução adiciona quatro folhas de assets visuais públicos para os oito papéis ficcionais do primeiro episódio da Kairos Signal. A ampulheta é o invariante visual de todos os papéis; ORION preserva sua geometria como guardião-ampulheta e KAIROS é uma pessoa-avatar. Os assets são referências de direção de arte e não contêm clone, pessoa real, cliente, treinamento biométrico ou autorização de geração externa.
