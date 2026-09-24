@@ -155,3 +155,7 @@ O Studio agora inclui uma [leitura visual guiada](docs/series/KAIROS_SIGNAL_STOR
 ## Storyboard para job sem execução
 
 O Studio permite preparar um quadro para o Content Engine, carregando localmente título, câmera, transição e prompt. O registro do job continua explícito; não houve chamada de Gateway, geração, gasto ou publicação.
+
+## Prompt integral para Seedance
+
+O campo de prompt no Content Engine passou a ser a fonte direta da chamada Seedance para jobs novos. Direção de câmera, restrições de personagens e marca não são reduzidas pelo backend. A chamada externa continua bloqueada até as condições operacionais reais; nenhum vídeo foi gerado nesta mudança.

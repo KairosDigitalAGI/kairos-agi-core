@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { computeContentPipeline, createContentJob, generateScript, approveContentJob, generateImage, generateVideo, postToYoutube } from '../api/_content.js'
+import { buildVideoPrompt, computeContentPipeline, createContentJob, generateScript, approveContentJob, generateImage, generateVideo, postToYoutube } from '../api/_content.js'
 import { encrypt } from '../api/_crypto.js'
 
 const KEYS = [
@@ -21,6 +21,17 @@ function withEnv(vars, fn) {
       for (const [k, v] of Object.entries(saved)) if (v !== undefined) process.env[k] = v
     })
 }
+
+test('video prompt preserves the exact Studio briefing when one exists', () => {
+  const prompt = 'Original cinematic vertical 9:16. Macro glass, dolly out, no people.'
+  assert.equal(buildVideoPrompt({ titulo: 'Outro título', briefing: { roteiro: prompt } }), prompt)
+})
+
+test('video prompt retains a descriptive fallback for legacy jobs without a Studio briefing', () => {
+  const prompt = buildVideoPrompt({ titulo: 'Cena legado', briefing: { publico: 'fundadores' } })
+  assert.match(prompt, /Cena legado/)
+  assert.match(prompt, /fundadores/)
+})
 
 test('content pipeline reports unavailable (never an empty-but-real pipeline) without Supabase configured', async () => {
   await withEnv({}, async () => {

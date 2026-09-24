@@ -53,3 +53,7 @@ O Content Engine agora aceita briefing textual ao registrar uma ideia e oferece 
 ## Direção de câmera do primeiro take
 
 O prompt visível no Content Engine inclui macro de partículas e textura de vidro, dolly-out e espaço para a marca adicionada na pós-produção. A gramática de câmera completa está no documento da série. O primeiro take permanece sem pessoa, rosto, voz ou referência biométrica.
+
+## Integridade do prompt Seedance
+
+A rota Gateway usa primeiro `briefing.roteiro` (depois `videoPrompt` ou `prompt`) como texto integral do modelo. O fallback descritivo serve somente para jobs legados que não tenham prompt explícito. Assim, o texto visível e aprovado no Studio é o mesmo material enviado à Gateway quando todos os gates forem atendidos.

@@ -39,6 +39,23 @@ function assertSeedanceGatewayEnabled() {
   }
 }
 
+// O briefing do Studio carrega o prompt integral em `roteiro`.  Preservar
+// este valor evita que a descrição visível ao Founder seja reduzida a um
+// resumo genérico no momento de chamar o modelo. Jobs legados, sem prompt
+// explícito, recebem o fallback descritivo abaixo.
+export function buildVideoPrompt(job) {
+  const briefing = job?.briefing && typeof job.briefing === 'object' ? job.briefing : {}
+  const explicitPrompt = [briefing.roteiro, briefing.videoPrompt, briefing.prompt]
+    .find(value => typeof value === 'string' && value.trim())
+  if (explicitPrompt) return explicitPrompt.trim()
+  return [
+    `Vídeo curto (Short/Reel) para a Kairos Digital, tema: ${job?.titulo || 'sem título'}.`,
+    briefing.publico && `Público-alvo: ${briefing.publico}.`,
+    briefing.promessa && `Promessa central: ${briefing.promessa}.`,
+    'Estilo profissional e moderno, sem texto sobreposto, sem logotipo inventado.',
+  ].filter(Boolean).join(' ')
+}
+
 // Lidas a cada chamada (não numa const de módulo), mesma convenção de
 // api/_providers/fal.js#pollIntervalMs/pollTimeoutMs — assim os testes
 // conseguem acelerar o polling do container do Reels via env var sem
@@ -422,13 +439,7 @@ export async function generateVideo({ jobId, tier = 'free' }) {
     throw err
   }
 
-  const briefing = job.briefing && typeof job.briefing === 'object' ? job.briefing : {}
-  const prompt = [
-    `Vídeo curto (Short/Reel) para a Kairos Digital, tema: ${job.titulo}.`,
-    briefing.publico && `Público-alvo: ${briefing.publico}.`,
-    briefing.promessa && `Promessa central: ${briefing.promessa}.`,
-    'Estilo profissional e moderno, sem texto sobreposto, sem logotipo inventado.',
-  ].filter(Boolean).join(' ')
+  const prompt = buildVideoPrompt(job)
 
   if (tier === 'gateway') {
     assertSeedanceGatewayEnabled()

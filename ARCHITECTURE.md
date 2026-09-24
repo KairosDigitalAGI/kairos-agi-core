@@ -227,3 +227,7 @@ O Studio armazena rascunhos editoriais de episódios em localStorage sob kairos.
 ## Handoff editorial para o Content Engine
 
 O storyboard envia apenas um rascunho local de título e briefing ao formulário de criação de jobs. O contrato está em `src/features/studio/storyboard.ts`; `ContentEnginePanel` lê e mostra o rascunho sem executar ações externas. Registrar, aprovar, gerar e publicar continuam transições independentes do pipeline server-side.
+
+## Prompt integral do vídeo
+
+`api/_content.js#buildVideoPrompt` preserva o briefing explícito do Studio na chamada Seedance. Isso elimina a perda de direção de câmera, transições e restrições entre o campo visível e o modelo. Jobs antigos sem briefing continuam recebendo fallback compatível.

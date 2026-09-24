@@ -359,3 +359,9 @@ pm run build concluídos.
 - Um quadro selecionado no Studio pode preencher título e briefing locais do formulário de criação de job.
 - O handoff não faz POST, não aprova job e não chama provider; o rascunho só é removido depois de registro bem-sucedido.
 - Validação: `npm test` (149 aprovados) e `npm run build` concluídos.
+
+## 2026-09-23 — Integridade do prompt Seedance
+
+- Corrigido o caminho do briefing: `briefing.roteiro` é agora o prompt integral usado pela rota Seedance, com fallback somente para jobs legados.
+- O painel declara a correspondência entre texto visível e texto enviado após aprovação, sem iniciar provider.
+- Dois testes cobrem preservação do prompt e fallback; `npm test` passou com 151 testes e o build foi concluído.

@@ -307,3 +307,7 @@ O Blueprint passa a armazenar direção visual por quadro antes de geração: du
 ## Handoff seguro de storyboard
 
 O Blueprint agora estabelece uma passagem explícita entre direção editorial e operação: um quadro pode preencher um rascunho local, mas só um registro consciente cria um job. O rascunho não é aprovação, não chama provedor e não produz mídia.
+
+## Prompt audiovisual verificável
+
+O Blueprint passa a exigir que o prompt exibido, editado e aprovado seja preservado integralmente até a chamada de geração. Resumos de compatibilidade só são aceitos para jobs legados sem prompt explícito; o log do asset continua guardando o prompt usado e o uso devolvido pelo provider.

@@ -165,3 +165,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - Permitir que um quadro cinematográfico preencha o formulário de ideia sem acionar geração.
 - Preservar a separação entre rascunho local, job persistido, aprovação, custo e publicação.
 - Próxima: auditoria somente leitura do estado real de schema/bucket antes de qualquer primeiro job Seedance.
+
+## Missão 019 — Integridade do prompt de geração (entregue)
+
+- Garantir que o prompt cinematográfico visível no Studio seja preservado até o adaptador Seedance.
+- Cobrir o contrato com testes e manter fallback apenas para jobs legados.
+- Próxima: superfície de prontidão que leia e explique o estado real de storage, gateway, aprovação e destino antes da primeira geração.
