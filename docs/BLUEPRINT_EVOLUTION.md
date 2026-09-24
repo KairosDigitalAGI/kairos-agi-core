@@ -347,3 +347,7 @@ O Studio ganhou oito retratos individuais públicos de personagens ficcionais. R
 ## 2026-09-24 — Cofre multi-referência e dossiê editorial
 
 O Blueprint evolui o Clone Studio para uma biblioteca local de referências humanas com visibilidade individual protegida, edição e remoção. O material fica no navegador e continua fora de Git, Vercel e providers até autorização específica. O Studio também exporta o dossiê editorial completo de cada episódio em Markdown; exportar não gera mídia, despesa nem publicação.
+
+## 2026-09-24 — Realismo físico do prólogo
+
+A direção final do Episódio 01 passa a distinguir os mundos por fotografia: a Founder Tower é fantasia digital dirigida; o exterior é mundo físico brasileiro contemporâneo, filmado com textura humana, luz solar, óptica e som ambiente realistas. Essa diferença é requisito de storyboard e de seleção de take, não uma promessa de que qualquer provider entregará o resultado sem revisão.

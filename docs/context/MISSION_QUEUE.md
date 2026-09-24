@@ -227,3 +227,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Exibir Vilson como Co-CEO no elenco, mantendo sua identidade fora de assets públicos.
 - [x] Disponibilizar download do dossiê editorial do episódio no Studio.
 - [ ] Integrar um armazenamento autenticado privado para sincronização entre dispositivos, somente após contrato de acesso e consentimento de destino.
+
+## Missão 012 — Seleção e revisão de qualidade cinematográfica
+
+- [x] Especificar contraste de realismo entre Founder Tower digital e mundo físico no Episódio 01.
+- [ ] Criar os takes somente após o pré-voo indicar provider, crédito, limite, consentimento de destino e job aprovado.
+- [ ] Revisar continuidade, expressão, voz e lockup em cada take antes da montagem final de 60 segundos.

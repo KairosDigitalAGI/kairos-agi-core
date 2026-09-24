@@ -105,3 +105,9 @@ A série não deve parecer uma gravação plana. Cada plano recebe um verbo de c
 - **Plano fixo:** reservado a decisão humana, emoção ou CTA; é contraste deliberado, não ausência de direção.
 
 Para o establishing shot textual Seedance, a receita é macro de partículas e vidro → dolly-out lento → órbita curta em torno da Founder Tower → match-cut para a ampulheta. Nenhum close humano é enviado nesse primeiro take.
+
+## Padrão final de realismo — mundo fora da tela
+
+Nos takes físicos do Episódio 01, Matheus e Vilson são pessoas reais no Brasil contemporâneo de 2026. A direção deve buscar fotografia de cinema, e não aparência de avatar: close de pele com poros e microexpressões, olhos com reflexo e movimento de pupila natural, cabelo e tecido reagindo ao vento, sol atravessando janelas, sombras coerentes, reflexos verdadeiros, perspectiva física, profundidade de campo óptica e som ambiente discreto. O corte entre a Founder Tower digital e o mundo externo deve aumentar a fidelidade perceptível de propósito: o público percebe que saiu da simulação antes mesmo de a fala explicar isso.
+
+A performance permanece humana: pausa antes de responder, respiração, olhar fora de quadro, gesto econômico e fala conversada. Não acelerar a dicção para preencher 60 segundos. A marca Kairos Digital entra exclusivamente pelo lockup original em pós-produção local e por elementos cenográficos aprovados, sem pedir texto ou tipografia ao modelo generativo.
