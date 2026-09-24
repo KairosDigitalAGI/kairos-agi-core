@@ -45,3 +45,7 @@ A Produção exibe duas rotas: Seedance 2.5 pela Vercel AI Gateway (quando os gu
 ## Storyboard e press kit textual v0.1
 
 A aba História mostra seis quadros de direção por episódio: intenção, câmera, transição e prompt. A aba Elenco mostra as diretrizes repetíveis de personagens ficcionais. Os prompts são editáveis no pipeline apenas depois de virarem um job explícito; não representam imagens ou vídeos existentes. A geração externa, publicação e qualquer transmissão de clone humano permanecem bloqueadas pelos respectivos gates.
+
+## Do storyboard ao pipeline
+
+Selecionar **Preparar no Content Engine** em um quadro salva somente um rascunho local com título, câmera, transição e prompt. A área Produção o carrega para revisão. Somente **Registrar ideia** cria um job no servidor; aprovação, geração, custo e publicação seguem separados e bloqueados pelos respectivos gates.

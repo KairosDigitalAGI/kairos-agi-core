@@ -353,3 +353,9 @@ pm run build concluídos.
 - O Studio exibe a leitura visual guiada e um press kit textual dos personagens ficcionais, mantendo Founder/Wilson fora dos prompts e dos assets públicos.
 - Nenhuma imagem, vídeo, job, chamada de Gateway, gasto ou publicação foi criada por este incremento.
 - Validação: `npm test` (149 aprovados) e `npm run build` concluídos.
+
+## 2026-09-23 — Handoff do storyboard ao Content Engine
+
+- Um quadro selecionado no Studio pode preencher título e briefing locais do formulário de criação de job.
+- O handoff não faz POST, não aprova job e não chama provider; o rascunho só é removido depois de registro bem-sucedido.
+- Validação: `npm test` (149 aprovados) e `npm run build` concluídos.

@@ -151,3 +151,7 @@ Na área Produção do Studio, escolha **Seedance 2.5** para o teste externo iso
 ## Storyboard cinematográfico
 
 O Studio agora inclui uma [leitura visual guiada](docs/series/KAIROS_SIGNAL_STORYBOARD_V0_1.md) para cada episódio da Kairos Signal: direção de câmera, transição, intenção e prompt por quadro. Os cartões ainda não são imagens nem vídeos; eles preparam jobs aprovados sem gastar crédito ou expor clones.
+
+## Storyboard para job sem execução
+
+O Studio permite preparar um quadro para o Content Engine, carregando localmente título, câmera, transição e prompt. O registro do job continua explícito; não houve chamada de Gateway, geração, gasto ou publicação.

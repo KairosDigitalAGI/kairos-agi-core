@@ -223,3 +223,7 @@ O Studio armazena rascunhos editoriais de episódios em localStorage sob kairos.
 ## Storyboard cinematográfico e press kit textual
 
 `src/features/studio/storyboard.ts` concentra planos editoriais por episódio e direções repetíveis dos personagens ficcionais. `StudioPage` os mostra como leitura visual guiada e como press kit textual. Esses dados não são assets nem jobs: qualquer geração continua dependente dos guards de aprovação, provider, orçamento e consentimento.
+
+## Handoff editorial para o Content Engine
+
+O storyboard envia apenas um rascunho local de título e briefing ao formulário de criação de jobs. O contrato está em `src/features/studio/storyboard.ts`; `ContentEnginePanel` lê e mostra o rascunho sem executar ações externas. Registrar, aprovar, gerar e publicar continuam transições independentes do pipeline server-side.

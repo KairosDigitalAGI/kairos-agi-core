@@ -15,3 +15,7 @@ A área Elenco contém fichas de direção para os personagens ficcionais KAIROS
 ## Privacidade e produção
 
 Founder e Wilson não entram nos prompts de storyboard. Referências de pessoas reais permanecem privadas e só podem viajar para um destino definido depois de consentimento e autorização específicos. Para virar um vídeo, um cartão precisa ser convertido em job, aprovado, executado por rota configurada e devolvido pelo provider com origem e uso verificáveis.
+
+## Handoff seguro de quadros
+
+O botão de cada quadro prepara um rascunho local (`kairos.signal.production-draft.v1`) para o formulário do Content Engine. O estado não é job, não chama Gateway e não persiste em servidor até que o Founder registre explicitamente a ideia. Essa fronteira preserva o pipeline verificável entre roteiro e geração.

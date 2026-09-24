@@ -159,3 +159,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - Associar cenas da trilogia a direção de câmera, transições e prompts explícitos dentro do Studio.
 - Criar fichas repetíveis de direção para personagens ficcionais, sem gerar assets nem incluir pessoas reais.
 - Próxima: revisar o schema real do Content Engine e converter apenas o establishing shot textual em job, quando a configuração e o orçamento forem confirmados.
+
+## Missão 018 — Handoff do storyboard para pipeline (entregue)
+
+- Permitir que um quadro cinematográfico preencha o formulário de ideia sem acionar geração.
+- Preservar a separação entre rascunho local, job persistido, aprovação, custo e publicação.
+- Próxima: auditoria somente leitura do estado real de schema/bucket antes de qualquer primeiro job Seedance.

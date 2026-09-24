@@ -303,3 +303,7 @@ O Blueprint passa a exigir uma gramática de câmera por plano: macro/microtextu
 ## 2026-09-23 — Storyboard e direção repetível
 
 O Blueprint passa a armazenar direção visual por quadro antes de geração: duração, intenção, transição, verbo de câmera e prompt. A Character Bible ganha press kits textuais de figurino, objeto e marca para personagens ficcionais. Esses planos reduzem perda de continuidade, mas não valem como mídia criada, execução de agente, aprovação de gasto ou licença de semelhança humana.
+
+## Handoff seguro de storyboard
+
+O Blueprint agora estabelece uma passagem explícita entre direção editorial e operação: um quadro pode preencher um rascunho local, mas só um registro consciente cria um job. O rascunho não é aprovação, não chama provedor e não produz mídia.

@@ -8,6 +8,16 @@ export type StoryboardFrame = {
   prompt: string
 }
 
+export type StudioProductionDraft = { title: string; briefing: string }
+export const STUDIO_PRODUCTION_DRAFT_KEY = 'kairos.signal.production-draft.v1'
+
+export function toProductionDraft(episodeNumber: string, episodeTitle: string, frame: StoryboardFrame): StudioProductionDraft {
+  return {
+    title: `Kairos Signal · EP${episodeNumber} · Cena ${String(frame.scene).padStart(2, '0')} — ${frame.title}`,
+    briefing: `${frame.visual}\n\nCâmera: ${frame.camera}. Transição: ${frame.transition}.\n\nPrompt de geração:\n${frame.prompt}`,
+  }
+}
+
 const common = 'original Kairos Digital universe, vertical 9:16, deep black, electric blue, Kairos violet and magenta, luminous hourglass motif, premium cinematic sci-fi, no readable text, no third-party logos, no watermark'
 
 export const storyboards: Record<string, StoryboardFrame[]> = {

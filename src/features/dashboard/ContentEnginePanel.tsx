@@ -1,6 +1,7 @@
 import { FormEvent, useState } from 'react'
 import { Clapperboard, ExternalLink, Play, Sparkles } from 'lucide-react'
 import { useContentPipeline } from '../../core/useContentPipeline'
+import { STUDIO_PRODUCTION_DRAFT_KEY, type StudioProductionDraft } from '../studio/storyboard'
 import { SectionHeader } from '../../ui/SectionHeader'
 import type { ContentJobEtapa } from '../../types/operations'
 import './operations.css'
@@ -12,6 +13,14 @@ const ETAPA_LABEL: Record<ContentJobEtapa, string> = {
 const SIGNAL_TEST_TITLE = 'Kairos Signal — Episódio 1 · establishing shot'
 const SIGNAL_TEST_BRIEF = 'Clipe vertical cinematográfico original, 9:16, 8 segundos. Um grão violeta desperta na escuridão e desenha uma ampulheta abstrata de luz azul, violeta e magenta. Dolly-out lento revela a Founder Tower dentro de uma interface de vidro, cidade digital abstrata ao fundo, partículas sutis, macro de textura de vidro e arquitetura precisa. Sem pessoas, sem rosto, sem voz, sem texto legível, sem logotipos de terceiros, sem personagens existentes, sem marca d’água. O quadro final deixa espaço limpo para a assinatura Kairos Digital adicionada depois na edição.'
 
+function readStoryboardDraft(): StudioProductionDraft | null {
+  try {
+    const value = JSON.parse(localStorage.getItem(STUDIO_PRODUCTION_DRAFT_KEY) ?? 'null')
+    if (!value || typeof value.title !== 'string' || typeof value.briefing !== 'string') return null
+    return { title: value.title.slice(0, 200), briefing: value.briefing.slice(0, 2000) }
+  } catch { return null }
+}
+
 // Painel operacional do Content Engine. O backend continua sendo a fonte de
 // verdade de autorização, saldo e execução; a interface mostra a recusa real
 // quando a Gateway estiver desligada, sem crédito ou sem migration.
@@ -21,8 +30,9 @@ export function ContentEnginePanel() {
     generateVideo, postToYoutube, postToInstagram, generatingJobId, generateError,
     approveJob, approvingJobId, approveError,
   } = useContentPipeline()
-  const [titulo, setTitulo] = useState('')
-  const [briefing, setBriefing] = useState('')
+  const [storyboardDraft] = useState(readStoryboardDraft)
+  const [titulo, setTitulo] = useState(() => storyboardDraft?.title ?? '')
+  const [briefing, setBriefing] = useState(() => storyboardDraft?.briefing ?? '')
   const [route, setRoute] = useState<'gateway' | 'local'>('gateway')
   const [gatewayPrompt, setGatewayPrompt] = useState(SIGNAL_TEST_BRIEF)
 
@@ -35,6 +45,7 @@ export function ContentEnginePanel() {
     if (ok) {
       setTitulo('')
       setBriefing('')
+      localStorage.removeItem(STUDIO_PRODUCTION_DRAFT_KEY)
     }
   }
 
@@ -56,6 +67,7 @@ export function ContentEnginePanel() {
         <a href="/?module=library"><ExternalLink size={14} />Abrir acervo</a>
       </div>
       <p>O Gateway só executa um job aprovado e com a flag específica ativada no servidor. A primeira criação não usa imagem, voz ou rosto do Founder; os vídeos retornados entram no acervo operacional e não são publicados automaticamente.</p>
+      {storyboardDraft && <p className="generation-route-note"><strong>Rascunho do storyboard carregado.</strong> Revise título e prompt abaixo; “Registrar ideia” cria apenas o job, sem aprovar, gerar ou gastar.</p>}
 
       <section className="generation-route" aria-label="Rota de geração">
         <div><span className="eyebrow">MODELO E PROMPT DO PRÓXIMO TAKE</span><h3>Escolha a rota antes de criar o job</h3></div>
