@@ -339,3 +339,7 @@ A especificação do Episódio 01 agora inclui direção de atuação, gestos, p
 ## 24/09/2026 — Lockup original e roteiro performático
 
 A pós-produção local ganhou `brandLockup`, que aplica a imagem corporativa original da Kairos Digital durante o último 1,5 segundo do render. Essa camada é independente de watermark e nunca é delegada ao modelo generativo. O Episódio 01 foi ampliado para 22 beats de diálogo, mais reações, gestos, pausas, mixagem e uma instrução global de qualidade por take; o roteiro preserva dicção em 60 segundos em vez de acelerar falas.
+
+## 24/09/2026 — Elenco visual individual
+
+O Studio ganhou oito retratos individuais públicos de personagens ficcionais. Referências humanas de Founder e sócio permanecem em armazenamento privado e não possuem URL pública, mantendo a diferença entre continuidade de arte e identidade pessoal.

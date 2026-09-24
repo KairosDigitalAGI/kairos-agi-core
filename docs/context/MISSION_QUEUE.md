@@ -213,3 +213,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - Episódio 01 expandido para 22 beats de diálogo, direção de atuação, reações, pausas, mixagem e prompt global de qualidade.
 - Lockup final usa a arte original em pós-produção local e permanece distinto de marca d'água.
 - Próxima: validar o render de pós-produção e iniciar somente o take piloto Seedance aprovado, com teto total de US$ 5 e uso real registrado.
+
+## Missão 024 — Continuidade visual do elenco (em andamento)
+
+- Referências de Vilson guardadas localmente em área privada, sem upload, Git ou envio a modelo.
+- Studio atualizado com oito retratos v3 de personagens ficcionais do Episódio 01.
+- Próxima: aguardar referências atualizadas do Founder; então registrar sua versão privada e reescrever as cenas humanas de Matheus e Vilson juntas.

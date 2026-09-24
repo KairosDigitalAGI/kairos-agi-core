@@ -393,3 +393,7 @@ O Content Engine mostra o orçamento do primeiro take Seedance: teto total de US
 - Video Engine: `brandLockup` aplica `public/brand/kairos-digital-hourglass.jpg` durante os 1,5 s finais da pós-produção local, separadamente da marca d'água.
 - Série: Episódio 01 ganhou 22 beats de voz, direção de atuação, reações, mixagem e instrução global de qualidade por take.
 - Próxima: validação local de render e take piloto Seedance explicitamente aprovado sob teto total de US$ 5.
+
+## 24/09/2026 — referências privadas do sócio e retratos do elenco
+
+Foram recebidas cinco referências de Vilson e armazenadas exclusivamente em área privada ignorada pelo Git. O material não foi enviado a nenhum provedor e o roteiro não foi alterado enquanto a atualização das referências do Founder não chega. O Studio agora usa retratos individuais v3 para KAIROS, ORION, Instagram AI, Hunter AI, Money Hunter, CFO, QA AI e CPO; são personagens ficcionais públicos de direção de arte, sem relação com os clones humanos.
