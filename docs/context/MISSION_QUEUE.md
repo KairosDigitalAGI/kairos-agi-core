@@ -146,3 +146,10 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - Transformar a trilogia em narrativa de elenco, com conversação e conflito dramático responsável.
 - Incluir papéis ficcionais para criação, pesquisa, produto, custo, valor e qualidade.
 - Próxima: criar frames de storyboard e press kits ficcionais para cada integrante, registrando origem e aprovação antes de qualquer vídeo externo.
+
+
+## Missão 016 — Console de geração e câmera (entregue)
+
+- Expor modelo, prompt e rota de criação antes de registrar o primeiro job.
+- Formalizar movimentos de câmera por plano e preservar close humano atrás dos gates de consentimento.
+- Próxima: associar o storyboard de cada episódio a prompts por plano e a versões de press kit ficcional.

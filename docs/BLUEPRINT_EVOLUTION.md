@@ -294,3 +294,8 @@ A ampulheta azul, violeta e magenta fornecida pelo Founder passa a ser a assinat
 ## 2026-09-23 — Kairos Signal coral
 
 A narrativa audiovisual evolui de locução expositiva para elenco coral. KAIROS, ORION, Instagram AI, Hunter AI, CFO, Money Hunter, QA AI e CPO representam tensões saudáveis de uma operação: intenção, contexto, criação, pesquisa, custo, valor, qualidade e produto. A obra deixa claro que personagens são ficção e que decisões continuam humanas e verificáveis.
+
+
+## 2026-09-23 — Direção cinematográfica verificável
+
+O Blueprint passa a exigir uma gramática de câmera por plano: macro/microtextura, dolly, órbita, rack focus, zoom controlado, match-cut e plano fixo deliberado. Essa direção sustenta narrativa e continuidade; material humano continua sujeito a consentimento e autorização de destino antes de qualquer close ou envio.

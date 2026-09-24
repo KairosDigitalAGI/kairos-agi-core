@@ -142,3 +142,8 @@ A ampulheta oficial está aplicada à navegação e ao Kairos Studio. Ela é a a
 ## Kairos Signal coral
 
 O [Kairos Studio](https://kairos-agi-core.vercel.app/?module=studio) traz uma trilogia editável de três episódios de 96 segundos, com conversas entre os personagens da Founder Tower. São roteiros ficcionais: os diálogos explicam a visão da Kairos sem declarar ações reais, vendas, gastos ou agentes executando.
+
+
+## Produção controlada
+
+Na área Produção do Studio, escolha **Seedance 2.5** para o teste externo isolado ou **Kairos Motion local** para um render sem API. O prompt inicial fica visível e editável antes de virar job. A publicação automática segue bloqueada enquanto o Instagram não comprovar publicação e atendimento em produção.

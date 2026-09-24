@@ -91,3 +91,17 @@ A abertura parece acontecer dentro de um computador: Founder Tower, interfaces d
 A trilogia passa a ter **96 segundos por episódio**, em doze planos de oito segundos. A nova versão substitui a locução contínua por conversas curtas entre KAIROS, ORION, Instagram AI, Hunter AI, CFO, Money Hunter, QA AI, CPO, Founder e Cliente-arquétipo. O conflito dramático é produtivo: velocidade versus direção, oportunidade versus evidência, criatividade versus limite e execução versus decisão humana.
 
 Os agentes são personagens ficcionais que dramatizam papéis configurados do produto; a fala não afirma que um executor real trabalhou, pesquisou, gastou, falou com cliente ou concluiu tarefa. O Founder mantém a decisão final.
+
+
+## Gramática de câmera v0.3
+
+A série não deve parecer uma gravação plana. Cada plano recebe um verbo de câmera e uma intenção narrativa antes de entrar no provider:
+
+- **Macro e microtextura:** grão de luz, visor, superfície de vidro, íris ou poro somente quando uma pessoa autorizada estiver em cena.
+- **Dolly-in e dolly-out:** aproximar uma pergunta, revelar contexto depois de uma resposta.
+- **Órbita, parallax e rack focus:** apresentar o elenco e trocar foco entre personagem, interface e ampulheta.
+- **Zoom óptico/digital controlado:** só em descoberta, alerta ou quebra da quarta parede; evitar pulsação aleatória.
+- **Match-cut e transição de profundidade:** ampulheta→tela, tela→vida real, reflexo→olho, sempre preservando a continuidade de cor.
+- **Plano fixo:** reservado a decisão humana, emoção ou CTA; é contraste deliberado, não ausência de direção.
+
+Para o establishing shot textual Seedance, a receita é macro de partículas e vidro → dolly-out lento → órbita curta em torno da Founder Tower → match-cut para a ampulheta. Nenhum close humano é enviado nesse primeiro take.

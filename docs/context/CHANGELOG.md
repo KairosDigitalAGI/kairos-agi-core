@@ -339,3 +339,10 @@ pm run build concluídos.
 - Os três episódios do Studio foram reescritos para 96 s, com doze cenas e diálogo entre o elenco.
 - Incluídos oito personagens ficcionais adicionais no elenco e uma pauta de vozes visível por episódio.
 - O roteiro usa persistência local versionada para a nova história aparecer mesmo quando existir rascunho da versão anterior.
+
+
+## 2026-09-23 — Console de geração e câmera
+
+- A Produção agora exibe e permite editar o prompt do primeiro take Seedance antes de copiar o texto para um job.
+- Criada escolha explícita entre Seedance Gateway e Kairos Motion local, sem alegar que providers desconectados podem gerar.
+- Adicionada gramática visual de macro, dolly, órbita, rack focus, zoom e match-cut; autopublicação continua bloqueada até provas remotas.

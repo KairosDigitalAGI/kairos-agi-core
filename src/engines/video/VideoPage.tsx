@@ -84,7 +84,7 @@ export function VideoPage() {
     } finally { abortRef.current = null; setStatus('idle') }
   }
 
-  return <div className="page-stack video-engine">
+  return <div id="video-engine-local" className="page-stack video-engine">
     <section className="glass-panel video-mode-hero"><div><span className="eyebrow">MISSÃO 004 · VIDEO ENGINE</span><h2>Criação e pós-produção local</h2><p>Comece por um roteiro ou refine um arquivo real. Os dois fluxos funcionam no navegador.</p></div><div className="video-mode-tabs" role="tablist"><button className={mode === 'generate' ? 'active' : ''} onClick={() => setMode('generate')}><Sparkles size={17} />Criar do zero</button><button className={mode === 'edit' ? 'active' : ''} onClick={() => setMode('edit')}><Scissors size={17} />Editar arquivo</button></div></section>
     {mode === 'generate' ? <>
       <ProductionPlanner onUseScript={(title, script) => setGenerationSeed({ title, script, revision: Date.now() })} />

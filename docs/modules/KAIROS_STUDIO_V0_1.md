@@ -36,3 +36,8 @@ O asset é público por ser a identidade corporativa fornecida pelo Founder. Ref
 ## Elenco e conversação v0.2
 
 A área História agora exibe uma pauta de diálogos para o episódio selecionado e roteiros corais de 96 segundos. O rascunho editorial usa a chave local `kairos.signal.episodes.v2` para a versão de elenco não ser ocultada por rascunhos da trilogia anterior. O elenco contém personagens ficcionais adicionais, cada um com função dramática e regra de marca; isso não cria agentes executores.
+
+
+## Modelo, prompt e câmera
+
+A Produção exibe duas rotas: Seedance 2.5 pela Vercel AI Gateway (quando os guards server-side estiverem ativos) e Kairos Motion local, sem API externa. O prompt do primeiro take é editável e só é copiado para o job quando o Founder usa a preparação explícita. Uma gramática de câmera visível define macro, dolly, órbita, rack focus, zoom e match-cut; ela é direção editorial, não uma geração iniciada.

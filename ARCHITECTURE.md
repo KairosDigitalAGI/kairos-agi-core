@@ -214,3 +214,8 @@ O Studio armazena rascunhos editoriais de episódios em localStorage sob kairos.
 ## Kairos Signal coral
 
 `StudioPage` mantém os roteiros de 96 s e seus beats de diálogo como conteúdo editorial local. A chave versionada `kairos.signal.episodes.v2` separa o novo arco de rascunhos anteriores. Personagens adicionais são metadados de narrativa; o registro operacional dos 27 papéis continua sendo a única fonte para estrutura de agentes.
+
+
+## Console de geração e gramática de câmera
+
+`ContentEnginePanel` conserva a escolha local da rota de geração e o prompt textual do primeiro take. A Gateway continua sendo a única rota externa implementada; o render local é independente. A gramática de câmera é metadado editorial visível, sem enviar referências humanas ou iniciar provider. A autopublicação permanece bloqueada até confirmação remota de publicação e atendimento.

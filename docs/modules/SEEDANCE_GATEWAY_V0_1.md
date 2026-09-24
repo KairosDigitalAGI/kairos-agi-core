@@ -48,3 +48,8 @@ Seedance pode partir diretamente de uma ideia aprovada usando texto, para o esta
 ## 23/09/2026 — Briefing de trilogia acionável
 
 O Content Engine agora aceita briefing textual ao registrar uma ideia e oferece o botão **Preparar teste Kairos Signal**. Ele apenas preenche título e briefing do establishing shot textual; o Founder ainda precisa registrar o job, aprová-lo e encontrar os guards de schema, flag, OIDC e orçamento antes de qualquer chamada da Gateway.
+
+
+## Direção de câmera do primeiro take
+
+O prompt visível no Content Engine inclui macro de partículas e textura de vidro, dolly-out e espaço para a marca adicionada na pós-produção. A gramática de câmera completa está no documento da série. O primeiro take permanece sem pessoa, rosto, voz ou referência biométrica.
