@@ -327,3 +327,7 @@ A evolução adiciona quatro folhas de assets visuais públicos para os oito pap
 ## 24/09/2026 — Prólogo audiovisual e cobrança protegida
 
 A Kairos Signal passa a ter um prólogo final de 60 segundos dividido em oito takes renderizáveis. O Studio mostra o plano e um link para a AI Gateway oficial, mas não recebe dados de cartão nem dispara compras. O orçamento da primeira rodada permanece com teto global de US$ 5, sem recarga automática; a cobrança exata continua dependente do uso que a Gateway devolver por take.
+
+## 24/09/2026 — Prólogo coral e contraste entre mundos
+
+A narrativa audiovisual evolui para um prólogo coral de 60 segundos: os agentes têm voz, expressão e gesto próprios no universo dentro do computador; Matheus aparece no mundo real hiper-realista como Founder e cliente zero. A saída pela tela evidencia que a automação prepara escolhas e devolve tempo, mas não substitui o propósito humano. Referências de face e voz do Founder permanecem em domínio privado até o provedor e o envio serem aprovados.

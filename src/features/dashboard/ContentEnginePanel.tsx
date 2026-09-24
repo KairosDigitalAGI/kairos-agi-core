@@ -15,14 +15,14 @@ const SIGNAL_TEST_BRIEF = 'Clipe vertical cinematográfico original, 9:16, 8 seg
 const SEEDANCE_OUTPUT_RATE_USD_PER_MILLION = 10.70
 const VERCEL_GATEWAY_URL = 'https://vercel.com/ai-gateway'
 const sixtySecondPlan: ReadonlyArray<readonly [string, string, string, string]> = [
-  ['01', 'O grão', '7–8 s', 'Narrador: “Toda ideia começa pequena.”'],
-  ['02', 'O sinal', '7–8 s', 'KAIROS: “Recebi uma ideia. Abrimos uma missão?”'],
-  ['03', 'O contexto', '7–8 s', 'ORION: “Velocidade sem direção é só barulho.”'],
-  ['04', 'A investigação', '7–8 s', 'HUNTER: “Sinal não é cliente. Primeiro, evidência.”'],
-  ['05', 'A história', '7–8 s', 'INSTAGRAM AI: “Então vamos fazer alguém sentir.”'],
-  ['06', 'O limite', '7–8 s', 'CFO + QA: “Criar também exige limite e prova.”'],
-  ['07', 'A decisão', '7–8 s', 'KAIROS: “Eu preparo opções. Você decide.”'],
-  ['08', 'A hora certa', '7–8 s', 'Narrador: “Kairos Digital. Construa a hora certa.”'],
+  ['01', 'O grão acorda', '7–8 s', 'NARRADOR: “Toda ideia começa pequena.” ORION: “E toda ideia precisa de contexto.”'],
+  ['02', 'O sinal entra', '7–8 s', 'KAIROS: “Matheus enviou uma missão.” INSTAGRAM AI: “Então vamos dar a ela uma história.”'],
+  ['03', 'O mundo trabalha', '7–8 s', 'HUNTER: “Eu vejo sinais.” MONEY HUNTER: “Eu encontro valor quando alguém precisa dele.”'],
+  ['04', 'O limite fala', '7–8 s', 'CFO: “Qual é o limite?” QA AI: “E o que já foi provado?”'],
+  ['05', 'O protótipo nasce', '7–8 s', 'CPO: “Uma hipótese vira algo que alguém consegue tocar.” ORION: “Só depois de escolher o essencial.”'],
+  ['06', 'O portal abre', '7–8 s', 'KAIROS: “As opções estão prontas.” NARRADOR: “E a tela deixa de ser o mundo inteiro.”'],
+  ['07', 'Matheus no real', '7–8 s', 'MATHEUS: “Hoje eu precisei estar presente.” KAIROS: “Nós mantivemos a fila organizada.”'],
+  ['08', 'A escolha humana', '7–8 s', 'MATHEUS: “Agora eu sei o próximo passo.” NARRADOR: “Kairos Digital. Construa a hora certa.”'],
 ]
 
 function readStoryboardDraft(): StudioProductionDraft | null {
@@ -93,7 +93,12 @@ export function ContentEnginePanel() {
         <div><strong>Seedance 2.5 · Vercel AI Gateway</strong><span>Clipe textual de 8 s · 9:16 · teto técnico de US$ 5 · sem recarga</span></div>
         <a href="/?module=library"><ExternalLink size={14} />Abrir acervo</a>
       </div>
-      <p>O Gateway só executa um job aprovado e com a flag específica ativada no servidor. A primeira criação não usa imagem, voz ou rosto do Founder; os vídeos retornados entram no acervo operacional e não são publicados automaticamente.</p>
+      <p>O Gateway só executa um job aprovado e com a flag específica ativada no servidor. Os seis takes internos usam apenas personagens ficcionais; os dois takes reais do Founder ficam separados e só recebem referência de rosto ou voz após a seleção explícita do provedor e a aprovação do envio. Os vídeos retornados entram no acervo e não são publicados automaticamente.</p>
+      <section className="gateway-funding" aria-label="Saldo e limite para a geração">
+        <div><span className="eyebrow">1 · SALDO E LIMITE ANTES DE GERAR</span><h3>Saldo protegido, fora do Kairos</h3><p>O cartão nunca é informado aqui. O botão abre a área oficial da Vercel, onde o crédito e o limite da chave são configurados com segurança.</p></div>
+        <a className="gateway-funding-action" href={VERCEL_GATEWAY_URL} target="_blank" rel="noreferrer">Adicionar saldo na Vercel <ExternalLink size={15} /></a>
+        <dl><div><dt>Piloto</dt><dd>1 take de 8 s · teto atual US$ {readiness?.budgetCapUsd.toFixed(2) ?? '5.00'}.</dd></div><div><dt>Filme de 60 s</dt><dd>8 takes. Previsão final = 8 × custo real do piloto + 20% de margem.</dd></div><div><dt>Tokens</dt><dd>O modelo devolve tokens/uso após o piloto; antes disso, qualquer número seria inventado.</dd></div><div><dt>Proteção</dt><dd>Auto top-up desligado. A chave recusa chamadas quando alcança o teto.</dd></div></dl>
+      </section>
       {storyboardDraft && <p className="generation-route-note"><strong>Rascunho do storyboard carregado.</strong> Revise título e prompt abaixo; “Registrar ideia” cria apenas o job, sem aprovar, gerar ou gastar.</p>}
       <section className="seedance-readiness" aria-live="polite">
         <div><span className="eyebrow">PRÉ-VOO REAL · SEEDANCE 2.5</span><strong>{checkingReadiness ? 'Verificando o servidor…' : readiness ? 'Estado confirmado pelo deployment' : 'Status não disponível'}</strong></div>
@@ -114,7 +119,7 @@ export function ContentEnginePanel() {
       <section className="sixty-second-plan" aria-label="Plano do filme de sessenta segundos">
         <div><span className="eyebrow">FILME FINAL · 60 SEGUNDOS</span><h3>Oito takes, uma história e montagem final</h3><p>O Seedance renderiza takes curtos. A qualidade vem de fixar os mesmos press kits, paleta, lente e movimentos por take; depois o Kairos monta a sequência vertical com transições, trilha e a assinatura final.</p></div>
         <ol>{sixtySecondPlan.map(([number, title, duration, audio]) => <li key={number}><span>{number}</span><strong>{title}</strong><small>{duration}</small><p>{audio}</p></li>)}</ol>
-        <footer><strong>Guardrail:</strong> cada take será um job separado, registrado e revisável. O teto de US$ 5 é global para esta primeira rodada; não há recarga automática nem publicação automática.</footer>
+        <footer><strong>Guardrail:</strong> cada take será um job separado, registrado e revisável. O teto de US$ 5 é global para o piloto; após ele, a previsão do filme usa o consumo real devolvido pela Gateway. Não há recarga automática nem publicação automática.</footer>
       </section>
 
       <section className="generation-route" aria-label="Rota de geração">

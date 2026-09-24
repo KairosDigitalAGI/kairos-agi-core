@@ -381,3 +381,9 @@ O Content Engine mostra o orçamento do primeiro take Seedance: teto total de US
 - Renderizadas quatro folhas de referência de arte para ORION + KAIROS, Instagram AI + QA AI, Hunter AI + Money Hunter e CPO + CFO.
 - A aba Elenco do Kairos Studio passou a tratar as folhas como o catálogo visual do episódio 01; as fichas textuais continuam a fonte dos invariantes de prompt.
 - Os assets são PNGs públicos de personagens ficcionais. Nenhuma referência pessoal, clone, job de vídeo, chamada Seedance, gasto ou publicação foi feita nesta entrega.
+
+## 24/09/2026 — Prólogo coral, contraste real e orçamento por take
+
+- O episódio 01 foi revisado para oito takes com 18 intervenções curtas, expressões e gestos próprios para cada papel.
+- O mundo interno recebe direção sci-fi estilizada; a transição revela Matheus no mundo real hiper-realista de 2026, com fala própria e decisão humana explícita.
+- O Studio ganhou um bloco prioritário de saldo que leva à cobrança oficial da Vercel. O Core não recebe dados de cartão. O teto de US$ 5 cobre somente o piloto; o custo do filme usa o consumo real do primeiro take multiplicado pelos oito takes com margem de 20%.

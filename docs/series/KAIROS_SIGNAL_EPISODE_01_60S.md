@@ -2,42 +2,46 @@
 
 ## Função na série
 
-Este é o prólogo de 60 segundos da Kairos Signal. Ele apresenta a Founder Tower, o motivo da existência do elenco e o limite central da série: a IA prepara caminhos; a decisão continua humana. O último plano abre a pergunta dos episódios seguintes: o que acontece quando o Founder escolhe uma missão real?
+O episódio inaugural é um prólogo coral de 60 segundos. A câmera apresenta o universo dentro do computador, onde cada agente vive e trabalha dentro da Founder Tower. A passagem para o mundo real revela Matheus, o Founder e cliente zero da Kairos: ele recupera tempo sem entregar a decisão humana. O fim abre a próxima história: uma missão real acaba de ser escolhida.
 
-## Formato de produção
+## Regra de imagem e som
 
-- Vertical 9:16, 60 segundos finais.
-- Oito takes de aproximadamente 7–8 segundos, montados em sequência.
-- Referências visuais: os quatro press kits ficcionais do episódio 01 em `public/characters/`.
-- Marca recorrente: ampulheta Kairos em núcleo, emblema, holograma ou arquitetura.
-- Áudio: narrador, diálogos curtos, desenho sonoro de partículas/vidro e trilha original discreta. Cada take pede áudio nativo; a mixagem final precisa normalizar voz, música e efeitos.
-- Nenhuma voz, rosto ou referência do Founder é enviada para provedores neste episódio.
+- **Takes 01–06 — dentro do computador:** ficção científica realista, textura de vidro, néon azul/violeta/magenta, partículas, ampulheta Kairos e personalidade visual aumentada. O acabamento é premium, mas propositalmente estilizado.
+- **Takes 07–08 — mundo real em 2026:** fotografia hiper-realista de cinema. Pele, poros, olhos, pupila, sol, concreto, prédios e reflexos têm nitidez, luz natural e profundidade superiores aos takes digitais. A mudança precisa ser percebida sem explicação.
+- **Matheus:** personagem Founder no mundo real, com fala própria. Face e voz só usam referências autorizadas e são enviadas ao provedor escolhido somente no momento da geração aprovada.
+- **Áudio:** cada take especifica diálogo ou narração nativa; a montagem final normaliza voz, ambiente, música e efeitos. Legendas e lockup são aplicados na pós-produção.
 
-## Roteiro final
+## Roteiro de 60 segundos
 
-| Take | Tempo | Imagem e câmera | Fala/áudio |
+| Take | Tempo | Expressão, ação e câmera | Falas e áudio |
 | --- | --- | --- | --- |
-| 01 — O grão | 0–8 s | Macro de um grão violeta no vidro; dolly-out revela a Founder Tower. | **NARRADOR:** “Toda ideia começa pequena.” Som: grão, vidro e pulso grave. |
-| 02 — O sinal | 8–15 s | Um brilho de celular anônimo atravessa um corredor azul-violeta; rack focus. | **KAIROS:** “Recebi uma ideia. Abrimos uma missão?” |
-| 03 — O contexto | 15–23 s | ORION emerge da ampulheta orbital; órbita simétrica e contra-plongée. | **ORION:** “Antes disso: qual problema ela resolve? Velocidade sem direção é só barulho.” |
-| 04 — A investigação | 23–30 s | Hunter AI abre sinais abstratos; over-the-shoulder e mapa dobra em cartões de revisão. | **HUNTER AI:** “Eu encontro sinais. Mas sinal não é cliente. Primeiro, evidência.” |
-| 05 — A história | 30–38 s | Instagram AI transforma partículas em três frames; dolly lateral e match-cut. | **INSTAGRAM AI:** “Se a ideia for clara, eu faço alguém sentir.” |
-| 06 — O limite | 38–45 s | CFO fecha um círculo azul; QA AI imprime o selo âmbar em uma cena. Macro e zoom-out. | **CFO:** “Qual é o limite?” **QA AI:** “E o que já foi provado?” |
-| 07 — A decisão | 45–53 s | KAIROS reúne opções em vidro. Câmera atravessa a tela e encontra apenas a silhueta do Founder tocando “revisar”. | **KAIROS:** “Eu preparo opções. Você decide.” |
-| 08 — A hora certa | 53–60 s | Todos os agentes se organizam em torno da ampulheta; a Tower dobra no símbolo Kairos. Dolly-out final. | **NARRADOR:** “A máquina acelera. O propósito continua humano.” **TEXTO ADICIONADO NA EDIÇÃO:** “Kairos Digital — Construa a hora certa.” |
+| 01 — O grão acorda | 0–8 s | Macro de um grão violeta tocando vidro gravado. A câmera faz dolly-out e revela a Founder Tower. ORION surge sereno, a areia percorre o núcleo dele. | **NARRADOR:** “Toda ideia começa pequena.” **ORION, grave e calmo:** “E toda ideia precisa de contexto.” Som: grão, vidro, pulso profundo. |
+| 02 — O sinal entra | 8–15 s | Um reflexo de celular atravessa o teto da Tower. KAIROS acompanha com olhos atentos, meio sorriso, e abre a palma; a luz vira uma missão. Push-in, rack focus no broche de ampulheta. | **KAIROS, acolhedor:** “Matheus enviou uma ideia.” **INSTAGRAM AI, animada, entrando de lado:** “Então vamos dar a ela uma história.” |
+| 03 — O mundo trabalha | 15–23 s | Hunter AI inclina a cabeça e examina sinais abstratos. Money Hunter cruza uma ponte de luz, confiante, o colar-ampulheta pulsa. Órbita curta e corte por reflexo. | **HUNTER AI, direto:** “Eu vejo sinais.” **MONEY HUNTER, precisa:** “Eu encontro valor quando alguém precisa dele.” |
+| 04 — O limite fala | 23–30 s | CFO fecha os dedos e cria um círculo azul de contenção. QA AI olha de lado, expressão firme, e grava um selo âmbar no ar. Macro do selo, zoom-out lento. | **CFO, contido:** “Qual é o limite?” **QA AI, sem hesitar:** “E o que já foi provado?” **KAIROS:** “Sem isso, não existe próximo passo.” |
+| 05 — O protótipo nasce | 30–38 s | CPO manipula um protótipo holográfico com curiosidade concentrada. Instagram AI aproxima-se, arqueia a sobrancelha e o frame ganha cor. Dolly lateral, parallax nos painéis. | **CPO, construtivo:** “Uma hipótese vira algo que alguém consegue tocar.” **INSTAGRAM AI:** “E algo que alguém consegue lembrar.” |
+| 06 — O portal abre | 38–45 s | ORION ergue o olhar; a Tower inteira se dobra em uma ampulheta. KAIROS reúne alternativas, respira e oferece o painel. O portal ocupa a lente. | **ORION:** “Escolhemos o essencial.” **KAIROS:** “As opções estão prontas.” **NARRADOR:** “E a tela deixa de ser o mundo inteiro.” |
+| 07 — Matheus no real | 45–53 s | Corte abrupto para hiper-realismo: sol de fim de tarde sobre prédio de 2026, close da pupila de Matheus, textura de pele e reflexos naturais. Ele guarda o celular e olha para o filho brincando, aliviado. | **MATHEUS, humano e cansado, mas leve:** “Hoje eu precisei estar presente.” **KAIROS, vindo do celular:** “A fila ficou organizada. Nada foi decidido sem você.” |
+| 08 — A escolha humana | 53–60 s | Matheus volta ao computador em uma sala real. Ele observa as opções, sorri discretamente e toca em revisar. A câmera sai pela janela, encontra a cidade e reflete a ampulheta no vidro. | **MATHEUS, decidido:** “Agora eu sei o próximo passo.” **NARRADOR:** “A máquina acelera. O propósito continua humano.” **LOCKUP:** “Kairos Digital — Construa a hora certa.” |
 
-## Prompt-mestre de consistência
+## Personalidade visual do elenco
 
-> Original Kairos Digital universe. Premium realistic cinematic science fiction, vertical 9:16. Deep black, electric blue, Kairos violet and magenta, luminous hourglass motif in every scene. Use the approved fictional Kairos Signal press kits as visual continuity reference: ORION is a dark-glass hourglass guardian, KAIROS is a human avatar with a discrete hourglass crest, Instagram AI is a blue-haired creative director, Hunter AI is an orc analyst, QA AI is an amber glass sentinel, Money Hunter is a futuristic messenger, CFO is a blue-glass boundary entity, CPO is a prototype architect. Realistic materials, skin and glass microtexture, controlled camera motion, no readable UI text, no third-party logos, no watermarks, no existing characters, no person likenesses. Preserve the same wardrobe, motifs and palette between takes. Native Brazilian Portuguese dialogue only when specified for the current take; otherwise environmental sound and score only.
+| Personagem | Expressão-base | Gesto individual |
+| --- | --- | --- |
+| ORION | serenidade concentrada | fecha a mão e reorganiza a areia do núcleo |
+| KAIROS | atenção acolhedora | abre a palma ao oferecer opções |
+| Instagram AI | curiosidade elétrica | desenha frames no ar com os dedos |
+| Hunter AI | cautela investigativa | inclina a cabeça antes de apontar um sinal |
+| Money Hunter | segurança pragmática | cruza a ponte de luz sem perder o contato visual |
+| CFO | disciplina silenciosa | fecha um círculo de limite com os dedos |
+| QA AI | firmeza protetora | aplica o selo e espera o resultado |
+| CPO | entusiasmo de construtor | gira o protótipo até a forma ficar clara |
+| Matheus | cansaço real que se torna clareza | pausa, respira e escolhe conscientemente |
 
-## Quality gate before generation
+## Orçamento controlado
 
-1. Conferir press kit, fala, lente, movimento e transição do take.
-2. Gerar um take por job com teto global de US$ 5.
-3. Rejeitar take com texto ilegível, mudança de identidade, marca de terceiros, fala truncada ou artefatos.
-4. Montar os takes aprovados, normalizar áudio e adicionar legenda/lockup apenas na pós-produção.
-5. Revisar o vídeo de 60 segundos antes de criar qualquer ação de publicação.
+O filme é oito takes separados. O piloto é o primeiro take com teto global de US$ 5, sem recarga. Depois de a Gateway devolver o uso real e os tokens desse piloto, a previsão operacional do filme é `8 × custo real do piloto + 20% de margem`. Não há previsão honesta de tokens antes de a Gateway processar um take; o Studio exibe essa limitação e registra os valores reais no acervo.
 
-## Próximo episódio
+## Gancho do Episódio 02
 
-**Episódio 02 — A Cidade que Trabalha Junto:** a missão aprovada no prólogo leva o elenco para uma cidade virtual. Cada departamento discorda sobre como resolver o mesmo problema; a história passa de apresentação para conflito e colaboração.
+Matheus escolhe uma missão. A câmera volta para a Founder Tower, onde os agentes discordam sobre como transformar a escolha em algo útil no mundo real.

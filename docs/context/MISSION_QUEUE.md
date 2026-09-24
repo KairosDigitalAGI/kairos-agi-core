@@ -195,3 +195,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - Roteiro final do episódio 01 organizado em oito takes curtos com falas, narrador, áudio e direção de câmera.
 - Studio mostra o plano de montagem e encaminha o Founder para a cobrança oficial da Vercel; nenhum cartão é coletado pelo Kairos.
 - Próxima: confirmar saldo disponível e gerar somente o primeiro take aprovado; a continuação depende da revisão do resultado e do orçamento real devolvido pela Gateway.
+
+## Missão 022 — Prólogo de 60 segundos e plano de crédito (revisada)
+
+- Roteiro coral com Matheus, expressões, gestos individuais e contraste explícito entre mundo digital e mundo real de 2026.
+- Saldo no Studio passa a ser uma ação prioritária que abre somente a cobrança oficial da Vercel; cartão não é coletado pelo Core.
+- Próxima: gerar o take 01 aprovado com teto de US$ 5, registrar uso e então calcular o orçamento verificável dos sete takes restantes.
