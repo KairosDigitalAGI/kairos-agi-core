@@ -4,7 +4,7 @@
 // migration 0020 aplicada em produção, GET reporta "unavailable" com o motivo
 // e POST falha fechado com 503 — nunca finge ter criado o job.
 import { checkAuth, unauthorized } from './_auth.js'
-import { computeContentPipeline, createContentJob } from './_content.js'
+import { computeContentPipeline, createContentJob, computeSeedanceReadiness } from './_content.js'
 
 export default async function handler(req, res) {
   if (!checkAuth(req)) return unauthorized(res)
@@ -12,6 +12,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'GET') {
     try {
+      if (req.query?.action === 'readiness') return res.status(200).json(await computeSeedanceReadiness())
       return res.status(200).json(await computeContentPipeline())
     } catch (e) {
       return res.status(500).json({ erro: e.message })
