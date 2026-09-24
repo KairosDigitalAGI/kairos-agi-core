@@ -1,3 +1,5 @@
+import { computeSeedanceReadiness } from '../_content.js'
+
 const definitions = [
   { id: 'instagram', mode: 'oauth', required: ['META_APP_ID', 'META_APP_SECRET', 'META_OAUTH_REDIRECT_URI'] },
   { id: 'youtube', mode: 'oauth', required: ['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'GOOGLE_OAUTH_REDIRECT_URI'] },
@@ -16,7 +18,12 @@ export function readIntegrationStatus(env = process.env, now = new Date()) {
   }
 }
 
-export default function handler(_request, response) {
+export default async function handler(request, response) {
   response.setHeader('Cache-Control', 'no-store, max-age=0')
-  response.status(200).json(readIntegrationStatus())
+  const status = readIntegrationStatus()
+  if (request.query?.scope === 'media') {
+    try { status.media = { seedance: await computeSeedanceReadiness() } }
+    catch { status.media = { seedance: null } }
+  }
+  response.status(200).json(status)
 }
