@@ -1,0 +1,6 @@
+{
+  "_instrucoes": "Preencha os campos com URLs públicas das imagens de referência. Cenas 2 e 5 precisam de fotos reais do Matheus/Vilson. Cena 6 usa a logo já deployada no Vercel.",
+  "2": "",
+  "5": "",
+  "6": "https://kairos-agi-core.vercel.app/brand/kairos-digital-hourglass.jpg"
+}

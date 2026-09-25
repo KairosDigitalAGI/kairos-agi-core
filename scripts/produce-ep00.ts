@@ -98,16 +98,22 @@ async function generateScene(sceneNum: number): Promise<SceneResult> {
     generate_audio: true,
   }
 
+  // Cenas com imageUrl usam image-to-video (mais fiel à referência visual)
+  // Cenas sem imageUrl usam text-to-video
+  const endpoint = imageUrl
+    ? 'bytedance/seedance-2.5/image-to-video'
+    : 'bytedance/seedance-2.5/text-to-video'
+
   if (imageUrl) {
     input['image_url'] = imageUrl
     base.usedImageRef = true
-    console.log(`  Cena ${sceneNum}: usando referência de imagem`)
+    console.log(`  Cena ${sceneNum}: image-to-video com referência`)
   } else if (scene.needsRef) {
-    console.log(`  Cena ${sceneNum}: sem imagem de referência — usando apenas prompt de texto (${scene.needsRef})`)
+    console.log(`  Cena ${sceneNum}: text-to-video (sem foto de referência para ${scene.needsRef})`)
   }
 
   try {
-    const result = await higgsfield.subscribe('bytedance/seedance-2.5/text-to-video', {
+    const result = await higgsfield.subscribe(endpoint, {
       input,
       withPolling: true,
     })
