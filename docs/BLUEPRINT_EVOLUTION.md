@@ -351,3 +351,7 @@ O Blueprint evolui o Clone Studio para uma biblioteca local de referências huma
 ## 2026-09-24 — Realismo físico do prólogo
 
 A direção final do Episódio 01 passa a distinguir os mundos por fotografia: a Founder Tower é fantasia digital dirigida; o exterior é mundo físico brasileiro contemporâneo, filmado com textura humana, luz solar, óptica e som ambiente realistas. Essa diferença é requisito de storyboard e de seleção de take, não uma promessa de que qualquer provider entregará o resultado sem revisão.
+
+## 2026-09-24 — Conflito humano e Valt
+
+A trilogia passa a usar pressão dramática sem transformar sofrimento familiar em produto: urgências como trânsito, compromisso familiar e cuidado com alguém próximo motivam a necessidade de clareza, mas decisões e cenas sensíveis permanecem humanas. Valt entra no Episódio 02 como sentinela ficcional de segurança, protegendo dados e interrompendo atalhos de origem não comprovada.

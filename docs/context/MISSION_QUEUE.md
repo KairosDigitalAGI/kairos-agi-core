@@ -233,3 +233,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Especificar contraste de realismo entre Founder Tower digital e mundo físico no Episódio 01.
 - [ ] Criar os takes somente após o pré-voo indicar provider, crédito, limite, consentimento de destino e job aprovado.
 - [ ] Revisar continuidade, expressão, voz e lockup em cada take antes da montagem final de 60 segundos.
+
+## Missão 013 — Conflito dramático e sentinela Valt
+
+- [x] Integrar conflitos reais e digitais à trilogia sem alegar automação de decisões humanas.
+- [x] Definir Valt como personagem ficcional de segurança no Episódio 02.
+- [ ] Produzir press kit ficcional de Valt antes de usá-lo em qualquer vídeo.

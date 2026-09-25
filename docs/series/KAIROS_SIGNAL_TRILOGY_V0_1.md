@@ -111,3 +111,17 @@ Para o establishing shot textual Seedance, a receita é macro de partículas e v
 Nos takes físicos do Episódio 01, Matheus e Vilson são pessoas reais no Brasil contemporâneo de 2026. A direção deve buscar fotografia de cinema, e não aparência de avatar: close de pele com poros e microexpressões, olhos com reflexo e movimento de pupila natural, cabelo e tecido reagindo ao vento, sol atravessando janelas, sombras coerentes, reflexos verdadeiros, perspectiva física, profundidade de campo óptica e som ambiente discreto. O corte entre a Founder Tower digital e o mundo externo deve aumentar a fidelidade perceptível de propósito: o público percebe que saiu da simulação antes mesmo de a fala explicar isso.
 
 A performance permanece humana: pausa antes de responder, respiração, olhar fora de quadro, gesto econômico e fala conversada. Não acelerar a dicção para preencher 60 segundos. A marca Kairos Digital entra exclusivamente pelo lockup original em pós-produção local e por elementos cenográficos aprovados, sem pedir texto ou tipografia ao modelo generativo.
+
+## Versão dramática da trilogia
+
+### Episódio 01 — A hora certa desperta
+
+Uma noite comum se rompe quando Matheus recebe uma ligação: um familiar precisa de ajuda e ele deixa o computador sem conseguir terminar uma ideia que poderia virar trabalho. Dentro da Founder Tower, o rascunho chega como um sinal incompleto. KAIROS quer abrir a missão; ORION recusa a pressa sem contexto; Hunter detecta uma possível demanda e QA impede que ela seja tratada como cliente. Instagram AI vê uma história humana escondida naquele caos, enquanto CFO fecha o limite: nenhum gasto, nenhum envio, nenhuma promessa. Ao voltar para o celular, Matheus encontra opções preparadas, não uma decisão tomada. O conflito termina na escolha dele de priorizar a família; a torre continua em estado de revisão.
+
+### Episódio 02 — A cidade que trabalha junto
+
+No dia seguinte, Matheus e Vilson estão presos em um trânsito intenso a caminho de um compromisso importante. No mundo digital, a Founder Tower sente a pressão: a demanda está esfriando, uma peça de conteúdo tem prazo e um sinal externo parece urgente. A equipe quase se divide. Hunter quer reagir; Instagram AI quer publicar; CFO calcula o risco; QA bloqueia o atalho. Valt, sentinela de segurança da torre, detecta uma tentativa de usar dados sem origem comprovada e isola o distrito inteiro. Ele não “vence” com violência: segura a porta, registra a evidência e dá à equipe tempo para decidir. Vilson, como Co-CEO, recebe no telefone uma rota de decisão preparada para revisão. A ação do episódio é a equipe impedindo que urgência vire erro.
+
+### Episódio 03 — Do outro lado da ampulheta
+
+Um dia que deveria ser de celebração — aniversário da família e a chegada de uma notícia que muda a rotina — coincide com uma crise de operação: uma mensagem importante chega, um vídeo está pronto para revisão e uma oportunidade depende de resposta. Matheus não abandona a vida real para “salvar o sistema”. KAIROS reúne o elenco; ORION divide a prioridade; Valt mantém os dados protegidos; QA separa fato de suposição; Instagram AI prepara duas versões honestas de uma história; Hunter organiza o contexto; CFO preserva o limite. Ao fim, Matheus e Vilson abrem o painel quando podem e escolhem juntos. A Kairos não prometeu resolver a vida deles: devolveu clareza suficiente para que a vida fosse vivida. A ampulheta final aparece como assinatura da escolha humana sobre o tempo.
