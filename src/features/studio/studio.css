@@ -53,3 +53,4 @@
 .ep00-hf-input:focus { border-color: rgba(123,47,255,.5); }
 .ep00-endpoint-ref summary { font-size: .8rem; color: var(--text-muted, #6a6a9c); cursor: pointer; }
 .ep00-endpoint-code { background: #050510; border: 1px solid rgba(255,255,255,.06); border-radius: 8px; padding: 12px; font-size: .72rem; line-height: 1.75; color: rgba(238,238,246,.7); overflow-x: auto; margin-top: 8px; }
+.ep00-logo { width: 64px; height: 64px; object-fit: contain; border-radius: 12px; border: 1px solid rgba(123,47,255,.3); background: #040409; flex-shrink: 0; }

@@ -218,7 +218,7 @@ const dialogueBeats: Record<string, Array<{ speaker: string; line: string }>> = 
 
 
 const cast = [
-  { name: 'Founder', role: 'Narrador e presença humana', state: 'Referências privadas locais', detail: 'A decisão final é humana. O press kit do Founder permanece no cofre privado local e não é enviado por esta tela.' },
+  { name: 'Matheus Schelle', role: 'Co-CEO · Co-Fundador · Narrador EP00', state: 'Upload de referência disponível no Cofre', detail: 'Brasileiro, 27 anos. Cabelo castanho escuro, cachos naturais, comprimento médio. Olhos castanho-escuros amendoados, sobrancelhas grossas. Barba: cavanhaque + bigode conectado, densidade média. Pele oliva/morena clara, tom quente. Físico atlético-sólido, ombros largos, ~1.78m. Mandíbula forte com barba. Look: camisa sobreposta cinza carvão + camiseta preta + calça escura + tênis preto. Expressão base: confiante, leve sorriso estratégico, olhar firme.' },
   { name: 'KAIROS', role: 'Assistente pessoal · pessoa-avatar Kairos', state: 'Retrato v3 disponível', image: '/characters/kairos-portrait-v3.png', detail: 'Mediador humano do elenco: recebe a ideia, organiza opções e devolve a decisão ao Founder. A nova ficha usa a ampulheta como tatuagem, broche ou detalhe do figurino.' },
   { name: 'ORION', role: 'Coordenação estratégica · guardião-ampulheta', state: 'Retrato v3 disponível', image: '/characters/orion-portrait-v3.png', detail: 'Guardião de contexto e prioridades. Corpo, núcleo e silhueta repetem a geometria da ampulheta Kairos.' },
   { name: 'Instagram AI', role: 'Direção criativa · avatar azul', state: 'Retrato v3 disponível', image: '/characters/instagram-ai-portrait-v3.png', detail: 'Traduz intenção em narrativa, storyboard e conversa. Cabelo azul, lentes de holograma e emblema magenta.' },
@@ -228,7 +228,7 @@ const cast = [
   { name: 'QA AI', role: 'Qualidade e evidência · sentinela âmbar', state: 'Retrato v3 disponível', image: '/characters/qa-ai-portrait-v3.png', detail: 'Interrompe atalhos e exige prova. Carrega uma ampulheta em forma de selo de validação.' },
   { name: 'CPO', role: 'Produto e experiências · arquiteto de protótipos', state: 'Retrato v3 disponível', image: '/characters/cpo-portrait-v3.png', detail: 'Transforma hipótese em protótipo revisável. O capacete projeta a marca Kairos como uma ampulheta geométrica.' },
   { name: 'Cliente-arquétipo', role: 'Olhar do público · personagem ficcional', state: 'Personagem ficcional', detail: 'Faz as perguntas que a audiência faria. Não representa nem reproduz uma pessoa ou cliente real.' },
-  { name: 'Vilson', role: 'Co-CEO · cofundador e presença humana', state: 'Referências privadas recebidas', detail: 'As referências privadas do co-CEO pertencem ao cofre local. Nenhuma delas é enviada a provedor por esta tela; a aparição em produção exige autorização específica de destino.' },
+  { name: 'Vilson Mota', role: 'Co-CEO · Co-Fundador · Narrador EP00', state: 'Upload de referência disponível no Cofre', detail: 'Brasileiro, início dos 30s. Cabelo preto liso, comprimento médio, levemente penteado para um lado com undercut fade nas laterais. Olhos castanho-escuros amendoados, sobrancelhas grossas bem definidas. Barba: cavanhaque conectado ao bigode, bem aparada, preta, bordas precisas. Pele morena clara a média, tom quente. Físico muito musculoso e atlético, ombros muito largos, presença imponente. Mandíbula quadrada forte. Traço marcante: sorriso muito aberto, amplo e branco. Smartband fitness preta no pulso esquerdo. Expressão base: sorriso confiante e aberto, energia dominante e acessível.' },
 ]
 
 const pressKits = [
@@ -300,6 +300,7 @@ function Ep00ProductionPanel() {
   return <>
     <section className="glass-panel ep00-panel">
       <div className="ep00-header">
+        <img src="/brand/kairos-digital-hourglass.jpg" alt="Kairos Digital" className="ep00-logo" />
         <div>
           <span className="eyebrow">EP00 · TRAILER INSTITUCIONAL · 30 SEGUNDOS</span>
           <h3>Produção: GPT Image 2.5 → Seedance 2.5</h3>
