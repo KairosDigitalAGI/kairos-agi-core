@@ -359,3 +359,7 @@ A trilogia passa a usar pressão dramática sem transformar sofrimento familiar 
 ## 2026-09-24 — Âncora de identidade privada
 
 O Blueprint permite uma imagem-âncora privada para continuidade editorial do Founder quando ele fornece as referências e autoriza a geração. A âncora não muda o requisito de autorização específica para qualquer transferência a um provedor de vídeo ou voz.
+
+## 2026-09-24 — Press kit humano privado
+
+O Blueprint inclui um press kit humano privado em peças de continuidade: âncora, turnaround, expressão, cenário de trabalho e vida cotidiana. Essa coleção só pode aparecer em cofre local/autenticado; não é asset público e não autoriza transferência a qualquer provider externo.

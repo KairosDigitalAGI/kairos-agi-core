@@ -407,3 +407,7 @@ O Studio permite baixar um dossiê Markdown do episódio selecionado com visão,
 ## 2026-09-24 — Âncora visual privada do Founder
 
 Uma âncora visual fotográfica do Founder foi gerada exclusivamente a partir das referências fornecidas por ele nesta conversa. O resultado fica em área privada ignorada pelo Git e serve apenas como referência editorial local. Não constitui clonagem de voz, treinamento, autorização de upload externo ou uso em geração de vídeo por outro provedor.
+
+## 2026-09-24 — Press kit privado do Founder
+
+O press kit privado ganhou cinco peças: âncora facial, turnaround de corpo inteiro, expressões e microdetalhes, estação de trabalho e pose reclinada. Cada imagem foi gerada a partir da âncora autorizada do Founder e permanece em `memory/private`, fora do repositório público. A próxima etapa é importar explicitamente a coleção no cofre do Studio do navegador, sem criar URL pública ou enviar a outro provedor.

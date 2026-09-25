@@ -244,3 +244,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 
 - [x] Gerar uma referência-base fotográfica privada a partir das imagens autorizadas do Founder.
 - [ ] Criar variações de cenário, corpo e expressão somente após seleção explícita de referências e destino de geração.
+
+## Missão 015 — Press kit privado completo do Founder
+
+- [x] Criar âncora, turnaround, expressões, workstation e pose reclinada para continuidade do avatar.
+- [x] Manter todas as peças no armazenamento privado ignorado pelo Git.
+- [ ] Importar a coleção no cofre local do Studio quando a versão do cofre multi-referência estiver disponível no deployment ativo.
