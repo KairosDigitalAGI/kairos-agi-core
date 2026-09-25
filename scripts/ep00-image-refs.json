@@ -1,5 +1,5 @@
 {
-  "_instrucoes": "URLs públicas Vercel das referências. Cena 2 usa text-to-video (sem foto combinada dos dois fundadores). Cena 5 usa face-reference-sheet do Matheus para máxima fidelidade no close-up. Cena 6 usa a logo.",
+  "_instrucoes": "image-to-video para todas as 6 cenas. Cenas 1/3/4/6 usam o frame GPT gerado. Cena 2 usa foto do Matheus (home office/charcoal = look exato EP00). Cena 5 usa face-reference-sheet para fidelidade máxima no close-up.",
   "_referencias_disponiveis": {
     "matheus": [
       "https://kairos-agi-core.vercel.app/references/matheus/matheus-01-studio-portrait-beige.webp",
@@ -16,7 +16,10 @@
       "https://kairos-agi-core.vercel.app/references/vilson/vilson-05-apartment-olive.jpg"
     ]
   },
-  "2": "",
+  "1": "https://kairos-agi-core.vercel.app/references/ep00-scenes/cena1-abertura-caos.webp",
+  "2": "https://kairos-agi-core.vercel.app/references/matheus/matheus-04-homeoffice-laptop-night.webp",
+  "3": "https://kairos-agi-core.vercel.app/references/ep00-scenes/cena3-kairos-sistema.webp",
+  "4": "https://kairos-agi-core.vercel.app/references/ep00-scenes/cena4-cliente-reacao.webp",
   "5": "https://kairos-agi-core.vercel.app/references/matheus/matheus-05-face-reference-sheet.webp",
-  "6": "https://kairos-agi-core.vercel.app/brand/kairos-digital-hourglass.jpg"
+  "6": "https://kairos-agi-core.vercel.app/references/ep00-scenes/cena6-logo-reveal.webp"
 }
