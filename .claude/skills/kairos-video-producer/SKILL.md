@@ -73,6 +73,14 @@ Conclusões:
 - Payoff visual (venda fechando) repetido no fim para manter retenção.
 - Estrutura narrativa que funcionou: estilo "Divertidamente" — agentes operando um Quartel-General dentro do celular enquanto o dono dorme; fundadores como criadores observando pelo vidro.
 
+## Entrega para Instagram (Reels) sem perder qualidade
+
+1. Upscale IA do vídeo gerado (não esticar 480p): `upscale_video` provider `bytedance`, preset `aigc`, `resolution` 1080p, fps 24 — custou 0,6 crédito para 30s.
+2. Montar tudo numa passada só (um único encode): vídeo do upscale + **áudio do arquivo original da geração**; edição da abertura vencedora + `eq` + layout 9:16 (fundo = vídeo desfocado, vídeo 1080x608 no centro com `flags=lanczos`, `setsar=1`) + overlay PNG (título no topo y≈350–550, CTA em y≈1400; fora da faixa inferior da interface).
+3. Encode: `libx264 -preset slow -crf 16 -profile:v high`, fps igual ao da fonte (24), `aac -b:a 256k`, `aresample=48000:resampler=soxr`, `-movflags +faststart`.
+4. Subir vídeo e capa no Higgsfield (`media_upload` → PUT → `media_confirm`) para ter link permanente — o container da sessão é temporário.
+5. Postagem: `scripts/ep00-videos/ep00-reels-post.md` é o modelo (legenda, 5 hashtags, rótulo de IA ligado, sem música por cima das falas, colaborador, alt text). Publicar exige conector (Metricool) e aprovação explícita do Matheus antes de agendar/publicar.
+
 ## Assets no Higgsfield (workspace privado 937d13ee-84bc-432f-a24b-45803a0b7cce)
 
 Referências para `medias` (`role: image_references`):
