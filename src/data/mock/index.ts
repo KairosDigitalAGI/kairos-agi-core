@@ -25,7 +25,7 @@ export const agents: FounderAgent[] = [
   },
   {
     id: 'hunter-ai', name: 'Hunter AI', role: 'Demand Network', status: 'Trabalhando',
-    task: 'Pesquisando clínicas em Campinas.', progress: 48, color: '#34d399', position: [3.35, 0, -0.85],
+    task: 'Pesquisando leads no segmento-alvo.', progress: 48, color: '#34d399', position: [3.35, 0, -0.85],
   },
 ]
 

@@ -17,7 +17,7 @@ const episodes: Episode[] = [
     number: '00',
     title: 'Kairos Digital — Trailer Institucional',
     status: 'Trailer · 30 s · Seedance 2.5',
-    summary: 'O vídeo de abertura da Kairos Digital. 6 cenas de 5 segundos que apresentam o problema (leads perdidos), os fundadores (Matheus + Vilson), o produto (Operador Autônomo Arthur), a prova social (bot fechou às 2AM), a autoridade (Matheus VO) e o logo. Produzido com GPT Image 2.5 (referências) → Seedance 2.5 via Higgsfield API.',
+    summary: 'O vídeo de abertura da Kairos Digital. 6 cenas de 5 segundos que apresentam o problema (leads perdidos), os fundadores (Matheus + Vilson), o produto (Operador Autônomo Kairos), a prova social (bot fechou às 2AM), a autoridade (Matheus VO) e o logo. Produzido com GPT Image 2.5 (referências) → Seedance 2.5 via Higgsfield API.',
     narration: '"Cada segundo sem automação é dinheiro deixado na mesa." — Matheus Schelle',
     hook: 'Kairos Digital. O futuro chegou. E ele trabalha pra você.',
     screenplay: `EP00 — TRAILER INSTITUCIONAL KAIROS DIGITAL · 30 SEGUNDOS
@@ -34,7 +34,7 @@ VILSON: "...a gente vai mudar o jogo pra sempre."
 Tool: GPT Image 2.5 (+ referências privadas) → Seedance 2.5
 
 CENA 3 (00:10–00:15) — ARTHUR + KAIROS EM AÇÃO
-Interface holográfica dividida. Arthur (WhatsApp dashboard) à esquerda, símbolo Kairos pulsando à direita.
+Interface holográfica dividida. Kairos (WhatsApp dashboard) à esquerda, símbolo Kairos pulsando à direita.
 ARTHUR (IA): "Lead identificado. Qualificando perfil... interesse confirmado."
 KAIROS (IA): "Proposta enviada. Acompanhando. Fechando."
 Tool: GPT Image 2.5 → Seedance 2.5
@@ -205,7 +205,7 @@ const dialogueBeats: Record<string, Array<{ speaker: string; line: string }>> = 
   '00': [
     { speaker: 'MATHEUS', line: 'A gente não vai só automatizar processos...' },
     { speaker: 'VILSON', line: '...a gente vai mudar o jogo pra sempre.' },
-    { speaker: 'ARTHUR (IA)', line: 'Lead identificado. Qualificando perfil... interesse confirmado.' },
+    { speaker: 'KAIROS (IA)', line: 'Lead identificado. Qualificando perfil... interesse confirmado.' },
     { speaker: 'KAIROS (IA)', line: 'Proposta enviada. Acompanhando. Fechando.' },
     { speaker: 'CLIENTE', line: 'Cê tá me dizendo que o bot fechou sozinho... às 2 da manhã?!' },
     { speaker: 'MATHEUS (VO)', line: 'Cada segundo sem automação é dinheiro deixado na mesa.' },
