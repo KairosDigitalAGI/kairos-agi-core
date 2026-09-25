@@ -4,7 +4,7 @@ import { ContentEnginePanel } from '../dashboard/ContentEnginePanel'
 import { FilmLibraryPage } from '../../engines/video/FilmLibraryPage'
 import { VideoPage } from '../../engines/video/VideoPage'
 import { PrivateCloneVault } from './PrivateCloneVault'
-import { characterDirections, STUDIO_PRODUCTION_DRAFT_KEY, storyboards, toProductionDraft } from './storyboard'
+import { characterDirections, ep00CharacterBases, ep00GptPrompts, STUDIO_PRODUCTION_DRAFT_KEY, storyboards, toProductionDraft } from './storyboard'
 import './studio.css'
 
 type StudioTab = 'story' | 'cast' | 'production' | 'library'
@@ -13,6 +13,47 @@ type Episode = { number: string; title: string; status: string; summary: string;
 const EPISODE_STORAGE_KEY = 'kairos.signal.episodes.v2'
 
 const episodes: Episode[] = [
+  {
+    number: '00',
+    title: 'Kairos Digital — Trailer Institucional',
+    status: 'Trailer · 30 s · Seedance 2.5',
+    summary: 'O vídeo de abertura da Kairos Digital. 6 cenas de 5 segundos que apresentam o problema (leads perdidos), os fundadores (Matheus + Vilson), o produto (Operador Autônomo Arthur), a prova social (bot fechou às 2AM), a autoridade (Matheus VO) e o logo. Produzido com GPT Image 2.5 (referências) → Seedance 2.5 via Higgsfield API.',
+    narration: '"Cada segundo sem automação é dinheiro deixado na mesa." — Matheus Schelle',
+    hook: 'Kairos Digital. O futuro chegou. E ele trabalha pra você.',
+    screenplay: `EP00 — TRAILER INSTITUCIONAL KAIROS DIGITAL · 30 SEGUNDOS
+
+CENA 1 (00:00–00:05) — ABERTURA: O MUNDO EM CAOS
+Vista aérea de cidade brasileira à noite. Telas de celular flutuam no ar escuro com mensagens sem resposta, leads perdidos, oportunidades escoando.
+[SEM DIÁLOGO — música + efeitos digitais]
+Tool: GPT Image 2.5 → Seedance 2.5
+
+CENA 2 (00:05–00:10) — FUNDADORES: VISÃO
+Matheus e Vilson lado a lado no home office noturno. Confiantes, determinados. Viram para câmera.
+MATHEUS: "A gente não vai só automatizar processos..."
+VILSON: "...a gente vai mudar o jogo pra sempre."
+Tool: GPT Image 2.5 (+ referências privadas) → Seedance 2.5
+
+CENA 3 (00:10–00:15) — ARTHUR + KAIROS EM AÇÃO
+Interface holográfica dividida. Arthur (WhatsApp dashboard) à esquerda, símbolo Kairos pulsando à direita.
+ARTHUR (IA): "Lead identificado. Qualificando perfil... interesse confirmado."
+KAIROS (IA): "Proposta enviada. Acompanhando. Fechando."
+Tool: GPT Image 2.5 → Seedance 2.5
+
+CENA 4 (00:15–00:20) — CLIENTE CHOCADO
+Empresário brasileiro no escritório à noite. Segura celular mostrando venda fechada às 02:17.
+CLIENTE: "Cê tá me dizendo que o bot fechou sozinho... às 2 da manhã?!"
+Tool: GPT Image 2.5 → Seedance 2.5
+
+CENA 5 (00:20–00:25) — MATHEUS VO: CLOSE INTENSO
+Extreme close-up do Matheus direto para câmera. Iluminação dramática. "The boss" energy.
+MATHEUS (voz over): "Cada segundo sem automação é dinheiro deixado na mesa."
+Tool: GPT Image 2.5 (+ referência privada Matheus) → Seedance 2.5
+
+CENA 6 (00:25–00:30) — LOGO REVEAL
+Logo Kairos Digital surge do centro com pulso de luz. Partículas. Tagline final.
+VILSON (voz over): "Kairos Digital. O futuro chegou. E ele trabalha pra você."
+Tool: GPT Image 2.5 → Seedance 2.5`,
+  },
   { number: '01', title: 'A hora certa desperta', status: 'Roteiro coral · 96 s', summary: 'Dentro da Founder Tower, uma ideia enviada de madrugada acorda um elenco de agentes. Eles discordam sobre velocidade, contexto e risco até o Founder escolher a primeira missão.', narration: '“Uma ideia não precisa esperar a hora perfeita. Ela precisa encontrar a hora certa.”', hook: 'Quando a ampulheta vira, todo mundo precisa escolher o que fazer com o tempo.', screenplay: `CENA 1 · O GRÃO · 0–8s
 Um grão violeta cai no vazio e desenha a ampulheta Kairos. Dolly-out revela a Founder Tower.
 NARRADOR: “Toda ideia começa pequena.”
@@ -161,6 +202,15 @@ TEXTO: “Kairos Digital · construa a hora certa.”` },
 ]
 
 const dialogueBeats: Record<string, Array<{ speaker: string; line: string }>> = {
+  '00': [
+    { speaker: 'MATHEUS', line: 'A gente não vai só automatizar processos...' },
+    { speaker: 'VILSON', line: '...a gente vai mudar o jogo pra sempre.' },
+    { speaker: 'ARTHUR (IA)', line: 'Lead identificado. Qualificando perfil... interesse confirmado.' },
+    { speaker: 'KAIROS (IA)', line: 'Proposta enviada. Acompanhando. Fechando.' },
+    { speaker: 'CLIENTE', line: 'Cê tá me dizendo que o bot fechou sozinho... às 2 da manhã?!' },
+    { speaker: 'MATHEUS (VO)', line: 'Cada segundo sem automação é dinheiro deixado na mesa.' },
+    { speaker: 'VILSON (VO)', line: 'Kairos Digital. O futuro chegou. E ele trabalha pra você.' },
+  ],
   '01': [{ speaker: 'KAIROS', line: 'Recebi uma ideia. Querem que eu abra uma missão?' }, { speaker: 'ORION', line: 'Velocidade sem direção é só barulho.' }, { speaker: 'HUNTER AI', line: 'Sinal não é cliente; oportunidade não é promessa.' }, { speaker: 'INSTAGRAM AI', line: 'Primeiro, alguém precisa sentir.' }, { speaker: 'QA AI', line: 'Eu marco o que foi provado.' }, { speaker: 'FOUNDER', line: 'Revisar.' }],
   '02': [{ speaker: 'INSTAGRAM AI', line: 'Qual história merece ser contada primeiro?' }, { speaker: 'CFO', line: 'Quanto custa tentar?' }, { speaker: 'QA AI', line: 'Mostrem o limite e deixem a escolha visível.' }, { speaker: 'CLIENTE', line: 'Então vocês fazem tudo por mim?' }, { speaker: 'ELENCO', line: 'Nós preparamos o caminho para você decidir melhor.' }],
   '03': [{ speaker: 'FOUNDER', line: 'Eu tive uma ideia. Não tenho uma noite inteira.' }, { speaker: 'KAIROS', line: 'Eu devolvo opções, não decisões.' }, { speaker: 'QA AI', line: 'Evidência antes de transformar sinal em verdade.' }, { speaker: 'FOUNDER', line: 'Agora eu entendo o próximo passo.' }, { speaker: 'ELENCO', line: 'Pessoas com mais tempo para criar.' }],
@@ -224,9 +274,115 @@ export function StudioPage() {
     <nav className="studio-tabs" aria-label="Áreas do Studio"><button className={tab === 'story' ? 'active' : ''} onClick={() => setTab('story')}><FileText size={16} />História</button><button className={tab === 'cast' ? 'active' : ''} onClick={() => setTab('cast')}><UsersRound size={16} />Elenco</button><button className={tab === 'production' ? 'active' : ''} onClick={() => setTab('production')}><Clapperboard size={16} />Produção</button><button className={tab === 'library' ? 'active' : ''} onClick={() => setTab('library')}><LibraryBig size={16} />Biblioteca</button></nav>
     {tab === 'story' && <><section className="glass-panel studio-continuation"><div><span className="eyebrow">CONTINUIDADE DA SÉRIE</span><h3>Como a Kairos Signal continua</h3><p>{continuation === 'paused' ? 'A produção está pausada. Nada é gerado, gasto ou publicado automaticamente.' : 'Modo manual: o roteiro e os pedidos ficam prontos, mas cada geração e publicação exige a ação correspondente no pipeline operacional.'}</p></div><div className="studio-switch"><button className={continuation === 'paused' ? 'selected' : ''} onClick={() => setContinuation('paused')}><Pause size={15} />Pausada</button><button className={continuation === 'manual' ? 'selected' : ''} onClick={() => setContinuation('manual')}><Play size={15} />Manual</button></div></section><section className="studio-autopilot-note"><LockKeyhole size={18} /><div><strong>Autopilot ainda não está liberado</strong><p>Ele só pode ser ativado após crédito real, provider configurado, job persistido, limite de gasto e uma integração social que confirme remotamente cada publicação.</p></div></section><section className="glass-panel studio-dialogue-deck"><div><span className="eyebrow">CONVERSA DO ELENCO · EPISÓDIO {episode.number}</span><h3>A história acontece entre as vozes</h3><p>Estas falas são a espinha do episódio. O roteiro completo abaixo traz a encenação e pode ser editado antes de qualquer geração.</p></div><ol>{(dialogueBeats[episode.number] ?? []).map((beat, index) => <li key={`${beat.speaker}-${index}`}><strong>{beat.speaker}</strong><span>“{beat.line}”</span></li>)}</ol></section><section className="glass-panel studio-storyboard"><div className="studio-storyboard-heading"><div><span className="eyebrow"><PanelsTopLeft size={13} /> LEITURA VISUAL GUIADA · EPISÓDIO {episode.number}</span><h3>Storyboard cinematográfico pronto para a fila</h3><p>São quadros de direção e prompts; ainda não são imagens ou vídeos gerados. Cada um preserva continuidade, marca e movimento de câmera antes de entrar em um job aprovado.</p></div><Camera size={28} /></div><div className="studio-storyboard-grid">{(storyboards[episode.number] ?? []).map(frame => <article key={frame.scene}><header><span>CENA {frame.scene} · {frame.duration}</span><strong>{frame.title}</strong></header><p>{frame.visual}</p><dl><div><dt>CÂMERA</dt><dd>{frame.camera}</dd></div><div><dt>TRANSIÇÃO</dt><dd>{frame.transition}</dd></div></dl><details><summary>Ver prompt de geração</summary><code>{frame.prompt}</code></details><button type="button" onClick={() => prepareStoryboardFrame(frame)}>Preparar no Content Engine</button></article>)}</div></section><section className="studio-episode-grid">{Object.values(episodeDrafts).map(item => <article className={`glass-panel studio-episode ${selectedEpisode === item.number ? 'selected' : ''}`} key={item.number} onClick={() => setSelectedEpisode(item.number)}><span>EPISÓDIO {item.number}</span><h3>{item.title}</h3><small>{item.status}</small><p>{item.summary}</p><blockquote>{item.narration}</blockquote><footer>{item.hook}</footer></article>)}</section><section className="glass-panel studio-screenplay"><div className="editorial-row"><div><span className="eyebrow">ROTEIRO COMPLETO · EPISÓDIO {episode.number}</span><h3>{episode.title}</h3><p>Edite a história, as falas, as cenas e o gancho. O rascunho fica salvo neste navegador até virar um job aprovado.</p></div><div className="studio-screenplay-actions"><button type="button" onClick={() => downloadEpisodeDocument(episode)}><Download size={15} />Baixar dossiê .md</button><button className="primary-button" onClick={saveEpisodes}><Save size={15} />Salvar roteiro</button></div></div><div className="studio-script-fields"><label>Título<input value={episode.title} onChange={event => updateEpisode('title', event.target.value)} /></label><label>Resumo<input value={episode.summary} onChange={event => updateEpisode('summary', event.target.value)} /></label><label>Narração principal<textarea value={episode.narration} onChange={event => updateEpisode('narration', event.target.value)} rows={3} /></label><label>Roteiro e cenas<textarea value={episode.screenplay} onChange={event => updateEpisode('screenplay', event.target.value)} rows={18} /></label><label>Gancho final<input value={episode.hook} onChange={event => updateEpisode('hook', event.target.value)} /></label></div>{saved && <span className="studio-saved">Roteiro salvo neste navegador.</span>}</section></>}
     {tab === 'cast' && <><section className="glass-panel studio-cast-intro"><div><span className="eyebrow">ELENCO · KAIROS SIGNAL</span><h3>Personagens organizados por história</h3><p>Este é o elenco da trilogia. Cada história futura terá sua própria ficha de elenco, referências, objetos, roupas e versões.</p></div><img className="studio-cast-brand" src="/brand/kairos-digital-hourglass.jpg" alt="Ampulheta Kairos Digital" /></section><PrivateCloneVault /><section className="glass-panel studio-brand-bible"><span className="eyebrow">BÍBLIA VISUAL · KAIROS DIGITAL</span><h3>Uma assinatura que atravessa o universo</h3><div><p><strong>Ícone recorrente:</strong> a ampulheta aparece como selo, holograma, arquitetura, joia, tatuagem ou núcleo de cada agente.</p><p><strong>Paleta:</strong> violeta Kairos, azul elétrico, magenta e preto profundo; luz de borda e vidro dão unidade ao mundo físico e digital.</p><p><strong>Tipografia e encerramento:</strong> cada episódio reserva o lockup Kairos Digital e a frase “Construa a hora certa” para a marca final.</p></div></section><section className="studio-presskit-intro"><div><span className="eyebrow">ASSETS VISUAIS · ELENCO DO EPISÓDIO 01</span><h3>Quatro folhas de referência para a produção</h3><p>Estes são assets ficcionais de direção visual. Eles dão continuidade a rosto, roupa, objeto e assinatura da marca antes de qualquer cena em vídeo.</p></div></section><section className="studio-presskit-grid">{pressKits.map(kit => <article className="glass-panel studio-presskit-card" key={kit.title}><img src={kit.image} alt={`Press kit visual de ${kit.title}`} /><div><span>{kit.title}</span><small>{kit.members}</small><p>{kit.description}</p></div></article>)}</section><section className="glass-panel studio-character-directions"><div><span className="eyebrow">PRESS KIT DE DIREÇÃO · PERSONAGENS FICCIONAIS</span><h3>Identidade repetível antes de renderizar</h3><p>As folhas acima são a referência visual. Estas fichas registram os invariantes de roupa, objeto, marca e movimento para o prompt de cada cena.</p></div><div>{characterDirections.map(member => <article key={member.name}><strong>{member.name}</strong><span>{member.archetype}</span><dl><div><dt>MARCA</dt><dd>{member.marker}</dd></div><div><dt>OBJETO</dt><dd>{member.prop}</dd></div><div><dt>CÂMERA</dt><dd>{member.camera}</dd></div></dl></article>)}</div></section><section className="studio-cast-grid">{cast.map(member => <article className="glass-panel studio-cast-card" key={member.name}>{member.image && <img src={member.image} alt={`Retrato ficcional de ${member.name}`} />}<div><span className="studio-cast-mark">{member.name === 'Founder' || member.name === 'Vilson' ? <LockKeyhole size={18} /> : <Sparkles size={18} />}</span><div><strong>{member.name}</strong><small>{member.role}</small></div></div><em>{member.state}</em><p>{member.detail}</p>{member.name === 'Founder' && <button onClick={() => setTab('production')}>Preparar edição segura</button>}</article>)}</section></>}
-    {tab === 'production' && <><section className="glass-panel studio-edit-request"><div><span className="eyebrow"><ImagePlus size={13} /> PEDIDO DE EDIÇÃO</span><h3>Melhorar imagem ou preparar uma nova cena</h3><p>Descreva a alteração: personagem, episódio, enquadramento, roupa, objeto, luz ou continuidade. O pedido fica salvo neste navegador para ser usado no gerador escolhido.</p></div><textarea value={editRequest} onChange={event => setEditRequest(event.target.value)} maxLength={2400} placeholder="Ex.: Episódio 1, plano 5: manter a paleta violeta, corrigir o reflexo do visor de KAIROS e deixar espaço para legenda…" rows={6} /><div><button className="primary-button" onClick={saveEditRequest}>Salvar pedido local</button>{saved && <span className="studio-saved">Pedido salvo neste navegador.</span>}</div></section><section className="studio-provider-note"><LockKeyhole size={18} /><p>O Studio organiza o pedido e o acervo. Enviar imagens do Founder, Wilson ou qualquer clone para GPT, Higgsfield, Seedance ou outro destino continua bloqueado até a escolha explícita do provedor e a autorização daquele envio.</p></section><ContentEnginePanel /><VideoPage /></>}
+    {tab === 'production' && <><Ep00ProductionPanel /><section className="glass-panel studio-edit-request"><div><span className="eyebrow"><ImagePlus size={13} /> PEDIDO DE EDIÇÃO</span><h3>Melhorar imagem ou preparar uma nova cena</h3><p>Descreva a alteração: personagem, episódio, enquadramento, roupa, objeto, luz ou continuidade. O pedido fica salvo neste navegador para ser usado no gerador escolhido.</p></div><textarea value={editRequest} onChange={event => setEditRequest(event.target.value)} maxLength={2400} placeholder="Ex.: Episódio 1, plano 5: manter a paleta violeta, corrigir o reflexo do visor de KAIROS e deixar espaço para legenda…" rows={6} /><div><button className="primary-button" onClick={saveEditRequest}>Salvar pedido local</button>{saved && <span className="studio-saved">Pedido salvo neste navegador.</span>}</div></section><section className="studio-provider-note"><LockKeyhole size={18} /><p>O Studio organiza o pedido e o acervo. Enviar imagens do Founder, Wilson ou qualquer clone para GPT, Higgsfield, Seedance ou outro destino continua bloqueado até a escolha explícita do provedor e a autorização daquele envio.</p></section><ContentEnginePanel /><VideoPage /></>}
     {tab === 'library' && <><section className="glass-panel studio-library-intro"><LibraryBig size={28} /><div><span className="eyebrow">ACERVO DA HISTÓRIA</span><h3>Filmes, cenas e versões</h3><p>O acervo operacional mostra apenas itens devolvidos por um provider ou salvos localmente. A ausência de vídeo significa que ainda não houve geração verificável.</p></div></section><FilmLibraryPage embedded /></>}
   </div>
+}
+
+function Ep00ProductionPanel() {
+  const [copied, setCopied] = useState<string | null>(null)
+  const [hfKey, setHfKey] = useState(() => { try { return localStorage.getItem('kairos.hf.key') ?? '' } catch { return '' } })
+  const [hfSaved, setHfSaved] = useState(false)
+
+  const copy = (text: string, id: string) => {
+    void navigator.clipboard.writeText(text).then(() => {
+      setCopied(id)
+      window.setTimeout(() => setCopied(null), 2200)
+    })
+  }
+
+  const saveHfKey = () => {
+    try { localStorage.setItem('kairos.hf.key', hfKey.trim()) } catch { /* ignore */ }
+    setHfSaved(true)
+    window.setTimeout(() => setHfSaved(false), 2500)
+  }
+
+  return <>
+    <section className="glass-panel ep00-panel">
+      <div className="ep00-header">
+        <div>
+          <span className="eyebrow">EP00 · TRAILER INSTITUCIONAL · 30 SEGUNDOS</span>
+          <h3>Produção: GPT Image 2.5 → Seedance 2.5</h3>
+          <p>6 cenas de 5s. Fluxo: referências no Cofre Privado → GPT Image 2.5 gera imagens de cena → Higgsfield API (Seedance 2.5) gera vídeo com áudio PT-BR nativo.</p>
+        </div>
+        <span className="ep00-badge">$5 + 100% cashback</span>
+      </div>
+
+      <div className="ep00-chars">
+        <div className="ep00-char-card">
+          <span className="eyebrow">BASE MATHEUS — copiar no prompt GPT</span>
+          <p className="ep00-char-text">{ep00CharacterBases.matheus}</p>
+          <button className={`ep00-copy-btn ${copied === 'matheus' ? 'copied' : ''}`} onClick={() => copy(ep00CharacterBases.matheus, 'matheus')}>
+            {copied === 'matheus' ? '✓ Copiado' : 'Copiar base Matheus'}
+          </button>
+        </div>
+        <div className="ep00-char-card">
+          <span className="eyebrow">BASE VILSON — copiar no prompt GPT</span>
+          <p className="ep00-char-text">{ep00CharacterBases.vilson}</p>
+          <button className={`ep00-copy-btn ${copied === 'vilson' ? 'copied' : ''}`} onClick={() => copy(ep00CharacterBases.vilson, 'vilson')}>
+            {copied === 'vilson' ? '✓ Copiado' : 'Copiar base Vilson'}
+          </button>
+        </div>
+      </div>
+
+      <div className="ep00-prompts">
+        <span className="eyebrow" style={{ display: 'block', marginBottom: 12 }}>6 PROMPTS GPT IMAGE 2.5 — clique para copiar</span>
+        {Object.entries(ep00GptPrompts).map(([num, p]) => (
+          <div className="ep00-prompt-row" key={num}>
+            <div className="ep00-prompt-meta">
+              <strong>Cena {num} · {p.title}</strong>
+              <span className="ep00-tool-tag">{p.tool}</span>
+            </div>
+            <details>
+              <summary>Ver prompt completo</summary>
+              <p className="ep00-prompt-body">{p.prompt}</p>
+            </details>
+            <button className={`ep00-copy-btn ${copied === `p${num}` ? 'copied' : ''}`} onClick={() => copy(p.prompt, `p${num}`)}>
+              {copied === `p${num}` ? '✓ Copiado' : 'Copiar prompt'}
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <div className="ep00-hf-panel">
+        <span className="eyebrow">HIGGSFIELD API · SEEDANCE 2.5</span>
+        <div className="ep00-hf-status">
+          <span className="ep00-credit-badge">$5.00 crédito ativo + 100% cashback</span>
+          <span style={{ fontSize: '0.78rem', color: 'var(--text-muted, #6a6a9c)' }}>Seedance 2.5 · generate_audio: true · áudio PT-BR nativo</span>
+        </div>
+        <div className="ep00-hf-key-row">
+          <label>
+            <span style={{ fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted, #6a6a9c)' }}>API Key (ID:SECRET)</span>
+            <input
+              type="password"
+              value={hfKey}
+              onChange={e => setHfKey(e.target.value)}
+              placeholder="xxxxxxxx:yyyyyyyy"
+              className="ep00-hf-input"
+            />
+          </label>
+          <button className="ep00-copy-btn" onClick={saveHfKey}>{hfSaved ? '✓ Salvo' : 'Salvar key'}</button>
+        </div>
+        <details className="ep00-endpoint-ref">
+          <summary>Referência de endpoint</summary>
+          <pre className="ep00-endpoint-code">{`POST https://api.higgsfield.ai/bytedance/seedance-2.5/text-to-video
+Authorization: Key {ID}:{SECRET}
+
+{
+  "prompt": "...",
+  "image_url": "...",   // referência GPT Image 2.5
+  "duration": 5,        // 5s por cena
+  "generate_audio": true,
+  "resolution": "1920x1080"
+}
+
+// Polling
+GET https://api.higgsfield.ai/request/{id}
+// → { "status": "completed", "output_url": "..." }`}</pre>
+        </details>
+      </div>
+    </section>
+  </>
 }
 
 
