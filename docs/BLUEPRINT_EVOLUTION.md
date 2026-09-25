@@ -355,3 +355,7 @@ A direção final do Episódio 01 passa a distinguir os mundos por fotografia: a
 ## 2026-09-24 — Conflito humano e Valt
 
 A trilogia passa a usar pressão dramática sem transformar sofrimento familiar em produto: urgências como trânsito, compromisso familiar e cuidado com alguém próximo motivam a necessidade de clareza, mas decisões e cenas sensíveis permanecem humanas. Valt entra no Episódio 02 como sentinela ficcional de segurança, protegendo dados e interrompendo atalhos de origem não comprovada.
+
+## 2026-09-24 — Âncora de identidade privada
+
+O Blueprint permite uma imagem-âncora privada para continuidade editorial do Founder quando ele fornece as referências e autoriza a geração. A âncora não muda o requisito de autorização específica para qualquer transferência a um provedor de vídeo ou voz.

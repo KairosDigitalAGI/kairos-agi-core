@@ -403,3 +403,7 @@ Foram recebidas cinco referências de Vilson e armazenadas exclusivamente em ár
 O cofre local de clones evoluiu de uma imagem única para uma biblioteca editável de referências individuais. Cada imagem permanece no IndexedDB do navegador, começa protegida por botão de olho e pode ser nomeada, anotada, adicionada ou removida. Registros legados são convertidos localmente na leitura. A identidade humana não recebe URL pública, upload automático ou transferência a provedor.
 
 O Studio permite baixar um dossiê Markdown do episódio selecionado com visão, roteiro, falas, storyboard e prompts. O arquivo é editorial e não inicia geração, cobrança ou publicação. O elenco reconhece o segundo cofundador como Co-CEO, mantendo suas referências apenas no cofre privado.
+
+## 2026-09-24 — Âncora visual privada do Founder
+
+Uma âncora visual fotográfica do Founder foi gerada exclusivamente a partir das referências fornecidas por ele nesta conversa. O resultado fica em área privada ignorada pelo Git e serve apenas como referência editorial local. Não constitui clonagem de voz, treinamento, autorização de upload externo ou uso em geração de vídeo por outro provedor.
