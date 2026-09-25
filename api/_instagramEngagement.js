@@ -5,6 +5,7 @@ import { createHmac, timingSafeEqual } from 'node:crypto'
 import { readCommand, writeCommand, patchCommand } from './_command.js'
 import { getValidInstagramAccess } from './_instagram.js'
 import { freeGreetingConfigured, generateFounderGreeting } from './_providers/geminiFree.js'
+import { commentDmEnabled, composeCommentDm, sendPrivateReply } from './_instagramCommentDm.js'
 
 const MAX_BODY = 256 * 1024
 const MAX_REPLY = 500
@@ -172,6 +173,20 @@ async function deliver(event, text, ruleId = null) {
   }
 }
 
+// Uma única tentativa: a Meta aceita só uma Private Reply por comentário, e
+// o evento/cooldown já gravados impedem que um webhook repetido chegue aqui.
+async function sendCommentDm(event) {
+  try {
+    const { accessToken, igUserId } = await getValidInstagramAccess()
+    if (String(igUserId) !== String(event.account_id)) throw fail('Evento de outra conta Instagram.', 403)
+    const { text } = await composeCommentDm({ comment: event.content, username: event.sender_username })
+    await sendPrivateReply({ accessToken, igUserId, commentId: event.source_id, text })
+  } catch (error) {
+    await patchCommand('instagram_engagement_events', `?event_key=eq.${encodeURIComponent(event.event_key)}`,
+      { error: `Direct: ${String(error.message).slice(0, 280)}` }).catch(() => {})
+  }
+}
+
 export async function receiveInstagramWebhook(payload) {
   const events = normalizeInstagramEvents(payload)
   if (!events.length) return { received: 0 }
@@ -207,7 +222,10 @@ export async function receiveInstagramWebhook(payload) {
         if (/respondeu 409/.test(error.message)) continue
         throw fail(`${MIGRATION_HINT} ${error.message}`, 503)
       }
-      await deliver(event, responseText, rule?.id || null)
+      const delivered = await deliver(event, responseText, rule?.id || null)
+      if (rule && event.kind === 'comment' && commentDmEnabled() && delivered.status !== 'already_handled') {
+        await sendCommentDm(event)
+      }
     }
   }
   return { received }

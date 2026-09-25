@@ -16,7 +16,8 @@ const env = {
 }
 
 async function withEnv(fn) {
-  const keys = [...Object.keys(env), 'KAIROS_IG_FREE_LLM_ENABLED', 'KAIROS_GEMINI_FREE_TIER_CONFIRMED', 'KAIROS_GEMINI_FREE_API_KEY', 'KAIROS_IG_FOUNDER_TEST_SENDER_ID']
+  const keys = [...Object.keys(env), 'KAIROS_IG_FREE_LLM_ENABLED', 'KAIROS_GEMINI_FREE_TIER_CONFIRMED', 'KAIROS_GEMINI_FREE_API_KEY', 'KAIROS_IG_FOUNDER_TEST_SENDER_ID',
+    'KAIROS_IG_COMMENT_DM_ENABLED', 'KAIROS_WHATSAPP_URL', 'OPENROUTER_API_KEY', 'KAIROS_IG_COMMENT_DM_FALLBACK']
   const saved = Object.fromEntries(keys.map(key => [key, process.env[key]]))
   for (const key of keys) delete process.env[key]
   Object.assign(process.env, env)
@@ -181,6 +182,83 @@ test('Founder greeting uses only a confirmed free-tier LLM and exact sender ID f
     assert.equal(calls.filter(call => call.href.includes('generativelanguage.googleapis.com')).length, 2)
     assert.equal(calls.filter(call => call.href === 'https://graph.instagram.com/ig-1/messages').length, 1)
     assert.equal(calls.filter(call => call.href === 'https://graph.instagram.com/comment-1/replies').length, 1)
+  } finally { globalThis.fetch = previousFetch }
+})
+
+function commentDmFetch({ token, llmText, calls, saved }) {
+  return async (url, options = {}) => {
+    const href = String(url)
+    const method = options.method || 'GET'
+    calls.push({ href, method, body: options.body, headers: options.headers })
+    if (href.includes('/rest/v1/integracoes_tokens')) return new Response(JSON.stringify(href.includes('access_token_enc') ? [{ account_id: 'ig-1', access_token_enc: token, expires_at: new Date(Date.now() + 40 * 86400000).toISOString() }] : [{ account_id: 'ig-1' }]), { status: 200 })
+    if (href.includes('/rest/v1/instagram_automation_rules')) return new Response(JSON.stringify([{ id: 'rule-k', kind: 'comment', keyword: 'kairos', response_text: 'Te chamei no Direct! 🚀', enabled: true, approved_at: '2026-09-25T00:00:00Z' }]), { status: 200 })
+    if (href.includes('/rest/v1/instagram_engagement_events') && method === 'POST') {
+      const key = JSON.parse(options.body).event_key
+      if (saved.has(key)) return new Response('{"code":"23505"}', { status: 409 })
+      saved.add(key)
+      return new Response('[{}]', { status: 201 })
+    }
+    if (href.includes('/rest/v1/instagram_engagement_cooldowns')) return new Response('[{}]', { status: 201 })
+    if (href.includes('/rest/v1/instagram_engagement_events') && method === 'PATCH') return new Response('[{}]', { status: 200 })
+    if (href === 'https://openrouter.ai/api/v1/chat/completions') return new Response(JSON.stringify({ choices: [{ message: { content: llmText } }] }), { status: 200 })
+    if (href === 'https://graph.instagram.com/c-9/replies') return new Response('{"id":"reply-9"}', { status: 200 })
+    if (href === 'https://graph.instagram.com/ig-1/messages') return new Response('{"message_id":"dm-9"}', { status: 200 })
+    throw new Error(`${method} ${href}`)
+  }
+}
+
+const kairosComment = { object: 'instagram', entry: [{ id: 'ig-1', time: Math.floor(Date.now() / 1000),
+  changes: [{ field: 'comments', value: { id: 'c-9', text: 'KAIROS!!', from: { id: 'fan-1', username: 'fan' }, media: { id: 'reel-1' } } }] }] }
+
+test('KAIROS comment gets the approved public reply plus one OpenRouter Private Reply with the configured link', async () => {
+  const previousFetch = globalThis.fetch
+  const calls = []
+  globalThis.fetch = commentDmFetch({ token: encryptWithEnv(), llmText: 'Valeu pelo comentário! Eu sou o Kairos e atendo seus clientes no WhatsApp 24h. Bora ver como fica no seu negócio?', calls, saved: new Set() })
+  try {
+    await withEnv(async () => {
+      process.env.KAIROS_IG_COMMENT_DM_ENABLED = 'true'
+      process.env.OPENROUTER_API_KEY = 'or-test'
+      process.env.KAIROS_WHATSAPP_URL = 'https://wa.me/5562999999999'
+      assert.equal((await receiveInstagramWebhook(kairosComment)).received, 1)
+      assert.equal((await receiveInstagramWebhook(kairosComment)).received, 0)
+    })
+    assert.equal(calls.filter(c => c.href === 'https://graph.instagram.com/c-9/replies').length, 1)
+    const dms = calls.filter(c => c.href === 'https://graph.instagram.com/ig-1/messages')
+    assert.equal(dms.length, 1)
+    const body = JSON.parse(dms[0].body)
+    assert.deepEqual(body.recipient, { comment_id: 'c-9' })
+    assert.match(body.message.text, /^Valeu pelo comentário!/)
+    assert.match(body.message.text, /https:\/\/wa\.me\/5562999999999$/)
+    const llm = calls.find(c => c.href.includes('openrouter.ai'))
+    assert.equal(llm.headers.Authorization, 'Bearer or-test')
+  } finally { globalThis.fetch = previousFetch }
+})
+
+test('LLM text with links or prices falls back to the fixed Direct message', async () => {
+  const previousFetch = globalThis.fetch
+  const calls = []
+  globalThis.fetch = commentDmFetch({ token: encryptWithEnv(), llmText: 'Plano por R$ 320 em https://site.falso', calls, saved: new Set() })
+  try {
+    await withEnv(async () => {
+      process.env.KAIROS_IG_COMMENT_DM_ENABLED = 'true'
+      process.env.OPENROUTER_API_KEY = 'or-test'
+      await receiveInstagramWebhook(kairosComment)
+    })
+    const text = JSON.parse(calls.find(c => c.href === 'https://graph.instagram.com/ig-1/messages').body).message.text
+    assert.match(text, /^Oi! Aqui é o Kairos/)
+    assert.doesNotMatch(text, /site\.falso|R\$/)
+  } finally { globalThis.fetch = previousFetch }
+})
+
+test('Private Reply stays off unless explicitly enabled', async () => {
+  const previousFetch = globalThis.fetch
+  const calls = []
+  globalThis.fetch = commentDmFetch({ token: encryptWithEnv(), llmText: 'x', calls, saved: new Set() })
+  try {
+    await withEnv(async () => { await receiveInstagramWebhook(kairosComment) })
+    assert.equal(calls.filter(c => c.href === 'https://graph.instagram.com/c-9/replies').length, 1)
+    assert.equal(calls.filter(c => c.href === 'https://graph.instagram.com/ig-1/messages').length, 0)
+    assert.equal(calls.filter(c => c.href.includes('openrouter.ai')).length, 0)
   } finally { globalThis.fetch = previousFetch }
 })
 
