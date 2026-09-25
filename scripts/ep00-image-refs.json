@@ -1,6 +1,22 @@
 {
-  "_instrucoes": "Preencha os campos com URLs públicas das imagens de referência. Cenas 2 e 5 precisam de fotos reais do Matheus/Vilson. Cena 6 usa a logo já deployada no Vercel.",
+  "_instrucoes": "URLs públicas Vercel das referências. Cena 2 usa text-to-video (sem foto combinada dos dois fundadores). Cena 5 usa face-reference-sheet do Matheus para máxima fidelidade no close-up. Cena 6 usa a logo.",
+  "_referencias_disponiveis": {
+    "matheus": [
+      "https://kairos-agi-core.vercel.app/references/matheus/matheus-01-studio-portrait-beige.webp",
+      "https://kairos-agi-core.vercel.app/references/matheus/matheus-02-fullbody-4angle-charcoal.webp",
+      "https://kairos-agi-core.vercel.app/references/matheus/matheus-03-couch-night-phone.webp",
+      "https://kairos-agi-core.vercel.app/references/matheus/matheus-04-homeoffice-laptop-night.webp",
+      "https://kairos-agi-core.vercel.app/references/matheus/matheus-05-face-reference-sheet.webp"
+    ],
+    "vilson": [
+      "https://kairos-agi-core.vercel.app/references/vilson/vilson-01-studio-navy.jpg",
+      "https://kairos-agi-core.vercel.app/references/vilson/vilson-02-outdoor-blue.jpg",
+      "https://kairos-agi-core.vercel.app/references/vilson/vilson-03-street-grey.jpg",
+      "https://kairos-agi-core.vercel.app/references/vilson/vilson-04-office-blazer.jpg",
+      "https://kairos-agi-core.vercel.app/references/vilson/vilson-05-apartment-olive.jpg"
+    ]
+  },
   "2": "",
-  "5": "",
+  "5": "https://kairos-agi-core.vercel.app/references/matheus/matheus-05-face-reference-sheet.webp",
   "6": "https://kairos-agi-core.vercel.app/brand/kairos-digital-hourglass.jpg"
 }
