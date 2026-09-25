@@ -54,3 +54,20 @@
 .ep00-endpoint-ref summary { font-size: .8rem; color: var(--text-muted, #6a6a9c); cursor: pointer; }
 .ep00-endpoint-code { background: #050510; border: 1px solid rgba(255,255,255,.06); border-radius: 8px; padding: 12px; font-size: .72rem; line-height: 1.75; color: rgba(238,238,246,.7); overflow-x: auto; margin-top: 8px; }
 .ep00-logo { width: 64px; height: 64px; object-fit: contain; border-radius: 12px; border: 1px solid rgba(123,47,255,.3); background: #040409; flex-shrink: 0; }
+.ep00-workflow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.05); border-radius: 12px; padding: 14px 16px; }
+.ep00-step { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 150px; }
+.ep00-step-ready .ep00-step-num { background: rgba(0,229,160,.15); border-color: rgba(0,229,160,.4); color: #00e5a0; }
+.ep00-step-num { width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(123,47,255,.4); background: rgba(123,47,255,.1); color: #b080ff; display: flex; align-items: center; justify-content: center; font-size: .72rem; font-family: 'JetBrains Mono', monospace; font-weight: 700; flex-shrink: 0; }
+.ep00-step div { display: flex; flex-direction: column; gap: 2px; }
+.ep00-step strong { font-size: .8rem; color: #eeeef6; }
+.ep00-step span { font-size: .7rem; color: var(--text-muted, #6a6a9c); line-height: 1.4; }
+.ep00-step-arrow { color: rgba(255,255,255,.2); font-size: 1rem; flex-shrink: 0; }
+.ep00-section-label { display: flex; align-items: center; gap: 10px; margin: 20px 0 10px; }
+.ep00-ready-badge { padding: 4px 14px; border-radius: 100px; font-size: .68rem; font-family: 'JetBrains Mono', monospace; letter-spacing: .06em; background: rgba(0,229,160,.1); border: 1px solid rgba(0,229,160,.35); color: #00e5a0; }
+.ep00-ref-badge { padding: 4px 14px; border-radius: 100px; font-size: .68rem; font-family: 'JetBrains Mono', monospace; letter-spacing: .06em; background: rgba(224,64,251,.08); border: 1px solid rgba(224,64,251,.3); color: #e040fb; }
+.ep00-row-ready { border-left: 2px solid rgba(0,229,160,.3) !important; padding-left: 12px !important; }
+.ep00-row-ref { border-left: 2px solid rgba(224,64,251,.3) !important; padding-left: 12px !important; }
+.ep00-ref-tag { padding: 3px 10px; border-radius: 100px; font-size: .68rem; font-family: 'JetBrains Mono', monospace; border: 1px solid rgba(224,64,251,.25); background: rgba(224,64,251,.06); color: #e040fb; letter-spacing: .04em; }
+.ep00-hf-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.ep00-key-link { font-size: .78rem; color: #7b2fff; text-decoration: none; border-bottom: 1px solid rgba(123,47,255,.35); padding-bottom: 1px; transition: color .2s; }
+.ep00-key-link:hover { color: #b080ff; }

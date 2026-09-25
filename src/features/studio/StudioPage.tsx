@@ -279,6 +279,11 @@ export function StudioPage() {
   </div>
 }
 
+const EP00_NEEDS_REF: Record<string, string> = {
+  '2': 'Matheus + Vilson',
+  '5': 'Matheus',
+}
+
 function Ep00ProductionPanel() {
   const [copied, setCopied] = useState<string | null>(null)
   const [hfKey, setHfKey] = useState(() => { try { return localStorage.getItem('kairos.hf.key') ?? '' } catch { return '' } })
@@ -297,6 +302,9 @@ function Ep00ProductionPanel() {
     window.setTimeout(() => setHfSaved(false), 2500)
   }
 
+  const ambientScenes = Object.entries(ep00GptPrompts).filter(([num]) => !EP00_NEEDS_REF[num])
+  const refScenes = Object.entries(ep00GptPrompts).filter(([num]) => EP00_NEEDS_REF[num])
+
   return <>
     <section className="glass-panel ep00-panel">
       <div className="ep00-header">
@@ -304,56 +312,81 @@ function Ep00ProductionPanel() {
         <div>
           <span className="eyebrow">EP00 · TRAILER INSTITUCIONAL · 30 SEGUNDOS</span>
           <h3>Produção: GPT Image 2.5 → Seedance 2.5</h3>
-          <p>6 cenas de 5s. Fluxo: referências no Cofre Privado → GPT Image 2.5 gera imagens de cena → Higgsfield API (Seedance 2.5) gera vídeo com áudio PT-BR nativo.</p>
+          <p>6 cenas de 5s. Copie o prompt → cole no ChatGPT (GPT-4o com Image 2.5) → salve a imagem → faça upload aqui. Depois: Higgsfield Seedance 2.5 gera o vídeo com áudio PT-BR.</p>
         </div>
         <span className="ep00-badge">$5 + 100% cashback</span>
       </div>
 
-      <div className="ep00-chars">
-        <div className="ep00-char-card">
-          <span className="eyebrow">BASE MATHEUS — copiar no prompt GPT</span>
-          <p className="ep00-char-text">{ep00CharacterBases.matheus}</p>
-          <button className={`ep00-copy-btn ${copied === 'matheus' ? 'copied' : ''}`} onClick={() => copy(ep00CharacterBases.matheus, 'matheus')}>
-            {copied === 'matheus' ? '✓ Copiado' : 'Copiar base Matheus'}
-          </button>
-        </div>
-        <div className="ep00-char-card">
-          <span className="eyebrow">BASE VILSON — copiar no prompt GPT</span>
-          <p className="ep00-char-text">{ep00CharacterBases.vilson}</p>
-          <button className={`ep00-copy-btn ${copied === 'vilson' ? 'copied' : ''}`} onClick={() => copy(ep00CharacterBases.vilson, 'vilson')}>
-            {copied === 'vilson' ? '✓ Copiado' : 'Copiar base Vilson'}
-          </button>
-        </div>
+      <div className="ep00-workflow">
+        <div className="ep00-step ep00-step-ready"><span className="ep00-step-num">1</span><div><strong>Gerar ambientação agora</strong><span>4 cenas sem foto — copie o prompt e gere no ChatGPT</span></div></div>
+        <div className="ep00-step-arrow">→</div>
+        <div className="ep00-step"><span className="ep00-step-num">2</span><div><strong>Subir fotos no Cofre</strong><span>Aba Elenco → Cofre Privado → criar clone → adicionar referência</span></div></div>
+        <div className="ep00-step-arrow">→</div>
+        <div className="ep00-step"><span className="ep00-step-num">3</span><div><strong>Gerar cenas com vocês</strong><span>Cenas 2 e 5 — cole base + foto no ChatGPT</span></div></div>
+        <div className="ep00-step-arrow">→</div>
+        <div className="ep00-step"><span className="ep00-step-num">4</span><div><strong>Seedance 2.5</strong><span>Higgsfield API → vídeo 5s por cena com áudio</span></div></div>
       </div>
 
+      <div className="ep00-section-label"><span className="ep00-ready-badge">GERAR AGORA · 4 CENAS SEM FOTO</span></div>
       <div className="ep00-prompts">
-        <span className="eyebrow" style={{ display: 'block', marginBottom: 12 }}>6 PROMPTS GPT IMAGE 2.5 — clique para copiar</span>
-        {Object.entries(ep00GptPrompts).map(([num, p]) => (
-          <div className="ep00-prompt-row" key={num}>
+        {ambientScenes.map(([num, p]) => (
+          <div className="ep00-prompt-row ep00-row-ready" key={num}>
             <div className="ep00-prompt-meta">
               <strong>Cena {num} · {p.title}</strong>
               <span className="ep00-tool-tag">{p.tool}</span>
             </div>
-            <details>
-              <summary>Ver prompt completo</summary>
-              <p className="ep00-prompt-body">{p.prompt}</p>
-            </details>
+            <p className="ep00-prompt-body">{p.prompt}</p>
             <button className={`ep00-copy-btn ${copied === `p${num}` ? 'copied' : ''}`} onClick={() => copy(p.prompt, `p${num}`)}>
-              {copied === `p${num}` ? '✓ Copiado' : 'Copiar prompt'}
+              {copied === `p${num}` ? '✓ Copiado!' : '↗ Copiar prompt'}
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <div className="ep00-section-label" style={{ marginTop: 20 }}><span className="ep00-ref-badge">PRECISAM DE FOTO · CENAS 2 E 5</span></div>
+      <div className="ep00-chars">
+        <div className="ep00-char-card">
+          <span className="eyebrow">BASE VISUAL MATHEUS — colar junto com a foto no GPT</span>
+          <p className="ep00-char-text">{ep00CharacterBases.matheus}</p>
+          <button className={`ep00-copy-btn ${copied === 'matheus' ? 'copied' : ''}`} onClick={() => copy(ep00CharacterBases.matheus, 'matheus')}>
+            {copied === 'matheus' ? '✓ Copiado!' : 'Copiar base Matheus'}
+          </button>
+        </div>
+        <div className="ep00-char-card">
+          <span className="eyebrow">BASE VISUAL VILSON — colar junto com a foto no GPT</span>
+          <p className="ep00-char-text">{ep00CharacterBases.vilson}</p>
+          <button className={`ep00-copy-btn ${copied === 'vilson' ? 'copied' : ''}`} onClick={() => copy(ep00CharacterBases.vilson, 'vilson')}>
+            {copied === 'vilson' ? '✓ Copiado!' : 'Copiar base Vilson'}
+          </button>
+        </div>
+      </div>
+      <div className="ep00-prompts" style={{ marginTop: 12 }}>
+        {refScenes.map(([num, p]) => (
+          <div className="ep00-prompt-row ep00-row-ref" key={num}>
+            <div className="ep00-prompt-meta">
+              <strong>Cena {num} · {p.title}</strong>
+              <span className="ep00-ref-tag">foto: {EP00_NEEDS_REF[num]}</span>
+            </div>
+            <p className="ep00-prompt-body">{p.prompt}</p>
+            <button className={`ep00-copy-btn ${copied === `p${num}` ? 'copied' : ''}`} onClick={() => copy(p.prompt, `p${num}`)}>
+              {copied === `p${num}` ? '✓ Copiado!' : '↗ Copiar prompt'}
             </button>
           </div>
         ))}
       </div>
 
       <div className="ep00-hf-panel">
-        <span className="eyebrow">HIGGSFIELD API · SEEDANCE 2.5</span>
+        <div className="ep00-hf-header">
+          <span className="eyebrow">HIGGSFIELD API · SEEDANCE 2.5</span>
+          <a href="https://higgsfield.ai/dashboard/api-keys" target="_blank" rel="noreferrer" className="ep00-key-link">Pegar minha API key →</a>
+        </div>
         <div className="ep00-hf-status">
           <span className="ep00-credit-badge">$5.00 crédito ativo + 100% cashback</span>
-          <span style={{ fontSize: '0.78rem', color: 'var(--text-muted, #6a6a9c)' }}>Seedance 2.5 · generate_audio: true · áudio PT-BR nativo</span>
+          <span style={{ fontSize: '0.78rem', color: 'var(--text-muted, #6a6a9c)' }}>Seedance 2.5 · generate_audio: true · PT-BR nativo · 5s/cena</span>
         </div>
         <div className="ep00-hf-key-row">
           <label>
-            <span style={{ fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted, #6a6a9c)' }}>API Key (ID:SECRET)</span>
+            <span style={{ fontSize: '0.72rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted, #6a6a9c)' }}>Cole sua API Key aqui (formato ID:SECRET)</span>
             <input
               type="password"
               value={hfKey}
@@ -362,22 +395,21 @@ function Ep00ProductionPanel() {
               className="ep00-hf-input"
             />
           </label>
-          <button className="ep00-copy-btn" onClick={saveHfKey}>{hfSaved ? '✓ Salvo' : 'Salvar key'}</button>
+          <button className="ep00-copy-btn" onClick={saveHfKey}>{hfSaved ? '✓ Salvo localmente' : 'Salvar key'}</button>
         </div>
         <details className="ep00-endpoint-ref">
-          <summary>Referência de endpoint</summary>
+          <summary>Referência de endpoint (para chamar manualmente)</summary>
           <pre className="ep00-endpoint-code">{`POST https://api.higgsfield.ai/bytedance/seedance-2.5/text-to-video
 Authorization: Key {ID}:{SECRET}
 
 {
   "prompt": "...",
-  "image_url": "...",   // referência GPT Image 2.5
-  "duration": 5,        // 5s por cena
+  "image_url": "...",   // URL da imagem GPT Image 2.5
+  "duration": 5,
   "generate_audio": true,
   "resolution": "1920x1080"
 }
 
-// Polling
 GET https://api.higgsfield.ai/request/{id}
 // → { "status": "completed", "output_url": "..." }`}</pre>
         </details>
