@@ -415,3 +415,7 @@ O press kit privado ganhou cinco peças: âncora facial, turnaround de corpo int
 ## 2026-09-25 — Acessibilidade do cofre de referências
 
 Os cartões de referência do cofre agora usam fundo opaco e texto de alto contraste. Cada referência possui um botão de olho próprio para revelar ou ocultar a prévia localmente, sem alterar a proteção das demais imagens.
+
+## 2026-09-28 — Console de agentes e trilha comercial
+
+A página de Agentes agora permite abrir um console por papel, associar localmente Codex CLI ou Claude Code e consultar a frota real após o desbloqueio do Painel Operacional. KAIROS mostra apenas o sinal verificado do processo WhatsApp. O Hunter ganhou uma trilha persistida de descoberta, qualificação e rascunho; nenhum envio é criado por ela.

@@ -187,3 +187,7 @@ O Studio agora mantém várias referências por clone no navegador, todas proteg
 ## Cofre de clones
 
 Em Studio → Elenco, cada referência privada possui um botão de olho individual. Os campos e cartões usam contraste alto para edição legível no tema escuro.
+
+## Operação comercial inicial
+
+Em Agentes, abra Terminal para verificar a frota e associar Codex CLI ou Claude Code localmente. Em Hunter, a trilha de receita registra descoberta, qualificação e rascunho no runtime; ela não envia mensagens ou propostas.

@@ -259,3 +259,7 @@ A Video Engine compõe `public/brand/kairos-digital-hourglass.jpg` no último 1,
 ## Controles do cofre privado
 
 A UI do PrivateCloneVault mantém seleção e revelação como estados separados. Cada cartão tem seleção própria e um controle de olho que exibe somente a referência escolhida no navegador.
+
+## Console de agentes e trilha comercial
+
+`useFleetStatus` consome a rota autenticada já existente de status da frota. `AgentRuntimePanel` separa sinal remoto, preferência local de terminal e link oficial do WhatsApp Business. `CommercialRunsPanel` usa o ledger `command.commercial_runs` para registrar a trilha inicial de descoberta, qualificação e rascunho.

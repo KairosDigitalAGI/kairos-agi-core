@@ -255,3 +255,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 
 - [x] Corrigir contraste de campos e cartões de referência no Studio.
 - [x] Incluir comando de olho individual em cada referência para visualização local.
+
+## Missão 017 — Console operacional e receita inicial
+
+- [x] Expor o sinal da frota para o console do KAIROS, sem declarar conexão não confirmada.
+- [x] Permitir associação local de terminal Codex CLI ou Claude Code por agente.
+- [x] Criar trilha comercial persistida de descoberta, qualificação e rascunho; envios continuam bloqueados.

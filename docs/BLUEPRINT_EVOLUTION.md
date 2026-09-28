@@ -367,3 +367,7 @@ O Blueprint inclui um press kit humano privado em peças de continuidade: âncor
 ## 2026-09-25 — Interação de referências privadas
 
 O Blueprint passa a exigir contraste legível nos campos do cofre e controle de revelação por referência. Revelar uma peça é uma ação local e temporária, nunca compartilhamento.
+
+## 2026-09-28 — Console operacional por agente
+
+Cada papel pode registrar uma preferência local de terminal para Codex CLI ou Claude Code. A preferência não cria processo, não compartilha credencial e não prova execução. A única prova de processo remoto é o sinal da frota autenticada.
