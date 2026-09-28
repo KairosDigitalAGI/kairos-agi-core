@@ -250,3 +250,8 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Criar âncora, turnaround, expressões, workstation e pose reclinada para continuidade do avatar.
 - [x] Manter todas as peças no armazenamento privado ignorado pelo Git.
 - [ ] Importar a coleção no cofre local do Studio quando a versão do cofre multi-referência estiver disponível no deployment ativo.
+
+## Missão 016 — Leitura e prévia do cofre privado
+
+- [x] Corrigir contraste de campos e cartões de referência no Studio.
+- [x] Incluir comando de olho individual em cada referência para visualização local.

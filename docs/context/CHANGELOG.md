@@ -411,3 +411,7 @@ Uma âncora visual fotográfica do Founder foi gerada exclusivamente a partir da
 ## 2026-09-24 — Press kit privado do Founder
 
 O press kit privado ganhou cinco peças: âncora facial, turnaround de corpo inteiro, expressões e microdetalhes, estação de trabalho e pose reclinada. Cada imagem foi gerada a partir da âncora autorizada do Founder e permanece em `memory/private`, fora do repositório público. A próxima etapa é importar explicitamente a coleção no cofre do Studio do navegador, sem criar URL pública ou enviar a outro provedor.
+
+## 2026-09-25 — Acessibilidade do cofre de referências
+
+Os cartões de referência do cofre agora usam fundo opaco e texto de alto contraste. Cada referência possui um botão de olho próprio para revelar ou ocultar a prévia localmente, sem alterar a proteção das demais imagens.

@@ -255,3 +255,7 @@ A Video Engine compõe `public/brand/kairos-digital-hourglass.jpg` no último 1,
 ## Cofre privado de referências v0.2
 
 `PrivateCloneVault` usa IndexedDB apenas no navegador para armazenar coleções de referências humanas. A biblioteca não cria URL pública, não envia arquivos automaticamente e não é um Vault de servidor. A persistência entre dispositivos exige uma implementação autenticada e auditável separada. O Studio exporta dossiês Markdown editoriais localmente; os dossiês não são jobs nem autorização de gasto.
+
+## Controles do cofre privado
+
+A UI do PrivateCloneVault mantém seleção e revelação como estados separados. Cada cartão tem seleção própria e um controle de olho que exibe somente a referência escolhida no navegador.
