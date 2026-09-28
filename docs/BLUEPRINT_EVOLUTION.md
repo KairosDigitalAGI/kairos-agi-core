@@ -363,3 +363,7 @@ O Blueprint permite uma imagem-âncora privada para continuidade editorial do Fo
 ## 2026-09-24 — Press kit humano privado
 
 O Blueprint inclui um press kit humano privado em peças de continuidade: âncora, turnaround, expressão, cenário de trabalho e vida cotidiana. Essa coleção só pode aparecer em cofre local/autenticado; não é asset público e não autoriza transferência a qualquer provider externo.
+
+## 2026-09-25 — Interação de referências privadas
+
+O Blueprint passa a exigir contraste legível nos campos do cofre e controle de revelação por referência. Revelar uma peça é uma ação local e temporária, nunca compartilhamento.

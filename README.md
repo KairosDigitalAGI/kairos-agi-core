@@ -183,3 +183,7 @@ A Video Engine aplica o arquivo corporativo original da Kairos Digital no encerr
 ### Cofre privado de referências e dossiês do Studio
 
 O Studio agora mantém várias referências por clone no navegador, todas protegidas inicialmente e editáveis de forma local. Dossiês de episódios podem ser baixados em Markdown com roteiro e prompts. Referências humanas continuam privadas e não são parte do deploy público.
+
+## Cofre de clones
+
+Em Studio → Elenco, cada referência privada possui um botão de olho individual. Os campos e cartões usam contraste alto para edição legível no tema escuro.

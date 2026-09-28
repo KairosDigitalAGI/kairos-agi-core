@@ -21,8 +21,7 @@
 .studio-storyboard-grid button{justify-self:start;border:1px solid rgba(96,165,250,.5);border-radius:8px;background:rgba(37,99,235,.15);color:#dbeafe;padding:7px 10px;font-size:.75rem;cursor:pointer}.studio-storyboard-grid button:hover{background:rgba(37,99,235,.3)}
 
 .studio-screenplay-actions { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
-.private-reference-list { display: flex; gap: .5rem; flex-wrap: wrap; margin: .8rem 0; }
-.private-reference-list button { display: grid; text-align: left; gap: .15rem; }
+.private-reference-list{display:flex;gap:.55rem;flex-wrap:wrap;margin:.8rem 0}.private-reference-item{display:flex;min-width:148px;overflow:hidden;border:1px solid #53617c;border-radius:9px;background:#101a2c;color:#f5f7ff}.private-reference-item.selected{border-color:#bca8ff;box-shadow:0 0 0 1px rgba(167,139,250,.28);background:#1a1734}.private-reference-select{display:grid;flex:1;gap:.18rem;min-width:0;padding:.65rem .7rem;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer}.private-reference-select span{color:#bfc9dc;font-size:.72rem}.private-reference-select strong{overflow:hidden;color:#fff;font-size:.79rem;text-overflow:ellipsis;white-space:nowrap}.private-reference-eye{display:grid;width:40px;flex:0 0 40px;place-items:center;border:0;border-left:1px solid #53617c;background:#17243a;color:#fff;cursor:pointer}.private-reference-eye:hover{background:#283b5b;color:#d7c8ff}.private-clone-editor input::placeholder,.private-clone-editor textarea::placeholder{color:#9dacbf;opacity:1}
 .danger-button { color: #ff9da9; }
 
 /* EP00 Production Panel */
