@@ -27,7 +27,7 @@ const humanSteps = [
 ]
 
 const authorizationKey = 'kairos.outbound.authorization.v1'
-const defaultOutreachDraft = 'Olá! Sou da Kairos Digital. Analisei informações públicas da sua empresa e identifiquei oportunidades para melhorar a captação digital. Posso enviar um diagnóstico curto e gratuito por aqui? Se preferir não receber mensagens, responda SAIR.'
+const defaultOutreachDraft = 'Olá, {{nome}}! Vi a {{empresa}} e reparei que {{sinal_real}}. Aqui é da Kairos Digital. Preparei duas sugestões específicas sobre {{oportunidade}} que podem ajudar sua empresa. Posso te enviar por aqui, sem compromisso? Se preferir não receber mensagens, responda SAIR.'
 
 type CampaignAuthorization = {
   authorizedAt: string
@@ -102,6 +102,7 @@ export function CrmPage() {
       <div className="outbound-form">
         <label>Limite por dia<input type="number" min="1" max="30" value={dailyLimit} onChange={event => setDailyLimit(Math.min(30, Math.max(1, Number(event.target.value) || 1)))} /></label>
         <label className="outbound-message">Mensagem para aprovação<textarea rows={5} value={message} onChange={event => setMessage(event.target.value)} /></label>
+        <div className="outbound-personalization"><strong>Personalização obrigatória por contato</strong><span><code>{'{{nome}}'}</code> responsável real · <code>{'{{empresa}}'}</code> empresa · <code>{'{{sinal_real}}'}</code> observação verificável · <code>{'{{oportunidade}}'}</code> sugestão coerente com o sinal.</span><small>Se qualquer informação estiver ausente, o lead permanece em revisão e a mensagem não é preparada para envio.</small></div>
         <label className="outbound-consent"><input type="checkbox" checked={founderChecked} onChange={event => setFounderChecked(event.target.checked)} /><span>Eu, Founder, autorizo preparar este lote de até {dailyLimit} contatos por dia, com identificação da Kairos Digital, opt-out e registro de resultado.</span></label>
         <button type="button" className="outbound-authorize" disabled={!founderChecked || !message.trim()} onClick={registerAuthorization}><Send size={16} /> Registrar autorização</button>
       </div>

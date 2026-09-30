@@ -283,3 +283,5 @@ O KAIROS pareado na VPS é um runtime externo ao Core. O sinal `ready` do WhatsA
 
 O painel de autorização de prospecção persiste apenas intenção editorial em `localStorage`. Ele não é Vault, aprovação de servidor nem executor. A transição para envio exige conexão WABA oficial, template/canal compatível, destinatário validado, opt-out, idempotência e confirmação remota; a sessão web pareada não satisfaz esse contrato.
 
+O rascunho de prospecção usa placeholders explícitos para nome, empresa, sinal verificado e oportunidade. O futuro compilador de campanha deve falhar fechado se qualquer valor estiver ausente; não existe fallback genérico que finja personalização.
+

@@ -397,3 +397,5 @@ O papel KAIROS ganha uma superfície única, chamada KAIROS AGI, para mostrar di
 
 O Founder pode declarar a campanha, o teto diário e a mensagem antes da conexão final. Essa intenção não é confundida com envio: o executor permanece fechado até receber autorização de servidor, canal oficial, destinatários validados, opt-out e confirmação remota. Isso permite preparar todo o trabalho no KAIROS AGI sem transformar sessão web em infraestrutura de campanha.
 
+A mensagem passa a ser um template individual com evidência: nome, empresa, sinal real e oportunidade. Se o Hunter não conseguir provar esses quatro campos, o prospect não entra no lote.
+

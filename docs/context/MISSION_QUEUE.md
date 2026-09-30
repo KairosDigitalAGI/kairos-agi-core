@@ -311,4 +311,5 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Exibir separadamente autorização, canal oficial, recibos e opt-out.
 - [ ] Conectar a WhatsApp Business Platform e persistir autorização/auditoria no servidor.
 - [ ] Executar lote piloto somente depois de validar destinatários, template e recibo remoto.
+- [x] Tornar a mensagem individual por contato e bloquear personalização com campos reais ausentes.
 

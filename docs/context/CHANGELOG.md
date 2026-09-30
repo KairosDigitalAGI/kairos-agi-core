@@ -463,4 +463,5 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - O Founder pode registrar no navegador uma campanha, limite de 1 a 30 contatos/dia e texto com identificação e opt-out.
 - A interface separa autorização editorial de execução e mostra cada pré-requisito do envio.
 - A campanha não liga `OUTBOUND_ENABLED` nem usa a sessão web para imitar comportamento humano; a WhatsApp Business Platform e recibos continuam sendo gates obrigatórios.
+- O texto de abertura passou a exigir nome, empresa, sinal real e oportunidade específica por lead; campo ausente mantém o contato em revisão.
 

@@ -46,3 +46,5 @@ Toda implementação concreta deve chamar `assertTenant` antes de processar um e
 A página KAIROS AGI reúne o sinal autenticado da frota, a rotina de descoberta e os handoffs do Founder. Ela não altera o gate de saída do runtime. O teste proprietário confirma o caminho técnico de envio ao dono da conta; ele não valida campanha, consentimento de terceiros ou integração oficial da Meta.
 
 A autorização de campanha registrada no navegador contém limite e mensagem, sem números ou credenciais. O executor deve ignorá-la enquanto não houver aprovação persistida no servidor e todas as condições do `whatsapp-gateway` oficial.
+
+`lead-intelligence` deve fornecer `nome`, `empresa`, `sinal_real` e `oportunidade` com origem verificável antes de compilar uma mensagem. Nenhum desses campos admite valor inventado ou fallback genérico.

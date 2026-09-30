@@ -211,3 +211,5 @@ O agente da VPS está pareado e online. O Hunter busca diariamente até 30 prosp
 Abra **KAIROS AGI** na barra lateral para acompanhar o runtime, a descoberta diária e os acessos que ainda dependem do Founder. O painel só declara o runtime online depois da consulta autenticada à frota. O teste proprietário de 30/09 confirmou entrega ao telefone do Founder.
 
 O painel também registra a autorização local de uma campanha de até 30 contatos/dia e mantém a mensagem aprovada visível. Esse registro não envia mensagens: o lote só poderá executar depois da conexão oficial da Meta, validação dos destinatários, opt-out e recibos remotos.
+
+O rascunho exige quatro dados reais para cada mensagem: nome, empresa, sinal observado e oportunidade específica. Contatos incompletos ficam em revisão em vez de receber uma saudação genérica.

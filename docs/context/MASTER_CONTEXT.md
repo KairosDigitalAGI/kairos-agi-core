@@ -136,3 +136,5 @@ O pareamento atual usa sessão web e serve para atendimento de inbound dentro do
 
 O Founder autorizou preparar campanha ativa com limite de até 30 contatos/dia. A página registra localmente o limite e a mensagem aprovada, sem tratar esse registro de navegador como auditoria de servidor. A autorização não ultrapassa o gate: envio continua bloqueado até a WhatsApp Business Platform estar conectada e os recibos/opt-out serem implementados.
 
+A mensagem usa quatro campos individuais: responsável real, empresa, observação pública verificável e oportunidade coerente. Ausência de qualquer campo impede a preparação daquele contato; a personalização não pode ser produzida com suposição ou texto genérico disfarçado.
+
