@@ -267,3 +267,5 @@ A UI do PrivateCloneVault mantém seleção e revelação como estados separados
 
 O arquivo estático /captacao.html apresenta uma oferta delimitada de serviço e encaminha interessados ao Instagram oficial da Kairos. Ele não processa pagamentos, não cria leads no banco e não aciona Meta API. O Hunter exibe seu link; o runtime comercial permanece separado e autenticado. Meta de faturamento é cálculo comercial, não métrica de receita.
 
+Uma segunda página estática, /diagnostico.html, apresenta o serviço de auditoria de uma página pública. As duas páginas compartilham /brand/sales.css, podem ser acessadas sem autenticação e aparecem no Hunter. Nenhuma delas armazena informações do visitante ou integra checkout.
+

@@ -375,3 +375,7 @@ Cada papel pode registrar uma preferência local de terminal para Codex CLI ou C
 
 O objetivo de receita passa a ter uma primeira oferta de serviço com escopo e preço públicos. A meta de quatro projetos de R$ 2.500 é hipótese comercial, não faturamento. A captação inicial usa um link para o Instagram oficial; pagamento, contatos e respostas não são simulados nem automatizados pelo Core. A cadência futura exige conector oficial, persistência e confirmação de execução.
 
+## 30/09/2026 — Serviço de entrada
+
+O catálogo comercial ganha um diagnóstico pontual de página pública por R$ 490, com relatório, cinco prioridades e plano de ação. Esta oferta complementa a implantação de R$ 2.500 e pode ser divulgada pelo mesmo canal. O bloqueio de propostas na Workana e a ausência de sessão social autenticada são estados operacionais, não receita ou execução.
+

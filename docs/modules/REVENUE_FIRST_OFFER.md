@@ -16,7 +16,7 @@ A página pública é /captacao.html. O CTA abre o perfil oficial @_kairosdigita
 4. Fazer diagnóstico, formalizar escopo e pagamento em canal oficial; só então marcar faturamento.
 5. Medir visualizações, conversas, propostas, contratos e recebimentos separadamente.
 
-O levantamento inicial encontrou pedidos de landing pages e captação em Workana. A conta no navegador consultado estava deslogada, portanto nenhuma proposta foi enviada. O conector Freelancer do Core segue sem credenciais nesta sessão. Nenhuma venda foi fechada nesta entrega.
+O levantamento inicial encontrou pedidos de landing pages e captação em Workana. Na sessão seguinte a conta foi autenticada, mas a plataforma informou que o perfil ainda está em revisão e bloqueia o envio de propostas. A opção de moderação prioritária custa R$ 59,90 e não foi comprada. O conector Freelancer do Core segue sem credenciais nesta sessão. Nenhuma proposta ou venda foi confirmada.
 
 ## Próxima implementação
 

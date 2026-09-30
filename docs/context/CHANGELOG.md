@@ -426,3 +426,10 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - Demanda em marketplace consultada; sessão sem login, nenhum envio ou contrato.
 - Próximo passo: cadência real e idempotente com conector oficial e evidência de cada etapa.
 
+## 30/09/2026 — Segunda frente de receita
+
+- Conta Workana autenticada e conferida: perfil em revisão, propostas bloqueadas. Compra de moderação prioritária descartada.
+- Página /diagnostico.html oferece um relatório de captação por R$ 490, com escopo e prazo explícitos.
+- /captacao.html e /diagnostico.html passam a compartilhar CSS e se referenciar; Hunter exibe ambas.
+- Edge não disponível para controle e Instagram embutido sem login; nenhuma publicação ou mensagem enviada.
+

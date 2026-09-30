@@ -116,3 +116,5 @@ A Missão 011 passou a ter template local para registrar o establishing shot com
 
 A Kairos ganhou uma oferta pública de implantação de captação por R$ 2.500 em /captacao.html. Quatro projetos correspondem à meta de R$ 10 mil brutos, sem receita registrada. O contato inicial é o Instagram oficial; não há formulário, envio automático ou cobrança no Core. A pesquisa Workana identificou demanda, mas a sessão consultada estava deslogada e nenhuma proposta foi enviada. O conector Freelancer ainda requer credenciais. Detalhes em docs/modules/REVENUE_FIRST_OFFER.md.
 
+Na retomada, o Founder conectou sua conta Workana: o perfil estava 70% completo e em revisão; a plataforma bloqueia propostas até aprovação. A revisão prioritária de R$ 59,90 não foi comprada. Como segunda frente, /diagnostico.html oferece Raio-X de captação por R$ 490. O Instagram embutido estava deslogado e o Edge pedido pelo Founder indisponível para automação nesta sessão. Nenhuma proposta, postagem, pagamento ou venda ocorreu. Detalhes em docs/modules/REVENUE_DIAGNOSTIC_OFFER.md.
+

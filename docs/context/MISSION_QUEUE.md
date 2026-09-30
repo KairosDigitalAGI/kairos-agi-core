@@ -269,3 +269,10 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [ ] Conectar conta oficial de prospecção e construir cadência diária com execução e confirmação verificáveis.
 - [ ] Medir conversas, propostas, contratos e recebimentos reais antes de declarar primeiras vendas.
 
+## Missão 019 — Segunda oferta de entrada (entregue)
+
+- [x] Conferir Workana autenticada e registrar impedimento de moderação sem comprar revisão.
+- [x] Publicar Raio-X de captação por R$ 490, com entrega verificável e sem promessa de resultado.
+- [x] Integrar a segunda oferta ao Hunter e à primeira página comercial.
+- [ ] Divulgar em conta oficial autenticada, registrar URL da publicação e respostas recebidas.
+
