@@ -128,3 +128,9 @@ O runtime KAIROS da VPS foi pareado novamente com o WhatsApp do Founder e confir
 
 O Hunter da VPS executa diariamente às 07h uma busca de até 30 prospects qualificados, divididos entre duas cidades, com reputação mínima, deduplicação e score. Essa meta é teto de coleta, não garantia de 30 registros: filtros, duplicatas, CAPTCHA ou ausência de telefone podem reduzir o resultado. Os registros ficam parados para revisão; `OUTBOUND_ENABLED=false` continua bloqueando prospecção fria. O bot responde apenas a inbound fresco dentro da janela já implementada e a contatos explicitamente monitorados. Workana e 99Freelas ainda não possuem conector oficial de inbox neste runtime.
 
+## Carlos AGI — centro operacional protegido (30/09/2026)
+
+A antiga entrada CRM passou a apresentar o Carlos AGI como centro do runtime KAIROS. A página consulta a frota autenticada, mostra o estado real da VPS, a rotina diária de descoberta, a fronteira entre coleta e comunicação e os acessos que ainda exigem o Founder. Um teste exclusivo para o número do Founder recebeu confirmação remota de envio às 17:49; nenhum prospect recebeu mensagem.
+
+O pareamento atual usa sessão web e serve para atendimento de inbound dentro do gate existente. Ele não é WhatsApp Business Platform e não libera disparo frio. A evolução diária mantém `OUTBOUND_ENABLED=false` até existir canal oficial, base legítima de contato, opt-out, limites, idempotência e recibo por destinatário.
+

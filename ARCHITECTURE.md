@@ -277,3 +277,7 @@ Uma segunda página estática, /diagnostico.html, apresenta o serviço de audito
 
 O KAIROS pareado na VPS é um runtime externo ao Core. O sinal `ready` do WhatsApp Web confirma somente a sessão atual; não transforma o transporte em WhatsApp Business Platform oficial. A coleta diária do Hunter grava prospects para revisão e mantém a sincronização com o bot suspensa durante a rodada. O choke point de saída preserva `OUTBOUND_ENABLED=false`: somente respostas a inbound fresco e contatos explicitamente monitorados podem atravessar o gate. Credenciais, sessão do navegador, telefones e bancos do runtime não entram no repositório ou no frontend.
 
+## Centro Carlos AGI
+
+`CrmPage` é a superfície operacional do Carlos AGI. Ela reutiliza `useFleetStatus`, `OperationsUnlock` e `AgentRuntimePanel`; portanto, o status online vem da frota autenticada e nunca de estado decorativo. A interface não transporta sessão, QR, número ou credencial da VPS. Links de Meta, Workana e 99Freelas são handoffs explícitos para autenticação humana, não conectores implícitos.
+
