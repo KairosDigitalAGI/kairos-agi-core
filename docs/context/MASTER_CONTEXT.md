@@ -114,6 +114,8 @@ A Missão 011 também ganhou referências visuais ficcionais de KAIROS e ORION, 
 A Missão 011 passou a ter template local para registrar o establishing shot com briefing auditável, aguardando confirmação do schema/bucket para ser persistido. A etapa ainda não executa a Gateway.
 # Atualização comercial — 30/09/2026
 
+O Hunter agora permite registrar empresas encontradas em perfil público do Instagram sem tratá-las como pedidos recebidos. Uma pesquisa assistida identificou cinco empresas locais com evidências em páginas de links próprias; lista nominal e links ficam apenas em `memory/private/revenue/instagram-leads-2026-09-30.md`. A leitura direta do Instagram foi limitada, então atividade recente e consentimento para contato continuam indisponíveis. Nenhum disparo WhatsApp foi feito.
+
 A Kairos ganhou uma oferta pública de implantação de captação por R$ 2.500 em /captacao.html. Quatro projetos correspondem à meta de R$ 10 mil brutos, sem receita registrada. O contato inicial é o Instagram oficial; não há formulário, envio automático ou cobrança no Core. A pesquisa Workana identificou demanda, mas a sessão consultada estava deslogada e nenhuma proposta foi enviada. O conector Freelancer ainda requer credenciais. Detalhes em docs/modules/REVENUE_FIRST_OFFER.md.
 
 Na retomada, o Founder conectou sua conta Workana: o perfil estava 70% completo e em revisão; a plataforma bloqueia propostas até aprovação. A revisão prioritária de R$ 59,90 não foi comprada. Como segunda frente, /diagnostico.html oferece Raio-X de captação por R$ 490. O Instagram embutido estava deslogado e o Edge pedido pelo Founder indisponível para automação nesta sessão. Nenhuma proposta, postagem, pagamento ou venda ocorreu. Detalhes em docs/modules/REVENUE_DIAGNOSTIC_OFFER.md.

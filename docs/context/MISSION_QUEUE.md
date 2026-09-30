@@ -276,3 +276,10 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Integrar a segunda oferta ao Hunter e à primeira página comercial.
 - [ ] Divulgar em conta oficial autenticada, registrar URL da publicação e respostas recebidas.
 
+## Missão 020 — Pesquisa assistida de empresas no Instagram
+
+- [x] Levantar cinco empresas locais com fonte pública e hipótese comercial explícita.
+- [x] Distinguir no Hunter empresa pesquisada de demanda recebida.
+- [ ] Confirmar perfis/sites atuais e base de contato antes de qualquer cadência WhatsApp.
+- [ ] Sincronizar leads revisados com CRM autenticado, com isolamento e registro de permissão; não usar a lista local como disparador.
+

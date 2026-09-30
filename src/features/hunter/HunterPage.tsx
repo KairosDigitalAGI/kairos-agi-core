@@ -56,12 +56,12 @@ export function HunterPage() {
       <div className="hunter-grid">
         <form className="glass-panel hunter-capture" onSubmit={capture}>
           <div className="section-header"><div><span className="eyebrow"><Search size={13} /> CAPTURA AUTORIZADA</span><h2>Registrar demanda</h2></div></div>
-          <p>Use o link e os dados que já foram vistos em uma plataforma autorizada. O Core não raspa páginas, não contorna limites e não cria contatos.</p>
+          <p>Registre demandas ou empresas observadas em fonte pública. Uma empresa pesquisada ainda não pediu proposta e não autorizou mensagens automáticas.</p>
           <label>Fonte<select value={form.source} onChange={(event) => setForm({ ...form, source: event.target.value as HunterDraft['source'] })}>{hunterSources.map((source) => <option key={source}>{source}</option>)}</select></label>
           <label>Título<input value={form.title} onChange={(event) => setForm({ ...form, title: event.target.value })} placeholder="Ex.: landing page para captação" required /></label>
           <label>Link de origem<input value={form.url} onChange={(event) => setForm({ ...form, url: event.target.value })} type="url" placeholder="https://..." /></label>
-          <label>Orçamento informado<input value={form.budget} onChange={(event) => setForm({ ...form, budget: event.target.value })} placeholder="Ex.: R$ 1.500–2.000" /></label>
-          <label>Escopo observado<textarea value={form.summary} onChange={(event) => setForm({ ...form, summary: event.target.value })} rows={4} placeholder="O que o cliente pediu, sem completar lacunas." required /></label>
+          <label>Orçamento informado, se houver<input value={form.budget} onChange={(event) => setForm({ ...form, budget: event.target.value })} placeholder="Ex.: não informado" /></label>
+          <label>Evidência e oportunidade<textarea value={form.summary} onChange={(event) => setForm({ ...form, summary: event.target.value })} rows={4} placeholder="O que foi visto na fonte; se for uma empresa pesquisada, descreva a hipótese sem atribuir pedido ao cliente." required /></label>
           <button className="primary-button" type="submit"><Target size={15} /> Adicionar à triagem</button>
         </form>
 

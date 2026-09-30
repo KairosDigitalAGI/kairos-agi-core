@@ -379,3 +379,7 @@ O objetivo de receita passa a ter uma primeira oferta de serviço com escopo e p
 
 O catálogo comercial ganha um diagnóstico pontual de página pública por R$ 490, com relatório, cinco prioridades e plano de ação. Esta oferta complementa a implantação de R$ 2.500 e pode ser divulgada pelo mesmo canal. O bloqueio de propostas na Workana e a ausência de sessão social autenticada são estados operacionais, não receita ou execução.
 
+## 30/09/2026 — Prospecção pública assistida
+
+O Hunter pode organizar empresas observadas em perfis públicos como hipóteses de venda, separadas de demandas recebidas. Antes de contato automatizado, a trilha exige revisão de fonte, canal empresarial, base de contato e opt-out; nenhuma URL pública por si só autoriza disparo. Dados nominais de prospects não entram no Blueprint público.
+

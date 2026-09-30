@@ -1,4 +1,4 @@
-export const hunterSources = ['99Freelas', 'Freelancer.com.br', 'Workana', 'Outra fonte autorizada'] as const
+export const hunterSources = ['99Freelas', 'Freelancer.com.br', 'Workana', 'Instagram público', 'Outra fonte autorizada'] as const
 export type HunterSource = (typeof hunterSources)[number]
 
 export const hunterStages = ['triagem', 'qualificada', 'proposta pronta', 'aguardando resposta'] as const

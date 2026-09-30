@@ -1,5 +1,11 @@
 # Changelog
 
+## 30/09/2026 — triagem pública de empresas no Instagram
+
+- Hunter ganhou a fonte `Instagram público` e texto de cadastro que separa empresa pesquisada de demanda recebida.
+- Cinco empresas de Goiânia foram pesquisadas por páginas de links publicadas pelas próprias contas. O lote identificado fica em memória privada fora do Git; no repositório há apenas método e contagem.
+- Instagram limitou leitura direta automatizada. Métricas, orçamento, interesse e consentimento permanecem indisponíveis; não houve envio por WhatsApp.
+
 ## 23/09/2026 — Seedance 2.5 com Gateway limitada
 
 - Adicionado `api/_providers/seedance.js`, adaptador de vídeo para `bytedance/seedance-2.5` via Vercel AI Gateway e `experimental_generateVideo` do AI SDK.
