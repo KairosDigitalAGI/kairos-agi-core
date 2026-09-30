@@ -464,4 +464,5 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - A interface separa autorização editorial de execução e mostra cada pré-requisito do envio.
 - A campanha não liga `OUTBOUND_ENABLED` nem usa a sessão web para imitar comportamento humano; a WhatsApp Business Platform e recibos continuam sendo gates obrigatórios.
 - O texto de abertura passou a exigir nome, empresa, sinal real e oportunidade específica por lead; campo ausente mantém o contato em revisão.
+- As credenciais do Painel Operacional foram atualizadas na Vercel e validadas em produção; a frota confirmou o runtime online. A tentativa obrigatória de registrar esta sessão no Mapa falhou porque `command.project_log` recusou escrita no Supabase, pendência registrada na fila.
 

@@ -303,7 +303,7 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [ ] Concluir configuração da WhatsApp Business Platform com login e escolha de número pelo Founder.
 - [ ] Implementar opt-out, templates aprovados, idempotência e recibos antes de qualquer campanha ativa.
 - [ ] Conectar Workana e 99Freelas por integrações próprias após aprovação e login das contas.
-- [ ] Registrar esta sessão no Mapa do Projeto após o Founder desbloquear o Painel Operacional.
+- [ ] Registrar esta sessão no Mapa do Projeto após corrigir a permissão de escrita de `command.project_log`; o painel foi desbloqueado, mas a API retornou 503/permission denied.
 
 ## Missão 022 — autorização de prospecção
 
