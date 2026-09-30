@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /captacao.html
+Allow: /diagnostico.html
+Sitemap: https://kairos-agi-core.vercel.app/sitemap.xml

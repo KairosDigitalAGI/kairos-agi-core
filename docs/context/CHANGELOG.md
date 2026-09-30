@@ -432,4 +432,5 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - Página /diagnostico.html oferece um relatório de captação por R$ 490, com escopo e prazo explícitos.
 - /captacao.html e /diagnostico.html passam a compartilhar CSS e se referenciar; Hunter exibe ambas.
 - Edge não disponível para controle e Instagram embutido sem login; nenhuma publicação ou mensagem enviada.
+- Canonical, metadados de compartilhamento, robots.txt e sitemap.xml para as duas ofertas; indexação ainda não confirmada.
 
