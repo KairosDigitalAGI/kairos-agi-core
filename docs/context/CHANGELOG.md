@@ -466,3 +466,9 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - O texto de abertura passou a exigir nome, empresa, sinal real e oportunidade específica por lead; campo ausente mantém o contato em revisão.
 - As credenciais do Painel Operacional foram atualizadas na Vercel e validadas em produção; a frota confirmou o runtime online. A tentativa obrigatória de registrar esta sessão no Mapa falhou porque `command.project_log` recusou escrita no Supabase, pendência registrada na fila.
 
+## 30/09/2026 — checklist real de ativação comercial
+
+- A página KAIROS AGI passou a mostrar cinco etapas: WhatsApp, leads, autorização, personalização e canal/recibos.
+- A rodada concluída aceitou 12 de até 30 leads, depois de 176 resultados brutos; o total é datado e não projetado.
+- O painel informa que ainda faltam responsáveis e sinais individuais dos 12, além do canal oficial com recibos.
+

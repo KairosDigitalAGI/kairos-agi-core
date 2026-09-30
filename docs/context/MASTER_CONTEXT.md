@@ -138,3 +138,5 @@ O Founder autorizou preparar campanha ativa com limite de até 30 contatos/dia. 
 
 A mensagem usa quatro campos individuais: responsável real, empresa, observação pública verificável e oportunidade coerente. Ausência de qualquer campo impede a preparação daquele contato; a personalização não pode ser produzida com suposição ou texto genérico disfarçado.
 
+A rodada manual de 30/09 terminou com 12 leads aceitos de 176 resultados brutos; Campinas forneceu 8 e Goiânia 4. O `hunter-sync` foi religado ao final e KAIROS/heartbeat permaneceram online. A página KAIROS AGI mostra esses números datados e um checklist de cinco etapas. A coleta não trouxe o nome do responsável e o sinal individual completo para cada contato, portanto os 12 ainda precisam de enriquecimento antes de compilar a abordagem.
+

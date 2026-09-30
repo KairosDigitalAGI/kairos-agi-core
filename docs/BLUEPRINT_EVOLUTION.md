@@ -399,3 +399,7 @@ O Founder pode declarar a campanha, o teto diário e a mensagem antes da conexã
 
 A mensagem passa a ser um template individual com evidência: nome, empresa, sinal real e oportunidade. Se o Hunter não conseguir provar esses quatro campos, o prospect não entra no lote.
 
+## 30/09/2026 — checklist de prontidão comercial
+
+O KAIROS AGI passa a explicar visualmente a distância entre coleta e campanha: conexão, leads, autorização, personalização e recibo são gates separados. Números de uma rodada aparecem com data e nunca como métrica viva sem ledger autenticado.
+

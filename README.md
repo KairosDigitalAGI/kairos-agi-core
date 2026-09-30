@@ -213,3 +213,5 @@ Abra **KAIROS AGI** na barra lateral para acompanhar o runtime, a descoberta di�
 O painel também registra a autorização local de uma campanha de até 30 contatos/dia e mantém a mensagem aprovada visível. Esse registro não envia mensagens: o lote só poderá executar depois da conexão oficial da Meta, validação dos destinatários, opt-out e recibos remotos.
 
 O rascunho exige quatro dados reais para cada mensagem: nome, empresa, sinal observado e oportunidade específica. Contatos incompletos ficam em revisão em vez de receber uma saudação genérica.
+
+O checklist do KAIROS AGI mostra a ativação em cinco passos. Na rodada verificada de 30/09, o Hunter aceitou 12 leads de uma meta máxima de 30. Ainda faltam responsável e sinal individual para compilar as 12 mensagens, além do canal oficial e seus recibos.

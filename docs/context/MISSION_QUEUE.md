@@ -313,3 +313,10 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [ ] Executar lote piloto somente depois de validar destinatários, template e recibo remoto.
 - [x] Tornar a mensagem individual por contato e bloquear personalização com campos reais ausentes.
 
+## Missão 023 — checklist de ativação comercial
+
+- [x] Confirmar o resultado real da última rodada: 12 leads aceitos, sem mensagem enviada.
+- [x] Exibir no KAIROS AGI o que está pronto e o que bloqueia o lote piloto.
+- [ ] Enriquecer os 12 leads com responsável e sinal verificável por empresa.
+- [ ] Persistir autorização e recibos em servidor antes de executar comunicação externa.
+

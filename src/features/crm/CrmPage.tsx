@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Bot, CheckCircle2, ExternalLink, LockKeyhole, MessageCircleReply, Search, Send, ShieldCheck, UserRoundCheck } from 'lucide-react'
+import { AlertTriangle, Bot, CheckCircle2, ExternalLink, LockKeyhole, MessageCircleReply, Search, Send, ShieldCheck, UserRoundCheck } from 'lucide-react'
 import { AgentRuntimePanel } from '../dashboard/AgentRuntimePanel'
 import { OperationsUnlock } from '../dashboard/OperationsUnlock'
 import { useFleetStatus } from '../../core/useFleetStatus'
@@ -73,6 +73,21 @@ export function CrmPage() {
         <strong>{online ? 'WhatsApp conectado' : 'Desbloqueie para consultar'}</strong>
         <small>{online ? `Processo ${kairos?.pm2_name || 'KAIROS'} confirmado pela frota` : 'O status real não é presumido sem autenticação.'}</small>
       </div>
+    </section>
+
+    <section className="glass-panel activation-board">
+      <div className="activation-heading">
+        <div><span className="eyebrow">O QUE FALTA PARA FUNCIONAR</span><h3>Ativação da primeira campanha</h3><p>Estado verificado em 30/09/2026. Cada etapa concluída precisa de evidência real.</p></div>
+        <strong>{online && authorization ? '3 de 5 prontas' : online ? '2 de 5 prontas' : '1 de 5 pronta'}</strong>
+      </div>
+      <div className="activation-steps">
+        <article className={online ? 'ready' : 'pending'}>{online ? <CheckCircle2 size={19} /> : <AlertTriangle size={19} />}<div><span>01 · WhatsApp conectado</span><strong>{online ? 'KAIROS online na VPS' : 'Desbloqueie para consultar'}</strong><small>Sessão e heartbeat confirmados pela frota.</small></div></article>
+        <article className="ready"><CheckCircle2 size={19} /><div><span>02 · Leads pesquisados</span><strong>12 qualificados na última rodada</strong><small>Meta era até 30; filtros reais aceitaram 12.</small></div></article>
+        <article className={authorization ? 'ready' : 'pending'}>{authorization ? <CheckCircle2 size={19} /> : <AlertTriangle size={19} />}<div><span>03 · Autorização</span><strong>{authorization ? `Registrada para ${authorization.dailyLimit}/dia` : 'Marcar e registrar abaixo'}</strong><small>Define limite, texto e opt-out.</small></div></article>
+        <article className="pending"><AlertTriangle size={19} /><div><span>04 · Personalizar os 12</span><strong>Faltam responsáveis e sinais individuais</strong><small>Sem esses dados, o KAIROS não inventa a abordagem.</small></div></article>
+        <article className="blocked"><LockKeyhole size={19} /><div><span>05 · Canal e recibos</span><strong>Integração oficial não conectada</strong><small>Bloqueio obrigatório antes de mensagem a terceiros.</small></div></article>
+      </div>
+      <div className="activation-next"><strong>Próximo passo agora</strong><span>Registre a autorização abaixo. Depois, enriquecer os 12 leads e conectar o canal com recibo remoto libera o lote piloto.</span></div>
     </section>
 
     <OperationsUnlock />

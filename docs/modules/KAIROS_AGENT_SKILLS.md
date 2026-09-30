@@ -48,3 +48,5 @@ A página KAIROS AGI reúne o sinal autenticado da frota, a rotina de descoberta
 A autorização de campanha registrada no navegador contém limite e mensagem, sem números ou credenciais. O executor deve ignorá-la enquanto não houver aprovação persistida no servidor e todas as condições do `whatsapp-gateway` oficial.
 
 `lead-intelligence` deve fornecer `nome`, `empresa`, `sinal_real` e `oportunidade` com origem verificável antes de compilar uma mensagem. Nenhum desses campos admite valor inventado ou fallback genérico.
+
+O painel de ativação pode apresentar snapshots datados de uma coleta, mas só um ledger autenticado deve alimentar contadores correntes. O snapshot de 30/09 registra 12 leads aceitos e nenhum envio.

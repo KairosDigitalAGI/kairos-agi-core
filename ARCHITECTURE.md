@@ -285,3 +285,5 @@ O painel de autorização de prospecção persiste apenas intenção editorial e
 
 O rascunho de prospecção usa placeholders explícitos para nome, empresa, sinal verificado e oportunidade. O futuro compilador de campanha deve falhar fechado se qualquer valor estiver ausente; não existe fallback genérico que finja personalização.
 
+O checklist de ativação em `CrmPage` mistura sinais dinâmicos da frota com um snapshot operacional explicitamente datado da última coleta. O total de 12 é evidência da rodada de 30/09, não contador em tempo real. Um futuro endpoint autenticado deve substituir o snapshot quando o ledger do Hunter estiver disponível ao Core.
+
