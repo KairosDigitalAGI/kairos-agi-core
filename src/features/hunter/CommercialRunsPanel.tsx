@@ -1,4 +1,4 @@
-import { Clock3, Play, RefreshCw, ServerCog } from 'lucide-react'
+import { Clock3, ExternalLink, Play, RefreshCw, ServerCog } from 'lucide-react'
 import { useState } from 'react'
 import { useCommercialRuns } from '../../core/useCommercialRuns'
 
@@ -28,7 +28,8 @@ export function CommercialRunsPanel() {
 
   return <article className="glass-panel hunter-runs">
     <div className="section-header"><div><span className="eyebrow"><ServerCog size={13}/> RUNTIME COMERCIAL</span><h2>Execuções do servidor</h2></div><button onClick={() => void refresh()}><RefreshCw size={14}/> Atualizar</button></div>
-    <section className="revenue-runway"><div><span className="eyebrow"><Clock3 size={13}/> PRIORIDADE 01 · RECEITA</span><h3>Trilha inicial de oportunidades</h3><p>Agenda três etapas persistidas: descoberta em fonte oficial, qualificação e rascunho. O envio segue bloqueado até haver canal oficial, consentimento e confirmação remota.</p></div><button type="button" className="primary-button" onClick={() => void scheduleRevenueRunway()} disabled={starting || state.status === 'sem-credencial'}><Play size={14}/>{starting ? 'Registrando…' : 'Agendar trilha de receita'}</button></section>
+    <section className="revenue-runway"><div><span className="eyebrow">OFERTA PUBLICADA · META R$ 10 MIL</span><h3>Implantação de captação · R$ 2.500</h3><p>Quatro projetos nesse valor alcançam R$ 10 mil de faturamento bruto contratado. A página mostra escopo e contato; receita realizada só aparece após confirmação financeira real.</p></div><a className="primary-button" href="/captacao.html" target="_blank" rel="noreferrer">Ver oferta pública <ExternalLink size={14}/></a></section>
+    <section className="revenue-runway"><div><span className="eyebrow"><Clock3 size={13}/> PRIORIDADE 01 · RECEITA</span><h3>Trilha inicial de oportunidades</h3><p>Registra três etapas persistidas: descoberta em fonte oficial, qualificação e rascunho. Esse comando ainda não agenda execução automática nem envia contatos.</p></div><button type="button" className="primary-button" onClick={() => void scheduleRevenueRunway()} disabled={starting || state.status === 'sem-credencial'}><Play size={14}/>{starting ? 'Registrando…' : 'Registrar trilha de receita'}</button></section>
     {notice && <p className="hunter-run-notice">{notice}</p>}
     {state.status === 'sem-credencial' && <p>Desbloqueie o Painel Operacional para consultar ou agendar ciclos persistidos.</p>}
     {state.status === 'carregando' && <p>Consultando execução comercial…</p>}

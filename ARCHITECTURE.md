@@ -263,3 +263,7 @@ A UI do PrivateCloneVault mantém seleção e revelação como estados separados
 ## Console de agentes e trilha comercial
 
 `useFleetStatus` consome a rota autenticada já existente de status da frota. `AgentRuntimePanel` separa sinal remoto, preferência local de terminal e link oficial do WhatsApp Business. `CommercialRunsPanel` usa o ledger `command.commercial_runs` para registrar a trilha inicial de descoberta, qualificação e rascunho.
+# Oferta comercial pública — 30/09/2026
+
+O arquivo estático /captacao.html apresenta uma oferta delimitada de serviço e encaminha interessados ao Instagram oficial da Kairos. Ele não processa pagamentos, não cria leads no banco e não aciona Meta API. O Hunter exibe seu link; o runtime comercial permanece separado e autenticado. Meta de faturamento é cálculo comercial, não métrica de receita.
+

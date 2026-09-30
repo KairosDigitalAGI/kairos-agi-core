@@ -371,3 +371,7 @@ O Blueprint passa a exigir contraste legível nos campos do cofre e controle de 
 ## 2026-09-28 — Console operacional por agente
 
 Cada papel pode registrar uma preferência local de terminal para Codex CLI ou Claude Code. A preferência não cria processo, não compartilha credencial e não prova execução. A única prova de processo remoto é o sinal da frota autenticada.
+## 30/09/2026 — Oferta de receita inicial
+
+O objetivo de receita passa a ter uma primeira oferta de serviço com escopo e preço públicos. A meta de quatro projetos de R$ 2.500 é hipótese comercial, não faturamento. A captação inicial usa um link para o Instagram oficial; pagamento, contatos e respostas não são simulados nem automatizados pelo Core. A cadência futura exige conector oficial, persistência e confirmação de execução.
+

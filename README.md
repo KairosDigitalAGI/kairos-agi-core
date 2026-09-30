@@ -191,3 +191,7 @@ Em Studio → Elenco, cada referência privada possui um botão de olho individu
 ## Operação comercial inicial
 
 Em Agentes, abra Terminal para verificar a frota e associar Codex CLI ou Claude Code localmente. Em Hunter, a trilha de receita registra descoberta, qualificação e rascunho no runtime; ela não envia mensagens ou propostas.
+
+## Primeira oferta de venda
+
+A oferta pública de implantação de captação está em [captacao.html](public/captacao.html), acessível em /captacao.html na implantação. Preço: R$ 2.500 por projeto; quatro contratos equivalem à meta de R$ 10 mil de faturamento bruto, ainda não realizado. O escopo, as exclusões e o canal de contato estão em [REVENUE_FIRST_OFFER.md](docs/modules/REVENUE_FIRST_OFFER.md). O Hunter mostra o acesso à página e distingue registro de etapas de execução automática.

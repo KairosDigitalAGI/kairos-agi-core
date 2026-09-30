@@ -112,3 +112,7 @@ A confirmação do schema precisa ocorrer antes de executar SQL: o histórico t�
 A Missão 011 também ganhou referências visuais ficcionais de KAIROS e ORION, visíveis no Character Studio. Próxima ação técnica continua sendo a confirmação remota de schema/bucket, antes do primeiro job textual Seedance.
 
 A Missão 011 passou a ter template local para registrar o establishing shot com briefing auditável, aguardando confirmação do schema/bucket para ser persistido. A etapa ainda não executa a Gateway.
+# Atualização comercial — 30/09/2026
+
+A Kairos ganhou uma oferta pública de implantação de captação por R$ 2.500 em /captacao.html. Quatro projetos correspondem à meta de R$ 10 mil brutos, sem receita registrada. O contato inicial é o Instagram oficial; não há formulário, envio automático ou cobrança no Core. A pesquisa Workana identificou demanda, mas a sessão consultada estava deslogada e nenhuma proposta foi enviada. O conector Freelancer ainda requer credenciais. Detalhes em docs/modules/REVENUE_FIRST_OFFER.md.
+

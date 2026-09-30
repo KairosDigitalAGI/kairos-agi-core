@@ -261,3 +261,11 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Expor o sinal da frota para o console do KAIROS, sem declarar conexão não confirmada.
 - [x] Permitir associação local de terminal Codex CLI ou Claude Code por agente.
 - [x] Criar trilha comercial persistida de descoberta, qualificação e rascunho; envios continuam bloqueados.
+## Missão 018 — Primeira oferta comercial (entregue)
+
+- [x] Definir e publicar uma oferta de serviço que a Kairos pode entregar sem gasto inicial obrigatório.
+- [x] Mostrar preço e alvo de quatro contratos no Hunter, sem apresentar meta como receita.
+- [x] Conferir demanda atual em marketplace; proposta depende de sessão oficial autenticada.
+- [ ] Conectar conta oficial de prospecção e construir cadência diária com execução e confirmação verificáveis.
+- [ ] Medir conversas, propostas, contratos e recebimentos reais antes de declarar primeiras vendas.
+

@@ -419,3 +419,10 @@ Os cartões de referência do cofre agora usam fundo opaco e texto de alto contr
 ## 2026-09-28 — Console de agentes e trilha comercial
 
 A página de Agentes agora permite abrir um console por papel, associar localmente Codex CLI ou Claude Code e consultar a frota real após o desbloqueio do Painel Operacional. KAIROS mostra apenas o sinal verificado do processo WhatsApp. O Hunter ganhou uma trilha persistida de descoberta, qualificação e rascunho; nenhum envio é criado por ela.
+# 30/09/2026 — Primeira oferta pública de venda
+
+- Página /captacao.html com preço, escopo, prazo condicional, exclusões e CTA para o Instagram oficial.
+- Hunter mostra a oferta e corrige “agendar” para “registrar” na trilha comercial, evitando declarar execução inexistente.
+- Demanda em marketplace consultada; sessão sem login, nenhum envio ou contrato.
+- Próximo passo: cadência real e idempotente com conector oficial e evidência de cada etapa.
+
