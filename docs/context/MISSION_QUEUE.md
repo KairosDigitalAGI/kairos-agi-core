@@ -285,3 +285,13 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Impedir que avanço manual da fila afirme envio ou resposta inexistentes; registrar permissão como não verificada.
 - [ ] Implementar recibo remoto autenticado antes de liberar a etapa “aguardando resposta”.
 
+## 30/09/2026 — Runtime comercial da VPS
+
+- [x] Reconectar o KAIROS ao WhatsApp do Founder e verificar o evento remoto de prontidão.
+- [x] Restaurar watchdog e heartbeat depois do pareamento.
+- [x] Programar caça diária revisável com teto de 30 prospects e zero envio.
+- [ ] Acompanhar a rodada em execução e registrar o total efetivamente aceito após deduplicação e score.
+- [ ] Substituir a sessão web por WhatsApp Business Platform oficial antes de liberar prospecção automatizada.
+- [ ] Implementar base de contato válida, opt-out, idempotência e recibo remoto por prospect.
+- [ ] Criar conectores oficiais separados para inbox de Workana e 99Freelas; login no navegador não equivale a integração.
+

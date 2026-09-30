@@ -122,3 +122,9 @@ A Kairos ganhou uma oferta pública de implantação de captação por R$ 2.500 
 
 Na retomada, o Founder conectou sua conta Workana: o perfil estava 70% completo e em revisão; a plataforma bloqueia propostas até aprovação. A revisão prioritária de R$ 59,90 não foi comprada. Como segunda frente, /diagnostico.html oferece Raio-X de captação por R$ 490. O Instagram embutido estava deslogado e o Edge pedido pelo Founder indisponível para automação nesta sessão. Nenhuma proposta, postagem, pagamento ou venda ocorreu. Detalhes em docs/modules/REVENUE_DIAGNOSTIC_OFFER.md.
 
+## Atualização operacional — KAIROS WhatsApp e Hunter (30/09/2026)
+
+O runtime KAIROS da VPS foi pareado novamente com o WhatsApp do Founder e confirmou o evento remoto `ready`. O processo `kairos`, o watchdog externo e o `kairos-heartbeat` ficaram ativos no PM2. O diretório temporário do Chromium foi normalizado para `/tmp`, eliminando a colisão de perfil que impedia a sessão de subir. Sessões, números e credenciais permanecem somente na VPS.
+
+O Hunter da VPS executa diariamente às 07h uma busca de até 30 prospects qualificados, divididos entre duas cidades, com reputação mínima, deduplicação e score. Essa meta é teto de coleta, não garantia de 30 registros: filtros, duplicatas, CAPTCHA ou ausência de telefone podem reduzir o resultado. Os registros ficam parados para revisão; `OUTBOUND_ENABLED=false` continua bloqueando prospecção fria. O bot responde apenas a inbound fresco dentro da janela já implementada e a contatos explicitamente monitorados. Workana e 99Freelas ainda não possuem conector oficial de inbox neste runtime.
+

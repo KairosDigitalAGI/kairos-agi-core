@@ -201,3 +201,7 @@ A fila indica quando a permissão de contato ainda não foi verificada e não pe
 A oferta pública de implantação de captação está em [captacao.html](public/captacao.html), acessível em /captacao.html na implantação. Preço: R$ 2.500 por projeto; quatro contratos equivalem à meta de R$ 10 mil de faturamento bruto, ainda não realizado. O escopo, as exclusões e o canal de contato estão em [REVENUE_FIRST_OFFER.md](docs/modules/REVENUE_FIRST_OFFER.md). O Hunter mostra o acesso à página e distingue registro de etapas de execução automática.
 
 A segunda oferta, [Raio-X de captação](public/diagnostico.html), custa R$ 490 por um relatório de uma página pública com cinco melhorias priorizadas. Ela usa a mesma identidade visual da primeira página e funciona como serviço de entrada. Consulte [REVENUE_DIAGNOSTIC_OFFER.md](docs/modules/REVENUE_DIAGNOSTIC_OFFER.md). Nenhum pagamento ou contato é automático.
+
+## Estado do KAIROS WhatsApp — 30/09/2026
+
+O agente da VPS está pareado e online. O Hunter busca diariamente até 30 prospects qualificados e mantém os resultados em revisão, sem disparo frio. O teto pode produzir menos de 30 registros por causa de qualidade, deduplicação, CAPTCHA ou falta de telefone. Respostas a inbound fresco usam o gate existente; Workana e 99Freelas ainda precisam de conectores oficiais próprios.

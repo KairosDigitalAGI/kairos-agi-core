@@ -273,3 +273,7 @@ O arquivo estático /captacao.html apresenta uma oferta delimitada de serviço e
 
 Uma segunda página estática, /diagnostico.html, apresenta o serviço de auditoria de uma página pública. As duas páginas compartilham /brand/sales.css, podem ser acessadas sem autenticação e aparecem no Hunter. Nenhuma delas armazena informações do visitante ou integra checkout.
 
+## Fronteira operacional do KAIROS na VPS
+
+O KAIROS pareado na VPS é um runtime externo ao Core. O sinal `ready` do WhatsApp Web confirma somente a sessão atual; não transforma o transporte em WhatsApp Business Platform oficial. A coleta diária do Hunter grava prospects para revisão e mantém a sincronização com o bot suspensa durante a rodada. O choke point de saída preserva `OUTBOUND_ENABLED=false`: somente respostas a inbound fresco e contatos explicitamente monitorados podem atravessar o gate. Credenciais, sessão do navegador, telefones e bancos do runtime não entram no repositório ou no frontend.
+

@@ -441,3 +441,12 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - Edge não disponível para controle e Instagram embutido sem login; nenhuma publicação ou mensagem enviada.
 - Canonical, metadados de compartilhamento, robots.txt e sitemap.xml para as duas ofertas; indexação ainda não confirmada.
 
+## 30/09/2026 — KAIROS WhatsApp reconectado e caça diária revisável
+
+- Pareamento do `whatsapp-web.js` confirmado pelo evento `ready` na VPS; QR efêmero removido após conexão.
+- Corrigido o ambiente do Chromium no PM2 com `TMPDIR=/tmp`; watchdog externo e `kairos-heartbeat` restaurados e salvos.
+- Hunter agendado todos os dias às 07h com teto de 30 prospects qualificados, distribuídos entre duas cidades, sem envio.
+- Uma nova rodada foi iniciada manualmente após a configuração; resultados entram em `hunter.sqlite` com sincronização para o bot desligada durante a coleta.
+- `OUTBOUND_ENABLED=false` foi preservado. Respostas a mensagens recebidas continuam permitidas pela janela de inbound; prospecção fria permanece bloqueada até conector oficial, base de contato válida, opt-out e recibo remoto.
+- Workana e 99Freelas continuam sem conectores oficiais de inbox; nenhuma resposta nessas plataformas foi automatizada.
+

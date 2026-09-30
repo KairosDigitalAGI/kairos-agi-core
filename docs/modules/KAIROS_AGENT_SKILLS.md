@@ -30,3 +30,13 @@ A tabela abaixo define o que cada capacidade pode fazer numa instalação nova:
 | `memory-state` | persistir estado isolado sob política declarada | misturar dados, histórico ou perfil entre clientes |
 
 Toda implementação concreta deve chamar `assertTenant` antes de processar um evento e registrar referências no contrato `AuditWriter` sem transportar conteúdo sensível.
+
+## Estado operacional verificado em 30/09/2026
+
+- WhatsApp pareado na VPS e evento `ready` confirmado.
+- PM2 executa `kairos` e `kairos-heartbeat`; watchdog externo restaurado.
+- Chromium usa `/tmp` como diretório temporário estável.
+- Hunter coleta diariamente até 30 prospects qualificados às 07h, com 15 vagas por cidade, deduplicação e score mínimo.
+- A coleta é separada da comunicação: resultados ficam em revisão e `OUTBOUND_ENABLED=false` bloqueia prospecção fria.
+- O gate permite resposta apenas após inbound fresco, dentro da janela definida pelo runtime, ou para contato monitorado explicitamente.
+- Workana e 99Freelas não estão conectados a este agente. Cada plataforma requer conector próprio com prova de envio e escopo de autorização.

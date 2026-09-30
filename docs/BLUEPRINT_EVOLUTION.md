@@ -385,3 +385,7 @@ O Hunter pode organizar empresas observadas em perfis públicos como hipóteses 
 
 O estado local de permissão começa não verificado. A fila manual não pode afirmar que uma mensagem foi enviada: “aguardando resposta” depende de recibo remoto autenticado, não de clique de avanço.
 
+## 30/09/2026 — Separação entre caça e comunicação no runtime KAIROS
+
+O Blueprint passa a tratar coleta diária e comunicação como operações independentes. O Hunter pode buscar e qualificar até 30 prospects por dia em fonte pública, mas o resultado permanece pendente de revisão e autorização de canal. Parear uma sessão do WhatsApp não autoriza prospecção fria: saída automática depende de integração oficial, base adequada, opt-out e confirmação remota. Respostas a inbound fresco podem operar sob uma janela limitada, com handoff humano e logs. Marketplaces exigem conectores próprios; o WhatsApp não representa suas caixas de entrada.
+
