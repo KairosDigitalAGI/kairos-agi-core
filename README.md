@@ -196,6 +196,8 @@ Em Agentes, abra Terminal para verificar a frota e associar Codex CLI ou Claude 
 
 O Hunter aceita empresas observadas em perfis públicos do Instagram como hipóteses de prospecção. A pesquisa inicial encontrou cinco casos locais; consulte [INSTAGRAM_LEAD_RESEARCH.md](docs/modules/INSTAGRAM_LEAD_RESEARCH.md). A lista identificada fica em memória privada, e não existe disparo automático pelo WhatsApp.
 
+A fila indica quando a permissão de contato ainda não foi verificada e não permite marcar manualmente uma proposta como “aguardando resposta”. Esse estado requer confirmação remota de envio em uma integração futura.
+
 A oferta pública de implantação de captação está em [captacao.html](public/captacao.html), acessível em /captacao.html na implantação. Preço: R$ 2.500 por projeto; quatro contratos equivalem à meta de R$ 10 mil de faturamento bruto, ainda não realizado. O escopo, as exclusões e o canal de contato estão em [REVENUE_FIRST_OFFER.md](docs/modules/REVENUE_FIRST_OFFER.md). O Hunter mostra o acesso à página e distingue registro de etapas de execução automática.
 
 A segunda oferta, [Raio-X de captação](public/diagnostico.html), custa R$ 490 por um relatório de uma página pública com cinco melhorias priorizadas. Ela usa a mesma identidade visual da primeira página e funciona como serviço de entrada. Consulte [REVENUE_DIAGNOSTIC_OFFER.md](docs/modules/REVENUE_DIAGNOSTIC_OFFER.md). Nenhum pagamento ou contato é automático.

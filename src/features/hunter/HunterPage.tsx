@@ -10,7 +10,7 @@ const stages: Array<{ id: HunterStage; label: string; hint: string }> = [
   { id: 'triagem', label: 'Triagem', hint: 'origem e escopo conferidos' },
   { id: 'qualificada', label: 'Qualificada', hint: 'viável sem promessas inventadas' },
   { id: 'proposta pronta', label: 'Proposta pronta', hint: 'texto preparado para revisão' },
-  { id: 'aguardando resposta', label: 'Aguardando resposta', hint: 'enviada e registrada na plataforma' },
+  { id: 'aguardando resposta', label: 'Aguardando resposta', hint: 'exige recibo remoto de envio' },
 ]
 
 export function HunterPage() {
@@ -77,7 +77,7 @@ export function HunterPage() {
 
           <aside className="glass-panel hunter-detail">
             {!active && <><Sparkles size={20} /><h3>Proposta irresistível, com base real</h3><p>Quando uma demanda for capturada, o Kairos estrutura a descoberta, a amostra de impacto e a proposta. A mensagem final permanece em revisão antes do envio.</p></>}
-            {active && <><span className="eyebrow"><FileText size={13} /> {active.source}</span><h3>{active.title}</h3><p>{active.summary}</p><dl><div><dt>Orçamento</dt><dd>{active.budget}</dd></div><div><dt>Etapa</dt><dd>{stages.find((stage) => stage.id === active.stage)?.label}</dd></div></dl><div className="hunter-detail-actions">{active.url && <a href={active.url} target="_blank" rel="noreferrer"><ExternalLink size={14} /> Abrir origem</a>}{nextHunterStage(active.stage) && <button type="button" onClick={() => advance(active)}>Avançar para {stages.find((stage) => stage.id === nextHunterStage(active.stage))?.label}</button>}</div><small>Avançar organiza a fila local. Não envia mensagens nem publica proposta.</small></>}
+            {active && <><span className="eyebrow"><FileText size={13} /> {active.source}</span><h3>{active.title}</h3><p>{active.summary}</p><dl><div><dt>Orçamento</dt><dd>{active.budget}</dd></div><div><dt>Etapa</dt><dd>{stages.find((stage) => stage.id === active.stage)?.label}</dd></div><div><dt>Contato automático</dt><dd>{active.contactPermission === 'authorized' ? 'Autorizado' : active.contactPermission === 'refused' ? 'Recusado' : 'Não verificado'}</dd></div></dl><div className="hunter-detail-actions">{active.url && <a href={active.url} target="_blank" rel="noreferrer"><ExternalLink size={14} /> Abrir origem</a>}{nextHunterStage(active.stage) && <button type="button" onClick={() => advance(active)}>Avançar para {stages.find((stage) => stage.id === nextHunterStage(active.stage))?.label}</button>}</div><small>Avançar organiza a fila local. “Aguardando resposta” só pode vir de envio com recibo remoto.</small></>}
           </aside>
         </div>
       </div>

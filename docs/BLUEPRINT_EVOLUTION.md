@@ -383,3 +383,5 @@ O catálogo comercial ganha um diagnóstico pontual de página pública por R$ 4
 
 O Hunter pode organizar empresas observadas em perfis públicos como hipóteses de venda, separadas de demandas recebidas. Antes de contato automatizado, a trilha exige revisão de fonte, canal empresarial, base de contato e opt-out; nenhuma URL pública por si só autoriza disparo. Dados nominais de prospects não entram no Blueprint público.
 
+O estado local de permissão começa não verificado. A fila manual não pode afirmar que uma mensagem foi enviada: “aguardando resposta” depende de recibo remoto autenticado, não de clique de avanço.
+

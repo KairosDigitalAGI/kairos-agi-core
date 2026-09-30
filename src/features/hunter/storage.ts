@@ -1,4 +1,4 @@
-import { hunterSources, hunterStages, type HunterOpportunity } from './domain'
+import { contactPermissions, hunterSources, hunterStages, type HunterOpportunity } from './domain'
 
 const storageKey = 'kairos.hunter.opportunities.v1'
 
@@ -13,6 +13,7 @@ function isOpportunity(value: unknown): value is HunterOpportunity {
     && typeof candidate.budget === 'string'
     && hunterStages.includes(candidate.stage as (typeof hunterStages)[number])
     && typeof candidate.capturedAt === 'string'
+    && (candidate.contactPermission === undefined || contactPermissions.includes(candidate.contactPermission as (typeof contactPermissions)[number]))
 }
 
 export function loadHunterOpportunities(storage: Storage = window.localStorage): HunterOpportunity[] {

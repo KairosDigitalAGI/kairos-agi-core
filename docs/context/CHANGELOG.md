@@ -5,6 +5,7 @@
 - Hunter ganhou a fonte `Instagram público` e texto de cadastro que separa empresa pesquisada de demanda recebida.
 - Cinco empresas de Goiânia foram pesquisadas por páginas de links publicadas pelas próprias contas. O lote identificado fica em memória privada fora do Git; no repositório há apenas método e contagem.
 - Instagram limitou leitura direta automatizada. Métricas, orçamento, interesse e consentimento permanecem indisponíveis; não houve envio por WhatsApp.
+- O contrato do Hunter agora inicia a permissão de contato como não verificada e bloqueia o avanço local de “proposta pronta” para “aguardando resposta” sem recibo remoto. Entradas antigas continuam legíveis e assumem estado não verificado.
 
 ## 23/09/2026 — Seedance 2.5 com Gateway limitada
 

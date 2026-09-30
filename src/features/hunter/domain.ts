@@ -3,6 +3,8 @@ export type HunterSource = (typeof hunterSources)[number]
 
 export const hunterStages = ['triagem', 'qualificada', 'proposta pronta', 'aguardando resposta'] as const
 export type HunterStage = (typeof hunterStages)[number]
+export const contactPermissions = ['not_verified', 'authorized', 'refused'] as const
+export type ContactPermission = (typeof contactPermissions)[number]
 
 export interface HunterOpportunity {
   id: string
@@ -13,6 +15,7 @@ export interface HunterOpportunity {
   budget: string
   stage: HunterStage
   capturedAt: string
+  contactPermission?: ContactPermission
 }
 
 export interface HunterDraft {
@@ -32,6 +35,8 @@ export const emptyHunterDraft: HunterDraft = {
 }
 
 export function nextHunterStage(stage: HunterStage): HunterStage | null {
+  // Apenas um recibo remoto de envio pode mover a oportunidade para aguardando resposta.
+  if (stage === 'proposta pronta') return null
   const current = hunterStages.indexOf(stage)
   return hunterStages[current + 1] ?? null
 }
@@ -50,5 +55,6 @@ export function createHunterOpportunity(draft: HunterDraft, id: string, captured
     budget: draft.budget.trim() || 'Orçamento não informado',
     stage: 'triagem',
     capturedAt,
+    contactPermission: 'not_verified',
   }
 }

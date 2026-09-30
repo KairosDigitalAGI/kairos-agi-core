@@ -282,4 +282,6 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Distinguir no Hunter empresa pesquisada de demanda recebida.
 - [ ] Confirmar perfis/sites atuais e base de contato antes de qualquer cadência WhatsApp.
 - [ ] Sincronizar leads revisados com CRM autenticado, com isolamento e registro de permissão; não usar a lista local como disparador.
+- [x] Impedir que avanço manual da fila afirme envio ou resposta inexistentes; registrar permissão como não verificada.
+- [ ] Implementar recibo remoto autenticado antes de liberar a etapa “aguardando resposta”.
 

@@ -267,6 +267,8 @@ A UI do PrivateCloneVault mantém seleção e revelação como estados separados
 
 O Hunter também admite a fonte `Instagram público` para pesquisa assistida. Esses registros são hipóteses locais em triagem, não propostas solicitadas, e não são exportados para o KAIROS WhatsApp. Evidências nominais permanecem fora do Git; ver `docs/modules/INSTAGRAM_LEAD_RESEARCH.md`.
 
+O domínio `src/features/hunter/domain.ts` inicia `contactPermission=not_verified`. O avanço local termina em `proposta pronta`; `aguardando resposta` só poderá ser gravado por um futuro caminho autenticado com recibo de envio. O armazenamento local aceita registros legados sem o campo, interpretados como não verificados.
+
 O arquivo estático /captacao.html apresenta uma oferta delimitada de serviço e encaminha interessados ao Instagram oficial da Kairos. Ele não processa pagamentos, não cria leads no banco e não aciona Meta API. O Hunter exibe seu link; o runtime comercial permanece separado e autenticado. Meta de faturamento é cálculo comercial, não métrica de receita.
 
 Uma segunda página estática, /diagnostico.html, apresenta o serviço de auditoria de uma página pública. As duas páginas compartilham /brand/sales.css, podem ser acessadas sem autenticação e aparecem no Hunter. Nenhuma delas armazena informações do visitante ou integra checkout.
