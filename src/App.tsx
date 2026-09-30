@@ -23,7 +23,7 @@ const DepartmentBackdrop = lazy(() => import('./world/DepartmentBackdrop').then(
 const WorldPage = lazy(() => import('./world/WorldPage').then((module) => ({ default: module.WorldPage })))
 
 const titles: Record<ModuleKey, string> = {
-  agents: 'Agentes e departamentos', world: 'Kairos World', dashboard: 'Visão geral', missions: 'Missões', clients: 'Clientes', crm: 'Carlos AGI',
+  agents: 'Agentes e departamentos', world: 'Kairos World', dashboard: 'Visão geral', missions: 'Missões', clients: 'Clientes', crm: 'KAIROS AGI',
   instagram: 'Instagram', studio: 'Studio', clone: 'Studio', characters: 'Studio', library: 'Studio', video: 'Studio', hunter: 'Hunter', 'money-lab': 'Money Lab', analytics: 'Analytics', integrations: 'Integrações', avatars: 'Avatar Studio', roadmap: 'Mapa do Projeto', vault: 'Vault', settings: 'Configurações',
 }
 

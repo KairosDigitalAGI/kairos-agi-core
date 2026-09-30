@@ -295,13 +295,20 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [ ] Implementar base de contato válida, opt-out, idempotência e recibo remoto por prospect.
 - [ ] Criar conectores oficiais separados para inbox de Workana e 99Freelas; login no navegador não equivale a integração.
 
-## Missão 021 — Carlos AGI operacional
+## Missão 021 — KAIROS AGI operacional
 
-- [x] Transformar a entrada CRM em centro operacional do Carlos AGI sem criar uma nova seção lateral.
+- [x] Transformar a entrada CRM em centro operacional do KAIROS AGI sem criar uma nova seção lateral.
 - [x] Expor estado autenticado da frota, rotina diária e fronteira entre descoberta e comunicação.
 - [x] Confirmar uma entrega de teste somente ao telefone do Founder, sem contatar prospects.
 - [ ] Concluir configuração da WhatsApp Business Platform com login e escolha de número pelo Founder.
 - [ ] Implementar opt-out, templates aprovados, idempotência e recibos antes de qualquer campanha ativa.
 - [ ] Conectar Workana e 99Freelas por integrações próprias após aprovação e login das contas.
 - [ ] Registrar esta sessão no Mapa do Projeto após o Founder desbloquear o Painel Operacional.
+
+## Missão 022 — autorização de prospecção
+
+- [x] Registrar limite diário, mensagem com opt-out e autorização explícita do Founder na página KAIROS AGI.
+- [x] Exibir separadamente autorização, canal oficial, recibos e opt-out.
+- [ ] Conectar a WhatsApp Business Platform e persistir autorização/auditoria no servidor.
+- [ ] Executar lote piloto somente depois de validar destinatários, template e recibo remoto.
 

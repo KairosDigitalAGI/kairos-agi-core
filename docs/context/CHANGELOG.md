@@ -450,11 +450,17 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - `OUTBOUND_ENABLED=false` foi preservado. Respostas a mensagens recebidas continuam permitidas pela janela de inbound; prospecção fria permanece bloqueada até conector oficial, base de contato válida, opt-out e recibo remoto.
 - Workana e 99Freelas continuam sem conectores oficiais de inbox; nenhuma resposta nessas plataformas foi automatizada.
 
-## 30/09/2026 — Carlos AGI e teste proprietário
+## 30/09/2026 — KAIROS AGI e teste proprietário
 
-- A navegação CRM foi renomeada para Carlos AGI e ganhou um centro operacional com estado real da frota, rotina diária e handoffs humanos.
+- A navegação CRM foi renomeada para KAIROS AGI e ganhou um centro operacional com estado real da frota, rotina diária e handoffs humanos.
 - A tela distingue sessão web pareada, API oficial Meta, descoberta de prospects e comunicação autorizada.
 - Uma mensagem de diagnóstico foi enviada somente ao telefone do Founder e recebeu confirmação remota às 17:49.
 - Prospecção fria segue bloqueada. Variação de intervalos não é tratada como proteção contra denúncias ou como substituta de consentimento.
 - Meta Business, Workana e 99Freelas aparecem como passos externos separados que exigem login/autorização do titular.
+
+## 30/09/2026 — autorização de campanha no KAIROS AGI
+
+- O Founder pode registrar no navegador uma campanha, limite de 1 a 30 contatos/dia e texto com identificação e opt-out.
+- A interface separa autorização editorial de execução e mostra cada pré-requisito do envio.
+- A campanha não liga `OUTBOUND_ENABLED` nem usa a sessão web para imitar comportamento humano; a WhatsApp Business Platform e recibos continuam sendo gates obrigatórios.
 

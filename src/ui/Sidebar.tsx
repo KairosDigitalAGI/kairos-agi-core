@@ -16,7 +16,7 @@ const navigation: Array<{ id: ModuleKey; label: string; icon: LucideIcon }> = [
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'missions', label: 'Missões', icon: ListChecks },
   { id: 'clients', label: 'Clientes', icon: Users },
-  { id: 'crm', label: 'Carlos AGI', icon: Contact },
+  { id: 'crm', label: 'KAIROS AGI', icon: Contact },
   { id: 'instagram', label: 'Instagram', icon: Camera },
   { id: 'studio', label: 'Studio', icon: Clapperboard },
   { id: 'hunter', label: 'Hunter', icon: Search },

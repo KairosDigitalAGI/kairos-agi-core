@@ -206,6 +206,8 @@ A segunda oferta, [Raio-X de captação](public/diagnostico.html), custa R$ 490 
 
 O agente da VPS está pareado e online. O Hunter busca diariamente até 30 prospects qualificados e mantém os resultados em revisão, sem disparo frio. O teto pode produzir menos de 30 registros por causa de qualidade, deduplicação, CAPTCHA ou falta de telefone. Respostas a inbound fresco usam o gate existente; Workana e 99Freelas ainda precisam de conectores oficiais próprios.
 
-## Carlos AGI
+## KAIROS AGI
 
-Abra **Carlos AGI** na barra lateral para acompanhar o KAIROS, a descoberta diária e os acessos que ainda dependem do Founder. O painel só declara o runtime online depois da consulta autenticada à frota. O teste proprietário de 30/09 confirmou entrega ao telefone do Founder; campanhas frias permanecem bloqueadas enquanto o canal oficial e as proteções de contato não estiverem completos.
+Abra **KAIROS AGI** na barra lateral para acompanhar o runtime, a descoberta diária e os acessos que ainda dependem do Founder. O painel só declara o runtime online depois da consulta autenticada à frota. O teste proprietário de 30/09 confirmou entrega ao telefone do Founder.
+
+O painel também registra a autorização local de uma campanha de até 30 contatos/dia e mantém a mensagem aprovada visível. Esse registro não envia mensagens: o lote só poderá executar depois da conexão oficial da Meta, validação dos destinatários, opt-out e recibos remotos.

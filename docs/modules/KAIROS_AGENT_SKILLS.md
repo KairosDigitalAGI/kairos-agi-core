@@ -41,6 +41,8 @@ Toda implementação concreta deve chamar `assertTenant` antes de processar um e
 - O gate permite resposta apenas após inbound fresco, dentro da janela definida pelo runtime, ou para contato monitorado explicitamente.
 - Workana e 99Freelas não estão conectados a este agente. Cada plataforma requer conector próprio com prova de envio e escopo de autorização.
 
-## Superfície Carlos AGI
+## Superfície KAIROS AGI
 
-A página Carlos AGI reúne o sinal autenticado da frota, a rotina de descoberta e os handoffs do Founder. Ela não altera o gate de saída do runtime. O teste proprietário confirma o caminho técnico de envio ao dono da conta; ele não valida campanha, consentimento de terceiros ou integração oficial da Meta.
+A página KAIROS AGI reúne o sinal autenticado da frota, a rotina de descoberta e os handoffs do Founder. Ela não altera o gate de saída do runtime. O teste proprietário confirma o caminho técnico de envio ao dono da conta; ele não valida campanha, consentimento de terceiros ou integração oficial da Meta.
+
+A autorização de campanha registrada no navegador contém limite e mensagem, sem números ou credenciais. O executor deve ignorá-la enquanto não houver aprovação persistida no servidor e todas as condições do `whatsapp-gateway` oficial.
