@@ -20,3 +20,12 @@ test('a newer todo reopens work even when an older done has the same title', () 
   assert.deepEqual([...state.openTodoIds], ['todo-2'])
   assert.deepEqual([...state.resolvedTodoIds], ['todo-1'])
 })
+
+test('a done entry resolves an older bug without deleting its history', () => {
+  const state = deriveProjectMapState([
+    { id: 'done-1', type: 'done', title: 'Detector de loop' },
+    { id: 'bug-1', type: 'bug', title: 'Detector de loop' },
+  ])
+  assert.deepEqual([...state.openBugIds], [])
+  assert.deepEqual([...state.resolvedBugIds], ['bug-1'])
+})

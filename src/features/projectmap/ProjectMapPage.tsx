@@ -41,11 +41,14 @@ export function ProjectMapPage() {
   const mapState = useMemo(() => deriveProjectMapState(entries), [entries])
   const visible = filter === 'todos'
     ? entries
-    : entries.filter((entry) => entry.type === filter && (entry.type !== 'todo' || mapState.openTodoIds.has(entry.id)))
+    : entries.filter((entry) => entry.type === filter
+      && (entry.type !== 'todo' || mapState.openTodoIds.has(entry.id))
+      && (entry.type !== 'bug' || mapState.openBugIds.has(entry.id)))
   const counts = useMemo(() => {
     const base: Record<ProjectLogType, number> = { done: 0, todo: 0, idea: 0, bug: 0 }
     for (const entry of entries) {
       if (entry.type === 'todo' && mapState.resolvedTodoIds.has(entry.id)) continue
+      if (entry.type === 'bug' && mapState.resolvedBugIds.has(entry.id)) continue
       base[entry.type] += 1
     }
     return base
@@ -127,7 +130,8 @@ export function ProjectMapPage() {
 
       <div className="project-map-grid">
         {visible.map((entry) => {
-          const resolved = entry.type === 'todo' && mapState.resolvedTodoIds.has(entry.id)
+          const resolved = (entry.type === 'todo' && mapState.resolvedTodoIds.has(entry.id))
+            || (entry.type === 'bug' && mapState.resolvedBugIds.has(entry.id))
           const meta = resolved ? { label: 'Resolvido', icon: CheckCircle2 } : typeMeta[entry.type]
           const Icon = meta.icon
           return (

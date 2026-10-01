@@ -370,4 +370,5 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Validar uma conversa comercial completa usando somente evidências reais do runtime.
 - [x] Registrar duas entregas confirmadas, duas mensagens inbound e a reunião na linha do tempo.
 - [x] Fazer uma entrega posterior de mesmo título resolver o `todo` anterior sem editar ou apagar o histórico.
+- [x] Projetar bugs já corrigidos como resolvidos sem retirar o registro original do histórico.
 - [x] Manter uma nova pendência posterior capaz de reabrir o mesmo assunto.

@@ -434,4 +434,4 @@ A frente posterior será uma célula de e-commerce sem estoque. Primeiro serão 
 
 ## 01/10/2026 — encerramento auditável de pendências
 
-O Mapa passa a diferenciar histórico de estado atual sem abandonar a regra append-only. Uma entrega posterior de mesmo título encerra a pendência anterior na projeção, mantendo o card antigo como resolvido. A primeira aplicação fechou a auditoria do WhatsApp e a validação de uma conversa comercial completa com evidência do runtime e persistência no CRM.
+O Mapa passa a diferenciar histórico de estado atual sem abandonar a regra append-only. Uma entrega posterior de mesmo título encerra a pendência ou bug anterior na projeção, mantendo o card antigo como resolvido. A primeira aplicação fechou a auditoria do WhatsApp, a validação de uma conversa comercial completa e o falso bloqueio de loop já corrigido.

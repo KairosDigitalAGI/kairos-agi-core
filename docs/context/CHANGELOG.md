@@ -530,4 +530,4 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - Reconstruída no CRM uma conversa comercial completa já comprovada pelos logs do runtime: retomada, resposta, opções de horário, escolha e reunião.
 - Estado confirmado pela API: 6 eventos auditados, 2 entregas confirmadas e 0 falhas.
 - `ProjectMapPage` agora resolve `todo` antigo por `done` posterior de mesmo título, preservando o histórico append-only e permitindo reabertura posterior.
-- Dois testes de projeção adicionados; suíte com 166 testes e build aprovados.
+- Três testes de projeção adicionados, incluindo bug corrigido sem apagar histórico; suíte com 167 testes e build aprovados.

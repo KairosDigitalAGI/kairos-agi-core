@@ -9,6 +9,8 @@ export function deriveProjectMapState(entries: ProjectLogEntry[]) {
   const completedTitles = new Set<string>()
   const resolvedTodoIds = new Set<string>()
   const openTodoIds = new Set<string>()
+  const resolvedBugIds = new Set<string>()
+  const openBugIds = new Set<string>()
 
   for (const entry of entries) {
     const title = normalizeTitle(entry.title)
@@ -18,7 +20,11 @@ export function deriveProjectMapState(entries: ProjectLogEntry[]) {
       if (completedTitles.has(title)) resolvedTodoIds.add(entry.id)
       else openTodoIds.add(entry.id)
     }
+    if (entry.type === 'bug') {
+      if (completedTitles.has(title)) resolvedBugIds.add(entry.id)
+      else openBugIds.add(entry.id)
+    }
   }
 
-  return { openTodoIds, resolvedTodoIds }
+  return { openTodoIds, resolvedTodoIds, openBugIds, resolvedBugIds }
 }
