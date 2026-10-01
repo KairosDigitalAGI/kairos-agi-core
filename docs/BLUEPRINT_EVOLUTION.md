@@ -1,5 +1,9 @@
 # Evolução do Blueprint
 
+## 01/10/2026 — gate fechado para o WhatsApp pessoal
+
+O KAIROS deixou de apresentar um assistente a todo número desconhecido. Resposta automática agora exige origem comercial explícita, reunião ou venda registrada; histórico e estado do funil não bastam. Erros e inicialização sem CRM falham fechados. A identidade comercial foi consolidada como `KAIROS`, agente autônomo pessoal do Matheus e da Kairos Digital. O patch operacional reproduzível está em `ops/kairos-whatsapp/inbound-lead-only.patch`.
+
 ## 18/09/2026 — observabilidade da saudação
 
 O painel de atendimento passa a mostrar apenas booleanos de prontidão para Free Tier, chave e remetente, sem publicar valores sensíveis. A verificação operacional distingue tabela e assinatura de conta funcionando de entrega real de evento; o app Meta ainda não foi publicado. Nenhuma nova automação foi ativada por esta revisão.

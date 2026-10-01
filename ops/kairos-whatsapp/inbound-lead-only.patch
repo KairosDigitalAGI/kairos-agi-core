@@ -1,0 +1,188 @@
+--- a/bot.js
++++ b/bot.js
+@@ -3287,7 +3287,6 @@
+   if (!lead) return false;
+   if (ESTADOS_SILENCIO.includes(lead.state)) return true;
+   if (lead.handoff_humano === true) return true;
+-  if (lead.bloqueado_ate && Date.now() < lead.bloqueado_ate) return true;
+   return false;
+ }
+ 
+@@ -3515,10 +3514,10 @@
+ 
+   // ═══ INBOUND GATE — PRIMEIRA coisa de todo inbound, ÁUDIO INCLUSO ══════════
+   // Ordem obrigatória: (1) pausa/handoff → silêncio total; (2) lead vs
+-  // desconhecido → desconhecido nunca entra no funil de vendas. Vilson (vcard) e
++  // desconhecido → desconhecido não recebe resposta automática. Vilson (vcard) e
+   // Matheus ficam de fora: são canais operacionais, não conversas de lead.
+   if (phone !== MATHEUS && phone !== VILSON && phone !== VILSON_LID) {
+-    let _ehLead = true;
++    let _ehLead = false;
+     try {
+       const _leadGate = buscarLeadSemCriar(phone);
+       if (inboundSilenciado(_leadGate)) {
+@@ -3527,15 +3526,13 @@
+       }
+       _ehLead = ehLeadConhecido(phone);
+     } catch (e) {
+-      // Fail-open só pro LADO DO LEAD: erro na classificação não pode deixar
+-      // lead real sem resposta. Segue o fluxo antigo.
++      // Fail-closed: erro de classificação nunca autoriza uma resposta.
+       logger.error("[GATE] erro na classificação: " + e.message);
+-      _ehLead = true;
++      _ehLead = false;
+     }
+     if (!_ehLead) {
+-      try { await tratarDesconhecido(msg, phone); }
+-      catch (e) { logger.error("[INBOUND-DESC] erro: " + e.message); }
+-      return; // terminal: desconhecido NUNCA cai no funil, mesmo se falhar acima
++      logger.info(`[GATE] ${phone} NÃO É LEAD EXPLÍCITO — mensagem pessoal ignorada sem resposta (tipo=${msg.type})`);
++      return; // terminal: desconhecido nunca cai no funil nem recebe apresentação
+     }
+     // É LEAD: segue o fluxo normal de vendas. Só intercepta se pedir humano.
+     try {
+@@ -3968,8 +3965,21 @@
+     try {
+       const leadCheck = getState(phone);
+       if (leadCheck.bloqueado_ate && Date.now() < leadCheck.bloqueado_ate) {
+-        logger.info(`[LOOP-IA] ${phone} ainda bloqueado até ${new Date(leadCheck.bloqueado_ate).toISOString()} — ignorando`);
+-        return;
++        const textoNormalizado = normTexto(message);
++        const retomadaHumana = /\b(interessad[oa]|quero\s+saber|gostaria|me\s+explica|pode\s+falar|podemos\s+conversar|quanto|valor|orcamento|proposta|tenho\s+interesse)\b/.test(textoNormalizado);
++        const sinaisAgora = detectarLoopIA(phone, message, leadCheck);
++        if (!retomadaHumana && sinaisAgora.length >= 2) {
++          logger.info(`[LOOP-IA] ${phone} segue automatizado até ${new Date(leadCheck.bloqueado_ate).toISOString()} — ignorando`);
++          return;
++        }
++        await saveLead({
++          phone,
++          loop_ia: false,
++          loop_retomado_em: Date.now(),
++          loop_retomado_motivo: retomadaHumana ? "interesse_comercial" : "mensagem_humana",
++          bloqueado_ate: null
++        });
++        logger.info(`[LOOP-IA] ${phone} retomado automaticamente após mensagem humana/comercial`);
+       }
+     } catch (err) { logger.error("Bloqueio check erro: " + err.message); }
+   }
+--- a/src/stateManager.js
++++ b/src/stateManager.js
+@@ -1,6 +1,7 @@
+ const { Low } = require("lowdb");
+ const { JSONFile } = require("lowdb/node");
+ const logger = require("./logger");
++const { EXPLICIT_COMMERCIAL_TYPES, isExplicitCommercialLead } = require("./inboundPolicy");
+ 
+ const db = new Low(new JSONFile("db.json"), { leads: [], meetings: [] });
+ 
+@@ -409,7 +410,10 @@
+ // dashboard→hunter-sync) convergem todas em tipo prospecto/site/x1. Salvaguarda:
+ // quem já agendou reunião ou comprou é lead mesmo com tipo herdado errado.
+ // Ambas as funções são READ-ONLY: nunca criam, nunca escrevem.
+-const TIPOS_LEAD_REAL = ["prospecto", "site", "x1", "parceiro", "equipe", "simulacao"];
++// Somente cadastros criados por uma origem comercial explícita podem receber
++// atendimento automático. Contatos pessoais, equipe, parceiros e registros
++// inbound genéricos permanecem silenciosos até o Founder classificá-los.
++const TIPOS_LEAD_REAL = EXPLICIT_COMMERCIAL_TYPES;
+ 
+ function buscarLeadSemCriar(phone) {
+   if (!phone) return null;
+@@ -425,29 +429,17 @@
+ }
+ 
+ function ehLeadConhecido(phone) {
+-  // FAIL-OPEN na janela de boot: init() é async, e enquanto db.data não carregou
+-  // TODO mundo pareceria desconhecido — leads reais levariam a pergunta "comigo ou
+-  // com o Matheus" no meio da venda. Base real nunca é vazia (1140+ leads).
++  // FAIL-CLOSED: enquanto a base não carregou, ninguém recebe resposta. É mais
++  // seguro atrasar uma conversa comercial do que responder um contato pessoal.
+   if (!db.data || !Array.isArray(db.data.leads) || db.data.leads.length === 0) {
+-    logger.warn("[CLASSIF] db.data ainda não carregado — tratando " + phone + " como LEAD (fail-open)");
+-    return true;
++    logger.warn("[CLASSIF] db.data ainda não carregado — silenciando " + phone + " (fail-closed)");
++    return false;
+   }
+   const lead = buscarLeadSemCriar(phone);
+   if (!lead) return false;
+-  if (TIPOS_LEAD_REAL.includes(lead.tipo)) return true;
+-  if (lead.meetingScheduled === true) return true;
+-  if (Array.isArray(lead.vendas) && lead.vendas.length > 0) return true;
+-  // Salvaguarda de PROGRESSO NO FUNIL. tipo="inbound" é carimbo automático
+-  // (bot.js:3800 marca qualquer um que caia no fluxo de LLM sem tipo), então ele
+-  // NÃO distingue lead real de contato pessoal — 155 contatos em estado de funil
+-  // ficariam como "desconhecido" e levariam a pergunta de apresentação no meio de
+-  // uma negociação. Quem já passou da abertura E tem troca real de mensagens é lead.
+-  // "pausado" entra na lista: não é silenciado pelo gate (tem reativação por
+-  // "kairos" no fluxo normal) — se caísse como desconhecido, o lead levaria a
+-  // apresentação em vez de reativar. Allow-list explícita de propósito: "abertura"
+-  // e "desconhecido_carlos" ficam de fora, que é onde o desconhecido de fato vive.
+-  const ESTADOS_FUNIL = ["dor", "diagnostico", "solucao", "interesse", "fechamento", "agendamento", "pausado"];
+-  if (ESTADOS_FUNIL.includes(lead.state) && Array.isArray(lead.history) && lead.history.length >= 2) return true;
++  if (isExplicitCommercialLead(lead)) return true;
++  // Estado ou histórico nunca promovem um contato a lead. Essa promoção precisa
++  // vir de uma origem comercial explícita para evitar responder conversas pessoais.
+   return false;
+ }
+ 
+--- a/src/promptBuilder.js
++++ b/src/promptBuilder.js
+@@ -207,7 +207,7 @@
+ 
+ // ─── RESPOSTA SE PERGUNTAREM SE É IA ────────────────────────────────────────
+ 
+-const RESPOSTA_IA = `Sim, sou uma IA — mas não sou o ChatGPT nem qualquer assistente genérico. Sou o Kairos, desenvolvido pela Kairos Digital com direcionamento adaptativo e personalizado para o seu negócio.
++const RESPOSTA_IA = `Sim, sou uma IA — mas não sou o ChatGPT nem qualquer assistente genérico. Sou o KAIROS, agente autônomo pessoal do Matheus e da Kairos Digital, com direcionamento adaptativo e personalizado para o seu negócio.
+ 
+ A diferença: IAs genéricas respondem qualquer coisa pra qualquer um. Eu fui construído para diagnosticar gargalos e gerar lucro real.
+ 
+@@ -393,7 +393,7 @@
+   const nomeNicho = nicho.charAt(0).toUpperCase() + nicho.slice(1);
+   const nome = nomeLead ? nomeLead.split(" ")[0] : null;
+ 
+-  return `Você é Kairos — agente de IA da Kairos Digital, criado por Matheus Schelle e Vilson Mota.
++  return `Você é KAIROS — agente autônomo pessoal do Matheus e agente de IA da Kairos Digital, criado por Matheus Schelle e Vilson Mota.
+ 
+ PERSONALIDADE — ENTREVISTA INVERTIDA:
+ Você é o candidato mais desejado do mercado. O lead precisa de você mais do que você precisa dele.
+@@ -402,7 +402,7 @@
+ Tom: especialista que já viu esse problema mil vezes e tem a solução exata.
+ 
+ IDENTIDADE:
+-Não é o Matheus nem o Vilson. Se confundirem: "Não sou o Matheus — sou o Kairos, a IA que ele e o Vilson construíram."
++Não é o Matheus nem o Vilson. Se confundirem: "Não sou o Matheus — sou o KAIROS, agente autônomo pessoal do Matheus e da Kairos Digital."
+ 
+ QUANDO PERGUNTAREM SE VOCÊ É IA — use este texto:
+ "${RESPOSTA_IA}"
+--- a/src/campanhaAprovada.js
++++ b/src/campanhaAprovada.js
+@@ -31,7 +31,7 @@
+     ? ` Vi também a presença pública de vocês${Number.isFinite(reviews) && reviews > 0 ? `, com ${reviews} avaliações` : ""}.`
+     : "";
+ 
+-  return `Olá, equipe da ${company}! Sou o Kairos, assistente digital da Kairos Digital. Encontrei o trabalho de vocês com ${niche} em ${city}.${publicSignal} A Kairos ajuda empresas a organizar o atendimento no WhatsApp, qualificar contatos e reduzir oportunidades perdidas quando a equipe está ocupada. Posso enviar um diagnóstico curto, sem compromisso, com duas ideias específicas para o atendimento de vocês? Se preferir não receber mensagens, responda SAIR.`;
++  return `Olá, equipe da ${company}! Sou o KAIROS, agente autônomo pessoal do Matheus e da Kairos Digital. Encontrei o trabalho de vocês com ${niche} em ${city}.${publicSignal} A Kairos ajuda empresas a organizar o atendimento no WhatsApp, qualificar contatos e reduzir oportunidades perdidas quando a equipe está ocupada. Posso enviar um diagnóstico curto, sem compromisso, com duas ideias específicas para o atendimento de vocês? Se preferir não receber mensagens, responda SAIR.`;
+ }
+ 
+ function samePhone(a, b) {
+--- /dev/null
++++ b/src/inboundPolicy.js
+@@ -0,0 +1,19 @@
++"use strict";
++
++const EXPLICIT_COMMERCIAL_TYPES = Object.freeze(["prospecto", "site", "x1", "simulacao"]);
++
++function isExplicitCommercialLead(lead) {
++  if (!lead || typeof lead !== "object") return false;
++  if (EXPLICIT_COMMERCIAL_TYPES.includes(lead.tipo)) return true;
++  if (lead.meetingScheduled === true) return true;
++  if (Array.isArray(lead.vendas) && lead.vendas.length > 0) return true;
++  return false;
++}
++
++function shouldAutoReply({ databaseReady, lead, isFounder = false, isCoCeo = false } = {}) {
++  if (isFounder || isCoCeo) return true;
++  if (!databaseReady) return false;
++  return isExplicitCommercialLead(lead);
++}
++
++module.exports = { EXPLICIT_COMMERCIAL_TYPES, isExplicitCommercialLead, shouldAutoReply };

@@ -811,4 +811,8 @@ O KAIROS mantém uma projeção privada e autenticada do CRM no Supabase mestre.
 
 Demandas de programação podem nascer no chat privado por `/upgrade`, mas só entram na fila técnica após `/confirmar`. Codex ou Claude Code registra progresso e resultado, que retornam ao Founder pelo WhatsApp. Texto de chat nunca é executado diretamente como código.
 
+# ADENDO OPERACIONAL — GATE DE INBOUND PESSOAL (01/10/2026)
+
+O WhatsApp do Founder responde automaticamente apenas a contatos com origem comercial explícita, reunião confirmada ou venda registrada. Contatos pessoais, equipe, parceiros, inbound genérico, classificação indisponível e falhas de leitura permanecem em silêncio. O agente se identifica aos leads como `KAIROS`, agente autônomo pessoal do Matheus e da Kairos Digital.
+
 A próxima célula planejada é uma operação de e-commerce sem estoque. A implantação começa pelo mapeamento das funções humanas e pela pesquisa atual das regras e custos de cada marketplace; nenhuma conta, anúncio, compra ou publicação é criada por este adendo.

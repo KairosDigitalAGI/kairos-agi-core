@@ -307,3 +307,5 @@ O runtime externo mede a fila Hunter às 22h, usa planos alternativos de nicho/c
 As tabelas `command.crm_leads`, `command.dev_requests` e `command.dev_request_events` têm RLS e privilégios restritos ao `service_role`. `api/_crm.js` centraliza normalização, paginação, confirmação e eventos; `api/hunter.mjs` reaproveita a função serverless existente para manter o projeto dentro da cota do deployment. `useCrm` e `CrmPage` são apenas a projeção autenticada desse estado.
 
 Pedidos do WhatsApp são dados, nunca comandos de shell. A confirmação do Founder muda o estado para `pending`; um engenheiro ainda precisa assumir, testar e registrar a implementação.
+
+O gate de inbound da VPS usa uma allow-list comercial. Apenas `prospecto`, `site`, `x1`, `simulacao`, reunião confirmada ou venda registrada autorizam resposta automática. Ausência de base, erro de classificação, contato pessoal, equipe, parceiro ou inbound genérico resultam em silêncio.

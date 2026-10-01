@@ -1,5 +1,15 @@
 # Changelog
 
+## 01/10/2026 — Missão 025: WhatsApp pessoal isolado
+
+- Removida a apresentação automática para números desconhecidos no runtime da VPS.
+- Respostas automáticas agora exigem origem comercial explícita; histórico e etapa não promovem contatos pessoais.
+- Classificação indisponível ou com erro falha fechada e mantém silêncio.
+- Identidade comercial consolidada como `KAIROS`, agente autônomo pessoal do Matheus e da Kairos Digital.
+- Corrigido falso positivo do detector de loop: uma nova mensagem humana ou comercial agora remove o bloqueio temporário e retoma o atendimento do lead explícito.
+- `CLIENT_001` foi reclassificado pelo Founder, recuperado e recebeu mensagem de retomada com confirmação remota de entrega.
+- Política compartilhada em `ops/kairos-whatsapp/inboundPolicy.cjs`, patch reproduzível e testes automatizados adicionados.
+
 ## 01/10/2026 — Mapa do Projeto ativado em produção
 
 - Confirmado o Supabase mestre `vbpxztmvyyqxuveilnwc` como destino da migration `0023_project_log.sql`.

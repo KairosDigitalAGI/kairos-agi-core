@@ -229,3 +229,5 @@ O Hunter recompõe a reserva às 22h e executa recuperação às 00h30/04h30 qua
 ### CRM real e evolução pelo WhatsApp
 
 O KAIROS AGI mostra a base sincronizada do runtime privado depois do desbloqueio do Painel Operacional. A lista tem busca, etapas, métricas reais e telefone oculto por padrão. No chat privado do KAIROS, `/upgrade <descrição>` registra uma demanda; `/confirmar <código>` autoriza a triagem; `/devstatus` consulta atualizações. Progresso e resultado retornam pelo WhatsApp. Consulte [CRM.md](docs/modules/CRM.md) e [KAIROS_DEV_REQUESTS.md](docs/modules/KAIROS_DEV_REQUESTS.md).
+
+O WhatsApp pessoal aplica um gate fechado: o KAIROS responde automaticamente apenas a leads comerciais explicitamente cadastrados. Mensagens pessoais, de equipe, de parceiros ou de números desconhecidos ficam sem resposta automática.

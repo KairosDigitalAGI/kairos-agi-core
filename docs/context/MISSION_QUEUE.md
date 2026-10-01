@@ -24,6 +24,8 @@ Atualização 23/09/2026, Seedance: adaptador da Vercel AI Gateway pronto e desl
 | 009 | Planejada | Founder Mobile App |
 | 010 | Planejada | World 0.2, incluindo Money Hunter |
 
+Atualização 01/10/2026, Missão 005: o gate de entrada do KAIROS foi implantado na VPS. Contatos pessoais permanecem silenciosos e apenas origens comerciais explícitas entram no atendimento. O detector de loop agora libera automaticamente um lead explícito quando chega nova resposta humana/comercial. `CLIENT_001` foi recuperado e a mensagem de retomada teve entrega confirmada. Próxima fatia: persistir no CRM os eventos de classificação, bloqueio, desbloqueio e confirmação de entrega para auditoria completa no painel.
+
 A numeração 003–008 anterior foi substituída por esta fila em 11/09/2026. Missão 004 foi autorizada posteriormente. O YouTube tornou-se a primeira integração externa real conectada em 15/09/2026; publicação continua privada por padrão e exige aprovação do Founder.
 
 Correção autorizada após Missão 003: organograma completo importado e exposto no painel/World. A Missão 004 foi ampliada após validação do Founder: criação do zero é o fluxo principal; edição virou pós-produção. Nenhum serviço externo foi ativado.
@@ -352,3 +354,10 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [ ] Mapear funções humanas, competências, rotinas, permissões, métricas, riscos e handoffs antes de definir os agentes digitais.
 - [ ] Escolher um único canal e modelo comercial após verificar tarifas, regras atuais, fornecedores e capital necessário.
 - [ ] Construir primeiro um piloto assistido, com catálogo, pedidos, atendimento, financeiro e auditoria; nenhuma compra, anúncio ou publicação sem autorização específica.
+
+## Missão 025 — isolamento do WhatsApp pessoal
+
+- [x] Restringir resposta automática a origens comerciais explícitas (`prospecto`, `site`, `x1` e `simulacao`).
+- [x] Manter contatos pessoais, equipe, parceiros e inbound genérico em silêncio, mesmo com histórico ou estado avançado.
+- [x] Fazer falhas de classificação e a janela de inicialização falharem fechadas, sem resposta.
+- [x] Apresentar o agente comercial como `KAIROS`, agente autônomo pessoal do Matheus e da Kairos Digital.
