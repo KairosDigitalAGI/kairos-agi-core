@@ -95,7 +95,7 @@ export function CrmPage() {
     <section className="carlos-status-grid">
       <article className="glass-panel"><Bot size={21} /><span>RUNTIME</span><strong>{online ? 'Conectado' : 'Protegido'}</strong><p>Sessão atual da VPS; não equivale à API oficial da Meta.</p></article>
       <article className="glass-panel"><MessageCircleReply size={21} /><span>RESPOSTAS</span><strong>{online ? 'Inbound ativo' : 'Aguardando consulta'}</strong><p>Responde somente após uma mensagem nova e respeita pausa e handoff.</p></article>
-      <article className="glass-panel"><Search size={21} /><span>HUNTER DIÁRIO</span><strong>Até 30 qualificados</strong><p>Busca, deduplica e pontua. A quantidade final depende da qualidade observada.</p></article>
+      <article className="glass-panel"><Search size={21} /><span>HUNTER AUTÔNOMO</span><strong>Reserva alvo: 45</strong><p>Repõe às 22h e tenta novas estratégias às 00h30 e 04h30 se a fila continuar curta.</p></article>
       <article className="glass-panel"><ShieldCheck size={21} /><span>CONTROLE DE SAÍDA</span><strong>Campanha isolada</strong><p>O freio geral continua fechado; somente a fila Hunter aprovada atravessa a rota programada.</p></article>
     </section>
 
@@ -103,8 +103,8 @@ export function CrmPage() {
       <div><span className="eyebrow">ROTINA DIÁRIA · PREPARADA</span><h3>O que já funciona daqui para frente</h3></div>
       <ol>
         <li><CheckCircle2 size={17} /><div><strong>07h · prospecção</strong><p>Até 30 empresas Hunter ainda não contatadas recebem uma única abordagem personalizada.</p></div></li>
-        <li><CheckCircle2 size={17} /><div><strong>08h, 13h e 18h · Hunter</strong><p>Novas fontes públicas são avaliadas para recompor a reserva do dia seguinte.</p></div></li>
-        <li><CheckCircle2 size={17} /><div><strong>Atendimento · mensagem recebida</strong><p>O KAIROS responde a inbound fresco, registra contexto e chama o Founder quando houver handoff.</p></div></li>
+        <li><CheckCircle2 size={17} /><div><strong>22h · reposição autônoma</strong><p>O Hunter mede a reserva, alterna nichos e cidades e busca até atingir 45 elegíveis. Se faltar, recupera às 00h30 e 04h30.</p></div></li>
+        <li><CheckCircle2 size={17} /><div><strong>Atendimento · evolução em tempo real</strong><p>Cada resposta atualiza histórico, score e etapa no CRM. O modo gratuito bloqueia chamadas de modelos pagos.</p></div></li>
         <li><CheckCircle2 size={17} /><div><strong>Recibo obrigatório</strong><p>Sem confirmação visível no chat, a execução para e não repete a mensagem às cegas.</p></div></li>
       </ol>
     </section>
@@ -122,7 +122,7 @@ export function CrmPage() {
         <button type="button" className="outbound-authorize" disabled={!founderChecked || !message.trim()} onClick={registerAuthorization}><Send size={16} /> Salvar cópia local</button>
       </div>
       <div className="outbound-requirements">
-        <article className="done"><CheckCircle2 size={16} /><div><strong>Busca e qualificação</strong><span>Ativa, até 30 registros/dia.</span></div></article>
+        <article className="done"><CheckCircle2 size={16} /><div><strong>Busca e qualificação</strong><span>Ativa com coleta pública gratuita, deduplicação, score e recuperação automática.</span></div></article>
         <article className="done"><CheckCircle2 size={16} /><div><strong>Autorização do Founder</strong><span>Runtime: 30/dia. {authorization ? `Cópia local: ${authorization.dailyLimit}/dia.` : 'A cópia no navegador é opcional e não bloqueia a agenda.'}</span></div></article>
         <article className="done"><CheckCircle2 size={16} /><div><strong>Sessão WhatsApp Web</strong><span>Pareada na VPS; transporte não oficial e sujeito a limitações da plataforma.</span></div></article>
         <article className="done"><CheckCircle2 size={16} /><div><strong>Recibos e opt-out</strong><span>Confirmação no chat e palavra SAIR incluídas no fluxo.</span></div></article>

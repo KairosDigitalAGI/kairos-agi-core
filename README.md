@@ -219,3 +219,7 @@ O checklist do KAIROS AGI mostra a ativação em cinco passos. Na rodada verific
 ## Campanha WhatsApp Web — 01/10/2026
 
 O Centro KAIROS AGI mostra o snapshot agregado da campanha autorizada no runtime privado: início diário às 07h (Brasília), teto de 30 primeiras abordagens, personalização com dados públicos, opt-out e confirmação no chat. O freio global permanece fechado. Detalhes e limites: `docs/modules/WHATSAPP_WEB_CAMPAIGN_RUNTIME.md`.
+
+### Reposição autônoma e custo zero
+
+O Hunter recompõe a reserva às 22h e executa recuperação às 00h30/04h30 quando necessário. A automação usa coleta pública e regras locais; `KAIROS_FREE_ONLY` bloqueia modelos pagos no runtime WhatsApp.

@@ -328,3 +328,11 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Exibir no Centro KAIROS AGI o snapshot da fila e a agenda.
 - [ ] Substituir o snapshot por endpoint autenticado de status agregado do runtime.
 - [ ] Medir a primeira execução após 07h: confirmados, inválidos, respostas e opt-outs.
+
+## Incremento concluído — reposição autônoma gratuita
+
+- [x] Medir e recompor reserva Hunter às 22h.
+- [x] Executar recuperação automática às 00h30 e 04h30 em caso de déficit.
+- [x] Registrar incidentes e estratégias sem depender do Founder.
+- [x] Bloquear LLM pago no runtime WhatsApp.
+- [ ] Expor no Core o ledger agregado dos ciclos noturnos por endpoint autenticado.

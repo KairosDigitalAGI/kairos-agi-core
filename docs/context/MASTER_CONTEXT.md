@@ -144,3 +144,7 @@ A rodada manual de 30/09 terminou com 12 leads aceitos de 176 resultados brutos;
 ## Atualização 01/10/2026 — campanha fria agendada no KAIROS
 
 Por autorização explícita do Founder, o runtime externo do KAIROS foi programado para iniciar prospecção às 07h de Brasília, com teto de 30 empresas Hunter por dia. O freio global segue desligado; a exceção é uma rota estreita, com uma abordagem por empresa, identificação como assistente digital, opt-out e confirmação no chat. Às 03:05 havia 33 registros elegíveis (score Hunter mínimo 45) para a primeira execução. Esse número é snapshot e não garantia diária.
+
+## Atualização 01/10/2026 — reposição autônoma gratuita
+
+O KAIROS ganhou política noturna de recuperação: 22h, 00h30 e 04h30. O Hunter alterna mercados e regiões para recompor uma reserva alvo de 45, mantendo score mínimo e sem fabricar registros. Leads aprovados são promovidos ao CRM privado; mensagens recebidas atualizam histórico, score e etapa. `KAIROS_FREE_ONLY=true` bloqueia chamadas pagas de LLM no runtime.

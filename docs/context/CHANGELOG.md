@@ -482,3 +482,12 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - Comandos privados de consulta e parada adicionados ao KAIROS.
 - Centro KAIROS AGI atualizado com o snapshot de 33 elegíveis e a agenda real.
 - Limite: WhatsApp Web não é transporte oficial e pode sofrer restrição da plataforma.
+
+## 01/10/2026 — Autorreparação Hunter e modo gratuito
+
+- Reposição da fila às 22h, com recuperação automática às 00h30 e 04h30.
+- Estratégias alternativas de nicho e cidade, preservando score e deduplicação.
+- Reserva operacional alvo de 45 para sustentar até 30 abordagens no dia seguinte.
+- Incidentes e estratégias registrados no runtime privado.
+- `KAIROS_FREE_ONLY=true` impede chamadas de modelos externos; respostas usam regras locais.
+- Coleta noturna pública e gratuita; Facebook Ads desativado no ciclo de reposição.

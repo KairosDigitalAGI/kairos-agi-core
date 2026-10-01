@@ -291,3 +291,7 @@ O checklist de ativação em `CrmPage` mistura sinais dinâmicos da frota com um
 ## Rota isolada de campanha no runtime externo — 01/10/2026
 
 O KAIROS da VPS continua externo ao Core. A campanha autorizada não altera o choke point geral: `OUTBOUND_ENABLED=false` permanece como fail-safe. Um runner privado, alimentado apenas por leads Hunter elegíveis, agenda até 30 primeiras abordagens às 07h, confirma a mensagem no chat antes de persistir o resultado e interrompe a fila diante de estado indeterminado. O Core exibe status agregado e nunca recebe sessão, telefones ou logs nominais.
+
+### Política de recuperação comercial — 01/10/2026
+
+O runtime externo mede a fila Hunter às 22h, usa planos alternativos de nicho/cidade e agenda novas tentativas às 00h30 e 04h30 quando a reserva fica abaixo de 45. O estado do lead permanece no CRM privado (`db.json`), atualizado por mensagem recebida. `KAIROS_FREE_ONLY=true` impede o caminho LLM externo e preserva custo incremental zero.
