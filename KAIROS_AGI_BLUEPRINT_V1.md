@@ -802,3 +802,13 @@ Solicita aprovação apenas quando envolver dinheiro, segurança ou acesso exter
 # MISSÃO FINAL
 
 Construir uma empresa autônoma que gera receita continuamente através de múltiplas fontes da internet e vende partes dessa própria empresa como produto.
+
+---
+
+# ADENDO OPERACIONAL — CRM E EVOLUÇÃO PELO WHATSAPP (01/10/2026)
+
+O KAIROS mantém uma projeção privada e autenticada do CRM no Supabase mestre. O runtime da VPS sincroniza leads por identificador estável; o Core mascara contatos e calcula indicadores somente a partir de dados persistidos.
+
+Demandas de programação podem nascer no chat privado por `/upgrade`, mas só entram na fila técnica após `/confirmar`. Codex ou Claude Code registra progresso e resultado, que retornam ao Founder pelo WhatsApp. Texto de chat nunca é executado diretamente como código.
+
+A próxima célula planejada é uma operação de e-commerce sem estoque. A implantação começa pelo mapeamento das funções humanas e pela pesquisa atual das regras e custos de cada marketplace; nenhuma conta, anúncio, compra ou publicação é criada por este adendo.

@@ -299,3 +299,11 @@ O KAIROS da VPS continua externo ao Core. A campanha autorizada não altera o ch
 ### Política de recuperação comercial — 01/10/2026
 
 O runtime externo mede a fila Hunter às 22h, usa planos alternativos de nicho/cidade e agenda novas tentativas às 00h30 e 04h30 quando a reserva fica abaixo de 45. O estado do lead permanece no CRM privado (`db.json`), atualizado por mensagem recebida. `KAIROS_FREE_ONLY=true` impede o caminho LLM externo e preserva custo incremental zero.
+
+## Ponte CRM e fila de evolução — 01/10/2026
+
+`ops/kairos-whatsapp/agiBridge.js` é o adaptador privado entre `/root/kairos3` e o Core. Ele usa um token servidor-servidor separado da autenticação do Founder, sincroniza lotes idempotentes e consulta eventos a cada minuto. O dashboard legado da VPS foi limitado a `127.0.0.1` para não expor contatos ou conversas na rede pública.
+
+As tabelas `command.crm_leads`, `command.dev_requests` e `command.dev_request_events` têm RLS e privilégios restritos ao `service_role`. `api/_crm.js` centraliza normalização, paginação, confirmação e eventos; `api/hunter.mjs` reaproveita a função serverless existente para manter o projeto dentro da cota do deployment. `useCrm` e `CrmPage` são apenas a projeção autenticada desse estado.
+
+Pedidos do WhatsApp são dados, nunca comandos de shell. A confirmação do Founder muda o estado para `pending`; um engenheiro ainda precisa assumir, testar e registrar a implementação.

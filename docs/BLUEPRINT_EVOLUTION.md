@@ -415,3 +415,11 @@ Foi introduzida uma política determinística de recuperação atribuída ao dom
 ## 01/10/2026 — Mapa persistente ativado
 
 O diário operacional previsto na Fase 14 passou de contrato para persistência real no Supabase mestre. O backend mantém escrita restrita ao `service_role` atrás da autenticação do painel; leitura pública contém apenas metadados técnicos do desenvolvimento e nenhum segredo. A ativação preserva plano gratuito e o histórico append-only.
+
+## 01/10/2026 — CRM privado e evolução solicitada no WhatsApp
+
+O KAIROS passa a manter uma projeção autenticada de sua base comercial no Supabase mestre. A sincronização é idempotente, telefones ficam mascarados na interface e nenhum dado identificado entra em documentação pública.
+
+O Blueprint também ganha uma fila segura de evolução: o KAIROS descreve a necessidade, o Founder confirma no WhatsApp e Codex ou Claude Code executa sob testes e auditoria. O canal não executa código arbitrário. Memória persistente significa conservar eventos, decisões e resultados; não significa treinamento autônomo de modelo. Obsidian só poderá ser marcado como conectado depois de evidência operacional.
+
+A frente posterior será uma célula de e-commerce sem estoque. Primeiro serão mapeados papéis humanos, regras atuais dos marketplaces, custos e riscos; depois um piloto assistido poderá virar automação por etapas.

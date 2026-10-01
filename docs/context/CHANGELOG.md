@@ -498,3 +498,12 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - Incidentes e estratégias registrados no runtime privado.
 - `KAIROS_FREE_ONLY=true` impede chamadas de modelos externos; respostas usam regras locais.
 - Coleta noturna pública e gratuita; Facebook Ads desativado no ciclo de reposição.
+# 01/10/2026 — CRM real e canal de evolução KAIROS
+
+- Aplicada no Supabase mestre a migration `0026_kairos_crm_dev_queue.sql`, com RLS e acesso restrito ao backend.
+- Ponte da VPS sincronizou 1.712 leads únicos; duplicidades internas de lote foram removidas antes do upsert.
+- O KAIROS AGI ganhou base autenticada, paginação completa, busca, filtro de etapa, métricas e telefone mascarado.
+- O chat privado ganhou `/upgrade`, `/confirmar` e `/devstatus`; pedidos não executam código diretamente.
+- Eventos de progresso e resultado voltam ao Founder pelo WhatsApp e recebem confirmação de entrega.
+- Dashboard legado da VPS passou a escutar apenas em `127.0.0.1`, eliminando exposição pública de contatos e mensagens.
+- Próxima frente registrada: desenho de uma equipe digital de e-commerce sem estoque, após pesquisa atual de marketplace.

@@ -336,3 +336,19 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Registrar incidentes e estratégias sem depender do Founder.
 - [x] Bloquear LLM pago no runtime WhatsApp.
 - [ ] Expor no Core o ledger agregado dos ciclos noturnos por endpoint autenticado.
+
+## Missão 024 — CRM real e pedidos de evolução pelo WhatsApp
+
+- [x] Persistir leads do runtime KAIROS em `command.crm_leads`, com RLS, deduplicação e sincronização idempotente.
+- [x] Exibir a base real no KAIROS AGI após autenticação, com busca, etapas e telefones mascarados.
+- [x] Receber `/upgrade`, exigir `/confirmar` e registrar progresso, conclusão, bloqueio ou erro no Supabase.
+- [x] Devolver eventos da fila técnica ao chat privado do Founder e confirmar a entrega do evento.
+- [ ] Conectar um vault Obsidian verificável antes de declarar sincronização do segundo cérebro com Obsidian.
+- [ ] Migrar credenciais embutidas no heartbeat legado da VPS para variáveis protegidas e rotacioná-las, sem registrar valores no Git ou no Mapa.
+
+## Próxima missão — equipe autônoma de e-commerce
+
+- [ ] Comparar Mercado Livre, Shopee, AliExpress e TikTok Shop para operação brasileira sem estoque e com investimento inicial zero ou baixo.
+- [ ] Mapear funções humanas, competências, rotinas, permissões, métricas, riscos e handoffs antes de definir os agentes digitais.
+- [ ] Escolher um único canal e modelo comercial após verificar tarifas, regras atuais, fornecedores e capital necessário.
+- [ ] Construir primeiro um piloto assistido, com catálogo, pedidos, atendimento, financeiro e auditoria; nenhuma compra, anúncio ou publicação sem autorização específica.

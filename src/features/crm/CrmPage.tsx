@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import { AlertTriangle, Bot, CheckCircle2, ExternalLink, MessageCircleReply, Search, Send, ShieldCheck, UserRoundCheck } from 'lucide-react'
+import { AlertTriangle, Bot, CheckCircle2, Code2, ExternalLink, Eye, EyeOff, MessageCircleReply, RefreshCw, Search, Send, ShieldCheck, UserRoundCheck } from 'lucide-react'
 import { AgentRuntimePanel } from '../dashboard/AgentRuntimePanel'
 import { OperationsUnlock } from '../dashboard/OperationsUnlock'
 import { useFleetStatus } from '../../core/useFleetStatus'
+import { useCrm } from '../../core/useCrm'
+import type { CrmLead } from '../../types/operations'
 import './crm.css'
 
 const humanSteps = [
@@ -44,6 +46,36 @@ function readAuthorization(): CampaignAuthorization | null {
   }
 }
 
+const stageLabel: Record<string, string> = { abertura: 'Abertura', diagnostico: 'Diagnóstico', dor: 'Dor', solucao: 'Solução', interesse: 'Interesse', agendamento: 'Agendamento', fechamento: 'Fechamento', conversando: 'Conversando', site_abordado: 'Site abordado', sem_whatsapp: 'Sem WhatsApp', pausado_manual: 'Pausado', bloqueado: 'Bloqueado' }
+const maskPhone = (phone: string | null) => phone ? `${phone.slice(0, 4)}••••${phone.slice(-3)}` : '—'
+const when = (value: string | null) => value ? new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(value)) : '—'
+
+function LiveCrmPanel() {
+  const { state, refresh } = useCrm()
+  const [query, setQuery] = useState('')
+  const [stage, setStage] = useState('todos')
+  const [revealed, setRevealed] = useState<Set<string>>(() => new Set())
+  const data = state.status === 'ok' ? state.data : null
+  const leads = (data?.leads || []).filter((lead: CrmLead) => {
+    const haystack = `${lead.name || ''} ${lead.niche || ''} ${lead.city || ''} ${lead.phone || ''}`.toLowerCase()
+    return (stage === 'todos' || lead.state === stage) && haystack.includes(query.toLowerCase().trim())
+  }).slice(0, 100)
+  const stages = Array.from(new Set((data?.leads || []).map(item => item.state))).sort()
+  const toggle = (id: string) => setRevealed(current => { const next = new Set(current); next.has(id) ? next.delete(id) : next.add(id); return next })
+  return <>
+    <section className="glass-panel crm-live">
+      <div className="crm-live-heading"><div><span className="eyebrow">CRM REAL · KAIROS WHATSAPP</span><h3>Base comercial privada</h3><p>Sincronizada da VPS para o Supabase mestre. Telefones ficam ocultos até você abrir cada registro.</p></div><button type="button" onClick={() => void refresh()}><RefreshCw size={15} /> Atualizar</button></div>
+      {state.status === 'sem-credencial' && <p className="crm-state">Desbloqueie o Painel Operacional para consultar a base.</p>}
+      {state.status === 'carregando' && <p className="crm-state">Consultando a base privada…</p>}
+      {state.status === 'erro' && <p className="crm-state error">{state.mensagem}</p>}
+      {data && <><div className="crm-kpis"><article><span>Total</span><strong>{data.stats.total}</strong></article><article><span>Ativos</span><strong>{data.stats.active}</strong></article><article><span>Contatados</span><strong>{data.stats.contacted}</strong></article><article><span>Qualificados</span><strong>{data.stats.qualified}</strong></article><article><span>Reuniões</span><strong>{data.stats.meetings}</strong></article></div>
+        <div className="crm-toolbar"><label><Search size={15} /><input value={query} onChange={event => setQuery(event.target.value)} placeholder="Buscar empresa, nicho, cidade ou telefone" /></label><select value={stage} onChange={event => setStage(event.target.value)}><option value="todos">Todos os estágios</option>{stages.map(item => <option value={item} key={item}>{stageLabel[item] || item}</option>)}</select><small>{leads.length} exibidos · limite visual de 100</small></div>
+        <div className="crm-table-wrap"><table className="crm-table"><thead><tr><th>Lead</th><th>Contato</th><th>Etapa</th><th>Score</th><th>Histórico</th><th>Atualizado</th></tr></thead><tbody>{leads.map(lead => <tr key={lead.id}><td><strong>{lead.name || 'Nome não informado'}</strong><small>{[lead.niche, lead.city].filter(Boolean).join(' · ') || 'Segmento não informado'}</small></td><td><span className="crm-phone">{revealed.has(lead.id) ? lead.phone || '—' : maskPhone(lead.phone)}<button type="button" onClick={() => toggle(lead.id)} aria-label={revealed.has(lead.id) ? 'Ocultar telefone' : 'Mostrar telefone'}>{revealed.has(lead.id) ? <EyeOff size={14} /> : <Eye size={14} />}</button></span></td><td><span className={`crm-stage stage-${lead.state}`}>{stageLabel[lead.state] || lead.state}</span></td><td><b>{lead.score}</b></td><td>{lead.history_count} eventos</td><td>{when(lead.source_updated_at || lead.last_message_at)}</td></tr>)}{!leads.length && <tr><td colSpan={6}>Nenhum lead corresponde aos filtros.</td></tr>}</tbody></table></div><small className="crm-source">Fonte: runtime KAIROS WhatsApp · consulta {when(data.checkedAt)}</small></>}
+    </section>
+    {data && <section className="glass-panel dev-requests"><div><span className="eyebrow">EVOLUÇÃO CONTÍNUA</span><h3>Demandas de programação vindas do WhatsApp</h3><p>O KAIROS registra a necessidade, pede sua confirmação e acompanha Codex ou Claude Code até concluir, bloquear ou reportar erro.</p></div><div className="dev-request-list">{data.requests.map(request => <article key={request.id}><Code2 size={18} /><div><strong>{request.title}</strong><p>{request.description}</p><span>{request.priority} · {request.status}{request.assigned_to ? ` · ${request.assigned_to}` : ' · aguardando responsável'}</span></div></article>)}{!data.requests.length && <p className="crm-state">Nenhuma demanda de programação recebida ainda.</p>}</div></section>}
+  </>
+}
+
 export function CrmPage() {
   const { state } = useFleetStatus()
   const fleet = state.status === 'ok' ? state.data.fleet : []
@@ -74,6 +106,8 @@ export function CrmPage() {
         <small>{online ? `Processo ${kairos?.pm2_name || 'KAIROS'} confirmado pela frota` : 'O status real não é presumido sem autenticação.'}</small>
       </div>
     </section>
+
+    <LiveCrmPanel />
 
     <section className="glass-panel activation-board">
       <div className="activation-heading">

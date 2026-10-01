@@ -148,3 +148,11 @@ Por autorização explícita do Founder, o runtime externo do KAIROS foi program
 ## Atualização 01/10/2026 — reposição autônoma gratuita
 
 O KAIROS ganhou política noturna de recuperação: 22h, 00h30 e 04h30. O Hunter alterna mercados e regiões para recompor uma reserva alvo de 45, mantendo score mínimo e sem fabricar registros. Leads aprovados são promovidos ao CRM privado; mensagens recebidas atualizam histórico, score e etapa. `KAIROS_FREE_ONLY=true` bloqueia chamadas pagas de LLM no runtime.
+
+## Atualização 01/10/2026 — CRM privado e fila de evolução
+
+O runtime WhatsApp sincroniza sua base privada para `command.crm_leads` em lotes idempotentes. O KAIROS AGI consulta toda a base somente após autenticação, mascara telefones e deriva métricas dos registros reais. Nenhuma credencial ou lista de contatos entra no Git.
+
+O chat privado do Founder aceita `/upgrade <descrição>` e exige `/confirmar <código>` antes de liberar a demanda para Codex ou Claude Code. Progresso, conclusão, bloqueio e erro são eventos persistentes enviados de volta pelo KAIROS. A memória executiva e o Supabase estão ativos; integração Obsidian ao vivo continua não comprovada.
+
+A próxima frente planejada é uma equipe digital de e-commerce sem estoque. A escolha entre marketplaces exige pesquisa atual de tarifas e regras antes de implementação; não há loja, anúncio, compra ou publicação criada nesta entrega.

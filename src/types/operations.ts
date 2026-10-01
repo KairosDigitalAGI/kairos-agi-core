@@ -176,3 +176,51 @@ export interface ProjectLogResponse {
   reason?: string
   entries: ProjectLogEntry[]
 }
+
+export interface CrmLead {
+  id: string
+  source: 'kairos_whatsapp'
+  source_ref: string
+  name: string | null
+  phone: string | null
+  state: string
+  score: number
+  contacted: boolean
+  meeting_scheduled: boolean
+  lead_type: string | null
+  attempts: number
+  niche: string | null
+  city: string | null
+  origin: string | null
+  priority: string | null
+  runtime_status: string | null
+  history_count: number
+  last_message_at: string | null
+  source_created_at: string | null
+  source_updated_at: string | null
+  synced_at: string
+}
+
+export interface DevRequest {
+  id: string
+  created_at: string
+  updated_at: string
+  source: string
+  title: string
+  description: string
+  impact: string | null
+  evidence: string | null
+  proposed_solution: string | null
+  priority: 'low' | 'medium' | 'high' | 'critical'
+  status: 'awaiting_confirmation' | 'pending' | 'triaged' | 'in_progress' | 'blocked' | 'done' | 'error' | 'rejected'
+  assigned_to: 'codex' | 'claude-code' | 'founder' | null
+  resolution: string | null
+}
+
+export interface CrmResponse {
+  source: DataSource
+  checkedAt: string
+  leads: CrmLead[]
+  requests: DevRequest[]
+  stats: { total: number; contacted: number; active: number; qualified: number; meetings: number }
+}
