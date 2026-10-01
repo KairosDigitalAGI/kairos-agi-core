@@ -1,0 +1,182 @@
+--- a/bot.js
++++ b/bot.js
+@@ -24,6 +24,7 @@
+ const { runProspeccao, setSendFunction: setProspeccaoSend, activateKillSwitch, isKillSwitchOn, resetKillSwitch } = require("./src/prospeccao");
+ const campanhaAprovada = require("./src/campanhaAprovada");
+ const agiBridge = require("./src/agiBridge");
++const { appendEvent: appendCrmEvent } = require("./src/crmAudit");
+ const logger      = require("./src/logger");
+ const socialMedia = require("./src/socialMedia");
+ const manus       = require("./src/manus");
+@@ -861,11 +862,19 @@
+ 
+ const _sendMessageOriginal = client.sendMessage.bind(client);
+ client.sendMessage = async function (to, content, options) {
+-  if (process.env.OUTBOUND_ENABLED === "true") return _sendMessageOriginal(to, content, options);
+-  if (_ehDono(to) || _ehRespostaPermitida(to)) return _sendMessageOriginal(to, content, options);
++  const sendAndAudit = async () => {
++    const result = await _sendMessageOriginal(to, content, options);
++    const digits = String(to || "").replace(/@.*$/, "").replace(/\D/g, "");
++    try {
++      if (ehLeadConhecido(digits)) appendCrmEvent({ phone: digits, eventType: "outbound_message", direction: "outbound", status: result ? "sent" : "queued", summary: typeof content === "string" ? content : "Mídia enviada pelo KAIROS.", metadata: { ack: result?.ack ?? null } });
++    } catch (error) { logger.warn(`[CRM-AUDIT] saída: ${error.message}`); }
++    return result;
++  };
++  if (process.env.OUTBOUND_ENABLED === "true") return sendAndAudit();
++  if (_ehDono(to) || _ehRespostaPermitida(to)) return sendAndAudit();
+   if (await _ehMonitorado(to)) {
+     logger.info(`[GATE-SAIDA] liberado p/ ${to} — contato monitorado (freio segue ativo p/ o resto)`);
+-    return _sendMessageOriginal(to, content, options);
++    return sendAndAudit();
+   }
+   logger.warn(`[GATE-SAIDA] BLOQUEADO envio p/ ${to} — OUTBOUND_ENABLED!=true e sem inbound recente`);
+   return null;
+@@ -887,7 +896,10 @@
+     }
+     const jid = numberId._serialized;
+     const sent = await client.sendMessage(jid, text);
+-    if (sent) return sent;
++    if (sent) {
++      try { if (ehLeadConhecido(rawPhone)) appendCrmEvent({ phone: rawPhone, eventType: "delivery", direction: "outbound", status: sent.ack >= 3 ? "read" : "delivered", summary: "Mensagem confirmada pelo WhatsApp.", metadata: { ack: sent.ack ?? null } }); } catch {}
++      return sent;
++    }
+     // FALSO NEGATIVO (21/08): sendMessage entrega a mensagem via
+     // addAndSendMsgToChat e SÓ DEPOIS tenta recuperá-la com
+     // Msg.get(newMsgKey._serialized). Com LID privacy a chave não bate, o get
+@@ -897,6 +909,7 @@
+     const confirmado = await confirmarEnvioReal(jid, text);
+     if (confirmado) {
+       logger.info(`[SEND] ✅ ${rawPhone} — entregue (retorno falsy da lib, confirmado no chat; ack=${confirmado.ack})`);
++      try { if (ehLeadConhecido(rawPhone)) appendCrmEvent({ phone: rawPhone, eventType: "delivery", direction: "outbound", status: confirmado.ack >= 3 ? "read" : "delivered", summary: "Mensagem confirmada no chat após retorno inconclusivo da biblioteca.", metadata: { ack: confirmado.ack ?? null, recovered: true } }); } catch {}
+       return confirmado;
+     }
+     logger.warn(`[SEND] ❓ ${rawPhone} — retorno falsy e NÃO confirmado no chat. NÃO reenviar às cegas.`);
+@@ -3958,6 +3971,7 @@
+     if (!(_siteLead && _ehMidiaSite)) return;
+   } else {
+     logger.info('📨 ' + phone + ': "' + message.slice(0, 60) + '"');
++    try { appendCrmEvent({ phone, eventType: "inbound_message", direction: "inbound", status: "received", summary: message, metadata: { message_type: msg.type || "chat" } }); } catch (error) { logger.warn(`[CRM-AUDIT] entrada: ${error.message}`); }
+   }
+ 
+   // ─── BLOQUEIO TEMPORÁRIO (loop_ia) ──────────────────────────────────────────
+--- a/src/stateManager.js
++++ b/src/stateManager.js
+@@ -2,6 +2,7 @@
+ const { JSONFile } = require("lowdb/node");
+ const logger = require("./logger");
+ const { EXPLICIT_COMMERCIAL_TYPES, isExplicitCommercialLead } = require("./inboundPolicy");
++const { appendEvent } = require("./crmAudit");
+ 
+ const db = new Low(new JSONFile("db.json"), { leads: [], meetings: [] });
+ 
+@@ -74,12 +75,18 @@
+   return _tx(async () => {
+     await db.read();
+     const idx = db.data.leads.findIndex(l => l.phone === lead.phone || (lead.id != null && l.id === lead.id));
++    const previous = idx >= 0 ? { ...db.data.leads[idx] } : null;
+     if (idx >= 0) {
+       db.data.leads[idx] = { ...db.data.leads[idx], ...lead, updatedAt: new Date().toISOString() };
+     } else {
+       db.data.leads.push({ ...lead, updatedAt: new Date().toISOString() });
+     }
+     await db.write();
++    const current = idx >= 0 ? db.data.leads[idx] : db.data.leads[db.data.leads.length - 1];
++    if (!previous || previous.tipo !== current.tipo) appendEvent({ phone: current.phone, eventType: "classification", summary: `Classificação: ${previous?.tipo || "sem tipo"} → ${current.tipo || "sem tipo"}`, metadata: { from: previous?.tipo || null, to: current.tipo || null } });
++    if (previous && previous.state !== current.state) appendEvent({ phone: current.phone, eventType: current.state === "bloqueado" ? "blocked" : previous.state === "bloqueado" ? "unblocked" : "state_changed", status: current.state === "bloqueado" ? "blocked" : "applied", summary: `Etapa: ${previous.state || "—"} → ${current.state || "—"}`, metadata: { from: previous.state || null, to: current.state || null } });
++    if (previous && previous.loop_ia !== current.loop_ia) appendEvent({ phone: current.phone, eventType: current.loop_ia ? "blocked" : "unblocked", status: current.loop_ia ? "blocked" : "applied", summary: current.loop_ia ? "Atendimento pausado pelo detector de loop." : "Atendimento retomado após sinal humano/comercial.", metadata: { reason: current.loop_retomado_motivo || current.loop_sinais || null } });
++    if (previous && Number(previous.score || 0) !== Number(current.score || 0)) appendEvent({ phone: current.phone, eventType: "score_changed", summary: `Score: ${Number(previous.score || 0)} → ${Number(current.score || 0)}`, metadata: { from: Number(previous.score || 0), to: Number(current.score || 0) } });
+   });
+ }
+ 
+--- a/src/agiBridge.js
++++ b/src/agiBridge.js
+@@ -1,5 +1,6 @@
+ const fs = require('fs')
+ const crypto = require('crypto')
++const { acknowledgeEvents, pendingEvents } = require('./crmAudit')
+ 
+ const DB_PATH = '/root/kairos3/db.json'
+ const apiUrl = () => String(process.env.CRM_SYNC_URL || '').trim()
+@@ -37,7 +38,16 @@
+     const result = await request('crm-sync', { method: 'POST', body: JSON.stringify({ leads: rows.slice(index, index + 200) }) })
+     accepted += Number(result.accepted || 0)
+   }
+-  return { accepted }
++  let eventsAccepted = 0
++  while (true) {
++    const events = pendingEvents(200)
++    if (!events.length) break
++    const result = await request('crm-events', { method: 'POST', body: JSON.stringify({ events }) })
++    eventsAccepted += Number(result.accepted || 0)
++    acknowledgeEvents(events.map(event => event.event_ref))
++    if (events.length < 200) break
++  }
++  return { accepted, eventsAccepted }
+ }
+ 
+ async function createDevRequest(description) {
+@@ -68,7 +78,7 @@
+ function start({ notify, logger = console }) {
+   if (started) return
+   started = true
+-  const safeSync = () => syncNow().then(r => logger.info(`[AGI-BRIDGE] CRM sincronizado: ${r.accepted}`)).catch(e => logger.error(`[AGI-BRIDGE] sync: ${e.message}`))
++  const safeSync = () => syncNow().then(r => logger.info(`[AGI-BRIDGE] CRM sincronizado: ${r.accepted} leads, ${r.eventsAccepted} eventos`)).catch(e => logger.error(`[AGI-BRIDGE] sync: ${e.message}`))
+   const safePoll = () => pollUpdates(notify).catch(e => logger.error(`[AGI-BRIDGE] updates: ${e.message}`))
+   safeSync(); safePoll()
+   setInterval(safeSync, 2 * 60 * 1000).unref()
+--- /dev/null
++++ b/src/crmAudit.js
+@@ -0,0 +1,53 @@
++const fs = require("fs");
++const path = require("path");
++const crypto = require("crypto");
++
++const QUEUE_PATH = path.join(__dirname, "..", "data", "crm-events.jsonl");
++const MAX_PENDING = 10000;
++
++function leadSourceRef(phone) {
++  const digits = String(phone || "").replace(/\D/g, "");
++  return crypto.createHash("sha256").update(digits).digest("hex");
++}
++
++function clean(value, max = 1200) {
++  const text = String(value ?? "").trim();
++  return text ? text.slice(0, max) : null;
++}
++
++function appendEvent({ phone, eventType, direction = "system", status = "applied", summary, metadata = {}, occurredAt }) {
++  if (!phone || !eventType) return null;
++  fs.mkdirSync(path.dirname(QUEUE_PATH), { recursive: true });
++  const event = {
++    event_ref: crypto.randomUUID(),
++    lead_source_ref: leadSourceRef(phone),
++    event_type: eventType,
++    direction,
++    status,
++    summary: clean(summary),
++    metadata: metadata && typeof metadata === "object" ? metadata : {},
++    occurred_at: occurredAt || new Date().toISOString(),
++  };
++  fs.appendFileSync(QUEUE_PATH, `${JSON.stringify(event)}\n`, { encoding: "utf8", mode: 0o600 });
++  return event;
++}
++
++function pendingEvents(limit = 200) {
++  if (!fs.existsSync(QUEUE_PATH)) return [];
++  return fs.readFileSync(QUEUE_PATH, "utf8").split("\n").filter(Boolean).slice(0, Math.min(limit, MAX_PENDING)).flatMap(line => {
++    try { return [JSON.parse(line)]; } catch { return []; }
++  });
++}
++
++function acknowledgeEvents(ids) {
++  if (!fs.existsSync(QUEUE_PATH) || !ids?.length) return 0;
++  const accepted = new Set(ids.map(String));
++  const lines = fs.readFileSync(QUEUE_PATH, "utf8").split("\n").filter(Boolean);
++  const kept = lines.filter(line => {
++    try { return !accepted.has(String(JSON.parse(line).event_ref)); } catch { return false; }
++  });
++  fs.writeFileSync(QUEUE_PATH, kept.length ? `${kept.join("\n")}\n` : "", { encoding: "utf8", mode: 0o600 });
++  return lines.length - kept.length;
++}
++
++module.exports = { appendEvent, pendingEvents, acknowledgeEvents, leadSourceRef };
