@@ -363,3 +363,11 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Manter contatos pessoais, equipe, parceiros e inbound genérico em silêncio, mesmo com histórico ou estado avançado.
 - [x] Fazer falhas de classificação e a janela de inicialização falharem fechadas, sem resposta.
 - [x] Apresentar o agente comercial como `KAIROS`, agente autônomo pessoal do Matheus e da Kairos Digital.
+
+## Missão 026 — concluir pendências do Mapa do Projeto
+
+- [x] Persistir a trilha de eventos do WhatsApp no CRM privado.
+- [x] Validar uma conversa comercial completa usando somente evidências reais do runtime.
+- [x] Registrar duas entregas confirmadas, duas mensagens inbound e a reunião na linha do tempo.
+- [x] Fazer uma entrega posterior de mesmo título resolver o `todo` anterior sem editar ou apagar o histórico.
+- [x] Manter uma nova pendência posterior capaz de reabrir o mesmo assunto.

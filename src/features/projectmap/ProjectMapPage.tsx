@@ -4,6 +4,7 @@ import { useOperationsAuth } from '../../core/OperationsAuthProvider'
 import { useProjectLog } from '../../core/useProjectLog'
 import { OperationsUnlock } from '../dashboard/OperationsUnlock'
 import type { ProjectLogAgent, ProjectLogEntry, ProjectLogType } from '../../types/operations'
+import { deriveProjectMapState } from './projectMapState'
 import './projectmap.css'
 
 const typeMeta: Record<ProjectLogType, { label: string; icon: typeof CheckCircle2 }> = {
@@ -37,13 +38,20 @@ export function ProjectMapPage() {
   const [form, setForm] = useState(emptyForm)
 
   const entries: ProjectLogEntry[] = state.status === 'ok' && state.data.source === 'real' ? state.data.entries : []
-  const visible = filter === 'todos' ? entries : entries.filter((entry) => entry.type === filter)
+  const mapState = useMemo(() => deriveProjectMapState(entries), [entries])
+  const visible = filter === 'todos'
+    ? entries
+    : entries.filter((entry) => entry.type === filter && (entry.type !== 'todo' || mapState.openTodoIds.has(entry.id)))
   const counts = useMemo(() => {
     const base: Record<ProjectLogType, number> = { done: 0, todo: 0, idea: 0, bug: 0 }
-    for (const entry of entries) base[entry.type] += 1
+    for (const entry of entries) {
+      if (entry.type === 'todo' && mapState.resolvedTodoIds.has(entry.id)) continue
+      base[entry.type] += 1
+    }
     return base
-  }, [entries])
-  const progressoPct = entries.length ? Math.round((counts.done / entries.length) * 100) : 0
+  }, [entries, mapState])
+  const trackedWork = counts.done + counts.todo
+  const progressoPct = trackedWork ? Math.round((counts.done / trackedWork) * 100) : 0
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault()
@@ -119,12 +127,13 @@ export function ProjectMapPage() {
 
       <div className="project-map-grid">
         {visible.map((entry) => {
-          const meta = typeMeta[entry.type]
+          const resolved = entry.type === 'todo' && mapState.resolvedTodoIds.has(entry.id)
+          const meta = resolved ? { label: 'Resolvido', icon: CheckCircle2 } : typeMeta[entry.type]
           const Icon = meta.icon
           return (
-            <article className="glass-panel project-map-card" key={entry.id}>
+            <article className={`glass-panel project-map-card${resolved ? ' resolved' : ''}`} key={entry.id}>
               <div className="project-map-card-head">
-                <span className={`project-map-type ${entry.type}`}><Icon size={13} /> {meta.label}</span>
+                <span className={`project-map-type ${resolved ? 'done' : entry.type}`}><Icon size={13} /> {meta.label}</span>
                 {entry.phase && <span className="project-map-phase">{entry.phase}</span>}
               </div>
               <h3>{entry.title}</h3>

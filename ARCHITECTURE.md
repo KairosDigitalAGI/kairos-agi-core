@@ -313,3 +313,7 @@ As tabelas `command.crm_leads`, `command.dev_requests` e `command.dev_request_ev
 Pedidos do WhatsApp são dados, nunca comandos de shell. A confirmação do Founder muda o estado para `pending`; um engenheiro ainda precisa assumir, testar e registrar a implementação.
 
 O gate de inbound da VPS usa uma allow-list comercial. Apenas `prospecto`, `site`, `x1`, `simulacao`, reunião confirmada ou venda registrada autorizam resposta automática. Ausência de base, erro de classificação, contato pessoal, equipe, parceiro ou inbound genérico resultam em silêncio.
+
+## Projeção de pendências do Mapa
+
+`command.project_log` permanece estritamente append-only. A interface deriva o estado atual sem mutação: um `done` mais recente com o mesmo título normalizado resolve o `todo` anterior; um `todo` ainda mais recente reabre o item. Cards históricos resolvidos continuam em **Todos**, enquanto o filtro e o contador **Pendente** mostram somente trabalho aberto.

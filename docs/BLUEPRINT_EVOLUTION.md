@@ -431,3 +431,7 @@ O KAIROS passa a manter uma projeção autenticada de sua base comercial no Supa
 O Blueprint também ganha uma fila segura de evolução: o KAIROS descreve a necessidade, o Founder confirma no WhatsApp e Codex ou Claude Code executa sob testes e auditoria. O canal não executa código arbitrário. Memória persistente significa conservar eventos, decisões e resultados; não significa treinamento autônomo de modelo. Obsidian só poderá ser marcado como conectado depois de evidência operacional.
 
 A frente posterior será uma célula de e-commerce sem estoque. Primeiro serão mapeados papéis humanos, regras atuais dos marketplaces, custos e riscos; depois um piloto assistido poderá virar automação por etapas.
+
+## 01/10/2026 — encerramento auditável de pendências
+
+O Mapa passa a diferenciar histórico de estado atual sem abandonar a regra append-only. Uma entrega posterior de mesmo título encerra a pendência anterior na projeção, mantendo o card antigo como resolvido. A primeira aplicação fechou a auditoria do WhatsApp e a validação de uma conversa comercial completa com evidência do runtime e persistência no CRM.

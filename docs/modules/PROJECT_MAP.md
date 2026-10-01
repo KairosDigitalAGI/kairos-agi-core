@@ -31,7 +31,9 @@ Lógica em `api/_project-log.js`; rota em `api/project-log.mjs` (arquivo própri
 
 ## Interface
 
-`ProjectMapPage` (`src/features/projectmap/`): contador de progresso (% de entradas `done`), filtros por tipo, grid de cards com fase/agente/commit/timestamp, e um formulário "Adicionar entrada" visível só quando o Painel Operacional está desbloqueado.
+`ProjectMapPage` (`src/features/projectmap/`): contador de progresso, filtros por tipo, grid de cards com fase/agente/commit/timestamp, e um formulário "Adicionar entrada" visível só quando o Painel Operacional está desbloqueado.
+
+O histórico continua append-only. Uma entrada `done` mais recente resolve uma entrada `todo` anterior quando os títulos normalizados são iguais. A pendência antiga permanece visível em **Todos** com o selo **Resolvido**, mas deixa o contador e o filtro **Pendente**. Uma nova entrada `todo` posterior com o mesmo título reabre o trabalho. Essa projeção é calculada em `projectMapState.ts`; nenhum registro do Supabase é atualizado ou apagado.
 
 ## Uso por agentes
 

@@ -27,6 +27,7 @@
 
 .project-map-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
 .project-map-card { display: flex; flex-direction: column; gap: 8px; }
+.project-map-card.resolved { opacity: .62; border-color: rgba(76,232,167,.22); }
 .project-map-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .project-map-type { display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; border-radius: 99px; font-size: .64rem; white-space: nowrap; }
 .project-map-type.done { background: rgba(52,211,153,.12); color: #6ee7b7; }

@@ -525,3 +525,9 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - Eventos de progresso e resultado voltam ao Founder pelo WhatsApp e recebem confirmação de entrega.
 - Dashboard legado da VPS passou a escutar apenas em `127.0.0.1`, eliminando exposição pública de contatos e mensagens.
 - Próxima frente registrada: desenho de uma equipe digital de e-commerce sem estoque, após pesquisa atual de marketplace.
+# 01/10/2026 — Missão 026: pendências do Mapa concluídas
+
+- Reconstruída no CRM uma conversa comercial completa já comprovada pelos logs do runtime: retomada, resposta, opções de horário, escolha e reunião.
+- Estado confirmado pela API: 6 eventos auditados, 2 entregas confirmadas e 0 falhas.
+- `ProjectMapPage` agora resolve `todo` antigo por `done` posterior de mesmo título, preservando o histórico append-only e permitindo reabertura posterior.
+- Dois testes de projeção adicionados; suíte com 166 testes e build aprovados.
