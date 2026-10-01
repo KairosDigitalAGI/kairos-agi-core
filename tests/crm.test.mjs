@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { checkCrmSyncAuth, normalizeCrmLead } from '../api/_crm.js'
+import { checkCrmSyncAuth, normalizeCrmEvent, normalizeCrmLead } from '../api/_crm.js'
 
 test('CRM sync requires the configured bearer token', () => {
   const previous = process.env.CRM_SYNC_TOKEN
@@ -34,4 +34,22 @@ test('CRM normalization constrains source data without inventing fields', () => 
 
 test('CRM normalization rejects entries without a stable source reference', () => {
   assert.throws(() => normalizeCrmLead({ name: 'Sem referência' }), /source_ref ausente/)
+})
+
+test('CRM event normalization keeps a bounded auditable event', () => {
+  const row = normalizeCrmEvent({
+    event_ref: 'evt-001', lead_source_ref: 'lead-001', event_type: 'delivery',
+    direction: 'outbound', status: 'delivered', summary: 'Mensagem confirmada',
+    metadata: { ack: 2 }, occurred_at: '2026-10-01T13:52:00Z',
+  })
+  assert.equal(row.source, 'kairos_whatsapp')
+  assert.equal(row.event_type, 'delivery')
+  assert.equal(row.status, 'delivered')
+  assert.equal(row.occurred_at, '2026-10-01T13:52:00.000Z')
+  assert.deepEqual(row.metadata, { ack: 2 })
+})
+
+test('CRM event normalization rejects unknown event types and unstable references', () => {
+  assert.throws(() => normalizeCrmEvent({ event_type: 'magic' }), /obrigatórios/)
+  assert.throws(() => normalizeCrmEvent({ event_ref: 'evt', lead_source_ref: 'lead', event_type: 'magic', occurred_at: new Date().toISOString() }), /event_type inválido/)
 })

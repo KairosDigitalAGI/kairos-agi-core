@@ -26,6 +26,8 @@ Atualização 23/09/2026, Seedance: adaptador da Vercel AI Gateway pronto e desl
 
 Atualização 01/10/2026, Missão 005: o gate de entrada do KAIROS foi implantado na VPS. Contatos pessoais permanecem silenciosos e apenas origens comerciais explícitas entram no atendimento. O detector de loop agora libera automaticamente um lead explícito quando chega nova resposta humana/comercial. `CLIENT_001` foi recuperado e a mensagem de retomada teve entrega confirmada. Próxima fatia: persistir no CRM os eventos de classificação, bloqueio, desbloqueio e confirmação de entrega para auditoria completa no painel.
 
+Atualização 01/10/2026, Missão 026: a fatia de auditoria foi entregue. `command.crm_events` está aplicada no Supabase mestre e a linha do tempo privada está integrada ao CRM. Próxima fatia: validar uma nova mensagem real de lead atravessando VPS → fila → Supabase → painel e medir a latência observada.
+
 A numeração 003–008 anterior foi substituída por esta fila em 11/09/2026. Missão 004 foi autorizada posteriormente. O YouTube tornou-se a primeira integração externa real conectada em 15/09/2026; publicação continua privada por padrão e exige aprovação do Founder.
 
 Correção autorizada após Missão 003: organograma completo importado e exposto no painel/World. A Missão 004 foi ampliada após validação do Founder: criação do zero é o fluxo principal; edição virou pós-produção. Nenhum serviço externo foi ativado.

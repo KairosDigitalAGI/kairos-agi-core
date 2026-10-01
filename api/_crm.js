@@ -3,6 +3,9 @@ import { patchCommand, readCommand, upsertCommand, writeCommand } from './_comma
 
 const MAX_BATCH = 250
 const ALLOWED_STATES = new Set(['abertura','diagnostico','dor','solucao','interesse','agendamento','fechamento','encerrado','conversando','site_abordado','sem_whatsapp','pausado','pausado_manual','bloqueado','x1_coletando'])
+const EVENT_TYPES = new Set(['classification','inbound_message','outbound_message','delivery','blocked','unblocked','state_changed','score_changed','meeting','error'])
+const EVENT_DIRECTIONS = new Set(['inbound','outbound','system'])
+const EVENT_STATUSES = new Set(['received','queued','sent','delivered','read','failed','blocked','ignored','applied'])
 
 const digest = value => createHash('sha256').update(String(value), 'utf8').digest()
 const equal = (a, b) => timingSafeEqual(digest(a), digest(b))
@@ -51,12 +54,42 @@ export function normalizeCrmLead(input) {
   }
 }
 
+export function normalizeCrmEvent(input) {
+  const eventRef = text(input?.event_ref, 120)
+  const leadSourceRef = text(input?.lead_source_ref, 96)
+  const eventType = text(input?.event_type, 40)
+  const direction = text(input?.direction, 20) || 'system'
+  const status = text(input?.status, 20) || 'applied'
+  const occurredAt = date(input?.occurred_at)
+  if (!eventRef || !leadSourceRef) throw new Error('event_ref e lead_source_ref são obrigatórios.')
+  if (!EVENT_TYPES.has(eventType)) throw new Error('event_type inválido.')
+  if (!EVENT_DIRECTIONS.has(direction)) throw new Error('direction inválida.')
+  if (!EVENT_STATUSES.has(status)) throw new Error('status inválido.')
+  if (!occurredAt) throw new Error('occurred_at inválido.')
+  const metadata = input?.metadata && typeof input.metadata === 'object' && !Array.isArray(input.metadata)
+    ? Object.fromEntries(Object.entries(input.metadata).slice(0, 24).map(([key, value]) => [text(key, 60), typeof value === 'string' ? text(value, 500) : value]).filter(([key]) => key))
+    : {}
+  return {
+    source: 'kairos_whatsapp', event_ref: eventRef, lead_source_ref: leadSourceRef,
+    event_type: eventType, direction, status, summary: text(input?.summary, 1200),
+    metadata, occurred_at: occurredAt, synced_at: new Date().toISOString(),
+  }
+}
+
 export async function syncCrmLeads(body) {
   const leads = Array.isArray(body?.leads) ? body.leads : []
   if (!leads.length || leads.length > MAX_BATCH) throw new Error(`Envie entre 1 e ${MAX_BATCH} leads por lote.`)
   const rows = [...new Map(leads.map(normalizeCrmLead).map(row => [`${row.source}:${row.source_ref}`, row])).values()]
   const saved = await upsertCommand('crm_leads', rows, 'source,source_ref')
   return { accepted: saved.length, received: leads.length, duplicatesRemoved: leads.length - rows.length, syncedAt: new Date().toISOString() }
+}
+
+export async function syncCrmEvents(body) {
+  const events = Array.isArray(body?.events) ? body.events : []
+  if (!events.length || events.length > MAX_BATCH) throw new Error(`Envie entre 1 e ${MAX_BATCH} eventos por lote.`)
+  const rows = [...new Map(events.map(normalizeCrmEvent).map(row => [row.event_ref, row])).values()]
+  const saved = await upsertCommand('crm_events', rows, 'source,event_ref')
+  return { accepted: saved.length, received: events.length, duplicatesRemoved: events.length - rows.length, syncedAt: new Date().toISOString() }
 }
 
 export async function addDevRequest(body) {
@@ -118,18 +151,27 @@ export async function acknowledgeDevUpdates(body) {
 export async function listCrm() {
   const leadFields = 'id,source,source_ref,name,phone,state,score,contacted,meeting_scheduled,lead_type,attempts,niche,city,origin,priority,runtime_status,history_count,last_message_at,source_created_at,source_updated_at,synced_at'
   const requestsPromise = readCommand('dev_requests', '?select=id,created_at,updated_at,source,title,description,impact,evidence,proposed_solution,priority,status,assigned_to,resolution&order=created_at.desc&limit=100')
+  const eventsPromise = readCommand('crm_events', '?select=id,event_ref,lead_source_ref,event_type,direction,status,summary,metadata,occurred_at,synced_at&order=occurred_at.desc&limit=1000')
   const rows = []
   for (let offset = 0; offset < 5000; offset += 1000) {
     const page = await readCommand('crm_leads', `?select=${leadFields}&order=source_updated_at.desc.nullslast&limit=1000&offset=${offset}`) ?? []
     rows.push(...page)
     if (page.length < 1000) break
   }
-  const requests = await requestsPromise
+  const [requests, events] = await Promise.all([requestsPromise, eventsPromise])
   return {
     source: 'real',
     checkedAt: new Date().toISOString(),
     leads: rows,
     requests: requests ?? [],
+    events: events ?? [],
+    eventStats: {
+      total: events?.length ?? 0,
+      delivered: (events ?? []).filter(item => ['delivered','read'].includes(item.status)).length,
+      blocked: (events ?? []).filter(item => item.event_type === 'blocked').length,
+      resumed: (events ?? []).filter(item => item.event_type === 'unblocked').length,
+      failed: (events ?? []).filter(item => item.status === 'failed' || item.event_type === 'error').length,
+    },
     stats: {
       total: rows.length,
       contacted: rows.filter(item => item.contacted).length,

@@ -1,5 +1,13 @@
 # Changelog
 
+## 01/10/2026 — Missão 026: auditoria em tempo real do CRM WhatsApp
+
+- Criada e aplicada no Supabase mestre a tabela privada append-only `command.crm_events`.
+- Runtime KAIROS ganhou fila local durável para classificação, mensagens, bloqueios, retomadas, mudanças de etapa/score e confirmação remota.
+- A ponte VPS → Core confirma cada lote antes de remover eventos locais; falhas preservam a fila.
+- CRM ganhou contadores operacionais, linha do tempo por lead, expansão protegida e atualização automática a cada 15 segundos.
+- Telefones permanecem somente no cadastro privado do lead; eventos usam o hash `source_ref`.
+
 ## 01/10/2026 — Missão 025: WhatsApp pessoal isolado
 
 - Removida a apresentação automática para números desconhecidos no runtime da VPS.

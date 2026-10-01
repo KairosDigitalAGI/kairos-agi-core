@@ -1,5 +1,9 @@
 # Evolução do Blueprint
 
+## 01/10/2026 — CRM observável
+
+A Missão 005 ganhou auditoria append-only entre o runtime KAIROS e o Supabase mestre. O Core passa a mostrar evolução e confirmação real por lead, sem transformar configuração em alegação de execução.
+
 ## 01/10/2026 — gate fechado para o WhatsApp pessoal
 
 O KAIROS deixou de apresentar um assistente a todo número desconhecido. Resposta automática agora exige origem comercial explícita, reunião ou venda registrada; histórico e estado do funil não bastam. Erros e inicialização sem CRM falham fechados. A identidade comercial foi consolidada como `KAIROS`, agente autônomo pessoal do Matheus e da Kairos Digital. O patch operacional reproduzível está em `ops/kairos-whatsapp/inbound-lead-only.patch`.

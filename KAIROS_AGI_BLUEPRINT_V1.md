@@ -1,4 +1,8 @@
 # KAIROS AGI BLUEPRINT v1.0
+## Evolução operacional — auditoria do CRM
+
+O KAIROS WhatsApp produz uma trilha real de eventos comerciais. Classificação, mensagens, entrega, bloqueio, retomada, etapa e score são persistidos de forma append-only e exibidos por lead no Core. Configuração de papel continua distinta de execução; somente eventos confirmados pelo runtime entram na trilha.
+
 ## Constituição da Kairos AGI
 
 > Adendos vigentes: Missão 001 e Memory Sync V1. KAIROS é o robô do Founder; referências a Arthur no contexto Founder abaixo são históricas e substituídas por KAIROS. Arthur pertence a cliente. ORB significa Operational Runtime Beacon, hardware futuro. A seção de clientes foi anonimizada; as mudanças estão registradas em docs/BLUEPRINT_EVOLUTION.md.

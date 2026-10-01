@@ -1,5 +1,9 @@
 # Arquitetura — proposta inicial
 
+## 01/10/2026 — auditoria comercial WhatsApp
+
+O KAIROS mantém uma fila local append-only de eventos na VPS. `agiBridge` sincroniza os eventos com `command.crm_events` pelo endpoint autenticado `POST /api/hunter?action=crm-events`; o CRM privado lê os últimos eventos e faz join por `lead_source_ref`. Eventos só saem da fila local após confirmação do Core.
+
 ## 01/10/2026 — diário operacional persistente
 
 O Mapa do Projeto usa `command.project_log` no Supabase mestre como histórico append-only do desenvolvimento. A API pública expõe somente leitura sem segredos; inserções passam pelo Basic Auth do Painel Operacional e pelo `service_role`, limitado a uso do schema, leitura/inserção da tabela e sequência de ID quando o schema legado exigir. A migration `0023_project_log.sql` é a fonte canônica desses privilégios.

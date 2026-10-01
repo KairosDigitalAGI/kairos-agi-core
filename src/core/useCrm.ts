@@ -11,6 +11,10 @@ export function useCrm() {
     setState({ status: 'carregando' })
     setState(await fetchOperations<CrmResponse>('/api/hunter?action=crm', header))
   }, [header])
-  useEffect(() => { void refresh() }, [refresh])
+  useEffect(() => {
+    void refresh()
+    const timer = window.setInterval(() => void refresh(), 15_000)
+    return () => window.clearInterval(timer)
+  }, [refresh])
   return { state, refresh }
 }

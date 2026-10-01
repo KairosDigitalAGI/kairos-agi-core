@@ -201,6 +201,19 @@ export interface CrmLead {
   synced_at: string
 }
 
+export interface CrmEvent {
+  id: string
+  event_ref: string
+  lead_source_ref: string
+  event_type: 'classification' | 'inbound_message' | 'outbound_message' | 'delivery' | 'blocked' | 'unblocked' | 'state_changed' | 'score_changed' | 'meeting' | 'error'
+  direction: 'inbound' | 'outbound' | 'system'
+  status: 'received' | 'queued' | 'sent' | 'delivered' | 'read' | 'failed' | 'blocked' | 'ignored' | 'applied'
+  summary: string | null
+  metadata: Record<string, unknown>
+  occurred_at: string
+  synced_at: string
+}
+
 export interface DevRequest {
   id: string
   created_at: string
@@ -222,5 +235,7 @@ export interface CrmResponse {
   checkedAt: string
   leads: CrmLead[]
   requests: DevRequest[]
+  events: CrmEvent[]
+  eventStats: { total: number; delivered: number; blocked: number; resumed: number; failed: number }
   stats: { total: number; contacted: number; active: number; qualified: number; meetings: number }
 }
