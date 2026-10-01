@@ -472,3 +472,13 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - A rodada concluída aceitou 12 de até 30 leads, depois de 176 resultados brutos; o total é datado e não projetado.
 - O painel informa que ainda faltam responsáveis e sinais individuais dos 12, além do canal oficial com recibos.
 
+
+## 01/10/2026 — Campanha WhatsApp Web isolada
+
+- Runtime privado da VPS: runner diário às 07h, teto 30/dia, seleção Hunter não contatada e score mínimo 45.
+- Mantido `OUTBOUND_ENABLED=false`; fluxos antigos e follow-ups legados não foram liberados.
+- Mensagem transparente e personalizada, com opt-out `SAIR`.
+- Confirmação no chat antes de registrar envio; fila para em resultado indeterminado.
+- Comandos privados de consulta e parada adicionados ao KAIROS.
+- Centro KAIROS AGI atualizado com o snapshot de 33 elegíveis e a agenda real.
+- Limite: WhatsApp Web não é transporte oficial e pode sofrer restrição da plataforma.

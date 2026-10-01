@@ -287,3 +287,7 @@ O rascunho de prospecção usa placeholders explícitos para nome, empresa, sina
 
 O checklist de ativação em `CrmPage` mistura sinais dinâmicos da frota com um snapshot operacional explicitamente datado da última coleta. O total de 12 é evidência da rodada de 30/09, não contador em tempo real. Um futuro endpoint autenticado deve substituir o snapshot quando o ledger do Hunter estiver disponível ao Core.
 
+
+## Rota isolada de campanha no runtime externo — 01/10/2026
+
+O KAIROS da VPS continua externo ao Core. A campanha autorizada não altera o choke point geral: `OUTBOUND_ENABLED=false` permanece como fail-safe. Um runner privado, alimentado apenas por leads Hunter elegíveis, agenda até 30 primeiras abordagens às 07h, confirma a mensagem no chat antes de persistir o resultado e interrompe a fila diante de estado indeterminado. O Core exibe status agregado e nunca recebe sessão, telefones ou logs nominais.

@@ -320,3 +320,11 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [ ] Enriquecer os 12 leads com responsável e sinal verificável por empresa.
 - [ ] Persistir autorização e recibos em servidor antes de executar comunicação externa.
 
+
+## Incremento concluído — 01/10/2026
+
+- [x] Programar campanha fria isolada do KAIROS para 07h, com 30/dia, recibo e opt-out.
+- [x] Preservar o freio global e impedir ativação das rotas legadas.
+- [x] Exibir no Centro KAIROS AGI o snapshot da fila e a agenda.
+- [ ] Substituir o snapshot por endpoint autenticado de status agregado do runtime.
+- [ ] Medir a primeira execução após 07h: confirmados, inválidos, respostas e opt-outs.

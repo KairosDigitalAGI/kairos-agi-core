@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AlertTriangle, Bot, CheckCircle2, ExternalLink, LockKeyhole, MessageCircleReply, Search, Send, ShieldCheck, UserRoundCheck } from 'lucide-react'
+import { AlertTriangle, Bot, CheckCircle2, ExternalLink, MessageCircleReply, Search, Send, ShieldCheck, UserRoundCheck } from 'lucide-react'
 import { AgentRuntimePanel } from '../dashboard/AgentRuntimePanel'
 import { OperationsUnlock } from '../dashboard/OperationsUnlock'
 import { useFleetStatus } from '../../core/useFleetStatus'
@@ -7,10 +7,10 @@ import './crm.css'
 
 const humanSteps = [
   {
-    title: 'WhatsApp Business Platform',
-    detail: 'Escolher o número oficial, concluir a autorização da Meta e aprovar os modelos de mensagem usados somente com base válida.',
+    title: 'WhatsApp oficial (migração opcional)',
+    detail: 'A campanha atual usa a sessão Web já pareada. A plataforma oficial permanece como opção futura para maior estabilidade e governança.',
     href: 'https://business.facebook.com/wa/manage/home/',
-    action: 'Abrir Meta Business',
+    action: 'Consultar Meta Business',
   },
   {
     title: 'Workana',
@@ -77,17 +77,17 @@ export function CrmPage() {
 
     <section className="glass-panel activation-board">
       <div className="activation-heading">
-        <div><span className="eyebrow">O QUE FALTA PARA FUNCIONAR</span><h3>Ativação da primeira campanha</h3><p>Estado verificado em 30/09/2026. Cada etapa concluída precisa de evidência real.</p></div>
-        <strong>{online && authorization ? '3 de 5 prontas' : online ? '2 de 5 prontas' : '1 de 5 pronta'}</strong>
+        <div><span className="eyebrow">CAMPANHA PROGRAMADA</span><h3>Primeira prospecção fria</h3><p>Snapshot operacional verificado em 01/10/2026 às 03:05 (Brasília). O status online continua vindo da frota autenticada.</p></div>
+        <strong>{online ? '5 de 5 prontas' : '4 de 5 prontas'}</strong>
       </div>
       <div className="activation-steps">
         <article className={online ? 'ready' : 'pending'}>{online ? <CheckCircle2 size={19} /> : <AlertTriangle size={19} />}<div><span>01 · WhatsApp conectado</span><strong>{online ? 'KAIROS online na VPS' : 'Desbloqueie para consultar'}</strong><small>Sessão e heartbeat confirmados pela frota.</small></div></article>
-        <article className="ready"><CheckCircle2 size={19} /><div><span>02 · Leads pesquisados</span><strong>12 qualificados na última rodada</strong><small>Meta era até 30; filtros reais aceitaram 12.</small></div></article>
-        <article className={authorization ? 'ready' : 'pending'}>{authorization ? <CheckCircle2 size={19} /> : <AlertTriangle size={19} />}<div><span>03 · Autorização</span><strong>{authorization ? `Registrada para ${authorization.dailyLimit}/dia` : 'Marcar e registrar abaixo'}</strong><small>Define limite, texto e opt-out.</small></div></article>
-        <article className="pending"><AlertTriangle size={19} /><div><span>04 · Personalizar os 12</span><strong>Faltam responsáveis e sinais individuais</strong><small>Sem esses dados, o KAIROS não inventa a abordagem.</small></div></article>
-        <article className="blocked"><LockKeyhole size={19} /><div><span>05 · Canal e recibos</span><strong>Integração oficial não conectada</strong><small>Bloqueio obrigatório antes de mensagem a terceiros.</small></div></article>
+        <article className="ready"><CheckCircle2 size={19} /><div><span>02 · Fila aprovada</span><strong>33 empresas elegíveis</strong><small>30 para a meta diária e 3 de reserva; score Hunter mínimo 45.</small></div></article>
+        <article className="ready"><CheckCircle2 size={19} /><div><span>03 · Autorização</span><strong>30 contatos por dia</strong><small>Autorização explícita do Founder registrada no runtime privado.</small></div></article>
+        <article className="ready"><CheckCircle2 size={19} /><div><span>04 · Mensagem personalizada</span><strong>Empresa, nicho, cidade e sinal público</strong><small>KAIROS se identifica como assistente digital e inclui opt-out SAIR.</small></div></article>
+        <article className="ready"><CheckCircle2 size={19} /><div><span>05 · Agenda e recibo</span><strong>01/10 às 07h · Brasília</strong><small>Uma abordagem por empresa; fila para se faltar confirmação no chat.</small></div></article>
       </div>
-      <div className="activation-next"><strong>Próximo passo agora</strong><span>Registre a autorização abaixo. Depois, enriquecer os 12 leads e conectar o canal com recibo remoto libera o lote piloto.</span></div>
+      <div className="activation-next"><strong>Próxima execução</strong><span>O KAIROS inicia automaticamente às 07h. A meta é 30; o total real depende de números válidos e confirmação do WhatsApp. O comando /campanha-parar desativa a rotina.</span></div>
     </section>
 
     <OperationsUnlock />
@@ -96,36 +96,36 @@ export function CrmPage() {
       <article className="glass-panel"><Bot size={21} /><span>RUNTIME</span><strong>{online ? 'Conectado' : 'Protegido'}</strong><p>Sessão atual da VPS; não equivale à API oficial da Meta.</p></article>
       <article className="glass-panel"><MessageCircleReply size={21} /><span>RESPOSTAS</span><strong>{online ? 'Inbound ativo' : 'Aguardando consulta'}</strong><p>Responde somente após uma mensagem nova e respeita pausa e handoff.</p></article>
       <article className="glass-panel"><Search size={21} /><span>HUNTER DIÁRIO</span><strong>Até 30 qualificados</strong><p>Busca, deduplica e pontua. A quantidade final depende da qualidade observada.</p></article>
-      <article className="glass-panel"><ShieldCheck size={21} /><span>PROTEÇÃO META</span><strong>Disparo frio bloqueado</strong><p>Intervalo aleatório não substitui consentimento nem reduz o risco de denúncia.</p></article>
+      <article className="glass-panel"><ShieldCheck size={21} /><span>CONTROLE DE SAÍDA</span><strong>Campanha isolada</strong><p>O freio geral continua fechado; somente a fila Hunter aprovada atravessa a rota programada.</p></article>
     </section>
 
     <section className="glass-panel carlos-routine">
       <div><span className="eyebrow">ROTINA DIÁRIA · PREPARADA</span><h3>O que já funciona daqui para frente</h3></div>
       <ol>
-        <li><CheckCircle2 size={17} /><div><strong>07h · descoberta</strong><p>Busca pública com teto de 30 contatos, filtros de reputação, telefone, deduplicação e score.</p></div></li>
-        <li><CheckCircle2 size={17} /><div><strong>Revisão · fila parada</strong><p>Prospects ficam separados do bot enquanto a base e o canal de contato não forem aprovados.</p></div></li>
+        <li><CheckCircle2 size={17} /><div><strong>07h · prospecção</strong><p>Até 30 empresas Hunter ainda não contatadas recebem uma única abordagem personalizada.</p></div></li>
+        <li><CheckCircle2 size={17} /><div><strong>08h, 13h e 18h · Hunter</strong><p>Novas fontes públicas são avaliadas para recompor a reserva do dia seguinte.</p></div></li>
         <li><CheckCircle2 size={17} /><div><strong>Atendimento · mensagem recebida</strong><p>O KAIROS responde a inbound fresco, registra contexto e chama o Founder quando houver handoff.</p></div></li>
-        <li><CheckCircle2 size={17} /><div><strong>Teste real · 30/09/2026 17:49</strong><p>A VPS confirmou a entrega de uma mensagem de diagnóstico exclusivamente ao telefone do Founder.</p></div></li>
+        <li><CheckCircle2 size={17} /><div><strong>Recibo obrigatório</strong><p>Sem confirmação visível no chat, a execução para e não repete a mensagem às cegas.</p></div></li>
       </ol>
     </section>
 
     <section className="glass-panel outbound-authorization">
       <div className="outbound-heading">
-        <div><span className="eyebrow">AUTORIZAÇÃO DO FOUNDER</span><h3>Campanha de prospecção ativa</h3><p>Registre aqui o lote que você autoriza. O registro prepara a campanha, mas o envio permanece travado até a WhatsApp Business Platform confirmar o canal oficial.</p></div>
-        <div className={`outbound-gate ${authorization ? 'authorized' : ''}`}><LockKeyhole size={17} /><strong>{authorization ? 'Autorização registrada' : 'Aguardando autorização'}</strong><span>Execução: bloqueada pela conexão oficial</span></div>
+        <div><span className="eyebrow">AUTORIZAÇÃO DO FOUNDER</span><h3>Campanha de prospecção ativa</h3><p>O runtime privado está programado para 30 contatos/dia desde 01/10/2026 às 07h. Este formulário conserva uma cópia editorial do limite e da mensagem no navegador.</p></div>
+        <div className="outbound-gate authorized"><CheckCircle2 size={17} /><strong>Runtime programado</strong><span>Próxima execução: 07h, Brasília</span></div>
       </div>
       <div className="outbound-form">
         <label>Limite por dia<input type="number" min="1" max="30" value={dailyLimit} onChange={event => setDailyLimit(Math.min(30, Math.max(1, Number(event.target.value) || 1)))} /></label>
         <label className="outbound-message">Mensagem para aprovação<textarea rows={5} value={message} onChange={event => setMessage(event.target.value)} /></label>
         <div className="outbound-personalization"><strong>Personalização obrigatória por contato</strong><span><code>{'{{nome}}'}</code> responsável real · <code>{'{{empresa}}'}</code> empresa · <code>{'{{sinal_real}}'}</code> observação verificável · <code>{'{{oportunidade}}'}</code> sugestão coerente com o sinal.</span><small>Se qualquer informação estiver ausente, o lead permanece em revisão e a mensagem não é preparada para envio.</small></div>
         <label className="outbound-consent"><input type="checkbox" checked={founderChecked} onChange={event => setFounderChecked(event.target.checked)} /><span>Eu, Founder, autorizo preparar este lote de até {dailyLimit} contatos por dia, com identificação da Kairos Digital, opt-out e registro de resultado.</span></label>
-        <button type="button" className="outbound-authorize" disabled={!founderChecked || !message.trim()} onClick={registerAuthorization}><Send size={16} /> Registrar autorização</button>
+        <button type="button" className="outbound-authorize" disabled={!founderChecked || !message.trim()} onClick={registerAuthorization}><Send size={16} /> Salvar cópia local</button>
       </div>
       <div className="outbound-requirements">
         <article className="done"><CheckCircle2 size={16} /><div><strong>Busca e qualificação</strong><span>Ativa, até 30 registros/dia.</span></div></article>
-        <article className={authorization ? 'done' : ''}><CheckCircle2 size={16} /><div><strong>Autorização do Founder</strong><span>{authorization ? `Registrada para ${authorization.dailyLimit}/dia neste navegador.` : 'Ainda não registrada.'}</span></div></article>
-        <article><LockKeyhole size={16} /><div><strong>WhatsApp Business Platform</strong><span>Não conectada; bloqueia o envio.</span></div></article>
-        <article><LockKeyhole size={16} /><div><strong>Recibos e opt-out</strong><span>Entram na execução após o canal oficial.</span></div></article>
+        <article className="done"><CheckCircle2 size={16} /><div><strong>Autorização do Founder</strong><span>Runtime: 30/dia. {authorization ? `Cópia local: ${authorization.dailyLimit}/dia.` : 'A cópia no navegador é opcional e não bloqueia a agenda.'}</span></div></article>
+        <article className="done"><CheckCircle2 size={16} /><div><strong>Sessão WhatsApp Web</strong><span>Pareada na VPS; transporte não oficial e sujeito a limitações da plataforma.</span></div></article>
+        <article className="done"><CheckCircle2 size={16} /><div><strong>Recibos e opt-out</strong><span>Confirmação no chat e palavra SAIR incluídas no fluxo.</span></div></article>
       </div>
     </section>
 

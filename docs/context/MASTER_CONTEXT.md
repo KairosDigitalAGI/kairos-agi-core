@@ -140,3 +140,7 @@ A mensagem usa quatro campos individuais: responsável real, empresa, observaç�
 
 A rodada manual de 30/09 terminou com 12 leads aceitos de 176 resultados brutos; Campinas forneceu 8 e Goiânia 4. O `hunter-sync` foi religado ao final e KAIROS/heartbeat permaneceram online. A página KAIROS AGI mostra esses números datados e um checklist de cinco etapas. A coleta não trouxe o nome do responsável e o sinal individual completo para cada contato, portanto os 12 ainda precisam de enriquecimento antes de compilar a abordagem.
 
+
+## Atualização 01/10/2026 — campanha fria agendada no KAIROS
+
+Por autorização explícita do Founder, o runtime externo do KAIROS foi programado para iniciar prospecção às 07h de Brasília, com teto de 30 empresas Hunter por dia. O freio global segue desligado; a exceção é uma rota estreita, com uma abordagem por empresa, identificação como assistente digital, opt-out e confirmação no chat. Às 03:05 havia 33 registros elegíveis (score Hunter mínimo 45) para a primeira execução. Esse número é snapshot e não garantia diária.

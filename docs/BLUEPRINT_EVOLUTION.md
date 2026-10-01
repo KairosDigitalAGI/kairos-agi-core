@@ -403,3 +403,7 @@ A mensagem passa a ser um template individual com evidência: nome, empresa, sin
 
 O KAIROS AGI passa a explicar visualmente a distância entre coleta e campanha: conexão, leads, autorização, personalização e recibo são gates separados. Números de uma rodada aparecem com data e nunca como métrica viva sem ledger autenticado.
 
+
+## 01/10/2026 — Exceção operacional autorizada para campanha WhatsApp Web
+
+O Founder autorizou expressamente a prospecção fria pelo KAIROS já pareado. A implementação mantém o princípio de falha fechada: o freio geral continua desligado e somente a campanha privada aprovada possui rota direta, limite, recibo e parada. A identidade do robô não é mascarada; a abordagem informa que KAIROS é assistente digital. A meta de 30 é operacional e depende de leads reais elegíveis.

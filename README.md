@@ -215,3 +215,7 @@ O painel também registra a autorização local de uma campanha de até 30 conta
 O rascunho exige quatro dados reais para cada mensagem: nome, empresa, sinal observado e oportunidade específica. Contatos incompletos ficam em revisão em vez de receber uma saudação genérica.
 
 O checklist do KAIROS AGI mostra a ativação em cinco passos. Na rodada verificada de 30/09, o Hunter aceitou 12 leads de uma meta máxima de 30. Ainda faltam responsável e sinal individual para compilar as 12 mensagens, além do canal oficial e seus recibos.
+
+## Campanha WhatsApp Web — 01/10/2026
+
+O Centro KAIROS AGI mostra o snapshot agregado da campanha autorizada no runtime privado: início diário às 07h (Brasília), teto de 30 primeiras abordagens, personalização com dados públicos, opt-out e confirmação no chat. O freio global permanece fechado. Detalhes e limites: `docs/modules/WHATSAPP_WEB_CAMPAIGN_RUNTIME.md`.
