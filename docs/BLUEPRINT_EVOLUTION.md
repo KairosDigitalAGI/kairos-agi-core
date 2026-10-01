@@ -411,3 +411,7 @@ O Founder autorizou expressamente a prospecção fria pelo KAIROS já pareado. A
 ## 01/10/2026 — Política DOTS de recuperação, sem executor fictício
 
 Foi introduzida uma política determinística de recuperação atribuída ao domínio DOTS: detectar déficit, variar fontes, reprocessar candidatos limítrofes, repetir antes da janela comercial e registrar a decisão. Isso é uma máquina de estados real no runtime; não afirma que um agente DOTS independente está conectado. O caminho é gratuito e falha fechado para modelos externos.
+
+## 01/10/2026 — Mapa persistente ativado
+
+O diário operacional previsto na Fase 14 passou de contrato para persistência real no Supabase mestre. O backend mantém escrita restrita ao `service_role` atrás da autenticação do painel; leitura pública contém apenas metadados técnicos do desenvolvimento e nenhum segredo. A ativação preserva plano gratuito e o histórico append-only.

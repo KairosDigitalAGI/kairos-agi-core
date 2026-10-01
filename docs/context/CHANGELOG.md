@@ -1,5 +1,12 @@
 # Changelog
 
+## 01/10/2026 — Mapa do Projeto ativado em produção
+
+- Confirmado o Supabase mestre `vbpxztmvyyqxuveilnwc` como destino da migration `0023_project_log.sql`.
+- Concedidos ao `service_role` somente `usage` no schema `command`, leitura/inserção em `command.project_log` e uso da sequência legada `project_log_id_seq` necessária no schema que já existia em produção.
+- Leitura e escrita foram validadas pelo painel publicado. A entrega comercial do runtime KAIROS foi registrada no Mapa com o commit `b4c2696`, sem contratação ou ativação de recurso pago.
+- A migration canônica passou a preservar esses grants em instalações futuras, incluindo compatibilidade com bancos antigos que usam ID serial.
+
 ## 30/09/2026 — triagem pública de empresas no Instagram
 
 - Hunter ganhou a fonte `Instagram público` e texto de cadastro que separa empresa pesquisada de demanda recebida.
@@ -52,13 +59,13 @@
 - Migration `0025_instagram_engagement.sql`, painel Atendimento, testes e documentação entregues no repositório. `META_WEBHOOK_VERIFY_TOKEN` consta na Vercel; faltam migration no Supabase mestre, publicação/análise do app Meta e teste ponta a ponta. A migration legada 0024 do Claude foi preservada, mas não é usada pelo novo fluxo.
 
 ## Missão 006, Fase 14 — Mapa do Projeto (15/09/2026)
-- Nova tabela `command.project_log` (migration `supabase/migrations/0023_project_log.sql`, repo kairos-command, **pendente de aplicar em produção**): diário de bordo append-only (`agent`, `phase`, `type`, `title`, `description`, `commit`, `deployed`) do próprio desenvolvimento do Core — nunca editado/apagado por este projeto, RLS habilitado sem policy de escrita (só `service_role`).
+- Nova tabela `command.project_log` (migration `supabase/migrations/0023_project_log.sql`, repo kairos-command; **ativada em produção em 01/10/2026**): diário de bordo append-only (`agent`, `phase`, `type`, `title`, `description`, `commit`, `deployed`) do próprio desenvolvimento do Core — nunca editado/apagado por este projeto, RLS habilitado sem policy de escrita (só `service_role`).
 - `api/_project-log.js` (`listProjectLog`/`addProjectLogEntry`) + rota própria `api/project-log.mjs`: `GET` lista tudo sem Basic Auth (o Mapa é feito pra ser visível sem desbloquear o Painel Operacional — nunca carrega segredo), `POST` exige a mesma Basic Auth do Painel. Rota nova, não consolidada num `[action].mjs` — havia margem (9/12 antes desta fase), fecha em 10/12.
 - Nova página `ProjectMapPage` (rota `roadmap` no sidebar): contador de progresso, filtros por tipo (feito/pendente/ideia/bug), grid de cards com fase/agente/commit/timestamp, formulário "Adicionar entrada" atrás do Painel Operacional.
 - `scripts/log-update.mjs`: CLI que qualquer agente roda ao fim de uma sessão para gravar uma entrada (mesmas credenciais `KAIROS_USER`/`KAIROS_PASS`, nenhum segredo novo). `scripts/seed-project-log.mjs`: semeia o histórico real das Fases 1-13 desta missão (extraído deste próprio CHANGELOG e do git log) assim que a migration 0023 for aplicada.
 - `AGENTS.md` ganhou a seção "Regra obrigatória — atualização do Mapa": todo agente deve registrar o que fez, o que ficou pendente e bugs encontrados ao fim de cada sessão.
 - 8 testes novos (`tests/project-log.test.mjs`): fail-closed sem Supabase, hint de migration pendente, leitura real, validação de `agent`/`type`/`title`, normalização de campos opcionais — total 132/132 passando. Typecheck e build limpos.
-- Bloqueado para uso real até o Founder aplicar a migration 0023 em produção — mesma pendência de toda migration nova deste Core.
+- Leitura e escrita reais foram validadas em 01/10/2026 no Supabase mestre; o bloqueio da migration 0023 foi encerrado.
 
 ## Ativação Instagram — permissões operacionais (15/09/2026)
 - App Meta `Kairos AGI Core` configurado para Instagram Login com callback de produção.

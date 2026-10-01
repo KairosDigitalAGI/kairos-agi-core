@@ -6,7 +6,7 @@ Página persistente no dashboard (`roadmap` no sidebar) que registra tudo que j�
 
 ## Schema
 
-`command.project_log` (migration `supabase/migrations/0023_project_log.sql`, repo kairos-command — **pendente de aplicar em produção**, mesma pendência de toda migration nova deste Core até o Founder colar no SQL Editor do Supabase):
+`command.project_log` (migration `supabase/migrations/0023_project_log.sql`, repo kairos-command — aplicada e validada no Supabase mestre em 01/10/2026):
 
 | coluna | tipo | notas |
 | --- | --- | --- |
@@ -20,7 +20,7 @@ Página persistente no dashboard (`roadmap` no sidebar) que registra tudo que j�
 | `commit` | text | hash curto, quando existir |
 | `deployed` | boolean | default `false` |
 
-RLS habilitado, sem policy de insert/update/delete (só `service_role` escreve, sempre atrás do Basic Auth do próprio Core).
+RLS habilitado, sem policy de insert/update/delete. O `service_role` possui apenas `usage` no schema, `select`/`insert` na tabela e acesso à sequência legada quando ela existe; toda escrita continua atrás do Basic Auth do próprio Core.
 
 ## Contrato
 
@@ -39,4 +39,4 @@ Lógica em `api/_project-log.js`; rota em `api/project-log.mjs` (arquivo própri
 node scripts/log-update.mjs --agent="claude-code" --phase="Fase 14" --type="done" --title="..." --description="..." --commit="abc1234" --deployed
 ```
 
-`scripts/seed-project-log.mjs` semeia o histórico real das Fases 1-13 (extraído de `docs/context/CHANGELOG.md` e do git log) assim que a migration 0023 estiver aplicada — antes disso, a API responde `source:"unavailable"` e o script reporta a falha real, sem fingir sucesso.
+`scripts/seed-project-log.mjs` pode semear o histórico real das Fases 1-13 (extraído de `docs/context/CHANGELOG.md` e do git log). A API foi validada com leitura e inserção reais em 01/10/2026; falhas futuras continuam sendo reportadas sem presumir sucesso.

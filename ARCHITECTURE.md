@@ -1,5 +1,9 @@
 # Arquitetura — proposta inicial
 
+## 01/10/2026 — diário operacional persistente
+
+O Mapa do Projeto usa `command.project_log` no Supabase mestre como histórico append-only do desenvolvimento. A API pública expõe somente leitura sem segredos; inserções passam pelo Basic Auth do Painel Operacional e pelo `service_role`, limitado a uso do schema, leitura/inserção da tabela e sequência de ID quando o schema legado exigir. A migration `0023_project_log.sql` é a fonte canônica desses privilégios.
+
 ## 18/09/2026 — mídia gratuita e saudação de teste
 
 O Flow oficial produz ativos generativos usando a cota exibida na própria conta; o navegador baixa os MP4/JPEG originais e a Video Engine importa MP4/WebM para IndexedDB, sem servidor de upload nem publicação implícita. A API `generateVideo(tier=free)` recusa a antiga suposição de Veo gratuito. Roteiro, imagem e vídeo por APIs pagas exigem `KAIROS_ENABLE_PAID_MEDIA=true` além da aprovação do job; o modo custo zero deixa a flag ausente. O tier isolado `gateway` usa `bytedance/seedance-2.5` via Vercel AI Gateway e exige apenas a flag específica `KAIROS_ENABLE_SEEDANCE_GATEWAY=true`, job aprovado e autenticação OIDC do deployment; ele não libera outros providers. O fallback permanente é o render Canvas/WebM local. O projeto do Flow e os arquivos produzidos são descritos em `docs/modules/VIDEO_ENGINE_V0_4.md`, e o contrato da Gateway em `docs/modules/SEEDANCE_GATEWAY_V0_1.md`.

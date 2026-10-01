@@ -4,6 +4,8 @@ Atualização 18/09/2026: [primeiros vídeos e imagens generativos reais no Goog
 
 Atualização 23/09/2026: o Content Engine recebeu adaptador isolado para Seedance 2.5 pela Vercel AI Gateway. Ele usa OIDC do deployment, exige aprovação por job e uma flag exclusiva; não gera, não publica nem envia referências do Founder até as migrations do Engine estarem aplicadas. Veja [Seedance Gateway](docs/modules/SEEDANCE_GATEWAY_V0_1.md).
 
+Atualização 01/10/2026: o [Mapa do Projeto](docs/modules/PROJECT_MAP.md) está ativo no Supabase mestre. Leitura e escrita foram verificadas no painel publicado, com privilégios mínimos para o backend e sem contratação de recurso pago.
+
 Atendimento Instagram: o webhook autentica eventos da Meta por HMAC e só envia respostas automáticas a regras aprovadas. A conexão OAuth ou a assinatura de campos, isoladamente, não comprova entrega de eventos; acompanhe o estado no painel de Integrações.
 
 Ambiente oficial de desenvolvimento da **Kairos Digital**, destinado à construção de uma empresa operada por agentes de IA com supervisão humana.
