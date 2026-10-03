@@ -352,10 +352,10 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 
 ## Próxima missão — equipe autônoma de e-commerce
 
-- [ ] Comparar Mercado Livre, Shopee, AliExpress e TikTok Shop para operação brasileira sem estoque e com investimento inicial zero ou baixo.
-- [ ] Mapear funções humanas, competências, rotinas, permissões, métricas, riscos e handoffs antes de definir os agentes digitais.
-- [ ] Escolher um único canal e modelo comercial após verificar tarifas, regras atuais, fornecedores e capital necessário.
-- [ ] Construir primeiro um piloto assistido, com catálogo, pedidos, atendimento, financeiro e auditoria; nenhuma compra, anúncio ou publicação sem autorização específica.
+- [x] Comparar Mercado Livre, Shopee, AliExpress e TikTok Shop para operação brasileira sem estoque e com investimento inicial zero ou baixo.
+- [x] Mapear funções humanas, competências, rotinas, permissões, métricas, riscos e handoffs antes de definir os agentes digitais.
+- [x] Escolher Mercado Livre Afiliados como primeiro canal sem estoque; a cesta de produtos, elegibilidade da conta e dados variáveis continuam pendentes de validação oficial.
+- [x] Construir no Money Lab o desenho do piloto assistido, com matriz, equipe, handoffs e portões; nenhuma compra, anúncio ou publicação foi executada.`r`n- [ ] Validar a conta do Founder no Programa de Afiliados do Mercado Livre e montar a primeira cesta real de produtos elegíveis.`r`n- [ ] Implementar catálogo assistido, pacote editorial e ingestão de métricas oficiais após o acesso correspondente.
 
 ## Missão 025 — isolamento do WhatsApp pessoal
 

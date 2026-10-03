@@ -317,3 +317,7 @@ O gate de inbound da VPS usa uma allow-list comercial. Apenas `prospecto`, `site
 ## Projeção de pendências do Mapa
 
 `command.project_log` permanece estritamente append-only. A interface deriva o estado atual sem mutação: um `done` mais recente com o mesmo título normalizado resolve o `todo` ou `bug` anterior; uma ocorrência ainda mais recente reabre o item. Cards históricos resolvidos continuam em **Todos**, enquanto filtros e contadores mostram somente trabalho aberto.
+
+## Piloto de e-commerce assistido — 03/10/2026
+
+`src/features/moneylab/ecommercePilot.ts` é o domínio estático e auditável da comparação entre canais. `MoneyLabPage` projeta a decisão, as fontes, os papéis e os portões operacionais. Dados externos desconhecidos permanecem `null`/indisponíveis; a UI não converte ausência de fonte em custo zero, receita ou prontidão. Não existe conector de marketplace nesta fase.

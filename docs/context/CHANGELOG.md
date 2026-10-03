@@ -531,3 +531,19 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - Estado confirmado pela API: 6 eventos auditados, 2 entregas confirmadas e 0 falhas.
 - `ProjectMapPage` agora resolve `todo` antigo por `done` posterior de mesmo título, preservando o histórico append-only e permitindo reabertura posterior.
 - Três testes de projeção adicionados, incluindo bug corrigido sem apagar histórico; suíte com 167 testes e build aprovados.
+
+## 03/10/2026 — Missão 027 — piloto assistido de e-commerce
+
+### Entregue
+- Domínio de decisão `src/features/moneylab/ecommercePilot.ts` com quatro canais, fontes e limites.
+- Money Lab expandido com comparação, escolha do canal, equipe funcional e portões de execução.
+- Documento `docs/modules/ECOMMERCE_PILOT.md` e testes de integridade do piloto.
+
+### Limites
+- Nenhuma conta, API, pagamento, anúncio, publicação ou receita foi criada.
+- Valores de comissão variáveis permanecem na fonte do marketplace.
+- AliExpress permanece indisponível até existir fonte oficial brasileira suficiente.
+
+### Validação
+- `npm test`: 170 testes aprovados.
+- `npm run build`: aprovado.

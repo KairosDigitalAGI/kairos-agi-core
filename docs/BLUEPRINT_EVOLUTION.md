@@ -435,3 +435,7 @@ A frente posterior será uma célula de e-commerce sem estoque. Primeiro serão 
 ## 01/10/2026 — encerramento auditável de pendências
 
 O Mapa passa a diferenciar histórico de estado atual sem abandonar a regra append-only. Uma entrega posterior de mesmo título encerra a pendência ou bug anterior na projeção, mantendo o card antigo como resolvido. A primeira aplicação fechou a auditoria do WhatsApp, a validação de uma conversa comercial completa e o falso bloqueio de loop já corrigido.
+
+## 03/10/2026 — célula de e-commerce começa como decisão auditável
+
+O Blueprint passa a incluir no Money Lab um piloto assistido de e-commerce sem estoque. A decisão usa evidências oficiais e separa claramente papel configurado, trabalho preparado e execução externa. Mercado Livre Afiliados é a primeira hipótese; conta, catálogo, publicação e métricas continuam atrás de portões verificáveis. Um canal sem fonte oficial suficiente permanece indisponível em vez de receber uma estimativa inventada.

@@ -235,3 +235,7 @@ O KAIROS AGI mostra a base sincronizada do runtime privado depois do desbloqueio
 O WhatsApp pessoal aplica um gate fechado: o KAIROS responde automaticamente apenas a leads comerciais explicitamente cadastrados. Mensagens pessoais, de equipe, de parceiros ou de números desconhecidos ficam sem resposta automática.
 
 O CRM também mantém uma linha do tempo privada de eventos do WhatsApp. A validação de 01/10/2026 registrou uma conversa comercial completa já comprovada nos logs, com duas entregas confirmadas e agendamento. O Mapa do Projeto encerra pendências e bugs corrigidos por uma entrada `done` posterior de mesmo título, preservando os registros antigos como histórico resolvido.
+
+## 03/10/2026 — piloto assistido de e-commerce
+
+O Money Lab compara Mercado Livre, Shopee, TikTok Shop e AliExpress com fontes oficiais datadas. Mercado Livre Afiliados foi escolhido para o primeiro piloto sem estoque e sem mídia paga. A tela mostra a equipe proposta, os handoffs e seis portões que mantêm conta, publicação e receita dependentes de prova externa. Consulte `docs/modules/ECOMMERCE_PILOT.md`.

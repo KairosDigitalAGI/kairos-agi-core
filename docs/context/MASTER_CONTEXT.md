@@ -159,3 +159,11 @@ O runtime WhatsApp sincroniza sua base privada para `command.crm_leads` em lotes
 O chat privado do Founder aceita `/upgrade <descrição>` e exige `/confirmar <código>` antes de liberar a demanda para Codex ou Claude Code. Progresso, conclusão, bloqueio e erro são eventos persistentes enviados de volta pelo KAIROS. A memória executiva e o Supabase estão ativos; integração Obsidian ao vivo continua não comprovada.
 
 A próxima frente planejada é uma equipe digital de e-commerce sem estoque. A escolha entre marketplaces exige pesquisa atual de tarifas e regras antes de implementação; não há loja, anúncio, compra ou publicação criada nesta entrega.
+
+## 03/10/2026 — Missão 027: piloto assistido de e-commerce
+
+- Comparados Mercado Livre, Shopee, TikTok Shop e AliExpress para uma operação brasileira sem estoque.
+- Mercado Livre Afiliados escolhido como primeiro canal por ter entrada sem estoque e fonte oficial suficiente; nenhuma conta foi conectada.
+- Money Lab ganhou matriz de decisão, equipe proposta, handoffs e portões de ativação.
+- A ausência de evidência oficial suficiente para AliExpress é exibida como indisponível, nunca como custo zero.
+- Próximo passo: validar a conta do Founder e preparar uma cesta real de produtos elegíveis antes de qualquer publicação.
