@@ -239,3 +239,7 @@ O CRM também mantém uma linha do tempo privada de eventos do WhatsApp. A valid
 ## 03/10/2026 — piloto assistido de e-commerce
 
 O Money Lab compara Mercado Livre, Shopee, TikTok Shop e AliExpress com fontes oficiais datadas. Mercado Livre Afiliados foi escolhido para o primeiro piloto sem estoque e sem mídia paga. A tela mostra a equipe proposta, os handoffs e seis portões que mantêm conta, publicação e receita dependentes de prova externa. Consulte `docs/modules/ECOMMERCE_PILOT.md`.
+
+## 04/10/2026 — catálogo assistido do piloto
+
+O Money Lab agora permite cadastrar candidatos reais do Mercado Livre com URL oficial, preço, comissão, data e evidência. O sistema calcula somente a comissão bruta observada e libera briefing editorial apenas depois da verificação manual. A cesta é local, não publica e não cria receita.

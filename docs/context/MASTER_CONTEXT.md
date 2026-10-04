@@ -167,3 +167,11 @@ A próxima frente planejada é uma equipe digital de e-commerce sem estoque. A e
 - Money Lab ganhou matriz de decisão, equipe proposta, handoffs e portões de ativação.
 - A ausência de evidência oficial suficiente para AliExpress é exibida como indisponível, nunca como custo zero.
 - Próximo passo: validar a conta do Founder e preparar uma cesta real de produtos elegíveis antes de qualquer publicação.
+
+## 04/10/2026 — Missão 028: catálogo assistido do e-commerce
+
+- Money Lab ganhou cadastro local de candidatos reais do Mercado Livre.
+- Campos obrigatórios: URL oficial, preço, comissão, data e evidência.
+- Comissão exibida é bruta potencial por venda; não representa receita realizada.
+- Briefing editorial só é liberado após verificação manual do item.
+- Próxima dependência: conta do Founder aprovada e primeira cesta real.

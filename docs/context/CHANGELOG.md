@@ -547,3 +547,15 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 ### Validação
 - `npm test`: 170 testes aprovados.
 - `npm run build`: aprovado.
+
+## 04/10/2026 — Missão 028 — catálogo assistido do e-commerce
+
+### Entregue
+- Validação de URL oficial, preço, comissão, data e nota de evidência.
+- Cesta local versionada, estados rascunho/verificado/rejeitado e exclusão manual.
+- Cálculo determinístico de comissão bruta e briefing editorial para item verificado.
+- Três testes novos; suíte com 173 testes e build aprovados.
+
+### Limites
+- `localStorage` não é banco oficial, Vault ou sincronização entre dispositivos.
+- Nenhum produto real foi cadastrado, nenhuma conta foi conectada e nada foi publicado.

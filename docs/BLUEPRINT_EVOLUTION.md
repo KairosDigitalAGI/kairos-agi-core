@@ -439,3 +439,7 @@ O Mapa passa a diferenciar histórico de estado atual sem abandonar a regra appe
 ## 03/10/2026 — célula de e-commerce começa como decisão auditável
 
 O Blueprint passa a incluir no Money Lab um piloto assistido de e-commerce sem estoque. A decisão usa evidências oficiais e separa claramente papel configurado, trabalho preparado e execução externa. Mercado Livre Afiliados é a primeira hipótese; conta, catálogo, publicação e métricas continuam atrás de portões verificáveis. Um canal sem fonte oficial suficiente permanece indisponível em vez de receber uma estimativa inventada.
+
+## 04/10/2026 — catálogo antes da automação
+
+A célula de e-commerce ganha uma etapa de catálogo assistido: evidência e números observados vêm antes do conteúdo. Um candidato só libera briefing editorial após verificação manual, e o cálculo permanece comissão bruta potencial. Essa etapa prepara o trabalho sem fingir conexão, venda ou receita.

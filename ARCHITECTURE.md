@@ -321,3 +321,7 @@ O gate de inbound da VPS usa uma allow-list comercial. Apenas `prospecto`, `site
 ## Piloto de e-commerce assistido — 03/10/2026
 
 `src/features/moneylab/ecommercePilot.ts` é o domínio estático e auditável da comparação entre canais. `MoneyLabPage` projeta a decisão, as fontes, os papéis e os portões operacionais. Dados externos desconhecidos permanecem `null`/indisponíveis; a UI não converte ausência de fonte em custo zero, receita ou prontidão. Não existe conector de marketplace nesta fase.
+
+## Catálogo local de e-commerce — 04/10/2026
+
+`ecommerceCatalog.ts` valida e persiste até 50 candidatos no navegador. O domínio restringe URLs ao Mercado Livre Brasil, rejeita preço/comissão zero e separa rascunho de verificação. `EcommerceCatalogPanel` apenas projeta e edita essa cesta; não consulta marketplace, cria link afiliado ou publica. O briefing editorial é derivado somente de item verificado.
