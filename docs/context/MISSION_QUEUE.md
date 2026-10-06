@@ -358,7 +358,8 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Construir no Money Lab o desenho do piloto assistido, com matriz, equipe, handoffs e portões; nenhuma compra, anúncio ou publicação foi executada.
 - [x] Implementar catálogo assistido local, cálculo de comissão bruta e briefing editorial somente para produtos verificados.
 - [ ] Validar a conta do Founder no Programa de Afiliados do Mercado Livre e montar a primeira cesta real de produtos elegíveis.
-- [ ] Implementar ingestão de métricas oficiais após o acesso correspondente.
+- [x] Implementar importação assistida e validada de métricas oficiais por CSV normalizado, mantendo dados ausentes como indisponíveis.
+- [ ] Conectar ingestão automática de métricas oficiais após o acesso correspondente.
 
 ## Missão 025 — isolamento do WhatsApp pessoal
 

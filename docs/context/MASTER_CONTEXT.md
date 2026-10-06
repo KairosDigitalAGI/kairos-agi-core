@@ -175,3 +175,11 @@ A próxima frente planejada é uma equipe digital de e-commerce sem estoque. A e
 - Comissão exibida é bruta potencial por venda; não representa receita realizada.
 - Briefing editorial só é liberado após verificação manual do item.
 - Próxima dependência: conta do Founder aprovada e primeira cesta real.
+
+## 06/10/2026 — Missão 029: métricas assistidas do e-commerce
+
+- Importador local de CSV normalizado adicionado ao Money Lab.
+- Cabeçalho, datas, colunas, limites e números não negativos são validados antes da persistência.
+- Ausência de relatório continua como indisponível; zero só é aceito quando explícito na fonte.
+- Resumo mostra cliques, pedidos, vendas, comissão, conversão e cancelamentos observados.
+- Próximo passo externo: validar a conta de afiliado e obter o primeiro relatório oficial.

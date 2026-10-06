@@ -243,3 +243,7 @@ O Money Lab compara Mercado Livre, Shopee, TikTok Shop e AliExpress com fontes o
 ## 04/10/2026 — catálogo assistido do piloto
 
 O Money Lab agora permite cadastrar candidatos reais do Mercado Livre com URL oficial, preço, comissão, data e evidência. O sistema calcula somente a comissão bruta observada e libera briefing editorial apenas depois da verificação manual. A cesta é local, não publica e não cria receita.
+
+## 06/10/2026 — métricas verificáveis do piloto
+
+O Money Lab agora importa relatórios CSV normalizados do marketplace e resume apenas valores explícitos. Sem relatório, as métricas aparecem como indisponíveis. O importador é local, gratuito e não conecta contas nem publica conteúdo.

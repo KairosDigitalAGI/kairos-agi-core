@@ -325,3 +325,7 @@ O gate de inbound da VPS usa uma allow-list comercial. Apenas `prospecto`, `site
 ## Catálogo local de e-commerce — 04/10/2026
 
 `ecommerceCatalog.ts` valida e persiste até 50 candidatos no navegador. O domínio restringe URLs ao Mercado Livre Brasil, rejeita preço/comissão zero e separa rascunho de verificação. `EcommerceCatalogPanel` apenas projeta e edita essa cesta; não consulta marketplace, cria link afiliado ou publica. O briefing editorial é derivado somente de item verificado.
+
+## Importador local de métricas do e-commerce — 06/10/2026
+
+`ecommerceMetrics.ts` define o contrato normalizado, parser limitado, persistência local e agregação. `EcommerceMetricsPanel` aceita arquivo ou texto, mostra a origem de cada lote e permite removê-lo. O domínio distingue ausência de dados (`null`) de zero explícito e não transforma importação local em receita operacional. Uma futura integração autenticada deverá produzir o mesmo contrato.

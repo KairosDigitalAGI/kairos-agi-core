@@ -559,3 +559,15 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 ### Limites
 - `localStorage` não é banco oficial, Vault ou sincronização entre dispositivos.
 - Nenhum produto real foi cadastrado, nenhuma conta foi conectada e nada foi publicado.
+
+## 06/10/2026 — Missão 029 — importação assistida de métricas
+
+### Entregue
+- Parser CSV normalizado e limitado para métricas do e-commerce.
+- Upload/paste local com identificação de fonte, histórico de lotes e remoção manual.
+- Agregados derivados somente das linhas importadas; ausência permanece indisponível.
+- Três testes novos; suíte com 176 testes e build aprovados.
+
+### Limites
+- Não há OAuth, API de marketplace, sincronização Supabase ou prova de liquidação.
+- O Founder ainda precisa validar a conta e fornecer o primeiro relatório oficial.

@@ -44,3 +44,9 @@ O Core não criou conta, não conectou API, não publicou conteúdo, não compro
 O Money Lab possui uma cesta local para candidatos reais do Mercado Livre. Cada registro exige URL oficial, preço, comissão observada, data e nota de evidência. O estado inicial é rascunho; somente um item marcado como verificado libera um briefing editorial com transparência de afiliado. A interface calcula apenas comissão bruta potencial por venda e não presume impostos, cancelamentos, conversão ou receita.
 
 A cesta usa `localStorage` e não sincroniza entre dispositivos. Ela não é catálogo oficial, integração, autorização de publicação nem auditoria inviolável. O próximo passo externo continua sendo a validação da conta do Founder.
+
+## Importação assistida de métricas — 06/10/2026
+
+O Money Lab aceita um CSV normalizado derivado do relatório oficial do canal. O cabeçalho obrigatório é `date,clicks,orders,sales_brl,commission_brl,cancellations`. A importação valida data, seis colunas e valores explícitos não negativos, limita cada lote a 365 linhas e conserva no máximo 12 lotes no navegador.
+
+Sem lote válido, a tela mostra **Indisponível** em vez de zeros. Zeros aparecem somente quando estão escritos no relatório importado. O resumo soma cliques, pedidos, vendas, comissão e cancelamentos e calcula conversão apenas quando existem cliques. Esta é uma ferramenta local de revisão; não comprova integração, liquidação financeira ou receita no Supabase.

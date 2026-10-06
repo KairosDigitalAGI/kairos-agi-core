@@ -443,3 +443,7 @@ O Blueprint passa a incluir no Money Lab um piloto assistido de e-commerce sem e
 ## 04/10/2026 — catálogo antes da automação
 
 A célula de e-commerce ganha uma etapa de catálogo assistido: evidência e números observados vêm antes do conteúdo. Um candidato só libera briefing editorial após verificação manual, e o cálculo permanece comissão bruta potencial. Essa etapa prepara o trabalho sem fingir conexão, venda ou receita.
+
+## 06/10/2026 — métricas externas entram por contrato explícito
+
+A célula de e-commerce passa a aceitar um contrato CSV revisável como ponte para relatórios oficiais. A ausência de dados continua indisponível, enquanto zeros só existem quando declarados pela fonte. A futura integração autenticada deverá conservar esse contrato e a separação entre venda, comissão e liquidação.

@@ -7,6 +7,7 @@ import { OperationsUnlock } from '../dashboard/OperationsUnlock'
 import { SectionHeader } from '../../ui/SectionHeader'
 import { ecommerceRoles, marketplaceOptions, pilotGates, selectRecommendedMarketplace } from './ecommercePilot'
 import { EcommerceCatalogPanel } from './EcommerceCatalogPanel'
+import { EcommerceMetricsPanel } from './EcommerceMetricsPanel'
 import './moneylab.css'
 
 const brl=(value:number|undefined)=>value===undefined?'—':value.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})
@@ -27,5 +28,6 @@ export function MoneyLabPage({ navigate }: { navigate: (module: 'hunter' | 'anal
  <article className="glass-panel moneylab-card ecommerce-roles"><SectionHeader eyebrow="Equipe digital proposta" title="Papéis, responsabilidade e passagem de trabalho" action={<UsersRound size={18}/>}/><div>{ecommerceRoles.map(item=><article key={item.role}><strong>{item.role}</strong><span>{item.owner}</span><p>{item.duty}</p></article>)}</div></article>
  <article className="glass-panel moneylab-card ecommerce-gates"><SectionHeader eyebrow="Portões do piloto" title="O que precisa acontecer antes da primeira publicação" action={<ShieldCheck size={18}/>}/><ol>{pilotGates.map((gate,index)=><li key={gate.id} data-state={gate.state}><b>{index+1}</b><span>{gate.label}</span><small>{gate.state==='human'?'Ação do Founder':gate.state==='planned'?'Pode ser preparado internamente':'Bloqueado até etapas anteriores'}</small></li>)}</ol></article>
  <EcommerceCatalogPanel/>
+ <EcommerceMetricsPanel/>
  <article className="glass-panel moneylab-card moneylab-rules"><SectionHeader eyebrow="Política de execução" title="Ações que preservam a margem"/><ul><li><Target size={15}/> Registrar fonte, escopo e orçamento antes de desenhar proposta.</li><li><FileSearch size={15}/> Preparar amostra somente com materiais e direitos disponíveis.</li><li><ReceiptText size={15}/> Registrar receita apenas após a fonte operacional confirmar o fato.</li></ul><button className="moneylab-outline" onClick={()=>navigate('integrations')}>Revisar integrações e canais</button></article></div></section>
 }
