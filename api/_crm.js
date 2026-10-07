@@ -148,6 +148,29 @@ export async function acknowledgeDevUpdates(body) {
   return { acknowledged: rows.length }
 }
 
+export function summarizeCrmRuntime(rows = [], events = []) {
+  const closedStates = new Set(['encerrado','bloqueado','sem_whatsapp','pausado_manual'])
+  const eligible = rows.filter(item => !item.contacted && item.phone && Number(item.score) >= 8 && !closedStates.has(item.state))
+  const inbound = events.filter(item => item.event_type === 'inbound_message' && item.direction === 'inbound')
+  const outbound = events.filter(item => item.event_type === 'outbound_message' && item.direction === 'outbound')
+  const delivered = events.filter(item => item.event_type === 'delivery' && ['delivered','read'].includes(item.status))
+  const failed = events.filter(item => item.status === 'failed' || item.event_type === 'error')
+  const latest = [...rows.map(item => item.synced_at || item.source_updated_at), ...events.map(item => item.synced_at || item.occurred_at)]
+    .filter(Boolean).map(value => new Date(value)).filter(value => Number.isFinite(value.getTime())).sort((a, b) => b.getTime() - a.getTime())[0]
+  return {
+    source: rows.length || events.length ? 'crm_projection' : 'unavailable',
+    eligible: eligible.length,
+    contacted: rows.filter(item => item.contacted).length,
+    invalid: rows.filter(item => item.state === 'sem_whatsapp').length,
+    inbound: inbound.length,
+    outbound: outbound.length,
+    delivered: delivered.length,
+    blocked: events.filter(item => item.event_type === 'blocked').length,
+    failed: failed.length,
+    lastSyncedAt: latest?.toISOString() ?? null,
+  }
+}
+
 export async function listCrm() {
   const leadFields = 'id,source,source_ref,name,phone,state,score,contacted,meeting_scheduled,lead_type,attempts,niche,city,origin,priority,runtime_status,history_count,last_message_at,source_created_at,source_updated_at,synced_at'
   const requestsPromise = readCommand('dev_requests', '?select=id,created_at,updated_at,source,title,description,impact,evidence,proposed_solution,priority,status,assigned_to,resolution&order=created_at.desc&limit=100')
@@ -165,6 +188,7 @@ export async function listCrm() {
     leads: rows,
     requests: requests ?? [],
     events: events ?? [],
+    runtime: summarizeCrmRuntime(rows, events ?? []),
     eventStats: {
       total: events?.length ?? 0,
       delivered: (events ?? []).filter(item => ['delivered','read'].includes(item.status)).length,

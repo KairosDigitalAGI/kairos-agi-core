@@ -329,3 +329,7 @@ O gate de inbound da VPS usa uma allow-list comercial. Apenas `prospecto`, `site
 ## Importador local de métricas do e-commerce — 06/10/2026
 
 `ecommerceMetrics.ts` define o contrato normalizado, parser limitado, persistência local e agregação. `EcommerceMetricsPanel` aceita arquivo ou texto, mostra a origem de cada lote e permite removê-lo. O domínio distingue ausência de dados (`null`) de zero explícito e não transforma importação local em receita operacional. Uma futura integração autenticada deverá produzir o mesmo contrato.
+
+## Projeção autenticada do runtime comercial — 07/10/2026
+
+`api/_crm.js#summarizeCrmRuntime` deriva o estado comercial apenas de `command.crm_leads` e `command.crm_events`. O resultado integra a resposta autenticada já existente de `api/hunter.mjs?action=crm`, sem nova função serverless. `CrmPage` consome essa projeção e mantém o status da frota como sinal independente. Agenda e ciclos noturnos não são inferidos do CRM.

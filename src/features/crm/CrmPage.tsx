@@ -52,8 +52,8 @@ const when = (value: string | null) => value ? new Intl.DateTimeFormat('pt-BR', 
 const eventLabel: Record<string, string> = { classification: 'Classificação', inbound_message: 'Mensagem recebida', outbound_message: 'Mensagem enviada', delivery: 'Confirmação de entrega', blocked: 'Bloqueio', unblocked: 'Retomada', state_changed: 'Mudança de etapa', score_changed: 'Mudança de score', meeting: 'Reunião', error: 'Erro' }
 const statusLabel: Record<string, string> = { received: 'recebida', queued: 'na fila', sent: 'enviada', delivered: 'entregue', read: 'lida', failed: 'falhou', blocked: 'bloqueada', ignored: 'ignorada', applied: 'aplicada' }
 
-function LiveCrmPanel() {
-  const { state, refresh } = useCrm()
+function LiveCrmPanel({ crm }: { crm: ReturnType<typeof useCrm> }) {
+  const { state, refresh } = crm
   const [query, setQuery] = useState('')
   const [stage, setStage] = useState('todos')
   const [revealed, setRevealed] = useState<Set<string>>(() => new Set())
@@ -87,6 +87,8 @@ function LiveCrmPanel() {
 
 export function CrmPage() {
   const { state } = useFleetStatus()
+  const crm = useCrm()
+  const data = crm.state.status === 'ok' ? crm.state.data : null
   const fleet = state.status === 'ok' ? state.data.fleet : []
   const kairos = fleet.find(item => /kairos|whatsapp/i.test(`${item.slug} ${item.nome} ${item.pm2_name || ''}`))
   const online = kairos?.status === 'online'
@@ -116,21 +118,15 @@ export function CrmPage() {
       </div>
     </section>
 
-    <LiveCrmPanel />
+    <LiveCrmPanel crm={crm} />
 
     <section className="glass-panel activation-board">
       <div className="activation-heading">
-        <div><span className="eyebrow">CAMPANHA PROGRAMADA</span><h3>Primeira prospecção fria</h3><p>Snapshot operacional verificado em 01/10/2026 às 03:05 (Brasília). O status online continua vindo da frota autenticada.</p></div>
-        <strong>{online ? '5 de 5 prontas' : '4 de 5 prontas'}</strong>
+        <div><span className="eyebrow">LEDGER AUTENTICADO · CRM</span><h3>Estado real da operação comercial</h3><p>Os números abaixo são calculados agora a partir dos leads e eventos sincronizados pela VPS. Agenda e processo online continuam sinais separados.</p></div>
+        <strong>{data?.runtime.source === 'crm_projection' ? `Sincronizado ${when(data.runtime.lastSyncedAt)}` : 'Dados indisponíveis'}</strong>
       </div>
-      <div className="activation-steps">
-        <article className={online ? 'ready' : 'pending'}>{online ? <CheckCircle2 size={19} /> : <AlertTriangle size={19} />}<div><span>01 · WhatsApp conectado</span><strong>{online ? 'KAIROS online na VPS' : 'Desbloqueie para consultar'}</strong><small>Sessão e heartbeat confirmados pela frota.</small></div></article>
-        <article className="ready"><CheckCircle2 size={19} /><div><span>02 · Fila aprovada</span><strong>33 empresas elegíveis</strong><small>30 para a meta diária e 3 de reserva; score Hunter mínimo 45.</small></div></article>
-        <article className="ready"><CheckCircle2 size={19} /><div><span>03 · Autorização</span><strong>30 contatos por dia</strong><small>Autorização explícita do Founder registrada no runtime privado.</small></div></article>
-        <article className="ready"><CheckCircle2 size={19} /><div><span>04 · Mensagem personalizada</span><strong>Empresa, nicho, cidade e sinal público</strong><small>KAIROS se identifica como assistente digital e inclui opt-out SAIR.</small></div></article>
-        <article className="ready"><CheckCircle2 size={19} /><div><span>05 · Agenda e recibo</span><strong>01/10 às 07h · Brasília</strong><small>Uma abordagem por empresa; fila para se faltar confirmação no chat.</small></div></article>
-      </div>
-      <div className="activation-next"><strong>Próxima execução</strong><span>O KAIROS inicia automaticamente às 07h. A meta é 30; o total real depende de números válidos e confirmação do WhatsApp. O comando /campanha-parar desativa a rotina.</span></div>
+      {data?.runtime.source === 'crm_projection' ? <div className="runtime-ledger"><article><span>Elegíveis agora</span><strong>{data.runtime.eligible}</strong><small>Não contatados, com telefone, score ≥ 8 e estado ativo.</small></article><article><span>Contatados</span><strong>{data.runtime.contacted}</strong><small>Leads marcados pelo runtime como já contatados.</small></article><article><span>Sem WhatsApp</span><strong>{data.runtime.invalid}</strong><small>Descartados pela ausência de canal válido.</small></article><article><span>Mensagens recebidas</span><strong>{data.runtime.inbound}</strong><small>Eventos inbound sincronizados.</small></article><article><span>Entregas confirmadas</span><strong>{data.runtime.delivered}</strong><small>Recibos delivered/read registrados.</small></article><article className={data.runtime.failed ? 'danger' : 'ready'}><span>Falhas</span><strong>{data.runtime.failed}</strong><small>Eventos de erro ou status failed.</small></article></div> : <p className="crm-state">Desbloqueie o painel ou aguarde a primeira sincronização real.</p>}
+      <div className="activation-next"><strong>Leitura operacional</strong><span>{online ? 'A frota confirma o processo KAIROS online.' : 'O processo da VPS ainda não foi confirmado nesta sessão.'} O ledger comprova somente o que chegou ao CRM; não presume a próxima execução.</span></div>
     </section>
 
     <OperationsUnlock />

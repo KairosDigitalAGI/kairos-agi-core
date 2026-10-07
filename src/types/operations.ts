@@ -237,5 +237,6 @@ export interface CrmResponse {
   requests: DevRequest[]
   events: CrmEvent[]
   eventStats: { total: number; delivered: number; blocked: number; resumed: number; failed: number }
+  runtime: { source: 'crm_projection' | 'unavailable'; eligible: number; contacted: number; invalid: number; inbound: number; outbound: number; delivered: number; blocked: number; failed: number; lastSyncedAt: string | null }
   stats: { total: number; contacted: number; active: number; qualified: number; meetings: number }
 }

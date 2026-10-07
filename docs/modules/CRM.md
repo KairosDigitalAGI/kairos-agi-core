@@ -22,3 +22,9 @@ Comandos disponíveis: `/upgrade`, `/confirmar` e `/devstatus`. A confirmação 
 - A memória persistente atual é o banco do runtime, o arquivo de memória executiva e o Supabase; uma sincronização Obsidian ao vivo ainda não foi comprovada.
 - A ponte não treina um modelo. Ela conserva histórico, estado, evidência e fila de melhoria para evolução auditável.
 - O transporte atual usa uma sessão WhatsApp Web privada e pode sofrer restrições do provedor.
+
+## 07/10/2026 — ledger autenticado da operação comercial
+
+O KAIROS AGI deixou de exibir o snapshot fixo de 01/10. A própria resposta autenticada de `GET /api/hunter?action=crm` agora inclui `runtime`, uma projeção calculada sobre leads e eventos sincronizados: elegíveis, contatados, sem WhatsApp, mensagens recebidas, mensagens de saída, entregas, bloqueios e falhas. A data exibida é a atividade sincronizada mais recente.
+
+A projeção não comprova agenda, processo online ou execução futura. O status da frota continua sendo consultado separadamente. O ledger dos ciclos noturnos permanece pendente porque esses eventos ainda não chegam ao Core.

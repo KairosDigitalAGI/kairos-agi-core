@@ -183,3 +183,10 @@ A próxima frente planejada é uma equipe digital de e-commerce sem estoque. A e
 - Ausência de relatório continua como indisponível; zero só é aceito quando explícito na fonte.
 - Resumo mostra cliques, pedidos, vendas, comissão, conversão e cancelamentos observados.
 - Próximo passo externo: validar a conta de afiliado e obter o primeiro relatório oficial.
+
+## 07/10/2026 — Missão 030: projeção autenticada do runtime comercial
+
+- Removido do KAIROS AGI o snapshot fixo de fila e prontidão de 01/10.
+- Endpoint CRM autenticado passou a devolver projeção real de elegíveis, contatados, inválidos, inbound, outbound, entregas, bloqueios e falhas.
+- Interface separa o ledger sincronizado do sinal online da frota e não presume execução futura.
+- Próximo passo: sincronizar eventos dos ciclos noturnos para medir reposição e cada rodada por data.

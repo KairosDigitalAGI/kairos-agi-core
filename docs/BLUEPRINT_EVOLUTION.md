@@ -447,3 +447,7 @@ A célula de e-commerce ganha uma etapa de catálogo assistido: evidência e nú
 ## 06/10/2026 — métricas externas entram por contrato explícito
 
 A célula de e-commerce passa a aceitar um contrato CSV revisável como ponte para relatórios oficiais. A ausência de dados continua indisponível, enquanto zeros só existem quando declarados pela fonte. A futura integração autenticada deverá conservar esse contrato e a separação entre venda, comissão e liquidação.
+
+## 07/10/2026 — operação comercial observada pelo CRM
+
+O Blueprint passa a tratar o CRM sincronizado como a fonte da projeção comercial atual. Contagens editoriais deixam de representar fila ou entrega. Status de processo, agenda e resultado continuam evidências distintas: a frota comprova disponibilidade; o CRM comprova leads e eventos recebidos; nenhuma delas promete a próxima execução.

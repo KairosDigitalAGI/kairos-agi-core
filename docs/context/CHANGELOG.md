@@ -571,3 +571,15 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 ### Limites
 - Não há OAuth, API de marketplace, sincronização Supabase ou prova de liquidação.
 - O Founder ainda precisa validar a conta e fornecer o primeiro relatório oficial.
+
+## 07/10/2026 — Missão 030 — ledger autenticado da operação comercial
+
+### Entregue
+- `summarizeCrmRuntime()` agrega somente leads e eventos sincronizados.
+- `CrmResponse.runtime` expõe o estado pela rota autenticada existente.
+- KAIROS AGI mostra números reais e a última sincronização, sem snapshot editorial.
+- Dois testes novos; suíte com 178 testes e build aprovados.
+
+### Limites
+- A projeção não comprova cron, próxima execução ou ciclo noturno.
+- O ledger de reposição noturna continua pendente de eventos emitidos pela VPS.

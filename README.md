@@ -247,3 +247,7 @@ O Money Lab agora permite cadastrar candidatos reais do Mercado Livre com URL of
 ## 06/10/2026 — métricas verificáveis do piloto
 
 O Money Lab agora importa relatórios CSV normalizados do marketplace e resume apenas valores explícitos. Sem relatório, as métricas aparecem como indisponíveis. O importador é local, gratuito e não conecta contas nem publica conteúdo.
+
+## 07/10/2026 — estado comercial sem snapshot
+
+O painel KAIROS AGI substituiu os números fixos da primeira campanha por uma projeção autenticada do CRM. Elegíveis, contatados, inválidos, inbound, entregas e falhas agora vêm dos registros sincronizados e mostram a data real mais recente.
