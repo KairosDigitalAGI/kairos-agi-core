@@ -451,3 +451,7 @@ A célula de e-commerce passa a aceitar um contrato CSV revisável como ponte pa
 ## 07/10/2026 — operação comercial observada pelo CRM
 
 O Blueprint passa a tratar o CRM sincronizado como a fonte da projeção comercial atual. Contagens editoriais deixam de representar fila ou entrega. Status de processo, agenda e resultado continuam evidências distintas: a frota comprova disponibilidade; o CRM comprova leads e eventos recebidos; nenhuma delas promete a próxima execução.
+
+## 08/10/2026 — tempo operacional derivado de eventos
+
+O Blueprint passa a exigir que séries diárias usem o fuso da operação e apenas dias presentes na trilha autenticada. Zero não é usado para preencher ausência de evidência. A evolução seguinte é incluir identidade de rodada e ciclo no evento de origem para separar prospecção, recuperação e atendimento.

@@ -333,3 +333,7 @@ O gate de inbound da VPS usa uma allow-list comercial. Apenas `prospecto`, `site
 ## Projeção autenticada do runtime comercial — 07/10/2026
 
 `api/_crm.js#summarizeCrmRuntime` deriva o estado comercial apenas de `command.crm_leads` e `command.crm_events`. O resultado integra a resposta autenticada já existente de `api/hunter.mjs?action=crm`, sem nova função serverless. `CrmPage` consome essa projeção e mantém o status da frota como sinal independente. Agenda e ciclos noturnos não são inferidos do CRM.
+
+## Ledger diário do CRM — 08/10/2026
+
+`api/_crm.js#summarizeCrmDaily` agrupa eventos sincronizados por data de Brasília e retorna apenas dias observados. A projeção limita a visualização a 14 dias com atividade e sinaliza quando a consulta de 1.000 eventos pode ser parcial. `CrmPage` mostra a tabela dentro do painel autenticado. Rodadas e ciclos ainda precisam de identificador emitido pela VPS.

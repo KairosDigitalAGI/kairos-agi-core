@@ -171,6 +171,27 @@ export function summarizeCrmRuntime(rows = [], events = []) {
   }
 }
 
+export function summarizeCrmDaily(events = [], limit = 14) {
+  const byDay = new Map()
+  const dayFormatter = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo', year: 'numeric', month: '2-digit', day: '2-digit' })
+  for (const event of events) {
+    const instant = new Date(event.occurred_at)
+    if (!Number.isFinite(instant.getTime())) continue
+    const day = dayFormatter.format(instant)
+    const item = byDay.get(day) ?? { date: day, total: 0, classified: 0, inbound: 0, outbound: 0, delivered: 0, blocked: 0, failed: 0, meetings: 0 }
+    item.total += 1
+    if (event.event_type === 'classification') item.classified += 1
+    if (event.event_type === 'inbound_message' && event.direction === 'inbound') item.inbound += 1
+    if (event.event_type === 'outbound_message' && event.direction === 'outbound') item.outbound += 1
+    if (event.event_type === 'delivery' && ['delivered','read'].includes(event.status)) item.delivered += 1
+    if (event.event_type === 'blocked') item.blocked += 1
+    if (event.status === 'failed' || event.event_type === 'error') item.failed += 1
+    if (event.event_type === 'meeting') item.meetings += 1
+    byDay.set(day, item)
+  }
+  return [...byDay.values()].sort((a, b) => b.date.localeCompare(a.date)).slice(0, Math.max(1, Math.min(31, limit)))
+}
+
 export async function listCrm() {
   const leadFields = 'id,source,source_ref,name,phone,state,score,contacted,meeting_scheduled,lead_type,attempts,niche,city,origin,priority,runtime_status,history_count,last_message_at,source_created_at,source_updated_at,synced_at'
   const requestsPromise = readCommand('dev_requests', '?select=id,created_at,updated_at,source,title,description,impact,evidence,proposed_solution,priority,status,assigned_to,resolution&order=created_at.desc&limit=100')
@@ -189,6 +210,8 @@ export async function listCrm() {
     requests: requests ?? [],
     events: events ?? [],
     runtime: summarizeCrmRuntime(rows, events ?? []),
+    daily: summarizeCrmDaily(events ?? []),
+    dailyWindowTruncated: (events?.length ?? 0) >= 1000,
     eventStats: {
       total: events?.length ?? 0,
       delivered: (events ?? []).filter(item => ['delivered','read'].includes(item.status)).length,

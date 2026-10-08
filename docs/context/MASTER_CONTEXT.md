@@ -190,3 +190,10 @@ A próxima frente planejada é uma equipe digital de e-commerce sem estoque. A e
 - Endpoint CRM autenticado passou a devolver projeção real de elegíveis, contatados, inválidos, inbound, outbound, entregas, bloqueios e falhas.
 - Interface separa o ledger sincronizado do sinal online da frota e não presume execução futura.
 - Próximo passo: sincronizar eventos dos ciclos noturnos para medir reposição e cada rodada por data.
+
+## 08/10/2026 — Missão 031: ledger diário do CRM
+
+- CRM autenticado passou a agrupar eventos no fuso de Brasília.
+- KAIROS AGI mostra classificações, inbound, outbound, entregas, bloqueios, falhas e reuniões por dia observado.
+- Dias sem evento não recebem zero presumido; janela parcial é sinalizada.
+- Próximo passo: a VPS deve enviar identificador e snapshot de cada rodada comercial e ciclo noturno.

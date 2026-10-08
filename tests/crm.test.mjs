@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { checkCrmSyncAuth, normalizeCrmEvent, normalizeCrmLead, summarizeCrmRuntime } from '../api/_crm.js'
+import { checkCrmSyncAuth, normalizeCrmEvent, normalizeCrmLead, summarizeCrmDaily, summarizeCrmRuntime } from '../api/_crm.js'
 
 test('CRM sync requires the configured bearer token', () => {
   const previous = process.env.CRM_SYNC_TOKEN
@@ -69,4 +69,21 @@ test('CRM runtime summary projects only synchronized facts', () => {
 
 test('CRM runtime summary stays unavailable without synchronized rows', () => {
   assert.deepEqual(summarizeCrmRuntime([], []), { source: 'unavailable', eligible: 0, contacted: 0, invalid: 0, inbound: 0, outbound: 0, delivered: 0, blocked: 0, failed: 0, lastSyncedAt: null })
+})
+
+test('CRM daily ledger groups facts in Brasilia time without filling absent days', () => {
+  const events = [
+    { event_type: 'inbound_message', direction: 'inbound', status: 'received', occurred_at: '2026-10-08T02:30:00Z' },
+    { event_type: 'outbound_message', direction: 'outbound', status: 'sent', occurred_at: '2026-10-08T03:30:00Z' },
+    { event_type: 'delivery', direction: 'outbound', status: 'delivered', occurred_at: '2026-10-08T03:31:00Z' },
+    { event_type: 'meeting', direction: 'system', status: 'applied', occurred_at: '2026-10-08T12:00:00Z' },
+  ]
+  assert.deepEqual(summarizeCrmDaily(events), [
+    { date: '2026-10-08', total: 3, classified: 0, inbound: 0, outbound: 1, delivered: 1, blocked: 0, failed: 0, meetings: 1 },
+    { date: '2026-10-07', total: 1, classified: 0, inbound: 1, outbound: 0, delivered: 0, blocked: 0, failed: 0, meetings: 0 },
+  ])
+})
+
+test('CRM daily ledger remains empty without events', () => {
+  assert.deepEqual(summarizeCrmDaily([]), [])
 })

@@ -583,3 +583,14 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 ### Limites
 - A projeção não comprova cron, próxima execução ou ciclo noturno.
 - O ledger de reposição noturna continua pendente de eventos emitidos pela VPS.
+
+## 08/10/2026 — Missão 031 — ledger diário autenticado
+
+### Entregue
+- Agregador diário de eventos reais no fuso de Brasília.
+- Tabela autenticada no KAIROS AGI com oito dimensões operacionais.
+- Sinal de janela truncada quando a consulta atingir 1.000 eventos.
+- Dois testes novos; suíte com 180 testes e build aprovados.
+
+### Limites
+- Eventos ainda não carregam `run_id`; a primeira rodada das 07h e os ciclos noturnos não podem ser isolados com precisão.

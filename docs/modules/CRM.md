@@ -28,3 +28,9 @@ Comandos disponíveis: `/upgrade`, `/confirmar` e `/devstatus`. A confirmação 
 O KAIROS AGI deixou de exibir o snapshot fixo de 01/10. A própria resposta autenticada de `GET /api/hunter?action=crm` agora inclui `runtime`, uma projeção calculada sobre leads e eventos sincronizados: elegíveis, contatados, sem WhatsApp, mensagens recebidas, mensagens de saída, entregas, bloqueios e falhas. A data exibida é a atividade sincronizada mais recente.
 
 A projeção não comprova agenda, processo online ou execução futura. O status da frota continua sendo consultado separadamente. O ledger dos ciclos noturnos permanece pendente porque esses eventos ainda não chegam ao Core.
+
+## Ledger diário de eventos — 08/10/2026
+
+A resposta autenticada do CRM agora inclui `daily`, agrupado no fuso `America/Sao_Paulo`. Cada dia existente nos eventos sincronizados mostra classificações, mensagens recebidas, saídas, entregas confirmadas, bloqueios, falhas e reuniões. Dias ausentes não são preenchidos com zero. A API informa quando a janela está truncada pelo limite de 1.000 eventos.
+
+O ledger mede fatos recebidos pelo Core, mas ainda não atribui eventos a um identificador de rodada das 07h nem aos ciclos noturnos. Essa atribuição exige que a VPS envie um `run_id` ou snapshot de ciclo.

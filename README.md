@@ -251,3 +251,7 @@ O Money Lab agora importa relatórios CSV normalizados do marketplace e resume a
 ## 07/10/2026 — estado comercial sem snapshot
 
 O painel KAIROS AGI substituiu os números fixos da primeira campanha por uma projeção autenticada do CRM. Elegíveis, contatados, inválidos, inbound, entregas e falhas agora vêm dos registros sincronizados e mostram a data real mais recente.
+
+## 08/10/2026 — histórico diário do KAIROS
+
+O KAIROS AGI mostra agora a atividade comercial por dia no fuso de Brasília: classificações, mensagens recebidas e enviadas, entregas, bloqueios, falhas e reuniões. A tabela usa somente eventos sincronizados e não preenche dias sem evidência.

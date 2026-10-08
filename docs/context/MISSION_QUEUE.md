@@ -331,6 +331,7 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Preservar o freio global e impedir ativação das rotas legadas.
 - [x] Exibir no Centro KAIROS AGI o snapshot da fila e a agenda.
 - [x] Substituir o snapshot estático por projeção autenticada do CRM, calculada a cada consulta com leads e eventos sincronizados.
+- [x] Expor histórico diário autenticado de classificações, inbound, outbound, entregas, bloqueios, falhas e reuniões no fuso de Brasília.
 - [ ] Medir a primeira execução após 07h: confirmados, inválidos, respostas e opt-outs.
 
 ## Incremento concluído — reposição autônoma gratuita
