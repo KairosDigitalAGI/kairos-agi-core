@@ -337,3 +337,8 @@ O gate de inbound da VPS usa uma allow-list comercial. Apenas `prospecto`, `site
 ## Ledger diário do CRM — 08/10/2026
 
 `api/_crm.js#summarizeCrmDaily` agrupa eventos sincronizados por data de Brasília e retorna apenas dias observados. A projeção limita a visualização a 14 dias com atividade e sinaliza quando a consulta de 1.000 eventos pode ser parcial. `CrmPage` mostra a tabela dentro do painel autenticado. Rodadas e ciclos ainda precisam de identificador emitido pela VPS.
+## Ledger de rodadas do runtime — 09/10/2026
+
+`command.crm_runtime_runs` separa campanha, reposição e recuperação por identificador idempotente. A ponte envia os snapshots por `POST /api/hunter?action=crm-runs`, protegido pelo mesmo bearer servidor-servidor do CRM. A fila local só reconhece a sincronização após resposta válida. `CrmPage` lê essa projeção pela rota CRM autenticada; ausência da migration não derruba o CRM existente e é exibida como indisponibilidade explícita.
+
+O contrato não agenda nem executa uma rodada. Os schedulers externos devem registrar início e conclusão com os contadores observados; sem esses hooks, o Core não converte horário esperado em execução presumida.

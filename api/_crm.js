@@ -6,6 +6,8 @@ const ALLOWED_STATES = new Set(['abertura','diagnostico','dor','solucao','intere
 const EVENT_TYPES = new Set(['classification','inbound_message','outbound_message','delivery','blocked','unblocked','state_changed','score_changed','meeting','error'])
 const EVENT_DIRECTIONS = new Set(['inbound','outbound','system'])
 const EVENT_STATUSES = new Set(['received','queued','sent','delivered','read','failed','blocked','ignored','applied'])
+const RUN_TYPES = new Set(['campaign','replenishment','recovery'])
+const RUN_STATES = new Set(['running','completed','partial','failed'])
 
 const digest = value => createHash('sha256').update(String(value), 'utf8').digest()
 const equal = (a, b) => timingSafeEqual(digest(a), digest(b))
@@ -76,6 +78,30 @@ export function normalizeCrmEvent(input) {
   }
 }
 
+const count = value => Math.max(0, Math.min(100000, Math.trunc(Number(value) || 0)))
+
+export function normalizeCrmRuntimeRun(input) {
+  const runRef = text(input?.run_ref, 120)
+  const runType = text(input?.run_type, 30)
+  const state = text(input?.state, 20)
+  const startedAt = date(input?.started_at)
+  if (!runRef || !RUN_TYPES.has(runType)) throw new Error('run_ref e run_type válido são obrigatórios.')
+  if (!RUN_STATES.has(state)) throw new Error('state da rodada é inválido.')
+  if (!startedAt) throw new Error('started_at da rodada é inválido.')
+  const finishedAt = date(input?.finished_at)
+  if (state !== 'running' && !finishedAt) throw new Error('finished_at é obrigatório para rodada encerrada.')
+  return {
+    source: 'kairos_whatsapp', run_ref: runRef, run_type: runType, state,
+    scheduled_for: date(input?.scheduled_for), started_at: startedAt, finished_at: finishedAt,
+    target_count: count(input?.target_count), eligible_before: count(input?.eligible_before),
+    discovered: count(input?.discovered), qualified: count(input?.qualified), attempted: count(input?.attempted),
+    delivered: count(input?.delivered), responses: count(input?.responses), opt_outs: count(input?.opt_outs),
+    invalid: count(input?.invalid), eligible_after: count(input?.eligible_after),
+    strategy: text(input?.strategy, 500), error_summary: text(input?.error_summary, 1200),
+    synced_at: new Date().toISOString(),
+  }
+}
+
 export async function syncCrmLeads(body) {
   const leads = Array.isArray(body?.leads) ? body.leads : []
   if (!leads.length || leads.length > MAX_BATCH) throw new Error(`Envie entre 1 e ${MAX_BATCH} leads por lote.`)
@@ -90,6 +116,14 @@ export async function syncCrmEvents(body) {
   const rows = [...new Map(events.map(normalizeCrmEvent).map(row => [row.event_ref, row])).values()]
   const saved = await upsertCommand('crm_events', rows, 'source,event_ref')
   return { accepted: saved.length, received: events.length, duplicatesRemoved: events.length - rows.length, syncedAt: new Date().toISOString() }
+}
+
+export async function syncCrmRuntimeRuns(body) {
+  const runs = Array.isArray(body?.runs) ? body.runs : []
+  if (!runs.length || runs.length > 100) throw new Error('Envie entre 1 e 100 rodadas por lote.')
+  const rows = [...new Map(runs.map(normalizeCrmRuntimeRun).map(row => [row.run_ref, row])).values()]
+  const saved = await upsertCommand('crm_runtime_runs', rows, 'source,run_ref')
+  return { accepted: saved.length, received: runs.length, duplicatesRemoved: runs.length - rows.length, syncedAt: new Date().toISOString() }
 }
 
 export async function addDevRequest(body) {
@@ -196,13 +230,16 @@ export async function listCrm() {
   const leadFields = 'id,source,source_ref,name,phone,state,score,contacted,meeting_scheduled,lead_type,attempts,niche,city,origin,priority,runtime_status,history_count,last_message_at,source_created_at,source_updated_at,synced_at'
   const requestsPromise = readCommand('dev_requests', '?select=id,created_at,updated_at,source,title,description,impact,evidence,proposed_solution,priority,status,assigned_to,resolution&order=created_at.desc&limit=100')
   const eventsPromise = readCommand('crm_events', '?select=id,event_ref,lead_source_ref,event_type,direction,status,summary,metadata,occurred_at,synced_at&order=occurred_at.desc&limit=1000')
+  const runtimeRunsPromise = readCommand('crm_runtime_runs', '?select=id,run_ref,run_type,state,scheduled_for,started_at,finished_at,target_count,eligible_before,discovered,qualified,attempted,delivered,responses,opt_outs,invalid,eligible_after,strategy,error_summary,synced_at&order=started_at.desc&limit=100')
+    .then(rows => ({ rows: rows ?? [], available: true, reason: null }))
+    .catch(error => ({ rows: [], available: false, reason: error.message }))
   const rows = []
   for (let offset = 0; offset < 5000; offset += 1000) {
     const page = await readCommand('crm_leads', `?select=${leadFields}&order=source_updated_at.desc.nullslast&limit=1000&offset=${offset}`) ?? []
     rows.push(...page)
     if (page.length < 1000) break
   }
-  const [requests, events] = await Promise.all([requestsPromise, eventsPromise])
+  const [requests, events, runtimeRuns] = await Promise.all([requestsPromise, eventsPromise, runtimeRunsPromise])
   return {
     source: 'real',
     checkedAt: new Date().toISOString(),
@@ -212,6 +249,9 @@ export async function listCrm() {
     runtime: summarizeCrmRuntime(rows, events ?? []),
     daily: summarizeCrmDaily(events ?? []),
     dailyWindowTruncated: (events?.length ?? 0) >= 1000,
+    runtimeRuns: runtimeRuns.rows,
+    runtimeRunsAvailable: runtimeRuns.available,
+    runtimeRunsReason: runtimeRuns.reason,
     eventStats: {
       total: events?.length ?? 0,
       delivered: (events ?? []).filter(item => ['delivered','read'].includes(item.status)).length,

@@ -197,3 +197,4 @@ A próxima frente planejada é uma equipe digital de e-commerce sem estoque. A e
 - KAIROS AGI mostra classificações, inbound, outbound, entregas, bloqueios, falhas e reuniões por dia observado.
 - Dias sem evento não recebem zero presumido; janela parcial é sinalizada.
 - Próximo passo: a VPS deve enviar identificador e snapshot de cada rodada comercial e ciclo noturno.
+- Em 09/10/2026, a Missão 032 definiu o contrato idempotente das rodadas comerciais: migration 0028, endpoint `crm-runs`, fila local da VPS e tabela autenticada no KAIROS AGI. A migration e os hooks dos schedulers ainda não foram aplicados no runtime remoto; nenhuma rodada nova é declarada como observada.

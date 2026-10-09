@@ -333,6 +333,8 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Substituir o snapshot estático por projeção autenticada do CRM, calculada a cada consulta com leads e eventos sincronizados.
 - [x] Expor histórico diário autenticado de classificações, inbound, outbound, entregas, bloqueios, falhas e reuniões no fuso de Brasília.
 - [ ] Medir a primeira execução após 07h: confirmados, inválidos, respostas e opt-outs.
+- [x] Definir contrato idempotente, endpoint autenticado e visualização para rodadas das 07h e ciclos noturnos.
+- [ ] Aplicar a migration 0028 no Supabase mestre e instrumentar os schedulers da VPS com `upsertRun()`.
 
 ## Incremento concluído — reposição autônoma gratuita
 
@@ -341,6 +343,7 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Registrar incidentes e estratégias sem depender do Founder.
 - [x] Bloquear LLM pago no runtime WhatsApp.
 - [ ] Expor no Core o ledger agregado dos ciclos noturnos por endpoint autenticado.
+- [x] Implementar o endpoint autenticado e a projeção do ledger de ciclos; ativação remota depende da migration 0028 e dos hooks na VPS.
 
 ## Missão 024 — CRM real e pedidos de evolução pelo WhatsApp
 

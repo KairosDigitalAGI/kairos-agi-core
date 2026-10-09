@@ -34,3 +34,9 @@ A projeção não comprova agenda, processo online ou execução futura. O statu
 A resposta autenticada do CRM agora inclui `daily`, agrupado no fuso `America/Sao_Paulo`. Cada dia existente nos eventos sincronizados mostra classificações, mensagens recebidas, saídas, entregas confirmadas, bloqueios, falhas e reuniões. Dias ausentes não são preenchidos com zero. A API informa quando a janela está truncada pelo limite de 1.000 eventos.
 
 O ledger mede fatos recebidos pelo Core, mas ainda não atribui eventos a um identificador de rodada das 07h nem aos ciclos noturnos. Essa atribuição exige que a VPS envie um `run_id` ou snapshot de ciclo.
+
+## Contrato de rodadas do runtime — 09/10/2026
+
+A migration `supabase/migrations/0028_crm_runtime_runs.sql` cria o ledger privado e idempotente `command.crm_runtime_runs`. Cada rodada possui `run_ref`, tipo (`campaign`, `replenishment` ou `recovery`), estado, horários e contadores observados. `POST /api/hunter?action=crm-runs` aceita somente a ponte autenticada por `CRM_SYNC_TOKEN`; o painel operacional lê as rodadas pela consulta CRM já existente.
+
+`ops/kairos-whatsapp/runtimeRuns.cjs` mantém snapshots locais pendentes até confirmação do Core, e `agiBridge.js` remove o pendente somente depois do aceite remoto. A migration ainda precisa ser aplicada no Supabase mestre e os schedulers da VPS precisam chamar `upsertRun()` no início e no encerramento de cada ciclo. Enquanto isso, a interface declara o ledger indisponível e não infere resultados a partir do horário.

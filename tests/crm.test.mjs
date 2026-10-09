@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { checkCrmSyncAuth, normalizeCrmEvent, normalizeCrmLead, summarizeCrmDaily, summarizeCrmRuntime } from '../api/_crm.js'
+import { checkCrmSyncAuth, normalizeCrmEvent, normalizeCrmLead, normalizeCrmRuntimeRun, summarizeCrmDaily, summarizeCrmRuntime } from '../api/_crm.js'
 
 test('CRM sync requires the configured bearer token', () => {
   const previous = process.env.CRM_SYNC_TOKEN
@@ -86,4 +86,23 @@ test('CRM daily ledger groups facts in Brasilia time without filling absent days
 
 test('CRM daily ledger remains empty without events', () => {
   assert.deepEqual(summarizeCrmDaily([]), [])
+})
+
+test('CRM runtime run normalization preserves verified counters and identity', () => {
+  const row = normalizeCrmRuntimeRun({
+    run_ref: 'campaign-2026-10-09', run_type: 'campaign', state: 'completed',
+    scheduled_for: '2026-10-09T10:00:00Z', started_at: '2026-10-09T10:00:03Z', finished_at: '2026-10-09T10:18:00Z',
+    target_count: 30, eligible_before: 47, attempted: 30, delivered: 27, responses: 4, opt_outs: 1,
+  })
+  assert.equal(row.source, 'kairos_whatsapp')
+  assert.equal(row.run_ref, 'campaign-2026-10-09')
+  assert.equal(row.attempted, 30)
+  assert.equal(row.delivered, 27)
+  assert.equal(row.responses, 4)
+  assert.equal(row.opt_outs, 1)
+})
+
+test('CRM runtime run rejects finished runs without a completion timestamp', () => {
+  assert.throws(() => normalizeCrmRuntimeRun({ run_ref: 'night-1', run_type: 'replenishment', state: 'completed', started_at: '2026-10-09T01:00:00Z' }), /finished_at/)
+  assert.throws(() => normalizeCrmRuntimeRun({ run_ref: 'night-2', run_type: 'unknown', state: 'running', started_at: '2026-10-09T01:00:00Z' }), /run_type/)
 })

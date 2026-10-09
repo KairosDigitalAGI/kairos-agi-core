@@ -240,5 +240,31 @@ export interface CrmResponse {
   runtime: { source: 'crm_projection' | 'unavailable'; eligible: number; contacted: number; invalid: number; inbound: number; outbound: number; delivered: number; blocked: number; failed: number; lastSyncedAt: string | null }
   daily: Array<{ date: string; total: number; classified: number; inbound: number; outbound: number; delivered: number; blocked: number; failed: number; meetings: number }>
   dailyWindowTruncated: boolean
+  runtimeRuns: CrmRuntimeRun[]
+  runtimeRunsAvailable: boolean
+  runtimeRunsReason: string | null
   stats: { total: number; contacted: number; active: number; qualified: number; meetings: number }
+}
+
+export interface CrmRuntimeRun {
+  id: string
+  run_ref: string
+  run_type: 'campaign' | 'replenishment' | 'recovery'
+  state: 'running' | 'completed' | 'partial' | 'failed'
+  scheduled_for: string | null
+  started_at: string
+  finished_at: string | null
+  target_count: number
+  eligible_before: number
+  discovered: number
+  qualified: number
+  attempted: number
+  delivered: number
+  responses: number
+  opt_outs: number
+  invalid: number
+  eligible_after: number
+  strategy: string | null
+  error_summary: string | null
+  synced_at: string
 }

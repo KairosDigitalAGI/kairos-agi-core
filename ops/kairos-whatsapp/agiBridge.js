@@ -1,5 +1,7 @@
 const fs = require('fs')
 const crypto = require('crypto')
+const { acknowledgeEvents, pendingEvents } = require('./crmAudit')
+const { acknowledgeRuns, pendingRuns } = require('./runtimeRuns')
 
 const DB_PATH = '/root/kairos3/db.json'
 const apiUrl = () => String(process.env.CRM_SYNC_URL || '').trim()
@@ -37,7 +39,23 @@ async function syncNow() {
     const result = await request('crm-sync', { method: 'POST', body: JSON.stringify({ leads: rows.slice(index, index + 200) }) })
     accepted += Number(result.accepted || 0)
   }
-  return { accepted }
+  let eventsAccepted = 0
+  while (true) {
+    const events = pendingEvents(200)
+    if (!events.length) break
+    const result = await request('crm-events', { method: 'POST', body: JSON.stringify({ events }) })
+    eventsAccepted += Number(result.accepted || 0)
+    acknowledgeEvents(events.map(event => event.event_ref))
+    if (events.length < 200) break
+  }
+  const runs = pendingRuns(100)
+  let runsAccepted = 0
+  if (runs.length) {
+    const result = await request('crm-runs', { method: 'POST', body: JSON.stringify({ runs: runs.map(({ pending_sync, ...run }) => run) }) })
+    runsAccepted = Number(result.accepted || 0)
+    acknowledgeRuns(runs.map(run => run.run_ref))
+  }
+  return { accepted, eventsAccepted, runsAccepted }
 }
 
 async function createDevRequest(description) {
@@ -68,7 +86,7 @@ let started = false
 function start({ notify, logger = console }) {
   if (started) return
   started = true
-  const safeSync = () => syncNow().then(r => logger.info(`[AGI-BRIDGE] CRM sincronizado: ${r.accepted}`)).catch(e => logger.error(`[AGI-BRIDGE] sync: ${e.message}`))
+  const safeSync = () => syncNow().then(r => logger.info(`[AGI-BRIDGE] CRM sincronizado: ${r.accepted} leads, ${r.eventsAccepted} eventos, ${r.runsAccepted} rodadas`)).catch(e => logger.error(`[AGI-BRIDGE] sync: ${e.message}`))
   const safePoll = () => pollUpdates(notify).catch(e => logger.error(`[AGI-BRIDGE] updates: ${e.message}`))
   safeSync(); safePoll()
   setInterval(safeSync, 2 * 60 * 1000).unref()

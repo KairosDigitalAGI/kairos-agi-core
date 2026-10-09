@@ -455,3 +455,6 @@ O Blueprint passa a tratar o CRM sincronizado como a fonte da projeção comerci
 ## 08/10/2026 — tempo operacional derivado de eventos
 
 O Blueprint passa a exigir que séries diárias usem o fuso da operação e apenas dias presentes na trilha autenticada. Zero não é usado para preencher ausência de evidência. A evolução seguinte é incluir identidade de rodada e ciclo no evento de origem para separar prospecção, recuperação e atendimento.
+## 09/10/2026 — identidade auditável das rodadas
+
+O Blueprint passa a exigir um identificador idempotente para cada campanha, reposição e recuperação. A agenda descreve intenção; apenas um snapshot emitido pelo runtime comprova início, término e contadores. O Core conserva os snapshots em ledger privado e expõe a leitura autenticada sem transformar ausência em zero ou execução presumida.

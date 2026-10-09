@@ -594,3 +594,16 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 
 ### Limites
 - Eventos ainda não carregam `run_id`; a primeira rodada das 07h e os ciclos noturnos não podem ser isolados com precisão.
+
+## 09/10/2026 — Missão 032 — contrato de rodadas do runtime
+
+### Entregue
+- Migration 0028 para `command.crm_runtime_runs`, com RLS, unicidade por origem/rodada e contadores não negativos.
+- Normalização e upsert autenticado em `POST /api/hunter?action=crm-runs`.
+- Fila local persistente `runtimeRuns.cjs` e sincronização com confirmação no `agiBridge`.
+- Tabela no KAIROS AGI para campanha das 07h, reposição das 22h e recuperações.
+- Dois testes novos; suíte com 182 testes e build aprovados.
+
+### Limites
+- A migration ainda não foi aplicada no Supabase mestre.
+- Os schedulers externos ainda precisam registrar início e fim de cada rodada; nenhum resultado foi inventado a partir da agenda.

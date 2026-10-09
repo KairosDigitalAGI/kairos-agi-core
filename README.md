@@ -255,3 +255,6 @@ O painel KAIROS AGI substituiu os números fixos da primeira campanha por uma pr
 ## 08/10/2026 — histórico diário do KAIROS
 
 O KAIROS AGI mostra agora a atividade comercial por dia no fuso de Brasília: classificações, mensagens recebidas e enviadas, entregas, bloqueios, falhas e reuniões. A tabela usa somente eventos sincronizados e não preenche dias sem evidência.
+## 09/10/2026 — contrato de rodadas identificadas
+
+O Core agora possui schema, endpoint autenticado, fila local reproduzível e visualização para separar a campanha das 07h das reposições de 22h, 00h30 e 04h30. Cada ciclo usa um `run_ref` idempotente e envia apenas contadores observados. A migration 0028 e os hooks dos schedulers ainda precisam ser aplicados no Supabase mestre e na VPS antes de aparecerem rodadas reais.

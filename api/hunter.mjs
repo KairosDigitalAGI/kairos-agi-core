@@ -1,16 +1,17 @@
 import { checkAuth, unauthorized } from './_auth.js'
 import { discoverFreelancerProjects } from './_freelancerDiscovery.js'
 import { createCommercialRun, listCommercialRuns } from './_commercial.js'
-import { acknowledgeDevUpdates, addDevRequest, checkCrmSyncAuth, confirmDevRequest, listCrm, listPendingDevUpdates, syncCrmEvents, syncCrmLeads, updateDevRequest } from './_crm.js'
+import { acknowledgeDevUpdates, addDevRequest, checkCrmSyncAuth, confirmDevRequest, listCrm, listPendingDevUpdates, syncCrmEvents, syncCrmLeads, syncCrmRuntimeRuns, updateDevRequest } from './_crm.js'
 
 export default async function handler(req,res){
  res.setHeader('Cache-Control','no-store')
  const action=req.query?.action
  try{
-  if((req.method==='POST'&&['crm-sync','crm-events','dev-request','dev-confirm','dev-ack'].includes(action))||(req.method==='GET'&&action==='dev-updates')){
+  if((req.method==='POST'&&['crm-sync','crm-events','crm-runs','dev-request','dev-confirm','dev-ack'].includes(action))||(req.method==='GET'&&action==='dev-updates')){
    if(!checkCrmSyncAuth(req)) return unauthorized(res)
    if(action==='crm-sync') return res.status(200).json(await syncCrmLeads(req.body))
    if(action==='crm-events') return res.status(200).json(await syncCrmEvents(req.body))
+   if(action==='crm-runs') return res.status(200).json(await syncCrmRuntimeRuns(req.body))
    if(action==='dev-request') return res.status(201).json({request:await addDevRequest(req.body)})
    if(action==='dev-confirm') return res.status(200).json({request:await confirmDevRequest(req.body)})
    if(action==='dev-updates') return res.status(200).json({events:await listPendingDevUpdates()})
