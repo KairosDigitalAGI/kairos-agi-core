@@ -103,4 +103,5 @@ export const characterDirections = [
   { name: 'Money Hunter', archetype: 'Mensageira futurista', marker: 'Joia de ampulheta azul-violeta', prop: 'Ponte de valor, nunca saldo', camera: 'Travelling; luz de recorte; transição por reflexo' },
   { name: 'CFO', archetype: 'Entidade de vidro azul', marker: 'Areia azul em ampulheta interna', prop: 'Círculo de limite sem números', camera: 'Dolly-in econômico; close de vidro; rack focus' },
   { name: 'CPO', archetype: 'Arquiteto de protótipos', marker: 'Capacete com ícone Kairos geométrico', prop: 'Protótipo holográfico', camera: 'Over-the-shoulder; macro de material; parallax' },
+  { name: 'VALT', archetype: 'Sentinela de segurança · guardião de dados', marker: 'Núcleo de ampulheta azul-violeta no peito e ombreira', prop: 'Escudo translúcido de contenção, nunca arma', camera: 'Contra-plongée contido; macro do núcleo; órbita defensiva curta' },
 ]

@@ -458,3 +458,7 @@ O Blueprint passa a exigir que séries diárias usem o fuso da operação e apen
 ## 09/10/2026 — identidade auditável das rodadas
 
 O Blueprint passa a exigir um identificador idempotente para cada campanha, reposição e recuperação. A agenda descreve intenção; apenas um snapshot emitido pelo runtime comprova início, término e contadores. O Core conserva os snapshots em ledger privado e expõe a leitura autenticada sem transformar ausência em zero ou execução presumida.
+
+## 10/10/2026 — segurança ganha identidade visual própria
+
+VALT passa de descrição narrativa a personagem ficcional visualmente controlado. Sua linguagem é proteção e contenção: armadura grafite, visor ciano, núcleo e escudo de ampulheta, sem armas ou gesto agressivo. A folha pública resolve continuidade do personagem sem misturar o domínio de clones humanos nem liberar produção automática.

@@ -63,3 +63,7 @@ A navegação separa três responsabilidades: **Clone Engine** contém somente i
 ## 23/09/2026 — Referências visuais ficcionais no Character Studio
 
 Foram criados e versionados dois press kits originais de personagens não humanos: KAIROS (`public/characters/kairos-press-kit-v1.png`) e ORION (`public/characters/orion-press-kit-v1.png`). A página Personagens os apresenta como referências oficiais, separadas da Clone Engine. Os arquivos não representam pessoa real, não usam material do Founder/Wilson e não concedem permissão para copiar marcas ou personagens de terceiros.
+
+## 10/10/2026 — VALT no elenco ficcional
+
+O Studio ganhou a folha de referência pública `public/characters/valt-press-kit-v1.png`. O asset reúne corpo inteiro, cabeça, perfil, costas, núcleo, gesto e escudo do mesmo personagem. VALT permanece separado do cofre de clones humanos e não autoriza geração de vídeo: ele serve como referência de continuidade para um job futuro aprovado.

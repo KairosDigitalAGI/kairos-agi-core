@@ -242,7 +242,7 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 
 - [x] Integrar conflitos reais e digitais à trilogia sem alegar automação de decisões humanas.
 - [x] Definir Valt como personagem ficcional de segurança no Episódio 02.
-- [ ] Produzir press kit ficcional de Valt antes de usá-lo em qualquer vídeo.
+- [x] Produzir press kit ficcional de Valt antes de usá-lo em qualquer vídeo.
 
 ## Missão 014 — Âncora privada de identidade do Founder
 

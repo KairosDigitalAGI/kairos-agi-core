@@ -342,3 +342,7 @@ O gate de inbound da VPS usa uma allow-list comercial. Apenas `prospecto`, `site
 `command.crm_runtime_runs` separa campanha, reposição e recuperação por identificador idempotente. A ponte envia os snapshots por `POST /api/hunter?action=crm-runs`, protegido pelo mesmo bearer servidor-servidor do CRM. A fila local só reconhece a sincronização após resposta válida. `CrmPage` lê essa projeção pela rota CRM autenticada; ausência da migration não derruba o CRM existente e é exibida como indisponibilidade explícita.
 
 O contrato não agenda nem executa uma rodada. Os schedulers externos devem registrar início e conclusão com os contadores observados; sem esses hooks, o Core não converte horário esperado em execução presumida.
+
+## Press kit de VALT — 10/10/2026
+
+`public/characters/valt-press-kit-v1.png` entra no catálogo estático do Studio e é referenciado por `StudioPage` e `characterDirections`. O arquivo representa somente um personagem ficcional. Sua direção define armadura, visor, núcleo, escudo e câmera; o asset não pertence ao Clone Vault, não é conteúdo gerado no pipeline e não comprova take ou vídeo.

@@ -24,8 +24,11 @@ O primeiro conjunto de assets do episódio 01 foi renderizado como referência p
 | Criação e prova | Instagram AI e QA AI | narrativa, revisão e evidência | `public/characters/instagram-qa-press-kit-v1.png` |
 | Sinais e valor | Hunter AI e Money Hunter | pesquisa, qualificação e proposta de valor | `public/characters/hunter-money-press-kit-v1.png` |
 | Produto e limite | CPO e CFO | protótipo, experiência e orçamento | `public/characters/cpo-cfo-press-kit-v1.png` |
+| Segurança e contenção | VALT | origem, proteção de dados e interrupção não violenta | `public/characters/valt-press-kit-v1.png` |
 
 Invariantes comuns: a ampulheta Kairos aparece como núcleo, emblema, joia, broche, selo ou geometria; a paleta combina violeta, azul elétrico, magenta, preto profundo e vidro. As folhas guiam prompts futuros, mas não são anexadas a uma chamada externa sem registro do job, do orçamento e do provedor.
+
+VALT usa armadura grafite, visor ciano, núcleo de ampulheta azul-violeta e escudo translúcido. O escudo é um objeto de contenção; armas, símbolos militares e ação violenta ficam fora de sua direção visual.
 
 ## Entregáveis por personagem
 

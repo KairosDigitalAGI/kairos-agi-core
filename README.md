@@ -258,3 +258,7 @@ O KAIROS AGI mostra agora a atividade comercial por dia no fuso de Brasília: cl
 ## 09/10/2026 — contrato de rodadas identificadas
 
 O Core agora possui schema, endpoint autenticado, fila local reproduzível e visualização para separar a campanha das 07h das reposições de 22h, 00h30 e 04h30. Cada ciclo usa um `run_ref` idempotente e envia apenas contadores observados. A migration 0028 e os hooks dos schedulers ainda precisam ser aplicados no Supabase mestre e na VPS antes de aparecerem rodadas reais.
+
+## 10/10/2026 — press kit de VALT
+
+O elenco do Kairos Studio agora inclui VALT com folha visual de múltiplas vistas, invariantes de marca e direção de câmera. O asset é ficcional e público, usa a ampulheta Kairos como núcleo e escudo e não contém referência biométrica humana. Nenhum vídeo, publicação ou chamada paga foi iniciada.

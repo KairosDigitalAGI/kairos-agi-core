@@ -607,3 +607,15 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 ### Limites
 - A migration ainda não foi aplicada no Supabase mestre.
 - Os schedulers externos ainda precisam registrar início e fim de cada rodada; nenhum resultado foi inventado a partir da agenda.
+
+## 10/10/2026 — Missão 033 — press kit ficcional de VALT
+
+### Entregue
+- Folha cinematográfica original de VALT com vistas de corpo, cabeça, perfil, costas, núcleo, gesto e escudo.
+- Integração do asset ao elenco e catálogo de press kits do Kairos Studio.
+- Ficha de direção com marca, objeto e câmera em `characterDirections`.
+- Teste de existência, resolução e invariantes não violentos; suíte com 183 testes.
+
+### Limites
+- O asset é referência editorial, não job, take ou vídeo.
+- Nenhum material humano, serviço pago, postagem ou envio externo foi utilizado.
