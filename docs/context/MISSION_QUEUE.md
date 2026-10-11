@@ -386,4 +386,4 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Permitir selecionar várias imagens em uma única operação no cofre de clones.
 - [x] Rejeitar arquivo não visual, imagem vazia, item acima de 8 MB, duplicata e excesso do limite de 50 referências.
 - [x] Persistir o lote em uma única atualização local, mantendo cada imagem protegida pelo controle de olho.
-- [ ] Importar as coleções de Matheus e Vilson no navegador escolhido pelo Founder; os arquivos não podem ser embutidos no deployment.
+- [x] Importar as coleções de Matheus e Vilson no navegador in-app deste dispositivo e validar o controle de olho; os arquivos não foram embutidos no deployment.

@@ -6,6 +6,7 @@
 - `privateCloneImport.ts` centraliza limite de 8 MB, deduplicação, formato visual e teto de 50 referências por clone.
 - A interface informa quantos arquivos foram aceitos ou ignorados sem enviar imagem humana ao servidor.
 - Testes cobrem formato inválido, tamanho, duplicidade e capacidade.
+- As coleções privadas de Matheus e Vilson foram conferidas no navegador in-app deste dispositivo; novas referências do Founder entraram em lote e o botão de olho foi validado nos dois clones.
 - Limite: as coleções continuam vinculadas ao navegador em que forem importadas; sincronização autenticada entre dispositivos permanece pendente.
 
 ## 01/10/2026 — Missão 026: auditoria em tempo real do CRM WhatsApp
