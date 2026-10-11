@@ -1,5 +1,9 @@
 # Evolução do Blueprint
 
+## 11/10/2026 — Cofre privado com entrada em lote
+
+O contrato do Clone Engine passa a admitir coleções locais de referências em uma única seleção. O limite continua estrito: validação e persistência ocorrem no navegador, sem transformar o repositório, o deployment ou uma galeria pública em armazenamento biométrico.
+
 ## 01/10/2026 — CRM observável
 
 A Missão 005 ganhou auditoria append-only entre o runtime KAIROS e o Supabase mestre. O Core passa a mostrar evolução e confirmação real por lead, sem transformar configuração em alegação de execução.

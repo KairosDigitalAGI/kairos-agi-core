@@ -67,3 +67,7 @@ Foram criados e versionados dois press kits originais de personagens não humano
 ## 10/10/2026 — VALT no elenco ficcional
 
 O Studio ganhou a folha de referência pública `public/characters/valt-press-kit-v1.png`. O asset reúne corpo inteiro, cabeça, perfil, costas, núcleo, gesto e escudo do mesmo personagem. VALT permanece separado do cofre de clones humanos e não autoriza geração de vídeo: ele serve como referência de continuidade para um job futuro aprovado.
+
+## 11/10/2026 — Importação privada em lote
+
+O Studio permite selecionar várias referências de uma vez. Cada lote é validado localmente: arquivos precisam ser imagens não vazias com até 8 MB; duplicatas são ignoradas e cada clone aceita até 50 referências. As imagens permanecem no IndexedDB do navegador e continuam ocultas até o usuário acionar o botão de olho.

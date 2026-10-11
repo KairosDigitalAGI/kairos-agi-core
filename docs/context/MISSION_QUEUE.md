@@ -380,3 +380,10 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Fazer uma entrega posterior de mesmo título resolver o `todo` anterior sem editar ou apagar o histórico.
 - [x] Projetar bugs já corrigidos como resolvidos sem retirar o registro original do histórico.
 - [x] Manter uma nova pendência posterior capaz de reabrir o mesmo assunto.
+
+## Missão 034 — importação local em lote no cofre privado
+
+- [x] Permitir selecionar várias imagens em uma única operação no cofre de clones.
+- [x] Rejeitar arquivo não visual, imagem vazia, item acima de 8 MB, duplicata e excesso do limite de 50 referências.
+- [x] Persistir o lote em uma única atualização local, mantendo cada imagem protegida pelo controle de olho.
+- [ ] Importar as coleções de Matheus e Vilson no navegador escolhido pelo Founder; os arquivos não podem ser embutidos no deployment.

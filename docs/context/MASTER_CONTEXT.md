@@ -21,6 +21,7 @@ O status autenticado de produção confirmou `_kairosdigital_` conectado via OAu
 Constituição: KAIROS_AGI_BLUEPRINT_V1.md. Adendos: KAIROS_MEMORY_SYNC_V1.md e KAIROS_MEMORY_SYNC_V1_1.md. AGENTS.md define papéis. Não reiniciar a arquitetura.
 
 ## Estado atual
+- Em 11/10/2026, o cofre privado do Studio passou a importar coleções de imagens em lote. A validação local limita cada imagem a 8 MB, elimina duplicatas e restringe cada clone a 50 referências. Os binários continuam apenas no IndexedDB do navegador escolhido; o deployment contém a interface, nunca as fotos humanas.
 - Em 01/10/2026, as duas pendências existentes no Mapa foram concluídas com evidência: a auditoria do WhatsApp está ativa e uma conversa comercial completa foi reconstruída dos logs reais no CRM. O Mapa preserva os `todo` antigos e os projeta como resolvidos quando existe `done` posterior de mesmo título.
 - Em 01/10/2026, o CRM passou a receber uma trilha append-only do WhatsApp em `command.crm_events`. O runtime conserva eventos localmente até confirmação do Core; a interface mostra classificação, mensagens, entrega, bloqueio e retomada por lead com atualização a cada 15 segundos.
 - Em 01/10/2026, o runtime WhatsApp passou a responder automaticamente somente a contatos de origem comercial explícita. Contatos pessoais, equipe, parceiros e registros inbound genéricos permanecem silenciosos; histórico ou avanço manual de etapa não os transforma em lead. Erros de classificação falham fechados. A identidade usada com leads é `KAIROS`, agente autônomo pessoal do Matheus e da Kairos Digital.

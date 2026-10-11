@@ -1,5 +1,13 @@
 # Changelog
 
+## 11/10/2026 — Missão 034: importação local em lote no cofre privado
+
+- `PrivateCloneVault` aceita múltiplas imagens por seleção e grava o lote de uma vez no IndexedDB.
+- `privateCloneImport.ts` centraliza limite de 8 MB, deduplicação, formato visual e teto de 50 referências por clone.
+- A interface informa quantos arquivos foram aceitos ou ignorados sem enviar imagem humana ao servidor.
+- Testes cobrem formato inválido, tamanho, duplicidade e capacidade.
+- Limite: as coleções continuam vinculadas ao navegador em que forem importadas; sincronização autenticada entre dispositivos permanece pendente.
+
 ## 01/10/2026 — Missão 026: auditoria em tempo real do CRM WhatsApp
 
 - Criada e aplicada no Supabase mestre a tabela privada append-only `command.crm_events`.

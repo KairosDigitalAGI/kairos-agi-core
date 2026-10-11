@@ -192,6 +192,8 @@ O Studio agora mantém várias referências por clone no navegador, todas proteg
 
 Em Studio → Elenco, cada referência privada possui um botão de olho individual. Os campos e cartões usam contraste alto para edição legível no tema escuro.
 
+O mesmo cofre aceita várias imagens por seleção, valida formato e tamanho, ignora duplicatas e limita cada clone a 50 referências. Os arquivos ficam no IndexedDB local e não são enviados ao GitHub, à Vercel ou a providers de IA.
+
 ## Operação comercial inicial
 
 Em Agentes, abra Terminal para verificar a frota e associar Codex CLI ou Claude Code localmente. Em Hunter, a trilha de receita registra descoberta, qualificação e rascunho no runtime; ela não envia mensagens ou propostas.
