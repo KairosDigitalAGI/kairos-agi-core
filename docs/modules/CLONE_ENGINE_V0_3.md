@@ -71,3 +71,7 @@ O Studio ganhou a folha de referência pública `public/characters/valt-press-ki
 ## 11/10/2026 — Importação privada em lote
 
 O Studio permite selecionar várias referências de uma vez. Cada lote é validado localmente: arquivos precisam ser imagens não vazias com até 8 MB; duplicatas são ignoradas e cada clone aceita até 50 referências. As imagens permanecem no IndexedDB do navegador e continuam ocultas até o usuário acionar o botão de olho.
+
+## 12/10/2026 — Backup portátil criptografado
+
+O cofre inteiro pode ser baixado como `.kairos-vault`. O conteúdo é cifrado no navegador com AES-256-GCM e senha derivada por PBKDF2/SHA-256; a senha não é salva. A restauração valida versão, integridade, MIME e limites antes de atualizar o IndexedDB. Perder a senha torna o arquivo irrecuperável, e nenhuma cópia é enviada ao Core.

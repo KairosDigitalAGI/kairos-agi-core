@@ -1,5 +1,14 @@
 # Changelog
 
+## 12/10/2026 — Missão 035: backup criptografado do cofre privado
+
+- O Studio exporta todo o cofre local para `.kairos-vault` cifrado com AES-256-GCM.
+- A chave é derivada da senha com PBKDF2/SHA-256 e 250 mil iterações; a senha nunca é salva.
+- A restauração falha fechada para senha incorreta, arquivo adulterado, versão incompatível, MIME inválido ou limites excedidos.
+- O envelope limita 20 clones, 50 referências por clone, 8 MB por imagem e 120 MB de payload original.
+- Dois testes validam sigilo do texto, round-trip dos bytes, senha incorreta e arquivo inválido; suíte total 187/187 e build aprovados.
+- Limite: o arquivo e sua senha ficam sob responsabilidade do Founder; esta entrega não cria sincronização autenticada entre dispositivos.
+
 ## 11/10/2026 — Missão 034: importação local em lote no cofre privado
 
 - `PrivateCloneVault` aceita múltiplas imagens por seleção e grava o lote de uma vez no IndexedDB.

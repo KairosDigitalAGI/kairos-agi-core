@@ -266,6 +266,8 @@ A Video Engine compõe `public/brand/kairos-digital-hourglass.jpg` no último 1,
 
 `privateCloneImport.ts` é o limite de entrada para coleções locais: aceita somente imagens não vazias de até 8 MB, elimina duplicatas pelo nome normalizado, tamanho e MIME e limita cada clone a 50 referências. O componente persiste o lote em uma única atualização; nenhuma imagem entra no bundle ou atravessa a rede.
 
+`privateCloneBackup.ts` fornece portabilidade local sem servidor. O formato `.kairos-vault` contém um envelope versionado; metadados e bytes ficam cifrados com AES-256-GCM, AAD fixa do formato e chave PBKDF2/SHA-256 com salt aleatório e 250 mil iterações. A restauração valida limites antes do IndexedDB. A senha não é armazenada e não existe recuperação de senha pelo Core.
+
 ## Controles do cofre privado
 
 A UI do PrivateCloneVault mantém seleção e revelação como estados separados. Cada cartão tem seleção própria e um controle de olho que exibe somente a referência escolhida no navegador.

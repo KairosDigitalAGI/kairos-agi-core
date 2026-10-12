@@ -1,5 +1,9 @@
 # Evolução do Blueprint
 
+## 12/10/2026 — Portabilidade local cifrada do Clone Vault
+
+O Clone Engine ganha um formato de backup local versionado para preservar referências privadas entre navegadores sem criar um serviço de armazenamento. A senha permanece exclusivamente com o Founder, e a restauração falha fechada diante de adulteração ou limites inválidos.
+
 ## 11/10/2026 — Cofre privado com entrada em lote
 
 O contrato do Clone Engine passa a admitir coleções locais de referências em uma única seleção. O limite continua estrito: validação e persistência ocorrem no navegador, sem transformar o repositório, o deployment ou uma galeria pública em armazenamento biométrico.

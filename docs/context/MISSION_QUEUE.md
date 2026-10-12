@@ -253,7 +253,7 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 
 - [x] Criar âncora, turnaround, expressões, workstation e pose reclinada para continuidade do avatar.
 - [x] Manter todas as peças no armazenamento privado ignorado pelo Git.
-- [ ] Importar a coleção no cofre local do Studio quando a versão do cofre multi-referência estiver disponível no deployment ativo.
+- [x] Importar a coleção no cofre local do Studio no navegador in-app deste dispositivo.
 
 ## Missão 016 — Leitura e prévia do cofre privado
 
@@ -387,3 +387,11 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Rejeitar arquivo não visual, imagem vazia, item acima de 8 MB, duplicata e excesso do limite de 50 referências.
 - [x] Persistir o lote em uma única atualização local, mantendo cada imagem protegida pelo controle de olho.
 - [x] Importar as coleções de Matheus e Vilson no navegador in-app deste dispositivo e validar o controle de olho; os arquivos não foram embutidos no deployment.
+
+## Missão 035 — backup criptografado do cofre privado
+
+- [x] Exportar clones e referências para um arquivo local cifrado com AES-256-GCM.
+- [x] Derivar a chave com PBKDF2/SHA-256 sem persistir a senha no navegador.
+- [x] Restaurar o arquivo com validação de versão, MIME, quantidade e tamanho das referências.
+- [x] Manter backup e restauração locais, sem upload, custo ou integração externa.
+- [ ] Sincronização automática entre dispositivos continua condicionada a armazenamento autenticado e consentimento do destino.

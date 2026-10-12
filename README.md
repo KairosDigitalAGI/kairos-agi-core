@@ -194,6 +194,8 @@ Em Studio → Elenco, cada referência privada possui um botão de olho individu
 
 O mesmo cofre aceita várias imagens por seleção, valida formato e tamanho, ignora duplicatas e limita cada clone a 50 referências. Os arquivos ficam no IndexedDB local e não são enviados ao GitHub, à Vercel ou a providers de IA.
 
+Para evitar perda ao trocar de navegador, o Studio baixa um arquivo `.kairos-vault` criptografado com a senha informada no momento. A senha não é armazenada nem recuperável pelo Kairos. A restauração também roda no navegador e não envia o arquivo ao servidor.
+
 ## Operação comercial inicial
 
 Em Agentes, abra Terminal para verificar a frota e associar Codex CLI ou Claude Code localmente. Em Hunter, a trilha de receita registra descoberta, qualificação e rascunho no runtime; ela não envia mensagens ou propostas.
