@@ -75,3 +75,7 @@ O Studio permite selecionar várias referências de uma vez. Cada lote é valida
 ## 12/10/2026 — Backup portátil criptografado
 
 O cofre inteiro pode ser baixado como `.kairos-vault`. O conteúdo é cifrado no navegador com AES-256-GCM e senha derivada por PBKDF2/SHA-256; a senha não é salva. A restauração valida versão, integridade, MIME e limites antes de atualizar o IndexedDB. Perder a senha torna o arquivo irrecuperável, e nenhuma cópia é enviada ao Core.
+
+## 13/10/2026 — inventário e integridade local
+
+O cofre privado possui uma verificação sob demanda que calcula SHA-256 do conteúdo das referências e uma impressão determinística do conjunto. A interface exibe contagem, tamanho e alertas de duplicidade/formato sem revelar as imagens. O resultado é descartado após qualquer alteração ou restauração e não equivale a autenticação, sincronização ou prova biométrica.

@@ -350,3 +350,7 @@ O contrato não agenda nem executa uma rodada. Os schedulers externos devem regi
 ## Press kit de VALT — 10/10/2026
 
 `public/characters/valt-press-kit-v1.png` entra no catálogo estático do Studio e é referenciado por `StudioPage` e `characterDirections`. O arquivo representa somente um personagem ficcional. Sua direção define armadura, visor, núcleo, escudo e câmera; o asset não pertence ao Clone Vault, não é conteúdo gerado no pipeline e não comprova take ou vídeo.
+
+## Integridade local do Clone Vault — 13/10/2026
+
+privateCloneIntegrity.ts lê o estado normalizado do IndexedDB, calcula SHA-256 por Blob e gera uma impressão estável do manifesto ordenado. PrivateCloneVault apresenta somente totais, alertas e um trecho da impressão; nenhum byte sai do dispositivo. Qualquer gravação, exclusão ou restauração invalida o relatório visual para impedir que uma verificação antiga pareça atual.

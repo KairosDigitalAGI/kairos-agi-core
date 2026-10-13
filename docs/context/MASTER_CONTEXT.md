@@ -201,3 +201,7 @@ A próxima frente planejada é uma equipe digital de e-commerce sem estoque. A e
 - Próximo passo: a VPS deve enviar identificador e snapshot de cada rodada comercial e ciclo noturno.
 - Em 09/10/2026, a Missão 032 definiu o contrato idempotente das rodadas comerciais: migration 0028, endpoint `crm-runs`, fila local da VPS e tabela autenticada no KAIROS AGI. A migration e os hooks dos schedulers ainda não foram aplicados no runtime remoto; nenhuma rodada nova é declarada como observada.
 - Em 10/10/2026, a pendência visual de VALT foi concluída: folha pública de múltiplas vistas, ficha de continuidade e integração ao Studio. O personagem é ficcional; nenhuma identidade humana, geração de vídeo ou publicação foi acionada.
+
+## Atualização 13/10/2026 — integridade verificável do Clone Vault
+
+O Studio agora audita localmente o cofre privado: conta clones, referências e bytes, calcula SHA-256 de cada imagem e produz uma impressão determinística do conjunto. O relatório destaca arquivos inválidos, possíveis duplicatas e clones vazios. A verificação não envia biometria, não substitui o backup criptografado e é invalidada quando o conteúdo muda.

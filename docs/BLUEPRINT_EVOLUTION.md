@@ -470,3 +470,7 @@ O Blueprint passa a exigir um identificador idempotente para cada campanha, repo
 ## 10/10/2026 — segurança ganha identidade visual própria
 
 VALT passa de descrição narrativa a personagem ficcional visualmente controlado. Sua linguagem é proteção e contenção: armadura grafite, visor ciano, núcleo e escudo de ampulheta, sem armas ou gesto agressivo. A folha pública resolve continuidade do personagem sem misturar o domínio de clones humanos nem liberar produção automática.
+
+## 13/10/2026 — clones privados ganham integridade verificável
+
+A evolução do Blueprint separa três garantias: proteção visual pelo olho, portabilidade pelo backup cifrado e integridade por SHA-256 local. A impressão permite reconhecer se o conjunto de referências mudou sem expor imagens ou introduzir infraestrutura paga. Ela não transforma o armazenamento do navegador em Vault remoto nem valida a identidade retratada.

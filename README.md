@@ -266,3 +266,7 @@ O Core agora possui schema, endpoint autenticado, fila local reproduzível e vis
 ## 10/10/2026 — press kit de VALT
 
 O elenco do Kairos Studio agora inclui VALT com folha visual de múltiplas vistas, invariantes de marca e direção de câmera. O asset é ficcional e público, usa a ampulheta Kairos como núcleo e escudo e não contém referência biométrica humana. Nenhum vídeo, publicação ou chamada paga foi iniciada.
+
+## 13/10/2026 — verificação do cofre de clones
+
+No Kairos Studio, **Verificar agora** audita localmente o Clone Vault. A tela mostra quantidade de clones e referências, espaço usado, possíveis duplicatas, arquivos inválidos e uma impressão SHA-256 curta. O processo não faz upload e não substitui o backup .kairos-vault.

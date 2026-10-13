@@ -637,3 +637,15 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 ### Limites
 - O asset é referência editorial, não job, take ou vídeo.
 - Nenhum material humano, serviço pago, postagem ou envio externo foi utilizado.
+
+## 13/10/2026 — Missão 036 — auditoria local do cofre privado
+
+### Entregue
+- Inspeção SHA-256 de todas as referências no navegador.
+- Impressão determinística do cofre, contagem de itens e tamanho total.
+- Alertas para imagem inválida, possível duplicata e clone vazio.
+- Dois testes novos; suíte com 189 testes e build aprovados.
+
+### Limites
+- A impressão confirma o conteúdo observado naquele navegador; não cria sincronização remota nem prova identidade.
+- O backup criptografado continua sendo a forma portátil e a senha continua irrecuperável.

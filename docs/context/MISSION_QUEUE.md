@@ -395,3 +395,10 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Restaurar o arquivo com validação de versão, MIME, quantidade e tamanho das referências.
 - [x] Manter backup e restauração locais, sem upload, custo ou integração externa.
 - [ ] Sincronização automática entre dispositivos continua condicionada a armazenamento autenticado e consentimento do destino.
+
+## Missão 036 — verificação local de integridade do cofre privado
+
+- [x] Inventariar clones, referências e bytes diretamente no navegador.
+- [x] Calcular SHA-256 do conteúdo e uma impressão determinística do conjunto completo.
+- [x] Sinalizar arquivos inválidos, possíveis duplicatas e clones ainda sem referência.
+- [x] Invalidar o relatório quando o cofre for editado ou restaurado, sem upload ou custo.
