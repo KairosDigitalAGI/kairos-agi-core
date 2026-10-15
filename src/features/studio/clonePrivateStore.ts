@@ -53,6 +53,16 @@ export async function putPrivateClone(clone: PrivateClone) {
   const db = await open()
   try { const tx = db.transaction(STORE, 'readwrite'); tx.objectStore(STORE).put(normalize(clone)); await done(tx) } finally { db.close() }
 }
+export async function putPrivateClones(clones: PrivateClone[]) {
+  if (!clones.length) return
+  const db = await open()
+  try {
+    const tx = db.transaction(STORE, 'readwrite')
+    const store = tx.objectStore(STORE)
+    for (const clone of clones) store.put(normalize(clone))
+    await done(tx)
+  } finally { db.close() }
+}
 export async function deletePrivateClone(id: string) {
   const db = await open()
   try { const tx = db.transaction(STORE, 'readwrite'); tx.objectStore(STORE).delete(id); await done(tx) } finally { db.close() }

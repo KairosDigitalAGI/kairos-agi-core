@@ -270,3 +270,7 @@ O elenco do Kairos Studio agora inclui VALT com folha visual de múltiplas vista
 ## 13/10/2026 — verificação do cofre de clones
 
 No Kairos Studio, **Verificar agora** audita localmente o Clone Vault. A tela mostra quantidade de clones e referências, espaço usado, possíveis duplicatas, arquivos inválidos e uma impressão SHA-256 curta. O processo não faz upload e não substitui o backup .kairos-vault.
+
+## 15/10/2026 — mesclagem segura de backup privado
+
+No Studio, **Mesclar backup** abre o arquivo cifrado com a senha local e mostra quantos clones e referências serão acrescentados. O cofre preserva nomes, notas e imagens que já estão no navegador. Referências repetidas ou acima do limite são ignoradas. Salve edições pendentes antes de fazer backup, mesclar ou verificar integridade.

@@ -474,3 +474,7 @@ VALT passa de descrição narrativa a personagem ficcional visualmente controlad
 ## 13/10/2026 — clones privados ganham integridade verificável
 
 A evolução do Blueprint separa três garantias: proteção visual pelo olho, portabilidade pelo backup cifrado e integridade por SHA-256 local. A impressão permite reconhecer se o conjunto de referências mudou sem expor imagens ou introduzir infraestrutura paga. Ela não transforma o armazenamento do navegador em Vault remoto nem valida a identidade retratada.
+
+## 15/10/2026 — portabilidade privada preserva trabalho existente
+
+O Blueprint acrescenta a regra de restauração aditiva: um backup antigo não pode substituir automaticamente imagens ou notas mais recentes do cofre privado. A mesclagem exige prévia e confirmação, conserva identificadores e respeita limites. Sincronização autenticada entre dispositivos permanece uma decisão separada, dependente de destino privado e controle de acesso.

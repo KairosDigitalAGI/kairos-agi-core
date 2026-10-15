@@ -649,3 +649,17 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 ### Limites
 - A impressão confirma o conteúdo observado naquele navegador; não cria sincronização remota nem prova identidade.
 - O backup criptografado continua sendo a forma portátil e a senha continua irrecuperável.
+
+## 15/10/2026 — Missão 037 — restauração aditiva do Clone Vault
+
+### Entregue
+- Corrigido o risco de sobrescrever referências locais ao restaurar um backup antigo.
+- Planejamento de mesclagem mostra quantidade de clones novos, referências adicionadas e colisões ignoradas antes da confirmação.
+- Escrita de todos os registros alterados em uma transação local.
+- Verificação e backup usam dados persistidos; edições pendentes devem ser salvas antes.
+- Três testes novos para preservação, repetição segura e limite de 50 referências; suíte com 192 testes e build aprovados.
+
+### Limites
+- A mesclagem usa identificadores estáveis; referências com o mesmo identificador mantêm a versão já presente.
+- O cofre continua local a este navegador e a senha do backup não é recuperável.
+- A migration 0028 e os hooks da VPS continuam pendentes: neste ambiente a CLI Supabase não tem acesso ao projeto mestre e SSH não autenticou, portanto nenhuma rodada remota foi alterada.

@@ -402,3 +402,12 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Calcular SHA-256 do conteúdo e uma impressão determinística do conjunto completo.
 - [x] Sinalizar arquivos inválidos, possíveis duplicatas e clones ainda sem referência.
 - [x] Invalidar o relatório quando o cofre for editado ou restaurado, sem upload ou custo.
+
+## Missão 037 — restauração aditiva e segura do cofre privado
+
+- [x] Examinar o backup cifrado antes de pedir confirmação, mostrando quantos clones e referências serão acrescentados.
+- [x] Preservar nomes, notas e imagens atuais quando o backup trouxer o mesmo identificador.
+- [x] Mesclar referências ausentes em uma única transação do IndexedDB, respeitando o limite por clone.
+- [x] Impedir backup, restauração e verificação com edições ainda não salvas.
+- [x] Manter a verificação de integridade atualizada após edição e restauração.
+- [ ] Sincronização autenticada entre dispositivos continua dependente de destino privado e autorização de acesso.

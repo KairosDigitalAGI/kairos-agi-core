@@ -205,3 +205,7 @@ A próxima frente planejada é uma equipe digital de e-commerce sem estoque. A e
 ## Atualização 13/10/2026 — integridade verificável do Clone Vault
 
 O Studio agora audita localmente o cofre privado: conta clones, referências e bytes, calcula SHA-256 de cada imagem e produz uma impressão determinística do conjunto. O relatório destaca arquivos inválidos, possíveis duplicatas e clones vazios. A verificação não envia biometria, não substitui o backup criptografado e é invalidada quando o conteúdo muda.
+
+## Atualização 15/10/2026 — restauração segura do cofre
+
+O arquivo cifrado agora é examinado antes da confirmação. A restauração mescla somente clones e referências ausentes, preservando os registros atuais; referências com o mesmo identificador e itens acima do limite são ignorados. As gravações planejadas ocorrem em uma única transação do IndexedDB. Edições não salvas bloqueiam backup, restauração e verificação para que o resultado corresponda aos dados persistidos. Não existe sincronização remota.

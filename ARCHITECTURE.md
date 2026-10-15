@@ -354,3 +354,7 @@ O contrato não agenda nem executa uma rodada. Os schedulers externos devem regi
 ## Integridade local do Clone Vault — 13/10/2026
 
 privateCloneIntegrity.ts lê o estado normalizado do IndexedDB, calcula SHA-256 por Blob e gera uma impressão estável do manifesto ordenado. PrivateCloneVault apresenta somente totais, alertas e um trecho da impressão; nenhum byte sai do dispositivo. Qualquer gravação, exclusão ou restauração invalida o relatório visual para impedir que uma verificação antiga pareça atual.
+
+## Restauração aditiva do Clone Vault — 15/10/2026
+
+privateCloneRestore.ts calcula a mesclagem de um backup cifrado já validado. Em colisões de clone, os metadados e as referências persistidas têm prioridade; apenas referências com novos identificadores entram, até 50 por clone. putPrivateClones aplica o plano numa transação de escrita do IndexedDB. A UI calcula o plano antes da confirmação e novamente imediatamente antes de gravar, em caso de alterações de outra aba. Operações de backup e verificação leem a base persistida e bloqueiam edições locais pendentes.

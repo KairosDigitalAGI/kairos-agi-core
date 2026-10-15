@@ -79,3 +79,7 @@ O cofre inteiro pode ser baixado como `.kairos-vault`. O conteúdo é cifrado no
 ## 13/10/2026 — inventário e integridade local
 
 O cofre privado possui uma verificação sob demanda que calcula SHA-256 do conteúdo das referências e uma impressão determinística do conjunto. A interface exibe contagem, tamanho e alertas de duplicidade/formato sem revelar as imagens. O resultado é descartado após qualquer alteração ou restauração e não equivale a autenticação, sincronização ou prova biométrica.
+
+## 15/10/2026 — restauração sem sobrescrita
+
+O fluxo de backup mantém AES-GCM e a validação existente. Ao abrir um arquivo, o Studio calcula uma prévia da mesclagem e solicita confirmação. Clones novos são adicionados; clones com mesmo ID preservam metadados atuais e recebem somente referências ausentes, até o limite de 50. A gravação é transacional. Repetir a mesma restauração não duplica referências. Edições pendentes precisam ser salvas para impedir confusão entre o estado da tela e o IndexedDB.
