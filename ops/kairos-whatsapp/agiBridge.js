@@ -2,6 +2,7 @@ const fs = require('fs')
 const crypto = require('crypto')
 const { acknowledgeEvents, pendingEvents } = require('./crmAudit')
 const { acknowledgeRuns, pendingRuns } = require('./runtimeRuns')
+const { requireRunReceipt } = require('./runReceipt.cjs')
 
 const DB_PATH = '/root/kairos3/db.json'
 const apiUrl = () => String(process.env.CRM_SYNC_URL || '').trim()
@@ -53,7 +54,8 @@ async function syncNow() {
   if (runs.length) {
     const result = await request('crm-runs', { method: 'POST', body: JSON.stringify({ runs: runs.map(({ pending_sync, ...run }) => run) }) })
     runsAccepted = Number(result.accepted || 0)
-    acknowledgeRuns(runs.map(run => run.run_ref))
+    requireRunReceipt(result, runs)
+    acknowledgeRuns(runs)
   }
   return { accepted, eventsAccepted, runsAccepted }
 }

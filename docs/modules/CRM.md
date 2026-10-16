@@ -40,3 +40,7 @@ O ledger mede fatos recebidos pelo Core, mas ainda não atribui eventos a um ide
 A migration `supabase/migrations/0028_crm_runtime_runs.sql` cria o ledger privado e idempotente `command.crm_runtime_runs`. Cada rodada possui `run_ref`, tipo (`campaign`, `replenishment` ou `recovery`), estado, horários e contadores observados. `POST /api/hunter?action=crm-runs` aceita somente a ponte autenticada por `CRM_SYNC_TOKEN`; o painel operacional lê as rodadas pela consulta CRM já existente.
 
 `ops/kairos-whatsapp/runtimeRuns.cjs` mantém snapshots locais pendentes até confirmação do Core, e `agiBridge.js` remove o pendente somente depois do aceite remoto. A migration ainda precisa ser aplicada no Supabase mestre e os schedulers da VPS precisam chamar `upsertRun()` no início e no encerramento de cada ciclo. Enquanto isso, a interface declara o ledger indisponível e não infere resultados a partir do horário.
+
+## 16/10/2026 — recibo completo e retenção da fila
+
+O endpoint crm-runs retorna acceptedRefs dos registros efetivamente persistidos. A ponte compara esse conjunto ao lote enviado antes de reconhecer qualquer snapshot. Cada upsertRun requer um run_ref idempotente e incrementa revision; acknowledgeRuns verifica a revisão para evitar perda quando uma rodada muda durante o envio. A fila preserva todos os pendentes e até 250 históricos confirmados. Corrupção de arquivo falha fechada. A instalação remota precisa incluir runReceipt.cjs na mesma pasta de agiBridge.js; migration 0028 e hooks dos schedulers permanecem pendentes.

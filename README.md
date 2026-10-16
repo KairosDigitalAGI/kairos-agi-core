@@ -274,3 +274,7 @@ No Kairos Studio, **Verificar agora** audita localmente o Clone Vault. A tela mo
 ## 15/10/2026 — mesclagem segura de backup privado
 
 No Studio, **Mesclar backup** abre o arquivo cifrado com a senha local e mostra quantos clones e referências serão acrescentados. O cofre preserva nomes, notas e imagens que já estão no navegador. Referências repetidas ou acima do limite são ignoradas. Salve edições pendentes antes de fazer backup, mesclar ou verificar integridade.
+
+## 16/10/2026 — proteção das rodadas comerciais
+
+A ponte de CRM foi preparada para preservar cada rodada até receber do Core a lista exata dos identificadores gravados. Uma alteração durante a sincronização continua pendente para a tentativa seguinte. A implantação na VPS e a migration 0028 ainda são necessárias antes de aparecerem rodadas reais no painel KAIROS AGI.

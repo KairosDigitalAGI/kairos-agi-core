@@ -123,7 +123,7 @@ export async function syncCrmRuntimeRuns(body) {
   if (!runs.length || runs.length > 100) throw new Error('Envie entre 1 e 100 rodadas por lote.')
   const rows = [...new Map(runs.map(normalizeCrmRuntimeRun).map(row => [row.run_ref, row])).values()]
   const saved = await upsertCommand('crm_runtime_runs', rows, 'source,run_ref')
-  return { accepted: saved.length, received: runs.length, duplicatesRemoved: runs.length - rows.length, syncedAt: new Date().toISOString() }
+  return { accepted: saved.length, acceptedRefs: saved.map(row => row.run_ref), received: runs.length, duplicatesRemoved: runs.length - rows.length, syncedAt: new Date().toISOString() }
 }
 
 export async function addDevRequest(body) {

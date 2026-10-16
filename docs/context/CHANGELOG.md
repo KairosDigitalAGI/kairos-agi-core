@@ -663,3 +663,16 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - A mesclagem usa identificadores estáveis; referências com o mesmo identificador mantêm a versão já presente.
 - O cofre continua local a este navegador e a senha do backup não é recuperável.
 - A migration 0028 e os hooks da VPS continuam pendentes: neste ambiente a CLI Supabase não tem acesso ao projeto mestre e SSH não autenticou, portanto nenhuma rodada remota foi alterada.
+
+## 16/10/2026 — Missão 038 — proteção do ledger de rodadas
+
+### Entregue
+- Corrigida a perda potencial de snapshots: confirmação atrasada não limpa uma revisão posterior da mesma rodada.
+- Resposta autenticada do Core inclui acceptedRefs; ponte só reconhece lote com todos os identificadores persistidos.
+- Arquivo local corrompido causa falha explícita sem substituição por fila vazia.
+- Retenção limitada apenas aos 250 históricos confirmados; pendentes nunca são truncados.
+- Testes de corrida, recibo parcial, corrupção, retenção e resposta do Core; suíte de 197 testes e build aprovados.
+
+### Limites
+- O código da ponte ainda não está instalado na VPS; a migration 0028 também não foi confirmada no Supabase mestre.
+- Nenhum agendamento, envio de mensagem ou resultado comercial foi criado por esta entrega.

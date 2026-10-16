@@ -209,3 +209,7 @@ O Studio agora audita localmente o cofre privado: conta clones, referências e b
 ## Atualização 15/10/2026 — restauração segura do cofre
 
 O arquivo cifrado agora é examinado antes da confirmação. A restauração mescla somente clones e referências ausentes, preservando os registros atuais; referências com o mesmo identificador e itens acima do limite são ignorados. As gravações planejadas ocorrem em uma única transação do IndexedDB. Edições não salvas bloqueiam backup, restauração e verificação para que o resultado corresponda aos dados persistidos. Não existe sincronização remota.
+
+## Atualização 16/10/2026 — recibos de rodadas do KAIROS
+
+O contrato do ledger comercial agora devolve os run_ref persistidos. A fila privada mantém revisão por snapshot e só libera o item quando o Core confirma a mesma rodada e a mesma versão enviada. Um arquivo local ilegível interrompe a sincronização sem apagar dados; a retenção guarda todos os pendentes. A migration 0028 e os hooks da VPS continuam pendentes de acesso e instalação remota, portanto o painel não deve declarar rodadas observadas apenas com esta mudança de código.

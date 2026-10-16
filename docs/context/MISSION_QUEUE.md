@@ -411,3 +411,12 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Impedir backup, restauração e verificação com edições ainda não salvas.
 - [x] Manter a verificação de integridade atualizada após edição e restauração.
 - [ ] Sincronização autenticada entre dispositivos continua dependente de destino privado e autorização de acesso.
+
+## Missão 038 — fila de rodadas sem perda silenciosa
+
+- [x] Exigir run_ref estável e revisão monotônica em cada snapshot local.
+- [x] Confirmar somente a revisão efetivamente aceita pelo Core; atualização ocorrida durante a requisição permanece pendente.
+- [x] Fazer o Core devolver os identificadores persistidos, e exigir o recibo completo antes de limpar a fila.
+- [x] Preservar todas as rodadas pendentes na retenção e interromper a escrita se o arquivo local estiver corrompido.
+- [ ] Aplicar a migration 0028 no Supabase mestre e instalar runtimeRuns, runReceipt e agiBridge juntos na VPS, após acesso autenticado verificável.
+- [ ] Instrumentar os schedulers reais das 07h, 22h, 00h30 e 04h30; observar a primeira rodada completa antes de declarar o ledger operacional.

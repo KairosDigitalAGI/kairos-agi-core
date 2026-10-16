@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { checkCrmSyncAuth, normalizeCrmEvent, normalizeCrmLead, normalizeCrmRuntimeRun, summarizeCrmDaily, summarizeCrmRuntime } from '../api/_crm.js'
+import { checkCrmSyncAuth, normalizeCrmEvent, normalizeCrmLead, normalizeCrmRuntimeRun, summarizeCrmDaily, summarizeCrmRuntime, syncCrmRuntimeRuns } from '../api/_crm.js'
 
 test('CRM sync requires the configured bearer token', () => {
   const previous = process.env.CRM_SYNC_TOKEN
@@ -105,4 +105,28 @@ test('CRM runtime run normalization preserves verified counters and identity', (
 test('CRM runtime run rejects finished runs without a completion timestamp', () => {
   assert.throws(() => normalizeCrmRuntimeRun({ run_ref: 'night-1', run_type: 'replenishment', state: 'completed', started_at: '2026-10-09T01:00:00Z' }), /finished_at/)
   assert.throws(() => normalizeCrmRuntimeRun({ run_ref: 'night-2', run_type: 'unknown', state: 'running', started_at: '2026-10-09T01:00:00Z' }), /run_type/)
+})
+
+test('CRM run sync returns exact persisted references for outbox confirmation', async () => {
+  const previousUrl = process.env.SUPABASE_URL
+  const previousKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  const previousFetch = globalThis.fetch
+  process.env.SUPABASE_URL = 'https://example.supabase.co'
+  process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-only'
+  globalThis.fetch = async (_url, options) => {
+    const rows = JSON.parse(options.body)
+    assert.equal(rows.length, 1)
+    return new Response(JSON.stringify([{ ...rows[0], id: 'saved-1' }]), { status: 201, headers: { 'content-type': 'application/json' } })
+  }
+  try {
+    const result = await syncCrmRuntimeRuns({ runs: [{ run_ref: 'campaign-2026-10-16', run_type: 'campaign', state: 'running', started_at: '2026-10-16T10:00:00Z' }] })
+    assert.equal(result.accepted, 1)
+    assert.deepEqual(result.acceptedRefs, ['campaign-2026-10-16'])
+  } finally {
+    globalThis.fetch = previousFetch
+    if (previousUrl === undefined) delete process.env.SUPABASE_URL
+    else process.env.SUPABASE_URL = previousUrl
+    if (previousKey === undefined) delete process.env.SUPABASE_SERVICE_ROLE_KEY
+    else process.env.SUPABASE_SERVICE_ROLE_KEY = previousKey
+  }
 })

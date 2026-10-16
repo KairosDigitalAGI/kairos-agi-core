@@ -358,3 +358,7 @@ privateCloneIntegrity.ts lê o estado normalizado do IndexedDB, calcula SHA-256 
 ## Restauração aditiva do Clone Vault — 15/10/2026
 
 privateCloneRestore.ts calcula a mesclagem de um backup cifrado já validado. Em colisões de clone, os metadados e as referências persistidas têm prioridade; apenas referências com novos identificadores entram, até 50 por clone. putPrivateClones aplica o plano numa transação de escrita do IndexedDB. A UI calcula o plano antes da confirmação e novamente imediatamente antes de gravar, em caso de alterações de outra aba. Operações de backup e verificação leem a base persistida e bloqueiam edições locais pendentes.
+
+## Outbox de rodadas comerciais — 16/10/2026
+
+runtimeRuns.cjs conserva run_ref estável, revision monotônica e todas as rodadas pendentes. acknowledgeRuns aceita o snapshot enviado e não limpa uma versão nova criada durante a chamada HTTP. Arquivo JSON corrompido provoca falha fechada para preservar evidência. runReceipt.cjs exige correspondência exata entre lote enviado e acceptedRefs retornados por syncCrmRuntimeRuns; uma resposta incompleta fica na fila para retry idempotente. A instalação na VPS deve copiar runReceipt.cjs junto com agiBridge.js e runtimeRuns.cjs. Sem migration 0028 e hooks reais, o ledger do painel continua indisponível.

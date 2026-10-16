@@ -478,3 +478,7 @@ A evolução do Blueprint separa três garantias: proteção visual pelo olho, p
 ## 15/10/2026 — portabilidade privada preserva trabalho existente
 
 O Blueprint acrescenta a regra de restauração aditiva: um backup antigo não pode substituir automaticamente imagens ou notas mais recentes do cofre privado. A mesclagem exige prévia e confirmação, conserva identificadores e respeita limites. Sincronização autenticada entre dispositivos permanece uma decisão separada, dependente de destino privado e controle de acesso.
+
+## 16/10/2026 — ledger comercial exige recibo por rodada
+
+O Blueprint passa a tratar uma confirmação por quantidade como insuficiente para limpar a fila local. Cada rodada tem identidade e revisão; somente os identificadores persistidos pelo Core confirmam a versão enviada. Esta garantia é de código preparado, não evidência de execução na VPS. A operação só se torna observável após migration, instalação e primeiro ciclo real confirmado.
