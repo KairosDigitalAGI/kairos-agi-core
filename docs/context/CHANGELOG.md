@@ -676,3 +676,15 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 ### Limites
 - O código da ponte ainda não está instalado na VPS; a migration 0028 também não foi confirmada no Supabase mestre.
 - Nenhum agendamento, envio de mensagem ou resultado comercial foi criado por esta entrega.
+
+## 17/10/2026 — Missão 039 — compatibilidade dos snapshots legados
+
+### Entregue
+- Snapshots gravados antes da introdução de `revision` passam a ser lidos como revisão 0, sem alteração imediata do arquivo.
+- Recibo exato pode confirmar a revisão 0; novo upsert avança para revisão 1 e não é apagado por recibo antigo.
+- Revisão explicitamente inválida interrompe a leitura e preserva o arquivo para recuperação.
+- Testes de compatibilidade e corrida adicionados.
+
+### Limites
+- A migration 0028 e os hooks reais ainda não estão ativos no Supabase mestre e na VPS.
+- A mudança não executa campanhas nem comprova rodadas remotas.

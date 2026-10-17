@@ -362,3 +362,5 @@ privateCloneRestore.ts calcula a mesclagem de um backup cifrado já validado. Em
 ## Outbox de rodadas comerciais — 16/10/2026
 
 runtimeRuns.cjs conserva run_ref estável, revision monotônica e todas as rodadas pendentes. acknowledgeRuns aceita o snapshot enviado e não limpa uma versão nova criada durante a chamada HTTP. Arquivo JSON corrompido provoca falha fechada para preservar evidência. runReceipt.cjs exige correspondência exata entre lote enviado e acceptedRefs retornados por syncCrmRuntimeRuns; uma resposta incompleta fica na fila para retry idempotente. A instalação na VPS deve copiar runReceipt.cjs junto com agiBridge.js e runtimeRuns.cjs. Sem migration 0028 e hooks reais, o ledger do painel continua indisponível.
+
+Snapshots legados sem `revision` são normalizados na leitura para revisão 0; o primeiro upsert gera revisão 1. Uma revisão explícita inválida é erro de integridade, não ausência de versão. Isso permite migrar a fila existente sem descartar pendentes e conserva a comparação exata de recibos.

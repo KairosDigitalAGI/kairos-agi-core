@@ -44,3 +44,7 @@ A migration `supabase/migrations/0028_crm_runtime_runs.sql` cria o ledger privad
 ## 16/10/2026 — recibo completo e retenção da fila
 
 O endpoint crm-runs retorna acceptedRefs dos registros efetivamente persistidos. A ponte compara esse conjunto ao lote enviado antes de reconhecer qualquer snapshot. Cada upsertRun requer um run_ref idempotente e incrementa revision; acknowledgeRuns verifica a revisão para evitar perda quando uma rodada muda durante o envio. A fila preserva todos os pendentes e até 250 históricos confirmados. Corrupção de arquivo falha fechada. A instalação remota precisa incluir runReceipt.cjs na mesma pasta de agiBridge.js; migration 0028 e hooks dos schedulers permanecem pendentes.
+
+## 17/10/2026 — leitura de snapshots legados
+
+Uma rodada pendente gravada antes do campo `revision` é lida como revisão 0. O recibo exato dessa versão pode confirmá-la; se houver novo upsert durante o envio, a revisão 1 permanece pendente. Uma revisão presente porém inválida gera erro e deixa o arquivo intacto. Esta compatibilidade ainda precisa ser instalada na VPS junto à ponte; não comprova execução do scheduler.

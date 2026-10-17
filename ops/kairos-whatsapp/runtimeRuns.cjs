@@ -11,10 +11,12 @@ function readRuns() {
   let parsed
   try { parsed = JSON.parse(fs.readFileSync(RUNS_PATH, 'utf8')) }
   catch { throw new Error('Ledger local de rodadas ilegível; preservado para recuperação manual.') }
-  if (!Array.isArray(parsed) || parsed.some(run => !run || typeof run.run_ref !== 'string')) {
+  if (!Array.isArray(parsed) || parsed.some(run => !run || typeof run.run_ref !== 'string' || (run.revision !== undefined && (!Number.isSafeInteger(run.revision) || run.revision < 0)))) {
     throw new Error('Ledger local de rodadas inválido; preservado para recuperação manual.')
   }
-  return parsed
+  // Snapshots written before revision existed are version 0. Keep them eligible
+  // for an exact acknowledgement instead of retrying a confirmed run forever.
+  return parsed.map(run => run.revision === undefined ? { ...run, revision: 0 } : run)
 }
 
 function saveRuns(runs) {

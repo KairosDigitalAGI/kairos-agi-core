@@ -213,3 +213,7 @@ O arquivo cifrado agora é examinado antes da confirmação. A restauração mes
 ## Atualização 16/10/2026 — recibos de rodadas do KAIROS
 
 O contrato do ledger comercial agora devolve os run_ref persistidos. A fila privada mantém revisão por snapshot e só libera o item quando o Core confirma a mesma rodada e a mesma versão enviada. Um arquivo local ilegível interrompe a sincronização sem apagar dados; a retenção guarda todos os pendentes. A migration 0028 e os hooks da VPS continuam pendentes de acesso e instalação remota, portanto o painel não deve declarar rodadas observadas apenas com esta mudança de código.
+
+## Atualização 17/10/2026 — compatibilidade do ledger local
+
+Registros locais anteriores à introdução de `revision` são interpretados como revisão 0 para permitir confirmação após recibo remoto exato. Uma atualização da mesma rodada produz revisão 1 e continua pendente se o recibo antigo chegar depois. Revisões explícitas inválidas bloqueiam a leitura, preservando o arquivo. O ledger remoto permanece indisponível até migration 0028 e instalação verificada na VPS.

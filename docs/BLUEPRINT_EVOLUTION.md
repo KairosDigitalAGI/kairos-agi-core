@@ -482,3 +482,7 @@ O Blueprint acrescenta a regra de restauração aditiva: um backup antigo não p
 ## 16/10/2026 — ledger comercial exige recibo por rodada
 
 O Blueprint passa a tratar uma confirmação por quantidade como insuficiente para limpar a fila local. Cada rodada tem identidade e revisão; somente os identificadores persistidos pelo Core confirmam a versão enviada. Esta garantia é de código preparado, não evidência de execução na VPS. A operação só se torna observável após migration, instalação e primeiro ciclo real confirmado.
+
+## 17/10/2026 — evolução gradual do outbox sem perda
+
+O Blueprint inclui compatibilidade explícita com rodadas armazenadas antes do versionamento: ausência de revisão equivale à versão 0, enquanto revisão inválida bloqueia a sincronização. Recibos antigos não podem confirmar atualizações novas. A regra protege a migração da fila local, sem presumir que a VPS já recebeu o código.

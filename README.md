@@ -278,3 +278,7 @@ No Studio, **Mesclar backup** abre o arquivo cifrado com a senha local e mostra 
 ## 16/10/2026 — proteção das rodadas comerciais
 
 A ponte de CRM foi preparada para preservar cada rodada até receber do Core a lista exata dos identificadores gravados. Uma alteração durante a sincronização continua pendente para a tentativa seguinte. A implantação na VPS e a migration 0028 ainda são necessárias antes de aparecerem rodadas reais no painel KAIROS AGI.
+
+## 17/10/2026 — compatibilidade de rodadas anteriores
+
+A fila local também reconhece rodadas pendentes criadas antes de existir o campo de revisão. Elas podem ser confirmadas por recibo exato sem apagar uma atualização posterior. O código continua aguardando instalação na VPS e a migration 0028 no Supabase mestre; o painel ainda não deve apresentar rodadas como observadas sem esses passos.

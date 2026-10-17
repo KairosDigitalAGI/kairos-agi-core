@@ -420,3 +420,10 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Preservar todas as rodadas pendentes na retenção e interromper a escrita se o arquivo local estiver corrompido.
 - [ ] Aplicar a migration 0028 no Supabase mestre e instalar runtimeRuns, runReceipt e agiBridge juntos na VPS, após acesso autenticado verificável.
 - [ ] Instrumentar os schedulers reais das 07h, 22h, 00h30 e 04h30; observar a primeira rodada completa antes de declarar o ledger operacional.
+
+## Missão 039 — compatibilidade do outbox anterior à revisão
+
+- [x] Ler snapshots legados sem `revision` como revisão 0, permitindo confirmação exata após recibo válido.
+- [x] Preservar uma atualização posterior como revisão 1 quando o recibo da revisão 0 chegar atrasado.
+- [x] Falhar fechado diante de `revision` explícita inválida, sem substituir o arquivo local.
+- [ ] Aplicar migration 0028 e instalar a ponte e os hooks na VPS mediante acesso autenticado ao ambiente correto.
