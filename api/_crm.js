@@ -115,7 +115,7 @@ export async function syncCrmEvents(body) {
   if (!events.length || events.length > MAX_BATCH) throw new Error(`Envie entre 1 e ${MAX_BATCH} eventos por lote.`)
   const rows = [...new Map(events.map(normalizeCrmEvent).map(row => [row.event_ref, row])).values()]
   const saved = await upsertCommand('crm_events', rows, 'source,event_ref')
-  return { accepted: saved.length, received: events.length, duplicatesRemoved: events.length - rows.length, syncedAt: new Date().toISOString() }
+  return { accepted: saved.length, acceptedRefs: saved.map(row => row.event_ref), received: events.length, duplicatesRemoved: events.length - rows.length, syncedAt: new Date().toISOString() }
 }
 
 export async function syncCrmRuntimeRuns(body) {

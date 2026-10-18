@@ -1,9 +1,12 @@
-function requireRunReceipt(result, runs) {
-  const expected = new Set(runs.map(run => run.run_ref))
+function requireExactReceipt(result, snapshots, key, noun) {
+  const expected = new Set(snapshots.map(snapshot => snapshot[key]))
   const confirmed = new Set(Array.isArray(result?.acceptedRefs) ? result.acceptedRefs : [])
-  if (Number(result?.accepted) !== expected.size || confirmed.size !== expected.size || [...expected].some(ref => !confirmed.has(ref))) {
-    throw new Error('O Core não confirmou todas as rodadas enviadas; fila local preservada para nova tentativa.')
+  if (expected.size !== snapshots.length || Number(result?.accepted) !== expected.size || confirmed.size !== expected.size || [...expected].some(ref => !confirmed.has(ref))) {
+    throw new Error(`O Core não confirmou todos os ${noun} enviados; fila local preservada para nova tentativa.`)
   }
 }
 
-module.exports = { requireRunReceipt }
+function requireRunReceipt(result, runs) { return requireExactReceipt(result, runs, 'run_ref', 'registros de rodada') }
+function requireEventReceipt(result, events) { return requireExactReceipt(result, events, 'event_ref', 'eventos') }
+
+module.exports = { requireRunReceipt, requireEventReceipt }

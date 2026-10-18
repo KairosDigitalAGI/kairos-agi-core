@@ -33,21 +33,31 @@ function appendEvent({ phone, eventType, direction = "system", status = "applied
 }
 
 function pendingEvents(limit = 200) {
-  if (!fs.existsSync(QUEUE_PATH)) return [];
-  return fs.readFileSync(QUEUE_PATH, "utf8").split("\n").filter(Boolean).slice(0, Math.min(limit, MAX_PENDING)).flatMap(line => {
-    try { return [JSON.parse(line)]; } catch { return []; }
-  });
+  return readEvents().slice(0, Math.min(limit, MAX_PENDING));
 }
 
 function acknowledgeEvents(ids) {
   if (!fs.existsSync(QUEUE_PATH) || !ids?.length) return 0;
   const accepted = new Set(ids.map(String));
+  const events = readEvents();
+  const kept = events.filter(event => !accepted.has(event.event_ref));
+  if (kept.length === events.length) return 0;
+  const temporary = `${QUEUE_PATH}.${process.pid}.tmp`;
+  fs.writeFileSync(temporary, kept.length ? `${kept.map(event => JSON.stringify(event)).join("\n")}\n` : "", { encoding: "utf8", mode: 0o600 });
+  fs.renameSync(temporary, QUEUE_PATH);
+  return events.length - kept.length;
+}
+
+function readEvents() {
+  if (!fs.existsSync(QUEUE_PATH)) return [];
   const lines = fs.readFileSync(QUEUE_PATH, "utf8").split("\n").filter(Boolean);
-  const kept = lines.filter(line => {
-    try { return !accepted.has(String(JSON.parse(line).event_ref)); } catch { return false; }
-  });
-  fs.writeFileSync(QUEUE_PATH, kept.length ? `${kept.join("\n")}\n` : "", { encoding: "utf8", mode: 0o600 });
-  return lines.length - kept.length;
+  try {
+    const events = lines.map(line => JSON.parse(line));
+    if (events.some(event => !event || typeof event.event_ref !== "string" || !event.event_ref.trim())) throw new Error("event_ref inválido");
+    return events;
+  } catch {
+    throw new Error("Fila local de eventos ilegível; preservada para recuperação manual.");
+  }
 }
 
 module.exports = { appendEvent, pendingEvents, acknowledgeEvents, leadSourceRef };

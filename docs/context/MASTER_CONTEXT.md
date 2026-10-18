@@ -217,3 +217,7 @@ O contrato do ledger comercial agora devolve os run_ref persistidos. A fila priv
 ## Atualização 17/10/2026 — compatibilidade do ledger local
 
 Registros locais anteriores à introdução de `revision` são interpretados como revisão 0 para permitir confirmação após recibo remoto exato. Uma atualização da mesma rodada produz revisão 1 e continua pendente se o recibo antigo chegar depois. Revisões explícitas inválidas bloqueiam a leitura, preservando o arquivo. O ledger remoto permanece indisponível até migration 0028 e instalação verificada na VPS.
+
+## Atualização 18/10/2026 — integridade do outbox de eventos
+
+Os eventos de CRM seguem a mesma regra de recibo exato das rodadas: o Core retorna os `event_ref` persistidos e a ponte só libera o lote local quando todos aparecem. Arquivo JSONL corrompido bloqueia sincronização sem perda silenciosa; confirmação preserva novos eventos. A instalação remota da ponte ainda não foi verificada.

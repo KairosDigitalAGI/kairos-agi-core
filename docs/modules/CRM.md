@@ -48,3 +48,7 @@ O endpoint crm-runs retorna acceptedRefs dos registros efetivamente persistidos.
 ## 17/10/2026 — leitura de snapshots legados
 
 Uma rodada pendente gravada antes do campo `revision` é lida como revisão 0. O recibo exato dessa versão pode confirmá-la; se houver novo upsert durante o envio, a revisão 1 permanece pendente. Uma revisão presente porém inválida gera erro e deixa o arquivo intacto. Esta compatibilidade ainda precisa ser instalada na VPS junto à ponte; não comprova execução do scheduler.
+
+## 18/10/2026 — eventos com recibo completo
+
+`syncCrmEvents` devolve `acceptedRefs` dos eventos persistidos no Supabase. `agiBridge` compara a lista ao lote enviado antes de chamar `acknowledgeEvents`; contagem isolada ou recibo parcial não bastam. `crmAudit.cjs` interrompe a leitura em JSONL corrompido e regrava o restante por arquivo temporário somente após confirmação válida. A implantação exige copiar `crmAudit.cjs`, `runReceipt.cjs` e `agiBridge.js` juntos para a VPS e observar um lote real; o código local não comprova instalação.

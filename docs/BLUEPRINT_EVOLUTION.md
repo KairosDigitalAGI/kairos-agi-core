@@ -486,3 +486,7 @@ O Blueprint passa a tratar uma confirmação por quantidade como insuficiente pa
 ## 17/10/2026 — evolução gradual do outbox sem perda
 
 O Blueprint inclui compatibilidade explícita com rodadas armazenadas antes do versionamento: ausência de revisão equivale à versão 0, enquanto revisão inválida bloqueia a sincronização. Recibos antigos não podem confirmar atualizações novas. A regra protege a migração da fila local, sem presumir que a VPS já recebeu o código.
+
+## 18/10/2026 — outbox auditável também para eventos
+
+O Blueprint estende a confirmação por identificador aos eventos do CRM. A ausência de recibo completo mantém o lote pendente; uma linha local ilegível bloqueia a sincronização para recuperação em vez de ser descartada. Esta regra melhora a integridade de dados, mas não representa mensagens enviadas nem integração remota instalada.

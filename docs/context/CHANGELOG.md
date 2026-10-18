@@ -688,3 +688,16 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 ### Limites
 - A migration 0028 e os hooks reais ainda não estão ativos no Supabase mestre e na VPS.
 - A mudança não executa campanhas nem comprova rodadas remotas.
+
+## 18/10/2026 — Missão 040 — integridade da fila de eventos
+
+### Entregue
+- `crm-events` devolve identificadores dos eventos realmente persistidos, além da contagem.
+- Ponte exige recibo exato do lote antes de remover eventos locais; recibo parcial não limpa a fila.
+- JSONL ilegível passa a interromper leitura e confirmação, preservando a evidência local.
+- Confirmação regrava via arquivo temporário e conserva eventos acrescentados após o lote enviado.
+- Testes cobrem recibo, corrupção e inclusão tardia.
+
+### Limites
+- A ponte corrigida ainda não foi instalada nem observada na VPS.
+- Nenhuma mensagem comercial foi disparada por esta mudança.

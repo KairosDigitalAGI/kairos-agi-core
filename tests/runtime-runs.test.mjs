@@ -8,7 +8,7 @@ const directory = mkdtempSync(join(tmpdir(), 'kairos-runtime-runs-test-'))
 const file = join(directory, 'runs.json')
 process.env.KAIROS_RUNTIME_RUNS_PATH = file
 const { upsertRun, pendingRuns, acknowledgeRuns } = await import('../ops/kairos-whatsapp/runtimeRuns.cjs')
-const { requireRunReceipt } = await import('../ops/kairos-whatsapp/runReceipt.cjs')
+const { requireEventReceipt, requireRunReceipt } = await import('../ops/kairos-whatsapp/runReceipt.cjs')
 after(() => { for (const name of readdirSync(directory)) unlinkSync(join(directory, name)); rmdirSync(directory); delete process.env.KAIROS_RUNTIME_RUNS_PATH })
 
 test('run outbox only acknowledges the exact snapshot remotely confirmed', () => {
@@ -28,6 +28,14 @@ test('run receipt must list every sent reference before the outbox can clear', (
   assert.throws(() => requireRunReceipt({ accepted: 1, acceptedRefs: ['a'] }, snapshots), /não confirmou/)
   assert.throws(() => requireRunReceipt({ accepted: 2, acceptedRefs: ['a', 'c'] }, snapshots), /não confirmou/)
   assert.throws(() => requireRunReceipt({ accepted: 2 }, snapshots), /não confirmou/)
+})
+
+test('event receipt must list every persisted event reference', () => {
+  const sent = [{ event_ref: 'evt-a' }, { event_ref: 'evt-b' }]
+  assert.doesNotThrow(() => requireEventReceipt({ accepted: 2, acceptedRefs: ['evt-b', 'evt-a'] }, sent))
+  assert.throws(() => requireEventReceipt({ accepted: 1, acceptedRefs: ['evt-a'] }, sent), /não confirmou/)
+  assert.throws(() => requireEventReceipt({ accepted: 2, acceptedRefs: ['evt-a', 'evt-c'] }, sent), /não confirmou/)
+  assert.throws(() => requireEventReceipt({ accepted: 2 }, sent), /não confirmou/)
 })
 
 test('legacy pending runs without revision can be acknowledged after a matching receipt', () => {

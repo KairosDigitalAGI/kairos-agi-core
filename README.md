@@ -282,3 +282,7 @@ A ponte de CRM foi preparada para preservar cada rodada até receber do Core a l
 ## 17/10/2026 — compatibilidade de rodadas anteriores
 
 A fila local também reconhece rodadas pendentes criadas antes de existir o campo de revisão. Elas podem ser confirmadas por recibo exato sem apagar uma atualização posterior. O código continua aguardando instalação na VPS e a migration 0028 no Supabase mestre; o painel ainda não deve apresentar rodadas como observadas sem esses passos.
+
+## 18/10/2026 — confirmação dos eventos do CRM
+
+A ponte agora mantém eventos locais até receber do Core os identificadores exatos persistidos. Um recibo incompleto ou arquivo de eventos ilegível interrompe a limpeza da fila; novos eventos continuam preservados. A atualização ainda precisa ser instalada e validada na VPS antes de ser considerada operacional.

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { checkCrmSyncAuth, normalizeCrmEvent, normalizeCrmLead, normalizeCrmRuntimeRun, summarizeCrmDaily, summarizeCrmRuntime, syncCrmRuntimeRuns } from '../api/_crm.js'
+import { checkCrmSyncAuth, normalizeCrmEvent, normalizeCrmLead, normalizeCrmRuntimeRun, summarizeCrmDaily, summarizeCrmRuntime, syncCrmEvents, syncCrmRuntimeRuns } from '../api/_crm.js'
 
 test('CRM sync requires the configured bearer token', () => {
   const previous = process.env.CRM_SYNC_TOKEN
@@ -122,6 +122,30 @@ test('CRM run sync returns exact persisted references for outbox confirmation', 
     const result = await syncCrmRuntimeRuns({ runs: [{ run_ref: 'campaign-2026-10-16', run_type: 'campaign', state: 'running', started_at: '2026-10-16T10:00:00Z' }] })
     assert.equal(result.accepted, 1)
     assert.deepEqual(result.acceptedRefs, ['campaign-2026-10-16'])
+  } finally {
+    globalThis.fetch = previousFetch
+    if (previousUrl === undefined) delete process.env.SUPABASE_URL
+    else process.env.SUPABASE_URL = previousUrl
+    if (previousKey === undefined) delete process.env.SUPABASE_SERVICE_ROLE_KEY
+    else process.env.SUPABASE_SERVICE_ROLE_KEY = previousKey
+  }
+})
+
+test('CRM event sync returns exact persisted references for outbox confirmation', async () => {
+  const previousUrl = process.env.SUPABASE_URL
+  const previousKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  const previousFetch = globalThis.fetch
+  process.env.SUPABASE_URL = 'https://example.supabase.co'
+  process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-only'
+  globalThis.fetch = async (_url, options) => {
+    const rows = JSON.parse(options.body)
+    assert.equal(rows.length, 1)
+    return new Response(JSON.stringify([{ ...rows[0], id: 'saved-event-1' }]), { status: 201, headers: { 'content-type': 'application/json' } })
+  }
+  try {
+    const result = await syncCrmEvents({ events: [{ event_ref: 'evt-2026-10-18', lead_source_ref: 'lead-001', event_type: 'delivery', occurred_at: '2026-10-18T10:00:00Z' }] })
+    assert.equal(result.accepted, 1)
+    assert.deepEqual(result.acceptedRefs, ['evt-2026-10-18'])
   } finally {
     globalThis.fetch = previousFetch
     if (previousUrl === undefined) delete process.env.SUPABASE_URL

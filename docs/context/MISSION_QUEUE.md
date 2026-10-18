@@ -427,3 +427,11 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Preservar uma atualização posterior como revisão 1 quando o recibo da revisão 0 chegar atrasado.
 - [x] Falhar fechado diante de `revision` explícita inválida, sem substituir o arquivo local.
 - [ ] Aplicar migration 0028 e instalar a ponte e os hooks na VPS mediante acesso autenticado ao ambiente correto.
+
+## Missão 040 — confirmação exata dos eventos de CRM
+
+- [x] Fazer a API devolver `acceptedRefs` dos eventos efetivamente persistidos.
+- [x] Exigir o recibo completo antes de confirmar o lote da fila local.
+- [x] Falhar fechado em JSONL corrompido e preservar o arquivo original.
+- [x] Regravar a fila por arquivo temporário, mantendo eventos acrescentados após o lote enviado.
+- [ ] Instalar a ponte atualizada na VPS após acesso autenticado e observar a primeira sincronização real de eventos.
