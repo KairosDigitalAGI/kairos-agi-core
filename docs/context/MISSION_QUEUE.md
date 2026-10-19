@@ -435,3 +435,10 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Falhar fechado em JSONL corrompido e preservar o arquivo original.
 - [x] Regravar a fila por arquivo temporário, mantendo eventos acrescentados após o lote enviado.
 - [ ] Instalar a ponte atualizada na VPS após acesso autenticado e observar a primeira sincronização real de eventos.
+
+## Missão 041 — ponte carregável antes da instalação
+
+- [x] Alinhar a extensão CommonJS da ponte e seus imports versionados de `crmAudit.cjs`, `runtimeRuns.cjs` e `runReceipt.cjs`.
+- [x] Atualizar o instalador para importar `agiBridge.cjs` e migrar a referência antiga sem duplicá-la.
+- [x] Testar o carregamento do módulo completo sem depender da VPS.
+- [ ] Instalar o conjunto na VPS após acesso autenticado; validar o processo real antes de declarar a ponte operacional.

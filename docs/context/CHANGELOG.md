@@ -701,3 +701,15 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 ### Limites
 - A ponte corrigida ainda não foi instalada nem observada na VPS.
 - Nenhuma mensagem comercial foi disparada por esta mudança.
+
+## 19/10/2026 — Missão 041 — carregamento da ponte da VPS
+
+### Entregue
+- Corrigida a incompatibilidade entre extensão `.js` tratada como ES module neste repositório e a implementação CommonJS da ponte.
+- `agiBridge.cjs` importa explicitamente os módulos `.cjs` de eventos e rodadas.
+- Instalador preparado para atualizar a referência antiga em vez de inserir declaração duplicada; falha antes de gravar caso faltem os pontos principais de integração.
+- Teste de carregamento de módulo incluído.
+
+### Limites
+- Teste local comprova carregamento dos módulos versionados, não instalação nem execução na VPS.
+- Migration 0028 e hooks reais dos schedulers continuam pendentes de acesso.

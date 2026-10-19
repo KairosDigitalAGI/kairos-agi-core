@@ -286,3 +286,7 @@ A fila local também reconhece rodadas pendentes criadas antes de existir o camp
 ## 18/10/2026 — confirmação dos eventos do CRM
 
 A ponte agora mantém eventos locais até receber do Core os identificadores exatos persistidos. Um recibo incompleto ou arquivo de eventos ilegível interrompe a limpeza da fila; novos eventos continuam preservados. A atualização ainda precisa ser instalada e validada na VPS antes de ser considerada operacional.
+
+## 19/10/2026 — ponte da VPS pronta para carregar
+
+O pacote versionado da ponte foi ajustado para CommonJS (`agiBridge.cjs`) e seus módulos de eventos e rodadas carregam juntos em teste local. O instalador também referencia o arquivo correto. A VPS ainda precisa receber o pacote e comprovar uma sincronização real.

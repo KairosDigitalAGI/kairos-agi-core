@@ -310,7 +310,7 @@ O runtime externo mede a fila Hunter às 22h, usa planos alternativos de nicho/c
 
 ## Ponte CRM e fila de evolução — 01/10/2026
 
-`ops/kairos-whatsapp/agiBridge.js` é o adaptador privado entre `/root/kairos3` e o Core. Ele usa um token servidor-servidor separado da autenticação do Founder, sincroniza lotes idempotentes e consulta eventos a cada minuto. O dashboard legado da VPS foi limitado a `127.0.0.1` para não expor contatos ou conversas na rede pública.
+`ops/kairos-whatsapp/agiBridge.cjs` é o adaptador privado entre `/root/kairos3` e o Core. Ele usa um token servidor-servidor separado da autenticação do Founder, sincroniza lotes idempotentes e consulta eventos a cada minuto. O dashboard legado da VPS foi limitado a `127.0.0.1` para não expor contatos ou conversas na rede pública.
 
 As tabelas `command.crm_leads`, `command.dev_requests` e `command.dev_request_events` têm RLS e privilégios restritos ao `service_role`. `api/_crm.js` centraliza normalização, paginação, confirmação e eventos; `api/hunter.mjs` reaproveita a função serverless existente para manter o projeto dentro da cota do deployment. `useCrm` e `CrmPage` são apenas a projeção autenticada desse estado.
 
@@ -361,10 +361,12 @@ privateCloneRestore.ts calcula a mesclagem de um backup cifrado já validado. Em
 
 ## Outbox de rodadas comerciais — 16/10/2026
 
-runtimeRuns.cjs conserva run_ref estável, revision monotônica e todas as rodadas pendentes. acknowledgeRuns aceita o snapshot enviado e não limpa uma versão nova criada durante a chamada HTTP. Arquivo JSON corrompido provoca falha fechada para preservar evidência. runReceipt.cjs exige correspondência exata entre lote enviado e acceptedRefs retornados por syncCrmRuntimeRuns; uma resposta incompleta fica na fila para retry idempotente. A instalação na VPS deve copiar runReceipt.cjs junto com agiBridge.js e runtimeRuns.cjs. Sem migration 0028 e hooks reais, o ledger do painel continua indisponível.
+runtimeRuns.cjs conserva run_ref estável, revision monotônica e todas as rodadas pendentes. acknowledgeRuns aceita o snapshot enviado e não limpa uma versão nova criada durante a chamada HTTP. Arquivo JSON corrompido provoca falha fechada para preservar evidência. runReceipt.cjs exige correspondência exata entre lote enviado e acceptedRefs retornados por syncCrmRuntimeRuns; uma resposta incompleta fica na fila para retry idempotente. A instalação na VPS deve copiar runReceipt.cjs junto com agiBridge.cjs e runtimeRuns.cjs. Sem migration 0028 e hooks reais, o ledger do painel continua indisponível.
 
 Snapshots legados sem `revision` são normalizados na leitura para revisão 0; o primeiro upsert gera revisão 1. Uma revisão explícita inválida é erro de integridade, não ausência de versão. Isso permite migrar a fila existente sem descartar pendentes e conserva a comparação exata de recibos.
 
 ## Outbox de eventos de CRM — 18/10/2026
 
 `crmAudit.cjs` trata o JSONL como fila auditável: qualquer linha ilegível interrompe a leitura, e a confirmação de identificadores persistidos regrava o restante por arquivo temporário. `syncCrmEvents` devolve `acceptedRefs`, validados pela mesma função de recibo exato usada nas rodadas. A ponte só confirma eventos após correspondência integral do lote; eventos criados durante o envio permanecem na fila. Sem instalação na VPS, essa garantia é apenas de código preparado.
+
+O pacote da ponte usa CommonJS em `agiBridge.cjs`, com imports explícitos de `crmAudit.cjs`, `runtimeRuns.cjs` e `runReceipt.cjs`. O teste de carregamento evita entregar um arquivo `.js` interpretado como ES module pelo projeto; o instalador da VPS passa a referenciar a extensão correta. Isto não instala o pacote remoto.

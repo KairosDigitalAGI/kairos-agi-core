@@ -1,12 +1,15 @@
 const fs = require('fs')
 const path = '/root/kairos3/bot.js'
 let source = fs.readFileSync(path, 'utf8')
-if (!source.includes('const agiBridge = require("./src/agiBridge")')) {
-  source = source.replace('const campanhaAprovada = require("./src/campanhaAprovada");', 'const campanhaAprovada = require("./src/campanhaAprovada");\nconst agiBridge = require("./src/agiBridge");')
+source = source.replace('const agiBridge = require("./src/agiBridge");', 'const agiBridge = require("./src/agiBridge.cjs");')
+if (!source.includes('const agiBridge = require("./src/agiBridge.cjs")')) {
+  source = source.replace('const campanhaAprovada = require("./src/campanhaAprovada");', 'const campanhaAprovada = require("./src/campanhaAprovada");\nconst agiBridge = require("./src/agiBridge.cjs");')
 }
+if (!source.includes('const agiBridge = require("./src/agiBridge.cjs")')) throw new Error('Ponto de importação do agiBridge não encontrado; bot original preservado.')
 if (!source.includes('agiBridge.start({')) {
   source = source.replace('  socialMedia.setGlobalSend(globalSendFn);', '  socialMedia.setGlobalSend(globalSendFn);\n  agiBridge.start({ notify: (text) => globalSendFn(MATHEUS, text), logger });')
 }
+if (!source.includes('agiBridge.start({')) throw new Error('Ponto de inicialização do agiBridge não encontrado; bot original preservado.')
 if (!source.includes('case "/upgrade":')) {
   source = source.replace('    switch (slash) {', `    switch (slash) {
       case "/upgrade": {

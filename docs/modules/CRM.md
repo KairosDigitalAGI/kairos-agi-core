@@ -4,7 +4,7 @@ O KAIROS AGI consulta a base comercial privada do runtime WhatsApp por uma ponte
 
 ## Fluxo
 
-1. `ops/kairos-whatsapp/agiBridge.js` lê o banco privado da VPS, remove duplicidades pelo identificador estável e sincroniza lotes a cada dois minutos.
+1. `ops/kairos-whatsapp/agiBridge.cjs` lê o banco privado da VPS, remove duplicidades pelo identificador estável e sincroniza lotes a cada dois minutos.
 2. `POST /api/hunter?action=crm-sync` exige `CRM_SYNC_TOKEN`, normaliza os campos e faz upsert pelo par `source/source_ref`.
 3. `GET /api/hunter?action=crm` exige a autenticação do Painel Operacional, pagina toda a base e calcula indicadores somente a partir dos registros retornados.
 4. `CrmPage` oferece busca, filtro por etapa, métricas verificadas e revelação individual de telefone.
@@ -39,11 +39,11 @@ O ledger mede fatos recebidos pelo Core, mas ainda não atribui eventos a um ide
 
 A migration `supabase/migrations/0028_crm_runtime_runs.sql` cria o ledger privado e idempotente `command.crm_runtime_runs`. Cada rodada possui `run_ref`, tipo (`campaign`, `replenishment` ou `recovery`), estado, horários e contadores observados. `POST /api/hunter?action=crm-runs` aceita somente a ponte autenticada por `CRM_SYNC_TOKEN`; o painel operacional lê as rodadas pela consulta CRM já existente.
 
-`ops/kairos-whatsapp/runtimeRuns.cjs` mantém snapshots locais pendentes até confirmação do Core, e `agiBridge.js` remove o pendente somente depois do aceite remoto. A migration ainda precisa ser aplicada no Supabase mestre e os schedulers da VPS precisam chamar `upsertRun()` no início e no encerramento de cada ciclo. Enquanto isso, a interface declara o ledger indisponível e não infere resultados a partir do horário.
+`ops/kairos-whatsapp/runtimeRuns.cjs` mantém snapshots locais pendentes até confirmação do Core, e `agiBridge.cjs` remove o pendente somente depois do aceite remoto. A migration ainda precisa ser aplicada no Supabase mestre e os schedulers da VPS precisam chamar `upsertRun()` no início e no encerramento de cada ciclo. Enquanto isso, a interface declara o ledger indisponível e não infere resultados a partir do horário.
 
 ## 16/10/2026 — recibo completo e retenção da fila
 
-O endpoint crm-runs retorna acceptedRefs dos registros efetivamente persistidos. A ponte compara esse conjunto ao lote enviado antes de reconhecer qualquer snapshot. Cada upsertRun requer um run_ref idempotente e incrementa revision; acknowledgeRuns verifica a revisão para evitar perda quando uma rodada muda durante o envio. A fila preserva todos os pendentes e até 250 históricos confirmados. Corrupção de arquivo falha fechada. A instalação remota precisa incluir runReceipt.cjs na mesma pasta de agiBridge.js; migration 0028 e hooks dos schedulers permanecem pendentes.
+O endpoint crm-runs retorna acceptedRefs dos registros efetivamente persistidos. A ponte compara esse conjunto ao lote enviado antes de reconhecer qualquer snapshot. Cada upsertRun requer um run_ref idempotente e incrementa revision; acknowledgeRuns verifica a revisão para evitar perda quando uma rodada muda durante o envio. A fila preserva todos os pendentes e até 250 históricos confirmados. Corrupção de arquivo falha fechada. A instalação remota precisa incluir runReceipt.cjs na mesma pasta de agiBridge.cjs; migration 0028 e hooks dos schedulers permanecem pendentes.
 
 ## 17/10/2026 — leitura de snapshots legados
 
@@ -51,4 +51,8 @@ Uma rodada pendente gravada antes do campo `revision` é lida como revisão 0. O
 
 ## 18/10/2026 — eventos com recibo completo
 
-`syncCrmEvents` devolve `acceptedRefs` dos eventos persistidos no Supabase. `agiBridge` compara a lista ao lote enviado antes de chamar `acknowledgeEvents`; contagem isolada ou recibo parcial não bastam. `crmAudit.cjs` interrompe a leitura em JSONL corrompido e regrava o restante por arquivo temporário somente após confirmação válida. A implantação exige copiar `crmAudit.cjs`, `runReceipt.cjs` e `agiBridge.js` juntos para a VPS e observar um lote real; o código local não comprova instalação.
+`syncCrmEvents` devolve `acceptedRefs` dos eventos persistidos no Supabase. `agiBridge` compara a lista ao lote enviado antes de chamar `acknowledgeEvents`; contagem isolada ou recibo parcial não bastam. `crmAudit.cjs` interrompe a leitura em JSONL corrompido e regrava o restante por arquivo temporário somente após confirmação válida. A implantação exige copiar `crmAudit.cjs`, `runReceipt.cjs` e `agiBridge.cjs` juntos para a VPS e observar um lote real; o código local não comprova instalação.
+
+## 19/10/2026 — pacote CommonJS da ponte
+
+A ponte exporta CommonJS em `agiBridge.cjs` e carrega explicitamente os três módulos `.cjs` versionados. O instalador aponta para a nova extensão e substitui o import legado caso exista. O teste local importa o pacote completo; a instalação na VPS e o primeiro lote observado seguem pendentes.

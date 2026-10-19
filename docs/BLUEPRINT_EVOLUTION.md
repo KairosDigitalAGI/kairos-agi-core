@@ -490,3 +490,7 @@ O Blueprint inclui compatibilidade explícita com rodadas armazenadas antes do v
 ## 18/10/2026 — outbox auditável também para eventos
 
 O Blueprint estende a confirmação por identificador aos eventos do CRM. A ausência de recibo completo mantém o lote pendente; uma linha local ilegível bloqueia a sincronização para recuperação em vez de ser descartada. Esta regra melhora a integridade de dados, mas não representa mensagens enviadas nem integração remota instalada.
+
+## 19/10/2026 — pacote implantável deve carregar antes de operar
+
+O contrato da ponte passa a incluir compatibilidade explícita de módulos CommonJS: extensão e imports precisam ser carregáveis em teste local antes de copiar para a VPS. Isto separa integridade de código da confirmação de instalação e execução remota.

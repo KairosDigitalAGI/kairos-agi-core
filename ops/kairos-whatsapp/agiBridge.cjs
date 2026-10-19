@@ -1,7 +1,7 @@
 const fs = require('fs')
 const crypto = require('crypto')
-const { acknowledgeEvents, pendingEvents } = require('./crmAudit')
-const { acknowledgeRuns, pendingRuns } = require('./runtimeRuns')
+const { acknowledgeEvents, pendingEvents } = require('./crmAudit.cjs')
+const { acknowledgeRuns, pendingRuns } = require('./runtimeRuns.cjs')
 const { requireEventReceipt, requireRunReceipt } = require('./runReceipt.cjs')
 
 const DB_PATH = '/root/kairos3/db.json'

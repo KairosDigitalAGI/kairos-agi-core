@@ -221,3 +221,7 @@ Registros locais anteriores à introdução de `revision` são interpretados com
 ## Atualização 18/10/2026 — integridade do outbox de eventos
 
 Os eventos de CRM seguem a mesma regra de recibo exato das rodadas: o Core retorna os `event_ref` persistidos e a ponte só libera o lote local quando todos aparecem. Arquivo JSONL corrompido bloqueia sincronização sem perda silenciosa; confirmação preserva novos eventos. A instalação remota da ponte ainda não foi verificada.
+
+## Atualização 19/10/2026 — pacote da ponte carregável
+
+A ponte da VPS foi renomeada para `agiBridge.cjs` para corresponder ao CommonJS real, e importa explicitamente os módulos `.cjs` versionados. O instalador migra a referência anterior e o teste local confirma o carregamento conjunto. A implantação e a observação do processo remoto continuam pendentes.
