@@ -56,3 +56,7 @@ Uma rodada pendente gravada antes do campo `revision` é lida como revisão 0. O
 ## 19/10/2026 — pacote CommonJS da ponte
 
 A ponte exporta CommonJS em `agiBridge.cjs` e carrega explicitamente os três módulos `.cjs` versionados. O instalador aponta para a nova extensão e substitui o import legado caso exista. O teste local importa o pacote completo; a instalação na VPS e o primeiro lote observado seguem pendentes.
+
+## 21/10/2026 — preflight do instalador
+
+Antes de alterar o runtime, copiar `agiBridge.cjs`, `crmAudit.cjs`, `runtimeRuns.cjs`, `runReceipt.cjs` e `bridgeInstaller.cjs` para a localização correspondente da VPS e executar `node install-agi-bridge.cjs --check`. A saída indica se `bot.js` ou `dashboard.js` mudariam. Estrutura desconhecida, módulos ausentes e instalação parcial geram erro sem escrita. A execução normal cria backups e arquivos temporários antes da troca. Ainda não houve execução nem verificação remota; a migration 0028 também permanece pendente.

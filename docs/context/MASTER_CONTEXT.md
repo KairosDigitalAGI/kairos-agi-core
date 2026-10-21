@@ -225,3 +225,7 @@ Os eventos de CRM seguem a mesma regra de recibo exato das rodadas: o Core retor
 ## Atualização 19/10/2026 — pacote da ponte carregável
 
 A ponte da VPS foi renomeada para `agiBridge.cjs` para corresponder ao CommonJS real, e importa explicitamente os módulos `.cjs` versionados. O instalador migra a referência anterior e o teste local confirma o carregamento conjunto. A implantação e a observação do processo remoto continuam pendentes.
+
+## Atualização 21/10/2026 — preflight da instalação remota
+
+O instalador da ponte possui transformações puras, valida o pacote e oferece `--check` somente leitura. Ele interrompe a operação quando a estrutura do bot ou do dashboard divergir do esperado; prepara backups e arquivos temporários antes de substituir. Nenhuma instalação na VPS foi realizada nesta atualização.

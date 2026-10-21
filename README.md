@@ -290,3 +290,7 @@ A ponte agora mantém eventos locais até receber do Core os identificadores exa
 ## 19/10/2026 — ponte da VPS pronta para carregar
 
 O pacote versionado da ponte foi ajustado para CommonJS (`agiBridge.cjs`) e seus módulos de eventos e rodadas carregam juntos em teste local. O instalador também referencia o arquivo correto. A VPS ainda precisa receber o pacote e comprovar uma sincronização real.
+
+## 21/10/2026 — instalação da ponte com prévia
+
+O instalador da VPS agora permite `--check` para verificar o pacote e mostrar as alterações planejadas sem gravação. A instalação normal cria backups e interrompe a operação se o código legado divergir do esperado. Nada foi instalado no WhatsApp nesta entrega; o próximo passo é executar a prévia e validar a integração na VPS correta.

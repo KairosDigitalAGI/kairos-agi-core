@@ -370,3 +370,7 @@ Snapshots legados sem `revision` são normalizados na leitura para revisão 0; o
 `crmAudit.cjs` trata o JSONL como fila auditável: qualquer linha ilegível interrompe a leitura, e a confirmação de identificadores persistidos regrava o restante por arquivo temporário. `syncCrmEvents` devolve `acceptedRefs`, validados pela mesma função de recibo exato usada nas rodadas. A ponte só confirma eventos após correspondência integral do lote; eventos criados durante o envio permanecem na fila. Sem instalação na VPS, essa garantia é apenas de código preparado.
 
 O pacote da ponte usa CommonJS em `agiBridge.cjs`, com imports explícitos de `crmAudit.cjs`, `runtimeRuns.cjs` e `runReceipt.cjs`. O teste de carregamento evita entregar um arquivo `.js` interpretado como ES module pelo projeto; o instalador da VPS passa a referenciar a extensão correta. Isto não instala o pacote remoto.
+
+## Preflight da ponte WhatsApp — 21/10/2026
+
+`bridgeInstaller.cjs` transforma em memória os arquivos legados e falha diante de âncoras ausentes, duplicadas ou parcialmente instaladas. `install-agi-bridge.cjs --check` verifica os módulos em `/root/kairos3/src` e informa quais arquivos mudariam sem escrita. A execução normal prepara backups e arquivos temporários antes de substituir `bot.js` e `dashboard.js`; tenta restaurar o primeiro arquivo caso a segunda substituição falhe. A instalação real e os hooks do runtime dependem de acesso verificável à VPS.

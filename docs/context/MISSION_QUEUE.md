@@ -442,3 +442,11 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Atualizar o instalador para importar `agiBridge.cjs` e migrar a referência antiga sem duplicá-la.
 - [x] Testar o carregamento do módulo completo sem depender da VPS.
 - [ ] Instalar o conjunto na VPS após acesso autenticado; validar o processo real antes de declarar a ponte operacional.
+
+## Missão 042 — instalação verificável da ponte
+
+- [x] Separar transformações puras e testáveis de `bot.js` e `dashboard.js` da escrita no sistema remoto.
+- [x] Disponibilizar `--check` para validar dependências e mostrar quais arquivos mudariam sem gravar.
+- [x] Falhar fechado quando pontos de integração estiverem ausentes, duplicados ou parcialmente instalados.
+- [x] Fazer cópia de segurança e preparar arquivos temporários antes de substituir os originais.
+- [ ] Executar o preflight e instalar na VPS correta com acesso autenticado; verificar processo, CRM e primeiro lote real.

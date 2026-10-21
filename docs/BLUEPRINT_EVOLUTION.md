@@ -494,3 +494,7 @@ O Blueprint estende a confirmação por identificador aos eventos do CRM. A aus�
 ## 19/10/2026 — pacote implantável deve carregar antes de operar
 
 O contrato da ponte passa a incluir compatibilidade explícita de módulos CommonJS: extensão e imports precisam ser carregáveis em teste local antes de copiar para a VPS. Isto separa integridade de código da confirmação de instalação e execução remota.
+
+## 21/10/2026 — instalação remota deve ter preflight
+
+O Blueprint exige prévia somente leitura, validação de âncoras e cópias de segurança para adaptar código legado na VPS. Um script preparado não é prova de instalação: somente processo remoto observado, recibos e dados persistidos comprovam a integração.

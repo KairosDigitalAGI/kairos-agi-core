@@ -713,3 +713,16 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 ### Limites
 - Teste local comprova carregamento dos módulos versionados, não instalação nem execução na VPS.
 - Migration 0028 e hooks reais dos schedulers continuam pendentes de acesso.
+
+## 21/10/2026 — Missão 042 — preflight do instalador da ponte
+
+### Entregue
+- Extraídas transformações testáveis de `bot.js` e `dashboard.js` para `bridgeInstaller.cjs`.
+- Instalador agora verifica os quatro módulos necessários e aceita `--check` sem escrever arquivos.
+- Âncoras ausentes, duplicadas ou parcialmente instaladas interrompem a operação antes da gravação.
+- Cópias de segurança e arquivos temporários precedem a substituição; falha na substituição tenta restaurar os originais.
+- Quatro testes cobrem instalação idempotente, import legado, falhas fechadas e binding privado.
+
+### Limites
+- Não houve execução na VPS nem alteração do processo WhatsApp.
+- A substituição de dois arquivos não constitui transação atômica do sistema; backups permitem recuperação, mas a execução remota ainda precisa ser acompanhada.
