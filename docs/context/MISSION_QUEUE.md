@@ -450,3 +450,10 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Falhar fechado quando pontos de integração estiverem ausentes, duplicados ou parcialmente instalados.
 - [x] Fazer cópia de segurança e preparar arquivos temporários antes de substituir os originais.
 - [ ] Executar o preflight e instalar na VPS correta com acesso autenticado; verificar processo, CRM e primeiro lote real.
+
+## Missão 043 — registro local recuperável do Mapa
+
+- [x] Preservar localmente entradas quando a API do Mapa responder 402 ou 503, sem armazenar credenciais.
+- [x] Disponibilizar `--queue-only` e `--flush` para registrar agora e sincronizar depois.
+- [x] Falhar fechado se a fila JSONL estiver corrompida e comparar com o Mapa remoto antes de reenviar.
+- [ ] Sincronizar a fila após a Vercel voltar a servir a API; confirmar as entradas remotas no Mapa.

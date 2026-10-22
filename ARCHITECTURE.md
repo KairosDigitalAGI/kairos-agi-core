@@ -374,3 +374,7 @@ O pacote da ponte usa CommonJS em `agiBridge.cjs`, com imports explícitos de `c
 ## Preflight da ponte WhatsApp — 21/10/2026
 
 `bridgeInstaller.cjs` transforma em memória os arquivos legados e falha diante de âncoras ausentes, duplicadas ou parcialmente instaladas. `install-agi-bridge.cjs --check` verifica os módulos em `/root/kairos3/src` e informa quais arquivos mudariam sem escrita. A execução normal prepara backups e arquivos temporários antes de substituir `bot.js` e `dashboard.js`; tenta restaurar o primeiro arquivo caso a segunda substituição falhe. A instalação real e os hooks do runtime dependem de acesso verificável à VPS.
+
+## Outbox do Mapa — 22/10/2026
+
+`scripts/project-log-outbox.mjs` guarda somente o corpo público da futura entrada em `.kairos-local/project-log-outbox.jsonl`, excluído do Git. `log-update.mjs` usa o outbox quando a API responde 402/503. `--flush` faz GET para evitar reenvio de registros já visíveis e POST sequencial dos demais, removendo cada item apenas após confirmação. Falhas e JSONL corrompido preservam o arquivo. A fila não substitui `command.project_log` nem prova implantação.

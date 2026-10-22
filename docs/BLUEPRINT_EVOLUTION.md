@@ -498,3 +498,7 @@ O contrato da ponte passa a incluir compatibilidade explícita de módulos Commo
 ## 21/10/2026 — instalação remota deve ter preflight
 
 O Blueprint exige prévia somente leitura, validação de âncoras e cópias de segurança para adaptar código legado na VPS. Um script preparado não é prova de instalação: somente processo remoto observado, recibos e dados persistidos comprovam a integração.
+
+## 22/10/2026 — Mapa append-only com tolerância à indisponibilidade
+
+Quando o endpoint do Mapa estiver indisponível, uma entrada pode ficar em outbox privado local para sincronização posterior, mas não é apresentada como publicada. A remoção exige confirmação remota; credenciais não entram na fila. Esse fallback não altera registros antigos nem contorna bloqueio da hospedagem.

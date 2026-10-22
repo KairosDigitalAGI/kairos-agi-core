@@ -726,3 +726,16 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 ### Limites
 - Não houve execução na VPS nem alteração do processo WhatsApp.
 - A substituição de dois arquivos não constitui transação atômica do sistema; backups permitem recuperação, mas a execução remota ainda precisa ser acompanhada.
+
+## 22/10/2026 — Missão 043 — outbox local do Mapa do Projeto
+
+### Entregue
+- Resposta 402/503 da API deixa uma entrada pendente em `.kairos-local/project-log-outbox.jsonl`, fora do Git e sem credenciais.
+- `--queue-only` registra um item localmente; `--flush` consulta o Mapa e envia os itens ausentes quando o serviço voltar.
+- JSONL inválido interrompe a operação sem substituir o arquivo; escrita usa arquivo temporário.
+- Testes cobrem a CLI, duplicata local, corrupção, 402 e sincronização posterior.
+- Corrigida antes da entrega uma declaração duplicada no fluxo de sucesso da CLI, detectada ao executar `--queue-only` de ponta a ponta.
+
+### Limites
+- Entrada em fila local não é entrada publicada no Mapa. A confirmação exige resposta remota e o serviço continua bloqueado por 402.
+- O GET remoto traz os 500 itens mais recentes; uma entrada muito antiga fora dessa janela pode precisar de revisão manual antes de reenviar.

@@ -229,3 +229,7 @@ A ponte da VPS foi renomeada para `agiBridge.cjs` para corresponder ao CommonJS 
 ## Atualização 21/10/2026 — preflight da instalação remota
 
 O instalador da ponte possui transformações puras, valida o pacote e oferece `--check` somente leitura. Ele interrompe a operação quando a estrutura do bot ou do dashboard divergir do esperado; prepara backups e arquivos temporários antes de substituir. Nenhuma instalação na VPS foi realizada nesta atualização.
+
+## Atualização 22/10/2026 — Mapa indisponível e outbox local
+
+A API pública do Mapa respondeu 402 `DEPLOYMENT_DISABLED` ao registrar a Missão 042. `log-update.mjs` agora preserva entradas recusadas por 402/503 em fila local ignorada pelo Git e oferece `--flush` para sincronização posterior. Uma entrada pendente não deve ser contada como registrada no Supabase. Nenhum pagamento ou desbloqueio da Vercel foi executado.

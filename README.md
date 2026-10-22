@@ -294,3 +294,7 @@ O pacote versionado da ponte foi ajustado para CommonJS (`agiBridge.cjs`) e seus
 ## 21/10/2026 — instalação da ponte com prévia
 
 O instalador da VPS agora permite `--check` para verificar o pacote e mostrar as alterações planejadas sem gravação. A instalação normal cria backups e interrompe a operação se o código legado divergir do esperado. Nada foi instalado no WhatsApp nesta entrega; o próximo passo é executar a prévia e validar a integração na VPS correta.
+
+## 22/10/2026 — histórico preservado durante indisponibilidade
+
+O Mapa do Projeto está indisponível pela resposta 402 da hospedagem. Registros recusados por 402/503 ficam numa fila local privada, fora do Git, e podem ser sincronizados com `node scripts/log-update.mjs --flush` quando a API voltar. Estar na fila não significa aparecer no painel. Nenhum pagamento foi feito.
