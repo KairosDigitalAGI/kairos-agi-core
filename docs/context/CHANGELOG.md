@@ -739,3 +739,8 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 ### Limites
 - Entrada em fila local não é entrada publicada no Mapa. A confirmação exige resposta remota e o serviço continua bloqueado por 402.
 - O GET remoto traz os 500 itens mais recentes; uma entrada muito antiga fora dessa janela pode precisar de revisão manual antes de reenviar.
+
+### Confirmação remota no mesmo dia
+- A API voltou a responder 200 com fonte `real`.
+- `--flush` recebeu confirmação para quatro entradas, deixando zero pendente no outbox local.
+- O bloqueio 402 foi transitório; não houve pagamento. A instalação da ponte na VPS e a migration 0028 continuam pendentes.

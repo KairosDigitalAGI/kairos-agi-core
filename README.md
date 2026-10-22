@@ -297,4 +297,4 @@ O instalador da VPS agora permite `--check` para verificar o pacote e mostrar as
 
 ## 22/10/2026 — histórico preservado durante indisponibilidade
 
-O Mapa do Projeto está indisponível pela resposta 402 da hospedagem. Registros recusados por 402/503 ficam numa fila local privada, fora do Git, e podem ser sincronizados com `node scripts/log-update.mjs --flush` quando a API voltar. Estar na fila não significa aparecer no painel. Nenhum pagamento foi feito.
+O Mapa do Projeto respondeu 402 temporariamente. Registros recusados por 402/503 ficam numa fila local privada, fora do Git, e podem ser sincronizados com `node scripts/log-update.mjs --flush` quando a API voltar. Quatro registros foram confirmados após a recuperação e a fila ficou vazia; nenhum pagamento foi feito.

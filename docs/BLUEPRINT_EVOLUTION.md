@@ -502,3 +502,5 @@ O Blueprint exige prévia somente leitura, validação de âncoras e cópias de 
 ## 22/10/2026 — Mapa append-only com tolerância à indisponibilidade
 
 Quando o endpoint do Mapa estiver indisponível, uma entrada pode ficar em outbox privado local para sincronização posterior, mas não é apresentada como publicada. A remoção exige confirmação remota; credenciais não entram na fila. Esse fallback não altera registros antigos nem contorna bloqueio da hospedagem.
+
+A primeira recuperação foi observada: quatro entradas saíram do outbox somente após aceite da API. A distinção entre pendente local e persistido remoto permanece obrigatória em incidentes futuros.

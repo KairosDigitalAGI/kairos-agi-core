@@ -46,3 +46,5 @@ node scripts/log-update.mjs --agent="claude-code" --phase="Fase 14" --type="done
 ## 22/10/2026 — fila local quando a API está indisponível
 
 Se o endpoint responder 402 ou 503, `scripts/log-update.mjs` preserva a entrada em `.kairos-local/project-log-outbox.jsonl` e informa que ela ainda não está no Mapa. A pasta é ignorada pelo Git; não inclua dados confidenciais na descrição, pois o destino final tem leitura pública. Sem credenciais ou sem rede, `--queue-only` faz apenas o registro local. Quando o serviço voltar, use `node scripts/log-update.mjs --flush` com `KAIROS_USER` e `KAIROS_PASS` no ambiente. O comando consulta as entradas remotas recentes antes de enviar e remove cada item local só depois de confirmação. A consulta é limitada aos 500 registros mais recentes; para itens antigos fora da janela, revise o histórico antes do reenvio.
+
+No primeiro uso, após a resposta 402, a API voltou a `source: real`; quatro registros pendentes foram aceitos e o outbox ficou vazio. Esse resultado comprova a recuperação do diário, sem inferir implantação de outros módulos.

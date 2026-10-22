@@ -378,3 +378,5 @@ O pacote da ponte usa CommonJS em `agiBridge.cjs`, com imports explícitos de `c
 ## Outbox do Mapa — 22/10/2026
 
 `scripts/project-log-outbox.mjs` guarda somente o corpo público da futura entrada em `.kairos-local/project-log-outbox.jsonl`, excluído do Git. `log-update.mjs` usa o outbox quando a API responde 402/503. `--flush` faz GET para evitar reenvio de registros já visíveis e POST sequencial dos demais, removendo cada item apenas após confirmação. Falhas e JSONL corrompido preservam o arquivo. A fila não substitui `command.project_log` nem prova implantação.
+
+Após retorno da API no mesmo dia, quatro registros foram confirmados por POST e a fila local ficou vazia. Esta observação valida o caminho de recuperação do Mapa, não o estado do runtime WhatsApp.
