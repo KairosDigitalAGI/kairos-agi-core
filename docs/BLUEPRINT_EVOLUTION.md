@@ -504,3 +504,7 @@ O Blueprint exige prévia somente leitura, validação de âncoras e cópias de 
 Quando o endpoint do Mapa estiver indisponível, uma entrada pode ficar em outbox privado local para sincronização posterior, mas não é apresentada como publicada. A remoção exige confirmação remota; credenciais não entram na fila. Esse fallback não altera registros antigos nem contorna bloqueio da hospedagem.
 
 A primeira recuperação foi observada: quatro entradas saíram do outbox somente após aceite da API. A distinção entre pendente local e persistido remoto permanece obrigatória em incidentes futuros.
+
+## 23/10/2026 — instalador recuperável antes da operação
+
+O Blueprint exige que a adaptação de arquivos legados preserve permissões e backups, remova temporários após falha e teste restauração quando a segunda troca falhar. A validação local aumenta a segurança do pacote, mas não é evidência de que o KAIROS remoto esteja executando a ponte.

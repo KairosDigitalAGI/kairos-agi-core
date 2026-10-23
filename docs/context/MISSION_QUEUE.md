@@ -457,3 +457,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Disponibilizar `--queue-only` e `--flush` para registrar agora e sincronizar depois.
 - [x] Falhar fechado se a fila JSONL estiver corrompida e comparar com o Mapa remoto antes de reenviar.
 - [x] Sincronizar a fila após a Vercel voltar a servir a API; quatro entradas confirmadas e zero pendente local.
+
+## Missão 044 — instalação recuperável da ponte
+
+- [x] Exercitar o instalador completo em diretório temporário, inclusive `--check`, instalação repetida e falha na segunda substituição.
+- [x] Preservar o modo dos arquivos substituídos, manter backups exclusivos e limpar arquivos temporários após falha.
+- [ ] Executar `--check` e instalar somente na VPS correta com acesso autenticado; observar o processo, aplicar migration 0028 no Supabase mestre e confirmar o primeiro ciclo real.

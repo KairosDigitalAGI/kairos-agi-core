@@ -380,3 +380,7 @@ O pacote da ponte usa CommonJS em `agiBridge.cjs`, com imports explícitos de `c
 `scripts/project-log-outbox.mjs` guarda somente o corpo público da futura entrada em `.kairos-local/project-log-outbox.jsonl`, excluído do Git. `log-update.mjs` usa o outbox quando a API responde 402/503. `--flush` faz GET para evitar reenvio de registros já visíveis e POST sequencial dos demais, removendo cada item apenas após confirmação. Falhas e JSONL corrompido preservam o arquivo. A fila não substitui `command.project_log` nem prova implantação.
 
 Após retorno da API no mesmo dia, quatro registros foram confirmados por POST e a fila local ficou vazia. Esta observação valida o caminho de recuperação do Mapa, não o estado do runtime WhatsApp.
+
+## Instalação recuperável da ponte — 23/10/2026
+
+`install-agi-bridge.cjs` separa preflight e escrita via `installBridge`. Cada arquivo alterado recebe backup exclusivo e temporário com modo original antes da substituição. Falha na segunda troca restaura a primeira a partir do backup e remove temporários; falha no rollback expõe erro agregado e conserva os backups. Esta proteção foi testada localmente e não equivale a implantação na VPS.

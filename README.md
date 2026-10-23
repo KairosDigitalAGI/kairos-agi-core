@@ -298,3 +298,7 @@ O instalador da VPS agora permite `--check` para verificar o pacote e mostrar as
 ## 22/10/2026 — histórico preservado durante indisponibilidade
 
 O Mapa do Projeto respondeu 402 temporariamente. Registros recusados por 402/503 ficam numa fila local privada, fora do Git, e podem ser sincronizados com `node scripts/log-update.mjs --flush` quando a API voltar. Quatro registros foram confirmados após a recuperação e a fila ficou vazia; nenhum pagamento foi feito.
+
+## 23/10/2026 — instalador da ponte
+
+O instalador da ponte WhatsApp foi validado em diretório temporário, com preflight, repetição segura e restauração após falha simulada. Backups preservam os arquivos originais e temporários são removidos. A VPS e a migration 0028 ainda exigem implantação e verificação autenticadas.

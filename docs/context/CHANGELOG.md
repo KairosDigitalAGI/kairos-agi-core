@@ -1,5 +1,12 @@
 # Changelog
 
+## 23/10/2026 — Missão 044: recuperação do instalador da ponte
+
+- `installBridge` permite validar o fluxo completo em diretório temporário, sem atingir a VPS.
+- Pré-voo permanece somente leitura; substituição preserva o modo original, cria backups exclusivos e limpa temporários mesmo após falha.
+- Teste simula falha na segunda substituição e verifica restauração de `bot.js` e preservação de `dashboard.js`.
+- Limite: a troca dos dois arquivos ainda não é atômica; backups precisam ser preservados para recuperação manual se o rollback falhar. Nenhuma instalação remota ou migration 0028 foi executada.
+
 ## 12/10/2026 — Missão 035: backup criptografado do cofre privado
 
 - O Studio exporta todo o cofre local para `.kairos-vault` cifrado com AES-256-GCM.

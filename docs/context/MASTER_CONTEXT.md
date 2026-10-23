@@ -235,3 +235,7 @@ O instalador da ponte possui transformações puras, valida o pacote e oferece `
 A API pública do Mapa respondeu 402 `DEPLOYMENT_DISABLED` ao registrar a Missão 042. `log-update.mjs` agora preserva entradas recusadas por 402/503 em fila local ignorada pelo Git e oferece `--flush` para sincronização posterior. Uma entrada pendente não deve ser contada como registrada no Supabase. Nenhum pagamento ou desbloqueio da Vercel foi executado.
 
 No mesmo dia, a API voltou a responder 200 com `source: real` e o outbox foi esvaziado após quatro confirmações remotas. A indisponibilidade não exigiu gasto. O código do Core continua versionado; execução da ponte e migration 0028 ainda não foram verificadas remotamente.
+
+## Atualização 23/10/2026 — recuperação do instalador da ponte
+
+O instalador preserva o modo dos arquivos legados, usa nomes exclusivos para backups e temporários e limpa os temporários quando uma etapa falha. O fluxo completo foi exercitado em diretório temporário, inclusive preflight, repetição e falha simulada na segunda troca com restauração da primeira. Nenhuma alteração foi feita na VPS nem no Supabase mestre; migration 0028 e observação do processo continuam pendentes.

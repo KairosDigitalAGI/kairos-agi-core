@@ -19,3 +19,7 @@ Migration: `kairos-command/supabase/migrations/0027_kairos_crm_events.sql`.
 ## Validação operacional — 01/10/2026
 
 Uma conversa comercial já confirmada nos logs do runtime foi reconstruída na auditoria sem inventar atividade: retomada entregue, resposta inbound sobre organização do WhatsApp, opções de horário entregues, escolha de horário e reunião registrada. O Core passou a expor seis eventos no total, duas entregas confirmadas e zero falhas. O backfill foi marcado como evidência histórica do log; novas mensagens entram pela instrumentação ativa do runtime.
+
+## Preparação da instalação — 23/10/2026
+
+`install-agi-bridge.cjs --check` continua sem escrita. A instalação mantém backup exclusivo de cada arquivo legado, preserva seu modo e remove temporários em caso de falha. Um teste local força erro na segunda substituição e confirma que `bot.js` é restaurado. Isto não comprova instalação da ponte na VPS nem a aplicação da migration 0028.
