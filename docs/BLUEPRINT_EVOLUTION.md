@@ -516,3 +516,5 @@ A Cidade Inteligente passa a ser a entrada visual do Founder para o Core e para 
 ### Terminais e bairros de projeto
 
 Cada projeto pode ter uma sessão persistente Claude Code ou Codex na VPS. O cadastro privado de `CLIENT_001` agrupa projetos em bairros na interface; um bairro visual não comprova trabalho em andamento. Uma nota curada pode alimentar o Obsidian, enquanto a integração automática de conversas exige fonte autorizada e controle de privacidade. A cidade continua sendo a entrada visual, com Core e Maestro como partes da infraestrutura, mesmo mantendo repositórios e bancos próprios.
+
+A primeira ponte de dados lê somente os pedidos técnicos autenticados do Core na mesa da cidade. Ela não envia ordens automaticamente: o Founder escolhe a sessão, revisa o texto e inicia a tarefa. Estados, resultados e custos terão de retornar ao Core com recibos antes de chamar essa ponte de orquestração completa.

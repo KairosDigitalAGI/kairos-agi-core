@@ -247,3 +247,7 @@ A Cidade Inteligente na VPS, acessível por Tailscale, ganhou um portal para o K
 ## Atualização 24/10/2026 — terminais e bairros de projeto
 
 A mesa privada da cidade agora abre sessões reais e persistentes de Claude Code/Codex no tmux da VPS. O Codex CLI foi instalado mas precisa do login ChatGPT pelo Founder; Claude Code já está autenticado. O projeto escolhido permanece fixo para a sessão. Clientes novos usam códigos e pastas privadas, agrupados na interface de terminais. Um resumo curado desta conversa foi gravado no Obsidian; não existe sincronização automática do histórico do app ChatGPT. O teste abriu e encerrou Claude Code sem mandar tarefa nem consumir IA. O terminal ainda roda com as permissões do Maestro; autenticação ampliada, isolamento e orçamento seguem necessários antes de operação autônoma contínua.
+
+Correção na mesma data: rotas legadas do Maestro que iniciam tarefas, leem histórico/arquivos ou operam o app também exigem o login privado. A mesa de voz agora solicita esse login. O estado público de saúde e a lista básica de workspaces continuam sem autenticação dentro do Tailnet.
+
+A fila de pedidos técnicos confirmados do Core agora tem uma leitura específica e autenticada para a cidade. O Maestro a consulta sem transportar o CRM inteiro; a mesa permite preparar o texto de um pedido no terminal, cabendo ao Founder enviá-lo. O resultado da sessão ainda não retorna automaticamente à fila do Core.

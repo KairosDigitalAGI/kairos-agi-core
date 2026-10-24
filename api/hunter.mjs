@@ -1,7 +1,7 @@
 import { checkAuth, unauthorized } from './_auth.js'
 import { discoverFreelancerProjects } from './_freelancerDiscovery.js'
 import { createCommercialRun, listCommercialRuns } from './_commercial.js'
-import { acknowledgeDevUpdates, addDevRequest, checkCrmSyncAuth, confirmDevRequest, listCrm, listPendingDevUpdates, syncCrmEvents, syncCrmLeads, syncCrmRuntimeRuns, updateDevRequest } from './_crm.js'
+import { acknowledgeDevUpdates, addDevRequest, checkCrmSyncAuth, confirmDevRequest, listCrm, listDevRequests, listPendingDevUpdates, syncCrmEvents, syncCrmLeads, syncCrmRuntimeRuns, updateDevRequest } from './_crm.js'
 
 export default async function handler(req,res){
  res.setHeader('Cache-Control','no-store')
@@ -19,6 +19,7 @@ export default async function handler(req,res){
   }
   if(!checkAuth(req)) return unauthorized(res)
   if(req.method==='GET'&&action==='crm') return res.status(200).json(await listCrm())
+  if(req.method==='GET'&&action==='dev-requests') return res.status(200).json({source:'real',requests:await listDevRequests()})
   if(req.method==='POST'&&action==='dev-update') return res.status(200).json({request:await updateDevRequest(req.body)})
   if(req.method==='GET'&&action==='runs'){const runs=await listCommercialRuns();return runs?res.status(200).json({source:'real',runs}):res.status(503).json({source:'unavailable',reason:'Supabase não configurado.'})}
   if(req.method==='POST'&&action==='run') return res.status(201).json(await createCommercialRun(req.body))

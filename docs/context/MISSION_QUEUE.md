@@ -479,7 +479,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Criar mesa privada de terminais persistentes via tmux, vinculados a workspaces permitidos; cada sessão informa ferramenta, projeto e estado real.
 - [x] Cadastrar pastas privadas de projeto por código de cliente (`CLIENT_001` etc.) e agrupá-las na interface, sem importar dados privados ao Git.
 - [x] Proteger as rotas novas de terminal e projeto com senha derivada na configuração privada da VPS; validar abertura e encerramento de Claude Code sem prompt de IA.
+- [x] Exigir o mesmo login nas rotas legadas de execução, histórico, arquivos e operação do app; validar 401 sem login e teste de terminal após o fechamento.
 - [x] Registrar resumo curado desta missão no Obsidian real; confirmar a nota em `/api/obsidian`.
+- [x] Expor fila técnica autenticada e enxuta no Core para a mesa da cidade; preparar um pedido confirmado no terminal sem iniciar IA automaticamente.
 - [ ] Concluir login Codex com o Founder; verificar envio de tarefa de baixo risco sob limite do plano, com aprovação da execução.
-- [ ] Converter os bairros de projeto em geografia 3D que cresça com registros reais, implementar ponte de ordens Core–Maestro, resumos seletivos de conversas e isolamento do executor antes de autonomia contínua.
+- [ ] Converter os bairros de projeto em geografia 3D que cresça com registros reais, registrar resultado/estado do terminal de volta na fila Core, implementar resumos seletivos de conversas e isolamento do executor antes de autonomia contínua.
 - [ ] Migration 0028 e instalação da ponte WhatsApp/CRM continuam missão separada.

@@ -308,3 +308,7 @@ O instalador da ponte WhatsApp foi validado em diretório temporário, com prefl
 A Cidade Inteligente de Agentes na VPS abre este Core num painel interno e oferece uma mesa para comandos manuais por projeto. O Maestro trabalha em clones separados, registra threads e custo real. A interface e a VPS foram verificadas sem disparar IA paga; operação autônoma contínua depende de autenticação, isolamento e orçamento. Ver [integração da cidade](docs/modules/CITY_INTEGRATION.md).
 
 A mesa inclui terminais persistentes Claude Code/Codex por projeto, protegidos por login privado; projetos de cliente usam códigos anônimos. Codex aguarda login do Founder na VPS. O Obsidian recebeu um resumo curado desta missão, enquanto a sincronização automática de conversas do app permanece pendente.
+
+O mesmo login agora protege o envio de tarefas, o histórico e as ações do Maestro. A saúde do serviço permanece consultável no Tailnet.
+
+A fila técnica do Core pode ser consultada dentro da mesa da cidade sem expor o CRM completo. Um pedido confirmado pode ser preparado para um terminal, com envio explícito pelo Founder.

@@ -5,7 +5,9 @@
 - Cidade privada, commits `506e234` e `f2e91ec`: a mesa oferece sessões Claude Code/Codex no tmux da VPS, uma por projeto selecionado, com estado e saída consultáveis no navegador. O computador do Founder e a barra da cidade abrem a tela de terminais.
 - Projetos de clientes recebem códigos anônimos e pastas privadas; rotas de criação e terminais exigem autenticação com hash scrypt no `config.json` da VPS. Codex CLI 0.164.0 instalado; Claude Code 2.1.309 autenticado no plano Pro, Codex ainda sem login.
 - Testes do Maestro 4/4 em Windows e Linux; um terminal Claude Code foi aberto, observado e encerrado na VPS sem enviar prompt. Nota curada gravada no Obsidian e vista na API da cidade. Nenhum modelo foi chamado.
-- Limites: a tela mostra bairros em lista, ainda não em prédios 3D. O terminal ainda herda permissões do processo Maestro; a autenticação cobre apenas as rotas novas. O app ChatGPT não fornece acesso automático às suas conversas por meio do login Codex. Não há ciclo autônomo de IA 24/7.
+- Limites: a tela mostra bairros em lista, ainda não em prédios 3D. O terminal ainda herda permissões do processo Maestro. O app ChatGPT não fornece acesso automático às suas conversas por meio do login Codex. Não há ciclo autônomo de IA 24/7.
+- Correção posterior `f312668`: a autenticação agora protege também rotas legadas de tarefas, histórico, arquivos e operações do app; a mesa de voz pede login. `/health` e `/workspaces` continuam públicos no Tailnet. Sem login, `/threads` e `/run` retornam 401 antes de iniciar IA. O teste de sessão vazia continuou passando após a correção.
+- O Core passou a expor `GET /api/hunter?action=dev-requests` sob o login existente, retornando apenas a fila técnica sem a base de leads. A cidade consulta essa rota pelo servidor Maestro e oferece preparação explícita de um pedido confirmado no terminal; sem envio automático nem alteração de estado por esta etapa.
 
 ## 24/10/2026 — Missão 045: Cidade como entrada da Kairos AGI
 

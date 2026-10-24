@@ -268,3 +268,9 @@ export async function listCrm() {
     },
   }
 }
+
+// Contrato enxuto da fila técnica para a mesa da Cidade. Não transporta leads,
+// telefones nem o CRM inteiro para um painel de desenvolvimento.
+export async function listDevRequests() {
+  return await readCommand('dev_requests', '?select=id,created_at,updated_at,title,description,priority,status,assigned_to,progress_note&order=created_at.desc&limit=100') ?? []
+}
