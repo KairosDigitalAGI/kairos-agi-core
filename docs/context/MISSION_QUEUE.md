@@ -485,3 +485,13 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [ ] Concluir login Codex com o Founder; verificar envio de tarefa de baixo risco sob limite do plano, com aprovação da execução.
 - [ ] Converter os bairros de projeto em geografia 3D que cresça com registros reais, registrar resultado/estado do terminal de volta na fila Core, implementar resumos seletivos de conversas e isolamento do executor antes de autonomia contínua.
 - [ ] Migration 0028 e instalação da ponte WhatsApp/CRM continuam missão separada.
+
+## Missão 047 — Cofre mestre e presença real na Cidade (24/10/2026)
+
+- [x] Verificar a fonte Obsidian do Kairos Command e sincronizar sua cópia de leitura na VPS; confirmar 48 notas em `/api/infra`.
+- [x] Observar n8n e Maestro localmente e mostrar o estado no painel da cidade sem inventar execução de workflows.
+- [x] Remover a heurística de histórico antigo como presença de terminal; usar tmux vivo e abrir conversa por projeto no monitor.
+- [x] Abrir mesas Claude Code de `cidade` e `agi-core` em espera, sem enviar prompt ou iniciar gasto.
+- [ ] Vincular Codex desktop à cidade por fonte autorizada ou login Codex na VPS; não simular sessão.
+- [ ] Receber demanda de cliente pelo canal autorizado, criar ordem isolada com idempotência e consentimento, executar em workspace e registrar artefato/custo/resultado; revisão do Founder antes de entrega.
+- [ ] Consultar workflows reais do n8n e Command/Supabase por API autenticada, com escopo por cliente; catálogo estático não prova operação.

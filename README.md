@@ -1,5 +1,7 @@
 # Kairos AGI Core
 
+A [Cidade Inteligente](https://kairos-maestro.tail250cee.ts.net:8790/) reúne acesso ao Core, terminais de projeto e um [painel de infraestrutura](https://kairos-maestro.tail250cee.ts.net:8790/infra.html). O cofre Obsidian da cidade lê o mesmo repositório privado usado pelo Kairos Command. O painel distingue serviço ativo, terminal aguardando e tarefa realmente executada. Veja [contrato e limites](docs/modules/CITY_INTEGRATION.md).
+
 O CRM privado inclui uma linha do tempo auditável do KAIROS WhatsApp: classificação, mensagens, entrega, bloqueio, retomada, etapa e score, sincronizados da VPS e atualizados no painel a cada 15 segundos.
 
 Atualização 18/09/2026: [primeiros vídeos e imagens generativos reais no Google Flow](docs/modules/VIDEO_ENGINE_V0_4.md) (duas cenas de 8 s e montagem de 16 s); a Video Engine importa MP4/WebM na galeria local. A API Veo não é gratuita e foi desligada no modo custo zero. O teste de [resposta “oi” do Founder no Instagram](docs/modules/FOUNDER_GREETING_V0_1.md) está implementado; as tabelas de atendimento e a assinatura da conta foram confirmadas em produção. Falta o app Meta publicar e entregar um evento real, identificar o ID do Founder e vincular uma chave Gemini de projeto Free Tier. Não há postagem nem resposta automática comprovada.

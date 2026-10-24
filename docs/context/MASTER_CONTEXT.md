@@ -251,3 +251,7 @@ A mesa privada da cidade agora abre sessões reais e persistentes de Claude Code
 Correção na mesma data: rotas legadas do Maestro que iniciam tarefas, leem histórico/arquivos ou operam o app também exigem o login privado. A mesa de voz agora solicita esse login. O estado público de saúde e a lista básica de workspaces continuam sem autenticação dentro do Tailnet.
 
 A fila de pedidos técnicos confirmados do Core agora tem uma leitura específica e autenticada para a cidade. O Maestro a consulta sem transportar o CRM inteiro; a mesa permite preparar o texto de um pedido no terminal, cabendo ao Founder enviá-lo. O resultado da sessão ainda não retorna automaticamente à fila do Core.
+
+Verificação ao vivo: Core e ponte Maestro retornaram a mesma contagem de 1 pedido técnico; o conteúdo não foi copiado para a documentação pública. A rota da ponte sem credencial retornou 401.
+
+Atualização posterior em 24/10/2026: o Obsidian da cidade foi apontado ao mesmo repositório privado `kairos-brain` que alimenta o Kairos Command, em cópia de leitura na VPS; 48 notas verificadas no painel. n8n e Maestro respondem localmente. Duas sessões Claude Code por projeto estão abertas e aguardando instrução; não houve prompt de IA nem comprovação de trabalho contínuo. A cidade deixou de inferir terminal vivo por histórico antigo. Integração transacional Command/Supabase/WhatsApp/n8n e retorno de resultados à fila do Core seguem pendentes.

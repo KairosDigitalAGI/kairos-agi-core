@@ -8,6 +8,7 @@
 - Limites: a tela mostra bairros em lista, ainda não em prédios 3D. O terminal ainda herda permissões do processo Maestro. O app ChatGPT não fornece acesso automático às suas conversas por meio do login Codex. Não há ciclo autônomo de IA 24/7.
 - Correção posterior `f312668`: a autenticação agora protege também rotas legadas de tarefas, histórico, arquivos e operações do app; a mesa de voz pede login. `/health` e `/workspaces` continuam públicos no Tailnet. Sem login, `/threads` e `/run` retornam 401 antes de iniciar IA. O teste de sessão vazia continuou passando após a correção.
 - O Core passou a expor `GET /api/hunter?action=dev-requests` sob o login existente, retornando apenas a fila técnica sem a base de leads. A cidade consulta essa rota pelo servidor Maestro e oferece preparação explícita de um pedido confirmado no terminal; sem envio automático nem alteração de estado por esta etapa.
+- Commit da cidade `3690c7b` instalado na VPS. A consulta autenticada do Core retornou 1 pedido real; a ponte Maestro→Core também retornou 1. Sem login, a ponte retorna 401. O número é contagem observada no momento, não promessa de trabalho executado.
 
 ## 24/10/2026 — Missão 045: Cidade como entrada da Kairos AGI
 
@@ -769,3 +770,12 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - A API voltou a responder 200 com fonte `real`.
 - `--flush` recebeu confirmação para quatro entradas, deixando zero pendente no outbox local.
 - O bloqueio 402 foi transitório; não houve pagamento. A instalação da ponte na VPS e a migration 0028 continuam pendentes.
+
+## 24/10/2026 — cofre mestre e saúde da infraestrutura na Cidade
+
+- A cidade mudou do cofre legado com 8 notas para a cópia privada do `kairos-brain`, o mesmo repositório usado no Kairos Command; após sincronização foram confirmadas 48 notas.
+- Cron gratuito executa `git pull --ff-only` de leitura a cada cinco minutos. A pasta legada e o backup da configuração permanecem na VPS.
+- Painel da cidade consulta saúde local real do n8n e Maestro e mostra Command/Core com a distinção entre link e dados importados.
+- O Escritório mostra somente terminais tmux vivos, com botão de conversa e estado aguardando quando nenhum pedido está em execução. Duas mesas Claude Code foram abertas sem prompt de IA.
+- `python -m py_compile servidor.py`, `node --check atividade.js`, teste HTTP `/api/infra` e `/api/agora` passaram. Commit cidade `465afb5`; cofre privado `24e7473`.
+- Pendentes: login Codex na VPS, sincronização da sessão Codex do app, recibos de tarefa na fila Core, integração autenticada dos fluxos do Command/n8n/WhatsApp e isolamento operacional por cliente.

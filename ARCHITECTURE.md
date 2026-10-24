@@ -1,5 +1,9 @@
 # Arquitetura — proposta inicial
 
+## 24/10/2026 — cofre mestre e presença na Cidade
+
+O Kairos Command e a cidade passam a consultar a mesma fonte de conhecimento: o repositório privado `kairos-brain`. A VPS mantém uma cópia de leitura por `git pull --ff-only`; o globo ainda usa cache de cinco minutos. O estado do n8n e do Maestro é consultado localmente e não equivale a um workflow executado. A presença de terminal exige sessão tmux viva; pedidos e resultados continuam sob os respectivos contratos do Maestro e do Core. Fluxos de cliente, WhatsApp, Supabase e Resend não foram unificados nesta fase.
+
 ## 01/10/2026 — auditoria comercial WhatsApp
 
 O KAIROS mantém uma fila local append-only de eventos na VPS. `agiBridge` sincroniza os eventos com `command.crm_events` pelo endpoint autenticado `POST /api/hunter?action=crm-events`; o CRM privado lê os últimos eventos e faz join por `lead_source_ref`. Eventos só saem da fila local após confirmação do Core.

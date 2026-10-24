@@ -17,3 +17,13 @@ Projetos de clientes são pastas e registros privados por código `CLIENT_001`, 
 Após a revisão de segurança, todas as rotas legadas do Maestro que executam comandos ou expõem tarefas, arquivos e ações do app exigem o mesmo login privado. `/health` e a lista básica `/workspaces` seguem legíveis dentro do Tailnet. A mesa de voz pede credenciais antes de enviar ou abrir histórico; chamada sem login retorna 401. Essa autenticação não substitui o isolamento do processo no sistema operacional.
 
 O Core publica leitura autenticada e restrita da fila técnica em `GET /api/hunter?action=dev-requests`. A cidade faz proxy de servidor para servidor usando a credencial que o Founder acabou de validar na mesa; não guarda essa credencial em configuração permanente. A interface mostra pedidos reais e só prepara o texto no terminal escolhido. A confirmação do pedido continua regida pela fila original; nenhuma tarefa é enviada à IA só por aparecer na lista. A devolução de eventos e resultado à fila ainda não existe.
+
+Em produção, a rota do Core e a ponte da cidade retornaram 1 pedido no momento do teste; a chamada sem login retornou 401. Cidade commit `3690c7b`, Core commit `cce9078`.
+
+## Cofre mestre e presença real — 24/10/2026
+
+O Kairos Command lê o repositório privado `kairos-brain` pelo GitHub. A cidade agora lê uma cópia desse mesmo cofre na VPS, atualizada por `git pull --ff-only` a cada cinco minutos quando limpa. A instância foi verificada com 48 notas; a pasta legada de 8 notas foi preservada. O grafo possui cache de cinco minutos. O painel **Infraestrutura ao vivo** verifica n8n e Maestro localmente; acesso ao Command é linkado, mas seus dados operacionais ainda não foram importados para a cidade.
+
+No Escritório, uma sessão só entra como terminal quando o tmux correspondente existe. Duas sessões Claude Code reais foram abertas, uma para `cidade` e outra para `agi-core`, ambas **aguardando**: iniciar o CLI sem pedido não comprova trabalho nem consome uma tarefa de IA. Clicar no monitor permite conversar no terminal correto. Conversas `.jsonl` antigas deixaram de manter avatares falsamente ativos; o Codex deste app no computador do Founder continua sem sincronização automática à VPS. O Codex CLI da VPS precisa de login.
+
+Fonte: cidade commit `465afb5`; cofre privado commit `24e7473`. Fluxos n8n, dados Supabase/Command, atendimento WhatsApp, publicação e entrega ao cliente ainda exigem contratos autenticados, isolamento por cliente, recibo de execução, revisão humana e testes com dados reais. Nenhuma dessas ações foi ativada por esta integração.

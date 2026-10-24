@@ -518,3 +518,7 @@ A Cidade Inteligente passa a ser a entrada visual do Founder para o Core e para 
 Cada projeto pode ter uma sessão persistente Claude Code ou Codex na VPS. O cadastro privado de `CLIENT_001` agrupa projetos em bairros na interface; um bairro visual não comprova trabalho em andamento. Uma nota curada pode alimentar o Obsidian, enquanto a integração automática de conversas exige fonte autorizada e controle de privacidade. A cidade continua sendo a entrada visual, com Core e Maestro como partes da infraestrutura, mesmo mantendo repositórios e bancos próprios.
 
 A primeira ponte de dados lê somente os pedidos técnicos autenticados do Core na mesa da cidade. Ela não envia ordens automaticamente: o Founder escolhe a sessão, revisa o texto e inicia a tarefa. Estados, resultados e custos terão de retornar ao Core com recibos antes de chamar essa ponte de orquestração completa.
+
+### Cofre e infraestrutura existente
+
+A cidade lê o mesmo `kairos-brain` privado do Kairos Command por cópia de leitura sincronizada, sem criar outra fonte de verdade. O n8n e o Maestro exibem saúde observada, e agentes no Escritório representam sessões vivas ou eventos recentes, nunca somente configuração. O próximo contrato operacional deve receber demanda, verificar cliente e autorização, produzir artefato em workspace isolado, registrar recibos, pedir revisão do Founder e só então permitir entrega. Não há garantia de operação IA contínua ou custo zero quando uma ferramenta externa consome cota.

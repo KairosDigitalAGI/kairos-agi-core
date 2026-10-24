@@ -38,3 +38,9 @@ Fonte: `matheusschelle/kairos-ecossistema-vivo`, commits `a058738`, `2367164` e 
 
 A Missão 046 evoluiu a mesma fonte privada nos commits `506e234` e `f2e91ec`: sessões tmux por projeto, terminal de navegador e catálogo de projetos de cliente. O Core registra a integração e seus limites; não importa configurações, credenciais, clientes nem histórico privado da VPS.
 
+O commit `f312668` da mesma fonte protegeu também as rotas legadas do Maestro. A configuração de autenticação permanece na VPS privada.
+
+O commit `3690c7b` da cidade apresenta a fila técnica do Core através do Maestro sem copiar o CRM inteiro nem armazenar credenciais no repositório.
+
+O commit `465afb5` da cidade reutiliza o Maestro e as sessões tmux reais no Escritório, acrescenta interação com o terminal e observa a saúde local do n8n. A fonte do Obsidian é o repositório privado `matheusschelle/kairos-brain`, commit `24e7473`, já usado pelo Kairos Command; a cópia de leitura fica na VPS. Não foram importados dados transacionais ou credenciais do Command para o Core.
+
