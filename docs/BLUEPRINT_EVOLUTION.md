@@ -512,3 +512,7 @@ O Blueprint exige que a adaptação de arquivos legados preserve permissões e b
 ## 24/10/2026 — cidade como portal e executor observado
 
 A Cidade Inteligente passa a ser a entrada visual do Founder para o Core e para o Maestro. Identidade de agente e personagem 3D continuam separadas de execução: o processo verificado é um Claude Code por thread. Projetos são trabalhados em clones, sem publicação automática. O Blueprint exige autenticação do barramento, isolamento do executor, orçamento e recibos antes de coordenação autônoma contínua.
+
+### Terminais e bairros de projeto
+
+Cada projeto pode ter uma sessão persistente Claude Code ou Codex na VPS. O cadastro privado de `CLIENT_001` agrupa projetos em bairros na interface; um bairro visual não comprova trabalho em andamento. Uma nota curada pode alimentar o Obsidian, enquanto a integração automática de conversas exige fonte autorizada e controle de privacidade. A cidade continua sendo a entrada visual, com Core e Maestro como partes da infraestrutura, mesmo mantendo repositórios e bancos próprios.

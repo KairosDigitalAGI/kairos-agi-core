@@ -472,4 +472,14 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Corrigir acompanhamento assíncrono, mensagem de erro sem resultado final e o processo duplicado que reiniciava por conflito de porta.
 - [x] Verificar portal e mesa ao vivo, rotas, CORS, testes locais e preflight sem chamada paga de IA.
 - [ ] Criar ponte autenticada de ordens de serviço entre Core e Maestro, isolamento de sistema operacional do executor e orçamento verificável antes de agendar IA 24/7.
+
+## Missão 046 — Terminais de projeto na Cidade (24/10/2026)
+
+- [x] Instalar Codex CLI na VPS e confirmar Claude Code autenticado no plano pessoal. Codex ainda requer login do Founder por código de dispositivo.
+- [x] Criar mesa privada de terminais persistentes via tmux, vinculados a workspaces permitidos; cada sessão informa ferramenta, projeto e estado real.
+- [x] Cadastrar pastas privadas de projeto por código de cliente (`CLIENT_001` etc.) e agrupá-las na interface, sem importar dados privados ao Git.
+- [x] Proteger as rotas novas de terminal e projeto com senha derivada na configuração privada da VPS; validar abertura e encerramento de Claude Code sem prompt de IA.
+- [x] Registrar resumo curado desta missão no Obsidian real; confirmar a nota em `/api/obsidian`.
+- [ ] Concluir login Codex com o Founder; verificar envio de tarefa de baixo risco sob limite do plano, com aprovação da execução.
+- [ ] Converter os bairros de projeto em geografia 3D que cresça com registros reais, implementar ponte de ordens Core–Maestro, resumos seletivos de conversas e isolamento do executor antes de autonomia contínua.
 - [ ] Migration 0028 e instalação da ponte WhatsApp/CRM continuam missão separada.

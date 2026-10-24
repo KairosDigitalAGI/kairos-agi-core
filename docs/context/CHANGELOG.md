@@ -1,5 +1,12 @@
 # Changelog
 
+## 24/10/2026 — Missão 046: terminais persistentes por projeto
+
+- Cidade privada, commits `506e234` e `f2e91ec`: a mesa oferece sessões Claude Code/Codex no tmux da VPS, uma por projeto selecionado, com estado e saída consultáveis no navegador. O computador do Founder e a barra da cidade abrem a tela de terminais.
+- Projetos de clientes recebem códigos anônimos e pastas privadas; rotas de criação e terminais exigem autenticação com hash scrypt no `config.json` da VPS. Codex CLI 0.164.0 instalado; Claude Code 2.1.309 autenticado no plano Pro, Codex ainda sem login.
+- Testes do Maestro 4/4 em Windows e Linux; um terminal Claude Code foi aberto, observado e encerrado na VPS sem enviar prompt. Nota curada gravada no Obsidian e vista na API da cidade. Nenhum modelo foi chamado.
+- Limites: a tela mostra bairros em lista, ainda não em prédios 3D. O terminal ainda herda permissões do processo Maestro; a autenticação cobre apenas as rotas novas. O app ChatGPT não fornece acesso automático às suas conversas por meio do login Codex. Não há ciclo autônomo de IA 24/7.
+
 ## 24/10/2026 — Missão 045: Cidade como entrada da Kairos AGI
 
 - Repositório privado `kairos-ecossistema-vivo` recebeu portal para o Core, indicador do Maestro e mesa de tarefas com escolha entre sandbox, `agi-core` e cidade. Acessos rápidos permanecem disponíveis durante o carregamento 3D. Commits `a058738`, `2367164` e `62a0584`.

@@ -36,3 +36,5 @@ O schema `command` e o contrato REST com `Accept-Profile`/`Content-Profile` segu
 
 Fonte: `matheusschelle/kairos-ecossistema-vivo`, commits `a058738`, `2367164` e `62a0584`, implantados na VPS da cidade. O portal incorpora visualmente o Kairos AGI Core existente; a mesa reaproveita o Maestro da VPS e adiciona workspaces em clones separados. Nenhum componente do Core foi copiado para uma segunda fonte de verdade. A correspondência entre personagem e processo permanece explícita e não é inferida da cena 3D.
 
+A Missão 046 evoluiu a mesma fonte privada nos commits `506e234` e `f2e91ec`: sessões tmux por projeto, terminal de navegador e catálogo de projetos de cliente. O Core registra a integração e seus limites; não importa configurações, credenciais, clientes nem histórico privado da VPS.
+
