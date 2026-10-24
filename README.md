@@ -315,3 +315,4 @@ O mesmo login agora protege o envio de tarefas, o histórico e as ações do Mae
 
 A fila técnica do Core pode ser consultada dentro da mesa da cidade sem expor o CRM completo. Um pedido confirmado pode ser preparado para um terminal, com envio explícito pelo Founder.
 A Cidade também cataloga repositórios GitHub autorizados e só libera terminais para cópias com origem verificável. A conexão da Vercel é feita pelo Founder em sessão oficial na VPS; ela não salva senhas nem cria/publica projetos automaticamente. Ver [integração da cidade](docs/modules/CITY_INTEGRATION.md).
+O terminal da Cidade abre em aba própria, mantendo a mesa de tarefas e a cena 3D intactas. A senha da mesa é armazenada somente como hash na VPS: não pode ser recuperada ou exibida; uma perda de acesso exige redefinição autenticada.

@@ -32,3 +32,6 @@ Fonte: cidade commit `465afb5`; cofre privado commit `24e7473`. Fluxos n8n, dado
 A Cidade recebeu catálogo privado de repositórios GitHub autorizados. O sincronizador prepara cópias por `clone`/`fetch` e interrompe a atualização se a worktree estiver suja; não envia código, não força checkout e não cria deployment. Um projeto manual sem origem Git fica pendente/restrito e não libera uma sessão Claude Code/Codex.
 
 A mesa privada oferece o login oficial da Vercel por sessão tmux exclusiva, com estado obtido de `vercel whoami`. A tela não persiste senha, token ou cartão. O login é condição técnica, não consentimento de operação: a escolha da conta/time, criação de repositório, criação de projeto Vercel e publicação devem ser fluxos explícitos, separados e revisáveis. O Maestro real foi atualizado com backup, checks de sintaxe e healthcheck 200; a rota continua recusando acesso sem autenticação privada.
+## Navegação e acesso da mesa — 24/10/2026
+
+O atalho de terminais abre uma aba própria e o fechamento da mesa descarrega seu iframe, evitando que a última tela de terminal reapareça sobre a Cidade. A credencial privada permanece hash derivado na VPS. Isso torna a verificação possível, mas torna impossível recuperar a senha original; a recuperação correta substitui o hash depois de uma prova administrativa distinta, nunca revela ou registra a senha anterior.

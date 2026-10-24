@@ -503,3 +503,8 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Disponibilizar login oficial da Vercel na VPS sem persistir senha/token e com rotas privadas.
 - [ ] Founder conclui o login na conta Vercel escolhida; registrar somente a conta/time retornados pela CLI.
 - [ ] Projetar o provisionamento explícito e auditável de novo projeto (nome, organização GitHub, conta/time Vercel, preview e confirmação de deploy), sem execução implícita.
+## Missão 049 — Experiência segura da mesa (24/10/2026)
+
+- [x] Separar a navegação da Cidade e do terminal para o terminal não ocupar a mesa automaticamente.
+- [x] Descartar o iframe interno da mesa ao fechar, evitando reaproveitamento da tela anterior.
+- [ ] Implementar um fluxo autenticado de redefinição de acesso somente se houver um segundo fator/identidade de administração verificável; nunca recuperar ou mostrar senha existente.

@@ -525,3 +525,6 @@ A cidade lê o mesmo `kairos-brain` privado do Kairos Command por cópia de leit
 ## 24/10/2026 — catálogo de fontes e deploy explícito
 
 O Blueprint passa a exigir que uma mesa de projeto tenha origem Git verificável antes de ser considerada operacional. A Cidade pode catalogar fontes privadas autorizadas, mas atualiza cópias somente por operações que preservam alterações locais. A conexão de Vercel é um consentimento do Founder no ambiente oficial; não armazena credenciais, não seleciona conta e não converte conexão em autorização de criar ou publicar. Novo projeto, time de destino, ambiente e deploy devem aparecer como decisões separadas e auditáveis.
+## 24/10/2026 — mesa não é terminal
+
+A Cidade trata a mesa de tarefa e o terminal como superfícies distintas. Um atalho de terminal não pode substituir silenciosamente a mesa ou transformar a abertura de uma tarefa em sessão de shell. Recuperação de acesso deve redefinir credencial após prova administrativa; hashes não são fonte para revelar senhas.

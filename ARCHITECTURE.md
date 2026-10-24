@@ -403,3 +403,6 @@ O contrato `GET /api/hunter?action=dev-requests` devolve apenas pedidos técnico
 ## Catálogo GitHub e conexão Vercel — 24/10/2026
 
 O catálogo da Cidade é uma leitura privada de fontes GitHub autorizadas. O sincronizador só cria ou atualiza cópias limpas no sandbox por `clone`/`fetch`; ele não executa `push`, checkout forçado ou deploy. Workspaces sem repositório verificado são pendentes/restritos e não chegam ao launcher de terminal. O login de Vercel ocorre em uma sessão tmux separada do terminal de projeto, protegida pela mesma autenticação privada e verificada por `vercel whoami`; credenciais e tokens não atravessam a interface. Provisionar repositório, escolher time, criar projeto Vercel e publicar são comandos externos distintos, cada qual sujeito à confirmação explícita do Founder.
+## Navegação de terminais e recuperação de acesso — 24/10/2026
+
+A Cidade preserva a cena e a mesa de tarefa: a interface de terminais abre em contexto próprio e o iframe de tarefa volta a `about:blank` ao fechar. A autenticação da mesa é verificada por hash derivado no servidor; portanto a senha original não pode ser lida nem devolvida. Qualquer recuperação futura requer uma prova administrativa independente e redefine o hash, sem expor credencial anterior.

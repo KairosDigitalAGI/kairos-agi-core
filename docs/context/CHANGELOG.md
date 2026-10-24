@@ -791,3 +791,8 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 ### Limites
 - A Vercel continua em estado `login necessário` até o Founder concluir o consentimento da conta desejada na mesa. Há duas contas possíveis e a Cidade não escolhe uma por conta própria.
 - Criar repositório, alterar time Vercel, vincular ambiente e publicar deploy permanecem ações externas distintas e confirmadas; nenhum projeto ou deployment foi criado nesta entrega.
+## 24/10/2026 — navegação de terminais sem tomar a Cidade
+
+- **Entregue:** o launcher de terminais abriu em aba própria e o fechamento da mesa descarrega o iframe interno; reabrir **Mandar tarefa** volta ao painel de tarefa.
+- **Verificado:** sintaxe JavaScript e resposta da página servida pela VPS após `git pull`.
+- **Limite:** acesso à mesa continua protegido; senha não é recuperável a partir do hash e deve ser redefinida, não revelada, se o Founder não a possuir.
