@@ -463,3 +463,13 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Exercitar o instalador completo em diretório temporário, inclusive `--check`, instalação repetida e falha na segunda substituição.
 - [x] Preservar o modo dos arquivos substituídos, manter backups exclusivos e limpar arquivos temporários após falha.
 - [ ] Executar `--check` e instalar somente na VPS correta com acesso autenticado; observar o processo, aplicar migration 0028 no Supabase mestre e confirmar o primeiro ciclo real.
+
+## Missão 045 — Cidade como entrada da Kairos AGI (24/10/2026)
+
+- [x] Inspecionar a cidade e o Maestro reais na VPS via Tailscale; distinguir personagens cadastrados de processos executores.
+- [x] Abrir o Core na cidade e expor status real do Maestro e mesa de tarefas por projeto.
+- [x] Preparar clones editáveis separados de `agi-core` e `cidade`; encaminhar a thread ao projeto selecionado, sem publicar alterações do clone.
+- [x] Corrigir acompanhamento assíncrono, mensagem de erro sem resultado final e o processo duplicado que reiniciava por conflito de porta.
+- [x] Verificar portal e mesa ao vivo, rotas, CORS, testes locais e preflight sem chamada paga de IA.
+- [ ] Criar ponte autenticada de ordens de serviço entre Core e Maestro, isolamento de sistema operacional do executor e orçamento verificável antes de agendar IA 24/7.
+- [ ] Migration 0028 e instalação da ponte WhatsApp/CRM continuam missão separada.

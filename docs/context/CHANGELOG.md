@@ -1,5 +1,14 @@
 # Changelog
 
+## 24/10/2026 — Missão 045: Cidade como entrada da Kairos AGI
+
+- Repositório privado `kairos-ecossistema-vivo` recebeu portal para o Core, indicador do Maestro e mesa de tarefas com escolha entre sandbox, `agi-core` e cidade. Acessos rápidos permanecem disponíveis durante o carregamento 3D. Commits `a058738`, `2367164` e `62a0584`.
+- Maestro versionado dentro da cidade e instalado na VPS com backup/rollback. `/workspaces` mostra três espaços prontos; `/run` rejeita projeto inválido antes de abrir thread. CORS agora limita navegadores à origem da cidade.
+- Mesa envia tarefas de forma assíncrona e consulta eventos, resultado e custo; executor preserva a última resposta textual se o evento final vier sem texto.
+- Processo PM2 duplicado `kairos-world` removido após verificar o watchdog de cron e a instância estável na porta 8790.
+- Testes Node do Maestro 2/2, sintaxe JS e shell, rotas HTTP e browser da mesa verificados. Nenhuma tarefa paga de IA foi disparada.
+- Limite: portal e cópias de trabalho não são um barramento de dados entre Core e Maestro. O único executor de comandos observado é o Claude Code; personagens não são 27 processos. `headroom:false` e threads anteriores com custo tornam indevida qualquer promessa de IA gratuita 24/7.
+
 ## 23/10/2026 — Missão 044: recuperação do instalador da ponte
 
 - `installBridge` permite validar o fluxo completo em diretório temporário, sem atingir a VPS.

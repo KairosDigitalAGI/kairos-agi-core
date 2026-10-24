@@ -302,3 +302,7 @@ O Mapa do Projeto respondeu 402 temporariamente. Registros recusados por 402/503
 ## 23/10/2026 — instalador da ponte
 
 O instalador da ponte WhatsApp foi validado em diretório temporário, com preflight, repetição segura e restauração após falha simulada. Backups preservam os arquivos originais e temporários são removidos. A VPS e a migration 0028 ainda exigem implantação e verificação autenticadas.
+
+## 24/10/2026 — Cidade Inteligente
+
+A Cidade Inteligente de Agentes na VPS abre este Core num painel interno e oferece uma mesa para comandos manuais por projeto. O Maestro trabalha em clones separados, registra threads e custo real. A interface e a VPS foram verificadas sem disparar IA paga; operação autônoma contínua depende de autenticação, isolamento e orçamento. Ver [integração da cidade](docs/modules/CITY_INTEGRATION.md).

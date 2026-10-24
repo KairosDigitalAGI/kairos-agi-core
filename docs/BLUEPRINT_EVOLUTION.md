@@ -508,3 +508,7 @@ A primeira recuperação foi observada: quatro entradas saíram do outbox soment
 ## 23/10/2026 — instalador recuperável antes da operação
 
 O Blueprint exige que a adaptação de arquivos legados preserve permissões e backups, remova temporários após falha e teste restauração quando a segunda troca falhar. A validação local aumenta a segurança do pacote, mas não é evidência de que o KAIROS remoto esteja executando a ponte.
+
+## 24/10/2026 — cidade como portal e executor observado
+
+A Cidade Inteligente passa a ser a entrada visual do Founder para o Core e para o Maestro. Identidade de agente e personagem 3D continuam separadas de execução: o processo verificado é um Claude Code por thread. Projetos são trabalhados em clones, sem publicação automática. O Blueprint exige autenticação do barramento, isolamento do executor, orçamento e recibos antes de coordenação autônoma contínua.

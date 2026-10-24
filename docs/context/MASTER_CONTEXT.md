@@ -239,3 +239,7 @@ No mesmo dia, a API voltou a responder 200 com `source: real` e o outbox foi esv
 ## Atualização 23/10/2026 — recuperação do instalador da ponte
 
 O instalador preserva o modo dos arquivos legados, usa nomes exclusivos para backups e temporários e limpa os temporários quando uma etapa falha. O fluxo completo foi exercitado em diretório temporário, inclusive preflight, repetição e falha simulada na segunda troca com restauração da primeira. Nenhuma alteração foi feita na VPS nem no Supabase mestre; migration 0028 e observação do processo continuam pendentes.
+
+## Atualização 24/10/2026 — cidade única como entrada visual
+
+A Cidade Inteligente na VPS, acessível por Tailscale, ganhou um portal para o Kairos AGI Core e uma mesa com roteamento explícito a clones editáveis do Core e da própria cidade. O Maestro executa uma thread Claude Code por comando manual; a cidade mostra a contagem real de execuções e o histórico mostra erros e custo observado. O serviço de cidade duplicado no PM2 foi removido após identificar conflito com a instância já vigiada pelo cron. O Core e a cidade continuam repositórios separados: a integração atual é portal visual e espaço de trabalho, não sincronização bidirecional de dados ou 27 executores. O proxy de cota não respondeu (`headroom:false`); nenhuma automação paga contínua foi ativada. Detalhes em `docs/modules/CITY_INTEGRATION.md`.

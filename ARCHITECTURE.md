@@ -384,3 +384,7 @@ Após retorno da API no mesmo dia, quatro registros foram confirmados por POST e
 ## Instalação recuperável da ponte — 23/10/2026
 
 `install-agi-bridge.cjs` separa preflight e escrita via `installBridge`. Cada arquivo alterado recebe backup exclusivo e temporário com modo original antes da substituição. Falha na segunda troca restaura a primeira a partir do backup e remove temporários; falha no rollback expõe erro agregado e conserva os backups. Esta proteção foi testada localmente e não equivale a implantação na VPS.
+
+## Cidade Inteligente e Maestro — 24/10/2026
+
+A cidade no repositório privado `kairos-ecossistema-vivo` abre o Kairos AGI Core num portal, mantendo o Core como aplicação e banco próprios. A mesa fala com o Maestro via Tailscale e seleciona somente `sandbox`, `agi-core` ou `cidade`; os dois projetos são clones no sandbox da VPS, não os deployments. `/run` registra thread real e a interface consulta `/thread` até conclusão, sem supor que personagem visual executa código. O Maestro limita o CORS ao domínio da cidade, mas ainda precisa de autenticação própria e isolamento de sistema operacional antes de oferecer terminal genérico a terceiros. Não há scheduler de IA contínuo sem teto de custo verificável. A ponte WhatsApp/CRM e migration 0028 não foram instaladas por esta mudança.

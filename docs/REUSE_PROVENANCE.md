@@ -31,3 +31,8 @@ A correção generativa acrescenta código novo de storyboard e motion graphics 
 ## CRM e control plane
 
 O schema `command` e o contrato REST com `Accept-Profile`/`Content-Profile` seguem o control plane do `kairos-command` no commit `d92c53e`. A migration `0026_kairos_crm_dev_queue.sql` foi acrescentada ao repositório correspondente. A normalização do banco legado da VPS, a ponte idempotente e a UI do CRM são implementações novas deste Core; nenhum telefone, sessão ou histórico foi copiado para o Git.
+
+## Cidade Inteligente — 24/10/2026
+
+Fonte: `matheusschelle/kairos-ecossistema-vivo`, commits `a058738`, `2367164` e `62a0584`, implantados na VPS da cidade. O portal incorpora visualmente o Kairos AGI Core existente; a mesa reaproveita o Maestro da VPS e adiciona workspaces em clones separados. Nenhum componente do Core foi copiado para uma segunda fonte de verdade. A correspondência entre personagem e processo permanece explícita e não é inferida da cena 3D.
+
