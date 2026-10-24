@@ -314,3 +314,4 @@ A mesa inclui terminais persistentes Claude Code/Codex por projeto, protegidos p
 O mesmo login agora protege o envio de tarefas, o histórico e as ações do Maestro. A saúde do serviço permanece consultável no Tailnet.
 
 A fila técnica do Core pode ser consultada dentro da mesa da cidade sem expor o CRM completo. Um pedido confirmado pode ser preparado para um terminal, com envio explícito pelo Founder.
+A Cidade também cataloga repositórios GitHub autorizados e só libera terminais para cópias com origem verificável. A conexão da Vercel é feita pelo Founder em sessão oficial na VPS; ela não salva senhas nem cria/publica projetos automaticamente. Ver [integração da cidade](docs/modules/CITY_INTEGRATION.md).

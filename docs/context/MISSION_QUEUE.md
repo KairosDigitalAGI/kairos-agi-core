@@ -495,3 +495,11 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [ ] Vincular Codex desktop à cidade por fonte autorizada ou login Codex na VPS; não simular sessão.
 - [ ] Receber demanda de cliente pelo canal autorizado, criar ordem isolada com idempotência e consentimento, executar em workspace e registrar artefato/custo/resultado; revisão do Founder antes de entrega.
 - [ ] Consultar workflows reais do n8n e Command/Supabase por API autenticada, com escopo por cliente; catálogo estático não prova operação.
+
+## Missão 048 — Catálogo GitHub e conexão de deploy da Cidade (24/10/2026)
+
+- [x] Importar catálogo privado de repositórios autorizados para a Cidade e preparar cópias de trabalho sem sobrescrever worktrees locais.
+- [x] Impedir que projeto sem repositório GitHub verificável abra terminal ou pareça operacional.
+- [x] Disponibilizar login oficial da Vercel na VPS sem persistir senha/token e com rotas privadas.
+- [ ] Founder conclui o login na conta Vercel escolhida; registrar somente a conta/time retornados pela CLI.
+- [ ] Projetar o provisionamento explícito e auditável de novo projeto (nome, organização GitHub, conta/time Vercel, preview e confirmação de deploy), sem execução implícita.

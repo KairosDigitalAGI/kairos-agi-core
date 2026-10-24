@@ -522,3 +522,6 @@ A primeira ponte de dados lê somente os pedidos técnicos autenticados do Core 
 ### Cofre e infraestrutura existente
 
 A cidade lê o mesmo `kairos-brain` privado do Kairos Command por cópia de leitura sincronizada, sem criar outra fonte de verdade. O n8n e o Maestro exibem saúde observada, e agentes no Escritório representam sessões vivas ou eventos recentes, nunca somente configuração. O próximo contrato operacional deve receber demanda, verificar cliente e autorização, produzir artefato em workspace isolado, registrar recibos, pedir revisão do Founder e só então permitir entrega. Não há garantia de operação IA contínua ou custo zero quando uma ferramenta externa consome cota.
+## 24/10/2026 — catálogo de fontes e deploy explícito
+
+O Blueprint passa a exigir que uma mesa de projeto tenha origem Git verificável antes de ser considerada operacional. A Cidade pode catalogar fontes privadas autorizadas, mas atualiza cópias somente por operações que preservam alterações locais. A conexão de Vercel é um consentimento do Founder no ambiente oficial; não armazena credenciais, não seleciona conta e não converte conexão em autorização de criar ou publicar. Novo projeto, time de destino, ambiente e deploy devem aparecer como decisões separadas e auditáveis.

@@ -779,3 +779,15 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - O Escritório mostra somente terminais tmux vivos, com botão de conversa e estado aguardando quando nenhum pedido está em execução. Duas mesas Claude Code foram abertas sem prompt de IA.
 - `python -m py_compile servidor.py`, `node --check atividade.js`, teste HTTP `/api/infra` e `/api/agora` passaram. Commit cidade `465afb5`; cofre privado `24e7473`.
 - Pendentes: login Codex na VPS, sincronização da sessão Codex do app, recibos de tarefa na fila Core, integração autenticada dos fluxos do Command/n8n/WhatsApp e isolamento operacional por cliente.
+
+## 24/10/2026 — catálogo GitHub e conexão Vercel da Cidade
+
+### Entregue
+- A Cidade passou a catalogar somente repositórios GitHub autorizados e a sincronizar cópias por `clone`/`fetch`, recusando worktree suja e sem `push`, checkout forçado ou deploy.
+- Projetos novos sem repositório ficam pendentes e não liberam terminal; a interface não chama mais um diretório vazio de projeto operacional.
+- A mesa ganhou fluxo de login oficial da Vercel na VPS, por sessão separada e autenticada. Senhas, tokens e cartões não são armazenados pela Cidade.
+- O Maestro real recebeu a atualização com backup local, validação de sintaxe, reinício apenas do processo `maestro` e healthcheck 200. A rota de Vercel responde 401 sem a autenticação privada, como esperado.
+
+### Limites
+- A Vercel continua em estado `login necessário` até o Founder concluir o consentimento da conta desejada na mesa. Há duas contas possíveis e a Cidade não escolhe uma por conta própria.
+- Criar repositório, alterar time Vercel, vincular ambiente e publicar deploy permanecem ações externas distintas e confirmadas; nenhum projeto ou deployment foi criado nesta entrega.

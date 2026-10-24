@@ -400,3 +400,6 @@ O Maestro acrescenta sessões tmux para Claude Code e Codex CLI. A API autentica
 Uma correção da mesma missão estendeu a autenticação a todas as rotas legadas do Maestro, exceto `/health` e `/workspaces`. Isolamento por usuário/contêiner, orçamento e autorização de publicação ainda são pendências separadas.
 
 O contrato `GET /api/hunter?action=dev-requests` devolve apenas pedidos técnicos sob Basic Auth, sem leads ou telefones. O Maestro encaminha a credencial verificada do Founder somente ao domínio oficial do Core e oferece leitura na mesa. Preparar um pedido não o executa nem muda status; recibos de volta ao Core serão uma etapa posterior.
+## Catálogo GitHub e conexão Vercel — 24/10/2026
+
+O catálogo da Cidade é uma leitura privada de fontes GitHub autorizadas. O sincronizador só cria ou atualiza cópias limpas no sandbox por `clone`/`fetch`; ele não executa `push`, checkout forçado ou deploy. Workspaces sem repositório verificado são pendentes/restritos e não chegam ao launcher de terminal. O login de Vercel ocorre em uma sessão tmux separada do terminal de projeto, protegida pela mesma autenticação privada e verificada por `vercel whoami`; credenciais e tokens não atravessam a interface. Provisionar repositório, escolher time, criar projeto Vercel e publicar são comandos externos distintos, cada qual sujeito à confirmação explícita do Founder.
