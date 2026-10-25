@@ -528,3 +528,6 @@ O Blueprint passa a exigir que uma mesa de projeto tenha origem Git verificável
 ## 24/10/2026 — mesa não é terminal
 
 A Cidade trata a mesa de tarefa e o terminal como superfícies distintas. Um atalho de terminal não pode substituir silenciosamente a mesa ou transformar a abertura de uma tarefa em sessão de shell. Recuperação de acesso deve redefinir credencial após prova administrativa; hashes não são fonte para revelar senhas.
+## 24/10/2026 — barramento seguro da mesa
+
+A Cidade deve ser a única superfície web do Founder para o Maestro: portas locais da VPS não são interface de navegador. O barramento same-origin permite observar e controlar a mesa por HTTPS sem abrir a superfície de administração; a autenticação e autorização permanecem no executor local.

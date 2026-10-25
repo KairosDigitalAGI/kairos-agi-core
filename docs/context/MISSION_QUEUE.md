@@ -508,3 +508,8 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Separar a navegação da Cidade e do terminal para o terminal não ocupar a mesa automaticamente.
 - [x] Descartar o iframe interno da mesa ao fechar, evitando reaproveitamento da tela anterior.
 - [ ] Implementar um fluxo autenticado de redefinição de acesso somente se houver um segundo fator/identidade de administração verificável; nunca recuperar ou mostrar senha existente.
+## Missão 050 — Conectividade da mesa na Cidade (24/10/2026)
+
+- [x] Eliminar tentativa de acesso direto do browser à porta interna do Maestro.
+- [x] Manter allowlist de rotas e verificação de credencial no Maestro atrás da ponte same-origin.
+- [ ] Confirmar login do Founder depois de atualização de navegador; investigar somente se o serviço retornar mensagem de autenticação, não erro de rede.

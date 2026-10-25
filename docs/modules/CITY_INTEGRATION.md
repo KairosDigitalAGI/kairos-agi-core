@@ -35,3 +35,6 @@ A mesa privada oferece o login oficial da Vercel por sessão tmux exclusiva, com
 ## Navegação e acesso da mesa — 24/10/2026
 
 O atalho de terminais abre uma aba própria e o fechamento da mesa descarrega seu iframe, evitando que a última tela de terminal reapareça sobre a Cidade. A credencial privada permanece hash derivado na VPS. Isso torna a verificação possível, mas torna impossível recuperar a senha original; a recuperação correta substitui o hash depois de uma prova administrativa distinta, nunca revela ou registra a senha anterior.
+## Ponte de conectividade da mesa — 24/10/2026
+
+O Maestro atende somente HTTP local em `127.0.0.1:8791`, enquanto a Cidade chega ao Founder por HTTPS/Tailscale. O proxy `/api/maestro/*` da Cidade encaminha apenas uma allowlist de rotas da mesa, com tamanho limitado e sem encaminhar `Origin`; transmite `Authorization` somente à instância local. O healthcheck via proxy e o 401 sem credencial foram observados após o deploy. Isso corrige conectividade, não autentica o usuário nem recupera senha.

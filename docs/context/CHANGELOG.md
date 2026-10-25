@@ -796,3 +796,8 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - **Entregue:** o launcher de terminais abriu em aba própria e o fechamento da mesa descarrega o iframe interno; reabrir **Mandar tarefa** volta ao painel de tarefa.
 - **Verificado:** sintaxe JavaScript e resposta da página servida pela VPS após `git pull`.
 - **Limite:** acesso à mesa continua protegido; senha não é recuperável a partir do hash e deve ser redefinida, não revelada, se o Founder não a possuir.
+## 24/10/2026 — ponte segura da mesa para o Maestro
+
+- **Entregue:** a Cidade passou a encaminhar as rotas permitidas da mesa por `/api/maestro/*`, evitando conexão direta do browser HTTPS/Tailscale à porta HTTP interna 8791.
+- **Verificado:** healthcheck do Maestro pelo proxy retornou 200; requisição sem credencial retornou 401 pelo mesmo caminho; a página servida referencia o proxy.
+- **Limite:** a ponte apenas encaminha uma credencial já digitada pelo Founder. Ela não recupera, grava ou redefine senhas.

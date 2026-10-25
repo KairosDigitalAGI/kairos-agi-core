@@ -406,3 +406,6 @@ O catálogo da Cidade é uma leitura privada de fontes GitHub autorizadas. O sin
 ## Navegação de terminais e recuperação de acesso — 24/10/2026
 
 A Cidade preserva a cena e a mesa de tarefa: a interface de terminais abre em contexto próprio e o iframe de tarefa volta a `about:blank` ao fechar. A autenticação da mesa é verificada por hash derivado no servidor; portanto a senha original não pode ser lida nem devolvida. Qualquer recuperação futura requer uma prova administrativa independente e redefine o hash, sem expor credencial anterior.
+## Ponte same-origin da mesa — 24/10/2026
+
+O navegador acessa a Cidade por HTTPS/Tailscale, enquanto o Maestro permanece HTTP em localhost. A Cidade encaminha uma allowlist pequena de rotas da mesa por `/api/maestro/*`, preservando o cabeçalho de autenticação apenas até localhost. O proxy não conhece senha, não cria sessão e não pode alcançar rotas fora da allowlist; a política de autenticação continua pertencendo ao Maestro.
