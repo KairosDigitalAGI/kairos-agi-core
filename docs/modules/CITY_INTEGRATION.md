@@ -38,3 +38,7 @@ O atalho de terminais abre uma aba própria e o fechamento da mesa descarrega se
 ## Ponte de conectividade da mesa — 24/10/2026
 
 O Maestro atende somente HTTP local em `127.0.0.1:8791`, enquanto a Cidade chega ao Founder por HTTPS/Tailscale. O proxy `/api/maestro/*` da Cidade encaminha apenas uma allowlist de rotas da mesa, com tamanho limitado e sem encaminhar `Origin`; transmite `Authorization` somente à instância local. O healthcheck via proxy e o 401 sem credencial foram observados após o deploy. Isso corrige conectividade, não autentica o usuário nem recupera senha.
+
+## Recuperação temporária de acesso — 26/10/2026
+
+Com autorização do Founder, a credencial de terminais pode ser redefinida no configurador local do Maestro. A rotina grava apenas o derivado scrypt no arquivo privado de configuração, reinicia exclusivamente o processo `maestro` e valida `POST /api/maestro/terminal/auth` através da ponte. Nessa data a validação retornou sucesso. O evento não representa execução de terminal, login dos provedores de IA, nem atividade autônoma.

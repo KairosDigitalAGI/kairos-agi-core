@@ -255,3 +255,7 @@ A fila de pedidos técnicos confirmados do Core agora tem uma leitura específic
 Verificação ao vivo: Core e ponte Maestro retornaram a mesma contagem de 1 pedido técnico; o conteúdo não foi copiado para a documentação pública. A rota da ponte sem credencial retornou 401.
 
 Atualização posterior em 24/10/2026: o Obsidian da cidade foi apontado ao mesmo repositório privado `kairos-brain` que alimenta o Kairos Command, em cópia de leitura na VPS; 48 notas verificadas no painel. n8n e Maestro respondem localmente. Duas sessões Claude Code por projeto estão abertas e aguardando instrução; não houve prompt de IA nem comprovação de trabalho contínuo. A cidade deixou de inferir terminal vivo por histórico antigo. Integração transacional Command/Supabase/WhatsApp/n8n e retorno de resultados à fila do Core seguem pendentes.
+
+## Atualização 26/10/2026 — acesso temporário à mesa da Cidade
+
+O Founder autorizou uma redefinição temporária da credencial da mesa de terminais. A VPS recebeu somente o hash derivado pelo configurador local do Maestro, o processo `maestro` foi reiniciado e o teste autenticado passou pela ponte HTTPS same-origin da Cidade. A senha não foi inserida em documentação, código ou logs do projeto. Esta confirmação valida conectividade e autenticação da mesa; não inicia agentes, prompts, deploys ou tarefas autônomas.

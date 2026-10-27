@@ -513,3 +513,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Eliminar tentativa de acesso direto do browser à porta interna do Maestro.
 - [x] Manter allowlist de rotas e verificação de credencial no Maestro atrás da ponte same-origin.
 - [ ] Confirmar login do Founder depois de atualização de navegador; investigar somente se o serviço retornar mensagem de autenticação, não erro de rede.
+
+## Missão 051 — acesso temporário à mesa (26/10/2026)
+
+- [x] Redefinir uma credencial temporária autorizada pelo Founder no configurador privado do Maestro.
+- [x] Confirmar autenticação pelo endpoint HTTPS same-origin da Cidade.
+- [ ] Founder confirma o acesso no navegador e redefine a credencial temporária quando desejar.

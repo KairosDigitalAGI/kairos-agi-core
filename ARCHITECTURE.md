@@ -409,3 +409,7 @@ A Cidade preserva a cena e a mesa de tarefa: a interface de terminais abre em co
 ## Ponte same-origin da mesa — 24/10/2026
 
 O navegador acessa a Cidade por HTTPS/Tailscale, enquanto o Maestro permanece HTTP em localhost. A Cidade encaminha uma allowlist pequena de rotas da mesa por `/api/maestro/*`, preservando o cabeçalho de autenticação apenas até localhost. O proxy não conhece senha, não cria sessão e não pode alcançar rotas fora da allowlist; a política de autenticação continua pertencendo ao Maestro.
+
+## Credencial temporária da mesa — 26/10/2026
+
+A recuperação temporária de acesso usa o configurador do Maestro na VPS: ele recebe usuário e senha pelo ambiente efêmero, persiste somente o derivado scrypt fora do repositório e reinicia apenas o processo `maestro`. A Cidade não recebe nem armazena a senha; o navegador a mantém apenas na sessão da aba e a transporta pela ponte HTTPS ao verificador local.
