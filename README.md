@@ -319,3 +319,5 @@ O terminal da Cidade abre em aba própria, mantendo a mesa de tarefas e a cena 3
 A mesa da Cidade usa uma ponte HTTPS same-origin para o Maestro local da VPS. Isso evita que o navegador tente acessar a porta interna diretamente; a senha continua verificada somente pelo Maestro e não é armazenada pela Cidade.
 
 Em 26/10/2026, uma credencial temporária autorizada pelo Founder foi validada de ponta a ponta nesta ponte. A validação prova apenas o login da mesa; não inicia agentes, terminais ou consumo de IA.
+
+Na mesma data, o painel de infraestrutura passou a mostrar a presença observada do KAIROS WhatsApp e do orquestrador. A conversa dentro da Cidade continua uma integração autenticada pendente, não uma simulação de chat.

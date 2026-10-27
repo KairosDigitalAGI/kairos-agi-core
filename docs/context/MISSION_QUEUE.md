@@ -519,3 +519,9 @@ Confirmar schema/bucket do Content Engine, registrar o establishing shot textual
 - [x] Redefinir uma credencial temporária autorizada pelo Founder no configurador privado do Maestro.
 - [x] Confirmar autenticação pelo endpoint HTTPS same-origin da Cidade.
 - [ ] Founder confirma o acesso no navegador e redefine a credencial temporária quando desejar.
+
+## Missão 052 — KAIROS visível e conversável na Cidade (26/10/2026)
+
+- [x] Mostrar presença real do processo KAIROS WhatsApp e do orquestrador pela infraestrutura da Cidade.
+- [ ] Projetar e implementar ponte de conversa autenticada entre a Cidade e o KAIROS, com autorização por mensagem, recibo e sem expor segredo de canal.
+- [ ] Criar catálogo de executores (Hermes/OpenClaw/Claude Code/Codex) que diferencie instalado, conectado, autorizado e em execução; nenhuma instalação ou loop contínuo implícito.

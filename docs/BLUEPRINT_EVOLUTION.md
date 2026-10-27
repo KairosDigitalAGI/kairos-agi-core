@@ -535,3 +535,7 @@ A Cidade deve ser a única superfície web do Founder para o Maestro: portas loc
 ## 26/10/2026 — recuperação temporária de acesso
 
 A credencial da mesa pode ser redefinida com autorização explícita do Founder, mas nunca lida de volta de um hash. A redefinição deve permanecer fora do Git, usar derivação forte no Maestro e ser validada pela ponte HTTPS da Cidade. Essa capacidade não implica autorização para lançar agentes, consumir créditos ou executar tarefas sem comando do Founder.
+
+## 26/10/2026 — agentes reais exigem prova de runtime
+
+Um agente exibido na Cidade deve derivar seu estado de processo, sessão, tarefa ou recibo verificável. O produto separa presença de conversação e conversação de execução: KAIROS pode estar online, mas só recebe uma ordem por ponte autenticada e autoriza a ação de acordo com as políticas do canal. Catálogos de frameworks ou skills servem como propostas verificáveis, nunca como código baixado e executado continuamente sem revisão.

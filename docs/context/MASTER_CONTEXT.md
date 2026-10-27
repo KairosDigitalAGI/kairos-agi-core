@@ -259,3 +259,7 @@ Atualização posterior em 24/10/2026: o Obsidian da cidade foi apontado ao mesm
 ## Atualização 26/10/2026 — acesso temporário à mesa da Cidade
 
 O Founder autorizou uma redefinição temporária da credencial da mesa de terminais. A VPS recebeu somente o hash derivado pelo configurador local do Maestro, o processo `maestro` foi reiniciado e o teste autenticado passou pela ponte HTTPS same-origin da Cidade. A senha não foi inserida em documentação, código ou logs do projeto. Esta confirmação valida conectividade e autenticação da mesa; não inicia agentes, prompts, deploys ou tarefas autônomas.
+
+## Atualização 26/10/2026 — presença real do KAIROS na Cidade
+
+A Cidade passou a consultar o PM2 e o healthcheck local para expor a presença observada do processo KAIROS (WhatsApp) e do orquestrador. A VPS confirmou ambos ativos, junto de 48 notas no cofre Obsidian e 50 workspaces catalogados. O cartão não afirma conversação: a ponte de mensagens continua pendente de um contrato autenticado que não exponha tokens ou permita execução sem comando explícito.

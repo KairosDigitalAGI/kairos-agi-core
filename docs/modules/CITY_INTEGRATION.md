@@ -42,3 +42,7 @@ O Maestro atende somente HTTP local em `127.0.0.1:8791`, enquanto a Cidade chega
 ## Recuperação temporária de acesso — 26/10/2026
 
 Com autorização do Founder, a credencial de terminais pode ser redefinida no configurador local do Maestro. A rotina grava apenas o derivado scrypt no arquivo privado de configuração, reinicia exclusivamente o processo `maestro` e valida `POST /api/maestro/terminal/auth` através da ponte. Nessa data a validação retornou sucesso. O evento não representa execução de terminal, login dos provedores de IA, nem atividade autônoma.
+
+## KAIROS WhatsApp: presença antes de conversa
+
+`/api/infra` consulta o processo `kairos` pelo PM2 e o healthcheck local do orquestrador. Esses são indicadores de runtime, exibidos no cartão **KAIROS · WhatsApp**. A leitura não envia nem recebe mensagens. Para conversar com KAIROS dentro da Cidade, a próxima entrega deve acrescentar uma ponte servidor-servidor autenticada, um contrato de mensagem limitado, registro de recibo e confirmação para ações de custo ou efeito externo. O browser não recebe credenciais de WhatsApp, PWA ou modelo.

@@ -807,3 +807,9 @@ A página de Agentes agora permite abrir um console por papel, associar localmen
 - **Entregue:** a credencial temporária autorizada pelo Founder foi derivada por scrypt no Maestro da VPS, sem persistência no repositório ou na interface.
 - **Verificado:** `POST /api/maestro/terminal/auth` retornou `200` com autenticação válida pelo domínio HTTPS da Cidade.
 - **Limite:** o teste confirma acesso à mesa, não autentica Codex/Claude Code, não abre terminal, não executa IA e não cria trabalho em segundo plano.
+
+## 26/10/2026 — presença observável do KAIROS
+
+- **Entregue:** a infraestrutura da Cidade exibe o estado PM2 real do KAIROS WhatsApp e a saúde local do orquestrador.
+- **Verificado:** ambos retornaram ativos pela URL HTTPS da Cidade; a consulta também confirmou 48 notas do Obsidian e 50 workspaces.
+- **Limite:** não foi enviada mensagem, iniciado workflow, nem criado conector de conversa sem autenticação e consentimento explícitos.

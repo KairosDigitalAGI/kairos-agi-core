@@ -413,3 +413,7 @@ O navegador acessa a Cidade por HTTPS/Tailscale, enquanto o Maestro permanece HT
 ## Credencial temporária da mesa — 26/10/2026
 
 A recuperação temporária de acesso usa o configurador do Maestro na VPS: ele recebe usuário e senha pelo ambiente efêmero, persiste somente o derivado scrypt fora do repositório e reinicia apenas o processo `maestro`. A Cidade não recebe nem armazena a senha; o navegador a mantém apenas na sessão da aba e a transporta pela ponte HTTPS ao verificador local.
+
+## Presença KAIROS e ponte de conversa — 26/10/2026
+
+A Cidade pode consultar somente sinais observáveis do runtime KAIROS: estado do processo PM2 e healthcheck do orquestrador local. Conversa é um domínio separado: precisa de rota autenticada de servidor para servidor, autorização explícita por mensagem e recibo de resultado. Nenhuma página web pode receber token do WhatsApp, do PWA ou de um provedor de IA; um processo ativo não é prova de que o agente recebeu ou executou uma ordem.
